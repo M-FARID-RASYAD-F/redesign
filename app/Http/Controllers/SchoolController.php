@@ -121,12 +121,13 @@ class SchoolController extends Controller
      */
     public function submitContact(Request $request)
     {
-        // Validasi input sederhana
+        // Validasi input
         $validated = $request->validate([
             'nama' => 'required|min:3',
             'email' => 'required|email',
             'jurusan_minat' => 'required',
-            'pesan' => 'required|min:10'
+            'pesan' => 'required|min:10',
+            'berkas' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ], [
             'nama.required' => 'Nama lengkap wajib diisi!',
             'nama.min' => 'Nama minimal terdiri dari 3 karakter.',
@@ -134,10 +135,19 @@ class SchoolController extends Controller
             'email.email' => 'Format email tidak valid!',
             'jurusan_minat.required' => 'Pilih jurusan yang diminati!',
             'pesan.required' => 'Pesan/pertanyaan wajib diisi!',
-            'pesan.min' => 'Pesan minimal terdiri dari 10 karakter.'
+            'pesan.min' => 'Pesan minimal terdiri dari 10 karakter.',
+            'berkas.file' => 'Berkas harus berupa file yang valid.',
+            'berkas.mimes' => 'Berkas harus berformat PDF, JPG, JPEG, atau PNG.',
+            'berkas.max' => 'Ukuran berkas maksimal 2MB.',
         ]);
 
+        $berkasInfo = '';
+        if ($request->hasFile('berkas')) {
+            $request->file('berkas')->store('berkas_ppdb', 'public');
+            $berkasInfo = ' serta berkas persyaratan berhasil diunggah';
+        }
+
         // Kirim response flash message kembali ke halaman sebelumnya
-        return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pesan dan pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim.');
+        return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pesan dan pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim' . $berkasInfo . '.');
     }
 }

@@ -191,7 +191,7 @@
 
             <!-- Form -->
             <div>
-                <form action="{{ route('kontak.submit') }}" method="POST">
+                <form action="{{ route('kontak.submit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -228,6 +228,14 @@
                         <label class="form-label" for="pesan">Pesan / Pertanyaan Tambahan:</label>
                         <textarea id="pesan" name="pesan" rows="4" class="form-control" placeholder="Tuliskan pertanyaan Anda di sini...">{{ old('pesan') }}</textarea>
                         @error('pesan')
+                            <span class="error-text">⚠️ {{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="berkas">Unggah Berkas PPDB (Raport/Ijazah - PDF/JPG, Max 2MB):</label>
+                        <input type="file" id="berkas" name="berkas" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                        @error('berkas')
                             <span class="error-text">⚠️ {{ $message }}</span>
                         @enderror
                     </div>

@@ -20,7 +20,7 @@ Route::post('/kontak', [SchoolController::class, 'submitContact'])->name('kontak
 // 3. Route Simulasi Login Guru (Auth untuk Edukasi Siswa)
 Route::get('/login', function () {
     $user = User::firstOrCreate(
-        ['email' => 'budi.guru@sekolah.sch.id'],
+        ['email' => 'dibu.guru@sekolah.sch.id'],
         [
             'name' => 'Budi Santoso, S.Pd. (Guru)',
             'password' => bcrypt('password123'),

@@ -27,9 +27,10 @@
             @endguest
 
             @auth
-                <div class="auth-badge">
+                <div class="auth-badge" style="display: flex; align-items: center; gap: 10px;">
                     <span>👨‍🏫 {{ auth()->user()->name }}</span>
-                    <a href="{{ route('logout') }}" style="color: #f87171; font-weight: 700; margin-left: 8px;">[ Logout ]</a>
+                    <a href="{{ route('admin.dashboard') }}" class="btn-admin-link" style="color: #f59e0b; font-weight: 600; text-decoration: none; margin-left: 8px; font-size: 0.85rem;">🛡️ Admin Panel</a>
+                    <a href="{{ route('logout') }}" style="color: #f87171; font-weight: 700; margin-left: 8px; text-decoration: none;">[ Logout ]</a>
                 </div>
             @endauth
         </div>

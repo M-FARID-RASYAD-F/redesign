@@ -1,0 +1,1426 @@
+
+DOKUMEN PROGRAM RESMI 
+PKBM TAHFIZH AT-TAMAM 
+Jurusan Rekayasa Perangkat Lunak (RPL) 
+         PROGRAM MAGANG  BERBASIS LARAVEL 
+Product Requirement Document (PRD) · System Architecture Document (SAD) · Panduan Kegiatan Harian 
+                      Tahun Program 2026 / 2027 
+Lokasi: Pekanbaru, Riau 
+ DAFTAR ISI 
+ TOC \h \o "1-3"  BAB I   PENDAHULUAN 	   PAGEREF _Toc234819752 \h    5  
+1.1 Tentang Program 	   PAGEREF _Toc234819753 \h    5  
+1.2 Informasi Umum Program 	   PAGEREF _Toc234819754 \h    5  
+1.3 Posisi Dokumen Ini dalam Siklus Pengembangan 	   PAGEREF _Toc234819755 \h    6  
+1.4 Glosarium & Daftar Istilah 	   PAGEREF _Toc234819756 \h    6  
+BAB II  PRODUCT REQUIREMENT DOCUMENT (PRD) 	   PAGEREF _Toc234819757 \h    8  
+2.1 Latar Belakang 	   PAGEREF _Toc234819758 \h    8  
+2.2 Tujuan Produk 	   PAGEREF _Toc234819759 \h    8  
+2.3 Ruang Lingkup Produk 	   PAGEREF _Toc234819760 \h    8  
+2.3.1 Dalam Lingkup (In-Scope) 	   PAGEREF _Toc234819761 \h    8  
+2.3.2 Di Luar Lingkup (Out-of-Scope) 	   PAGEREF _Toc234819762 \h    9  
+2.4 Pengguna Produk 	   PAGEREF _Toc234819763 \h    9  
+2.5 Kebutuhan Fungsional 	   PAGEREF _Toc234819764 \h    10  
+2.5.1 Modul A — Website Profil Sekolah 	   PAGEREF _Toc234819765 \h    10  
+2.5.2 Modul B — Fitur Pengumuman & Agenda 	   PAGEREF _Toc234819766 \h    10  
+2.5.3 Modul C — PPDB Online 	   PAGEREF _Toc234819767 \h    11  
+2.6 Kebutuhan Non-Fungsional 	   PAGEREF _Toc234819768 \h    11  
+2.7 Kriteria Penerimaan 	   PAGEREF _Toc234819769 \h    12  
+BAB III  SYSTEM ARCHITECTURE DOCUMENT (SAD) 	   PAGEREF _Toc234819770 \h    13  
+3.1 Gambaran Umum Arsitektur 	   PAGEREF _Toc234819771 \h    13  
+3.1.1 Diagram Komponen Arsitektur 	   PAGEREF _Toc234819772 \h    13  
+3.1.2 Prinsip Arsitektur 	   PAGEREF _Toc234819773 \h    13  
+3.2 Detail Stack Teknologi 	   PAGEREF _Toc234819774 \h    14  
+3.3 Kamus Data & Skema Basis Data 	   PAGEREF _Toc234819775 \h    14  
+3.3.1 Modul Autentikasi & Pengguna 	   PAGEREF _Toc234819776 \h    14  
+3.3.2 Modul Website Profil Sekolah 	   PAGEREF _Toc234819777 \h    14  
+3.3.3 Modul Pengumuman & Agenda 	   PAGEREF _Toc234819778 \h    15  
+3.3.4 Modul PPDB Online 	   PAGEREF _Toc234819779 \h    15  
+3.4 Matriks Hak Akses (Role-Based Access Control) 	   PAGEREF _Toc234819780 \h    15  
+3.5 Alur Data Utama (Data Flows) 	   PAGEREF _Toc234819781 \h    16  
+3.5.1 Alur Pendaftaran PPDB Online 	   PAGEREF _Toc234819782 \h    16  
+3.5.2 Alur Publikasi Pengumuman 	   PAGEREF _Toc234819783 \h    16  
+3.5.3 Alur Autentikasi & Otorisasi Admin 	   PAGEREF _Toc234819784 \h    17  
+3.6 Keamanan Sistem 	   PAGEREF _Toc234819785 \h    17  
+3.7 Arsitektur Deployment 	   PAGEREF _Toc234819786 \h    17  
+3.8 Keselarasan dengan Ekosistem Sistem Informasi At-Tamam Saat Ini 	   PAGEREF _Toc234819787 \h    18  
+3.9 Perlindungan Data Pribadi Peserta Didik (PPDB) 	   PAGEREF _Toc234819788 \h    18  
+BAB IV  KEGIATAN HARIAN & RENCANA KERJA 	   PAGEREF _Toc234819789 \h    19  
+4.1 Jadwal Kegiatan Harian Peserta 	   PAGEREF _Toc234819790 \h    19  
+4.1.1 Jadwal Harian Senin s.d. Jumat 	   PAGEREF _Toc234819791 \h    19  
+4.1.2 Jadwal Khusus Hari Sabtu 	   PAGEREF _Toc234819792 \h    19  
+4.2 Ringkasan Rencana Kerja 34 Minggu (8 Bulan) 	   PAGEREF _Toc234819793 \h    20  
+4.2.1 Fase 0 — Bootcamp Laravel (Minggu 1–6) 	   PAGEREF _Toc234819794 \h    20  
+4.2.2 Fase 1 — Git & Laravel Lanjutan (Minggu 7–10) 	   PAGEREF _Toc234819795 \h    20  
+4.2.3 Fase 2 — Prototype / Small Project (Minggu 11–14) 	   PAGEREF _Toc234819796 \h    21  
+Pembagian Peran Tim Produksi (ditentukan di akhir Fase 2) 	   PAGEREF _Toc234819797 \h    21  
+4.2.4 Fase 3 — Produksi Website Sekolah + Pengumuman + PPDB (Minggu 15–26) 	   PAGEREF _Toc234819798 \h    21  
+4.2.5 Fase 4a — QA & Optimization (Minggu 27–30) 	   PAGEREF _Toc234819799 \h    22  
+4.2.6 Fase 4b — Deployment & Closing (Minggu 31–34) 	   PAGEREF _Toc234819800 \h    22  
+4.3 Checkpoint GitHub & Strategi Branching 	   PAGEREF _Toc234819801 \h    23  
+BAB V  ATURAN TEKNIS PROGRAM 	   PAGEREF _Toc234819802 \h    24  
+5.1 Alur Kerja Git Harian 	   PAGEREF _Toc234819803 \h    24  
+5.2 Pembagian Kepemilikan File Antar Tim 	   PAGEREF _Toc234819804 \h    24  
+5.3 SOP Penanganan Konflik Git 	   PAGEREF _Toc234819805 \h    25  
+5.4 Konvensi Penamaan Branch & Commit 	   PAGEREF _Toc234819806 \h    25  
+5.5 Prinsip Lain 	   PAGEREF _Toc234819807 \h    25  
+5.5.1 No Copy-Paste Tanpa Paham 	   PAGEREF _Toc234819808 \h    25  
+5.5.2 Standardisasi Teknologi 	   PAGEREF _Toc234819809 \h    25  
+5.5.3 Daily Update 	   PAGEREF _Toc234819810 \h    25  
+5.6 SOP Review Pull Request oleh Pembimbing 	   PAGEREF _Toc234819811 \h    25  
+5.6.1 Service Level Agreement (SLA) Review 	   PAGEREF _Toc234819812 \h    26  
+5.6.2 Checklist Kriteria Review 	   PAGEREF _Toc234819813 \h    26  
+5.6.3 Kategori Keputusan Review 	   PAGEREF _Toc234819814 \h    26  
+BAB VI  MEKANISME KERJA KELOMPOK SISWA & SISWI  (KETENTUAN KONDISIONAL) 	   PAGEREF _Toc234819815 \h    27  
+6.1 Latar Belakang & Tujuan 	   PAGEREF _Toc234819816 \h    27  
+6.2 Ketentuan Pemberlakuan (Kondisional) 	   PAGEREF _Toc234819817 \h    27  
+6.2.1 Pemetaan terhadap Struktur Tim Bab IV 	   PAGEREF _Toc234819818 \h    27  
+6.3 Mekanisme Isolasi Kerja 	   PAGEREF _Toc234819819 \h    28  
+6.3.1 Pemisahan Route (routes/web.php) 	   PAGEREF _Toc234819820 \h    28  
+6.3.2 Konvensi Penamaan Kode — Netral & Berbasis Modul 	   PAGEREF _Toc234819821 \h    28  
+6.4 Alur Kerja Harian Kelompok Siswi 	   PAGEREF _Toc234819822 \h    28  
+6.5 Mekanisme Pull Request & Checkpoint Kelompok Siswi 	   PAGEREF _Toc234819823 \h    29  
+6.6 SOP Penanganan Konflik Git Kelompok Siswi 	   PAGEREF _Toc234819824 \h    29  
+6.7 Sinkronisasi Checkpoint Mingguan (Setiap Sabtu) 	   PAGEREF _Toc234819825 \h    29  
+6.8 Ringkasan Perbandingan Kelompok Siswa vs Kelompok Siswi 	   PAGEREF _Toc234819826 \h    30  
+BAB VII  SISTEM PENILAIAN & EVALUASI 	   PAGEREF _Toc234819827 \h    31  
+7.1 Komponen Penilaian Akhir 	   PAGEREF _Toc234819828 \h    31  
+7.2 Rubrik Nilai Akhir 	   PAGEREF _Toc234819829 \h    31  
+7.3 Siklus Pelaporan: Harian → Mingguan → Bulanan 	   PAGEREF _Toc234819830 \h    31  
+7.4 Kalender Evaluasi Bulanan 	   PAGEREF _Toc234819831 \h    32  
+BAB VIII  PERAN PEMBIMBING & KETENTUAN LAIN 	   PAGEREF _Toc234819832 \h    33  
+8.1 Peran Pembimbing 	   PAGEREF _Toc234819833 \h    33  
+8.2 Ketentuan Lain 	   PAGEREF _Toc234819834 \h    33  
+8.3 Mekanisme Keluhan & Eskalasi (Grievance Mechanism) 	   PAGEREF _Toc234819835 \h    33  
+8.4 Prosedur Pengunduran Diri & Reassignment Tugas 	   PAGEREF _Toc234819836 \h    34  
+LEMBAR PENGESAHAN PROGRAM 	   PAGEREF _Toc234819837 \h    35  
+LEMBAR PERSETUJUAN ORANG TUA / WALI 	   PAGEREF _Toc234819838 \h    36  
+LAMPIRAN A  SURAT KESEPAKATAN PROGRAM MAGANG 	   PAGEREF _Toc234819839 \h    37  
+Pasal 1 — Hak Siswa Peserta 	   PAGEREF _Toc234819840 \h    37  
+Pasal 2 — Kewajiban Siswa Peserta 	   PAGEREF _Toc234819841 \h    37  
+Pasal 3 — Hak Lembaga 	   PAGEREF _Toc234819842 \h    37  
+Pasal 4 — Kewajiban Lembaga 	   PAGEREF _Toc234819843 \h    37  
+Pasal 5 — Konsekuensi Pelanggaran 	   PAGEREF _Toc234819844 \h    37  
+Pasal 6 — Pernyataan Kesepakatan 	   PAGEREF _Toc234819845 \h    38  
+LAMPIRAN B  FORMULIR LOG HARIAN SISWA & SISWI 	   PAGEREF _Toc234819846 \h    39  
+Ringkasan Kegiatan Hari Ini 	   PAGEREF _Toc234819847 \h    39  
+Rincian Teknis 	   PAGEREF _Toc234819848 \h    39  
+Checklist Disiplin Harian 	   PAGEREF _Toc234819849 \h    39  
+LAMPIRAN C  FORMULIR LAPORAN MINGGUAN SISWA & SISWI 	   PAGEREF _Toc234819850 \h    40  
+Progres Belajar Minggu Ini 	   PAGEREF _Toc234819851 \h    40  
+Refleksi Diri 	   PAGEREF _Toc234819852 \h    40  
+LAMPIRAN D  FORMULIR LAPORAN BULANAN SISWA & SISWI 	   PAGEREF _Toc234819853 \h    42  
+Rekapitulasi Capaian Bulan Ini 	   PAGEREF _Toc234819854 \h    42  
+Refleksi Diri Bulanan 	   PAGEREF _Toc234819855 \h    42  
+Rekap Penilaian Kinerja Bulanan — Oleh Pembimbing 	   PAGEREF _Toc234819856 \h    43  
+LAMPIRAN E  FORMULIR CHECKLIST REVIEW PULL REQUEST UNTUK PEMBIMBING 	   PAGEREF _Toc234819857 \h    44  
+Checklist Kriteria Review (Bagian 5.6.2) 	   PAGEREF _Toc234819858 \h    44  
+Keputusan Review (Bagian 5.6.3) 	   PAGEREF _Toc234819859 \h    44  
+ 
+ 
+BAB I    PENDAHULUAN 
+1.1 Tentang Program 
+Program Magang Internal Berbasis Laravel adalah kegiatan pelatihan teknologi yang diselenggarakan langsung oleh  PT. Attamam Putra Mandiri  untuk siswa  atau siswi  Kelas XII Jurusan Rekayasa Perangkat Lunak (RPL), sebagai bagian dari kesiapan mereka memasuki dunia kerja pengembangan perangkat lunak berbasis web. 
+Berbeda dari magang di perusahaan eksternal, program ini dilaksanakan di lingkungan sekolah sehingga siswa tetap berada dalam pengawasan penuh guru pembimbing, sekaligus tetap menjalankan kegiatan rutin sekolah seperti setoran hafalan Al-Qur'an setiap harinya. 
+Dokumen ini merupakan  panduan  lengkap yang  terdiri dari  dua dokumen teknis formal  yaitu  Product Requirement Document (PRD) dan System Architecture Document (SAD) agar proses pengembangan produk mengikuti standar rekayasa perangkat lunak yang selaras dengan praktik yang berlaku di lingkungan kerja profesional, termasuk keselarasan dengan ekosistem sistem informasi yang sudah berjalan di  PKBM Tahfizh At Tamam saat ini. 
+1.2 Informasi Umum Program 
+Informasi 
+Keterangan 
+Nama Program 
+Program Magang Berbasis Laravel 
+Penyelenggara 
+CV . Attamam Putra Mandiri  — Jurusan RPL 
+Sasaran Peserta 
+Siswa  atau siswi  Kelas XII Semester 1, Jurusan RPL 
+Tahun Program 
+2026 / 2027 
+Jumlah Peserta 
+Mengikuti jumlah peserta 
+Durasi Program 
+8 Bulan (34 Minggu) — 6 Minggu Bootcamp + 28 Minggu Magang  
+Lokasi 
+Lingkungan PKBM Tahfizh At-Tamam, Pekanbaru 
+Output / Produk Akhir 
+(1) Website Profil Sekolah, (2) Fitur Pengumuman & Agenda, (3) PPDB Online  dan  dapat diakses publik 
+Stack Teknologi 
+Laravel 11 · PHP 8.2+ · Tailwind CSS / Bootstrap · MySQL 8 · Git & GitHub 
+Metodologi Kerja 
+Agile ringan , Daily Update dan Checkpoint . 
+       1.3 Posisi Dokumen Ini dalam Siklus Pengembangan 
+Dokumen ini disusun mengikuti alur baku pengembangan perangkat lunak (Software Development Life Cycle) agar siswa terbiasa dengan cara kerja tim profesional: 
+PRD (Product Requirement Document) — mendefinisikan MENGAPA dan APA yang dibangun: latar belakang, tujuan, pengguna, dan kebutuhan fungsional/non-fungsional produk. 
+SAD (System Architecture Document) — mendefinisikan BAGAIMANA produk dibangun secara teknis: arsitektur, skema database, alur data, dan keamanan. 
+Panduan Kegiatan Harian & Rencana Kerja 34 Minggu — mendefinisikan KAPAN dan SIAPA yang mengerjakan tiap bagian, lengkap dengan mekanisme pelaporan harian, mingguan, dan bulanan. 
+1.4 Glosarium & Daftar Istilah 
+Bagian ini menjelaskan istilah teknis yang digunakan berulang kali di sepanjang dokumen, agar seluruh pembaca — termasuk orang tua/wali peserta yang tidak berlatar belakang teknis — dapat memahami isi dokumen secara utuh sebelum menandatangani lembar persetujuan. 
+Istilah 
+Penjelasan Sederhana 
+Repository (Repo) 
+"Folder induk" tempat seluruh kode program disimpan dan dikelola bersama secara daring (di GitHub). 
+Branch 
+Salinan kerja terpisah dari kode utama, agar satu siswa bisa bekerja tanpa mengganggu pekerjaan siswa lain, sebelum digabungkan kembali. 
+Commit 
+"Titik simpan" perubahan kode, disertai catatan singkat tentang apa yang diubah. 
+Push / Pull 
+Push = mengunggah perubahan kode ke server. Pull = mengunduh/menyamakan kode terbaru dari server ke komputer sendiri. 
+Pull Request (PR) 
+Permintaan resmi dari siswa kepada pembimbing agar kode yang sudah selesai dikerjakan diperiksa lalu digabungkan ke kode utama. 
+Merge 
+Proses menggabungkan kode dari satu branch ke kode utama (main), hanya boleh dilakukan oleh guru pembimbing. 
+Checkpoint 
+"Titik aman" mingguan yang dikunci oleh pembimbing sebagai cadangan kondisi kode yang stabil. 
+Route / Prefix Route 
+Alamat/jalur halaman pada website (mis. /ppdb, /admin) yang menentukan modul mana yang sedang diakses. 
+Modul 
+Bagian besar dari sistem yang menangani satu fungsi utama, misalnya Modul PPDB, Modul Pengumuman. 
+Database / Basis Data 
+Tempat penyimpanan seluruh data (nilai, pendaftar, berita, dsb.) yang digunakan aplikasi. 
+RBAC (Role-Based Access Control) 
+Sistem pengaturan hak akses berdasarkan peran pengguna (mis. admin, editor, pengunjung biasa). 
+Deployment 
+Proses memindahkan/menerbitkan aplikasi dari komputer lokal ke server agar dapat diakses publik melalui internet. 
+Maintainer 
+Pihak yang berwenang menyetujui dan menggabungkan (merge) kode ke dalam repository utama — dalam program ini adalah Guru Pembimbing. 
+ 
+BAB II   PRODUCT REQUIREMENT DOCUMENT (PRD) 
+2.1 Latar Belakang 
+Saat ini PKBM Tahfizh At-Tamam telah memiliki ekosistem sistem informasi internal yang aktif digunakan untuk operasional harian yaitu Portal Kepala Sekolah, Portal Guru & Staf, dan Portal PKBM, yang seluruhnya berjalan di atas platform Google Apps Script (GAS) dan Google Sheets sebagai basis data. Ekosistem ini terbukti efektif untuk kebutuhan internal (presensi, tabungan  siswa , laporan bulanan, dan lain-lain), namun bersifat tertutup dan tidak menyediakan tampilan publik (public-facing) yang dapat diakses oleh masyarakat umum, calon wali murid, maupun calon siswa. 
+Ketiadaan kanal publik ini menimbulkan tiga kebutuhan mendesak yang menjadi latar belakang produk pada program magang ini: (1) profil sekolah belum dapat diakses siapa pun secara daring; (2) pengumuman resmi sekolah masih disebarkan secara manual (grup pesan, papan pengumuman fisik) sehingga jangkauannya terbatas; (3) proses Penerimaan Peserta Didik Baru (PPDB) masih dilakukan secara manual berbasis formulir kertas, yang rawan kehilangan data dan lambat direkap. 
+Program magang ini menjawab ketiga kebutuhan tersebut sekaligus menjadi wahana pembelajaran nyata (real project based learning) bagi siswa RPL, dengan siswa bertindak sebagai tim pengembang di bawah bimbingan guru pembimbing yang berperan sebagai Project Lead dan Maintainer Repository. 
+2.2 Tujuan Produk 
+Menyediakan situs profil sekolah resmi yang informatif, responsif, dan mudah diakses publik melalui internet. 
+Menyediakan kanal distribusi pengumuman dan agenda sekolah yang terpusat, cepat diperbarui, dan dapat diakses tanpa batas waktu maupun tempat. 
+Mendigitalisasi alur pendaftaran siswa baru (PPDB) dari formulir kertas menjadi formulir daring dengan dashboard verifikasi bagi admin sekolah. 
+Menjadi media pembelajaran praktik rekayasa perangkat lunak berbasis proyek nyata (Laravel, Git kolaboratif, code review) bagi siswa Kelas XII RPL. 
+2.3 Ruang Lingkup Produk 
+2.3.1 Dalam Lingkup (In-Scope) 
+Modul Website Profil Sekolah: landing page, profil & sejarah, visi-misi, data guru & staf, data jurusan, galeri foto, halaman kontak dengan peta lokasi. 
+Modul Pengumuman & Agenda: daftar pengumuman publik dengan filter kategori/tanggal, halaman detail, agenda kegiatan sekolah, panel admin CRUD dan pengarsipan. 
+Modul PPDB Online: formulir pendaftaran publik dengan unggah dokumen, halaman konfirmasi & tracking status, dashboard admin verifikasi dan ekspor data. 
+Modul pendukung: autentikasi multi-role, manajemen pengguna admin, log aktivitas sistem. 
+  2.3.2 Di Luar Lingkup (Out-of-Scope) 
+Integrasi otomatis (real-time) dengan ekosistem Portal Kepsek/Guru/PKBM berbasis Google Apps Script yang sudah berjalan pada versi awal, data guru/staf/jurusan diinput ulang secara manual oleh Tim Backend Akademik ke database MySQL yang baru dan terisolasi. 
+Sistem akademik (e-Rapor, presensi siswa, nilai) tetap menjadi tanggung jawab ekosistem GAS Portal Kepsek/Guru yang sudah ada dan tidak digantikan oleh produk magang ini. 
+Aplikasi mobile (Android/iOS) seluruh produk berbentuk website responsif (mobile-friendly), bukan aplikasi native. 
+Payment gateway/biaya pendaftaran daring pembayaran biaya PPDB (jika ada) tetap dilakukan luring, di luar sistem. 
+2.4 Pengguna Produk 
+Peran 
+Deskripsi 
+Kebutuhan Utama 
+Pengunjung Publik 
+Masyarakat umum yang mengakses website tanpa login 
+Melihat profil sekolah, berita, galeri, dan pengumuman terbaru dengan cepat 
+Calon Wali Murid / Siswa 
+Pihak yang ingin mendaftarkan anak/diri sendiri ke sekolah 
+Mengisi formulir PPDB, mengunggah dokumen, dan memantau status pendaftaran 
+Admin CMS (Backend Admin) 
+Staf/guru yang mengelola konten publik 
+Mengelola berita, galeri, pengumuman, dan agenda dengan mudah tanpa perlu kemampuan coding 
+Admin PPDB 
+Staf tata usaha yang memverifikasi pendaftar 
+Melihat daftar pendaftar, memverifikasi dokumen, mengubah status, dan mengekspor data 
+Kepala Sekolah / Pimpinan 
+Pengawas tertinggi konten & data sekolah 
+Memantau ringkasan pendaftar PPDB dan memastikan informasi publik akurat 
+Guru Pembimbing (Maintainer) 
+Pembimbing teknis program magang 
+Me-review Pull Request, menjaga kualitas kode, dan mengelola deployment 
+          2.5 Kebutuhan Fungsional   
+Kebutuhan fungsional dikelompokkan per modul dan ditulis dalam format user story agar siswa terbiasa menerjemahkan kebutuhan pengguna menjadi tugas teknis (task breakdown). 
+2.5.1 Modul A —   Website Profil Sekolah 
+ID 
+User Story 
+Prioritas 
+FR-A01 
+Sebagai pengunjung, saya ingin melihat landing page berisi visi, misi, dan sekilas profil sekolah, agar mendapat kesan pertama yang baik. 
+Tinggi 
+FR-A02 
+Sebagai pengunjung, saya ingin membaca berita & artikel terbaru sekolah beserta kategorinya, agar tetap mengikuti perkembangan sekolah. 
+Tinggi 
+FR-A03 
+Sebagai pengunjung, saya ingin melihat galeri foto kegiatan sekolah, agar dapat menilai suasana belajar secara visual. 
+Sedang 
+FR-A04 
+Sebagai pengunjung, saya ingin melihat daftar guru & staf beserta jabatannya, agar mengenal tenaga pendidik sekolah. 
+Sedang 
+FR-A05 
+Sebagai pengunjung, saya ingin melihat daftar jurusan/program kejuruan yang tersedia, agar dapat memilih jurusan yang sesuai minat. 
+Tinggi 
+FR-A06 
+Sebagai pengunjung, saya ingin melihat halaman kontak dan peta lokasi sekolah, agar mudah menemukan dan menghubungi sekolah. 
+Sedang 
+FR-A07 
+Sebagai admin, saya ingin mengelola (tambah/ubah/hapus) berita, galeri, dan data guru melalui dashboard, agar konten selalu terbarui tanpa mengubah kode. 
+Tinggi 
+2.5.2 Modul B — Fitur Pengumuman & Agenda 
+ID 
+User Story 
+Prioritas 
+FR-B01 
+Sebagai pengunjung, saya ingin melihat daftar pengumuman publik terbaru dengan filter kategori dan tanggal, agar mudah menemukan informasi relevan. 
+Tinggi 
+FR-B02 
+Sebagai pengunjung, saya ingin membuka halaman detail sebuah pengumuman, agar membaca informasi selengkapnya. 
+Tinggi 
+FR-B03 
+Sebagai pengunjung, saya ingin melihat agenda/jadwal kegiatan sekolah dalam bentuk kalender atau daftar, agar dapat merencanakan kehadiran. 
+Sedang 
+FR-B04 
+Sebagai admin, saya ingin menambah, mengubah, menghapus, dan mengarsipkan pengumuman, agar informasi yang sudah kedaluwarsa tidak lagi tampil di halaman utama. 
+Tinggi 
+FR-B05 
+Sebagai admin, saya ingin menjadwalkan tanggal tayang & tanggal berakhir suatu pengumuman, agar pengarsipan dapat berjalan otomatis. 
+Sedang 
+     2.5.3 Modul C — PPDB Online 
+ID 
+User Story 
+Prioritas 
+FR-C01 
+Sebagai calon wali murid, saya ingin mengisi formulir pendaftaran (data diri, data orang tua, pilihan jurusan) secara daring, agar tidak perlu datang langsung ke sekolah untuk mengambil formulir kertas. 
+Tinggi 
+FR-C02 
+Sebagai calon wali murid, saya ingin mengunggah dokumen pendukung (KK, akta lahir, foto, rapor terakhir), agar proses verifikasi dapat dilakukan tanpa berkas fisik. 
+Tinggi 
+FR-C03 
+Sebagai calon wali murid, saya ingin menerima nomor pendaftaran & dapat melacak status pendaftaran (menunggu/diverifikasi/diterima/ditolak), agar mengetahui perkembangan tanpa perlu bertanya langsung. 
+Tinggi 
+FR-C04 
+Sebagai admin PPDB, saya ingin melihat daftar seluruh pendaftar dalam dashboard dengan status masing-masing, agar dapat memproses verifikasi secara efisien. 
+Tinggi 
+FR-C05 
+Sebagai admin PPDB, saya ingin memverifikasi kelengkapan dokumen dan mengubah status pendaftar, agar keputusan penerimaan tercatat rapi. 
+Tinggi 
+FR-C06 
+Sebagai admin PPDB, saya ingin mengunduh rekap data pendaftar dalam format CSV, agar dapat diolah lebih lanjut atau dilaporkan ke pimpinan. 
+Sedang 
+FR-C07 
+Sebagai calon wali murid, saya ingin menerima notifikasi (email/tampilan status) saat status pendaftaran berubah, agar selalu mendapat informasi terkini. 
+Sedang 
+2.6 Kebutuhan Non-Fungsional   
+Kategori 
+Kebutuhan 
+Performa 
+Waktu muat halaman publik < 3 detik pada koneksi 4G standar; query database menggunakan eager loading untuk menghindari N+1. 
+Keamanan 
+Password tersimpan ter-hash (bcrypt), seluruh input tervalidasi & tersanitasi, proteksi CSRF aktif, koneksi HTTPS wajib pada tahap deployment. 
+Usabilitas 
+Antarmuka responsif (mobile-first) dan dapat digunakan tanpa pelatihan khusus oleh admin non-teknis. 
+Ketersediaan 
+Target uptime 99% setelah live; pemantauan error minimum melalui log aktivitas aplikasi. 
+Skalabilitas 
+Struktur basis data dan kode dirancang agar mudah ditambah modul baru (mis. modul alumni) pada pengembangan lanjutan. 
+Portabilitas Kode 
+Kode disusun sesuai konvensi Laravel standar (PSR-12) agar dapat dilanjutkan oleh siswa/pembimbing angkatan berikutnya. 
+Auditabilitas 
+Setiap aksi penting (perubahan status PPDB, publikasi pengumuman) tercatat di log aktivitas dengan pelaku dan waktu kejadian. 
+   2.7 Kriteria Penerimaan   
+Modul Website Profil: seluruh halaman publik dapat diakses tanpa error, konten dapat diperbarui admin melalui dashboard tanpa mengedit kode. 
+Modul Pengumuman & Agenda: pengumuman baru tampil di halaman publik dalam waktu nyata setelah dipublikasikan admin; pengarsipan otomatis berjalan sesuai tanggal berakhir. 
+Modul PPDB Online: formulir dapat diisi dan disubmit publik tanpa login, dokumen tersimpan dengan aman, status dapat diubah admin dan langsung terlihat oleh pendaftar. 
+Seluruh fitur telah melalui code review (Pull Request) dan lolos pengujian fungsional (cross-testing antar tim) sebelum dinyatakan selesai. 
+Website berjalan di server produksi dengan sertifikat HTTPS aktif pada akhir program (Fase 4b). 
+ 
+BAB III   SYSTEM ARCHITECTURE DOCUMENT (SAD) 
+3.1 Gambaran Umum Arsitektur 
+Produk hasil magang dibangun dengan arsitektur monolitik MVC (Model-View-Controller) menggunakan framework Laravel 11. Pilihan arsitektur monolitik disesuaikan dengan skala tim (maksimal 8 siswa), skala kebutuhan (website sekolah tunggal), dan tujuan pembelajaran agar siswa memahami fondasi MVC secara utuh sebelum mempelajari arsitektur terdistribusi (microservices) pada jenjang berikutnya. 
+Satu basis kode (codebase) dan satu basis data (database) melayani ketiga modul produk Website Profil, Pengumuman & Agenda, dan PPDB Online yang dibedakan melalui pengelompokan route, controller, dan hak akses (role) masing-masing tim pengembang. 
+3.1.1 Diagram Komponen Arsitektur 
+┌───────────────────────────┐ 
+│   Pengunjung / Browser    │  (Publik & Admin) 
+└─────────────┬─────────────┘ 
+              │ HTTPS 
+┌─────────────▼─────────────┐ 
+│  Web Server (Nginx/Apache)│ 
+└─────────────┬─────────────┘ 
+              │ 
+┌─────────────▼─────────── ─── ──┐ 
+│      Laravel Application       │ 
+│  ┌─────── ── ───┐ ┌─────── ─ ──┐ │ 
+│  │  Routes /  │ │Middleware│ │ 
+│  │ Controller │ │  (Auth,  │ │ 
+│  │            │ │  Role)   │ │ 
+│  └─────┬──────┘ └──────────┘ │ 
+│        │ Eloquent ORM        │ 
+└────────┼────────────── ─ ──────┘ 
+         │ 
+┌────────▼────── ─ ────┐   ┌────────────────── ─ ──┐ 
+│   MySQL Database   │   │  Storage (public/   │ 
+│ (website_attamam)  │   │  foto, dokumen PPDB)│ 
+└────────────────────┘   └────────────────── ─ ──┘ 
+Gambar 3.1 — Diagram komponen arsitektur monolitik Laravel 
+3.1.2 Prinsip Arsitektur 
+Separation of Concerns: logika bisnis pada Controller/Service, presentasi pada Blade View, struktur data pada Model/Eloquent. 
+Konvensi atas konfigurasi (convention over configuration): mengikuti standar penamaan Laravel agar kode mudah dibaca lintas anggota tim. 
+Isolasi kepemilikan modul per tim melalui prefix route (/admin/*, /akademik/*, /ppdb/*, /) sebagaimana diatur pada Bagian 5.2. 
+Basis data dan aplikasi ini terisolasi (independen) dari basis data ekosistem GAS Portal Kepsek/Guru/PKBM yang sudah berjalan, untuk mencegah gangguan pada sistem operasional yang sedang aktif digunakan. 
+3.2 Detail Stack Teknologi 
+Layer 
+Teknologi 
+Keterangan 
+Bahasa Pemrograman 
+PHP 8.2+ 
+Sesuai persyaratan minimum Laravel 11 
+Framework Backend 
+Laravel 11 
+Routing, Eloquent ORM, Blade Templating, Middleware 
+Autentikasi 
+Laravel Breeze 
+Login, register, reset password, middleware role sederhana 
+Frontend/Styling 
+Tailwind CSS / Bootstrap 
+Dipilih tim Frontend di awal Fase 3, konsisten sepanjang proyek 
+Basis Data 
+MySQL 8 
+Basis data relasional utama (website_attamam) 
+Manajemen Upload 
+Laravel Storage (disk public) + FilePond 
+Foto galeri, dokumen PPDB, foto guru 
+Editor Konten 
+Quill.js 
+WYSIWYG editor untuk isi berita & pengumuman 
+Version Control 
+Git & GitHub 
+Branching feature/nama-fitur, checkpoint/nama-checkpoint 
+Server Produksi 
+Shared hosting / VPS (dipandu pembimbing) 
+SSL/HTTPS via Let's Encrypt atau penyedia hosting 
+3.3 Kamus Data & Skema Basis Data 
+Skema berikut adalah rancangan awal tabel utama pada basis data website_attamam. Detail kolom dapat disesuaikan tim Backend saat fase migration tanpa mengubah relasi inti. 
+3.3.1 Modul Autentikasi & Pengguna 
+Tabel 
+Kolom Utama 
+Keterangan 
+users 
+id, name, email, password, role, is_active, timestamps 
+role: super_admin / admin_cms / admin_ppdb / editor_akademik 
+activity_logs 
+id, user_id, module, action, description, created_at 
+Audit trail seluruh aksi tulis/ubah/hapus data penting 
+3.3.2 Modul Website Profil Sekolah 
+Tabel 
+Kolom Utama 
+Keterangan 
+news_categories 
+id, name, slug 
+Kategori berita (Prestasi, Kegiatan, Pengumuman Umum, dll.) 
+news 
+id, category_id, title, slug, thumbnail, content, author_id, published_at 
+Berita & artikel sekolah 
+galleries 
+id, title, image_path, category, uploaded_by, created_at 
+Galeri foto kegiatan sekolah 
+teachers_staff 
+id, name, position, subject, photo, nip, status 
+Data guru & staf yang tampil di halaman publik 
+majors 
+id, name, slug, description, icon 
+Data jurusan/program kejuruan (mis. RPL, TKJ, dll.) 
+school_profile 
+id, key, value 
+Data profil dinamis (visi, misi, sejarah, alamat, kontak, koordinat peta) 
+3.3.3 Modul Pengumuman & Agenda 
+Tabel 
+Kolom Utama 
+Keterangan 
+announcements 
+id, title, content, type, start_date, end_date, is_archived, created_by 
+Pengumuman publik; is_archived diset otomatis via scheduler saat end_date lewat 
+agenda 
+id, title, date, location, description, created_by 
+Agenda/jadwal kegiatan sekolah 
+3.3.4 Modul PPDB Online 
+Tabel 
+Kolom Utama 
+Keterangan 
+ppdb_registrations 
+id, no_pendaftaran, full_name, gender, birth_date, address, parent_name, parent_phone, major_choice, status, notes, created_at 
+status: pending / diverifikasi / diterima / ditolak 
+ppdb_documents 
+id, registration_id, doc_type, file_path, verification_status 
+doc_type: KK, akta lahir, foto, rapor terakhir, dll. 
+3.4 Matriks Hak Akses (Role-Based Access Control) 
+Peran (Role) 
+Hak Akses Modul Website Profil 
+Hak Akses Modul Pengumuman 
+Hak Akses Modul PPDB 
+Super Admin / Guru Pembimbing 
+Akses penuh 
+Akses penuh 
+Akses penuh + kelola pengguna admin 
+Admin CMS (Tim Backend Admin) 
+Kelola berita, galeri, data guru & jurusan 
+Kelola pengumuman & agenda 
+Read-only (lihat rekap) 
+Admin PPDB (Tim Backend Admin/Akademik) 
+Read-only 
+Read-only 
+Verifikasi dokumen, ubah status, ekspor data 
+Editor Akademik (Tim Backend Akademik) 
+Kelola data guru, staf, jurusan 
+Read-only 
+Read-only 
+Pengunjung Publik (Guest) 
+Lihat seluruh halaman publik 
+Lihat pengumuman & agenda publik 
+Isi formulir & lacak status pendaftaran sendiri 
+3.5 Alur Data Utama (Data Flows) 
+3.5.1 Alur Pendaftaran PPDB Online 
+[Calon Wali Murid buka Form PPDB Publik] 
+                │ 
+                ▼ 
+[Isi Data Diri + Upload Dokumen (KK/Akta/Foto/Rapor)] 
+                │ 
+                ▼ 
+[Submit] ──► Validasi Input (FormRequest) ──► Gagal ──► Tampilkan Error 
+                │ Sukses 
+                ▼ 
+[Sistem generate No. Pendaftaran] ──► [Simpan status: PENDING] 
+                │ 
+                ▼ 
+[Admin PPDB buka Dashboard Verifikasi] 
+                │ 
+        ┌───────┴────────┐ 
+        ▼                 ▼ 
+  [Dokumen Lengkap]   [Dokumen Kurang] 
+        │                 │ 
+        ▼                 ▼ 
+  [Status: DITERIMA   [Status: DITOLAK / 
+   atau DIVERIFIKASI]  Diminta Lengkapi Ulang] 
+        │                 │ 
+        └───────┬─────────┘ 
+                ▼ 
+  [Calon Wali Murid cek status via No. Pendaftaran] 
+Gambar 3.2 — Alur data pendaftaran PPDB Online 
+3.5.2 Alur Publikasi Pengumuman 
+[Admin CMS buat draft Pengumuman + tentukan start_date & end_date] 
+                │ 
+                ▼ 
+        [Simpan sebagai Draft] 
+                │ 
+                ▼ 
+        [Publikasikan] ──► tampil di halaman publik mulai start_date 
+                │ 
+                ▼ 
+  [Scheduler harian cek end_date] ──► lewat? ──► is_archived = true 
+                                              (otomatis tidak tampil lagi) 
+Gambar 3.3 — Alur publikasi & pengarsipan otomatis pengumuman 
+     3.5.3 Alur Autentikasi & Otorisasi Admin 
+[Admin Login] ──► Validasi kredensial (users table, password hashed) 
+        │ Gagal ──► Tampilkan pesan error 
+        │ Sukses 
+        ▼ 
+[Buat Session Laravel] ──► [Middleware cek role] 
+        │ 
+        ▼ 
+[Redirect ke Dashboard sesuai role] 
+  - super_admin      → Dashboard Penuh 
+  - admin_cms        → Dashboard CMS 
+  - admin_ppdb       → Dashboard PPDB 
+  - editor_akademik  → Dashboard Data Akademik 
+Gambar 3.4 — Alur autentikasi dan otorisasi berbasis role 
+3.6 Keamanan Sistem 
+Password pengguna admin disimpan dalam bentuk hash bcrypt melalui mekanisme bawaan Laravel tidak pernah disimpan sebagai teks biasa. 
+Seluruh input formulir publik (khususnya form PPDB) divalidasi dan disanitasi menggunakan Form Request Validation Laravel sebelum disimpan ke basis data. 
+Proteksi CSRF token aktif secara default pada seluruh form Laravel Blade. 
+Middleware role membatasi akses route dashboard sesuai peran; percobaan akses tanpa otorisasi akan dialihkan ke halaman 403. 
+Unggahan dokumen PPDB dibatasi tipe file (PDF/JPG/PNG) dan ukuran maksimum, disimpan di disk storage yang tidak dapat dieksekusi sebagai skrip. 
+Koneksi produksi wajib menggunakan HTTPS (SSL) yang dipasang pada Fase 4b Deployment. 
+Setiap perubahan status PPDB dan publikasi konten tercatat pada tabel activity_logs sebagai jejak audit. 
+3.7 Arsitektur Deployment 
+Pada Fase 4b, aplikasi di-deploy ke layanan hosting/VPS yang dipandu oleh guru pembimbing. Konfigurasi environment (.env) produksi dipisahkan dari environment pengembangan lokal masing-masing siswa. Basis data produksi dibuat baru (bukan salinan data uji/dummy) dan diisi ulang oleh Tim Backend Akademik dengan data resmi sekolah sebelum peluncuran publik. 
+Tahap 
+Aktivitas 
+Persiapan 
+Setup domain/subdomain, provisioning server/hosting, instalasi PHP & MySQL sesuai kebutuhan Laravel 11 
+Konfigurasi 
+Set .env produksi, migrasi basis data, seeding data resmi (guru, jurusan, profil sekolah) 
+Keamanan 
+Pemasangan sertifikat SSL/HTTPS, penonaktifan mode debug (APP_DEBUG=false) 
+Uji Coba 
+Pengujian seluruh alur (form PPDB, publikasi pengumuman, login admin) langsung di server live 
+Serah Terima 
+Dokumentasi teknis & panduan penggunaan diserahkan ke staf sekolah (bukan hanya guru pembimbing) 
+3.8 Keselarasan dengan Ekosistem Sistem Informasi At-Tamam Saat Ini 
+Agar tidak mengganggu operasional sistem yang sudah berjalan, data guru/staf/jurusan pada modul Website Profil (lihat Bagian 3.3.2) diinput ulang secara manual oleh Tim Backend Akademik ke basis data MySQL yang baru, alih-alih ditarik otomatis dari Google Sheets DB_Master_Guru/DB_Master_Kepsek yang menjadi basis data ekosistem internal saat ini. 
+Sebagai rencana pengembangan lanjutan (di luar lingkup program magang tahun ini), arsitektur Laravel yang dibangun tetap dirancang agar dapat diperluas dengan modul integrasi API misalnya menambahkan endpoint REST API pada Web App Guru/Kepsek (Google Apps Script) yang dapat dipanggil (fetch) oleh aplikasi Laravel untuk menyinkronkan data guru & jurusan secara berkala, tanpa mengubah struktur basis data Google Sheets yang sudah ada. 
+3.9 Perlindungan Data Pribadi Peserta Didik (PPDB) 
+Modul PPDB Online (Bagian 3.3.4) mengumpulkan data pribadi calon peserta didik yang sebagian besar berstatus anak di bawah umur, termasuk NIK/data Kartu Keluarga, akta lahir, foto, dan data orang tua. Sesuai semangat Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP), pengelolaan data tersebut wajib mengikuti prinsip berikut: 
+Pembatasan Tujuan: data yang dikumpulkan hanya digunakan untuk keperluan proses PPDB, tidak digunakan untuk kepentingan lain tanpa persetujuan orang tua/wali. 
+Pembatasan Akses: hanya peran Admin PPDB dan Super Admin yang dapat mengakses dokumen & data pribadi pendaftar (lihat Matriks RBAC Bagian 3.4); akses tercatat pada activity_logs. 
+Keamanan Penyimpanan: dokumen diunggah ke disk storage privat (bukan folder publik yang dapat diindeks mesin pencari) dan tidak dapat diakses langsung melalui tautan tanpa otentikasi. 
+Retensi & Penghapusan: data pendaftar yang berstatus "Ditolak" disimpan maksimal 1 tahun ajaran untuk keperluan arsip, setelah itu dihapus permanen; orang tua/wali dapat mengajukan permintaan penghapusan data lebih awal secara tertulis kepada pihak sekolah. 
+Transparansi: formulir pendaftaran publik mencantumkan pemberitahuan singkat (privacy notice) mengenai tujuan pengumpulan data dan pihak yang dapat mengaksesnya, sebelum calon wali murid mengirimkan formulir. 
+ 
+BAB IV   KEGIATAN HARIAN & RENCANA KERJA 
+4.1 Jadwal Kegiatan Harian Peserta 
+Jadwal berikut berlaku setiap hari Senin s.d. Jumat, dengan jadwal khusus setengah hari pada hari Sabtu. Jadwal ini menjadi acuan utama pengisian Formulir Log Harian pada Lampiran B. 
+4.1.1 Jadwal Harian Senin s.d. Jumat 
+Waktu 
+Kegiatan 
+Keterangan 
+07.00 – 08.00 
+Setoran Hafalan Al-Qur'an 
+Halaqoh Al-Qur'an bersama pembina tahfizh 
+08.00 – 08.10 
+Daily Update (10 menit) 
+Briefing singkat: progres kemarin, kendala, target hari ini (3 pertanyaan wajib) 
+08.10 – 11.30 
+Sesi Pagi — Belajar & Materi / Pengerjaan Fitur 
+Sinkronisasi Git (pull main), lanjut materi/fitur sesuai fase berjalan 
+11.30 – 13.00 
+Istirahat, Sholat Dzuhur & Makan 
+Waktu ibadah dan makan siang berjamaah 
+13.00 – 14.00 
+Istirahat Siang 
+Waktu pemulihan energi siswa 
+14.00 – 16.00 
+Sesi Siang — Praktik & Pengembangan Fitur 
+Melanjutkan progres pekerjaan; commit kecil per unit kerja selesai 
+16.00 – 16.40 
+Sholat Ashar & Penutupan 
+Rekap singkat capaian hari itu, push kode ke branch masing-masing 
+4.1.2 Jadwal Khusus Hari Sabtu 
+Waktu 
+Kegiatan 
+Keterangan 
+07.00 – 08.00 
+Setoran Hafalan Al-Qur'an 
+Halaqoh Al-Qur'an 
+08.00 – 08.10 
+Daily Update Mingguan 
+Informasi terbaru sepekan & rencana pekan depan 
+08.10 – 11.00 
+Sesi Pagi — Review & Checkpoint Integrasi 
+Review seluruh progres sepekan, penyelesaian Pull Request tertunda 
+11.00 – 11.30 
+Pengumpulan Laporan Mingguan 
+Formulir Laporan Mingguan (Lampiran C) diserahkan ke pembimbing sebelum 11.30 
+11.30 
+Selesai 
+Penutupan kegiatan pekan 
+Total jam belajar efektif: ±6,5 jam/hari (Senin–Jumat) | ±4 jam (Sabtu) | ±36,5 jam per minggu. 
+     4.2 Ringkasan Rencana Kerja 34 Minggu (8 Bulan) 
+Fase 
+Periode 
+Nama Fase 
+Output Utama 
+0 
+Bulan 1–1,5 (M1–M6) 
+Bootcamp Laravel 
+Kompetensi dasar Laravel + Website Profil Sekolah (studi kasus) 
+1 
+Bulan 2 (M7–M10) 
+Git & Laravel Lanjutan 
+Git refresh + Routing, Eloquent, Blade lanjutan + Autentikasi multi-role 
+2 
+Bulan 3 (M11–M14) 
+Prototype — Small Project 
+Aplikasi CRUD mandiri + Penentuan peran tim produksi 
+3 
+Bulan 4–6 (M15–M26) 
+Produksi — Web Sekolah + Pengumuman + PPDB 
+Website sekolah lengkap, fitur pengumuman publik, PPDB Online dengan dashboard admin 
+4a 
+Bulan 7 (M27–M30) 
+QA & Optimization 
+Website bebas bug, cepat, kode bersih 
+4b 
+Bulan 8 (M31–M34) 
+Deployment & Closing 
+Website live (HTTPS) + sertifikat + presentasi akhir 
+4.2.1 Fase 0 — Bootcamp Laravel (Minggu 1–6) 
+Minggu 
+Modul 
+Topik Utama 
+Target Kemampuan 
+1–2 
+Modul A — Dasar Laravel & Landing Page 
+Instalasi, struktur folder, routing & parameter, controller dasar, Blade & layout, TailwindCSS, komponen reusable 
+Membuat halaman profil sekolah statis dengan layout & komponen reusable 
+3–4 
+Modul B — Konten Dinamis (Front End) 
+Model, migration, Eloquent ORM, relasi, factory & seeder, route model binding, eager loading, FlowBite UI, search & pagination 
+Membuat halaman publik dinamis (berita, galeri, data guru/jurusan) dengan database nyata 
+5–6 
+Modul C — Dashboard Admin (Back End) 
+Breeze auth, middleware, role admin sederhana, CRUD, validasi form, file upload, custom error page 404 
+Membuat dashboard admin lengkap dengan autentikasi, manajemen konten, dan penanganan error dasar 
+✔ Standar Lulus Fase 0: Mampu membuat Website Profil Sekolah yang lengkap dan fungsional secara mandiri. 
+4.2.2 Fase 1 — Git & Laravel Lanjutan (Minggu 7–10) 
+Minggu 
+Fokus Materi 
+Target Kemampuan 
+7 
+Git & GitHub Refresh — branching, merge, resolusi konflik, workflow fork & PR 
+Lancar Git dasar, siap berkolaborasi dalam proyek Laravel nyata 
+8 
+Routing & Controller Lanjutan — Resource Controller, route grouping, middleware, named routes 
+Mampu mengorganisasi routing proyek besar 
+9 
+Migration & Eloquent Lanjutan — relasi kompleks, accessor, mutator, scope, eager loading 
+Mengelola database proyek nyata tanpa SQL manual 
+10 
+Blade Lanjutan & Breeze Multi-Role — layout lanjutan, komponen lanjutan, autentikasi multi-role 
+Sistem autentikasi berbasis role (admin, editor, user) 
+✔ Standar Lulus Fase 1: Mampu membuat halaman Laravel dengan sistem login multi-role secara mandiri dan lancar menggunakan Git kolaboratif. 
+4.2.3 Fase 2 — Prototype / Small Project (Minggu 11–14) 
+Minggu 
+Kegiatan 
+Keterangan 
+11 
+CRUD mandiri di repo website sekolah 
+Modul kecil PPDB atau Pengumuman langsung dikerjakan di repo utama, bukan aplikasi terpisah 
+12 
+Integrasi template admin 
+Mengintegrasikan template admin (AdminLTE/Stisla) ke dashboard yang sudah ada 
+13 
+Praktik Git branching lanjutan 
+feature/nama-fitur → merge ke main; modul minggu 11 dilanjutkan & dirapikan 
+14 
+Evaluasi individu & penentuan peran tim 
+Modul PPDB/Pengumuman individual menjadi cikal-bakal fitur resmi Fase 3 
+Pembagian Peran Tim Produksi (ditentukan di akhir Fase 2) 
+Tim 
+Jumlah Anggota 
+Tanggung Jawab Utama 
+Frontend (UI/UX & Blade) 
+Menyesuaikan jumlah peserta 
+Slicing tampilan publik, responsivitas, konsistensi desain 
+Backend Admin (CMS + PPDB) 
+4 orang 
+Sistem manajemen konten (berita, galeri, pengumuman), dashboard admin PPDB, manajemen pengguna 
+Backend Akademik (Data) 
+3 orang 
+Data guru, staf, jurusan, dokumen sekolah, rekapitulasi data di dashboard 
+Catatan: apabila mekanisme kondisional Bab VI (Mekanisme Kerja Kelompok Siswa & Siswi) aktif pada suatu angkatan yaitu apabila terdapat peserta siswi terdaftar pembagian tim di atas dipetakan lebih lanjut ke dua kelompok pelaksana sebagaimana diatur pada Bagian 6.2.1. Apabila mekanisme tersebut tidak aktif, pembagian tim di atas berlaku apa adanya tanpa pemetaan tambahan. 
+✔ Standar Lulus Fase 2: Mampu membuat aplikasi CRUD mandiri, memahami Git branching, dan siap bekerja dalam tim produksi. 
+4.2.4 Fase 3 — Produksi Website Sekolah + Pengumuman + PPDB (Minggu 15–26) 
+Ketiga tim bekerja paralel membangun satu website sekolah yang utuh. Setiap fitur dikerjakan di branch terpisah (feature/nama-fitur) dan di-merge ke main melalui Pull Request yang di-review pembimbing. 
+Minggu 
+Tim Frontend (UI/UX & Blade) 
+Tim Backend Admin (CMS + PPDB) 
+Tim Backend Akademik 
+15–16 
+Slicing Landing Page (Visi, Misi, Banner, Hero Section) 
+Setup Fitur Berita & Kategori (CRUD admin) 
+Setup Data Guru & Staf Sekolah 
+17–18 
+Slicing Halaman Berita & Galeri Foto 
+Fitur Upload Foto (Storage) & Manajemen Galeri 
+Fitur Data Jurusan & Program Kejuruan 
+19–20 
+Slicing Halaman Pengumuman Publik & Kontak 
+Fitur Pengumuman & Agenda — tampilan publik + panel admin (CRUD, arsip) 
+Fitur Data Siswa (opsional) + Rekapitulasi Awal 
+21–22 
+Slicing Form PPDB Online + Halaman Profil Guru 
+PPDB Online — Form Pendaftaran Publik + Dashboard Admin PPDB (verifikasi, unduh data) 
+Fitur Download Dokumen / Modul Sekolah 
+23–24 
+Perbaikan Responsivitas (Mobile) + Integrasi Peta 
+Sistem Manajemen User (Role Admin/Editor) + Konfirmasi Status PPDB 
+Rekapitulasi Data Pendaftar PPDB di Dashboard 
+25–26 
+Finishing Animasi, Aset Gambar & Konsistensi Desain 
+Keamanan Input (Validasi & Sanitasi) + Log Aktivitas 
+Optimasi Query (Eager Loading) & Finalisasi Integrasi 
+✔ Standar Lulus Fase 3: Semua fitur yang ditugaskan selesai, berjalan baik, dan telah di-merge ke repository utama melalui Pull Request yang ter-review. 
+4.2.5 Fase 4a — QA & Optimization (Minggu 27–30) 
+Minggu 
+Kegiatan 
+Penjelasan 
+27 
+Cross-Testing Antar Tim 
+Tim Frontend menguji fitur Backend dan sebaliknya, termasuk pengujian form PPDB dari sisi pengguna & admin 
+28 
+Penanganan Error & UX 
+Halaman 404 rapi, pesan error informatif, validasi form user-friendly (termasuk form PPDB) 
+29 
+Optimasi Database & Kecepatan 
+Indexing tabel PPDB, pengumuman, dan berita agar pencarian data lebih cepat 
+30 
+Clean Code & Refactoring 
+Merapikan kode, konsistensi naming, hapus kode mati, pastikan semua branch feature telah di-merge 
+✔ Standar Lulus Fase 4a: Website bebas bug kritis, form PPDB berfungsi sempurna, loading cepat, dan kode telah dirapikan. 
+4.2.6 Fase 4b — Deployment & Closing (Minggu 31–34) 
+Minggu 
+Kegiatan 
+Penjelasan 
+31 
+Pembuatan Dokumentasi Teknis 
+Panduan update konten (berita, pengumuman) dan panduan dashboard PPDB untuk staf sekolah 
+32 
+Proses Hosting (Dipandu Pembimbing) 
+Setup SSL (HTTPS), konfigurasi database produksi, pengaturan .env, uji coba form PPDB di server live 
+33 
+Presentasi Akhir 
+Setiap tim mempresentasikan fitur yang dikerjakan (termasuk demo PPDB live) di depan pembimbing & kepala sekolah 
+34 
+Penutupan & Penyerahan Sertifikat 
+Acara penutupan resmi program magang, penyerahan sertifikat, dan pengumuman nilai akhir 
+✔ Standar Lulus Fase 4b: Website live, form PPDB dapat diisi oleh publik, sertifikat diserahkan kepada peserta yang memenuhi syarat. 
+4.3 Checkpoint GitHub & Strategi Branching 
+Setiap checkpoint merupakan tonggak penting proyek. Di akhir setiap checkpoint, pembimbing membuat branch khusus di GitHub sebagai snapshot kondisi kode yang stabil — berfungsi sebagai backup, referensi evaluasi, dan titik pemulihan (rollback). 
+No 
+Branch Name 
+Fase 
+Minggu 
+Deskripsi Checkpoint 
+1 
+checkpoint/fase-0-bootcamp 
+Fase 0 
+M6 
+Bootcamp selesai — website profil dasar (studi kasus) fungsional di lokal 
+2 
+checkpoint/fase-1-laravel-lanjutan 
+Fase 1 
+M10 
+Git refresh selesai + autentikasi multi-role berjalan baik 
+3 
+checkpoint/fase-2-prototype 
+Fase 2 
+M14 
+Prototype CRUD mandiri selesai + peran tim telah ditentukan 
+4 
+checkpoint/fase-3a-landingpage-berita 
+Fase 3 
+M18 
+Landing page, halaman berita & kategori, galeri foto ter-merge ke main 
+5 
+checkpoint/fase-3b-pengumuman-ppdb 
+Fase 3 
+M24 
+Fitur Pengumuman & PPDB Online selesai & fungsional 
+6 
+checkpoint/fase-3c-produksi-selesai 
+Fase 3 
+M26 
+Semua fitur produksi ter-merge ke main — siap masuk QA 
+7 
+checkpoint/fase-4a-qa-selesai 
+Fase 4a 
+M30 
+Website bebas bug kritis, kode telah direfactoring, performa dioptimasi 
+8 
+checkpoint/fase-4b-deployed 
+Fase 4b 
+M34 
+Website live HTTPS + dokumentasi lengkap + sertifikat diserahkan 
+ 
+BAB V   ATURAN TEKNIS PROGRAM 
+5.1 Alur Kerja Git Harian 
+Prinsip kunci: "Pull pagi, push sore, PR kecil-kecil." Semakin lama sebuah branch hidup tanpa sinkron ke main, semakin besar potensi konfliknya. 
+Langkah 
+Waktu 
+Aksi 
+Penjelasan 
+1 
+08.00 (Daily Update) 
+git checkout main → git pull origin main 
+Wajib menarik kondisi terbaru sebelum mulai kerja 
+2 
+Setelah pull 
+git checkout nama-branch → git merge main 
+Menyatukan branch sendiri dengan perubahan terbaru 
+3 
+08.10–16.00 
+Commit kecil & sering per fitur/sub-tugas selesai 
+Hindari 1 commit besar di akhir hari 
+4 
+±15.30 
+git push origin nama-branch-sendiri 
+Push wajib tiap hari, tidak ditahan sampai fitur 100% selesai 
+5 
+Saat fitur selesai 
+Buka Pull Request (PR) ke main 
+PR dibuka segera setelah unit kerja selesai, jangan menumpuk 
+6 
+Maks. 1×24 jam kerja setelah PR dibuka 
+Pembimbing memberi respons: Approve & Merge / Request Changes / Reject 
+Kewajiban pembimbing — detail SOP & checklist pada Bagian 5.6 dan Lampiran E 
+5.2 Pembagian Kepemilikan File Antar Tim 
+File / Folder 
+Pemilik Utama 
+Aturan Akses Tim Lain 
+routes/web.php 
+Backend Admin (CMS) 
+Ajukan PR kecil khusus penambahan route, jangan digabung fitur lain 
+resources/views/layouts/app.blade.php 
+Frontend (UI/UX) 
+Tim lain hanya boleh menambah section/slot, tidak boleh ubah struktur dasar 
+database/migrations/* 
+Sesuai data masing-masing (Akademik = guru/siswa; Admin = berita/galeri/pengumuman/ppdb) 
+Migration baru dibuat di file baru; jangan edit migration tim lain yang sudah ada 
+components/ (Blade reusable) 
+Frontend 
+Tim lain request penambahan lewat PR terpisah 
+Prefix route (/admin/*, /akademik/*, /ppdb/*, /) 
+Setiap tim pegang prefix-nya sendiri 
+/admin/* → Backend Admin; /akademik/* → Backend Akademik; / → Frontend 
+  5.3 SOP Penanganan Konflik Git 
+Siswa pemilik branch adalah pihak pertama yang wajib mencoba resolve conflict secara lokal (bukan langsung minta pembimbing). 
+Langkah: git pull origin main → file conflict ditandai → siswa memutuskan bagian yang dipertahankan → git add → commit → push ulang. 
+Jika tidak yakin (terutama conflict lintas tim), wajib bertanya ke siswa penulis kode tersebut, bukan menebak sendiri. 
+Pembimbing (Maintainer) turun tangan hanya jika kedua siswa tidak sepakat, atau conflict terjadi di file inti (routing/layout utama). 
+5.4 Konvensi Penamaan Branch & Commit 
+Tipe 
+Format 
+Contoh 
+Fitur baru 
+feature/nama-fitur 
+feature/ppdb-form, feature/pengumuman-admin 
+Perbaikan bug 
+fix/deskripsi-bug 
+fix/validasi-form-ppdb, fix/pagination-berita 
+Checkpoint fase 
+checkpoint/nama-checkpoint 
+Sesuai Tabel 4.3 (dibuat oleh pembimbing) 
+Commit message 
+[Tim] Penjelasan singkat aksi 
+[Frontend] Tambah slicing halaman kontak 
+5.5 Prinsip Lain 
+5.5.1 No Copy-Paste Tanpa Paham 
+Siswa boleh mencari referensi kode dari internet, namun wajib bisa menjelaskan setiap baris kode yang ditulis. 
+Pengecekan dilakukan saat sesi Daily Update setiap pagi. 
+5.5.2 Standardisasi Teknologi 
+Framework: Laravel 11 · Styling: Tailwind CSS atau Bootstrap · Database: MySQL · Version Control: Git dengan alur branching feature/nama-fitur dan checkpoint/nama-checkpoint. 
+5.5.3 Daily Update 
+Dilaksanakan setiap pagi pukul 08.00 selama maksimal 10 menit, menjawab: "Kemarin buat apa? Kendala apa? Hari ini mau buat apa?" 
+5.6 SOP Review Pull Request oleh Pembimbing 
+Sebagaimana siswa memiliki kewajiban baku dalam alur kerja Git (Bagian 5.1), Guru Pembimbing selaku Maintainer juga memiliki kewajiban baku yang setara pada sisi review kode agar proses Pull Request tidak menjadi hambatan tunggal (bottleneck) tanpa kepastian waktu bagi siswa. 
+5.6.1 Service Level Agreement (SLA) Review 
+Setiap Pull Request wajib mendapat respons pertama dari Pembimbing maksimal 1×24 jam kerja sejak dibuka (tidak termasuk hari Ahad/libur). 
+Apabila Pembimbing berhalangan (sakit, dinas luar, dsb.) lebih dari 2 hari kerja, berlaku mekanisme eskalasi pada Bagian 8.3. 
+5.6.2 Checklist Kriteria Review 
+Pembimbing menggunakan checklist baku berikut sebelum memutuskan status sebuah PR (formulir isian tersedia pada Lampiran E): 
+Fungsional: fitur berjalan sesuai user story terkait pada PRD (Bagian 2.5) tanpa error saat diuji coba. 
+Konvensi Penamaan: nama branch, folder, dan variabel mengikuti konvensi baku (Bagian 5.4 & 5.2) netral, berbasis modul/fitur, bukan atribut personal. 
+Kebersihan Kode: tidak ada kode mati (dead code), tidak ada sisa dd()/dump()/console.log() untuk debug, indentasi rapi. 
+Keamanan Dasar: tidak ada kredensial/API key ter-hardcode di kode; input divalidasi (Form Request) untuk fitur yang menerima input pengguna. 
+Cakupan Perubahan: PR tidak menyentuh file di luar kepemilikan tim pengaju tanpa koordinasi (lihat Bagian 5.2). 
+Kejelasan Commit: pesan commit deskriptif dan mengikuti format pada Bagian 5.4. 
+5.6.3 Kategori Keputusan Review 
+Keputusan 
+Kapan Diberikan 
+Tindak Lanjut 
+Approve & Merge 
+Seluruh item checklist 5.6.2 terpenuhi 
+Pembimbing merge PR ke main; siswa diberi tahu melalui komentar PR 
+Request Changes 
+Ada bagian kecil yang perlu diperbaiki namun arah pengerjaan sudah benar 
+Pembimbing menuliskan catatan spesifik di PR; siswa memperbaiki di branch yang sama tanpa membuka PR baru 
+Reject 
+Pendekatan/implementasi keliru secara mendasar dan perlu dikerjakan ulang 
+Pembimbing menjelaskan alasan tertulis; sesi bimbingan tatap muka dijadwalkan sebelum siswa memulai ulang 
+ 
+BAB VI   MEKANISME KERJA KELOMPOK SISWA & SISWI   (KETENTUAN KONDISIONAL) 
+6.1 Latar Belakang & Tujuan 
+Pada beberapa angkatan, kelas Kelas XII Jurusan RPL dapat terdiri dari peserta siswa dan siswi dengan variasi kecepatan pemahaman teknis. Untuk kelompok siswi khususnya yang pemahamannya bertahap/lebih lambat diperlukan ruang kerja yang aman dan terisolasi dari aktivitas pengodean kelompok siswa, agar terhindar dari merge conflict yang membingungkan dan tetap memperoleh bimbingan intensif tanpa gangguan lintas kelompok. 
+Bab ini melengkapi Bab IV (Kegiatan Harian & Rencana Kerja) dan Bab V (Aturan Teknis) dengan mekanisme tambahan yang bersifat kondisional hanya diberlakukan apabila komposisi peserta pada angkatan berjalan memerlukannya. Pemisahan pada bab ini bersifat administratif/pedagogis (siapa didampingi bersama siapa) dan TIDAK diterjemahkan menjadi penamaan kode berbasis gender lihat penegasan pada Bagian 6.3.2. 
+6.2 Ketentuan Pemberlakuan (Kondisional) 
+Agar guru pembimbing tidak bingung mengarahkan peserta baru saat pendaftaran/penentuan peran tim di akhir Fase 2 (Minggu 14), gunakan alur keputusan berikut: 
+[Pendaftaran / Penentuan Peran Tim — Akhir Fase 2, Minggu 14] 
+                      │ 
+                      ▼ 
+        Apakah ada peserta SISWI pada angkatan ini? 
+                      │ 
+        ┌─────────────┴─────────────┐ 
+        ▼ YA                        ▼ TIDAK 
+[Aktifkan Mekanisme Bab VI]   [Mekanisme Bab VI tidak aktif] 
+  - Siswi → Kelompok Siswi     [Seluruh siswa mengikuti 
+    (route /admin, /akademik,   pembagian tim standar 
+    / CMS, data akademik,     Bab IV 4.2.3:] 
+    landing page)               - Frontend (UI/UX & Blade) 
+  - Siswa → Kelompok Siswa      - Backend Admin (CMS+PPDB) 
+    (route /ppdb — PPDB Online) - Backend Akademik (Data) 
+Gambar 6.1 — Alur keputusan penerapan mekanisme isolasi kelompok siswa/siswi 
+6.2.1 Pemetaan terhadap Struktur Tim Bab IV 
+Struktur tim berbasis keahlian pada Bab IV Bagian 4.2.3 (Frontend, Backend Admin, Backend Akademik) tidak dihapus oleh bab ini. Saat mekanisme Bab VI aktif, ketiga tim tersebut dipetakan ke dua kelompok pelaksana sebagai berikut, agar tidak ada peserta yang bingung tim mana yang ia ikuti: 
+Tim (Bab IV — berbasis keahlian) 
+Cakupan Modul 
+Kelompok Pelaksana (saat Bab VI aktif) 
+Frontend (UI/UX & Blade) 
+Landing page & slicing tampilan publik (/) 
+Kelompok Siswi 
+Backend Admin — Sub-modul CMS 
+Berita, Galeri, Pengumuman & Agenda (/admin) 
+Kelompok Siswi 
+Backend Admin — Sub-modul PPDB 
+Form pendaftaran publik & dashboard admin PPDB (/ppdb) 
+Kelompok Siswa 
+Backend Akademik 
+Data guru, staf, jurusan (/akademik) 
+Kelompok Siswi 
+6.3 Mekanisme Isolasi Kerja   
+Apabila mekanisme ini diaktifkan, repositori utama dibagi secara ketat berdasarkan modul dan jalur (route) agar kode tidak saling bercampur dan memicu merge conflict yang membingungkan kelompok siswi. 
+6.3.1 Pemisahan Route (routes/web.php) 
+Kelompok 
+Prefix Route yang Dipegang 
+Cakupan Fitur 
+Kelompok Siswa 
+/ppdb 
+PPDB Online — form pendaftaran publik & dashboard admin PPDB 
+Kelompok Siswi 
+/admin, /akademik, dan / (halaman utama) 
+CMS Berita/Galeri/Pengumuman (/admin), data guru & jurusan (/akademik), landing page publik (/) 
+6.3.2 Konvensi Penamaan Kode — Netral & Berbasis Modul 
+Kedua kelompok (siswa maupun siswi) menggunakan konvensi penamaan yang identik format feature/nama-modul-nama-fitur persis mengikuti aturan umum Bagian 5.4. Perbedaan gender hanya menentukan SIAPA yang mengerjakan modul mana (lihat Bagian 6.2.1), bukan bagaimana kode tersebut dinamai. 
+Catatan: tabel di atas melengkapi (bukan menggantikan) tabel kepemilikan file pada Bagian 5.2 kolom "Prefix route" pada Bagian 5.2 tetap berlaku, dengan kepemilikan tim disesuaikan pemetaan Bagian 6.2.1 saat mekanisme ini aktif. 
+6.4 Alur Kerja Harian Kelompok Siswi 
+Mekanisme ini tetap mengikuti prinsip "Pull pagi, push sore, PR kecil-kecil" pada Bagian 5.1, dengan penyesuaian waktu dan pendampingan sebagai berikut: 
+[08.00 Daily Update] → Siswi & Siswa briefing TERPISAH bersama 
+                        Guru Pembimbing selaku Project Lead 
+          │ 
+          ▼ 
+[08.10 Pull Pagi]  → Siswi: git pull origin main (sinkron server) 
+          │ 
+          ▼ 
+[08.15 Sesi Kerja] → Siswi fokus mengerjakan branch masing-masing 
+          │           (contoh: feature/akademik-data-guru) 
+          │           * Bimbingan intensif / peer-programming 
+          │             untuk siswi yang pemahamannya bertahap 
+          │             dilakukan pada sesi ini. 
+          ▼ 
+[15.30 Push Sore]  → Siswi: git push ke branch milik sendiri 
+          │           (BUKAN langsung ke branch main) 
+          ▼ 
+[16.00 Tutup Log]  → Siswi mengisi Formulir Log Harian (Lampiran B) 
+Gambar 6.2 — Alur kerja harian Kelompok Siswi 
+6.5 Mekanisme Pull Request & Checkpoint Kelompok Siswi 
+Siswi dilarang keras melakukan merge langsung ke branch main. 
+Setiap fitur baru wajib dibuatkan branch tersendiri dengan format feature/nama-modul-nama-fitur mengikuti konvensi netral pada Bagian 6.3.2 (contoh: feature/cms-profil-guru, feature/akademik-data-jurusan) BUKAN nama kelompok/gender. 
+Saat tugas seorang siswi selesai, ia membuka Pull Request (PR) ke branch main. 
+Sebelum PR disetujui, wajib dilakukan Peer Review oleh siswi lain yang pemahamannya lebih cepat melatih komunikasi dan saling belajar sesama anggota kelompok siswi. 
+Guru Pembimbing (Maintainer) tetap menjadi satu-satunya pihak yang berwenang menekan tombol Merge PR ke branch main, mengikuti SOP & SLA review yang sama pada Bagian 5.6 dan Bagian 8.1 Peran Pembimbingtidak ada perlakuan berbeda dalam kecepatan/kriteria review antara PR kelompok siswa maupun siswi. 
+6.6 SOP Penanganan Konflik Git Kelompok Siswi 
+Apabila terjadi merge conflict antara kode kelompok siswa dan siswi umumnya terjadi pada file bersama seperti routes/web.php atau file konfigurasi database berlaku SOP tambahan berikut, sebagai penyesuaian atas SOP umum pada Bagian 5.3: 
+Siswi terkait wajib mencoba menyelesaikan konflik secara lokal terlebih dahulu, sesuai SOP umum Bagian 5.3. 
+Karena pemahaman kelompok siswi bertahap, Guru Pembimbing (Project Lead) mendampingi secara langsung untuk memutuskan bagian kode mana yang dipertahankan. 
+Kelompok siswa TIDAK diperkenankan mengambil alih laptop/perangkat siswi untuk memperbaiki kode secara langsung hal ini penting agar memori otot (muscle memory) dan rasa percaya diri siswi tetap terjaga. 
+6.7 Sinkronisasi Checkpoint Mingguan (Setiap Sabtu) 
+Setiap Sabtu pukul 08.10, dilakukan Checkpoint Integrasi sebagaimana diatur pada Bagian 5.1 & Bagian 4.3. 
+Guru Pembimbing mengunci kode stabil dari kelompok siswi ke dalam branch checkpoint resmi yang sama dengan kelompok siswa (contoh: checkpoint/fase-3a-landingpage-berita), memastikan kontribusi kedua kelompok tergabung utuh pada setiap checkpoint. 
+Sebelum sesi berakhir pukul 11.30, siswi tetap wajib mengumpulkan Formulir Laporan Mingguan (Lampiran C) berisi refleksi diri dan penilaian diri (skala 1–5). 
+Nilai penilaian-diri pada laporan mingguan menjadi dasar bagi pembimbing untuk memantau apakah siswi yang pemahamannya bertahap sudah menunjukkan peningkatan, atau masih memerlukan pola kode (blueprint) yang lebih sederhana untuk pekan berikutnya. 
+6.8 Ringkasan Perbandingan Kelompok Siswa vs Kelompok Siswi 
+Aspek 
+Kelompok Siswa 
+Kelompok Siswi 
+Prefix Route 
+/ppdb 
+/admin, /akademik, / 
+Konvensi Kode (Folder/Namespace/Branch) 
+Netral & berbasis modul — lihat Bagian 6.3.2 
+Netral & berbasis modul — lihat Bagian 6.3.2 (identik dengan Kelompok Siswa) 
+Pendampingan Konflik 
+Mandiri → eskalasi ke Maintainer bila perlu (Bagian 5.3) 
+Didampingi langsung oleh Pembimbing, tanpa alih-alih perangkat oleh siswa 
+Peer Review Sebelum PR 
+Opsional/sesuai kebutuhan tim 
+Wajib — dilakukan oleh siswi yang pemahamannya lebih cepat 
+SLA & Kriteria Review PR 
+Bagian 5.6 — sama untuk kedua kelompok 
+Bagian 5.6 — sama untuk kedua kelompok 
+Wewenang Merge ke main 
+Guru Pembimbing (Maintainer) — sama untuk kedua kelompok 
+Guru Pembimbing (Maintainer) — sama untuk kedua kelompok 
+Checkpoint Mingguan 
+Digabung dalam satu branch checkpoint bersama kelompok siswi 
+Digabung dalam satu branch checkpoint bersama kelompok siswa 
+ 
+BAB VII   SISTEM PENILAIAN & EVALUASI 
+7.1 Komponen Penilaian Akhir 
+Penilaian mengukur capaian kinerja nyata siswa secara periodik, diverifikasi melalui commit GitHub, Pull Request, laporan harian/mingguan, dan fitur yang selesai dikerjakan. 
+No 
+Komponen Penilaian 
+Bobot 
+Indikator Capaian Kinerja 
+1 
+Capaian Fitur & Tugas 
+35% 
+Persentase fitur selesai sesuai target fase; kelengkapan & kualitas implementasi (dibuktikan via PR & demo) 
+2 
+Kualitas Kode & Praktik Git 
+20% 
+Kerapian & keterbacaan kode; penggunaan branching benar; kualitas commit message & PR 
+3 
+Kedisiplinan & Kehadiran 
+15% 
+Persentase kehadiran; ketepatan waktu; konsistensi Daily Update & Log Harian 
+4 
+Laporan Harian, Mingguan & Bulanan 
+15% 
+Kelengkapan & ketepatan waktu pengumpulan laporan; kualitas refleksi diri 
+5 
+Kolaborasi & Komunikasi Tim 
+10% 
+Partisipasi aktif membantu rekan; komunikasi proaktif; kontribusi code review 
+6 
+Sikap & Etika Kerja 
+5% 
+Kesopanan & tanggung jawab; kepatuhan ground rules; integritas kode 
+TOTAL 
+100% 
+7.2 Rubrik Nilai Akhir 
+Predikat 
+Rentang Nilai 
+Deskripsi Capaian 
+A   Istimewa 
+90 – 100 
+Melampaui target fase, kode berkualitas tinggi, aktif membantu tim, laporan reflektif & tepat waktu 
+B   Baik 
+75 – 89 
+Mencapai target sesuai rencana, kode rapi, Git digunakan dengan benar, laporan lengkap 
+C   Cukup 
+60 – 74 
+Sebagian besar target tercapai dengan bimbingan intensif; beberapa fitur selesai terlambat 
+D   Kurang 
+< 60 
+Target tidak tercapai; perlu perhatian khusus; berisiko tidak mendapat sertifikat 
+7.3 Siklus Pelaporan: Harian → Mingguan → Bulanan 
+Tahap 
+Waktu 
+Pelaksana 
+Keterangan 
+1 
+Setiap hari, akhir sesi (±16.30) 
+Siswa 
+Mengisi Formulir Log Harian (Lampiran B) — ringkasan kerja, kendala, dan commit hari itu 
+2 
+Setiap Sabtu ≤ 11.30 
+Siswa 
+Mengisi Formulir Laporan Mingguan (Lampiran C), dikompilasi dari 6 Log Harian 
+3 
+Minggu ke-4 setiap bulan 
+Siswa 
+Mengompilasi 4 Laporan Mingguan menjadi Laporan Bulanan (Lampiran D) 
+4 
+Awal minggu berikutnya 
+Pembimbing 
+Sesi Evaluasi Bulanan (±15 menit/siswa) — menilai kinerja, memberi feedback, menetapkan target 
+5 
+Setelah sesi evaluasi 
+Pembimbing 
+Mengisi Rekap Nilai Bulanan berdasarkan 6 komponen penilaian 
+7.4 Kalender Evaluasi Bulanan 
+Evaluasi 
+Periode 
+Fase 
+Topik Evaluasi Utama 
+Bulan 1 
+M1–M4 
+Fase 0 
+Kecepatan adopsi Laravel; pemahaman routing, Blade, database; output: halaman statis 
+Bulan 2 
+M5–M8 
+Fase 0–1 
+Penyelesaian bootcamp Modul C (auth, CRUD); Git workflow dimulai 
+Bulan 3 
+M9–M12 
+Fase 1–2 
+Laravel lanjutan; prototype CRUD mandiri; penguasaan branching strategy 
+Bulan 4 
+M13–M16 
+Fase 2–3 
+Penentuan peran tim; kesiapan kolaborasi; awal produksi (landing page & berita) 
+Bulan 5 
+M17–M20 
+Fase 3 
+Kemajuan halaman berita, galeri, dan Pengumuman & Agenda selesai ter-merge 
+Bulan 6 
+M21–M24 
+Fase 3 
+PPDB Online (form publik + dashboard admin) selesai & fungsional 
+Bulan 7 
+M25–M28 
+Fase 3–4a 
+Finishing produksi; semua fitur ter-merge; awal QA & bug hunting 
+Bulan 8 
+M29–M34 
+Fase 4a–4b 
+QA selesai; deployment ke server live; dokumentasi; presentasi akhir & penutupan 
+ 
+BAB VIII   PERAN PEMBIMBING & KETENTUAN LAIN 
+8.1 Peran Pembimbing 
+Peran 
+Deskripsi 
+Pengajar & Fasilitator 
+Menyampaikan materi & memastikan siswa paham konsep dasar sebelum masuk fase produksi 
+Project Lead 
+Memimpin pengerjaan website, membagi tugas fitur, mengintegrasikan kode antar tim 
+Maintainer Repository 
+Satu-satunya yang berwenang melakukan merge Pull Request setelah code review; membuat branch checkpoint 
+Penanggung Jawab Hosting 
+Memandu & mengeksekusi proses deployment ke server produksi pada Fase 4b 
+8.2 Ketentuan Lain 
+Produk akhir (Website Sekolah, Fitur Pengumuman, PPDB Online) menjadi aset resmi milik PKBM Tahfizh At-Tamam. 
+Sertifikat resmi diberikan kepada peserta yang memenuhi syarat kelulusan sesuai rubrik pada Bagian 7.2. 
+Evaluasi rutin bulanan akan diinformasikan kepada orang tua/wali, termasuk apabila terdapat siswa yang memerlukan perhatian khusus. 
+8.3 Mekanisme Keluhan & Eskalasi (Grievance Mechanism) 
+Karena Guru Pembimbing merangkap peran Project Lead, Maintainer, sekaligus penilai (Bagian 8.1), diperlukan jalur keluhan independen agar siswa maupun orang tua/wali memiliki tempat mengadu yang tidak berpotensi konflik kepentingan. 
+Situasi 
+Langkah Penyelesaian 
+Siswa merasa keberatan atas keputusan PR (Reject/Request Changes berulang) atau nilai bulanan 
+1) Diskusikan langsung dengan Pembimbing terlebih dahulu. 2) Bila belum ada titik temu dalam 3 hari kerja, siswa/orang tua dapat mengajukan keberatan tertulis kepada Kepala PKBM Tahfizh At-Tamam, dilampiri bukti pendukung (riwayat PR, Log Harian, Laporan Mingguan/Bulanan terkait). 
+Pembimbing tidak merespons Pull Request melewati SLA Bagian 5.6 lebih dari 2 hari kerja berturut-turut 
+Siswa melapor ke Kepala PKBM untuk penunjukan reviewer pengganti sementara atau perpanjangan tenggat kerja tanpa mengurangi penilaian siswa. 
+Dugaan perlakuan tidak adil antar kelompok (siswa vs siswi) dalam proses review atau penilaian 
+Kepala PKBM meninjau kesesuaian perlakuan dengan Bagian 5.6 (SOP Review) dan Bagian 6.8 (kesetaraan SLA & kriteria review) sebelum memberi keputusan final. 
+
+
+Kepala PKBM wajib memberikan keputusan final atas keberatan tertulis dalam waktu maksimal 5 hari kerja sejak diterima. 
+Seluruh proses keluhan dan keputusannya dicatat secara tertulis sebagai bagian dari dokumentasi program. 
+8.4 Prosedur Pengunduran Diri & Reassignment Tugas 
+Mengingat Fase 3 (Bagian 4.2.4) sangat bergantung pada kontribusi tiap anggota tim, kekosongan mendadak dapat memblokir modul lain. Prosedur berikut berlaku apabila seorang siswa mengundurkan diri atau tidak dapat melanjutkan program: 
+1) Siswa/orang tua menyampaikan pemberitahuan tertulis kepada Guru Pembimbing sesegera mungkin, idealnya minimal 3 hari kerja sebelum berhenti aktif. 
+2) Guru Pembimbing melakukan serah terima (handover) branch dan modul yang sedang dikerjakan kepada anggota tim lain dalam kelompok yang sama, dibantu dokumentasi pada Log Harian & Laporan Mingguan terakhir siswa bersangkutan. 
+3) Apabila tidak ada anggota tim yang dapat mengambil alih dalam 1 minggu, Guru Pembimbing menyesuaikan cakupan modul pada Bagian 4.2.4 (mengurangi fitur non-prioritas) agar linimasa 34 minggu tetap tercapai. 
+4) Nilai akhir siswa yang mengundurkan diri dihitung proporsional berdasarkan capaian hingga tanggal pengunduran diri, mengacu pada komponen penilaian Bagian 7.1. 
+ 
+LEMBAR PENGESAHAN PROGRAM 
+Dokumen Program Magang Internal Berbasis Laravel Tahun 2026/2027  ini disahkan dan berlaku sejak ditandatangani oleh pihak-pihak yang berwenang. 
+
+Pekanbaru, ______________ 2026 
+Pekanbaru, ______________ 2026 
+Guru Pembimbing Program 
+( _____________________ ) 
+Kepala PKBM Tahfizh At-Tamam 
+( _____________________ ) 
+ 
+LEMBAR PERSETUJUAN ORANG TUA / WALI 
+Dengan menandatangani lembar ini, orang tua/wali peserta menyatakan telah membaca, memahami, dan menyetujui seluruh ketentuan Program Magang Internal Berbasis Laravel Tahun 2026/2027. 
+Data 
+Keterangan 
+Nama Peserta 
+_______________________________________________ 
+Kelas / Jurusan 
+_______________________________________________ 
+Nama Orang Tua / Wali 
+_______________________________________________ 
+No. HP Orang Tua / Wali 
+_______________________________________________ 
+
+Pekanbaru, ______________ 2026 
+Pekanbaru, ______________ 2026 
+Orang Tua / Wali Peserta 
+( _____________________ ) 
+Guru Pembimbing Program 
+( _____________________ ) 
+ 
+LAMPIRAN A   SURAT KESEPAKATAN PROGRAM MAGANG 
+Pada hari ini, _______________, tanggal _____ bulan _______________ tahun 2026, telah disepakati Perjanjian Program Magang antara pihak-pihak berikut: 
+Pihak Pertama: PKBM Tahfizh At-Tamam, diwakili oleh Guru Pembimbing Program 
+Pihak Kedua: Siswa Peserta Magang (identitas terlampir) 
+Pihak Ketiga: Orang Tua / Wali Peserta (sebagai penanggung jawab) 
+Pasal 1 — Hak Siswa Peserta 
+Mendapatkan bimbingan terstruktur, akses penuh repository & tools, penilaian adil dan transparan. 
+Mendapatkan feedback konstruktif setiap bulan berdasarkan hasil evaluasi kinerja. 
+Mendapatkan sertifikat resmi dan hak menyampaikan keluhan kepada pembimbing. 
+Pasal 2 — Kewajiban Siswa Peserta 
+Hadir tepat waktu, menyelesaikan tugas/fitur sesuai target fase, mematuhi Ground Rules (Bab V). 
+Mengisi Log Harian setiap hari, menyerahkan Laporan Mingguan setiap Sabtu sebelum 11.30, dan Laporan Bulanan di akhir setiap bulan. 
+Menjaga etika, serta menjaga kerahasiaan kepemilikan kode tim. 
+Pasal 3 — Hak Lembaga 
+Menggunakan hasil karya (Website Sekolah, Fitur Pengumuman, PPDB Online) sebagai aset sekolah. 
+Melakukan evaluasi kinerja bulanan, memberikan peringatan, memberhentikan peserta yang melanggar. 
+Menentukan peran siswa dalam tim produksi. 
+Pasal 4 — Kewajiban Lembaga 
+Menyediakan fasilitas dan bimbingan yang memadai selama 8 bulan program. 
+Memberikan penilaian kinerja yang objektif setiap bulan berdasarkan 6 komponen yang telah ditetapkan. 
+Menerbitkan sertifikat kepada peserta yang memenuhi syarat dan memberikan notifikasi kepada orang tua. 
+Pasal 5 — Konsekuensi Pelanggaran 
+Tingkat 
+Jenis Pelanggaran 
+Konsekuensi 
+1 
+Keterlambatan berulang, laporan tidak dikumpulkan 
+Peringatan lisan dari guru pembimbing 
+2 
+Pelanggaran ground rules, absensi tanpa keterangan 
+Peringatan tertulis & pengurangan nilai komponen terkait 
+3 
+Pelanggaran berat atau berulang setelah peringatan tertulis 
+Pemberhentian dari program & sertifikat tidak diterbitkan 
+ Pasal 6 — Pernyataan Kesepakatan 
+Seluruh pihak menyatakan telah membaca, memahami, dan menyetujui seluruh isi kesepakatan di atas. 
+
+Pihak Pertama (Guru Pembimbing) 
+Pihak Kedua (Siswa Peserta) 
+Pihak Ketiga (Orang Tua/Wali) 
+( _____________ ) 
+( _____________ ) 
+( _____________ ) 
+ 
+LAMPIRAN B   FORMULIR LOG HARIAN SISWA & SISWI 
+Data 
+Isian 
+Nama Lengkap 
+_______________________________________ 
+Kelas / Jurusan 
+_______________________________________ 
+Hari / Tanggal 
+_______________________ / _______ 2026 
+Minggu ke- / Fase 
+Minggu ke- _____ / Fase _____ 
+Branch Aktif (GitHub) 
+_______________________________________ 
+Ringkasan Kegiatan Hari Ini 
+Sesi 
+Aktivitas / Materi / Fitur yang Dikerjakan 
+Pagi (08.10–11.30) 
+Siang (14.00–16.00) 
+Rincian Teknis 
+Pertanyaan 
+Jawaban 
+Jumlah commit hari ini 
+Pesan commit (ringkas 1–2 baris) 
+Apakah ada Pull Request dibuka/di-merge hari ini? 
+Kendala teknis yang ditemui 
+Cara mengatasi / rencana solusi 
+Target yang akan dilanjutkan besok 
+Checklist Disiplin Harian 
+☐ Hadir tepat waktu pada sesi setoran hafalan (07.00) 
+☐ Mengikuti Daily Update pukul 08.00 dan menjawab 3 pertanyaan wajib 
+☐ Melakukan git pull sebelum mulai bekerja 
+☐ Melakukan git push sebelum sesi berakhir 
+Paraf Pembimbing: _______________ 
+ 
+LAMPIRAN C   FORMULIR LAPORAN MINGGUAN SISWA & SISWI 
+Data 
+Isian 
+Nama Lengkap 
+_______________________________________ 
+Kelas / Jurusan 
+_______________________________________ 
+Minggu ke- / Fase 
+Minggu ke- _____ / Fase _____ 
+Periode Laporan 
+_______________ s.d. _______________ 2026 
+Branch/fitur yang dikerjakan minggu ini 
+_______________________________________ 
+Progres Belajar Minggu Ini 
+Pertanyaan 
+Jawaban 
+Apa saja yang berhasil saya kerjakan minggu ini? 
+Konsep atau materi baru yang saya pelajari 
+Kendala atau kesulitan yang saya hadapi 
+Cara saya mengatasi kendala tersebut 
+Rencana yang akan saya kerjakan minggu depan 
+Refleksi Diri 
+Aspek 
+Penilaian Diri (1–5) 
+Kedisiplinan & kehadiran minggu ini 
+/ 5 
+Pemahaman materi yang dipelajari 
+/ 5 
+Kontribusi dalam kerja tim dan Git (PR, commit) 
+/ 5 
+Kualitas kode / hasil kerja yang dihasilkan 
+/ 5 
+Semangat & motivasi belajar 
+/ 5 
+        Catatan & Feedback Guru Pembimbing: 
+
+Pekanbaru, ______________ 2026 
+Pekanbaru, ______________ 2026 
+Siswa Peserta Magang 
+( _____________________ ) 
+Guru Pembimbing 
+( _____________________ ) 
+ 
+LAMPIRAN D   FORMULIR LAPORAN BULANAN SISWA & SISWI 
+Data 
+Isian 
+Nama Lengkap 
+_______________________________________ 
+Kelas / Jurusan 
+_______________________________________ 
+Bulan Evaluasi ke- 
+Bulan ke- _____ 
+Periode 
+Minggu ke- _____ s.d. _____ (_______________ s.d. _______________ 2026) 
+Fase yang Dikerjakan 
+_______________________________________ 
+Rekapitulasi Capaian Bulan Ini 
+Minggu 
+Ringkasan Capaian Utama 
+Branch / Fitur yang Dikerjakan 
+Minggu ___ 
+Minggu ___ 
+Minggu ___ 
+Minggu ___ 
+Refleksi Diri Bulanan 
+Aspek 
+Penilaian Diri (1–5) 
+Rata-rata kedisiplinan & kehadiran bulan ini 
+/ 5 
+Pemahaman materi dan perkembangan kemampuan teknis 
+/ 5 
+Kontribusi aktif dalam kolaborasi tim & Git workflow 
+/ 5 
+Kualitas dan kelengkapan fitur yang diselesaikan 
+/ 5 
+Konsistensi pengumpulan Log Harian & Laporan Mingguan tepat waktu 
+/ 5 
+Pertanyaan Refleksi 
+Jawaban 
+Apa pencapaian terbesar saya bulan ini? 
+Apa kendala terbesar dan bagaimana saya mengatasinya? 
+Target yang ingin saya capai bulan depan 
+   Rekap Penilaian Kinerja Bulanan — Oleh Pembimbing 
+Komponen 
+Bobot 
+Nilai (0–100) 
+Catatan Pembimbing 
+Capaian Fitur & Tugas 
+35% 
+Kualitas Kode & Praktik Git 
+20% 
+Kedisiplinan & Kehadiran 
+15% 
+Laporan Harian/Mingguan/Bulanan 
+15% 
+Kolaborasi & Komunikasi Tim 
+10% 
+Sikap & Etika Kerja 
+5% 
+NILAI BULANAN (BOBOT TERTIMBANG) 
+100% 
+Feedback & Arahan Pembimbing untuk Bulan Depan: 
+
+Pekanbaru, ______________ 2026 
+Pekanbaru, ______________ 2026 
+Siswa Peserta Magang 
+( _____________________ ) 
+Guru Pembimbing Program 
+( _____________________ ) 
+ 
+LAMPIRAN E   FORMULIR CHECKLIST REVIEW PULL REQUEST UNTUK PEMBIMBING 
+Data PR 
+Isian 
+Nomor / Judul Pull Request 
+_______________________________________ 
+Nama Pembuat PR 
+_______________________________________ 
+Kelompok 
+☐ Kelompok Siswa   ☐ Kelompok Siswi 
+Modul / Branch 
+_______________________________________ 
+Tanggal PR Dibuka 
+_______________ 2026, pukul _______ 
+Tanggal Direview 
+_______________ 2026, pukul _______ 
+Durasi Respons (jam kerja) 
+_______ jam — ☐ Memenuhi SLA (≤24 jam) ☐ Melebihi SLA 
+Checklist Kriteria Review (Bagian 5.6.2) 
+☐ Fungsional: fitur berjalan sesuai user story terkait pada PRD (Bagian 2.5) tanpa error saat diuji coba 
+☐ Konvensi Penamaan: nama branch/folder/variabel mengikuti konvensi baku netral berbasis modul (Bagian 5.4 & 6.3.2) 
+☐ Kebersihan Kode: tidak ada kode mati, tidak ada sisa dd()/dump()/console.log(), indentasi rapi 
+☐ Keamanan Dasar: tidak ada kredensial/API key ter-hardcode; input tervalidasi (Form Request) untuk fitur yang menerima input pengguna 
+☐ Cakupan Perubahan: PR tidak menyentuh file di luar kepemilikan tim pengaju tanpa koordinasi (Bagian 5.2) 
+☐ Kejelasan Commit: pesan commit deskriptif, mengikuti format Bagian 5.4 
+Keputusan Review (Bagian 5.6.3) 
+☐ Approve & Merge — seluruh kriteria terpenuhi, PR digabungkan ke main 
+☐ Request Changes — sebagian kecil perlu diperbaiki, dijelaskan pada catatan di bawah 
+☐ Reject — perlu dikerjakan ulang, sesi bimbingan tatap muka dijadwalkan 
+Catatan / Alasan Keputusan: 
+Paraf Pembimbing: _______________ 

@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SchoolProfile;
+use App\Models\Major;
+use App\Models\News;
+use App\Models\TeacherStaff;
+use App\Models\PpdbRegistration;
+use App\Models\ActivityLog;
 
 class SchoolController extends Controller
 {
@@ -11,7 +17,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        // 1. Data Informasi Sekolah
+        // 1. Data Informasi Sekolah (Default fallback jika DB kosong)
         $sekolah = [
             'nama' => 'SMK Negeri 1 Nusantara',
             'slogan' => 'Mencetak Generasi Unggul, Berkarakter & Siap Kerja di Era Digital',
@@ -24,85 +30,84 @@ class SchoolController extends Controller
         ];
 
         // 2. Data Sambutan Kepala Sekolah
+        $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
         $sambutan = [
-            'nama' => 'Dr. H. Ahmad Fauzi, M.Pd.',
+            'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
             'jabatan' => 'Kepala Sekolah SMK Negeri 1 Nusantara',
             'pesan' => 'Selamat datang di portal resmi SMK Negeri 1 Nusantara. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan relevan dengan kebutuhan dunia kerja masa depan. Mari bersama mewujudkan impian dan potensi terbaik para siswa!',
             'foto_initials' => 'AF'
         ];
 
         // 3. Data Statistik Sekolah
+        $jumlahSiswa = PpdbRegistration::count() + 1250; // Simulasi dengan penambahan pendaftar
+        $jumlahGuru = TeacherStaff::count();
+        $jumlahJurusan = Major::count();
+
         $stats = [
-            ['label' => 'Siswa Aktif', 'value' => '1,250+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
-            ['label' => 'Guru & Staf', 'value' => '85 Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
-            ['label' => 'Program Keahlian', 'value' => '4 Jurusan', 'icon' => '💻', 'color' => '#fffbeb'],
+            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
+            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
+            ['label' => 'Program Keahlian', 'value' => ($jumlahJurusan > 0 ? $jumlahJurusan : 4) . ' Jurusan', 'icon' => '💻', 'color' => '#fffbeb'],
             ['label' => 'Serapan Kerja', 'value' => '94% Pertahun', 'icon' => '🚀', 'color' => '#f3e8ff'],
         ];
 
-        // 4. Data Program Keahlian / Jurusan
-        $jurusan = [
-            [
-                'id' => 'rpl',
-                'nama' => 'Rekayasa Perangkat Lunak (RPL)',
-                'kategori' => 'Teknologi Informasi',
-                'deskripsi' => 'Mempelajari pemrograman web (Laravel, React), aplikasi mobile, basis data, dan pengembangan software berbasis industri.',
-                'prospek' => 'Fullstack Developer, Web Developer, Mobile App Engineer',
-                'badge' => '🔥 Paling Favorit',
-                'icon' => '⚡'
-            ],
-            [
-                'id' => 'tkj',
-                'nama' => 'Teknik Komputer & Jaringan (TKJ)',
-                'kategori' => 'Teknologi Informasi',
-                'deskripsi' => 'Fokus pada arsitektur jaringan komputer, administrasi server Linux/Windows, cloud computing, dan siber security.',
-                'prospek' => 'Network Engineer, Cloud Administrator, Cybersecurity Specialist',
-                'badge' => '🌐 Sertifikasi Cisco/Mikrotik',
-                'icon' => '📡'
-            ],
-            [
-                'id' => 'dkv',
-                'nama' => 'Desain Komunikasi Visual (DKV)',
-                'kategori' => 'Industri Kreatif',
-                'deskripsi' => 'Mengembangkan kreativitas seni visual, desain grafis, fotografi, videografi, serta desain UI/UX aplikasi digital.',
-                'prospek' => 'UI/UX Designer, Graphic Designer, Video Editor, Creative Director',
-                'badge' => '🎨 Studio Kreatif Komplit',
-                'icon' => '✨'
-            ],
-            [
-                'id' => 'akl',
-                'nama' => 'Akuntansi & Keuangan Lembaga (AKL)',
-                'kategori' => 'Bisnis & Manajemen',
-                'deskripsi' => 'Menguasai pengelolaan keuangan digital, perbankan syariah, pembukuan komputerisasi (Accurate/MYOB), dan pajak.',
-                'prospek' => 'Staf Keuangan, Financial Analyst, Akuntan Publik Junior',
-                'badge' => '📊 Lab Keuangan Digital',
-                'icon' => '💼'
-            ]
-        ];
+        // 4. Data Program Keahlian / Jurusan (Dinamis dari Database)
+        $jurusan = Major::all()->map(function ($item) {
+            $badges = [
+                'rekayasa-perangkat-lunak-rpl' => '🔥 Paling Favorit',
+                'teknik-komputer-jaringan-tkj' => '🌐 Sertifikasi Cisco/Mikrotik',
+                'desain-komunikasi-visual-dkv' => '🎨 Studio Kreatif Komplit',
+                'akuntansi-keuangan-lembaga-akl' => '📊 Lab Keuangan Digital',
+            ];
 
-        // 5. Data Berita Terbaru
-        $berita = [
-            [
-                'judul' => 'Tim RPL SMKN 1 Nusantara Meraih Juara 1 LKS Pemrograman Web 2026',
-                'tanggal' => '28 Juli 2026',
-                'kategori' => 'Prestasi',
-                'ringkasan' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi.',
+            return [
+                'id' => $item->slug,
+                'nama' => $item->name,
+                'kategori' => str_contains($item->slug, 'akl') ? 'Bisnis & Manajemen' : (str_contains($item->slug, 'dkv') ? 'Industri Kreatif' : 'Teknologi Informasi'),
+                'deskripsi' => $item->description,
+                'prospek' => 'Lulusan siap kerja di bidang ' . explode(' (', $item->name)[0],
+                'badge' => $badges[$item->slug] ?? '✨ Program Unggulan',
+                'icon' => $item->icon ?? '⚡'
+            ];
+        })->toArray();
+
+        // Fallback jika database belum di-seed
+        if (empty($jurusan)) {
+            $jurusan = [
+                [
+                    'id' => 'rpl',
+                    'nama' => 'Rekayasa Perangkat Lunak (RPL)',
+                    'kategori' => 'Teknologi Informasi',
+                    'deskripsi' => 'Mempelajari pemrograman web (Laravel, React), aplikasi mobile, basis data, dan pengembangan software berbasis industri.',
+                    'prospek' => 'Fullstack Developer, Web Developer, Mobile App Engineer',
+                    'badge' => '🔥 Paling Favorit',
+                    'icon' => '⚡'
+                ]
+            ];
+        }
+
+        // 5. Data Berita Terbaru (Dinamis dari Database)
+        $berita = News::with('category')->latest()->take(3)->get()->map(function ($item) {
+            return [
+                'judul' => $item->title,
+                'tanggal' => $item->created_at->translatedFormat('d F Y') ?? $item->created_at->format('d M Y'),
+                'kategori' => $item->category ? $item->category->name : 'Umum',
+                'ringkasan' => substr(strip_tags($item->content), 0, 120) . '...',
                 'baca_waktu' => '3 menit baca'
-            ],
-            [
-                'judul' => 'Penandatanganan MoU Kemitraan Kerja dengan 12 Perusahaan IT Nasional',
-                'tanggal' => '18 Juli 2026',
-                'kategori' => 'Kerjasama DUDI',
-                'ringkasan' => 'Memperluas jangkauan magang dan rekrutmen lulusan secara langsung sebelum wisuda kelulusan.',
-                'baca_waktu' => '2 menit baca'
-            ],
-            [
-                'judul' => 'Pembukaan Pendaftaran Siswa Baru (PPDB) Gelombang 2 Tahun 2026/2027',
-                'tanggal' => '05 Juli 2026',
-                'kategori' => 'Pengumuman',
-                'ringkasan' => 'Informasi lengkap persyataan dan alur pendaftaran calon peserta didik baru dapat diakses di portal ini.',
-                'baca_waktu' => '5 menit baca'
-            ]
-        ];
+            ];
+        })->toArray();
+
+        // Fallback jika database belum di-seed
+        if (empty($berita)) {
+            $berita = [
+                [
+                    'judul' => 'Tim RPL SMKN 1 Nusantara Meraih Juara 1 LKS Pemrograman Web 2026',
+                    'tanggal' => '28 Juli 2026',
+                    'kategori' => 'Prestasi',
+                    'ringkasan' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi.',
+                    'baca_waktu' => '3 menit baca'
+                ]
+            ];
+        }
 
         // 6. Data Fasilitas Utama
         $fasilitas = [
@@ -117,11 +122,11 @@ class SchoolController extends Controller
     }
 
     /**
-     * Memproses Form Simulasi Pendaftaran / Kontak dari Pengunjung
+     * Memproses Form Pendaftaran / Kontak dari Pengunjung dan menyimpannya ke database
      */
     public function submitContact(Request $request)
     {
-        // Validasi input sederhana
+        // Validasi input
         $validated = $request->validate([
             'nama' => 'required|min:3',
             'email' => 'required|email',
@@ -137,7 +142,31 @@ class SchoolController extends Controller
             'pesan.min' => 'Pesan minimal terdiri dari 10 karakter.'
         ]);
 
+        // Simpan pendaftaran ke database ppdb_registrations
+        $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . rand(1000, 9999);
+        $registration = PpdbRegistration::create([
+            'no_pendaftaran' => $noPendaftaran,
+            'full_name' => $validated['nama'],
+            'gender' => 'L', // default value
+            'birth_date' => now()->subYears(15)->format('Y-m-d'), // default value
+            'address' => $validated['pesan'], // simpan pesan ke alamat
+            'parent_name' => 'Wali Murid',
+            'parent_phone' => '081200000000',
+            'major_choice' => $validated['jurusan_minat'],
+            'status' => 'pending',
+            'notes' => 'Registrasi otomatis dari form kontak landing page'
+        ]);
+
+        // Catat log aktivitas admin/sistem
+        ActivityLog::create([
+            'user_id' => 1, // Hubungkan ke user Budi Santoso yang pertama kali diseed
+            'module' => 'ppdb',
+            'action' => 'create',
+            'description' => 'Pendaftaran PPDB baru oleh ' . $validated['nama'] . ' (No. Reg: ' . $noPendaftaran . ')',
+        ]);
+
         // Kirim response flash message kembali ke halaman sebelumnya
-        return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pesan dan pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim.');
+        return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim. Nomor Pendaftaran Anda: ' . $noPendaftaran);
     }
 }
+

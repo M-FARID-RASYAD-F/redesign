@@ -4,9 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Gallery extends Model
 {
     /** @use HasFactory<\Database\Factories\GalleryFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'image_path',
+        'category',
+        'uploaded_by',
+    ];
+
+    public function uploader(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'uploaded_by');
+    }
 }

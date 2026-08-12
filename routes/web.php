@@ -17,18 +17,9 @@ Route::get('/', [SchoolController::class, 'index'])->name('home');
 // 2. Route Memproses Form Kontak / Pendaftaran
 Route::post('/kontak', [SchoolController::class, 'submitContact'])->name('kontak.submit');
 
-// 3. Route Simulasi Login Guru (Auth untuk Edukasi Siswa)
+// 3. Route Login Guru (Mengarahkan ke Form Login Panel Admin Filament)
 Route::get('/login', function () {
-    $user = User::firstOrCreate(
-        ['email' => 'dibu.guru@sekolah.sch.id'],
-        [
-            'name' => 'Budi Santoso, S.Pd. (Guru)',
-            'password' => bcrypt('password123'),
-        ]
-    );
-
-    Auth::login($user);
-    return redirect('/')->with('success', 'Berhasil Login sebagai Guru: Budi Santoso, S.Pd.!');
+    return redirect('/portal/login');
 })->name('login');
 
 // 4. Route Logout Guru

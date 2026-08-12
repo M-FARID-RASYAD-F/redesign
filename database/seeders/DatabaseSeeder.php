@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Seed Super Admin User
-        $admin = User::firstOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'budi.guru@sekolah.sch.id'],
             [
                 'name' => 'Budi Santoso, S.Pd. (Admin Utama)',

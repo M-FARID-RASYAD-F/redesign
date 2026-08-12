@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Announcement extends Model
 {
@@ -20,16 +21,13 @@ class Announcement extends Model
         'created_by',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'start_date' => 'date',
-            'end_date' => 'date',
-            'is_archived' => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'is_archived' => 'boolean',
+    ];
 
-    public function creator()
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }

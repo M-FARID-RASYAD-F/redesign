@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PpdbRegistration extends Model
 {
@@ -23,14 +24,29 @@ class PpdbRegistration extends Model
         'notes',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'birth_date' => 'date',
+    ];
+
+    protected static function booted(): void
     {
-        return [
-            'birth_date' => 'date',
-        ];
+        static::creating(function (PpdbRegistration $registration) {
+            if (empty($registration->no_pendaftaran)) {
+                $year = date('Y');
+                $count = static::whereYear('created_at', $year)->count() + 1;
+                $noPendaftaran = 'PPDB-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
+
+                while (static::where('no_pendaftaran', $noPendaftaran)->exists()) {
+                    $count++;
+                    $noPendaftaran = 'PPDB-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
+                }
+
+                $registration->no_pendaftaran = $noPendaftaran;
+            }
+        });
     }
 
-    public function documents()
+    public function documents(): HasMany
     {
         return $this->hasMany(PpdbDocument::class, 'registration_id');
     }

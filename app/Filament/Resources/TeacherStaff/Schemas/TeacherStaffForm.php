@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TeacherStaff\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -13,14 +14,29 @@ class TeacherStaffForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->label('Nama Lengkap')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('nip')
+                    ->label('NIP')
+                    ->maxLength(255),
                 TextInput::make('position')
-                    ->required(),
-                TextInput::make('subject'),
-                TextInput::make('photo'),
-                TextInput::make('nip'),
+                    ->label('Jabatan')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('subject')
+                    ->label('Mata Pelajaran')
+                    ->maxLength(255),
+                FileUpload::make('photo')
+                    ->label('Foto')
+                    ->image()
+                    ->directory('teachers'),
                 Select::make('status')
-                    ->options(['aktif' => 'Aktif', 'nonaktif' => 'Nonaktif'])
+                    ->label('Status')
+                    ->options([
+                        'aktif' => 'Aktif',
+                        'nonaktif' => 'Non-aktif',
+                    ])
                     ->default('aktif')
                     ->required(),
             ]);

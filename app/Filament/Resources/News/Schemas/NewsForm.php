@@ -3,9 +3,10 @@
 namespace App\Filament\Resources\News\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
 class NewsForm
@@ -14,25 +15,32 @@ class NewsForm
     {
         return $schema
             ->components([
-                Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required()
-                    ->label('Category'),
                 TextInput::make('title')
+                    ->label('Judul Berita')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
-                TextInput::make('thumbnail'),
-                Textarea::make('content')
+                Select::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'name'),
+                FileUpload::make('thumbnail')
+                    ->label('Gambar Sampul')
+                    ->image()
+                    ->directory('news-thumbnails'),
+                RichEditor::make('content')
+                    ->label('Konten Berita')
                     ->required()
                     ->columnSpanFull(),
                 Select::make('author_id')
+                    ->label('Penulis')
                     ->relationship('author', 'name')
                     ->required()
-                    ->label('Author'),
-                DateTimePicker::make('published_at'),
+                    ->default(auth()->id()),
+                DateTimePicker::make('published_at')
+                    ->label('Tanggal Publikasi'),
             ]);
     }
 }

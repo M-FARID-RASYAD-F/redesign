@@ -317,3 +317,76 @@ Untuk menguji pemahaman siswa setelah mempraktikkan tutorial ini, berikan bebera
 ## 📌 Kesimpulan
 
 Dengan struktur project yang bersih ini, siswa dapat mempelajari fondasi utama Laravel secara lengkap—mulai dari tampilan antarmuka (UI/Blade), pengiriman data dari controller, alur routing, hingga validasi form interaktif. Selamat mengajar! 🎉
+
+---
+
+## 👩‍🏫 6. Panduan Khusus & Silabus 4 Jam Pengerjaan (Pendekatan Visual & Ramah Siswi)
+
+Bagian ini disusun khusus untuk membantu siswa/siswi yang membutuhkan **pendekatan visual, terstruktur, dan step-by-step** agar tidak merasa cemas atau bingung saat mempelajari Laravel.
+
+### 💡 A. Analogi Dunia Nyata: "Metode Restoran Kafe"
+Jelaskan alur kerja Laravel MVC menggunakan analogi restoran sebelum memulai koding:
+
+| Komponen Laravel | Analogi Restoran | Peran & Tugasnya |
+| :--- | :--- | :--- |
+| **`routes/web.php`** | **Pramusaji / Kasir** | Menerima pesanan pesanan dari pengunjung (URL di browser). |
+| **`Controller`** | **Koki / Chef** | Mengolah pesanan, mengambil bahan makanan, dan menyiapkan hidangan. |
+| **`Model` / Database** | **Gudang Bahan** | Tempat menyimpan data mentah (data siswa, guru, dsb.). |
+| **`Blade View`** | **Piring & Hiasan Makanan** | Tampilan akhir cantik yang disajikan kepada pembeli (HTML & CSS). |
+
+---
+
+### 📁 B. Peta & Panduan Lokasi File (Cheat Sheet)
+
+```text
+AttamamEdu/ (Folder Utama Project)
+│
+├── 🌐 routes/
+│   └── web.php                           <-- 1. Pintu Masuk URL (Daftar Alamat Halaman)
+│
+├── 🧠 app/Http/Controllers/
+│   └── SchoolController.php             <-- 2. Otak Aplikasi (Koki Pemproses Data & Form)
+│
+├── 🎨 public/css/
+│   └── style.css                         <-- 3. Tampilan Visual (Desain Warna & Layout)
+│
+└── 🖼️ resources/views/                   <-- 4. Komponen Halaman HTML (Blade)
+    ├── layouts/
+    │   └── app.blade.php                 <-- Master Layout (Bingkai Utama Website)
+    ├── partials/
+    │   ├── navbar.blade.php              <-- Menu Navigasi Atas
+    │   └── footer.blade.php              <-- Bagian Bawah Website
+    ├── components/
+    │   └── card.blade.php                <-- Kartu Informasi Reusable
+    └── welcome.blade.php                 <-- Halaman Utama Landing Page
+```
+
+---
+
+### ⏱️ C. Silabus & Materi Pembelajaran 4 Jam Pengerjaan
+
+#### 🕒 Jam Ke-1: Mental Map, Peta File & Tampilan Visual (60 Menit)
+* **Fokus:** Mengubah teks/warna dasar & menjalankan server tanpa rasa takut error.
+1. Minta siswi membuka `public/css/style.css` dan mengganti warna tema (`--primary`, `--accent`).
+2. Minta siswi membuka `resources/views/welcome.blade.php` untuk mengubah judul utama sekolah.
+3. Jalankan `php artisan serve` dan lihat hasilnya di browser `http://127.0.0.1:8000`.
+
+#### 🕒 Jam Ke-2: Menghubungkan Halaman & Master Layout (60 Menit)
+* **Fokus:** Memahami `@extends`, `@yield`, dan `@include`.
+1. Membuat bingkai utama di `resources/views/layouts/app.blade.php` dengan `@yield('konten_utama')`.
+2. Membuat `navbar.blade.php` dan `footer.blade.php` di folder `partials/`.
+3. Menghubungkan halaman `welcome.blade.php` menggunakan `@extends('layouts.app')`.
+
+#### 🕒 Jam Ke-3: Controller & Pengiriman Data Sederhana (60 Menit)
+* **Fokus:** Mengirim data daftar (Array) dari Controller ke View menggunakan `@foreach`.
+1. Membuka `app/Http/Controllers/SchoolController.php` dan menyiapkan array data `$jurusan`.
+2. Mengirim data ke view menggunakan `return view('welcome', compact('jurusan'));`.
+3. Menampilkan kartu jurusan secara dinamis di `welcome.blade.php` dengan sintaks `@foreach`.
+
+#### 🕒 Jam Ke-4: Formulir Kontak, Validasi & Notifikasi (60 Menit)
+* **Fokus:** Menangani input formulir user dan menampilkan notifikasi sukses.
+1. Daftarkan route POST di `routes/web.php`: `Route::post('/kontak', [SchoolController::class, 'submitContact'])`.
+2. Buat fungsi `submitContact` dengan validasi `$request->validate()` dan pengembalian `back()->with('success', ...)`.
+3. Buat Form HTML di `welcome.blade.php` lengkap dengan `@csrf`.
+4. Tambahkan notifikasi `session('success')` di `layouts/app.blade.php`.
+

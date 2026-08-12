@@ -18,7 +18,7 @@ Route::get('/', [SchoolController::class, 'index'])->name('home');
 // 2. Route Memproses Form Kontak / Pendaftaran
 Route::post('/kontak', [SchoolController::class, 'submitContact'])->name('kontak.submit');
 
-// 3. Route Login Guru (Mengarahkan ke Halaman Login Filament)
+// 3. Route Login Guru (Mengarahkan ke Form Login Panel Admin Filament)
 Route::get('/login', function () {
     return redirect('/portal/login');
 })->name('login');

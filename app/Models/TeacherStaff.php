@@ -14,10 +14,10 @@ class TeacherStaff extends Model
 
     protected $fillable = [
         'name',
+        'nip',
         'position',
         'subject',
         'photo',
-        'nip',
         'status',
     ];
 }

@@ -10,12 +10,12 @@
 
         <!-- Navigation Menu Links -->
         <ul class="nav-links">
-            <li><a href="#beranda" class="nav-link">Beranda</a></li>
-            <li><a href="#sambutan" class="nav-link">Sambutan</a></li>
-            <li><a href="#jurusan" class="nav-link">Jurusan</a></li>
-            <li><a href="#fasilitas" class="nav-link">Fasilitas</a></li>
-            <li><a href="#berita" class="nav-link">Berita</a></li>
-            <li><a href="#kontak" class="nav-link">PPDB & Kontak</a></li>
+            <li><a href="{{ route('home') }}" class="nav-link">Beranda</a></li>
+            <li><a href="{{ route('home') }}#jurusan" class="nav-link">Jurusan</a></li>
+            <li><a href="{{ route('home') }}#fasilitas" class="nav-link">Fasilitas</a></li>
+            <li><a href="{{ route('home') }}#berita" class="nav-link">Berita</a></li>
+            <li><a href="{{ route('ppdb.index') }}" class="nav-link" style="color: #60a5fa; font-weight: 700;">🎓 PPDB Online</a></li>
+            <li><a href="{{ route('ppdb.tracking') }}" class="nav-link" style="color: #fde047; font-weight: 600;">🔍 Cek Status</a></li>
         </ul>
 
         <!-- Authentication Badge (Edukasi Blade Auth) -->

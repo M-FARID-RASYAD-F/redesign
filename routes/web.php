@@ -15,21 +15,31 @@ use App\Http\Controllers\AdminController;
 // 1. Route Halaman Utama Landing Page Sekolah
 Route::get('/', [SchoolController::class, 'index'])->name('home');
 
-// 2. Route Memproses Form Kontak / Pendaftaran
+// 2. Route Memproses Form Kontak Cepat
 Route::post('/kontak', [SchoolController::class, 'submitContact'])->name('kontak.submit');
 
-// 3. Route Login Guru (Mengarahkan ke Form Login Panel Admin Filament)
+// 3. Route Modul PPDB Online Mandiri (Publik)
+Route::prefix('ppdb')->name('ppdb.')->group(function () {
+    Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');
+    Route::get('/daftar', [SchoolController::class, 'ppdbCreate'])->name('create');
+    Route::post('/daftar', [SchoolController::class, 'ppdbStore'])->name('store');
+    Route::get('/sukses/{no_pendaftaran}', [SchoolController::class, 'ppdbSuccess'])->name('success');
+    Route::get('/cek-status', [SchoolController::class, 'ppdbTracking'])->name('tracking');
+    Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])->name('check');
+});
+
+// 4. Route Login Guru (Mengarahkan ke Form Login Panel Admin Filament)
 Route::get('/login', function () {
     return redirect('/portal/login');
 })->name('login');
 
-// 4. Route Logout Guru
+// 5. Route Logout Guru
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/')->with('success', 'Anda telah berhasil Logout dari sistem.');
 })->name('logout');
 
-// 5. Route Group Admin
+// 6. Route Group Admin
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -51,6 +61,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     // PPDB Online (PPDB)
     Route::get('/ppdb', [AdminController::class, 'ppdbIndex'])->name('ppdb.index');
+    Route::get('/ppdb/export', [AdminController::class, 'ppdbExportCsv'])->name('ppdb.export');
     Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
     Route::post('/ppdb/{id}/status', [AdminController::class, 'ppdbUpdateStatus'])->name('ppdb.status');
     Route::delete('/ppdb/{id}', [AdminController::class, 'ppdbDelete'])->name('ppdb.delete');

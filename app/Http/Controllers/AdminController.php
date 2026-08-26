@@ -212,6 +212,67 @@ class AdminController extends Controller
         return view('admin.ppdb.index', compact('registrations'));
     }
 
+    /**
+     * Ekspor Data PPDB ke format CSV (FR-C06)
+     */
+    public function ppdbExportCsv()
+    {
+        $registrations = PpdbRegistration::orderBy('created_at', 'desc')->get();
+        $filename = 'rekap-ppdb-' . date('Y-m-d_His') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
+
+        $callback = function () use ($registrations) {
+            $file = fopen('php://output', 'w');
+            // Tambahkan UTF-8 BOM untuk kompatibilitas Excel (tidak rusak saat dibuka di Windows/Mac)
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+            // Header Kolom CSV
+            fputcsv($file, [
+                'No. Pendaftaran',
+                'Nama Lengkap',
+                'Jenis Kelamin',
+                'Tanggal Lahir',
+                'Alamat',
+                'Nama Orang Tua / Wali',
+                'No. HP Orang Tua',
+                'Pilihan Jurusan',
+                'Status Pendaftaran',
+                'Catatan Panitia',
+                'Tanggal Mendaftar'
+            ], ';');
+
+            // Data Baris
+            foreach ($registrations as $reg) {
+                fputcsv($file, [
+                    $reg->no_pendaftaran,
+                    $reg->full_name,
+                    $reg->gender == 'L' ? 'Laki-laki' : 'Perempuan',
+                    $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-',
+                    $reg->address,
+                    $reg->parent_name,
+                    $reg->parent_phone,
+                    strtoupper($reg->major_choice),
+                    ucfirst($reg->status),
+                    $reg->notes ?? '-',
+                    $reg->created_at ? $reg->created_at->format('d/m/Y H:i') : '-',
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        $this->logActivity('ppdb', 'export', 'Mengekspor seluruh rekap data pendaftar PPDB ke format file CSV');
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     public function ppdbShow($id)
     {
         $registration = PpdbRegistration::with('documents')->findOrFail($id);

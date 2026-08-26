@@ -8,6 +8,7 @@ use App\Models\Major;
 use App\Models\News;
 use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
+use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
 
 class SchoolController extends Controller
@@ -177,6 +178,183 @@ class SchoolController extends Controller
 
         // Kirim response flash message kembali ke halaman sebelumnya
         return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pesan dan pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim' . $berkasInfo . '. Nomor Pendaftaran Anda: ' . $noPendaftaran);
+    }
+
+    /**
+     * ========================================================
+     * MODUL PPDB MANDIRI PUBLIK (PRD 2.5.3 & SAD 3.5.1)
+     * ========================================================
+     */
+
+    /**
+     * Halaman Informasi Utama PPDB Online (Alur, Jadwal, Persyaratan, Kuota)
+     */
+    public function ppdbIndex()
+    {
+        $majors = Major::all();
+        $totalPendaftar = PpdbRegistration::count() + 85;
+        $totalDiterima = PpdbRegistration::where('status', 'diterima')->count() + 60;
+
+        $stats = [
+            'total' => $totalPendaftar,
+            'diterima' => $totalDiterima,
+            'gelombang' => 'Gelombang II (Tahun Ajaran 2026/2027)',
+            'deadline' => '30 Agustus 2026'
+        ];
+
+        return view('ppdb.index', compact('majors', 'stats'));
+    }
+
+    /**
+     * Halaman Formulir Pendaftaran Siswa Baru Mandiri
+     */
+    public function ppdbCreate()
+    {
+        $majors = Major::all();
+        return view('ppdb.create', compact('majors'));
+    }
+
+    /**
+     * Memproses Pengiriman Formulir Pendaftaran PPDB Online Mandiri
+     */
+    public function ppdbStore(Request $request)
+    {
+        $validated = $request->validate([
+            // Data Calon Siswa
+            'full_name' => 'required|string|min:3|max:255',
+            'gender' => 'required|in:L,P',
+            'birth_date' => 'required|date|before:today',
+            'address' => 'required|string|min:8',
+            'major_choice' => 'required|string',
+
+            // Data Orang Tua / Wali
+            'parent_name' => 'required|string|min:3|max:255',
+            'parent_phone' => 'required|string|min:9|max:20',
+
+            // Dokumen Persyaratan (Max 3MB per file)
+            'doc_kk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+            'doc_akta' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+            'doc_foto' => 'nullable|file|mimes:jpg,jpeg,png|max:3072',
+            'doc_rapor' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+
+            // Pernyataan UU PDP & Kebenaran Data
+            'agreement' => 'accepted',
+        ], [
+            'full_name.required' => 'Nama lengkap calon siswa wajib diisi.',
+            'full_name.min' => 'Nama lengkap minimal 3 karakter.',
+
+            'gender.required' => 'Pilih jenis kelamin calon siswa.',
+            'birth_date.required' => 'Tanggal lahir wajib diisi.',
+            'birth_date.before' => 'Tanggal lahir tidak valid.',
+
+            'address.required' => 'Alamat tempat tinggal lengkap wajib diisi.',
+            'address.min' => 'Alamat minimal 8 karakter.',
+
+            'major_choice.required' => 'Pilih salah satu program keahlian / jurusan.',
+            'parent_name.required' => 'Nama orang tua / wali wajib diisi.',
+            'parent_phone.required' => 'Nomor WhatsApp / telepon orang tua wajib diisi.',
+
+            'doc_kk.mimes' => 'Kartu Keluarga harus berformat PDF, JPG, atau PNG.',
+            'doc_kk.max' => 'Ukuran file Kartu Keluarga maksimal 3MB.',
+
+            'doc_akta.mimes' => 'Akta Kelahiran harus berformat PDF, JPG, atau PNG.',
+            'doc_akta.max' => 'Ukuran file Akta Kelahiran maksimal 3MB.',
+
+            'doc_foto.mimes' => 'Pas Foto harus berformat JPG atau PNG.',
+            'doc_foto.max' => 'Ukuran file Pas Foto maksimal 3MB.',
+
+            'doc_rapor.mimes' => 'Rapor terakhir harus berformat PDF, JPG, atau PNG.',
+            'doc_rapor.max' => 'Ukuran file Rapor maksimal 3MB.',
+            'agreement.accepted' => 'Anda wajib menyetujui pernyataan kebenaran data dan kebijakan privasi.',
+        ]);
+
+        // Simpan data pendaftaran
+        $registration = PpdbRegistration::create([
+            'full_name' => $validated['full_name'],
+            'gender' => $validated['gender'],
+            'birth_date' => $validated['birth_date'],
+            'address' => $validated['address'],
+            'parent_name' => $validated['parent_name'],
+            'parent_phone' => $validated['parent_phone'],
+            'major_choice' => $validated['major_choice'],
+            'status' => 'pending',
+            'notes' => 'Pendaftaran online mandiri berhasil diajukan. Menunggu verifikasi berkas oleh panitia PPDB.',
+        ]);
+
+        // Upload Dokumen Pendukung jika dilampirkan
+        $docMapping = [
+            'doc_kk' => 'kk',
+            'doc_akta' => 'akta_lahir',
+            'doc_foto' => 'foto',
+            'doc_rapor' => 'rapor_terakhir',
+        ];
+
+        foreach ($docMapping as $field => $type) {
+            if ($request->hasFile($field)) {
+                $path = $request->file($field)->store('ppdb_documents', 'public');
+                PpdbDocument::create([
+                    'registration_id' => $registration->id,
+                    'doc_type' => $type,
+                    'file_path' => $path,
+                    'verification_status' => 'belum_diverifikasi',
+                ]);
+            }
+        }
+
+        // Catat Audit Trail
+        ActivityLog::create([
+            'user_id' => null,
+            'module' => 'ppdb',
+            'action' => 'create',
+            'description' => "Pendaftaran PPDB mandiri berhasil diajukan oleh {$registration->full_name} (No: {$registration->no_pendaftaran})",
+        ]);
+
+        return redirect()->route('ppdb.success', $registration->no_pendaftaran);
+    }
+
+    /**
+     * Halaman Sukses Pendaftaran & Bukti Registrasi Digital
+     */
+    public function ppdbSuccess($no_pendaftaran)
+    {
+        $registration = PpdbRegistration::with('documents')->where('no_pendaftaran', $no_pendaftaran)->firstOrFail();
+        return view('ppdb.success', compact('registration'));
+    }
+
+    /**
+     * Halaman Lacak / Tracking Status PPDB Mandiri
+     */
+    public function ppdbTracking()
+    {
+        return view('ppdb.tracking');
+    }
+
+    /**
+     * Memproses Pencarian Status PPDB
+     */
+    public function ppdbCheckStatus(Request $request)
+    {
+        $request->validate([
+            'no_pendaftaran' => 'required|string|min:5|max:50',
+        ], [
+            'no_pendaftaran.required' => 'Masukkan Nomor Pendaftaran yang ingin dicari!',
+        ]);
+
+        $query = trim($request->no_pendaftaran);
+        $registration = PpdbRegistration::with('documents')
+            ->where('no_pendaftaran', $query)
+            ->first();
+
+        if (!$registration) {
+            return redirect()->route('ppdb.tracking')
+                ->withInput()
+                ->with('error', "Nomor pendaftaran '{$query}' tidak ditemukan dalam basis data sistem. Pastikan format nomor yang Anda masukkan sudah sesuai.");
+        }
+
+        return view('ppdb.tracking', [
+            'registration' => $registration,
+            'search' => $query,
+        ]);
     }
 }
 

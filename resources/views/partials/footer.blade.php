@@ -16,27 +16,27 @@
         <div>
             <h3 class="footer-title">Navigasi Sekolah</h3>
             <ul class="footer-links">
-                <li><a href="#beranda">Beranda Utama</a></li>
-                <li><a href="#sambutan">Sambutan Kepala Sekolah</a></li>
-                <li><a href="#jurusan">Program Keahlian</a></li>
-                <li><a href="#fasilitas">Sarana & Prasarana</a></li>
-                <li><a href="#berita">Kabar & Pengumuman</a></li>
+                <li><a href="{{ route('home') }}">Beranda Utama</a></li>
+                <li><a href="{{ route('ppdb.index') }}">Portal PPDB Online</a></li>
+                <li><a href="{{ route('ppdb.create') }}">Formulir Pendaftaran Siswa Baru</a></li>
+                <li><a href="{{ route('ppdb.tracking') }}">Lacak Status Pendaftaran</a></li>
+                <li><a href="{{ route('home') }}#berita">Kabar & Berita Terbaru</a></li>
             </ul>
         </div>
 
         <!-- Col 3: Media & Program -->
         <div>
-            <h3 class="footer-title">Program Unggulan</h3>
+            <h3 class="footer-title">Program Kejuruan</h3>
             <ul class="footer-links">
-                <li><a href="#jurusan">Kelas Industri Laravel & Cloud</a></li>
-                <li><a href="#jurusan">Sertifikasi Internasional Cisco</a></li>
-                <li><a href="#jurusan">Studio DKV & Produksi Digital</a></li>
-                <li><a href="#jurusan">Bursa Kerja Khusus (BKK)</a></li>
+                <li><a href="{{ route('home') }}#jurusan">Rekayasa Perangkat Lunak (RPL)</a></li>
+                <li><a href="{{ route('home') }}#jurusan">Teknik Komputer & Jaringan (TKJ)</a></li>
+                <li><a href="{{ route('home') }}#jurusan">Desain Komunikasi Visual (DKV)</a></li>
+                <li><a href="{{ route('home') }}#jurusan">Akuntansi & Keuangan (AKL)</a></li>
             </ul>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} <strong>SMK Negeri 1 Nusantara</strong>. Dibuat dengan ❤️ menggunakan Framework Laravel untuk Contoh Pembelajaran Siswa.</p>
+        <p>&copy; {{ date('Y') }} <strong>SMK Negeri 1 Nusantara</strong>.
     </div>
 </footer>

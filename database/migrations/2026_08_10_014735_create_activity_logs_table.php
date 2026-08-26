@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('module');       // mis. 'ppdb', 'pengumuman', 'berita'
             $table->string('action');       // mis. 'create', 'update', 'delete', 'verify'
             $table->text('description')->nullable();

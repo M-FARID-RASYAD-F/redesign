@@ -10,6 +10,7 @@ use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
+use App\Models\PpdbDocument;
 
 class SchoolController extends Controller
 {
@@ -356,5 +357,154 @@ class SchoolController extends Controller
             'search' => $query,
         ]);
     }
-}
 
+    public function ppdbIndex()
+    {
+        $majors = Major::all();
+        $totalPendaftaran = PpdbRegistration::count() + 85;
+        $totalDiterima = PpdbRegistration::where('status', 'diterima')->count() + 60;
+
+        $stats = [
+            'total' => $totalPendaftaran,
+            'terima' => $totalDiterima,
+            'gelombang' => 'Gelombang II (Tahun Ajaran 2026/2027)',
+            'deadline' => '30 Agustus 2026',
+        ];
+        return view('ppdb.index', compact('majors', 'stats'));
+    }
+
+    public function ppdbCreate()
+    {
+        $majors = Major::all();
+        return view('ppdb.create', compact('majors'));
+    }
+
+    public function ppdbStore(Request $request)
+    {
+        $validated = $request->validate([
+            'full_name' => 'required|string|min:3|max:255',
+            'gender' => 'required|in:L,P',
+            'birth_date' => 'required|date|before:today',
+            'address' => 'required|string|min:8',
+            'parent_name' => 'required|string|min:3',
+            'major_choice' => 'required|string',
+
+            'parent_name' => 'required|string|min:3|max:255',
+            'parent_phone' => 'required|string|min:9|max:20',
+
+            'doc_kk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+            'doc_akta' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+            'doc_ktp' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:3072',
+            'doc_foto' => 'nullable|file|mimes:jpg,jpeg,png|max:3072',
+
+            'agreement' => 'accepted',
+        ], [
+            'full_name.required' => 'Nama lengkap calon siswa wajib diisi',
+            'full_name.min' => 'Nama lengkap minimal 3 karakter',
+            'gender.required' => 'Jenis kelamin wajib diisi',
+            'birth_date.required' => 'Tanggal lahir wajib diisi',
+            'birth_date.before' => 'Tanggal lahir tidak valid',
+
+            'address.required' => 'Alamat wajib diisi',
+            'address.min' => 'Alamat minimal 8 karakter',
+
+            'parent_name.required' => 'Nama orang tua/wali wajib diisi',
+            'major_choice.required' => 'Pilih salah satu program keahlian / jurusan',
+            'parent_phone.required' => 'Nomor telepon whatshapp orang tua/wali wajib diisi',
+
+            'doc_kk.mimes' => 'Kartu keluarga harus berformat pdf, jpg, atau png',
+            'doc_kk.max' => 'Ukuran file Kartu keluarga maksimal 3MB',
+
+            'doc_akta.mimes' => 'Akta kelahiran harus berformat pdf, jpg, atau png',
+            'doc_akta.max' => 'Ukuran file Akta kelahiran maksimal 3MB',
+
+
+            'doc_foto.mimes' => 'Foto harus berformat pdf, jpg, atau png',
+            'doc_foto.max' => 'Ukuran file Foto maksimal 3MB',
+
+            'doc_rapor.mimes' => 'Rapor terakhir harus berformat pdf, jpg, atau png',
+            'doc_rapor.max' => 'Ukuran file rapor maksimal 3MB',
+            'agreement.accepted' => 'Anda wajib menyetujui pernyataan kebenaran data dan kebijakan privasi',
+        ]);
+
+        // Generate No. Pendaftaran: PPDB-[Tanggal Today]-[4 Digit Random]
+        $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . rand(1000, 9999);
+
+        // Create new registration record
+        $registration = PpdbRegistration::create([
+            'full_name' => $validated['full_name'],
+            'gender' => $validated['gender'],
+            'birth_date' => $validated['birth_date'],
+            'address' => $validated['address'],
+            'parent_name' => $validated['parent_name'],
+            'parent_phone' => $validated['parent_phone'],
+            'major_choice' => $validated['major_choice'],
+            'status' => 'pending',
+            'notes' => 'Pendaftaran online mandiri berhasil diajukan. menunggu verifikasi berkas oleh panitia PPDB'
+        ]);
+
+        $docMapping = [
+            'doc_kk' => 'kk',
+            'doc_akta' => 'akta_lahir',
+            'doc_foto' => 'foto',
+            'doc_rapor' => 'rapor_terakhir',
+        ];
+
+        foreach ($docMapping as $field  => $type) {
+            if ($request->hasFile($field)) {
+                $path = $request->file($field)->store('ppdb_documents', 'public');
+                PpdbDocument::create([
+                    'registration_id' => $registration->id,
+                    'doc_type' => $type,
+                    'file_path' => $path,
+                    'verification_status' => 'belum_diverifikasi',
+                ]);
+            }
+        }
+
+        ActivityLog::create([
+            'user_id' => null,
+            'module' => 'ppdb',
+            'action' => 'created',
+            'description' => 'Pendaftaran PPDB mandiri berhasil diajukan oleh ' . $registration['full_name'] . ' (No: {$registration->no_pendaftaran})',
+        ]);
+
+        return redirect()->route('ppdb.success', $registration->no_pendaftaran);
+    }
+
+    public function ppdbSuccess($noPendaftaran)
+    {
+        $registration = PpdbRegistration::with('documents')->where('no_pendaftaran', $noPendaftaran)->firstOrFail();
+        return view('ppdb.success', compact('registration'));
+    }
+
+    public function ppdbtracking()
+    {
+        return view('ppdb.tracking');
+    }
+
+    public function ppdbCheckStatus(Request $request)
+    {
+        $validated = $request->validate([
+            'no_pendaftaran' => 'required|string|min:5|max:50',
+        ], [
+            'no_pendaftaran.required' => 'Masukkan Nomor Pendaftaran Anda yang ingin dicari',
+        ]);
+
+        $query = trim($request->no_pendaftaran);
+        $registration = PpdbRegistration::with('document')
+            ->where('no_pendaftaran', $query)
+            ->first();
+
+        if (!$registration) {
+            return redirect()->route('ppdb.tracking')
+                ->withInput()
+                ->with('error', "Nomor pendaftaran '{$query}' tidak ditemukan dalam basis data sistem. pastikan format nomor yang anda masukkan sudah sesuai");
+        }
+
+        return view('ppdb.tracking', [
+            'registration' => $registration,
+            'search' => $query,
+        ]);
+    }
+}

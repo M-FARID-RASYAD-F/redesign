@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\News;
 use App\Models\NewsCategory;
@@ -18,7 +20,7 @@ class AdminController extends Controller
     protected function logActivity($module, $action, $description)
     {
         ActivityLog::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'module' => $module,
             'action' => $action,
             'description' => $description,
@@ -80,7 +82,7 @@ class AdminController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
-        $validated['author_id'] = auth()->id();
+        $validated['author_id'] = Auth::id();
 
         $news = News::create($validated);
 
@@ -231,7 +233,7 @@ class AdminController extends Controller
         $callback = function () use ($registrations) {
             $file = fopen('php://output', 'w');
             // Tambahkan UTF-8 BOM untuk kompatibilitas Excel (tidak rusak saat dibuka di Windows/Mac)
-            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
             // Header Kolom CSV
             fputcsv($file, [

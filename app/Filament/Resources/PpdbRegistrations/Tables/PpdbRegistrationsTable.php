@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PpdbRegistrations\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SelectColumn;
@@ -55,6 +56,7 @@ class PpdbRegistrationsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -3,12 +3,16 @@
 @section('title', 'Pendaftaran PPDB Online - At-Tamam Edu')
 
 @section('content')
-<div class="header">
+<div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
     <div>
         <h1 class="header-title">Pendaftaran PPDB Online</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Kelola dan verifikasi pendaftaran calon peserta didik baru.</p>
     </div>
+    <div style="margin-bottom: 24px;">
+    <a href="{{ route('admin.ppdb.export') }}" class="btn btn-success" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 10px 18px; border-radius: 8px; text-decoration: none; color: white; background: #10b981;">📥 Unduh Rekap CSV</a>
 </div>
+</div>
+
 
 <div class="card">
     <div class="table-responsive">

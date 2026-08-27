@@ -8,12 +8,12 @@
     <section class="hero" id="beranda">
         <div class="hero-container">
             <div>
-                <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(147, 197, 253, 0.3); padding: 6px 16px; margin-bottom: 1.5rem; display: inline-block;">
-                    🌟 Akreditasi {{ $sekolah['akreditasi'] }} • Berdiri Sejak {{ $sekolah['tahun_berdiri'] }}
+                <span class="hero-badge">
+                    🌟 Akreditasi {{ $sekolah['akreditasi'] }} &bull; Berdiri Sejak {{ $sekolah['tahun_berdiri'] }}
                 </span>
                 <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
                 <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
-                <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7;">
+                <p class="hero-desc">
                     {{ $sekolah['deskripsi'] }}
                 </p>
 
@@ -49,7 +49,7 @@
     </section>
 
     <!-- 2. Statistics Counter Bar -->
-    <div class="stats-section">
+    <div class="stats-section reveal">
         <div class="stats-grid">
             @foreach($stats as $st)
                 <x-stat-card 
@@ -63,7 +63,7 @@
     </div>
 
     <!-- 3. Sambutan Kepala Sekolah -->
-    <section class="section" id="sambutan">
+    <section class="section reveal" id="sambutan">
         <div class="principal-card">
             <div class="principal-avatar">
                 {{ $sambutan['foto_initials'] }}
@@ -87,7 +87,7 @@
             subtitle="Kurikulum disesuaikan langsung dengan kebutuhan industri teknologi & bisnis masa kini."
         />
 
-        <div class="grid-2">
+        <div class="grid-2 reveal">
             @foreach($jurusan as $j)
                 <x-card 
                     :title="$j['nama']" 
@@ -97,9 +97,9 @@
                 >
                     <p style="margin-bottom: 1rem; line-height: 1.6;">{{ $j['deskripsi'] }}</p>
                     
-                    <div style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px dashed #cbd5e1; font-size: 0.85rem;">
-                        <strong style="color: var(--text-main);">💼 Prospek Karir Lulusan:</strong><br>
-                        <span style="color: var(--primary-hover); font-weight: 600;">{{ $j['prospek'] }}</span>
+                    <div class="card-prospek">
+                        <strong>💼 Prospek Karir Lulusan:</strong><br>
+                        <span>{{ $j['prospek'] }}</span>
                     </div>
                 </x-card>
             @endforeach
@@ -107,7 +107,8 @@
     </section>
 
     <!-- 5. Fasilitas Sekolah -->
-    <section class="section" id="fasilitas" style="background: #ffffff; padding: 4rem 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
+    <section class="section" id="fasilitas">
+        <div class="fasilitas-section">
         <x-section-header 
             tag="SARANA & PRASARANA" 
             title="Fasilitas Modern Penunjang Pembelajaran" 
@@ -116,17 +117,18 @@
 
         <div class="grid-4">
             @foreach($fasilitas as $f)
-                <div style="padding: 1.5rem; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">{{ $f['icon'] }}</div>
-                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">{{ $f['nama'] }}</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">{{ $f['deskripsi'] }}</p>
+                <div class="facility-card reveal">
+                    <div class="facility-icon">{{ $f['icon'] }}</div>
+                    <h3 class="facility-title">{{ $f['nama'] }}</h3>
+                    <p class="facility-desc">{{ $f['deskripsi'] }}</p>
                 </div>
             @endforeach
+        </div>
         </div>
     </section>
 
     <!-- 6. Berita & Pengumuman Terbaru -->
-    <section class="section" id="berita" style="margin-top: 5rem;">
+    <section class="section reveal" id="berita" style="margin-top: 5rem;">
         <x-section-header 
             tag="KABAR SEKOLAH" 
             title="Berita & Pengumuman Terbaru" 
@@ -142,7 +144,7 @@
                 >
                     <p style="margin-bottom: 1rem; font-size: 0.9rem;">{{ $b['ringkasan'] }}</p>
                     
-                    <a href="#" style="font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">
+                    <a href="#" class="card-read-more">
                         Baca Selengkapnya &rarr;
                     </a>
                 </x-card>
@@ -151,7 +153,7 @@
     </section>
 
     <!-- 7. Form Kontak & Pendaftaran PPDB -->
-    <section class="section" id="kontak">
+    <section class="section reveal" id="kontak">
         <div class="contact-container">
             <div>
                 <span class="section-tag">HUBUNGI KAMI</span>
@@ -162,28 +164,28 @@
                     Isi formulir di sebelah kanan untuk berkonsultasi mengenai pemilihan jurusan, biaya pendidikan, atau pendaftaran siswa baru. Tim kami akan merespons pesan Anda secara cepat.
                 </p>
 
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 44px; height: 44px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📍</div>
+                <div class="contact-info-list">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon blue">📍</div>
                         <div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">ALAMAT SEKOLAH</div>
-                            <div style="font-weight: 700; font-size: 0.95rem;">{{ $sekolah['alamat'] }}</div>
+                            <div class="contact-info-label">ALAMAT SEKOLAH</div>
+                            <div class="contact-info-value">{{ $sekolah['alamat'] }}</div>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 44px; height: 44px; background: #ecfdf5; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📞</div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon green">📞</div>
                         <div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">CALL CENTER / WA</div>
-                            <div style="font-weight: 700; font-size: 0.95rem;">{{ $sekolah['telepon'] }}</div>
+                            <div class="contact-info-label">CALL CENTER / WA</div>
+                            <div class="contact-info-value">{{ $sekolah['telepon'] }}</div>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 44px; height: 44px; background: #fffbeb; color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">✉️</div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon yellow">✉️</div>
                         <div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">EMAIL OFFICIAL</div>
-                            <div style="font-weight: 700; font-size: 0.95rem;">{{ $sekolah['email'] }}</div>
+                            <div class="contact-info-label">EMAIL OFFICIAL</div>
+                            <div class="contact-info-value">{{ $sekolah['email'] }}</div>
                         </div>
                     </div>
                 </div>
@@ -240,7 +242,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">
+                    <button type="submit" class="btn-submit-ppdb">
                         🚀 Kirim Pesan & Konsultasi
                     </button>
                 </form>
@@ -252,6 +254,17 @@
 
 @push('scripts')
     <script>
+        // ── Scroll Reveal ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(el => {
+                if (el.isIntersecting) {
+                    el.target.classList.add('visible');
+                    observer.unobserve(el.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
         console.log('Website Sekolah SMKN 1 Nusantara - Dimuat dengan sukses!');
     </script>
 @endpush

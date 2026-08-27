@@ -2,7 +2,8 @@
     <div class="footer-container">
         <!-- Col 1: About -->
         <div>
-            <h3 class="footer-title">SMK Negeri 1 Nusantara</h3>
+            <div class="footer-brand-name">SMK Negeri 1 Nusantara</div>
+            <div class="footer-brand-tagline">Unggul · Kompeten · Berkarakter</div>
             <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">
                 Sekolah menengah kejuruan pilihan terbaik yang berdedikasi mencetak tenaga kerja profesional, wirausahawan muda, dan generasi unggul siap bersaing global.
             </p>
@@ -37,6 +38,6 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} <strong>SMK Negeri 1 Nusantara</strong>.
+        <p>&copy; {{ date('Y') }} <strong>SMK Negeri 1 Nusantara</strong>. Semua hak cipta dilindungi.</p>
     </div>
 </footer>

@@ -2,47 +2,53 @@
     {{-- ── Desktop Bar ── --}}
     <div class="navbar-container">
 
-        {{-- Brand Logo --}}
+        {{-- Brand: Kotak Logo Navy + Nama 2 Baris --}}
         <a href="{{ route('home') }}" class="navbar-brand">
             <div class="brand-icon">🏫</div>
-            <span>SMKN 1 NUSANTARA</span>
+            <div class="brand-text">
+                <span class="brand-text-main">SMKN 1 Nusantara</span>
+                <span class="brand-text-sub">Sekolah Kejuruan Terbaik</span>
+            </div>
         </a>
 
-        {{-- Desktop Navigation Links --}}
+        {{-- Navigation Links Horizontal --}}
         <nav class="nav-desktop-links">
             <a href="{{ route('home') }}" class="nav-link">Beranda</a>
             <a href="{{ route('home') }}#jurusan" class="nav-link">Jurusan</a>
             <a href="{{ route('home') }}#fasilitas" class="nav-link">Fasilitas</a>
             <a href="{{ route('home') }}#berita" class="nav-link">Berita</a>
-            <a href="{{ route('ppdb.tracking') }}" class="nav-cta-status">🔍 Cek Status</a>
-            <a href="{{ route('ppdb.index') }}" class="nav-cta-ppdb">🎓 PPDB Online</a>
+            <a href="{{ route('ppdb.index') }}" class="nav-link">PPDB</a>
         </nav>
 
-        {{-- Desktop Auth --}}
+        {{-- Kanan: Tombol Search + Menu (kotak border putih) --}}
         <div class="nav-auth-desktop">
+            @auth
+                <a href="{{ route('admin.dashboard') }}" class="nav-admin-link" style="margin-right: 8px;">🛡️ Admin</a>
+                <a href="{{ route('logout') }}" class="nav-logout-link" style="margin-right: 12px;">Logout</a>
+            @endauth
             @guest
-                <a href="{{ route('login') }}" class="btn-nav-login">🔑 Login Guru</a>
+                <a href="{{ route('login') }}" class="nav-btn-search">🔑 Login</a>
             @endguest
 
-            @auth
-                <div class="nav-auth-pill">
-                    <div class="nav-auth-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
-                    <span class="nav-auth-name">{{ auth()->user()->name }}</span>
-                </div>
-                <a href="{{ route('admin.dashboard') }}" class="nav-admin-link">🛡️ Admin</a>
-                <a href="{{ route('logout') }}" class="nav-logout-link">Logout</a>
-            @endauth
-        </div>
+            {{-- Tombol Search --}}
+            <button class="nav-btn-search" onclick="document.getElementById('heroSearchModal')?.classList.toggle('hidden');" aria-label="Search">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <span>Cari</span>
+            </button>
 
-        {{-- Hamburger (mobile only) --}}
-        <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-            <svg id="iconHamburger" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-            <svg id="iconClose" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-        </button>
+            {{-- Tombol Menu (kotak border putih) — hamburger --}}
+            <button class="nav-btn-menu" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg id="iconHamburger" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <svg id="iconClose" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                <span>Menu</span>
+            </button>
+        </div>
     </div>
 
     {{-- ── Mobile Panel ── --}}
@@ -66,6 +72,7 @@
         @endguest
     </div>
 </header>
+
 
 @push('scripts')
 <script>

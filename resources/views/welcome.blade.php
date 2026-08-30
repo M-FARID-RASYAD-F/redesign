@@ -4,18 +4,16 @@
 
 @section('konten_utama')
 
-    <!-- 1. Hero Banner Section -->
+    <!-- 1. Hero Banner Section — Full Width Academic Style -->
     <section class="hero" id="beranda">
         <div class="hero-container">
-            <div>
+            <div class="hero-content">
                 <span class="hero-badge">
-                    🌟 Akreditasi {{ $sekolah['akreditasi'] }} &bull; Berdiri Sejak {{ $sekolah['tahun_berdiri'] }}
+                    ★ Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
                 </span>
                 <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
                 <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
-                <p class="hero-desc">
-                    {{ $sekolah['deskripsi'] }}
-                </p>
+                <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
 
                 <div class="hero-actions">
                     <a href="#kontak" class="btn btn-primary">
@@ -26,25 +24,16 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <!-- Visual Hero Card -->
-            <div class="hero-card">
-                <div style="font-size: 0.85rem; font-weight: 700; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">
-                    💡 Informasi PPDB 2026/2027
-                </div>
-                <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem; color: #ffffff;">
-                    Penerimaan Siswa Baru Telah Dibuka!
-                </h3>
-                <ul style="list-style: none; color: #cbd5e1; font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 2;">
-                    <li>✔️ Bebas Biaya Pendaftaran Online</li>
-                    <li>✔️ Beasiswa Prestasi & Kurang Mampu</li>
-                    <li>✔️ Penyaluran Kerja Sebelum Lulus</li>
-                    <li>✔️ Lab Komputer Standar Industri</li>
-                </ul>
-                <div style="background: rgba(255,255,255,0.08); padding: 12px; border-radius: 8px; text-align: center; font-size: 0.85rem; color: #f1f5f9;">
-                    📞 Layanan Informasi: <strong>{{ $sekolah['telepon'] }}</strong>
-                </div>
-            </div>
+        {{-- Tombol Play + kredit foto — pojok kanan bawah --}}
+        <div class="hero-bottom-bar">
+            <span class="hero-credit">Foto: Kampus SMKN 1 Nusantara</span>
+            <a href="#beranda" class="hero-play-btn" aria-label="Putar video profil">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <polygon points="5,3 19,12 5,21"/>
+                </svg>
+            </a>
         </div>
     </section>
 
@@ -62,22 +51,39 @@
         </div>
     </div>
 
-    <!-- 3. Sambutan Kepala Sekolah -->
-    <section class="section reveal" id="sambutan">
-        <div class="principal-card">
-            <div class="principal-avatar">
-                {{ $sambutan['foto_initials'] }}
+    <!-- 3. Sambutan Kepala Sekolah — Navy Oxford Section -->
+    <section class="principal-section reveal" id="sambutan">
+        <div class="principal-section-inner">
+
+            {{-- Foto Kepsek (kiri) --}}
+            <div class="principal-photo-col">
+                <div class="principal-photo-frame">
+                    <div class="principal-photo-initials">
+                        {{ $sambutan['foto_initials'] }}
+                    </div>
+                </div>
             </div>
-            <div>
-                <span class="quote-icon">“</span>
-                <p class="principal-text">
+
+            {{-- Teks Sambutan (kanan) --}}
+            <div class="principal-text-col">
+                <div class="principal-eyebrow">Kata Sambutan</div>
+                <h2 class="principal-heading">
+                    Membangun Generasi<br>Unggul dan Berkarakter
+                </h2>
+                <blockquote class="principal-quote">
                     {{ $sambutan['pesan'] }}
-                </p>
-                <div class="principal-name">{{ $sambutan['nama'] }}</div>
-                <div class="principal-role">{{ $sambutan['jabatan'] }}</div>
+                </blockquote>
+                <div class="principal-name-block">
+                    <div class="principal-name">{{ $sambutan['nama'] }}</div>
+                    <div class="principal-role">{{ $sambutan['jabatan'] }}</div>
+                </div>
             </div>
+
         </div>
     </section>
+
+    {{-- ═══ Area Konten Putih — Naik dari zona Navy ═══ --}}
+    <div class="content-area-white">
 
     <!-- 4. Program Keahlian / Jurusan -->
     <section class="section" id="jurusan">
@@ -250,7 +256,10 @@
         </div>
     </section>
 
+    </div>{{-- end .content-area-white --}}
+
 @endsection
+
 
 @push('scripts')
     <script>

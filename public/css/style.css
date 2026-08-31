@@ -2168,3 +2168,7 @@ a:hover {
 [data-theme="light"] .footer-bottom::before {
   background: linear-gradient(90deg, transparent, oklch(58.6% 0.253 17.585 / 0.35), transparent) !important;
 }
+
+[data-theme="light"] .contact-container::before {
+  background: linear-gradient(90deg, oklch(41% 0.159 10.272) 0%, oklch(58.6% 0.253 17.585) 50%, oklch(65% 0.26 18) 100%) !important;
+}

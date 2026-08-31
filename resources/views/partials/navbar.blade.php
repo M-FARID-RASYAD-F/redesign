@@ -131,6 +131,92 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', () => {
         nav?.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
+
+    // ── Animasi Smooth Eased Scroll Menuju Section ──
+    function smoothScrollToTarget(targetY, duration = 800) {
+        const startY = window.pageYOffset;
+        const diff = targetY - startY;
+        let startTime = null;
+
+        // Cubic Easing untuk pergerakan turun yang sangat mulus & elegan
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function step(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            const ease = easeInOutCubic(progress);
+            window.scrollTo(0, startY + diff * ease);
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link');
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        try {
+            const url = new URL(href, window.location.origin);
+            if (url.pathname === window.location.pathname && url.hash) {
+                link.addEventListener('click', function (e) {
+                    const targetId = url.hash.substring(1);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+
+                        // Feedback animasi tekan tombol
+                        link.classList.add('nav-link-pressed');
+                        setTimeout(() => link.classList.remove('nav-link-pressed'), 250);
+
+                        const navHeight = 78;
+                        const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+                        smoothScrollToTarget(targetPosition, 850);
+
+                        // Update class aktif
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+
+                        // Update history URL tanpa jump
+                        history.pushState(null, null, url.hash);
+                    }
+                });
+            }
+        } catch (err) {}
+    });
+
+    // ── Scrollspy Otomatis Saat Halaman Di-scroll ──
+    const trackSections = document.querySelectorAll('section[id]');
+    function updateScrollspy() {
+        const scrollPosition = window.pageYOffset + 140;
+
+        trackSections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && href.includes('#' + sectionId)) {
+                        link.classList.add('active');
+                    } else if (href && href.includes('#')) {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateScrollspy, { passive: true });
+    updateScrollspy();
 });
 </script>
 @endpush

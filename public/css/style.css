@@ -308,10 +308,31 @@ a:hover {
 }
 
 /* Animasi turun lebih dalam saat tombol ditekan (active/click) */
-.nav-link:active {
-  transform: translateY(5px) scale(0.96);
+.nav-link:active,
+.nav-link.nav-link-pressed {
+  transform: translateY(5px) scale(0.96) !important;
   box-shadow: 0 1px 4px rgba(0, 180, 216, 0.15);
   transition-duration: 0.1s;
+}
+
+/* Active state & scrollspy highlight */
+.nav-link.active {
+  color: #ffffff;
+  background: rgba(0, 180, 216, 0.20);
+  transform: translateY(2px);
+}
+
+.nav-link.active::after {
+  transform: translateY(2px) scaleX(1);
+  opacity: 1;
+  box-shadow: 0 0 12px #00B4D8;
+}
+
+.nav-mobile-link.active {
+  background: rgba(0, 180, 216, 0.22);
+  color: #38bdf8;
+  font-weight: 700;
+  border-left: 3px solid #00B4D8;
 }
 
 /* CTA PPDB — Emerald Gradient + Shimmer */
@@ -1866,11 +1887,27 @@ a:hover {
 [data-theme="light"] .nav-link:hover {
   background: oklch(58.6% 0.253 17.585 / 0.20);
   transform: translateY(3px);
-  box-shadow: 0 4px 12px oklch(58.6% 0.253 17.585 / 0.35);
-}
 [data-theme="light"] .nav-link:active {
   transform: translateY(5px) scale(0.96);
   box-shadow: 0 1px 4px oklch(58.6% 0.253 17.585 / 0.2);
+}
+
+[data-theme="light"] .nav-link.active {
+  color: #ffffff;
+  background: oklch(58.6% 0.253 17.585 / 0.25);
+  transform: translateY(2px);
+}
+
+[data-theme="light"] .nav-link.active::after {
+  transform: translateY(2px) scaleX(1);
+  opacity: 1;
+  box-shadow: 0 0 12px oklch(58.6% 0.253 17.585);
+}
+
+[data-theme="light"] .nav-mobile-link.active {
+  background: oklch(58.6% 0.253 17.585 / 0.25);
+  color: #ffffff;
+  border-left-color: oklch(58.6% 0.253 17.585);
 }
 
 [data-theme="light"] .nav-btn-search {

@@ -124,7 +124,7 @@
     </section>
 
     <!-- 6. Berita & Pengumuman Terbaru -->
-    <section class="section reveal" id="berita" style="margin-top: 5rem;">
+    <section class="section reveal" id="berita">
         <x-section-header 
             tag="KABAR SEKOLAH" 
             title="Berita & Pengumuman Terbaru" 
@@ -153,10 +153,10 @@
         <div class="contact-container">
             <div>
                 <span class="section-tag">HUBUNGI KAMI</span>
-                <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-main);">
+                <h2 class="contact-heading">
                     Punya Pertanyaan atau Ingin Mendaftar?
                 </h2>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7;">
+                <p class="contact-desc">
                     Isi formulir di sebelah kanan untuk berkonsultasi mengenai pemilihan jurusan, biaya pendidikan, atau pendaftaran siswa baru. Tim kami akan merespons pesan Anda secara cepat.
                 </p>
 

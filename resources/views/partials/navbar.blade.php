@@ -16,11 +16,11 @@
         {{-- 2. Kapsul Tengah: Menu Navigasi Utama --}}
         <div class="navbar-capsule navbar-center">
             <nav class="nav-desktop-links">
-                <a href="{{ route('home') }}" class="nav-link">Beranda</a>
-                <a href="{{ route('home') }}#jurusan" class="nav-link">Jurusan</a>
-                <a href="{{ route('home') }}#fasilitas" class="nav-link">Fasilitas</a>
-                <a href="{{ route('home') }}#berita" class="nav-link">Berita</a>
-                <a href="{{ route('ppdb.index') }}" class="nav-link">PPDB</a>
+                <a href="{{ route('home') }}#beranda" class="nav-link active" data-section="beranda">Beranda</a>
+                <a href="{{ route('home') }}#jurusan" class="nav-link" data-section="jurusan">Jurusan</a>
+                <a href="{{ route('home') }}#fasilitas" class="nav-link" data-section="fasilitas">Fasilitas</a>
+                <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita">Berita</a>
+                <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb">PPDB</a>
             </nav>
         </div>
 
@@ -57,10 +57,10 @@
 
     {{-- ── Mobile Panel ── --}}
     <div class="nav-mobile-panel" id="navMobilePanel">
-        <a href="{{ route('home') }}" class="nav-mobile-link">🏠 Beranda</a>
-        <a href="{{ route('home') }}#jurusan" class="nav-mobile-link">📚 Jurusan</a>
-        <a href="{{ route('home') }}#fasilitas" class="nav-mobile-link">🏢 Fasilitas</a>
-        <a href="{{ route('home') }}#berita" class="nav-mobile-link">📰 Berita</a>
+        <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda">🏠 Beranda</a>
+        <a href="{{ route('home') }}#jurusan" class="nav-mobile-link" data-section="jurusan">📚 Jurusan</a>
+        <a href="{{ route('home') }}#fasilitas" class="nav-mobile-link" data-section="fasilitas">🏢 Fasilitas</a>
+        <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">📰 Berita</a>
         <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link">🔍 Cek Status Pendaftaran</a>
         <hr class="nav-mobile-divider">
         <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button">
@@ -68,7 +68,7 @@
             <span class="theme-mobile-text">Ganti Tema (Dark / White)</span>
         </button>
         <hr class="nav-mobile-divider">
-        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta">🎓 Daftar PPDB Online</a>
+        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb">🎓 Daftar PPDB Online</a>
 
         @auth
         <hr class="nav-mobile-divider">
@@ -138,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const diff = targetY - startY;
         let startTime = null;
 
-        // Cubic Easing untuk pergerakan turun yang sangat mulus & elegan
         function easeInOutCubic(t) {
             return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
@@ -158,6 +157,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link');
 
+    function setActiveNav(sectionName) {
+        navLinks.forEach(link => {
+            const sec = link.getAttribute('data-section');
+            if (sec === sectionName) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (!href) return;
@@ -176,15 +186,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         setTimeout(() => link.classList.remove('nav-link-pressed'), 250);
 
                         const navHeight = 78;
-                        const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        const targetPosition = targetId === 'beranda' ? 0 : (targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
 
                         smoothScrollToTarget(targetPosition, 850);
 
-                        // Update class aktif
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-
-                        // Update history URL tanpa jump
+                        setActiveNav(link.getAttribute('data-section') || targetId);
                         history.pushState(null, null, url.hash);
                     }
                 });
@@ -192,27 +198,33 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (err) {}
     });
 
-    // ── Scrollspy Otomatis Saat Halaman Di-scroll ──
-    const trackSections = document.querySelectorAll('section[id]');
+    // ── Scrollspy Otomatis: Beranda di paling atas, lalu Jurusan, Fasilitas, Berita ──
     function updateScrollspy() {
-        const scrollPosition = window.pageYOffset + 140;
+        const scrollY = window.pageYOffset;
 
-        trackSections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
+        if (window.location.pathname.includes('/ppdb')) {
+            setActiveNav('ppdb');
+            return;
+        }
 
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && href.includes('#' + sectionId)) {
-                        link.classList.add('active');
-                    } else if (href && href.includes('#')) {
-                        link.classList.remove('active');
-                    }
-                });
-            }
-        });
+        const jurusanEl   = document.getElementById('jurusan');
+        const fasilitasEl = document.getElementById('fasilitas');
+        const beritaEl    = document.getElementById('berita');
+
+        const navHeight = 90;
+        const jurusanTop   = jurusanEl   ? (jurusanEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
+        const fasilitasTop = fasilitasEl ? (fasilitasEl.getBoundingClientRect().top + scrollY - navHeight) : 2200;
+        const beritaTop    = beritaEl    ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight) : 3200;
+
+        if (scrollY < jurusanTop - 80) {
+            setActiveNav('beranda');
+        } else if (scrollY >= jurusanTop - 80 && scrollY < fasilitasTop - 80) {
+            setActiveNav('jurusan');
+        } else if (scrollY >= fasilitasTop - 80 && scrollY < beritaTop - 80) {
+            setActiveNav('fasilitas');
+        } else {
+            setActiveNav('berita');
+        }
     }
 
     window.addEventListener('scroll', updateScrollspy, { passive: true });

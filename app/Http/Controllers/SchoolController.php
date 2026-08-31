@@ -47,7 +47,7 @@ class SchoolController extends Controller
         $stats = [
             ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
             ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
-            ['label' => 'Program Keahlian', 'value' => ($jumlahJurusan > 0 ? $jumlahJurusan : 4) . ' Jurusan', 'icon' => '💻', 'color' => '#fffbeb'],
+            ['label' => 'Program Keahlian', 'value' => ($jumlahJurusan > 0 ? $jumlahJurusan : 3) . ' Jurusan', 'icon' => '💻', 'color' => '#fffbeb'],
             ['label' => 'Serapan Kerja', 'value' => '94% Pertahun', 'icon' => '🚀', 'color' => '#f3e8ff'],
         ];
 
@@ -57,13 +57,12 @@ class SchoolController extends Controller
                 'rekayasa-perangkat-lunak-rpl' => '🔥 Paling Favorit',
                 'teknik-komputer-jaringan-tkj' => '🌐 Sertifikasi Cisco/Mikrotik',
                 'desain-komunikasi-visual-dkv' => '🎨 Studio Kreatif Komplit',
-                'akuntansi-keuangan-lembaga-akl' => '📊 Lab Keuangan Digital',
             ];
 
             return [
                 'id' => $item->slug,
                 'nama' => $item->name,
-                'kategori' => str_contains($item->slug, 'akl') ? 'Bisnis & Manajemen' : (str_contains($item->slug, 'dkv') ? 'Industri Kreatif' : 'Teknologi Informasi'),
+                'kategori' => str_contains($item->slug, 'dkv') ? 'Industri Kreatif' : 'Teknologi Informasi',
                 'deskripsi' => $item->description,
                 'prospek' => 'Lulusan siap kerja di bidang ' . explode(' (', $item->name)[0],
                 'badge' => $badges[$item->slug] ?? '✨ Program Unggulan',

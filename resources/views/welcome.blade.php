@@ -82,8 +82,8 @@
         </div>
     </section>
 
-    {{-- ═══ Area Konten Putih — Naik dari zona Navy ═══ --}}
-    <div class="content-area-white">
+    {{-- ═══ Area Konten Animasi Constellation Grid (bck.md) ═══ --}}
+    <x-constellation-grid class="content-area-constellation">
 
     <!-- 4. Program Keahlian / Jurusan -->
     <section class="section" id="jurusan">
@@ -93,7 +93,7 @@
             subtitle="Kurikulum disesuaikan langsung dengan kebutuhan industri teknologi & bisnis masa kini."
         />
 
-        <div class="grid-2 reveal">
+        <div class="grid-3 reveal">
             @foreach($jurusan as $j)
                 <x-card 
                     :title="$j['nama']" 
@@ -225,7 +225,6 @@
                             <option value="rpl" {{ old('jurusan_minat') == 'rpl' ? 'selected' : '' }}>Rekayasa Perangkat Lunak (RPL)</option>
                             <option value="tkj" {{ old('jurusan_minat') == 'tkj' ? 'selected' : '' }}>Teknik Komputer & Jaringan (TKJ)</option>
                             <option value="dkv" {{ old('jurusan_minat') == 'dkv' ? 'selected' : '' }}>Desain Komunikasi Visual (DKV)</option>
-                            <option value="akl" {{ old('jurusan_minat') == 'akl' ? 'selected' : '' }}>Akuntansi & Keuangan Lembaga (AKL)</option>
                         </select>
                         @error('jurusan_minat')
                             <span class="error-text">⚠️ {{ $message }}</span>
@@ -256,7 +255,7 @@
         </div>
     </section>
 
-    </div>{{-- end .content-area-white --}}
+    </x-constellation-grid>{{-- end .content-area-constellation --}}
 
 @endsection
 

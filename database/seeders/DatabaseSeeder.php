@@ -45,12 +45,6 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'desain-komunikasi-visual-dkv',
                 'description' => 'Mengembangkan kreativitas seni visual, desain grafis, fotografi, videografi, serta desain UI/UX aplikasi digital.',
                 'icon' => '🎨',
-            ],
-            [
-                'name' => 'Akuntansi & Keuangan Lembaga (AKL)',
-                'slug' => 'akuntansi-keuangan-lembaga-akl',
-                'description' => 'Menguasai pengelolaan keuangan digital, perbankan syariah, pembukuan komputerisasi (Accurate/MYOB), dan pajak.',
-                'icon' => '📊',
             ]
         ];
 

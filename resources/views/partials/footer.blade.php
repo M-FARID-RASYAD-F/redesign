@@ -32,7 +32,6 @@
                 <li><a href="{{ route('home') }}#jurusan">Rekayasa Perangkat Lunak (RPL)</a></li>
                 <li><a href="{{ route('home') }}#jurusan">Teknik Komputer & Jaringan (TKJ)</a></li>
                 <li><a href="{{ route('home') }}#jurusan">Desain Komunikasi Visual (DKV)</a></li>
-                <li><a href="{{ route('home') }}#jurusan">Akuntansi & Keuangan (AKL)</a></li>
             </ul>
         </div>
     </div>

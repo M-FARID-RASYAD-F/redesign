@@ -2,41 +2,39 @@
     {{-- ── Desktop Bar ── --}}
     <div class="navbar-container">
 
-        {{-- Brand: Kotak Logo Navy + Nama 2 Baris --}}
-        <a href="{{ route('home') }}" class="navbar-brand">
-            <div class="brand-icon">🏫</div>
-            <div class="brand-text">
-                <span class="brand-text-main">SMKN 1 Nusantara</span>
-                <span class="brand-text-sub">Sekolah Kejuruan Terbaik</span>
+        {{-- 1. Kapsul Kiri: Brand & Logo Sekolah --}}
+        <div class="navbar-capsule navbar-left">
+            <a href="{{ route('home') }}" class="navbar-brand">
+                <div class="brand-icon">🏫</div>
+                <div class="brand-text">
+                    <span class="brand-text-main">SMKN 1 Nusantara</span>
+                    <span class="brand-text-sub">Sekolah Kejuruan Terbaik</span>
+                </div>
+            </a>
+        </div>
+
+        {{-- 2. Kapsul Tengah: Menu Navigasi Utama --}}
+        <div class="navbar-capsule navbar-center">
+            <nav class="nav-desktop-links">
+                <a href="{{ route('home') }}" class="nav-link">Beranda</a>
+                <a href="{{ route('home') }}#jurusan" class="nav-link">Jurusan</a>
+                <a href="{{ route('home') }}#fasilitas" class="nav-link">Fasilitas</a>
+                <a href="{{ route('home') }}#berita" class="nav-link">Berita</a>
+                <a href="{{ route('ppdb.index') }}" class="nav-link">PPDB</a>
+            </nav>
+        </div>
+
+        {{-- 3. Kapsul Kanan: Login / Admin & Menu Mobile --}}
+        <div class="navbar-capsule navbar-right">
+            <div class="nav-auth-desktop">
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="nav-admin-link">🛡️ Admin</a>
+                    <a href="{{ route('logout') }}" class="nav-logout-link">Logout</a>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="nav-btn-search">🔑 Login</a>
+                @endguest
             </div>
-        </a>
-
-        {{-- Navigation Links Horizontal --}}
-        <nav class="nav-desktop-links">
-            <a href="{{ route('home') }}" class="nav-link">Beranda</a>
-            <a href="{{ route('home') }}#jurusan" class="nav-link">Jurusan</a>
-            <a href="{{ route('home') }}#fasilitas" class="nav-link">Fasilitas</a>
-            <a href="{{ route('home') }}#berita" class="nav-link">Berita</a>
-            <a href="{{ route('ppdb.index') }}" class="nav-link">PPDB</a>
-        </nav>
-
-        {{-- Kanan: Tombol Search + Menu (kotak border putih) --}}
-        <div class="nav-auth-desktop">
-            @auth
-                <a href="{{ route('admin.dashboard') }}" class="nav-admin-link" style="margin-right: 8px;">🛡️ Admin</a>
-                <a href="{{ route('logout') }}" class="nav-logout-link" style="margin-right: 12px;">Logout</a>
-            @endauth
-            @guest
-                <a href="{{ route('login') }}" class="nav-btn-search">🔑 Login</a>
-            @endguest
-
-            {{-- Tombol Search --}}
-            <button class="nav-btn-search" onclick="document.getElementById('heroSearchModal')?.classList.toggle('hidden');" aria-label="Search">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <span>Cari</span>
-            </button>
 
             {{-- Tombol Menu (kotak border putih) — hamburger --}}
             <button class="nav-btn-menu" id="navToggle" aria-label="Toggle menu" aria-expanded="false">

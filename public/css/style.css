@@ -1098,27 +1098,30 @@ a:hover {
   margin-top: 0.5rem;
 }
 
-/* Grid Cards */
+/* Grid Cards dengan Perspective 3D */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
+  perspective: 1200px;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  perspective: 1200px;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
+  perspective: 1200px;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CUSTOM CARD — Jurusan & Berita (Border 2px Tebal & Efek Standout)
+   CUSTOM CARD — 3D Tilt Card Architecture (Sesuai hover.md)
    ═══════════════════════════════════════════════════════════ */
 .custom-card {
   background: #ffffff;
@@ -1130,10 +1133,15 @@ a:hover {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  transition: box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, background 0.35s ease;
 }
 
-/* Garis aksen atas 6px tebal pada card */
+/* Layer 1: Garis aksen atas 6px tebal pada card */
 .custom-card::before {
   content: '';
   position: absolute;
@@ -1144,35 +1152,100 @@ a:hover {
   background: linear-gradient(90deg, #002147 0%, #00B4D8 50%, #38bdf8 100%);
   opacity: 0.95;
   transition: opacity 0.3s ease, background 0.3s ease;
+  transform: translateZ(14px);
+  z-index: 5;
 }
 
-.custom-card:hover {
-  transform: translateY(-10px);
-  border-color: #00B4D8;
-  box-shadow: 0 24px 50px -6px rgba(0, 33, 71, 0.28), 0 10px 30px rgba(0, 180, 216, 0.35);
+/* Layer 2: Shine / Glare Effect yang mengikuti kursor */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: var(--glare-opacity, 0);
+  background: radial-gradient(circle 380px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.28), transparent 75%);
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+  z-index: 12;
+  transform: translateZ(1px);
 }
 
-.custom-card:hover::before {
+/* Layer 3: Indikator Status (Pulsing Dot) pojok kanan atas */
+.card-status-dot {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00B4D8;
+  box-shadow: 0 0 10px #00B4D8;
+  opacity: 0;
+  transform: translateZ(36px);
+  transition: opacity 0.3s ease;
+  z-index: 15;
+  pointer-events: none;
+}
+.card-status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #00B4D8;
+  animation: pulseDotRing 1.8s infinite ease-out;
+  opacity: 0;
+}
+.custom-card:hover .card-status-dot {
   opacity: 1;
-  background: linear-gradient(90deg, #00B4D8 0%, #38bdf8 100%);
+}
+.custom-card:hover .card-status-dot::after {
+  opacity: 1;
 }
 
-/* Stagger delay jurusan */
-.grid-2 .custom-card:nth-child(1) { transition-delay: 0.05s; }
-.grid-2 .custom-card:nth-child(2) { transition-delay: 0.15s; }
-.grid-2 .custom-card:nth-child(3) { transition-delay: 0.25s; }
-.grid-2 .custom-card:nth-child(4) { transition-delay: 0.35s; }
+@keyframes pulseDotRing {
+  0%   { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.3); opacity: 0; }
+}
 
-/* Stagger delay berita */
-.grid-3 .custom-card:nth-child(1) { transition-delay: 0.05s; }
-.grid-3 .custom-card:nth-child(2) { transition-delay: 0.15s; }
-.grid-3 .custom-card:nth-child(3) { transition-delay: 0.25s; }
+/* Stagger delay */
+.grid-2 .custom-card:nth-child(1), .grid-3 .custom-card:nth-child(1) { transition-delay: 0.03s; }
+.grid-2 .custom-card:nth-child(2), .grid-3 .custom-card:nth-child(2) { transition-delay: 0.08s; }
+.grid-2 .custom-card:nth-child(3), .grid-3 .custom-card:nth-child(3) { transition-delay: 0.12s; }
 
+/* Layer 4: Header & Elemen Depan Card (Depth Layer) */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+}
+
+.card-header-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform-style: preserve-3d;
+}
+
+.card-icon-3d {
+  font-size: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(38px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-card:hover .card-icon-3d {
+  transform: translateZ(48px) translateY(-3px) rotate(6deg);
+}
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
 }
 
 .card-title {
@@ -1181,6 +1254,14 @@ a:hover {
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.3;
+  transform: translateZ(32px);
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  transform: translateZ(24px);
 }
 
 .badge {
@@ -1191,6 +1272,8 @@ a:hover {
   font-size: 0.75rem;
   font-weight: 700;
   white-space: nowrap;
+  transform: translateZ(34px);
+  transition: transform 0.3s ease;
 }
 
 /* Badge warna per kategori */
@@ -1199,14 +1282,17 @@ a:hover {
 .badge-kegiatan { background: #fef9c3; color: #854d0e; }
 .badge-umum     { background: #f3f4f6; color: #374151; }
 
+/* Layer 5: Card Body */
 .card-body {
   color: var(--text-muted);
   font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   flex: 1;
+  transform: translateZ(22px);
+  transform-style: preserve-3d;
 }
 
-/* Prospek karir box tebal */
+/* Layer 6: Prospek Karir & Read More */
 .card-prospek {
   background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
   padding: 14px 18px;
@@ -1214,12 +1300,13 @@ a:hover {
   border: 2px solid #38bdf8;
   box-shadow: 0 4px 14px rgba(0, 180, 216, 0.18);
   font-size: 0.85rem;
-  margin-top: auto;
+  margin-top: 1rem;
+  transform: translateZ(30px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 .card-prospek strong { color: #0f172a; }
 .card-prospek span   { color: #0284c7; font-weight: 800; }
 
-/* "Baca Selengkapnya →" arrow hover */
 .card-read-more {
   display: inline-flex;
   align-items: center;
@@ -1227,20 +1314,108 @@ a:hover {
   font-weight: 700;
   font-size: 0.85rem;
   color: var(--primary);
-  transition: gap 0.22s ease, color 0.22s ease;
+  margin-top: 0.75rem;
+  transform: translateZ(32px);
+  transition: gap 0.22s ease, color 0.22s ease, transform 0.3s ease;
 }
 .card-read-more:hover {
   gap: 10px;
   color: var(--primary-hover);
+  transform: translateZ(40px);
 }
 
-.card-footer-info {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary);
+/* Layer 7: Elemen CTA Reveal (Explore Hint - Sesuai hover.md poin 7) */
+.card-explore-hint {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.14);
+  opacity: 0;
+  transform: translateX(-10px) translateZ(24px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.custom-card:hover .card-explore-hint {
+  opacity: 1;
+  transform: translateX(0) translateZ(32px);
+}
+
+.explore-line {
+  width: 18px;
+  height: 2px;
+  background: #00B4D8;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.custom-card:hover .explore-line {
+  width: 28px;
+}
+
+.explore-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3 THEME VARIANTS (theme-primary, theme-secondary, theme-accent)
+   ═══════════════════════════════════════════════════════════ */
+/* Varian 1: Primary (Oceanic / Cyan) */
+.custom-card.theme-primary:hover {
+  border-color: #00B4D8;
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 180, 216, 0.35);
+}
+.custom-card.theme-primary:hover::before {
+  background: linear-gradient(90deg, #00B4D8 0%, #38bdf8 100%);
+}
+
+/* Varian 2: Secondary (Emerald / Green) */
+.custom-card.theme-secondary:hover {
+  border-color: #10b981;
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(16, 185, 129, 0.35);
+}
+.custom-card.theme-secondary:hover::before {
+  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+}
+.custom-card.theme-secondary .card-status-dot {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+.custom-card.theme-secondary .card-status-dot::after {
+  border-color: #10b981;
+}
+.custom-card.theme-secondary .explore-line {
+  background: #10b981;
+}
+.custom-card.theme-secondary .explore-text {
+  color: #34d399;
+}
+
+/* Varian 3: Accent (Amber / Gold) */
+.custom-card.theme-accent:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 158, 11, 0.35);
+}
+.custom-card.theme-accent:hover::before {
+  background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+}
+.custom-card.theme-accent .card-status-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+.custom-card.theme-accent .card-status-dot::after {
+  border-color: #f59e0b;
+}
+.custom-card.theme-accent .explore-line {
+  background: #f59e0b;
+}
+.custom-card.theme-accent .explore-text {
+  color: #fbbf24;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2453,7 +2628,29 @@ a:hover {
 [data-theme="light"] .content-area-constellation .custom-card:hover {
   background: oklch(33% 0.125 13 / 0.98);
   border-color: oklch(58.6% 0.253 17.585);
-  box-shadow: 0 24px 50px -6px rgba(0, 0, 0, 0.45), 0 0 30px oklch(58.6% 0.253 17.585 / 0.4);
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.5), 0 0 35px oklch(58.6% 0.253 17.585 / 0.45) !important;
+}
+
+[data-theme="light"] .card-glare {
+  background: radial-gradient(circle 380px at var(--glare-x, 50%) var(--glare-y, 50%), oklch(75% 0.18 18 / 0.35), transparent 75%);
+}
+
+[data-theme="light"] .card-status-dot {
+  background: oklch(58.6% 0.253 17.585) !important;
+  box-shadow: 0 0 10px oklch(58.6% 0.253 17.585) !important;
+}
+[data-theme="light"] .card-status-dot::after {
+  border-color: oklch(58.6% 0.253 17.585) !important;
+}
+
+[data-theme="light"] .card-explore-hint {
+  border-top-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+}
+[data-theme="light"] .explore-line {
+  background: oklch(58.6% 0.253 17.585) !important;
+}
+[data-theme="light"] .explore-text {
+  color: oklch(75% 0.18 18) !important;
 }
 
 [data-theme="light"] .content-area-constellation .card-title {

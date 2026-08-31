@@ -49,6 +49,9 @@
     <!-- Partial Footer -->
     @include('partials.footer')
 
+    <!-- 3D Tilt Card Interactive Physics Engine -->
+    <script src="{{ asset('js/tilt-card.js') }}"></script>
+
     @stack('scripts')
 </body>
 </html>

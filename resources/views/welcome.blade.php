@@ -85,11 +85,19 @@
 
         <div class="grid-3 reveal">
             @foreach($jurusan as $j)
+                @php
+                    $theme = match($loop->iteration % 3) {
+                        1 => 'primary',
+                        2 => 'secondary',
+                        0 => 'accent',
+                    };
+                @endphp
                 <x-card 
                     :title="$j['nama']" 
                     :badge="$j['badge']" 
                     :icon="$j['icon']"
                     :subtitle="$j['kategori']"
+                    :theme="$theme"
                 >
                     <p style="margin-bottom: 1rem; line-height: 1.6;">{{ $j['deskripsi'] }}</p>
                     
@@ -133,10 +141,18 @@
 
         <div class="grid-3">
             @foreach($berita as $b)
+                @php
+                    $theme = match($loop->iteration % 3) {
+                        1 => 'primary',
+                        2 => 'secondary',
+                        0 => 'accent',
+                    };
+                @endphp
                 <x-card 
                     :title="$b['judul']" 
                     :badge="$b['kategori']"
                     :subtitle="$b['tanggal'] . ' • ' . $b['baca_waktu']"
+                    :theme="$theme"
                 >
                     <p style="margin-bottom: 1rem; font-size: 0.9rem;">{{ $b['ringkasan'] }}</p>
                     

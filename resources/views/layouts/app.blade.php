@@ -12,6 +12,18 @@
     
     <!-- CSS Custom App -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- Theme Initialization (Anti-Flicker) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('site_theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     
     @stack('styles')
 </head>

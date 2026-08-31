@@ -24,8 +24,14 @@
             </nav>
         </div>
 
-        {{-- 3. Kapsul Kanan: Login / Admin & Menu Mobile --}}
+        {{-- 3. Kapsul Kanan: Theme Switcher, Login / Admin & Menu Mobile --}}
         <div class="navbar-capsule navbar-right">
+            {{-- Tombol Toggle Theme (Dark / White) --}}
+            <button class="nav-theme-toggle" id="themeToggleBtn" type="button" aria-label="Ganti Tema Tampilan" title="Ganti Tema (Dark / White Mode)">
+                <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+                <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+            </button>
+
             <div class="nav-auth-desktop">
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="nav-admin-link">🛡️ Admin</a>
@@ -57,6 +63,11 @@
         <a href="{{ route('home') }}#berita" class="nav-mobile-link">📰 Berita</a>
         <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link">🔍 Cek Status Pendaftaran</a>
         <hr class="nav-mobile-divider">
+        <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button">
+            <span class="theme-mobile-icon">🌗</span>
+            <span class="theme-mobile-text">Ganti Tema (Dark / White)</span>
+        </button>
+        <hr class="nav-mobile-divider">
         <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta">🎓 Daftar PPDB Online</a>
 
         @auth
@@ -75,6 +86,21 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // ── Theme Switcher Handler ──
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const mobileThemeBtn = document.getElementById('mobileThemeToggleBtn');
+    
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('site_theme', newTheme);
+        window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: newTheme } }));
+    }
+
+    themeBtn?.addEventListener('click', toggleTheme);
+    mobileThemeBtn?.addEventListener('click', toggleTheme);
+
     // ── Hamburger Toggle ──
     const toggleBtn   = document.getElementById('navToggle');
     const mobilePanel = document.getElementById('navMobilePanel');

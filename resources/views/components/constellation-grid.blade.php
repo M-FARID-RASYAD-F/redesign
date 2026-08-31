@@ -39,8 +39,22 @@
     let width = 0;
     let height = 0;
 
-    // Deteksi dark mode dari preferensi sistem, sync realtime
+    // Deteksi mode tema dari data-theme dan preferensi sistem
+    function checkIsLight() {
+        return document.documentElement.getAttribute('data-theme') === 'light';
+    }
+    let isLightMode = checkIsLight();
     let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    window.addEventListener('theme-changed', (e) => {
+        isLightMode = e.detail?.theme === 'light';
+    });
+
+    const themeObserver = new MutationObserver(() => {
+        isLightMode = checkIsLight();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
     const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
     if (darkModeQuery && darkModeQuery.addEventListener) {
         darkModeQuery.addEventListener('change', (e) => {
@@ -56,14 +70,14 @@
         prevY: -1000,
         vx: 0,
         vy: 0,
-        radius: 220,
+        radius: 240,
     };
 
     let nodes = [];
 
     function initNodes() {
         nodes = [];
-        const spacing = 55; // Kerapatan grid
+        const spacing = 58; // Kerapatan grid
         const cols = Math.ceil(width / spacing) + 1;
         const rows = Math.ceil(height / spacing) + 1;
 
@@ -78,7 +92,7 @@
                     vy: 0,
                     baseX: x,
                     baseY: y,
-                    radius: Math.random() * 1.2 + 1.2,
+                    radius: Math.random() * 1.4 + 1.4,
                     label: `${(i * 7).toString(16).toUpperCase()}:${(j * 11).toString(16).toUpperCase()}`,
                     pulse: Math.random() * Math.PI * 2,
                 });
@@ -90,12 +104,14 @@
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const parent = canvas.parentElement || document.body;
         width = parent.clientWidth || window.innerWidth;
-        height = parent.clientHeight || window.innerHeight;
+        // Pastikan tinggi canvas menutupi seluruh tinggi konten scroll parent
+        height = Math.max(parent.clientHeight, parent.scrollHeight, parent.offsetHeight || 0, window.innerHeight);
+        
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-        ctx.setTransform(1, 0, 0, 1, 0, 0); // reset scale sebelum di-scale ulang
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
         initNodes();
     }
@@ -113,8 +129,15 @@
 
     handleResize();
     window.addEventListener('resize', handleResize);
+    window.addEventListener('load', handleResize);
+    document.addEventListener('DOMContentLoaded', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
+
+    // Re-check size after images / fonts load
+    setTimeout(handleResize, 200);
+    setTimeout(handleResize, 800);
+    setTimeout(handleResize, 1800);
 
     if (window.ResizeObserver && canvas.parentElement) {
         const ro = new ResizeObserver(() => handleResize());
@@ -135,9 +158,10 @@
 
         const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
 
-        const bgColor = isDarkMode ? '#030407' : '#030712';
-        const nodeColor = isDarkMode ? '255, 255, 255' : '226, 232, 240';
-        const accentColor = isDarkMode ? '56, 189, 248' : '0, 180, 216';
+        // Palet warna adaptif Dark Mode vs White Mode
+        const bgColor = isLightMode ? '#ffffff' : (isDarkMode ? '#030407' : '#030712');
+        const nodeColor = isLightMode ? '229, 36, 68' : (isDarkMode ? '255, 255, 255' : '226, 232, 240');
+        const accentColor = isLightMode ? '229, 36, 68' : (isDarkMode ? '56, 189, 248' : '0, 180, 216');
 
         ctx.fillStyle = bgColor;
         ctx.fillRect(0, 0, width, height);
@@ -146,8 +170,18 @@
         const SPRING_K = 18;
         const DAMPING = 0.82;
 
+        // Viewport bounds untuk culling (hanya proses node yang terlihat di layar agar 60fps konstan)
+        const rect = canvas.getBoundingClientRect();
+        const canvasScrollY = -rect.top;
+        const viewTop = Math.max(0, canvasScrollY - 250);
+        const viewBottom = canvasScrollY + window.innerHeight + 250;
+
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
+            
+            // Skip node yang jauh di luar viewport saat ini
+            if (n.baseY < viewTop - 100 || n.baseY > viewBottom + 100) continue;
+
             n.pulse += dt * 3;
 
             const dx = mouse.x - n.x;
@@ -156,7 +190,7 @@
 
             if (dist < mouse.radius && dist > 0) {
                 const power = (1 - dist / mouse.radius);
-                const force = power * (1500 + speed * 150);
+                const force = power * (1600 + speed * 160);
                 const angle = Math.atan2(dy, dx);
 
                 n.vx -= Math.cos(angle) * force * dt;
@@ -176,25 +210,29 @@
             n.y += n.vy * dt * 60;
         }
 
-        // Garis koneksi antar node
+        // Garis koneksi antar node (Visible & Sharp)
         const MAX_CONN_DIST = 75;
         const MAX_CONN_DIST_SQ = MAX_CONN_DIST * MAX_CONN_DIST;
+        const lineBaseAlphaFactor = isLightMode ? 0.38 : 0.20;
 
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
+            if (n.baseY < viewTop || n.baseY > viewBottom) continue;
 
             for (let j = i + 1; j < nodes.length; j++) {
                 const n2 = nodes[j];
+                if (Math.abs(n.y - n2.y) > MAX_CONN_DIST) continue;
+
                 const ndx = n.x - n2.x;
                 const ndy = n.y - n2.y;
                 const distSq = ndx * ndx + ndy * ndy;
 
                 if (distSq < MAX_CONN_DIST_SQ) {
                     const nDist = Math.sqrt(distSq);
-                    const alpha = (1 - nDist / MAX_CONN_DIST) * 0.18;
+                    const alpha = (1 - nDist / MAX_CONN_DIST) * lineBaseAlphaFactor;
 
                     ctx.strokeStyle = `rgba(${nodeColor}, ${alpha})`;
-                    ctx.lineWidth = 0.7;
+                    ctx.lineWidth = isLightMode ? 0.9 : 0.7;
                     ctx.beginPath();
                     ctx.moveTo(n.x, n.y);
                     ctx.lineTo(n2.x, n2.y);
@@ -203,15 +241,19 @@
             }
         }
 
-        // Render titik node + highlight interaktif
+        // Render titik node + highlight interaktif (High Contrast & Visible)
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
+            if (n.baseY < viewTop || n.baseY > viewBottom) continue;
+
             const dx = mouse.x - n.x;
             const dy = mouse.y - n.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const isNear = dist < mouse.radius;
 
-            const baseAlpha = isNear ? 0.95 : 0.25 + Math.sin(n.pulse) * 0.1;
+            const baseAlpha = isLightMode
+                ? (isNear ? 1.0 : 0.65 + Math.sin(n.pulse) * 0.15)
+                : (isNear ? 0.95 : 0.35 + Math.sin(n.pulse) * 0.1);
 
             ctx.fillStyle = isNear
                 ? `rgba(${accentColor}, ${baseAlpha})`
@@ -222,21 +264,23 @@
                 : n.radius + Math.sin(n.pulse) * 0.3;
 
             ctx.beginPath();
-            ctx.arc(n.x, n.y, Math.max(0.5, currentRadius), 0, Math.PI * 2);
+            ctx.arc(n.x, n.y, Math.max(0.8, currentRadius), 0, Math.PI * 2);
             ctx.fill();
 
             if (dist < 90) {
                 const pulseRing = ((n.pulse * 20) % 30) + 4;
-                const ringAlpha = (1 - pulseRing / 34) * 0.4;
+                const ringAlpha = isLightMode
+                    ? (1 - pulseRing / 34) * 0.7
+                    : (1 - pulseRing / 34) * 0.45;
 
                 ctx.strokeStyle = `rgba(${accentColor}, ${ringAlpha})`;
-                ctx.lineWidth = 1;
+                ctx.lineWidth = isLightMode ? 1.4 : 1;
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, pulseRing, 0, Math.PI * 2);
                 ctx.stroke();
 
                 ctx.font = '8px ui-monospace, SFMono-Regular, Consolas, monospace';
-                ctx.fillStyle = `rgba(${accentColor}, 0.85)`;
+                ctx.fillStyle = `rgba(${accentColor}, ${isLightMode ? 0.95 : 0.85})`;
                 ctx.fillText(n.label, n.x + 10, n.y - 10);
             }
         }

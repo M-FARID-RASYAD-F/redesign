@@ -1820,7 +1820,7 @@ a:hover {
 
 /* ═══════════════════════════════════════════════════════════
    WHITE / LIGHT MODE OVERRIDES (data-theme="light")
-   Strictly isolated without changing baseline dark mode styles
+   Sesuai Spesifikasi Asli di btnswitch.md
    ═══════════════════════════════════════════════════════════ */
 [data-theme="light"] body {
   background-color: oklch(41% 0.159 10.272);
@@ -1887,6 +1887,7 @@ a:hover {
 [data-theme="light"] .nav-link:hover {
   background: oklch(58.6% 0.253 17.585 / 0.20);
   transform: translateY(3px);
+}
 [data-theme="light"] .nav-link:active {
   transform: translateY(5px) scale(0.96);
   box-shadow: 0 1px 4px oklch(58.6% 0.253 17.585 / 0.2);
@@ -1936,7 +1937,7 @@ a:hover {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 28px oklch(58.6% 0.253 17.585 / 0.35);
 }
 
-/* 2. Hero Transition & Rose/Navy Sections (oklch(41% 0.159 10.272)) */
+/* 2. Hero Transition & Navy/Rose Sections (oklch(41% 0.159 10.272)) */
 [data-theme="light"] .hero::after {
   background: linear-gradient(
     to bottom,
@@ -2037,12 +2038,6 @@ a:hover {
   color: #ffffff;
 }
 
-[data-theme="light"] .badge {
-  background: oklch(58.6% 0.253 17.585 / 0.25);
-  color: #ffffff;
-  border: 1px solid oklch(58.6% 0.253 17.585 / 0.5);
-}
-
 /* Fasilitas */
 [data-theme="light"] .content-area-constellation .fasilitas-section {
   background: oklch(27.1% 0.105 12.094 / 0.94);
@@ -2131,113 +2126,4 @@ a:hover {
 }
 [data-theme="light"] .footer-bottom {
   color: #ffe4e6;
-}
-
-/* 6. Eliminasi Seluruh Efek Biru pada Container & Komponen Tambahan */
-[data-theme="light"] .hero-badge {
-  background: oklch(58.6% 0.253 17.585 / 0.22);
-  color: #ffffff;
-  border-color: oklch(58.6% 0.253 17.585 / 0.5);
-}
-
-[data-theme="light"] .hero-title {
-  background: linear-gradient(to right, #ffffff, oklch(85% 0.12 18));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-[data-theme="light"] .btn-primary {
-  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.24 16));
-  color: #ffffff;
-  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.4);
-}
-[data-theme="light"] .btn-primary:hover {
-  background: linear-gradient(135deg, oklch(65% 0.26 18), oklch(54% 0.25 17));
-  box-shadow: 0 8px 28px oklch(58.6% 0.253 17.585 / 0.55);
-}
-
-[data-theme="light"] .btn-outline {
-  border-color: oklch(58.6% 0.253 17.585 / 0.6);
-  color: #ffffff;
-  background: oklch(58.6% 0.253 17.585 / 0.12);
-}
-[data-theme="light"] .btn-outline:hover {
-  background: oklch(58.6% 0.253 17.585 / 0.28);
-  border-color: oklch(58.6% 0.253 17.585);
-}
-
-[data-theme="light"] .stat-icon-wrapper {
-  background-color: oklch(58.6% 0.253 17.585 / 0.22) !important;
-  color: #ffffff;
-  border: 1px solid oklch(58.6% 0.253 17.585 / 0.45);
-}
-
-[data-theme="light"] .contact-info-icon.blue,
-[data-theme="light"] .contact-info-icon.green,
-[data-theme="light"] .contact-info-icon.yellow {
-  background: oklch(58.6% 0.253 17.585 / 0.22);
-  color: oklch(80% 0.16 18);
-  border: 1px solid oklch(58.6% 0.253 17.585 / 0.35);
-}
-
-[data-theme="light"] .btn-submit-ppdb {
-  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.24 16));
-  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.35);
-}
-[data-theme="light"] .btn-submit-ppdb:hover {
-  background: linear-gradient(135deg, oklch(65% 0.26 18), oklch(54% 0.25 17));
-  box-shadow: 0 8px 28px oklch(58.6% 0.253 17.585 / 0.55);
-}
-
-[data-theme="light"] .nav-cta-ppdb,
-[data-theme="light"] .nav-mobile-cta {
-  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.24 16));
-  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.35);
-}
-[data-theme="light"] .nav-cta-ppdb:hover,
-[data-theme="light"] .nav-mobile-cta:hover {
-  box-shadow: 0 6px 22px oklch(58.6% 0.253 17.585 / 0.5);
-}
-
-[data-theme="light"] .nav-admin-link {
-  background: oklch(58.6% 0.253 17.585 / 0.25);
-  color: oklch(85% 0.15 18);
-}
-[data-theme="light"] .nav-admin-link:hover {
-  background: oklch(58.6% 0.253 17.585 / 0.4);
-}
-
-[data-theme="light"] .principal-quote {
-  border-left-color: oklch(58.6% 0.253 17.585);
-}
-
-[data-theme="light"] .custom-card,
-[data-theme="light"] .card-header {
-  border-color: oklch(58.6% 0.253 17.585 / 0.35);
-}
-
-/* 7. Garis aksen atas container (Custom Card, Photo Frame, Section Eyebrow, dll) */
-[data-theme="light"] .custom-card::before {
-  background: linear-gradient(90deg, oklch(41% 0.159 10.272) 0%, oklch(58.6% 0.253 17.585) 50%, oklch(65% 0.26 18) 100%) !important;
-}
-
-[data-theme="light"] .custom-card:hover::before {
-  background: linear-gradient(90deg, oklch(58.6% 0.253 17.585) 0%, oklch(65% 0.26 18) 100%) !important;
-}
-
-[data-theme="light"] .principal-photo-frame::before {
-  background: linear-gradient(to bottom, oklch(58.6% 0.253 17.585), oklch(65% 0.26 18)) !important;
-}
-
-[data-theme="light"] .principal-eyebrow::before {
-  background: oklch(58.6% 0.253 17.585) !important;
-}
-
-[data-theme="light"] .footer-bottom::before {
-  background: linear-gradient(90deg, transparent, oklch(58.6% 0.253 17.585 / 0.35), transparent) !important;
-}
-
-[data-theme="light"] .contact-container::before {
-  background: linear-gradient(90deg, oklch(41% 0.159 10.272) 0%, oklch(58.6% 0.253 17.585) 50%, oklch(65% 0.26 18) 100%) !important;
 }

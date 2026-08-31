@@ -593,8 +593,8 @@ a:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;  /* konten di bagian bawah */
-  padding: 0;
+  justify-content: center;  /* konten dinaikkan ke area tengah-atas */
+  padding: 8rem 0 6rem;
 }
 
 /* Overlay gradient gelap dari bawah ke atas */
@@ -637,14 +637,14 @@ a:hover {
   z-index: 2;
 }
 
-/* Konten hero — di bawah, layout lebar penuh */
+/* Konten hero — dinaikkan posisinya, layout lebar penuh */
 .hero-container {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2.5rem 4rem;
+  padding: 0 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -653,6 +653,7 @@ a:hover {
 /* Teks konten kiri-bawah */
 .hero-content {
   max-width: 700px;
+  margin-top: 1rem;
 }
 
 /* Badge akreditasi */

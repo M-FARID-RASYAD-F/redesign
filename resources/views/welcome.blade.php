@@ -25,16 +25,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Tombol Play + kredit foto — pojok kanan bawah --}}
-        <div class="hero-bottom-bar">
-            <span class="hero-credit">Foto: Kampus SMKN 1 Nusantara</span>
-            <a href="#beranda" class="hero-play-btn" aria-label="Putar video profil">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <polygon points="5,3 19,12 5,21"/>
-                </svg>
-            </a>
-        </div>
     </section>
 
     <!-- 2. Statistics Counter Bar -->

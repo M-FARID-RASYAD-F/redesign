@@ -2193,3 +2193,44 @@ a:hover {
 [data-theme="light"] .footer-bottom::before {
   background: linear-gradient(90deg, transparent, oklch(58.6% 0.253 17.585 / 0.35), transparent) !important;
 }
+
+/* 7. Tombol Aksi Hero (Daftar PPDB Online & Lihat Jurusan) & CTA PPDB */
+[data-theme="light"] .btn-primary {
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.24 16)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.4) !important;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background: linear-gradient(135deg, oklch(65% 0.26 18), oklch(54% 0.25 17)) !important;
+  box-shadow: 0 8px 28px oklch(58.6% 0.253 17.585 / 0.55) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .btn-outline {
+  border-color: oklch(58.6% 0.253 17.585 / 0.6) !important;
+  color: #ffffff !important;
+  background: oklch(58.6% 0.253 17.585 / 0.14) !important;
+}
+
+[data-theme="light"] .btn-outline:hover {
+  background: oklch(58.6% 0.253 17.585 / 0.30) !important;
+  border-color: oklch(58.6% 0.253 17.585) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.35);
+}
+
+[data-theme="light"] .btn-submit-ppdb,
+[data-theme="light"] .nav-cta-ppdb,
+[data-theme="light"] .nav-mobile-cta {
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.24 16)) !important;
+  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.35) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .btn-submit-ppdb:hover,
+[data-theme="light"] .nav-cta-ppdb:hover,
+[data-theme="light"] .nav-mobile-cta:hover {
+  background: linear-gradient(135deg, oklch(65% 0.26 18), oklch(54% 0.25 17)) !important;
+  box-shadow: 0 8px 28px oklch(58.6% 0.253 17.585 / 0.55) !important;
+}

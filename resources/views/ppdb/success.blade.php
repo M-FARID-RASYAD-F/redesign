@@ -20,9 +20,14 @@
             
             <!-- Header Kartu -->
             <div style="background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; padding: 24px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-                <div>
-                    <span style="font-size: 0.8rem; color: #93c5fd; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">KARTU BUKTI PENDAFTARAN</span>
-                    <h2 style="font-size: 1.25rem; font-weight: 800; margin: 2px 0 0;">PKBM Tahfizh At-Tamam / SMKN 1 Nusantara</h2>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div style="width: 48px; height: 48px; background: white; border-radius: 10px; padding: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8rem; color: #93c5fd; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">KARTU BUKTI PENDAFTARAN</span>
+                        <h2 style="font-size: 1.25rem; font-weight: 800; margin: 2px 0 0;">PKBM Tahfizh At-Tamam / SMKN 1 Nusantara</h2>
+                    </div>
                 </div>
                 <div style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 10px; text-align: right;">
                     <span style="font-size: 0.75rem; color: #cbd5e1; display: block;">Tahun Ajaran</span>

@@ -2,10 +2,17 @@
     <div class="footer-container">
         <!-- Col 1: About -->
         <div>
-            <div class="footer-brand-name">SMK Negeri 1 Nusantara</div>
-            <div class="footer-brand-tagline">Unggul · Kompeten · Berkarakter</div>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; background: #ffffff; border-radius: 10px; padding: 3px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 2px solid rgba(0, 180, 216, 0.4); flex-shrink: 0;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                </div>
+                <div>
+                    <div class="footer-brand-name" style="margin-bottom: 2px;">PKBM Tahfizh At-Tamam</div>
+                    <div class="footer-brand-tagline">Unggul · Berkarakter · Qur'ani</div>
+                </div>
+            </div>
             <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                Sekolah menengah kejuruan pilihan terbaik yang berdedikasi mencetak tenaga kerja profesional, wirausahawan muda, dan generasi unggul siap bersaing global.
+                Lembaga pendidikan Islam & kejuruan terkemuka yang berdedikasi mencetak generasi penghafal Al-Qur'an yang unggul, kompeten di bidang kejuruan modern, dan berakhlak mulia.
             </p>
             <p style="font-size: 0.85rem; color: #64748b;">
                 📍 Jl. Pendidikan Teknologi No. 45, Cyber City, Nusantara<br>

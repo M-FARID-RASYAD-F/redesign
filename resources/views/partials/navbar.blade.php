@@ -5,10 +5,12 @@
         {{-- 1. Kapsul Kiri: Brand & Logo Sekolah --}}
         <div class="navbar-capsule navbar-left">
             <a href="{{ route('home') }}" class="navbar-brand">
-                <div class="brand-icon">🏫</div>
+                <div class="brand-icon">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
+                </div>
                 <div class="brand-text">
-                    <span class="brand-text-main">SMKN 1 Nusantara</span>
-                    <span class="brand-text-sub">Sekolah Kejuruan Terbaik</span>
+                    <span class="brand-text-main">PKBM Tahfizh At-Tamam</span>
+                    <span class="brand-text-sub">Sekolah Unggulan Berkarakter</span>
                 </div>
             </a>
         </div>

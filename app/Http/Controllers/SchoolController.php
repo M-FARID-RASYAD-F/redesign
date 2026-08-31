@@ -20,14 +20,14 @@ class SchoolController extends Controller
     {
         // 1. Data Informasi Sekolah (Default fallback jika DB kosong)
         $sekolah = [
-            'nama' => 'SMK Negeri 1 Nusantara',
-            'slogan' => 'Mencetak Generasi Unggul, Berkarakter & Siap Kerja di Era Digital',
+            'nama' => 'PKBM TAHFIZH ATTAMAM',
+            'slogan' => 'Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital',
             'deskripsi' => 'Sekolah menengah kejuruan terkemuka yang memadukan kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
-            'tahun_berdiri' => '2005',
-            'akreditasi' => 'A (Sangat Baik)',
+            'tahun_berdiri' => '2018',
+            'akreditasi' => 'B (Baik)',
             'alamat' => 'Jl. Pendidikan Teknologi No. 45, Cyber City, Nusantara',
             'telepon' => '(021) 555-0192',
-            'email' => 'info@smkn1nusantara.sch.id'
+            'email' => 'info@pkbmtahfizhattamam.sch.id'
         ];
 
         // 2. Data Sambutan Kepala Sekolah

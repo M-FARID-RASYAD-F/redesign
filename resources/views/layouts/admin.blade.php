@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    
     <!-- Custom CSS inside the layout to avoid affecting other pages and keep everything contained -->
     <style>
         :root {
@@ -337,7 +339,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="{{ route('home') }}" class="sidebar-brand">
-            <span class="sidebar-brand-icon">🛡️</span>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 38px; height: 38px; object-fit: contain; background: #ffffff; border-radius: 8px; padding: 2px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
             <span>At-Tamam Admin</span>
         </a>
 

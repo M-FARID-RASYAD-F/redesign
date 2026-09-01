@@ -109,12 +109,52 @@ class SchoolController extends Controller
             ];
         }
 
-        // 6. Data Fasilitas Utama
+        // 6. Data Fasilitas Utama (Untuk Animated Tabs Container)
         $fasilitas = [
-            ['nama' => 'Lab Komputer High-End', 'deskripsi' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic.', 'icon' => '🖥️'],
-            ['nama' => 'Perpustakaan Digital Hub', 'deskripsi' => 'Akses ribuan e-book, repositori karya siswa, serta ruang baca ber-AC yang nyaman.', 'icon' => '📚'],
-            ['nama' => 'Studio Animasi & Podcast', 'deskripsi' => 'Fasilitas produksi konten audio-visual standar industri kreatif penyiaran.', 'icon' => '🎙️'],
-            ['nama' => 'Lapangan Olahraga Multifungsi', 'deskripsi' => 'Fasilitas outdoor & indoor untuk futsal, basket, voli, dan kegiatan kebugaran.', 'icon' => '⚽']
+            [
+                'id' => 'lab-komputer',
+                'label' => 'Lab Komputer',
+                'title' => 'Lab Komputer High-End',
+                'nama' => 'Lab Komputer High-End',
+                'desc' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic untuk menunjang praktikum pemrograman web, rekayasa perangkat lunak, dan konfigurasi jaringan industri.',
+                'deskripsi' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic.',
+                'icon' => '🖥️',
+                'image' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
+                'features' => ['120 Unit PC Core i7', 'GPU Dedicated', 'Fiber Optic 1 Gbps', 'AC & Ergonomic Chair']
+            ],
+            [
+                'id' => 'perpustakaan-digital',
+                'label' => 'Perpustakaan Digital',
+                'title' => 'Perpustakaan Digital Hub',
+                'nama' => 'Perpustakaan Digital Hub',
+                'desc' => 'Akses ribuan e-book, jurnal akademik internasional, repositori karya siswa, serta ruang baca tenang ber-AC yang dilengkapi workstation digital mandiri.',
+                'deskripsi' => 'Akses ribuan e-book, repositori karya siswa, serta ruang baca ber-AC yang nyaman.',
+                'icon' => '📚',
+                'image' => 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop',
+                'features' => ['Ribuan Koleksi E-Book', 'Ruang Baca Nyaman Ber-AC', 'Katalog Digital', 'Akses Internet Cepat']
+            ],
+            [
+                'id' => 'studio-multimedia',
+                'label' => 'Studio Multimedia',
+                'title' => 'Studio Animasi & Podcast',
+                'nama' => 'Studio Animasi & Podcast',
+                'desc' => 'Fasilitas produksi konten audio-visual standar penyiaran industri kreatif, lengkap dengan green screen studio, lighting kit broadcast profesional, dan soundproofing akustik.',
+                'deskripsi' => 'Fasilitas produksi konten audio-visual standar industri kreatif penyiaran.',
+                'icon' => '🎙️',
+                'image' => 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop',
+                'features' => ['Green Screen Studio', 'Podcast Mic Pro', 'Lighting Kit Broadcast', 'Soundproof Acoustic']
+            ],
+            [
+                'id' => 'sarana-olahraga',
+                'label' => 'Sarana Olahraga',
+                'title' => 'Lapangan Olahraga Multifungsi',
+                'nama' => 'Lapangan Olahraga Multifungsi',
+                'desc' => 'Fasilitas olahraga outdoor & indoor untuk futsal, basket, voli, dan kebugaran jasmani guna membangun sportivitas, daya tahan, dan kesehatan fisik peserta didik.',
+                'deskripsi' => 'Fasilitas outdoor & indoor untuk futsal, basket, voli, dan kegiatan kebugaran.',
+                'icon' => '⚽',
+                'image' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop',
+                'features' => ['Lapangan Futsal & Basket', 'Area Olahraga Luas', 'Loker & Ruang Ganti', 'Standar Kompetisi']
+            ]
         ];
 
         // Kirim seluruh data ke view 'welcome'

@@ -51,6 +51,9 @@
 
     <!-- 3D Tilt Card Interactive Physics Engine -->
     <script src="{{ asset('js/tilt-card.js') }}"></script>
+    
+    <!-- Animated Tabs Engine -->
+    <script src="{{ asset('js/animated-tabs.js') }}"></script>
 
     @stack('scripts')
 </body>

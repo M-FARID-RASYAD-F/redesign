@@ -78,32 +78,143 @@
         </div>
     </div>
 
-    <!-- Footer Bottom Area with Back to Top Button -->
+    <!-- Footer Bottom Area -->
     <div class="footer-bottom">
         <div class="footer-bottom-container">
             <p class="footer-copyright">
                 &copy; {{ date('Y') }} <strong>PKBM Tahfizh At-Tamam</strong>. Semua hak cipta dilindungi.
             </p>
-            <div class="footer-bottom-actions">
-                <button type="button" class="footer-back-to-top" id="footerBackToTop" aria-label="Kembali ke bagian atas halaman">
-                    <span class="back-to-top-icon">↑</span>
-                    <span class="back-to-top-text">Kembali ke Atas</span>
-                </button>
-            </div>
         </div>
     </div>
 </footer>
 
+<!-- Floating Action Back-to-Top Rocket Button (Appears on Scroll) -->
+<button type="button" class="floating-back-to-top" id="floatingBackToTop" aria-label="Kembali ke atas halaman" title="Kembali ke Atas">
+    <svg class="scroll-progress-ring" viewBox="0 0 36 36">
+        <path class="scroll-progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+        <path class="scroll-progress-bar" id="scrollProgressBar" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    </svg>
+    <span class="floating-btn-icon">🚀</span>
+</button>
+
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const backToTopBtn = document.getElementById('footerBackToTop');
-    if (backToTopBtn) {
-        backToTopBtn.addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+    const floatingBtn = document.getElementById('floatingBackToTop');
+    const progressBar = document.getElementById('scrollProgressBar');
+
+    // 1. Scroll Progress & Floating Button Visibility
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        if (floatingBtn) {
+            if (scrollTop > 280) {
+                floatingBtn.classList.add('is-visible');
+            } else {
+                floatingBtn.classList.remove('is-visible');
+            }
+        }
+
+        if (progressBar && scrollHeight > 0) {
+            const scrollPercentage = Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100));
+            progressBar.setAttribute('stroke-dasharray', `${scrollPercentage.toFixed(1)}, 100`);
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // 2. Rocket Launch & Particle Burst Animation
+    function createLaunchParticles(originElement) {
+        if (!originElement) return;
+        const rect = originElement.getBoundingClientRect();
+        const particleCount = 14;
+        const colors = ['#00B4D8', '#38bdf8', '#34d399', '#f59e0b', '#ec4899', '#ffffff'];
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'back-to-top-spark';
+            
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+            
+            const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
+            const distance = 25 + Math.random() * 55;
+            const destX = Math.cos(angle) * distance;
+            const destY = Math.sin(angle) * distance - 25; // Bias burst upwards
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = 3 + Math.random() * 5;
+
+            particle.style.cssText = `
+                position: fixed;
+                left: ${startX}px;
+                top: ${startY}px;
+                width: ${size}px;
+                height: ${size}px;
+                background: ${color};
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 999999;
+                box-shadow: 0 0 10px ${color};
+                transform: translate(-50%, -50%) scale(1);
+                transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.75s ease-out;
+            `;
+
+            document.body.appendChild(particle);
+
+            requestAnimationFrame(() => {
+                particle.style.transform = `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(0)`;
+                particle.style.opacity = '0';
             });
+
+            setTimeout(() => {
+                particle.remove();
+            }, 800);
+        }
+    }
+
+    // 3. Smooth Kinetic Momentum Scroll to Top
+    function triggerRocketLaunch(btn) {
+        if (!btn || btn.classList.contains('is-launching')) return;
+
+        btn.classList.add('is-launching');
+        createLaunchParticles(btn);
+
+        const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+        const duration = Math.min(900, Math.max(450, startPosition * 0.35));
+        let startTime = null;
+
+        function easeOutQuart(t) {
+            return 1 - (--t) * t * t * t;
+        }
+
+        function scrollStep(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = easeOutQuart(progress);
+
+            window.scrollTo(0, startPosition * (1 - ease));
+
+            if (progress < 1) {
+                requestAnimationFrame(scrollStep);
+            } else {
+                window.scrollTo(0, 0);
+            }
+        }
+
+        requestAnimationFrame(scrollStep);
+
+        // Reset button state after launch completion
+        setTimeout(() => {
+            btn.classList.remove('is-launching');
+        }, 1000);
+    }
+
+    if (floatingBtn) {
+        floatingBtn.addEventListener('click', function () {
+            triggerRocketLaunch(floatingBtn);
         });
     }
 });

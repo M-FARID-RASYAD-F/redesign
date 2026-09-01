@@ -113,21 +113,14 @@
     <!-- 5. Fasilitas Sekolah -->
     <section class="section" id="fasilitas">
         <div class="fasilitas-section">
-        <x-section-header 
-            tag="SARANA & PRASARANA" 
-            title="Fasilitas Modern Penunjang Pembelajaran" 
-            subtitle="Lingkungan belajar yang nyaman, kondusif, dan didukung perangkat berteknologi tinggi."
-        />
+            <x-section-header 
+                tag="SARANA & PRASARANA" 
+                title="Fasilitas Modern Penunjang Pembelajaran" 
+                subtitle="Lingkungan belajar yang nyaman, kondusif, dan didukung perangkat berteknologi tinggi."
+            />
 
-        <div class="grid-4">
-            @foreach($fasilitas as $f)
-                <div class="facility-card reveal">
-                    <div class="facility-icon">{{ $f['icon'] }}</div>
-                    <h3 class="facility-title">{{ $f['nama'] }}</h3>
-                    <p class="facility-desc">{{ $f['deskripsi'] }}</p>
-                </div>
-            @endforeach
-        </div>
+            {{-- Animated Tabs Container Component (contain.md) --}}
+            <x-animated-tabs :tabs="$fasilitas" />
         </div>
     </section>
 

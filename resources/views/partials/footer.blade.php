@@ -1,49 +1,111 @@
 <footer class="footer">
     <div class="footer-container">
-        <!-- Col 1: About -->
-        <div>
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                <div style="width: 48px; height: 48px; background: #ffffff; border-radius: 10px; padding: 3px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 2px solid rgba(0, 180, 216, 0.4); flex-shrink: 0;">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+        <!-- Col 1: Brand, Deskripsi, Badge & Kontak Interaktif -->
+        <div class="footer-col-brand">
+            <div class="footer-brand-header">
+                <div class="footer-logo-box">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="footer-logo-img">
                 </div>
-                <div>
-                    <div class="footer-brand-name" style="margin-bottom: 2px;">PKBM Tahfizh At-Tamam</div>
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">PKBM Tahfizh At-Tamam</div>
                     <div class="footer-brand-tagline">Unggul · Berkarakter · Qur'ani</div>
                 </div>
             </div>
-            <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                Lembaga pendidikan Islam & kejuruan terkemuka yang berdedikasi mencetak generasi penghafal Al-Qur'an yang unggul, kompeten di bidang kejuruan modern, dan berakhlak mulia.
+
+            <p class="footer-description">
+                Lembaga pendidikan Islam & kejuruan terkemuka yang berdedikasi mencetak generasi penghafal Al-Qur'an yang unggul, kompeten di bidang teknologi modern, dan berakhlak mulia.
             </p>
-            <p style="font-size: 0.85rem; color: #64748b;">
-                📍 Jl. Pendidikan Teknologi No. 45, Cyber City, Nusantara<br>
-                📞 (021) 555-0192 | ✉️ info@smkn1nusantara.sch.id
-            </p>
+
+            <!-- Pill Badges -->
+            <div class="footer-badges">
+                <span class="footer-badge">🌟 Akreditasi B</span>
+                <span class="footer-badge">📖 Tahfizh Qur'an</span>
+                <span class="footer-badge">🚀 Berbasis Industri</span>
+            </div>
+
+            <!-- Quick Interactive Contact Buttons / Chips -->
+            <div class="footer-contact-list">
+                <a href="https://maps.google.com/?q=PKBM+Tahfizh+At-Tamam" target="_blank" rel="noopener noreferrer" class="footer-contact-item" title="Buka Lokasi di Google Maps">
+                    <span class="footer-contact-icon">📍</span>
+                    <span class="footer-contact-text">Jl. Pendidikan Teknologi No. 45, Cyber City</span>
+                </a>
+                <div class="footer-contact-row">
+                    <a href="tel:0215550192" class="footer-contact-item" title="Hubungi Telepon">
+                        <span class="footer-contact-icon">📞</span>
+                        <span class="footer-contact-text">(021) 555-0192</span>
+                    </a>
+                    <a href="mailto:info@pkbmtahfizhattamam.sch.id" class="footer-contact-item" title="Kirim Email">
+                        <span class="footer-contact-icon">✉️</span>
+                        <span class="footer-contact-text">info@pkbmtahfizhattamam.sch.id</span>
+                    </a>
+                </div>
+                <a href="https://wa.me/6281200000000?text=Halo%20Admin%20PKBM%20Tahfizh%20At-Tamam,%20saya%20ingin%20konsultasi%20pendaftaran" target="_blank" rel="noopener noreferrer" class="footer-contact-item footer-contact-item-highlight" title="Chat WhatsApp Sekolah">
+                    <span class="footer-contact-icon">💬</span>
+                    <span class="footer-contact-text">Chat WhatsApp Panitia PPDB (Fast Response)</span>
+                </a>
+            </div>
         </div>
 
-        <!-- Col 2: Quick Links -->
-        <div>
-            <h3 class="footer-title">Navigasi Sekolah</h3>
-            <ul class="footer-links">
-                <li><a href="{{ route('home') }}">Beranda Utama</a></li>
-                <li><a href="{{ route('ppdb.index') }}">Portal PPDB Online</a></li>
-                <li><a href="{{ route('ppdb.create') }}">Formulir Pendaftaran Siswa Baru</a></li>
-                <li><a href="{{ route('ppdb.tracking') }}">Lacak Status Pendaftaran</a></li>
-                <li><a href="{{ route('home') }}#berita">Kabar & Berita Terbaru</a></li>
-            </ul>
-        </div>
+        <!-- Col 2 & 3 Subgrid: Navigasi Sekolah & Program Kejuruan -->
+        <div class="footer-nav-grid">
+            <!-- Navigasi Utama -->
+            <div class="footer-col-links">
+                <h3 class="footer-title">
+                    <span class="footer-title-icon">🧭</span> Navigasi Sekolah
+                </h3>
+                <ul class="footer-links">
+                    <li><a href="{{ route('home') }}#beranda"><span class="footer-link-arrow">›</span> Beranda Utama</a></li>
+                    <li><a href="{{ route('ppdb.index') }}"><span class="footer-link-arrow">›</span> Portal PPDB Online</a></li>
+                    <li><a href="{{ route('ppdb.create') }}"><span class="footer-link-arrow">›</span> Formulir Pendaftaran</a></li>
+                    <li><a href="{{ route('ppdb.tracking') }}"><span class="footer-link-arrow">›</span> Lacak Status PPDB</a></li>
+                    <li><a href="{{ route('home') }}#berita"><span class="footer-link-arrow">›</span> Kabar & Berita Terbaru</a></li>
+                </ul>
+            </div>
 
-        <!-- Col 3: Media & Program -->
-        <div>
-            <h3 class="footer-title">Program Kejuruan</h3>
-            <ul class="footer-links">
-                <li><a href="{{ route('home') }}#jurusan">Rekayasa Perangkat Lunak (RPL)</a></li>
-                <li><a href="{{ route('home') }}#jurusan">Teknik Komputer & Jaringan (TKJ)</a></li>
-                <li><a href="{{ route('home') }}#jurusan">Desain Komunikasi Visual (DKV)</a></li>
-            </ul>
+            <!-- Program Kejuruan & Unggulan -->
+            <div class="footer-col-links">
+                <h3 class="footer-title">
+                    <span class="footer-title-icon">🎓</span> Program Unggulan
+                </h3>
+                <ul class="footer-links">
+                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Rekayasa Perangkat Lunak</a></li>
+                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Teknik Komputer & Jaringan</a></li>
+                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Desain Komunikasi Visual</a></li>
+                    <li><a href="{{ route('home') }}#sambutan"><span class="footer-link-arrow">›</span> Program Tahfizh Intensif</a></li>
+                    <li><a href="{{ route('home') }}#fasilitas"><span class="footer-link-arrow">›</span> Fasilitas Modern</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
+    <!-- Footer Bottom Area with Back to Top Button -->
     <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} <strong>SMK Negeri 1 Nusantara</strong>. Semua hak cipta dilindungi.</p>
+        <div class="footer-bottom-container">
+            <p class="footer-copyright">
+                &copy; {{ date('Y') }} <strong>PKBM Tahfizh At-Tamam</strong>. Semua hak cipta dilindungi.
+            </p>
+            <div class="footer-bottom-actions">
+                <button type="button" class="footer-back-to-top" id="footerBackToTop" aria-label="Kembali ke bagian atas halaman">
+                    <span class="back-to-top-icon">↑</span>
+                    <span class="back-to-top-text">Kembali ke Atas</span>
+                </button>
+            </div>
+        </div>
     </div>
 </footer>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const backToTopBtn = document.getElementById('footerBackToTop');
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+</script>
+@endpush

@@ -97,6 +97,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('site_theme', newTheme);
+
+        // Spring 360-deg spin animation feedback
+        if (themeBtn) {
+            themeBtn.style.transition = 'transform 0.55s cubic-bezier(0.68, -0.6, 0.32, 1.6)';
+            themeBtn.style.transform = 'scale(0.85) rotate(360deg)';
+            setTimeout(() => {
+                themeBtn.style.transform = '';
+            }, 550);
+        }
+
         window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: newTheme } }));
     }
 

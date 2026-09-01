@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 z-index: 999999;
                 box-shadow: 0 0 10px ${color};
                 transform: translate(-50%, -50%) scale(1);
-                transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.75s ease-out;
+                transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
             `;
 
             document.body.appendChild(particle);

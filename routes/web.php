@@ -28,10 +28,14 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])->name('check');
 });
 
-// 4. Route Login Guru (Mengarahkan ke Form Login Panel Admin Filament)
+// 4. Route Login Guru (Custom UI) + proses autentikasi
 Route::get('/login', function () {
-    return redirect('/portal/login');
-})->name('login');
+    return view('auth.login');
+})->name('login')->middleware('guest');
+
+Route::post('/login-process', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
+    ->name('login.process')
+    ->middleware('guest');
 
 // 5. Route Logout Guru
 Route::get('/logout', function () {

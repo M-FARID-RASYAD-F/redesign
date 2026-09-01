@@ -2069,6 +2069,99 @@ a:hover {
   line-height: 1.35;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   FOOTER SOCIAL MEDIA BUTTONS (Clean, Stable & Interactive)
+   ═══════════════════════════════════════════════════════════ */
+.footer-social-section {
+  margin-top: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-social-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: -0.01em;
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-social-btn:hover {
+  transform: translateY(-4px) scale(1.12);
+}
+
+.footer-social-btn:active {
+  transform: translateY(-1px) scale(0.96);
+}
+
+.social-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+.social-whatsapp:hover {
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.5);
+  border-color: #25D366;
+}
+
+.social-instagram {
+  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
+}
+.social-instagram:hover {
+  box-shadow: 0 8px 22px rgba(225, 48, 108, 0.5);
+  border-color: #E1306C;
+}
+
+.social-youtube {
+  background: linear-gradient(135deg, #FF0000 0%, #B20000 100%);
+}
+.social-youtube:hover {
+  box-shadow: 0 8px 22px rgba(255, 0, 0, 0.5);
+  border-color: #FF0000;
+}
+
+.social-facebook {
+  background: linear-gradient(135deg, #1877F2 0%, #0E5AC4 100%);
+}
+.social-facebook:hover {
+  box-shadow: 0 8px 22px rgba(24, 119, 242, 0.5);
+  border-color: #1877F2;
+}
+
+.footer-social-svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s ease;
+}
+
+.footer-social-btn:hover .footer-social-svg {
+  transform: scale(1.08);
+}
+
 /* Nav Subgrid (Desktop) */
 .footer-nav-grid {
   display: grid;
@@ -3535,6 +3628,14 @@ a:hover {
 [data-theme="light"] .footer-links a:hover .footer-link-arrow {
   color: #ffffff;
 }
+[data-theme="light"] .footer-social-title {
+  color: #ffe4e6;
+}
+[data-theme="light"] .footer-social-btn {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
 [data-theme="light"] .footer-bottom {
   border-top-color: rgba(255, 255, 255, 0.15);
 }

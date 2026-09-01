@@ -30,7 +30,16 @@
     animation: tabFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-.tab-highlight {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+/* ═══════════════════════════════════════════════════════════
+   MACOS INTERACTIVE DOCK CSS (From icon.md)
+   ═══════════════════════════════════════════════════════════ */
+[data-dock-item]:hover [data-dock-label],
+[data-dock-item]:focus [data-dock-label] {
+    opacity: 1;
+    transform: translate(-50%, -10px);
+}
+
+[data-dock-label] {
+    transform: translate(-50%, 0);
 }
 

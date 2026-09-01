@@ -144,20 +144,21 @@ document.addEventListener('DOMContentLoaded', function () {
         nav?.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── Animasi Smooth Eased Scroll Menuju Section ──
-    function smoothScrollToTarget(targetY, duration = 800) {
+    // ── Animasi Smooth Eased Scroll Menuju Section (Cubic-Bezier Easing) ──
+    function smoothScrollToTarget(targetY, duration = 850) {
         const startY = window.pageYOffset;
         const diff = targetY - startY;
         let startTime = null;
 
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        // Formula Cubic Bezier (0.16, 1, 0.3, 1) - Luxury Fluid Deceleration
+        function cubicBezierEase(t) {
+            return 1 - Math.pow(1 - t, 3.8);
         }
 
         function step(currentTime) {
             if (!startTime) startTime = currentTime;
             const progress = Math.min((currentTime - startTime) / duration, 1);
-            const ease = easeInOutCubic(progress);
+            const ease = cubicBezierEase(progress);
             window.scrollTo(0, startY + diff * ease);
 
             if (progress < 1) {

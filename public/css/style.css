@@ -327,7 +327,7 @@ a:hover {
   color: #e0f2fe;
 }
 
-/* Desktop nav links — Kapsul Tengah dengan Efek Animasi Turun */
+/* Desktop nav links — Kapsul Tengah dengan Efek Animasi Kinetik Cubic Bezier */
 .nav-desktop-links {
   display: flex;
   align-items: center;
@@ -340,8 +340,11 @@ a:hover {
   font-size: 0.875rem;
   padding: 8px 16px;
   letter-spacing: 0.02em;
-  border-radius: 8px;
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 10px;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   position: relative;
   overflow: visible;
@@ -351,49 +354,51 @@ a:hover {
   content: '';
   position: absolute;
   bottom: 2px;
-  left: 12px;
-  right: 12px;
-  height: 2.5px;
+  left: 14px;
+  right: 14px;
+  height: 3px;
   background: linear-gradient(90deg, #00B4D8, #38bdf8);
-  border-radius: 3px;
-  transform: translateY(-4px) scaleX(0);
+  border-radius: 4px;
+  transform: translateY(4px) scaleX(0);
   opacity: 0;
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px #00B4D8;
+  transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 10px #00B4D8;
 }
 
-/* Animasi turun saat hover */
+/* Animasi Spring Lift saat hover */
 .nav-link:hover {
   color: #ffffff;
   background: rgba(0, 180, 216, 0.16);
-  transform: translateY(3px);
-  box-shadow: 0 4px 12px rgba(0, 180, 216, 0.25);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 180, 216, 0.28);
 }
 
 .nav-link:hover::after {
-  transform: translateY(2px) scaleX(1);
+  transform: translateY(0) scaleX(1);
   opacity: 1;
 }
 
-/* Animasi turun lebih dalam saat tombol ditekan (active/click) */
+/* Animasi Tactile Press saat ditekan (active/click) */
 .nav-link:active,
 .nav-link.nav-link-pressed {
-  transform: translateY(5px) scale(0.96) !important;
-  box-shadow: 0 1px 4px rgba(0, 180, 216, 0.15);
+  transform: translateY(2px) scale(0.94) !important;
+  box-shadow: 0 1px 4px rgba(0, 180, 216, 0.2);
   transition-duration: 0.12s;
 }
 
 /* Active state & scrollspy highlight */
 .nav-link.active {
   color: #ffffff;
-  background: rgba(0, 180, 216, 0.20);
-  transform: translateY(2px);
+  background: rgba(0, 180, 216, 0.22);
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.22);
 }
 
 .nav-link.active::after {
-  transform: translateY(2px) scaleX(1);
+  transform: translateY(0) scaleX(1);
   opacity: 1;
-  box-shadow: 0 0 12px #00B4D8;
+  box-shadow: 0 0 14px #00B4D8;
 }
 
 .nav-mobile-link.active {
@@ -415,15 +420,19 @@ a:hover {
   font-weight: 700;
   font-size: 0.875rem;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   white-space: nowrap;
 }
 .nav-cta-ppdb:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(16, 185, 129, 0.50);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.55);
   color: #ffffff !important;
+}
+.nav-cta-ppdb:active {
+  transform: translateY(1px) scale(0.96);
+  transition-duration: 0.12s;
 }
 .nav-cta-ppdb::after {
   content: '';
@@ -435,11 +444,12 @@ a:hover {
     transparent 60%
   );
   transform: translateX(-100%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .nav-cta-ppdb:hover::after {
   transform: translateX(200%);
 }
+
 
 /* Tombol Search — ikon kaca pembesar */
 .nav-btn-search {
@@ -3368,21 +3378,23 @@ a:hover {
 }
 [data-theme="light"] .nav-link:hover {
   background: oklch(58.6% 0.253 17.585 / 0.20);
-  transform: translateY(3px);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px oklch(58.6% 0.253 17.585 / 0.35);
 }
-[data-theme="light"] .nav-link:active {
-  transform: translateY(5px) scale(0.96);
+[data-theme="light"] .nav-link:active,
+[data-theme="light"] .nav-link.nav-link-pressed {
+  transform: translateY(2px) scale(0.94) !important;
   box-shadow: 0 1px 4px oklch(58.6% 0.253 17.585 / 0.2);
 }
 
 [data-theme="light"] .nav-link.active {
   color: #ffffff;
   background: oklch(58.6% 0.253 17.585 / 0.25);
-  transform: translateY(2px);
+  transform: translateY(0);
 }
 
 [data-theme="light"] .nav-link.active::after {
-  transform: translateY(2px) scaleX(1);
+  transform: translateY(0) scaleX(1);
   opacity: 1;
   box-shadow: 0 0 12px oklch(58.6% 0.253 17.585);
 }

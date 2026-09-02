@@ -124,8 +124,30 @@
   transform: translateY(0);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   SAME-PAGE NAVIGATION TRANSITION (Unified Component Effect)
+   Uses the signature cubic-bezier deceleration, blur-in, and lift
+   ═══════════════════════════════════════════════════════════ */
+@keyframes sectionNavEnter {
+  0% {
+    opacity: 0.75;
+    transform: translateY(14px) scale(0.992);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.section-nav-enter {
+  animation: sectionNavEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity, filter;
+}
+
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: hidden;
   width: 100%;
 }

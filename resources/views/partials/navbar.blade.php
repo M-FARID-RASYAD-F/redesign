@@ -144,28 +144,26 @@ document.addEventListener('DOMContentLoaded', function () {
         nav?.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── Animasi Smooth Eased Scroll Menuju Section (Cubic-Bezier Easing) ──
-    function smoothScrollToTarget(targetY, duration = 850) {
-        const startY = window.pageYOffset;
-        const diff = targetY - startY;
-        let startTime = null;
+    // ── Trigger Efek Transisi Komponen pada Section Target (Cubic-Bezier) ──
+    function triggerSectionTransition(targetEl) {
+        if (!targetEl) return;
 
-        // Formula Cubic Bezier (0.16, 1, 0.3, 1) - Luxury Fluid Deceleration
-        function cubicBezierEase(t) {
-            return 1 - Math.pow(1 - t, 3.8);
+        // Reset dan jalankan animasi entrance cubic-bezier yang seragam dengan komponen lain
+        targetEl.classList.remove('section-nav-enter');
+        void targetEl.offsetWidth; // Force reflow
+        targetEl.classList.add('section-nav-enter');
+
+        // Pastikan child elemen yang memiliki scroll-reveal langsung terlihat
+        targetEl.querySelectorAll('.reveal').forEach(el => {
+            el.classList.add('visible');
+        });
+        if (targetEl.classList.contains('reveal')) {
+            targetEl.classList.add('visible');
         }
 
-        function step(currentTime) {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            const ease = cubicBezierEase(progress);
-            window.scrollTo(0, startY + diff * ease);
-
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            }
-        }
-        requestAnimationFrame(step);
+        setTimeout(() => {
+            targetEl.classList.remove('section-nav-enter');
+        }, 700);
     }
 
     const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link');
@@ -181,35 +179,95 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    navLinks.forEach(link => {
+    function handleSamePageNavigation(e, link, targetId) {
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        e.preventDefault();
+
+        // Feedback tactile animation pada link yang diklik (cubic-bezier)
+        link.classList.add('nav-link-pressed');
+        setTimeout(() => link.classList.remove('nav-link-pressed'), 250);
+
+        // Tutup mobile panel jika sedang terbuka
+        const mobilePanel = document.getElementById('navMobilePanel');
+        if (mobilePanel && mobilePanel.classList.contains('is-open')) {
+            mobilePanel.classList.remove('is-open');
+            const iconOpen = document.getElementById('iconHamburger');
+            const iconClose = document.getElementById('iconClose');
+            const toggleBtn = document.getElementById('navToggle');
+            if (iconOpen && iconClose) {
+                iconOpen.style.display = 'block';
+                iconClose.style.display = 'none';
+                toggleBtn?.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        const navHeight = 78;
+        const targetPosition = targetId === 'beranda' ? 0 : Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
+
+        // Pindah posisi langsung tanpa animasi scrolling lambat
+        window.scrollTo({ top: targetPosition, behavior: 'auto' });
+
+        // Pertahankan efek transisi visual cubic-bezier pada section target
+        triggerSectionTransition(targetEl);
+
+        setActiveNav(link.getAttribute('data-section') || targetId);
+        history.pushState(null, null, '#' + targetId);
+    }
+
+    // Pasang event handler untuk semua link navigasi yang menuju anchor halaman yang sama
+    document.querySelectorAll('a[href*="#"]').forEach(link => {
         const href = link.getAttribute('href');
-        if (!href) return;
+        if (!href || href === '#' || href.startsWith('#!')) return;
 
         try {
             const url = new URL(href, window.location.origin);
             if (url.pathname === window.location.pathname && url.hash) {
                 link.addEventListener('click', function (e) {
                     const targetId = url.hash.substring(1);
-                    const targetEl = document.getElementById(targetId);
-                    if (targetEl) {
-                        e.preventDefault();
-
-                        // Feedback animasi tekan tombol
-                        link.classList.add('nav-link-pressed');
-                        setTimeout(() => link.classList.remove('nav-link-pressed'), 250);
-
-                        const navHeight = 78;
-                        const targetPosition = targetId === 'beranda' ? 0 : (targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
-
-                        smoothScrollToTarget(targetPosition, 850);
-
-                        setActiveNav(link.getAttribute('data-section') || targetId);
-                        history.pushState(null, null, url.hash);
+                    if (targetId) {
+                        handleSamePageNavigation(e, link, targetId);
                     }
                 });
             }
         } catch (err) {}
     });
+
+    // Logo Brand klik di homepage langsung pindah ke beranda dengan efek transisi
+    const brandLink = document.querySelector('.navbar-brand');
+    if (brandLink) {
+        try {
+            const brandUrl = new URL(brandLink.getAttribute('href'), window.location.origin);
+            if (brandUrl.pathname === window.location.pathname) {
+                brandLink.addEventListener('click', function (e) {
+                    const berandaEl = document.getElementById('beranda');
+                    if (berandaEl) {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'auto' });
+                        triggerSectionTransition(berandaEl);
+                        setActiveNav('beranda');
+                        history.pushState(null, null, window.location.pathname);
+                    }
+                });
+            }
+        } catch (err) {}
+    }
+
+    // Handle initial hash navigation on page load
+    if (window.location.hash) {
+        const initialTargetId = window.location.hash.substring(1);
+        const initialTargetEl = document.getElementById(initialTargetId);
+        if (initialTargetEl) {
+            setTimeout(() => {
+                const navHeight = 78;
+                const targetPosition = initialTargetId === 'beranda' ? 0 : Math.max(0, initialTargetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
+                window.scrollTo({ top: targetPosition, behavior: 'auto' });
+                triggerSectionTransition(initialTargetEl);
+                setActiveNav(initialTargetId);
+            }, 50);
+        }
+    }
 
     // ── Scrollspy Otomatis: Beranda di paling atas, lalu Jurusan, Fasilitas, Berita ──
     function updateScrollspy() {

@@ -401,6 +401,9 @@
         @yield('content')
     </div>
 
+    <!-- Modal Konfirmasi Logout (Scale-in / Zoom-in Pop Effect) -->
+    @include('partials.logout-modal')
+
     @stack('scripts')
 </body>
 </html>

@@ -49,6 +49,9 @@
     <!-- Partial Footer -->
     @include('partials.footer')
 
+    <!-- Modal Konfirmasi Logout (Scale-in / Zoom-in Pop Effect) -->
+    @include('partials.logout-modal')
+
     <!-- 3D Tilt Card Interactive Physics Engine -->
     <script src="{{ asset('js/tilt-card.js') }}"></script>
     

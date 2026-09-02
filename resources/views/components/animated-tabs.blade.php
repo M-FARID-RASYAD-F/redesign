@@ -78,10 +78,10 @@
                             🏛️ Sarana Unggulan
                         </span>
                     </div>
-                    <h2 class="tab-title text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug">
+                    <h2 class="tab-title text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">
                         {{ $tab['title'] ?? $tab['nama'] }}
                     </h2>
-                    <p class="tab-desc text-sm md:text-base text-gray-200 leading-relaxed">
+                    <p class="tab-desc text-xs md:text-sm text-gray-200 leading-relaxed">
                         {{ $tab['desc'] ?? $tab['deskripsi'] }}
                     </p>
 

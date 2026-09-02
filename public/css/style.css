@@ -166,6 +166,7 @@ body {
   font-family: var(--font-family);
   background-color: #001529; /* Navy gelap — tidak ada celah putih di antara hero, stats, dan sambutan */
   color: var(--text-main);
+  font-size: 0.935rem;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -324,7 +325,7 @@ a:hover {
 }
 .brand-text-main {
   font-family: var(--font-family);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 0.04em;
@@ -338,7 +339,7 @@ a:hover {
 
 .brand-text-sub {
   font-family: var(--font-family);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 500;
   color: rgba(255,255,255,0.7);
   letter-spacing: 0.06em;
@@ -359,8 +360,8 @@ a:hover {
 .nav-link {
   color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
-  font-size: 0.875rem;
-  padding: 8px 16px;
+  font-size: 0.825rem;
+  padding: 7px 15px;
   letter-spacing: 0.02em;
   border-radius: 10px;
   transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -437,10 +438,10 @@ a:hover {
   gap: 6px;
   background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
   color: #ffffff !important;
-  padding: 9px 20px;
+  padding: 8px 18px;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
@@ -825,21 +826,21 @@ a:hover {
   background: rgba(59, 130, 246, 0.15);
   color: #93c5fd;
   border: 1px solid rgba(147, 197, 253, 0.20);
-  padding: 6px 18px;
+  padding: 5px 16px;
   border-radius: 50px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: 2.75rem;
+  font-size: 2.35rem;
   font-weight: 800;
   line-height: 1.18;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
   background: linear-gradient(to right, #ffffff, #93c5fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -849,17 +850,17 @@ a:hover {
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: #94a3b8;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   max-width: 600px;
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
 }
 
 .hero-desc {
   color: #cbd5e1;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.75rem;
   line-height: 1.7;
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both;
 }
@@ -875,10 +876,10 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 11px 22px;
   border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   cursor: pointer;
   border: none;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -909,13 +910,13 @@ a:hover {
 /* Submit button — emerald + shimmer */
 .btn-submit-ppdb {
   width: 100%;
-  padding: 14px;
+  padding: 13px;
   background: linear-gradient(135deg, #10b981, #14b8a6);
   color: white;
   border: none;
   border-radius: 10px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.92rem;
   cursor: pointer;
   font-family: var(--font-family);
   box-shadow: 0 4px 16px rgba(16,185,129,0.35);
@@ -997,19 +998,19 @@ a:hover {
 }
 
 .stat-icon-wrapper {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
   flex-shrink: 0;
 }
 
 .stat-value {
-  font-size: 1.75rem;
+  font-size: 1.55rem;
   font-weight: 800;
   line-height: 1;
   color: #ffffff;
@@ -1017,10 +1018,10 @@ a:hover {
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.60);
   font-weight: 500;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 /* Section Wrapper */
@@ -1179,16 +1180,16 @@ a:hover {
 .section-tag {
   color: var(--primary);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   display: block;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.25;
@@ -1197,8 +1198,8 @@ a:hover {
 
 .section-subtitle {
   color: var(--text-muted);
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  margin-top: 0.45rem;
 }
 
 /* Grid Cards dengan Perspective 3D */
@@ -1333,7 +1334,7 @@ a:hover {
 }
 
 .card-icon-3d {
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1353,7 +1354,7 @@ a:hover {
 
 .card-title {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.3;
@@ -1361,7 +1362,7 @@ a:hover {
 }
 
 .card-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   margin-top: 3px;
   transform: translateZ(24px);
@@ -1372,7 +1373,7 @@ a:hover {
   color: var(--primary);
   padding: 4px 10px;
   border-radius: 50px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   white-space: nowrap;
   transform: translateZ(34px);
@@ -1388,7 +1389,7 @@ a:hover {
 /* Layer 5: Card Body */
 .card-body {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   margin-bottom: 0.5rem;
   flex: 1;
   transform: translateZ(22px);
@@ -1398,11 +1399,11 @@ a:hover {
 /* Layer 6: Prospek Karir & Read More */
 .card-prospek {
   background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: 10px;
   border: 2px solid #38bdf8;
   box-shadow: 0 4px 14px rgba(0, 180, 216, 0.18);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-top: 1rem;
   transform: translateZ(30px);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1415,7 +1416,7 @@ a:hover {
   align-items: center;
   gap: 4px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--primary);
   margin-top: 0.75rem;
   transform: translateZ(32px);
@@ -1590,12 +1591,12 @@ a:hover {
 
 .principal-eyebrow {
   font-family: var(--font-family);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #00B4D8;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1610,21 +1611,21 @@ a:hover {
 
 .principal-heading {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.3rem);
   font-weight: 700;
   line-height: 1.18;
   color: #ffffff;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   letter-spacing: -0.015em;
 }
 
 .principal-quote {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-style: italic;
   line-height: 1.85;
   color: rgba(255,255,255,0.80);
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   padding-left: 1.5rem;
   border-left: 3px solid rgba(0,180,216,0.50);
   position: relative;
@@ -1634,20 +1635,20 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding-top: 1.25rem;
+  padding-top: 1.15rem;
   border-top: 1px solid rgba(255,255,255,0.10);
 }
 
 .principal-name {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.01em;
 }
 
 .principal-role {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: rgba(255,255,255,0.55);
   letter-spacing: 0.03em;
 }
@@ -1926,7 +1927,7 @@ a:hover {
 .contact-info-icon.yellow { background: #fffbeb; color: var(--accent); }
 
 .contact-info-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -1935,7 +1936,7 @@ a:hover {
 
 .contact-info-value {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text-main);
 }
 
@@ -1972,18 +1973,18 @@ a:hover {
 .form-label {
   display: block;
   font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.45rem;
   color: var(--text-main);
 }
 
 .form-control {
   width: 100%;
-  padding: 12px 16px;
+  padding: 11px 15px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   background: #fafafa;
 }
@@ -1997,7 +1998,7 @@ a:hover {
 
 .error-text {
   color: var(--danger);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   margin-top: 4px;
   display: block;
 }
@@ -2082,7 +2083,7 @@ a:hover {
 }
 
 .footer-brand-name {
-  font-size: 1.18rem;
+  font-size: 1.08rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.01em;
@@ -2090,7 +2091,7 @@ a:hover {
 }
 
 .footer-brand-tagline {
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: #38bdf8;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -2098,7 +2099,7 @@ a:hover {
 }
 
 .footer-description {
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   line-height: 1.7;
   color: #94a3b8;
   margin-bottom: 1.25rem;
@@ -2114,9 +2115,9 @@ a:hover {
 .footer-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 9999px;
   background: rgba(0, 180, 216, 0.1);
   border: 1px solid rgba(0, 180, 216, 0.25);
@@ -2141,14 +2142,14 @@ a:hover {
   align-items: center;
   gap: 10px;
   color: #cbd5e1;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-decoration: none;
-  padding: 9px 12px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 10px;
   transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-  min-height: 42px;
+  min-height: 40px;
 }
 
 .footer-contact-item:hover {
@@ -2173,7 +2174,7 @@ a:hover {
 }
 
 .footer-contact-icon {
-  font-size: 1rem;
+  font-size: 0.95rem;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -2189,14 +2190,14 @@ a:hover {
    FOOTER SOCIAL MEDIA BUTTONS (Clean, Stable & Interactive)
    ═══════════════════════════════════════════════════════════ */
 .footer-social-section {
-  margin-top: 1.35rem;
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .footer-social-title {
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #94a3b8;
   letter-spacing: -0.01em;
@@ -2210,9 +2211,9 @@ a:hover {
 }
 
 .footer-social-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2267,8 +2268,8 @@ a:hover {
 }
 
 .footer-social-svg {
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2293,8 +2294,8 @@ a:hover {
 .footer-title {
   color: #ffffff;
   font-weight: 700;
-  font-size: 1.05rem;
-  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.15rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2302,7 +2303,7 @@ a:hover {
 }
 
 .footer-title-icon {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .footer-links {
@@ -2321,16 +2322,16 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   padding: 6px 10px;
   border-radius: 8px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 38px;
+  min-height: 36px;
 }
 
 .footer-link-arrow {
   color: #00b4d8;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   line-height: 1;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2366,7 +2367,7 @@ a:hover {
 }
 
 .footer-copyright {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #94a3b8;
   line-height: 1.5;
 }
@@ -2672,10 +2673,10 @@ a:hover {
 
   /* Navbar */
   .navbar {
-    padding: 8px 12px;
+    padding: 10px 18px;
   }
   .navbar.scrolled {
-    padding: 6px 12px;
+    padding: 8px 18px;
   }
   .navbar-container {
     gap: 8px;
@@ -2744,7 +2745,7 @@ a:hover {
   /* Hero Section */
   .hero {
     min-height: auto;
-    padding: 6.5rem 1.25rem 3.5rem;
+    padding: 6.5rem 2rem 3.5rem;
     justify-content: flex-start;
   }
   .hero-container {
@@ -2760,17 +2761,17 @@ a:hover {
     margin-bottom: 1.15rem;
   }
   .hero-title {
-    font-size: clamp(1.85rem, 6.5vw, 2.35rem);
+    font-size: clamp(1.65rem, 5.5vw, 2.05rem);
     line-height: 1.2;
     margin-bottom: 0.85rem;
   }
   .hero-subtitle {
-    font-size: 0.96rem;
+    font-size: 0.88rem;
     line-height: 1.5;
     margin-bottom: 0.75rem;
   }
   .hero-desc {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
@@ -2782,9 +2783,9 @@ a:hover {
   }
   .hero-actions .btn {
     width: 100%;
-    min-height: 48px;
-    padding: 12px 20px;
-    font-size: 0.95rem;
+    min-height: 46px;
+    padding: 11px 18px;
+    font-size: 0.88rem;
     font-weight: 700;
     justify-content: center;
     border-radius: 12px;
@@ -2793,7 +2794,7 @@ a:hover {
   /* Statistics Section */
   .stats-section {
     background: #002147;
-    padding: 2.25rem 1.25rem;
+    padding: 2.25rem 2rem;
     margin: 0;
     width: 100%;
   }
@@ -2802,28 +2803,28 @@ a:hover {
     gap: 12px;
   }
   .stat-card {
-    padding: 1rem 0.85rem;
+    padding: 0.95rem 0.8rem;
     gap: 10px;
     border-radius: 14px;
   }
   .stat-icon-wrapper {
-    width: 44px;
-    height: 44px;
-    font-size: 1.3rem;
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
     border-radius: 10px;
   }
   .stat-value {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     line-height: 1.1;
   }
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     line-height: 1.3;
   }
 
   /* Sambutan Kepala Sekolah */
   .principal-section {
-    padding: 3.5rem 1.25rem 4rem;
+    padding: 3.5rem 2rem 4rem;
   }
   .principal-section-inner {
     grid-template-columns: 1fr;
@@ -2841,30 +2842,30 @@ a:hover {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   }
   .principal-photo-initials {
-    font-size: 4.2rem;
+    font-size: 4rem;
   }
   .principal-eyebrow {
     justify-content: center;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     margin-bottom: 0.75rem;
   }
   .principal-eyebrow::before {
     display: none;
   }
   .principal-heading {
-    font-size: clamp(1.5rem, 5.5vw, 1.85rem);
-    margin-bottom: 1.25rem;
+    font-size: clamp(1.35rem, 4.8vw, 1.65rem);
+    margin-bottom: 1.15rem;
     line-height: 1.25;
   }
   .principal-quote {
-    font-size: 0.92rem;
+    font-size: 0.86rem;
     line-height: 1.75;
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 0.95rem;
     border-left: none;
     border-top: 3px solid #00B4D8;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 14px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.35rem;
     text-align: center;
   }
   .principal-name-block {
@@ -2872,10 +2873,10 @@ a:hover {
     text-align: center;
   }
   .principal-name {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
   .principal-role {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   /* Constellation Content Area */
@@ -2886,7 +2887,7 @@ a:hover {
     padding-bottom: 2rem;
   }
   .section {
-    padding: 0 1.25rem;
+    padding: 0 2rem;
     margin-bottom: 3.5rem;
   }
   .section-header {
@@ -2894,15 +2895,15 @@ a:hover {
     text-align: center;
   }
   .section-tag {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 1px;
   }
   .section-title {
-    font-size: clamp(1.45rem, 5vw, 1.85rem);
+    font-size: clamp(1.3rem, 4.5vw, 1.65rem);
     line-height: 1.25;
   }
   .section-subtitle {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     line-height: 1.5;
   }
 
@@ -2912,26 +2913,26 @@ a:hover {
     gap: 1.25rem;
   }
   .custom-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.35rem 1.15rem;
     border-radius: 16px;
   }
   .card-title {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
   }
   .card-body {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     line-height: 1.6;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.15rem;
   }
   .card-prospek {
-    padding: 12px 14px;
-    font-size: 0.82rem;
+    padding: 11px 13px;
+    font-size: 0.78rem;
     border-radius: 10px;
   }
 
   /* Fasilitas Section (Animated Tabs Responsive) */
   .fasilitas-section {
-    padding: 2.25rem 1.25rem 1.75rem;
+    padding: 2.25rem 1.5rem 1.75rem;
     border-radius: 18px;
   }
   .tab-nav-bar {
@@ -2940,8 +2941,8 @@ a:hover {
     justify-content: center;
   }
   .tab-btn {
-    padding: 0.55rem 0.9rem;
-    font-size: 0.82rem;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.78rem;
   }
   .tab-content-box {
     padding: 1.25rem 1rem;
@@ -2956,10 +2957,10 @@ a:hover {
     max-height: 220px;
   }
   .tab-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
   .tab-desc {
-    font-size: 0.86rem;
+    font-size: 0.82rem;
   }
   .tab-features-grid {
     grid-template-columns: 1fr;
@@ -2969,17 +2970,17 @@ a:hover {
   /* Contact Section */
   .contact-container {
     grid-template-columns: 1fr;
-    padding: 2rem 1.25rem;
+    padding: 2.25rem 2rem;
     gap: 2rem;
     border-radius: 18px;
   }
   .contact-heading {
-    font-size: 1.55rem;
+    font-size: 1.38rem;
     margin-bottom: 0.75rem;
   }
   .contact-desc {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.84rem;
+    margin-bottom: 1.35rem;
   }
   .contact-info-list {
     gap: 1rem;
@@ -2988,29 +2989,29 @@ a:hover {
     gap: 12px;
   }
   .contact-info-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.15rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
   }
   .contact-info-value {
-    font-size: 0.9rem;
+    font-size: 0.84rem;
     word-break: break-word;
   }
   .form-control {
     font-size: 16px; /* Cegah auto-zoom di iOS */
-    padding: 12px 14px;
+    padding: 11px 13px;
     border-radius: 10px;
   }
   .btn-submit-ppdb {
-    padding: 13px;
-    font-size: 0.95rem;
-    min-height: 48px;
+    padding: 12px;
+    font-size: 0.88rem;
+    min-height: 46px;
     border-radius: 10px;
   }
 
   /* Footer */
   .footer {
-    padding: 3rem 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+    padding: 3.25rem 2rem max(1.5rem, env(safe-area-inset-bottom));
   }
   .footer-container {
     display: flex;
@@ -3074,6 +3075,21 @@ a:hover {
     padding: 0.85rem 1rem;
     font-size: 0.9rem;
   }
+
+  /* PPDB Mobile Containers */
+  .ppdb-hero-section {
+    padding: 6.5rem 2rem 3.5rem;
+  }
+  .ppdb-stats-wrapper {
+    padding: 0 2rem;
+  }
+  .ppdb-section {
+    padding: 0 2rem;
+    margin-bottom: 3.5rem;
+  }
+  .ppdb-req-container {
+    padding: 2rem 1.5rem;
+  }
 }
 
 /* ────────────────────────────────────────────────────────
@@ -3082,7 +3098,7 @@ a:hover {
 @media (max-width: 480px) {
   /* Navbar */
   .navbar {
-    padding: 6px 8px;
+    padding: 8px 14px;
   }
   .navbar-capsule {
     height: 46px;
@@ -3120,25 +3136,25 @@ a:hover {
 
   /* Hero */
   .hero {
-    padding: 5.5rem 1rem 3rem;
+    padding: 5.5rem 2rem 3rem;
   }
   .hero-title {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
   .hero-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
   }
   .hero-desc {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
   }
   .hero-badge {
-    font-size: 0.7rem;
-    padding: 4px 10px;
+    font-size: 0.68rem;
+    padding: 3px 9px;
   }
 
   /* Stats Grid */
   .stats-section {
-    padding: 1.75rem 0.875rem;
+    padding: 1.75rem 2rem;
   }
   .stats-grid {
     gap: 8px;
@@ -3149,51 +3165,51 @@ a:hover {
     border-radius: 12px;
   }
   .stat-icon-wrapper {
-    width: 38px;
-    height: 38px;
-    font-size: 1.15rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.08rem;
   }
   .stat-value {
-    font-size: 1.18rem;
+    font-size: 1.08rem;
   }
   .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
   /* Sambutan */
   .principal-section {
-    padding: 3rem 1rem;
+    padding: 3rem 2rem;
   }
   .principal-photo-col {
     max-width: 150px;
   }
   .principal-photo-initials {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
   .principal-heading {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
   }
   .principal-quote {
-    font-size: 0.88rem;
-    padding: 1rem 0.85rem;
+    font-size: 0.82rem;
+    padding: 0.95rem 0.8rem;
   }
 
   /* Sections */
   .section {
-    padding: 0 0.875rem;
+    padding: 0 2rem;
     margin-bottom: 2.75rem;
   }
   .section-title {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
   }
   .custom-card {
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 0.9rem;
   }
 
   /* Fasilitas */
   /* Fasilitas Section (Small Mobile) */
   .fasilitas-section {
-    padding: 1.5rem 0.75rem;
+    padding: 1.6rem 1.15rem;
     border-radius: 14px;
   }
   .tab-nav-bar {
@@ -3203,29 +3219,29 @@ a:hover {
     padding: 4px;
   }
   .tab-btn {
-    padding: 0.5rem 0.6rem;
-    font-size: 0.75rem;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.72rem;
     justify-content: center;
   }
   .tab-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   .tab-desc {
-    font-size: 0.8rem;
+    font-size: 0.76rem;
   }
 
   /* Contact */
   .contact-container {
-    padding: 1.5rem 1rem;
+    padding: 1.75rem 2rem;
     gap: 1.5rem;
     border-radius: 14px;
   }
   .contact-heading {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
   }
   /* Footer Small Mobile */
   .footer {
-    padding: 2.25rem 0.875rem max(1.25rem, env(safe-area-inset-bottom));
+    padding: 2.5rem 2rem max(1.25rem, env(safe-area-inset-bottom));
   }
   .footer-container {
     gap: 1.75rem;
@@ -3235,18 +3251,18 @@ a:hover {
     gap: 10px;
   }
   .footer-logo-box {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
   }
   .footer-brand-name {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
   .footer-brand-tagline {
-    font-size: 0.74rem;
+    font-size: 0.7rem;
   }
   .footer-description {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
     line-height: 1.6;
     margin-bottom: 1rem;
   }
@@ -3255,7 +3271,7 @@ a:hover {
     margin-bottom: 1.25rem;
   }
   .footer-badge {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     padding: 3px 8px;
   }
   .footer-nav-grid {
@@ -3263,26 +3279,41 @@ a:hover {
     gap: 1.5rem;
   }
   .footer-title {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     margin-bottom: 0.75rem;
   }
   .footer-links a {
-    font-size: 0.84rem;
-    min-height: 40px;
-    padding: 8px 10px;
+    font-size: 0.8rem;
+    min-height: 38px;
+    padding: 7px 9px;
   }
   .footer-contact-item {
-    font-size: 0.82rem;
-    padding: 9px 12px;
+    font-size: 0.78rem;
+    padding: 8px 11px;
   }
   .footer-copyright {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
   }
   .footer-back-to-top {
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     padding: 8px 14px;
     width: 100%;
     max-width: 100%;
+  }
+
+  /* PPDB Small Mobile Containers */
+  .ppdb-hero-section {
+    padding: 5.5rem 2rem 3rem;
+  }
+  .ppdb-stats-wrapper {
+    padding: 0 2rem;
+  }
+  .ppdb-section {
+    padding: 0 2rem;
+    margin-bottom: 2.75rem;
+  }
+  .ppdb-req-container {
+    padding: 1.5rem 1.15rem;
   }
 }
 
@@ -3949,27 +3980,27 @@ a:hover {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #38bdf8;
-  padding: 6px 18px;
+  padding: 5px 16px;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 .ppdb-hero-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   color: #ffffff;
   letter-spacing: -0.02em;
 }
 .ppdb-hero-desc {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: #cbd5e1;
   max-width: 720px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.75rem;
   line-height: 1.7;
 }
 .ppdb-hero-actions {
@@ -3996,7 +4027,7 @@ a:hover {
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 1.5rem;
+  padding: 1.35rem;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -4012,24 +4043,24 @@ a:hover {
 .ppdb-stat-card.stat-emerald { border-top-color: #10b981; }
 
 .ppdb-stat-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #94a3b8;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .ppdb-stat-val {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 6px 0 4px;
+  margin: 5px 0 3px;
 }
 .ppdb-stat-val-highlight {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #38bdf8;
 }
 .ppdb-stat-sub {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 .ppdb-stat-sub.text-emerald { color: #34d399; }
@@ -4044,17 +4075,17 @@ a:hover {
 }
 .ppdb-section-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.25rem;
 }
 .ppdb-section-tag {
   color: #38bdf8;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 .ppdb-section-title {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
   font-weight: 800;
   color: #ffffff;
   margin-top: 6px;
@@ -4064,7 +4095,7 @@ a:hover {
   color: #94a3b8;
   max-width: 600px;
   margin: 8px auto 0;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   line-height: 1.6;
 }
 
@@ -4078,7 +4109,7 @@ a:hover {
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
-  padding: 1.75rem;
+  padding: 1.5rem;
   position: relative;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -4088,15 +4119,15 @@ a:hover {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 .ppdb-step-number {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
 }
 .ppdb-step-number.step-1 { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
 .ppdb-step-number.step-2 { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
@@ -4104,13 +4135,13 @@ a:hover {
 .ppdb-step-number.step-4 { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
 
 .ppdb-step-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .ppdb-step-desc {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: #94a3b8;
   line-height: 1.6;
 }

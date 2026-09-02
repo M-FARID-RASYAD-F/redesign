@@ -6,81 +6,82 @@ document.addEventListener('DOMContentLoaded', () => {
 export function initAuthCard(container) {
     if (!container) return;
 
-    const tabsWrapper = container.querySelector('[data-tabs-wrapper]');
-    const tabButtons = container.querySelectorAll('[data-tab-target]');
-    const panels = container.querySelectorAll('[data-panel]');
-    const switchLinks = container.querySelectorAll('[data-switch-to]');
+    const mobileTabsWrapper = container.querySelector('[data-mobile-tabs]');
+    const mobileTabBtns = container.querySelectorAll('[data-mobile-tab]');
+    const switchTriggers = container.querySelectorAll('[data-switch-trigger]');
 
-    function switchTab(targetTab) {
-        // Update tabs container active state for pill slide animation
-        if (tabsWrapper) {
-            tabsWrapper.setAttribute('data-active-tab', targetTab);
+    // Ready onload state removal after entrance animation completes
+    setTimeout(() => {
+        container.classList.add('is-animated-ready');
+    }, 900);
+
+    function setAuthMode(mode) {
+        const isReg = mode === 'register';
+
+        container.classList.add('is-animated-ready');
+        container.classList.toggle('is-register-active', isReg);
+        container.setAttribute('data-current-tab', mode);
+
+        if (mobileTabsWrapper) {
+            mobileTabsWrapper.setAttribute('data-active-tab', mode);
         }
 
-        // Update tab buttons
-        tabButtons.forEach(btn => {
-            const isActive = btn.getAttribute('data-tab-target') === targetTab;
-            btn.classList.toggle('is-active', isActive);
+        mobileTabBtns.forEach(btn => {
+            btn.classList.toggle('is-active', btn.getAttribute('data-mobile-tab') === mode);
         });
 
-        // Update panels with entrance animation
-        panels.forEach(panel => {
-            const isTarget = panel.getAttribute('data-panel') === targetTab;
-            if (isTarget) {
-                panel.classList.remove('is-active');
-                void panel.offsetWidth; // Force DOM reflow to trigger CSS keyframes
-                panel.classList.add('is-active');
-
-                // Focus the first input inside the active panel
-                const firstInput = panel.querySelector('input:not([type="hidden"])');
+        // Focus the first input inside the active slot
+        setTimeout(() => {
+            const activeSlot = isReg ? container.querySelector('.sign-up-slot') : container.querySelector('.sign-in-slot');
+            if (activeSlot) {
+                const firstInput = activeSlot.querySelector('input:not([type="hidden"])');
                 if (firstInput) {
-                    setTimeout(() => firstInput.focus(), 150);
+                    firstInput.focus();
                 }
-            } else {
-                panel.classList.remove('is-active');
             }
-        });
+        }, 350);
 
-        // Update URL parameter without reload (if supported)
+        // Update URL parameter without reload
         if (window.history && window.history.replaceState) {
             const url = new URL(window.location);
-            url.searchParams.set('tab', targetTab);
+            url.searchParams.set('tab', mode);
             window.history.replaceState({}, '', url);
         }
     }
 
-    // Tab button click listeners
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-tab-target');
-            switchTab(target);
-        });
-    });
-
-    // Quick switch links ("Daftar sekarang" / "Masuk sekarang")
-    switchLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    // Switch button click triggers
+    switchTriggers.forEach(btn => {
+        btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = link.getAttribute('data-switch-to');
-            switchTab(target);
+            const targetMode = btn.getAttribute('data-switch-trigger');
+            setAuthMode(targetMode);
         });
     });
 
-    // Password Toggle Logic
-    container.querySelectorAll('[data-password-toggle]').forEach(btn => {
+    // Mobile segmented tab buttons
+    mobileTabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const wrap = btn.closest('.input-wrap');
-            if (!wrap) return;
-            const input = wrap.querySelector('[data-password-input]') || wrap.querySelector('input[type="password"], input[type="text"]');
-            const eye = btn.querySelector('[data-eye-icon]');
-            if (!input) return;
+            const targetMode = btn.getAttribute('data-mobile-tab');
+            setAuthMode(targetMode);
+        });
+    });
 
-            const isPassword = input.type === 'password';
-            input.type = isPassword ? 'text' : 'password';
-            if (eye) {
-                eye.textContent = isPassword ? '🙈' : '👁️';
+    // Show/Hide Password Toggle Logic
+    container.querySelectorAll('[data-password-toggle]').forEach(toggleBtn => {
+        toggleBtn.addEventListener('click', () => {
+            const inputWrap = toggleBtn.closest('.input-wrap');
+            if (!inputWrap) return;
+
+            const passwordInput = inputWrap.querySelector('[data-password-input]') || inputWrap.querySelector('input[type="password"], input[type="text"]');
+            const eyeIcon = toggleBtn.querySelector('[data-eye-icon]');
+            if (!passwordInput) return;
+
+            const isCurrentlyPassword = passwordInput.type === 'password';
+            passwordInput.type = isCurrentlyPassword ? 'text' : 'password';
+            if (eyeIcon) {
+                eyeIcon.textContent = isCurrentlyPassword ? '🙈' : '👁️';
             }
-            btn.setAttribute('aria-label', isPassword ? 'Sembunyikan kata sandi' : 'Lihat kata sandi');
+            toggleBtn.setAttribute('aria-label', isCurrentlyPassword ? 'Sembunyikan kata sandi' : 'Lihat kata sandi');
         });
     });
 }

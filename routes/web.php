@@ -28,13 +28,21 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])->name('check');
 });
 
-// 4. Route Login Guru (Custom UI) + proses autentikasi
+// 4. Route Login & Registrasi Guru (Custom UI) + proses autentikasi
 Route::get('/login', function () {
-    return view('auth.login');
+    return view('auth.login', ['defaultTab' => 'login']);
 })->name('login')->middleware('guest');
+
+Route::get('/register', function () {
+    return view('auth.login', ['defaultTab' => 'register']);
+})->name('register')->middleware('guest');
 
 Route::post('/login-process', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
     ->name('login.process')
+    ->middleware('guest');
+
+Route::post('/register-process', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
+    ->name('register.process')
     ->middleware('guest');
 
 // 5. Route Logout Guru

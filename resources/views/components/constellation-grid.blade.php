@@ -8,15 +8,15 @@
 <div
     {{ $attributes->merge(['class' => 'relative w-full overflow-hidden select-none bg-slate-950 content-area-constellation']) }}
 >
-    <canvas id="constellation-canvas" class="absolute inset-0 block w-full h-full pointer-events-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+    <canvas id="constellation-canvas" class="absolute inset-0 block w-full h-full pointer-events-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></canvas>
 
     @if(isset($slot) && !empty(trim($slot)))
-        <div class="relative w-full" style="position: relative; z-index: 10;">
+        <div class="constellation-slot-wrapper relative w-full" style="position: relative; z-index: 10;">
             {{ $slot }}
         </div>
     @else
         {{-- Overlay judul default --}}
-        <div class="relative z-10 flex h-full min-h-[400px] flex-col items-center justify-center text-center px-4 pointer-events-none mix-blend-difference text-white">
+        <div class="constellation-slot-wrapper relative z-10 flex h-full min-h-[400px] flex-col items-center justify-center text-center px-4 pointer-events-none mix-blend-difference text-white">
             <h1 class="font-mono text-6xl md:text-9xl font-black tracking-tighter uppercase leading-none">
                 Constellation
             </h1>
@@ -103,14 +103,22 @@
     function handleResize() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const parent = canvas.parentElement || document.body;
-        width = parent.clientWidth || window.innerWidth;
-        // Pastikan tinggi canvas menutupi seluruh tinggi konten scroll parent
-        height = Math.max(parent.clientHeight, parent.scrollHeight, parent.offsetHeight || 0, window.innerHeight);
-        
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        const slotWrapper = parent.querySelector('.constellation-slot-wrapper') || parent;
+
+        // Reset inline CSS height/width agar tidak mengunci tinggi parent saat transisi layar mobile -> desktop
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+
+        // Ukur dimensi aktual dari elemen konten
+        const rect = slotWrapper.getBoundingClientRect();
+        width = Math.round(rect.width || parent.clientWidth || window.innerWidth);
+        height = Math.round(rect.height || slotWrapper.offsetHeight || parent.clientHeight || window.innerHeight);
+
+        if (width <= 0 || height <= 0) return;
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
         initNodes();
@@ -140,8 +148,9 @@
     setTimeout(handleResize, 1800);
 
     if (window.ResizeObserver && canvas.parentElement) {
+        const slotWrapper = canvas.parentElement.querySelector('.constellation-slot-wrapper') || canvas.parentElement;
         const ro = new ResizeObserver(() => handleResize());
-        ro.observe(canvas.parentElement);
+        ro.observe(slotWrapper);
     }
 
     let lastTime = performance.now();

@@ -761,20 +761,88 @@
             border-radius: 12px;
             font-size: 0.88rem;
             font-family: inherit;
-            background: var(--input-bg);
-            color: var(--text-primary);
+            background: rgba(30, 41, 59, 0.75);
+            color: #ffffff;
+            caret-color: #38bdf8;
             outline: none;
-            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .form-input::placeholder {
+            color: #64748b;
+            opacity: 1;
+        }
+
+        .form-input:hover {
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .form-input:focus {
             border-color: var(--input-focus-border);
             box-shadow: 0 0 0 4px var(--input-focus-glow);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 41, 59, 0.95);
+            color: #ffffff;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BROWSER AUTOFILL & FILLED INPUT CONTRAST FIX
+           ═══════════════════════════════════════════════════════════ */
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover, 
+        .form-input:-webkit-autofill:focus, 
+        .form-input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            color: #ffffff !important;
+            caret-color: #38bdf8 !important;
+            transition: background-color 50000s ease-in-out 0s;
+            border-color: var(--input-border) !important;
+            font-size: 0.88rem !important;
+            font-family: inherit !important;
+        }
+
+        .form-input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px #1e293b inset, 0 0 0 4px var(--input-focus-glow) !important;
+            border-color: var(--input-focus-border) !important;
+        }
+
+        /* Light Mode Input Overrides */
+        [data-theme="light"] .form-input {
+            background: #ffffff;
+            color: #0f172a;
+            border-color: #cbd5e1;
+            caret-color: oklch(58.6% 0.253 17.585);
+        }
+
+        [data-theme="light"] .form-input::placeholder {
+            color: #94a3b8;
+        }
+
+        [data-theme="light"] .form-input:hover {
+            border-color: #94a3b8;
         }
 
         [data-theme="light"] .form-input:focus {
             background: #ffffff;
+            color: #0f172a;
+            border-color: oklch(58.6% 0.253 17.585);
+            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.18);
+        }
+
+        [data-theme="light"] .form-input:-webkit-autofill,
+        [data-theme="light"] .form-input:-webkit-autofill:hover, 
+        [data-theme="light"] .form-input:-webkit-autofill:focus, 
+        [data-theme="light"] .form-input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+            -webkit-text-fill-color: #0f172a !important;
+            color: #0f172a !important;
+            caret-color: oklch(58.6% 0.253 17.585) !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        [data-theme="light"] .form-input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 4px rgba(225, 29, 72, 0.18) !important;
+            border-color: oklch(58.6% 0.253 17.585) !important;
         }
 
         .form-input:focus + .input-icon-left,

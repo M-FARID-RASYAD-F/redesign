@@ -4677,3 +4677,37 @@ a:hover {
   text-shadow: 0 0 20px oklch(58.6% 0.253 17.585 / 0.6);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL FORM INPUT & AUTOFILL CONTRAST FIX
+   ═══════════════════════════════════════════════════════════ */
+.form-input,
+.ppdb-form-input,
+.story-input,
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"] {
+  caret-color: #38bdf8;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  caret-color: #38bdf8 !important;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
+[data-theme="light"] input:-webkit-autofill,
+[data-theme="light"] input:-webkit-autofill:hover, 
+[data-theme="light"] input:-webkit-autofill:focus, 
+[data-theme="light"] input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  color: #0f172a !important;
+  caret-color: oklch(58.6% 0.253 17.585) !important;
+}
+

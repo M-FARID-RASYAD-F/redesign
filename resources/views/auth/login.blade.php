@@ -1401,6 +1401,610 @@
         [data-theme="light"] .swal-logout-popup .swal2-timer-progress-bar.swal-logout-progress {
             background: linear-gradient(90deg, oklch(58.6% 0.253 17.585) 0%, #fb7185 50%, #f43f5e 100%) !important;
         }
+
+        /* ═══════════════════════════════════════════════════════════
+           ONLOAD BRAND INTRO PRELOADER & ENTRANCE ANIMATION SYSTEM
+           ═══════════════════════════════════════════════════════════ */
+
+        /* 1. Ambient Background Glow Orbs */
+        .bg-ambient-light {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(85px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            animation: ambientFadeIn 1.2s ease-out 0.15s forwards;
+        }
+
+        .light-top-left {
+            width: 380px;
+            height: 380px;
+            top: -60px;
+            left: -60px;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.22) 0%, transparent 70%);
+        }
+
+        .light-bottom-right {
+            width: 440px;
+            height: 440px;
+            bottom: -70px;
+            right: -70px;
+            background: radial-gradient(circle, rgba(0, 119, 182, 0.28) 0%, transparent 70%);
+        }
+
+        [data-theme="light"] .light-top-left {
+            background: radial-gradient(circle, oklch(58.6% 0.253 17.585 / 0.25) 0%, transparent 70%);
+        }
+
+        [data-theme="light"] .light-bottom-right {
+            background: radial-gradient(circle, oklch(48% 0.22 17 / 0.3) 0%, transparent 70%);
+        }
+
+        @keyframes ambientFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 0.85;
+                transform: scale(1);
+            }
+        }
+
+        /* 2. Brand Intro Preloader (Glassmorphism Dual-Ring Orbit Spinner) */
+        .login-page-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999999;
+            background: rgba(0, 21, 41, 0.88);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s;
+            cursor: pointer;
+            user-select: none;
+            /* Fallback otomatis jika JavaScript dimatikan di browser */
+            animation: fallbackAutoDismiss 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+        }
+
+        [data-theme="light"] .login-page-loader {
+            background: oklch(27.1% 0.105 12.094 / 0.88);
+        }
+
+        .login-page-loader.loader-dismissed {
+            opacity: 0 !important;
+            transform: scale(1.08) !important;
+            filter: blur(12px) !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            animation: none !important;
+        }
+
+        @keyframes fallbackAutoDismiss {
+            to {
+                opacity: 0;
+                transform: scale(1.08);
+                filter: blur(12px);
+                visibility: hidden;
+                pointer-events: none;
+            }
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            max-width: 420px;
+            animation: loaderContentEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes loaderContentEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.88) translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .loader-emblem-wrap {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.35rem;
+        }
+
+        .loader-glow-orb {
+            position: absolute;
+            inset: -18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.5) 0%, rgba(0, 119, 182, 0.25) 50%, transparent 75%);
+            filter: blur(18px);
+            animation: loaderOrbPulse 1.8s ease-in-out infinite alternate;
+        }
+
+        [data-theme="light"] .loader-glow-orb {
+            background: radial-gradient(circle, oklch(58.6% 0.253 17.585 / 0.55) 0%, oklch(48% 0.22 17 / 0.28) 50%, transparent 75%);
+        }
+
+        @keyframes loaderOrbPulse {
+            0% { transform: scale(0.85); opacity: 0.6; }
+            100% { transform: scale(1.22); opacity: 1; }
+        }
+
+        .loader-orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2.5px solid transparent;
+            pointer-events: none;
+        }
+
+        .loader-orbit-ring.ring-outer {
+            width: 106px;
+            height: 106px;
+            border-top-color: #38bdf8;
+            border-right-color: #00b4d8;
+            border-bottom-color: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+            animation: orbitClockwise 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        [data-theme="light"] .loader-orbit-ring.ring-outer {
+            border-top-color: oklch(58.6% 0.253 17.585);
+            border-right-color: oklch(65% 0.26 18);
+            border-bottom-color: oklch(58.6% 0.253 17.585 / 0.2);
+            box-shadow: 0 0 18px oklch(58.6% 0.253 17.585 / 0.55);
+        }
+
+        .loader-orbit-ring.ring-inner {
+            width: 74px;
+            height: 74px;
+            border: 2px solid transparent;
+            border-bottom-color: #818cf8;
+            border-left-color: #6366f1;
+            border-top-color: rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+            animation: orbitCounterClockwise 1.05s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        [data-theme="light"] .loader-orbit-ring.ring-inner {
+            border-bottom-color: #fb7185;
+            border-left-color: #f43f5e;
+            border-top-color: rgba(244, 63, 94, 0.2);
+            box-shadow: 0 0 14px rgba(244, 63, 94, 0.48);
+        }
+
+        .loader-logo-card {
+            position: relative;
+            z-index: 5;
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 180, 216, 0.4);
+            animation: loaderLogoFloat 1.8s ease-in-out infinite alternate;
+        }
+
+        [data-theme="light"] .loader-logo-card {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px oklch(58.6% 0.253 17.585 / 0.45);
+        }
+
+        @keyframes loaderLogoFloat {
+            0% { transform: translateY(0) scale(0.98); }
+            100% { transform: translateY(-3px) scale(1.03); }
+        }
+
+        .loader-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .loader-text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .loader-title {
+            font-size: 1.18rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #bae6fd 60%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="light"] .loader-title {
+            background: linear-gradient(135deg, #ffffff 0%, #ffe4e6 60%, oklch(58.6% 0.253 17.585) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .loader-subtitle {
+            font-size: 0.84rem;
+            color: #94a3b8;
+            letter-spacing: 0.02em;
+            margin: 0;
+        }
+
+        [data-theme="light"] .loader-subtitle {
+            color: #fecdd3;
+        }
+
+        .loader-progress-wrap {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-top: 1.35rem;
+            position: relative;
+        }
+
+        .loader-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00B4D8 0%, #38bdf8 50%, #818cf8 100%);
+            border-radius: 9999px;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+            animation: loaderProgressFill 1.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+        }
+
+        [data-theme="light"] .loader-progress-bar {
+            background: linear-gradient(90deg, oklch(58.6% 0.253 17.585) 0%, #fb7185 50%, #f43f5e 100%);
+            box-shadow: 0 0 12px oklch(58.6% 0.253 17.585 / 0.7);
+        }
+
+        @keyframes loaderProgressFill {
+            0% { width: 0%; }
+            40% { width: 45%; }
+            75% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+        .loader-skip-btn {
+            margin-top: 1.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.32rem 0.9rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(8px);
+            font-family: inherit;
+        }
+
+        .loader-skip-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        [data-theme="light"] .loader-skip-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: oklch(58.6% 0.253 17.585 / 0.35);
+            color: #ffe4e6;
+        }
+
+        /* 3. Main Container Card Entrance & Shimmer Beam */
+        .container {
+            animation: cardOnloadEntrance 0.82s cubic-bezier(0.16, 1, 0.3, 1) 1.35s backwards;
+        }
+
+        .container::after {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -150%;
+            width: 80%;
+            height: 140%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 40%, rgba(56, 189, 248, 0.22) 50%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            z-index: 8;
+            animation: cardBeamSweep 1.3s cubic-bezier(0.16, 1, 0.3, 1) 1.55s backwards;
+        }
+
+        [data-theme="light"] .container::after {
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 40%, oklch(58.6% 0.253 17.585 / 0.25) 50%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+        }
+
+        @keyframes cardOnloadEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(32px) scale(0.95);
+                filter: blur(10px);
+            }
+            60% {
+                opacity: 0.98;
+                transform: translateY(-4px) scale(1.008);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes cardBeamSweep {
+            0% {
+                left: -150%;
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                left: 220%;
+                opacity: 0;
+            }
+        }
+
+        /* 4. Top Action Bar Entrance */
+        .top-action-bar {
+            animation: topBarOnload 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.42s backwards;
+        }
+
+        @keyframes topBarOnload {
+            0% {
+                opacity: 0;
+                transform: translateY(-26px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 5. Cascading Elements Keyframes */
+        @keyframes onloadItemSpring {
+            0% {
+                opacity: 0;
+                transform: translateY(14px) scale(0.92);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(-2px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes onloadItemSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes onloadBtnGlowPop {
+            0% {
+                opacity: 0;
+                transform: translateY(14px) scale(0.9);
+                box-shadow: 0 0 0 rgba(0, 180, 216, 0);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(-2px) scale(1.04);
+                box-shadow: 0 8px 25px var(--primary-btn-shadow);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                box-shadow: 0 4px 14px var(--primary-btn-shadow);
+            }
+        }
+
+        @keyframes onloadIconPop {
+            0% {
+                opacity: 0;
+                transform: translateY(12px) scale(0.7);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(-2px) scale(1.15);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Form Staggered Entrance Elements */
+        .brand-badge {
+            animation: onloadItemSpring 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 1.50s backwards;
+        }
+
+        .title {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.58s backwards;
+        }
+
+        .subtitle-text {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.66s backwards;
+        }
+
+        .alert-box {
+            animation: onloadItemSpring 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.70s backwards;
+        }
+
+        form .input-field {
+            animation: onloadItemSlide 0.52s cubic-bezier(0.16, 1, 0.3, 1) 1.74s backwards;
+        }
+
+        form .input-field ~ .input-field {
+            animation-delay: 1.82s;
+        }
+
+        form .input-field ~ .input-field ~ .input-field {
+            animation-delay: 1.90s;
+        }
+
+        form .input-field ~ .input-field ~ .input-field ~ .input-field {
+            animation-delay: 1.98s;
+        }
+
+        .form-meta-row {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.90s backwards;
+        }
+
+        form .btn {
+            animation: onloadBtnGlowPop 0.58s cubic-bezier(0.34, 1.56, 0.64, 1) 1.98s backwards;
+        }
+
+        .mobile-switch-text {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.04s backwards;
+        }
+
+        .social-text {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.08s backwards;
+        }
+
+        .social-media .social-icon:nth-child(1) {
+            animation: onloadIconPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2.12s backwards;
+        }
+
+        .social-media .social-icon:nth-child(2) {
+            animation: onloadIconPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2.17s backwards;
+        }
+
+        .social-media .social-icon:nth-child(3) {
+            animation: onloadIconPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2.22s backwards;
+        }
+
+        .social-media .social-icon:nth-child(4) {
+            animation: onloadIconPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2.27s backwards;
+        }
+
+        /* Side Panel Staggered Entrance */
+        .panel .panel-logo {
+            animation: onloadItemSpring 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.58s backwards;
+        }
+
+        .panel h3 {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.68s backwards;
+        }
+
+        .panel p {
+            animation: onloadItemSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.76s backwards;
+        }
+
+        .panel .btn.transparent {
+            animation: onloadItemSpring 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 1.86s backwards;
+        }
+
+        /* Instant Skip Intro Trigger */
+        .skip-intro .container,
+        .skip-intro .container::after,
+        .skip-intro .top-action-bar,
+        .skip-intro .brand-badge,
+        .skip-intro .title,
+        .skip-intro .subtitle-text,
+        .skip-intro .alert-box,
+        .skip-intro .input-field,
+        .skip-intro .form-meta-row,
+        .skip-intro form .btn,
+        .skip-intro .mobile-switch-text,
+        .skip-intro .social-text,
+        .skip-intro .social-icon,
+        .skip-intro .panel-logo,
+        .skip-intro .panel h3,
+        .skip-intro .panel p,
+        .skip-intro .panel .btn.transparent {
+            animation-delay: 0s !important;
+        }
+
+        /* 6. Post-Onload Cleanup State (After 2.6s) */
+        .onload-done .container,
+        .onload-done .container::after,
+        .onload-done .top-action-bar,
+        .onload-done .brand-badge,
+        .onload-done .title,
+        .onload-done .subtitle-text,
+        .onload-done .alert-box,
+        .onload-done .input-field,
+        .onload-done .form-meta-row,
+        .onload-done form .btn,
+        .onload-done .mobile-switch-text,
+        .onload-done .social-text,
+        .onload-done .social-icon,
+        .onload-done .panel-logo,
+        .onload-done .panel h3,
+        .onload-done .panel p,
+        .onload-done .panel .btn.transparent {
+            animation: none !important;
+        }
+
+        /* 7. Accessibility: Prefers-Reduced-Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .loader-orbit-ring,
+            .loader-glow-orb,
+            .loader-logo-card,
+            .container::after {
+                animation: none !important;
+            }
+            .container,
+            .top-action-bar,
+            .brand-badge,
+            .title,
+            .subtitle-text,
+            .alert-box,
+            .input-field,
+            .form-meta-row,
+            form .btn,
+            .mobile-switch-text,
+            .social-text,
+            .social-icon,
+            .panel-logo,
+            .panel h3,
+            .panel p,
+            .panel .btn.transparent {
+                animation: none !important;
+                transition: opacity 0.3s ease !important;
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1411,6 +2015,41 @@
             document.documentElement.setAttribute('data-theme', savedTheme);
         })();
     </script>
+
+    {{-- Onload Brand Intro Preloader (Glassmorphism Dual-Ring Orbit Spinner) --}}
+    <div id="loginPageLoader" class="login-page-loader" aria-live="polite" title="Klik untuk langsung masuk">
+        <div class="loader-content">
+            <div class="loader-emblem-wrap">
+                <div class="loader-glow-orb"></div>
+                <div class="loader-orbit-ring ring-outer"></div>
+                <div class="loader-orbit-ring ring-inner"></div>
+                <div class="loader-logo-card">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="loader-logo-img">
+                </div>
+            </div>
+            
+            <div class="loader-text-group">
+                <h1 class="loader-title">PKBM TAHFIZH AT-TAMAM</h1>
+                <p class="loader-subtitle">Portal Pendidik &amp; Staf</p>
+            </div>
+
+            <div class="loader-progress-wrap">
+                <div class="loader-progress-bar"></div>
+            </div>
+
+            <button type="button" class="loader-skip-btn" id="loaderSkipBtn" aria-label="Lewati transisi pembuka">
+                <span>Lewati</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="13 17 18 12 13 7"></polyline>
+                    <polyline points="6 17 11 12 6 7"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    {{-- Background Ambient Decorative Glow Lights --}}
+    <div class="bg-ambient-light light-top-left" aria-hidden="true"></div>
+    <div class="bg-ambient-light light-bottom-right" aria-hidden="true"></div>
 
     {{-- Top Floating Navigation Bar --}}
     <div class="top-action-bar">
@@ -1513,7 +2152,7 @@
                             </svg>
                         </a>
                         {{-- Facebook --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Facebook" aria-label="Facebook">
+                        <a href="https://www.facebook.com/groups/309658054507585" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" fill="#1877F2">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
@@ -1624,7 +2263,7 @@
                             </svg>
                         </a>
                         {{-- Facebook --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Facebook" aria-label="Facebook">
+                        <a href="https://www.facebook.com/groups/309658054507585" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" fill="#1877F2">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
@@ -1721,6 +2360,49 @@
          ═══════════════════════════════════════════════════════════ --}}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 0. Onload Brand Intro Preloader Dismissal & Smooth Transition
+            const pageLoader = document.getElementById('loginPageLoader');
+            const skipBtn = document.getElementById('loaderSkipBtn');
+
+            if (pageLoader) {
+                let isDismissed = false;
+                const dismissLoader = (instant = false) => {
+                    if (isDismissed) return;
+                    isDismissed = true;
+                    pageLoader.classList.add('loader-dismissed');
+                    if (instant) {
+                        document.body.classList.add('skip-intro');
+                    }
+                    setTimeout(() => {
+                        pageLoader.style.display = 'none';
+                    }, 550);
+                };
+
+                // Biarkan transisi pembuka tampil selama 1.5 detik agar terlihat jelas & dinikmati pengguna
+                const introDuration = 1500;
+                setTimeout(() => {
+                    dismissLoader(false);
+                }, introDuration);
+
+                // Tombol "Lewati" untuk pengguna yang ingin langsung masuk
+                if (skipBtn) {
+                    skipBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        dismissLoader(true);
+                    });
+                }
+
+                // Klik pada overlay preloader juga mempercepat masuk
+                pageLoader.addEventListener('click', () => {
+                    dismissLoader(true);
+                });
+            }
+
+            // Hentikan animasi onload setelah 2.6 detik agar tidak mengganggu interaksi form switch
+            setTimeout(() => {
+                document.body.classList.add('onload-done');
+            }, 2600);
+
             const container = document.getElementById('authContainer');
             const signUpBtn = document.getElementById('sign-up-btn');
             const signInBtn = document.getElementById('sign-in-btn');

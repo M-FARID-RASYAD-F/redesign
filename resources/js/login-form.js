@@ -1,87 +1,81 @@
 // resources/js/login-form.js
+// Handles 21st @appvibed01/components/auth-switch animated sliding container
+
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-auth-container]').forEach(initAuthCard);
+    const container = document.getElementById('authContainer') || document.querySelector('.container[id*="auth"], [data-auth-container]');
+    if (container) {
+        initAuthSwitch(container);
+    }
 });
 
-export function initAuthCard(container) {
+export function initAuthSwitch(container) {
     if (!container) return;
 
-    const mobileTabsWrapper = container.querySelector('[data-mobile-tabs]');
-    const mobileTabBtns = container.querySelectorAll('[data-mobile-tab]');
-    const switchTriggers = container.querySelectorAll('[data-switch-trigger]');
+    const signUpBtn = container.querySelector('#sign-up-btn') || container.querySelector('[data-switch-action="signup"]');
+    const signInBtn = container.querySelector('#sign-in-btn') || container.querySelector('[data-switch-action="signin"]');
 
-    // Ready onload state removal after entrance animation completes
-    setTimeout(() => {
-        container.classList.add('is-animated-ready');
-    }, 900);
-
-    function setAuthMode(mode) {
-        const isReg = mode === 'register';
-
-        container.classList.add('is-animated-ready');
-        container.classList.toggle('is-register-active', isReg);
-        container.setAttribute('data-current-tab', mode);
-
-        if (mobileTabsWrapper) {
-            mobileTabsWrapper.setAttribute('data-active-tab', mode);
+    function setSignUpMode(isSignUp) {
+        if (isSignUp) {
+            container.classList.add('sign-up-mode');
+        } else {
+            container.classList.remove('sign-up-mode');
         }
 
-        mobileTabBtns.forEach(btn => {
-            btn.classList.toggle('is-active', btn.getAttribute('data-mobile-tab') === mode);
-        });
-
-        // Focus the first input inside the active slot
-        setTimeout(() => {
-            const activeSlot = isReg ? container.querySelector('.sign-up-slot') : container.querySelector('.sign-in-slot');
-            if (activeSlot) {
-                const firstInput = activeSlot.querySelector('input:not([type="hidden"])');
-                if (firstInput) {
-                    firstInput.focus();
-                }
-            }
-        }, 350);
-
-        // Update URL parameter without reload
+        // Sync browser URL history
         if (window.history && window.history.replaceState) {
             const url = new URL(window.location);
-            url.searchParams.set('tab', mode);
+            url.searchParams.set('tab', isSignUp ? 'register' : 'login');
             window.history.replaceState({}, '', url);
         }
+
+        // Auto-focus active input
+        setTimeout(() => {
+            const activeForm = isSignUp 
+                ? container.querySelector('.sign-up-form') 
+                : container.querySelector('.sign-in-form');
+            if (activeForm) {
+                const firstInput = activeForm.querySelector('input:not([type="hidden"])');
+                if (firstInput) firstInput.focus();
+            }
+        }, 350);
     }
 
-    // Switch button click triggers
-    switchTriggers.forEach(btn => {
+    if (signUpBtn) {
+        signUpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setSignUpMode(true);
+        });
+    }
+
+    if (signInBtn) {
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setSignUpMode(false);
+        });
+    }
+
+    container.querySelectorAll('[data-switch-action]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetMode = btn.getAttribute('data-switch-trigger');
-            setAuthMode(targetMode);
+            const action = btn.getAttribute('data-switch-action');
+            setSignUpMode(action === 'signup');
         });
     });
 
-    // Mobile segmented tab buttons
-    mobileTabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetMode = btn.getAttribute('data-mobile-tab');
-            setAuthMode(targetMode);
-        });
-    });
-
-    // Show/Hide Password Toggle Logic
-    container.querySelectorAll('[data-password-toggle]').forEach(toggleBtn => {
+    // Password Visibility Toggle
+    container.querySelectorAll('[data-toggle-password]').forEach(toggleBtn => {
         toggleBtn.addEventListener('click', () => {
-            const inputWrap = toggleBtn.closest('.input-wrap');
-            if (!inputWrap) return;
+            const targetId = toggleBtn.getAttribute('data-toggle-password');
+            const input = document.getElementById(targetId) || toggleBtn.closest('.input-field').querySelector('input[type="password"], input[type="text"]');
+            const icon = toggleBtn.querySelector('.eye-icon');
+            if (!input) return;
 
-            const passwordInput = inputWrap.querySelector('[data-password-input]') || inputWrap.querySelector('input[type="password"], input[type="text"]');
-            const eyeIcon = toggleBtn.querySelector('[data-eye-icon]');
-            if (!passwordInput) return;
-
-            const isCurrentlyPassword = passwordInput.type === 'password';
-            passwordInput.type = isCurrentlyPassword ? 'text' : 'password';
-            if (eyeIcon) {
-                eyeIcon.textContent = isCurrentlyPassword ? '🙈' : '👁️';
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            if (icon) {
+                icon.textContent = isPassword ? '🙈' : '👁️';
             }
-            toggleBtn.setAttribute('aria-label', isCurrentlyPassword ? 'Sembunyikan kata sandi' : 'Lihat kata sandi');
+            toggleBtn.setAttribute('aria-label', isPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
         });
     });
 }

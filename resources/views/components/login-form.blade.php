@@ -52,7 +52,7 @@
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                     </i>
-                    <input type="email" name="email" value="{{ old('form_type') === 'register' ? '' : $email }}" placeholder="Email" required autofocus autocomplete="username" />
+                    <input type="email" name="email" value="{{ old('form_type') === 'register' ? '' : $email }}" placeholder="Email" required autofocus autocomplete="email" spellcheck="false" />
                 </div>
 
                 <div class="input-field">
@@ -147,7 +147,7 @@
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                     </i>
-                    <input type="email" name="email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="Email" required autocomplete="email" />
+                    <input type="email" name="email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="Email" required autocomplete="email" spellcheck="false" />
                 </div>
 
                 <div class="input-field">

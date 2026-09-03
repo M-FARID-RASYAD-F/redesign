@@ -16,54 +16,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --circle-gradient: linear-gradient(-45deg, #667eea 0%, #764ba2 100%);
-            --card-bg: #ffffff;
-            --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
-            --title-color: #333333;
-            --input-bg: #f0f0f0;
-            --input-hover-bg: #e8e8e8;
-            --input-text: #333333;
-            --input-placeholder: #888888;
-            --input-icon: #667eea;
-            --primary-btn: #667eea;
-            --primary-btn-hover: #5568d3;
-            --primary-btn-shadow: rgba(102, 126, 234, 0.45);
-            --social-border: #e2e8f0;
-            --social-color: #667eea;
-            --social-hover-border: #764ba2;
-            --social-text: #666666;
+        :root, [data-theme="dark"] {
+            --bg-gradient: radial-gradient(circle at 12% 18%, rgba(0, 180, 216, 0.18) 0%, transparent 45%),
+                           radial-gradient(circle at 88% 82%, rgba(0, 33, 71, 0.85) 0%, transparent 55%),
+                           #001529;
+            --circle-gradient: linear-gradient(-45deg, #00B4D8 0%, #0077B6 50%, #002147 100%);
+            --card-bg: #002147;
+            --card-border: rgba(0, 180, 216, 0.35);
+            --card-shadow: 0 25px 70px rgba(0, 12, 28, 0.75), 0 0 45px rgba(0, 180, 216, 0.22);
+            --title-color: #ffffff;
+            --input-bg: rgba(0, 21, 41, 0.82);
+            --input-hover-bg: rgba(0, 33, 71, 0.95);
+            --input-border: rgba(0, 180, 216, 0.28);
+            --input-text: #ffffff;
+            --input-placeholder: #94a3b8;
+            --input-icon: #00B4D8;
+            --primary-btn: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+            --primary-btn-hover: linear-gradient(135deg, #38bdf8 0%, #0096c7 100%);
+            --primary-btn-shadow: rgba(0, 180, 216, 0.45);
+            --social-border: rgba(0, 180, 216, 0.32);
+            --social-color: #00B4D8;
+            --social-hover-border: #38bdf8;
+            --social-text: #cbd5e1;
             --panel-text: #ffffff;
-            --panel-desc: rgba(255, 255, 255, 0.9);
-            --nav-btn-bg: rgba(255, 255, 255, 0.2);
-            --nav-btn-border: rgba(255, 255, 255, 0.4);
+            --panel-desc: rgba(255, 255, 255, 0.92);
+            --nav-btn-bg: rgba(0, 33, 71, 0.85);
+            --nav-btn-border: rgba(0, 180, 216, 0.35);
             --nav-btn-text: #ffffff;
+            --badge-bg: rgba(0, 180, 216, 0.12);
+            --badge-border: rgba(0, 180, 216, 0.35);
+            --badge-text: #38bdf8;
         }
 
-        [data-theme="dark"] {
-            --bg-gradient: linear-gradient(135deg, #090e1a 0%, #171d34 100%);
-            --circle-gradient: linear-gradient(-45deg, #4f46e5 0%, #7c3aed 100%);
-            --card-bg: #0f172a;
-            --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
-            --title-color: #f8fafc;
-            --input-bg: #1e293b;
-            --input-hover-bg: #283548;
-            --input-text: #f8fafc;
-            --input-placeholder: #64748b;
-            --input-icon: #818cf8;
-            --primary-btn: #6366f1;
-            --primary-btn-hover: #4f46e5;
-            --primary-btn-shadow: rgba(99, 102, 241, 0.5);
-            --social-border: #334155;
-            --social-color: #818cf8;
-            --social-hover-border: #a855f7;
-            --social-text: #94a3b8;
+        [data-theme="light"] {
+            /* White / Light Mode: Deep Maroon & Crimson Rose ☀️ (Sesuai btnswitch.md & Admin Dashboard) */
+            --bg-gradient: radial-gradient(circle at 12% 18%, oklch(58.6% 0.253 17.585 / 0.22) 0%, transparent 45%),
+                           radial-gradient(circle at 88% 82%, oklch(27.1% 0.105 12.094 / 0.85) 0%, transparent 50%),
+                           oklch(41% 0.159 10.272);
+            --circle-gradient: linear-gradient(-45deg, oklch(58.6% 0.253 17.585) 0%, oklch(48% 0.22 17) 50%, oklch(27.1% 0.105 12.094) 100%);
+            --card-bg: oklch(27.1% 0.105 12.094);
+            --card-border: oklch(58.6% 0.253 17.585 / 0.45);
+            --card-shadow: 0 25px 70px rgba(45, 10, 15, 0.65), 0 0 40px oklch(58.6% 0.253 17.585 / 0.25);
+            --title-color: #ffffff;
+            --input-bg: oklch(20% 0.08 11 / 0.85);
+            --input-hover-bg: oklch(24% 0.095 11.5 / 0.95);
+            --input-border: oklch(58.6% 0.253 17.585 / 0.38);
+            --input-text: #ffffff;
+            --input-placeholder: oklch(75% 0.18 18 / 0.65);
+            --input-icon: oklch(58.6% 0.253 17.585);
+            --primary-btn: linear-gradient(135deg, oklch(58.6% 0.253 17.585) 0%, oklch(48% 0.22 17) 100%);
+            --primary-btn-hover: linear-gradient(135deg, oklch(65% 0.26 18) 0%, oklch(55% 0.24 17) 100%);
+            --primary-btn-shadow: oklch(58.6% 0.253 17.585 / 0.48);
+            --social-border: oklch(58.6% 0.253 17.585 / 0.38);
+            --social-color: oklch(58.6% 0.253 17.585);
+            --social-hover-border: oklch(65% 0.26 18);
+            --social-text: #ffe4e6;
             --panel-text: #ffffff;
-            --panel-desc: rgba(255, 255, 255, 0.88);
-            --nav-btn-bg: rgba(15, 23, 42, 0.7);
-            --nav-btn-border: rgba(255, 255, 255, 0.15);
-            --nav-btn-text: #f8fafc;
+            --panel-desc: #ffe4e6;
+            --nav-btn-bg: oklch(27.1% 0.105 12.094 / 0.85);
+            --nav-btn-border: oklch(58.6% 0.253 17.585 / 0.4);
+            --nav-btn-text: #ffffff;
+            --badge-bg: oklch(58.6% 0.253 17.585 / 0.18);
+            --badge-border: oklch(58.6% 0.253 17.585 / 0.45);
+            --badge-text: #ffe4e6;
         }
 
         * {
@@ -168,10 +183,11 @@
             max-width: 950px;
             min-height: 620px;
             background: var(--card-bg);
-            border-radius: 24px;
+            border: 1.5px solid var(--card-border);
+            border-radius: 28px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             margin: auto;
         }
 
@@ -221,23 +237,29 @@
         }
 
         .brand-badge {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.85rem;
+            padding: 0.35rem 0.95rem;
+            border-radius: 9999px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .brand-badge img {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .brand-badge span {
             font-size: 0.78rem;
             font-weight: 700;
-            color: var(--social-text);
+            color: var(--badge-text);
             letter-spacing: 0.04em;
             text-transform: uppercase;
         }
@@ -271,7 +293,8 @@
             padding: 0 0.8rem 0 0.4rem;
             position: relative;
             transition: 0.3s ease;
-            border: 1px solid transparent;
+            border: 1.5px solid var(--input-border);
+            overflow: hidden;
         }
 
         .input-field.no-toggle {
@@ -280,7 +303,7 @@
 
         .input-field:focus-within {
             background-color: var(--input-hover-bg);
-            border-color: var(--primary-btn);
+            border-color: var(--input-icon);
             box-shadow: 0 0 0 3px var(--primary-btn-shadow);
         }
 
@@ -299,20 +322,57 @@
         }
 
         .input-field input {
-            background: none;
-            outline: none;
-            border: none;
+            background: transparent !important;
+            background-color: transparent !important;
+            outline: none !important;
+            border: none !important;
+            box-shadow: none !important;
             line-height: 1;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
-            color: var(--input-text);
+            color: var(--input-text) !important;
+            -webkit-text-fill-color: var(--input-text) !important;
+            caret-color: var(--input-text) !important;
             width: 100%;
+            height: 100%;
             font-family: inherit;
         }
 
         .input-field input::placeholder {
             color: var(--input-placeholder);
+            opacity: 0.75;
             font-weight: 400;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BROWSER AUTOFILL & TYPING INVISIBILITY FIX (Chrome, Edge, Safari, Firefox)
+           Mencegah background input berubah jadi putih dan teks hilang saat mengetik / autofill
+           ═══════════════════════════════════════════════════════════ */
+        .input-field input:-webkit-autofill,
+        .input-field input:-webkit-autofill:hover, 
+        .input-field input:-webkit-autofill:focus, 
+        .input-field input:-webkit-autofill:active,
+        .input-field input:-internal-autofill-selected {
+            -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+            box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+            -webkit-text-fill-color: var(--input-text) !important;
+            color: var(--input-text) !important;
+            caret-color: var(--input-text) !important;
+            border-radius: 50px !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            font-family: inherit !important;
+            transition: background-color 50000s ease-in-out 0s !important;
+        }
+
+        .input-field:focus-within input:-webkit-autofill,
+        .input-field:focus-within input:-webkit-autofill:hover, 
+        .input-field:focus-within input:-webkit-autofill:focus, 
+        .input-field:focus-within input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px var(--input-hover-bg) inset !important;
+            box-shadow: 0 0 0 1000px var(--input-hover-bg) inset !important;
+            -webkit-text-fill-color: var(--input-text) !important;
+            color: var(--input-text) !important;
         }
 
         .btn-field-toggle {
@@ -354,7 +414,7 @@
         }
 
         .remember-label input {
-            accent-color: var(--primary-btn);
+            accent-color: var(--input-icon);
             width: 15px;
             height: 15px;
             cursor: pointer;
@@ -363,7 +423,7 @@
         /* Buttons */
         .btn {
             width: 160px;
-            background-color: var(--primary-btn);
+            background: var(--primary-btn);
             border: none;
             outline: none;
             height: 48px;
@@ -381,9 +441,9 @@
         }
 
         .btn:hover {
-            background-color: var(--primary-btn-hover);
+            background: var(--primary-btn-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--primary-btn-shadow);
+            box-shadow: 0 8px 24px var(--primary-btn-shadow);
         }
 
         .btn:active {
@@ -393,7 +453,7 @@
         .btn.transparent {
             margin: 0;
             background: none;
-            border: 2px solid #fff;
+            border: 2px solid #ffffff;
             width: 140px;
             height: 44px;
             font-weight: 700;
@@ -408,9 +468,14 @@
         }
 
         .btn.transparent:hover {
-            background: rgba(255, 255, 255, 0.18);
+            background: #ffffff;
+            color: #0077B6;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        [data-theme="light"] .btn.transparent:hover {
+            color: oklch(48% 0.22 17);
         }
 
         /* Social Media Section */
@@ -629,7 +694,7 @@
         }
 
         .mobile-switch-text a {
-            color: var(--primary-btn);
+            color: var(--input-icon);
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
@@ -637,6 +702,7 @@
 
         .mobile-switch-text a:hover {
             text-decoration: underline;
+            filter: brightness(1.25);
         }
 
         /* ═══════════════════════════════════════════════════════════
@@ -784,18 +850,455 @@
                 top: 1rem;
             }
         }
+
+        /* ═══════════════════════════════════════════════════════════
+           SIGN IN LOADING MODAL (GLASSMORPHISM DUAL-RING ORBIT SPINNER)
+           Identical to Logout Loading Transition
+           ═══════════════════════════════════════════════════════════ */
+        .login-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s ease, visibility 0.28s ease;
+        }
+
+        .login-modal-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .login-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 13, 30, 0.84);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: opacity 0.28s ease;
+        }
+
+        .login-modal-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+        }
+
+        .login-modal-card {
+            background: rgba(15, 23, 42, 0.96);
+            border: 1.5px solid rgba(56, 189, 248, 0.45);
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.25);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            transform: scale(0.6) translateY(25px);
+            opacity: 0;
+            filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-modal-overlay.is-active .login-modal-card {
+            animation: loginPopIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .login-modal-overlay.is-closing .login-modal-card {
+            animation: loginPopOut 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes loginPopIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6) translateY(25px);
+                filter: blur(8px);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.05) translateY(-3px);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes loginPopOut {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.7) translateY(15px);
+                filter: blur(6px);
+            }
+        }
+
+        /* Orbit Spinner Container */
+        .orbit-spinner-container {
+            position: relative;
+            width: 104px;
+            height: 104px;
+            margin: 0 auto 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-ambient-glow {
+            position: absolute;
+            inset: -16px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(99, 102, 241, 0.22) 50%, transparent 75%);
+            filter: blur(14px);
+            animation: orbitAmbientPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbitAmbientPulse {
+            0% { transform: scale(0.88); opacity: 0.6; }
+            100% { transform: scale(1.18); opacity: 1; }
+        }
+
+        /* Outer Ring (Cyan Orbit) */
+        .orbit-ring-outer {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2.5px solid transparent;
+            border-top-color: #38bdf8;
+            border-right-color: #0284c7;
+            border-bottom-color: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+            animation: orbitClockwise 1.35s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        .orbit-satellite-outer {
+            position: absolute;
+            top: 5px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 10px 2.5px #38bdf8;
+        }
+
+        /* Inner Ring (Indigo/Purple Orbit) */
+        .orbit-ring-inner {
+            position: absolute;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 2.5px solid transparent;
+            border-top-color: #818cf8;
+            border-left-color: #6366f1;
+            border-bottom-color: rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+            animation: orbitCounterClockwise 1.05s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        .orbit-satellite-inner {
+            position: absolute;
+            bottom: 3px;
+            left: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #818cf8;
+            box-shadow: 0 0 9px 2px #818cf8;
+        }
+
+        /* Core Glass Center */
+        .orbit-core {
+            position: relative;
+            z-index: 5;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            animation: corePulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes orbitClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes orbitCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        @keyframes corePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(56, 189, 248, 0.45); }
+        }
+
+        .orbit-loading-content {
+            width: 100%;
+        }
+
+        .orbit-loading-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.45rem;
+            background: linear-gradient(135deg, #ffffff 0%, #bae6fd 60%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.01em;
+        }
+
+        .orbit-loading-desc {
+            font-size: 0.86rem;
+            color: #94a3b8;
+            line-height: 1.55;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Progress Track & Animated Bar */
+        .orbit-progress-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .orbit-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8 0%, #6366f1 50%, #10b981 100%);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            border-radius: 9999px;
+        }
+
+        .login-modal-overlay.is-active .orbit-progress-bar {
+            animation: orbitProgressFill 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes orbitProgressFill {
+            0% { width: 0%; }
+            40% { width: 65%; }
+            80% { width: 88%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes errorShake {
+            10%, 90% { transform: translate3d(-3px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        /* Light Theme (Deep Maroon & Crimson Rose ☀️) Overrides */
+        [data-theme="light"] .login-modal-backdrop {
+            background: rgba(45, 10, 15, 0.78);
+        }
+        [data-theme="light"] .login-modal-card {
+            background: oklch(27.1% 0.105 12.094 / 0.98);
+            border-color: oklch(58.6% 0.253 17.585 / 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 50px oklch(58.6% 0.253 17.585 / 0.35);
+        }
+        [data-theme="light"] .orbit-ambient-glow {
+            background: radial-gradient(circle, oklch(58.6% 0.253 17.585 / 0.4) 0%, oklch(48% 0.22 17 / 0.25) 50%, transparent 75%);
+        }
+        [data-theme="light"] .orbit-ring-outer {
+            border-top-color: oklch(58.6% 0.253 17.585);
+            border-right-color: oklch(65% 0.26 18);
+            border-bottom-color: oklch(58.6% 0.253 17.585 / 0.18);
+            box-shadow: 0 0 18px oklch(58.6% 0.253 17.585 / 0.55);
+        }
+        [data-theme="light"] .orbit-satellite-outer {
+            background: oklch(58.6% 0.253 17.585);
+            box-shadow: 0 0 10px 2.5px oklch(58.6% 0.253 17.585);
+        }
+        [data-theme="light"] .orbit-ring-inner {
+            border-top-color: oklch(75% 0.18 18);
+            border-left-color: oklch(65% 0.26 18);
+            border-bottom-color: oklch(58.6% 0.253 17.585 / 0.18);
+            box-shadow: 0 0 14px oklch(65% 0.26 18 / 0.45);
+        }
+        [data-theme="light"] .orbit-satellite-inner {
+            background: oklch(75% 0.18 18);
+            box-shadow: 0 0 9px 2px oklch(75% 0.18 18);
+        }
+        [data-theme="light"] .orbit-loading-title {
+            background: linear-gradient(135deg, #ffffff 0%, #ffe4e6 60%, oklch(58.6% 0.253 17.585) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="light"] .orbit-loading-desc {
+            color: #fecdd3;
+        }
+        [data-theme="light"] .orbit-core {
+            background: oklch(22% 0.09 11 / 0.95);
+            border-color: oklch(58.6% 0.253 17.585 / 0.45);
+        }
+        [data-theme="light"] .orbit-progress-bar {
+            background: linear-gradient(90deg, oklch(58.6% 0.253 17.585) 0%, #fb7185 50%, #f43f5e 100%);
+            box-shadow: 0 0 12px oklch(58.6% 0.253 17.585 / 0.65);
+        }
+
+        /* SweetAlert2 Styling */
+        .swal2-container.swal-logout-container {
+            z-index: 1000000 !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            background: rgba(15, 23, 42, 0.75) !important;
+        }
+
+        .swal2-popup.swal-logout-popup {
+            border-radius: 26px !important;
+            padding: 2.2rem 2.2rem 2rem !important;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.97) 100%) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(16, 185, 129, 0.16) !important;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            color: #ffffff !important;
+        }
+
+        .swal-logout-popup .swal2-icon.swal2-success {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.35) !important;
+            margin: 0.6rem auto 1.4rem !important;
+            width: 82px !important;
+            height: 82px !important;
+        }
+
+        .swal-logout-popup .swal2-icon.swal2-success [class^='swal2-success-line'] {
+            background-color: #10b981 !important;
+        }
+
+        .swal-logout-popup .swal2-icon.swal2-success .swal2-success-ring {
+            border-color: rgba(16, 185, 129, 0.35) !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .swal-logout-popup .swal2-icon.swal2-success [class^='swal2-circular-line'],
+        .swal-logout-popup .swal2-icon.swal2-success .swal2-success-fix {
+            background: transparent !important;
+        }
+
+        .swal-logout-title {
+            font-size: 1.45rem !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.015em !important;
+            color: #ffffff !important;
+            background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 50%, #34d399 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            margin-bottom: 0.5rem !important;
+            padding: 0 !important;
+        }
+
+        .swal-logout-msg {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .swal-logout-sub {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .swal-logout-popup .swal2-actions {
+            margin-top: 1.6rem !important;
+            gap: 0.75rem;
+        }
+
+        .swal-logout-popup .swal2-confirm.swal-logout-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 0.95rem !important;
+            border-radius: 14px !important;
+            padding: 0.72rem 2.4rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important;
+            box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4) !important;
+            cursor: pointer !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .swal-logout-popup .swal2-confirm.swal-logout-btn:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55) !important;
+        }
+
+        .swal-logout-popup .swal2-timer-progress-bar.swal-logout-progress {
+            background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%) !important;
+            height: 4px !important;
+            border-radius: 9999px !important;
+        }
+
+        [data-theme="light"] .swal2-container.swal-logout-container {
+            background: rgba(45, 10, 15, 0.75) !important;
+        }
+        [data-theme="light"] .swal2-popup.swal-logout-popup {
+            background: linear-gradient(145deg, oklch(27.1% 0.105 12.094 / 0.98) 0%, oklch(22% 0.09 11 / 0.99) 100%) !important;
+            border: 1.5px solid oklch(58.6% 0.253 17.585 / 0.45) !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px oklch(58.6% 0.253 17.585 / 0.3) !important;
+            color: #ffffff !important;
+        }
+        [data-theme="light"] .swal-logout-title {
+            background: linear-gradient(135deg, #ffffff 0%, #fecdd3 50%, oklch(58.6% 0.253 17.585) 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        [data-theme="light"] .swal-logout-msg {
+            color: #ffffff !important;
+        }
+        [data-theme="light"] .swal-logout-sub {
+            color: #ffe4e6 !important;
+        }
+        [data-theme="light"] .swal-logout-popup .swal2-confirm.swal-logout-btn {
+            background: linear-gradient(135deg, oklch(58.6% 0.253 17.585) 0%, oklch(48% 0.22 17) 100%) !important;
+            box-shadow: 0 4px 18px oklch(58.6% 0.253 17.585 / 0.45) !important;
+        }
+        [data-theme="light"] .swal-logout-popup .swal2-timer-progress-bar.swal-logout-progress {
+            background: linear-gradient(90deg, oklch(58.6% 0.253 17.585) 0%, #fb7185 50%, #f43f5e 100%) !important;
+        }
     </style>
 </head>
 <body>
     <script>
         // Set initial theme before paint to prevent flashing
         (function() {
-            const savedTheme = localStorage.getItem('auth_theme') || localStorage.getItem('site_theme');
-            if (savedTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            } else if (savedTheme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
+            const savedTheme = localStorage.getItem('auth_theme') || localStorage.getItem('site_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
         })();
     </script>
 
@@ -856,7 +1359,7 @@
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </i>
-                        <input type="email" name="email" value="{{ old('form_type') === 'register' ? '' : old('email') }}" placeholder="Email" required autofocus autocomplete="username" />
+                        <input type="email" name="email" id="login_email" value="{{ old('form_type') === 'register' ? '' : old('email') }}" placeholder="Email" required autofocus autocomplete="email" spellcheck="false" />
                     </div>
 
                     {{-- Password Field --}}
@@ -961,7 +1464,7 @@
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </i>
-                        <input type="email" name="email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="Email" required autocomplete="email" />
+                        <input type="email" name="email" id="reg_email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="Email" required autocomplete="email" spellcheck="false" />
                     </div>
 
                     {{-- Password Field --}}
@@ -1064,6 +1567,45 @@
         </div>
     </div>
 
+    {{-- Modal Loading Autentikasi (Glassmorphism Dual-Ring Orbit Spinner — Identik dengan Transisi Logout) --}}
+    <div id="loginLoadingModal" class="login-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="loginLoadingTitle">
+        <div class="login-modal-backdrop"></div>
+        <div class="login-modal-container">
+            <div class="login-modal-card">
+                <div class="orbit-spinner-container">
+                    <div class="orbit-ambient-glow"></div>
+                    
+                    {{-- Outer Clockwise Orbit Ring (Cyan) --}}
+                    <div class="orbit-ring-outer">
+                        <div class="orbit-satellite-outer"></div>
+                    </div>
+                    
+                    {{-- Inner Counter-Clockwise Orbit Ring (Purple/Indigo) --}}
+                    <div class="orbit-ring-inner">
+                        <div class="orbit-satellite-inner"></div>
+                    </div>
+                    
+                    {{-- Core Glassmorphism Center --}}
+                    <div class="orbit-core">
+                        <span>🔐</span>
+                    </div>
+                </div>
+
+                <div class="orbit-loading-content">
+                    <h3 class="orbit-loading-title" id="loginLoadingTitle">Memverifikasi Kredensial...</h3>
+                    <p class="orbit-loading-desc">Menghubungkan ke sistem & menyiapkan Dashboard Admin...</p>
+                    
+                    <div class="orbit-progress-track">
+                        <div class="orbit-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- SweetAlert2 Library --}}
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+
     {{-- ═══════════════════════════════════════════════════════════
          VANILLA JAVASCRIPT LOGIC (REPLACING REACT)
          ═══════════════════════════════════════════════════════════ --}}
@@ -1074,6 +1616,8 @@
             const signInBtn = document.getElementById('sign-in-btn');
             const themeBtn = document.getElementById('themeToggleBtn');
             const themeIcon = document.getElementById('themeIcon');
+            const signInForm = document.querySelector('form.sign-in-form');
+            const loginModal = document.getElementById('loginLoadingModal');
 
             // 1. Core Auth Switch Function
             function setSignUpMode(isSignUp) {
@@ -1152,12 +1696,12 @@
                 }
             }
 
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
             updateThemeUI(currentTheme);
 
             if (themeBtn) {
                 themeBtn.addEventListener('click', () => {
-                    const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                    const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
                     const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
                     document.documentElement.setAttribute('data-theme', nextTheme);
                     localStorage.setItem('auth_theme', nextTheme);
@@ -1170,6 +1714,140 @@
                     setTimeout(() => {
                         themeBtn.style.transform = '';
                     }, 500);
+                });
+            }
+
+            // 6. Fix Background Putih Saat Mengetik / Autofill Browser
+            document.querySelectorAll('.input-field input').forEach(input => {
+                const fixInputColor = () => {
+                    input.style.setProperty('background', 'transparent', 'important');
+                    input.style.setProperty('background-color', 'transparent', 'important');
+                    input.style.setProperty('color', 'var(--input-text)', 'important');
+                    input.style.setProperty('-webkit-text-fill-color', 'var(--input-text)', 'important');
+                };
+                input.addEventListener('input', fixInputColor);
+                input.addEventListener('focus', fixInputColor);
+                input.addEventListener('blur', fixInputColor);
+                input.addEventListener('change', fixInputColor);
+            });
+
+            // 7. SIGN IN DUAL-RING ORBIT SPINNER & SWEETALERT (SEPERTI TRANSISI LOGOUT)
+            if (signInForm && loginModal) {
+                signInForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const emailInput = signInForm.querySelector('input[name="email"]');
+                    const passwordInput = signInForm.querySelector('input[name="password"]');
+
+                    if (!emailInput.value.trim() || !passwordInput.value.trim()) {
+                        signInForm.reportValidity();
+                        return;
+                    }
+
+                    // Tampilkan Orbit Loading Modal dengan Pop-In Animation
+                    loginModal.classList.remove('is-closing');
+                    loginModal.classList.add('is-active');
+                    loginModal.setAttribute('aria-hidden', 'false');
+
+                    const formData = new FormData(signInForm);
+                    const actionUrl = signInForm.getAttribute('action') || '{{ route("login.process") }}';
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+                    const startTime = Date.now();
+                    const minLoadingDuration = 1150; // Durasi transisi agar animasi orbit dinikmati user
+
+                    fetch(actionUrl, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: formData,
+                        credentials: 'same-origin'
+                    })
+                    .then(async (response) => {
+                        const data = await response.json().catch(() => ({}));
+                        const elapsedTime = Date.now() - startTime;
+                        const remainingTime = Math.max(0, minLoadingDuration - elapsedTime);
+
+                        setTimeout(() => {
+                            // Tutup Loading Modal dengan Pop-Out Transition
+                            loginModal.classList.add('is-closing');
+                            setTimeout(() => {
+                                loginModal.classList.remove('is-active', 'is-closing');
+                                loginModal.setAttribute('aria-hidden', 'true');
+                            }, 220);
+
+                            if (response.ok && data.status === 'success') {
+                                const redirectUrl = data.redirect || '{{ route("admin.dashboard") }}';
+
+                                // Tampilkan SweetAlert2 Animasi Berhasil Masuk
+                                if (typeof Swal !== 'undefined') {
+                                    Swal.fire({
+                                        title: 'Berhasil Masuk!',
+                                        html: `
+                                            <div class="swal-logout-body">
+                                                <p class="swal-logout-msg">Autentikasi Berhasil!</p>
+                                                <p class="swal-logout-sub">Selamat datang kembali di Dashboard Admin. Membuka sesi...</p>
+                                            </div>
+                                        `,
+                                        icon: 'success',
+                                        timer: 2000,
+                                        timerProgressBar: true,
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'Buka Dashboard',
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                        customClass: {
+                                            container: 'swal-logout-container',
+                                            popup: 'swal-logout-popup',
+                                            title: 'swal-logout-title',
+                                            confirmButton: 'swal-logout-btn',
+                                            timerProgressBar: 'swal-logout-progress'
+                                        }
+                                    }).then(() => {
+                                        window.location.href = redirectUrl;
+                                    });
+                                } else {
+                                    window.location.href = redirectUrl;
+                                }
+                            } else {
+                                // Error kredensial / validasi gagal
+                                const errorMsg = data.errors?.email?.[0] || data.message || 'Email atau password yang Anda masukkan salah. Silakan periksa kembali.';
+                                
+                                let alertBox = signInForm.querySelector('.alert-box.danger');
+                                if (!alertBox) {
+                                    alertBox = document.createElement('div');
+                                    alertBox.className = 'alert-box danger';
+                                    alertBox.innerHTML = '<span>⚠️</span><span class="error-msg-text"></span>';
+                                    const titleEl = signInForm.querySelector('.subtitle-text') || signInForm.querySelector('.title');
+                                    if (titleEl) titleEl.after(alertBox);
+                                }
+                                const msgText = alertBox.querySelector('.error-msg-text') || alertBox.querySelector('span:last-child');
+                                if (msgText) msgText.textContent = errorMsg;
+                                alertBox.style.display = 'flex';
+
+                                // Animasi getar (shake) pada card
+                                const card = document.getElementById('authContainer');
+                                if (card) {
+                                    card.style.animation = 'none';
+                                    void card.offsetWidth;
+                                    card.style.animation = 'errorShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both';
+                                }
+
+                                passwordInput.focus();
+                                passwordInput.select();
+                            }
+                        }, remainingTime);
+                    })
+                    .catch((err) => {
+                        console.error('Sign In Error:', err);
+                        loginModal.classList.remove('is-active', 'is-closing');
+                        loginModal.setAttribute('aria-hidden', 'true');
+                        // Fallback browser standard submit
+                        signInForm.submit();
+                    });
                 });
             }
         });

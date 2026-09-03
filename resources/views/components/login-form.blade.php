@@ -7,7 +7,8 @@
 ])
 
 @php
-    $defaultTab = $defaultTab ?? request()->query('tab', old('form_type') === 'register' || $errors->has('name') || $errors->has('password_confirmation') ? 'register' : 'login');
+    $requestedTab = request()->query('tab');
+    $defaultTab = $requestedTab ?? $defaultTab ?? (old('form_type') === 'register' || $errors->has('name') || $errors->has('password_confirmation') ? 'register' : 'login');
     $isRegister = $defaultTab === 'register';
     $loginAction = $loginAction ?? route('login.process');
     $registerAction = $registerAction ?? route('register.process');

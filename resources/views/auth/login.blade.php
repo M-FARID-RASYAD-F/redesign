@@ -1,5 +1,6 @@
 @php
-    $defaultTab = $defaultTab ?? request()->query('tab', old('form_type') === 'register' || $errors->has('name') || $errors->has('password_confirmation') ? 'register' : 'login');
+    $requestedTab = request()->query('tab');
+    $defaultTab = $requestedTab ?? $defaultTab ?? (old('form_type') === 'register' || $errors->has('name') || $errors->has('password_confirmation') ? 'register' : 'login');
     $isRegister = $defaultTab === 'register';
 @endphp
 <!DOCTYPE html>
@@ -711,18 +712,20 @@
         @media (max-width: 870px) {
             body {
                 padding: 4.5rem 1rem 1.5rem 1rem;
+                min-height: 100vh;
+                min-height: 100dvh;
             }
 
             .container {
-                min-height: 780px;
+                min-height: 840px;
                 height: auto;
-                max-width: 520px;
+                max-width: 500px;
             }
 
             .signin-signup {
                 width: 100%;
-                top: 92%;
-                transform: translate(-50%, -100%);
+                top: 59%;
+                transform: translate(-50%, -50%);
                 transition: 1s 0.8s ease-in-out;
             }
 
@@ -733,15 +736,16 @@
 
             .panels-container {
                 grid-template-columns: 1fr;
-                grid-template-rows: 1fr 2fr 1fr;
+                grid-template-rows: 185px 1fr 185px;
             }
 
             .panel {
-                flex-direction: row;
-                justify-content: space-around;
+                flex-direction: column;
+                justify-content: center;
                 align-items: center;
-                padding: 2.2rem 8%;
+                padding: 1rem 1.5rem;
                 grid-column: 1 / 2;
+                width: 100%;
             }
 
             .right-panel {
@@ -753,11 +757,13 @@
             }
 
             .panel .content {
-                padding-right: 5%;
+                padding: 0;
                 transition: transform 0.9s ease-in-out;
                 transition-delay: 0.8s;
-                align-items: flex-start;
-                text-align: left;
+                align-items: center;
+                text-align: center;
+                max-width: 340px;
+                margin: 0 auto;
             }
 
             .panel-logo {
@@ -770,8 +776,9 @@
             }
 
             .panel p {
-                font-size: 0.76rem;
-                padding: 0.25rem 0 0.75rem 0;
+                font-size: 0.78rem;
+                padding: 0.2rem 0 0.65rem 0;
+                line-height: 1.45;
             }
 
             .btn.transparent {
@@ -784,8 +791,8 @@
                 width: 1500px;
                 height: 1500px;
                 transform: translateX(-50%);
-                left: 30%;
-                bottom: 68%;
+                left: 50%;
+                bottom: 77%;
                 right: initial;
                 top: initial;
                 transition: 2s ease-in-out;
@@ -793,7 +800,7 @@
 
             .container.sign-up-mode:before {
                 transform: translate(-50%, 100%);
-                bottom: 32%;
+                bottom: 23%;
                 right: initial;
             }
 
@@ -810,12 +817,88 @@
             }
 
             .container.sign-up-mode .signin-signup {
-                top: 8%;
-                transform: translate(-50%, 0);
+                top: 40%;
+                transform: translate(-50%, -50%);
             }
 
             .mobile-switch-text {
                 display: block;
+                margin-top: 0.65rem;
+                font-size: 0.82rem;
+            }
+
+            form {
+                padding: 1rem 2rem;
+            }
+
+            .title {
+                font-size: 1.85rem;
+                margin-bottom: 4px;
+            }
+
+            .subtitle-text {
+                font-size: 0.82rem;
+                margin-bottom: 0.75rem;
+                max-width: 100%;
+                line-height: 1.45;
+            }
+
+            .input-field {
+                max-width: 360px;
+                height: 48px;
+                margin: 6px 0;
+                grid-template-columns: 44px 1fr 40px;
+                padding: 0 0.6rem 0 0.3rem;
+            }
+
+            .input-field.no-toggle {
+                grid-template-columns: 44px 1fr;
+                padding-right: 0.8rem;
+            }
+
+            .input-field input {
+                font-size: 0.9rem;
+            }
+
+            .brand-badge {
+                margin-bottom: 0.55rem;
+                padding: 0.3rem 0.85rem;
+            }
+
+            .brand-badge span {
+                font-size: 0.74rem;
+                letter-spacing: 0.03em;
+            }
+
+            .brand-badge img {
+                width: 24px;
+                height: 24px;
+            }
+
+            .btn {
+                height: 44px;
+                margin: 8px 0;
+                font-size: 0.84rem;
+            }
+
+            .social-text {
+                padding: 0.35rem 0 0.25rem 0;
+                font-size: 0.8rem;
+            }
+
+            .social-media {
+                gap: 12px;
+                margin-top: 2px;
+            }
+
+            .social-icon {
+                height: 38px;
+                width: 38px;
+            }
+
+            .social-icon svg {
+                width: 17px;
+                height: 17px;
             }
         }
 
@@ -825,29 +908,56 @@
             }
 
             .container {
-                border-radius: 20px;
+                border-radius: 22px;
+                min-height: 830px;
             }
 
             form {
-                padding: 1rem 1.5rem;
-            }
-
-            .panel .content {
-                padding: 0.5rem 0.5rem;
+                padding: 0.75rem 1.25rem;
             }
 
             .title {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
+            }
+
+            .subtitle-text {
+                font-size: 0.78rem;
+                margin-bottom: 0.6rem;
             }
 
             .input-field {
-                height: 48px;
+                max-width: 100%;
+                height: 46px;
+                margin: 5px 0;
+                grid-template-columns: 40px 1fr 38px;
+            }
+
+            .input-field.no-toggle {
+                grid-template-columns: 40px 1fr;
+            }
+
+            .input-field input {
+                font-size: 0.86rem;
             }
 
             .top-action-bar {
                 left: 1rem;
                 right: 1rem;
                 top: 1rem;
+            }
+
+            .brand-badge {
+                margin-bottom: 0.5rem;
+                padding: 0.25rem 0.75rem;
+            }
+
+            .brand-badge span {
+                font-size: 0.7rem;
+            }
+
+            .panel p {
+                font-size: 0.75rem;
+                max-width: 290px;
             }
         }
 

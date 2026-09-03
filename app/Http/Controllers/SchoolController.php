@@ -119,7 +119,7 @@ class SchoolController extends Controller
                 'desc' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic untuk menunjang praktikum pemrograman web, rekayasa perangkat lunak, dan konfigurasi jaringan industri.',
                 'deskripsi' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic.',
                 'icon' => '🖥️',
-                'image' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
+                'image' => asset('sekolah.jpg'),
                 'features' => ['120 Unit PC Core i7', 'GPU Dedicated', 'Fiber Optic 1 Gbps', 'AC & Ergonomic Chair']
             ],
             [

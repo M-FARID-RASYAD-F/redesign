@@ -18,11 +18,11 @@
         {{-- 2. Kapsul Tengah: Menu Navigasi Utama --}}
         <div class="navbar-capsule navbar-center">
             <nav class="nav-desktop-links">
-                <a href="{{ route('home') }}#beranda" class="nav-link active" data-section="beranda">Beranda</a>
-                <a href="{{ route('home') }}#jurusan" class="nav-link" data-section="jurusan">Jurusan</a>
-                <a href="{{ route('home') }}#fasilitas" class="nav-link" data-section="fasilitas">Fasilitas</a>
-                <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita">Berita</a>
-                <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb">PPDB</a>
+                <a href="{{ route('home') }}#beranda" class="nav-link active" data-section="beranda"><span class="nav-link-text">Beranda</span></a>
+                <a href="{{ route('home') }}#jurusan" class="nav-link" data-section="jurusan"><span class="nav-link-text">Jurusan</span></a>
+                <a href="{{ route('home') }}#fasilitas" class="nav-link" data-section="fasilitas"><span class="nav-link-text">Fasilitas</span></a>
+                <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
+                <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
             </nav>
         </div>
 
@@ -36,11 +36,11 @@
 
             <div class="nav-auth-desktop">
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="nav-admin-link">🛡️ Admin</a>
-                    <a href="{{ route('logout') }}" class="nav-logout-link">Logout</a>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-admin-link"><span class="nav-link-text">🛡️ Admin</span></a>
+                    <a href="{{ route('logout') }}" class="nav-logout-link"><span class="nav-link-text">Logout</span></a>
                 @endauth
                 @guest
-                    <a href="{{ route('login') }}" class="nav-btn-search">🔑 Login</a>
+                    <a href="{{ route('login') }}" class="nav-btn-search"><span class="nav-link-text">🔑 Login</span></a>
                 @endguest
             </div>
 
@@ -52,34 +52,34 @@
                 <svg id="iconClose" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
-                <span>Menu</span>
+                <span class="nav-link-text">Menu</span>
             </button>
         </div>
     </div>
 
     {{-- ── Mobile Panel ── --}}
     <div class="nav-mobile-panel" id="navMobilePanel">
-        <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda">🏠 Beranda</a>
-        <a href="{{ route('home') }}#jurusan" class="nav-mobile-link" data-section="jurusan">📚 Jurusan</a>
-        <a href="{{ route('home') }}#fasilitas" class="nav-mobile-link" data-section="fasilitas">🏢 Fasilitas</a>
-        <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">📰 Berita</a>
-        <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link">🔍 Cek Status Pendaftaran</a>
+        <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda"><span class="nav-link-text">🏠 Beranda</span></a>
+        <a href="{{ route('home') }}#jurusan" class="nav-mobile-link" data-section="jurusan"><span class="nav-link-text">📚 Jurusan</span></a>
+        <a href="{{ route('home') }}#fasilitas" class="nav-mobile-link" data-section="fasilitas"><span class="nav-link-text">🏢 Fasilitas</span></a>
+        <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita"><span class="nav-link-text">📰 Berita</span></a>
+        <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
         <hr class="nav-mobile-divider">
         <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button">
             <span class="theme-mobile-icon">🌗</span>
             <span class="theme-mobile-text">Ganti Tema (Dark / White)</span>
         </button>
         <hr class="nav-mobile-divider">
-        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb">🎓 Daftar PPDB Online</a>
+        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb"><span class="nav-link-text">🎓 Daftar PPDB Online</span></a>
 
         @auth
         <hr class="nav-mobile-divider">
-        <a href="{{ route('admin.dashboard') }}" class="nav-mobile-link">🛡️ Admin Panel</a>
-        <a href="{{ route('logout') }}" class="nav-mobile-link" style="color: #f87171;">🚪 Logout</a>
+        <a href="{{ route('admin.dashboard') }}" class="nav-mobile-link"><span class="nav-link-text">🛡️ Admin Panel</span></a>
+        <a href="{{ route('logout') }}" class="nav-mobile-link" style="color: #f87171;"><span class="nav-link-text">🚪 Logout</span></a>
         @endauth
 
         @guest
-        <a href="{{ route('login') }}" class="nav-mobile-link">🔑 Login Guru</a>
+        <a href="{{ route('login') }}" class="nav-mobile-link"><span class="nav-link-text">🔑 Login Guru</span></a>
         @endguest
     </div>
 </header>

@@ -985,6 +985,365 @@
                 gap: 16px !important;
             }
         }
+
+        /* ═══════════════════════════════════════════════════════════
+           CRUD SKELETON LOADING ENGINE (FOR ALL CRUD METHODS)
+           ═══════════════════════════════════════════════════════════ */
+        :root {
+            --adm-skeleton-base: rgba(255, 255, 255, 0.08);
+            --adm-skeleton-shimmer: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(0, 180, 216, 0.22) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+        }
+
+        [data-theme="light"] {
+            --adm-skeleton-base: rgba(255, 255, 255, 0.12);
+            --adm-skeleton-shimmer: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                oklch(58.6% 0.253 17.585 / 0.32) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+        }
+
+        .skeleton-shimmer {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--adm-skeleton-base) !important;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .skeleton-shimmer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: var(--adm-skeleton-shimmer);
+            animation: skeletonWave 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        @keyframes skeletonWave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Wrappers & Smooth Hydration */
+        .crud-skeleton-wrapper {
+            width: 100%;
+            transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.26s;
+        }
+
+        .crud-skeleton-wrapper.is-hidden {
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .crud-content-wrapper {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .crud-content-wrapper.is-loading {
+            opacity: 0;
+            transform: translateY(6px);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            visibility: hidden;
+        }
+
+        /* Skeleton Layout Switcher */
+        .skeleton-layout {
+            display: none;
+            width: 100%;
+        }
+
+        .skeleton-layout.is-active {
+            display: block;
+        }
+
+        /* Header Skeleton */
+        .skeleton-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+        }
+
+        .skeleton-header-texts {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skeleton-title-bar {
+            height: 32px;
+            width: 220px;
+            border-radius: 8px;
+        }
+
+        .skeleton-subtitle-bar {
+            height: 16px;
+            width: 320px;
+            border-radius: 6px;
+        }
+
+        .skeleton-action-btn {
+            height: 42px;
+            width: 160px;
+            border-radius: 10px;
+        }
+
+        /* Table Skeleton */
+        .skeleton-card {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .skeleton-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .skeleton-th-cell {
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .skeleton-row-item td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--adm-table-border);
+        }
+
+        .skeleton-cell-identity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skeleton-avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .skeleton-identity-texts {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .skeleton-item-title {
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .skeleton-item-subtitle {
+            height: 12px;
+            border-radius: 4px;
+        }
+
+        .skeleton-badge-pill, .skeleton-badge-status {
+            height: 24px;
+            border-radius: 6px;
+        }
+
+        .skeleton-text-bar {
+            height: 15px;
+            border-radius: 4px;
+        }
+
+        .skeleton-action-group {
+            display: inline-flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .skeleton-btn-sm {
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        /* Form Skeleton */
+        .skeleton-form-group {
+            margin-bottom: 22px;
+        }
+
+        .skeleton-form-label {
+            height: 16px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-form-input {
+            height: 46px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .skeleton-form-hint {
+            height: 12px;
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+
+        .skeleton-form-textarea {
+            height: 160px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .skeleton-form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .skeleton-btn-primary, .skeleton-btn-outline {
+            height: 44px;
+            border-radius: 10px;
+        }
+
+        /* Detail Skeleton */
+        .skeleton-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .skeleton-card-heading {
+            height: 20px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+        }
+
+        .skeleton-kv-table {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skeleton-kv-row {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--adm-table-border);
+        }
+
+        .skeleton-kv-key {
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .skeleton-kv-val {
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .skeleton-doc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--adm-table-border);
+        }
+
+        .skeleton-doc-name {
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .skeleton-status-box {
+            height: 90px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Dashboard Skeleton */
+        .skeleton-dashboard-hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+            padding: 30px 32px;
+            margin-bottom: 26px;
+        }
+
+        .skeleton-hero-actions-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skeleton-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .skeleton-stat-card {
+            padding: 24px;
+        }
+
+        .skeleton-stat-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+        }
+
+        .skeleton-dash-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .skeleton-dash-content-grid {
+                grid-template-columns: 1fr;
+            }
+            .skeleton-dashboard-hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .skeleton-hero-actions-wrap {
+                width: 100%;
+                flex-direction: row;
+            }
+            .skeleton-hero-actions-wrap > div {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-header {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 12px !important;
+            }
+            .skeleton-header-texts .skeleton-subtitle-bar {
+                width: 100% !important;
+            }
+            .skeleton-action-btn {
+                width: 100% !important;
+            }
+            .skeleton-detail-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .skeleton-table {
+                min-width: 600px !important;
+            }
+        }
     </style>
     @stack('styles')
 </head>
@@ -1110,7 +1469,13 @@
             </div>
         @endif
 
-        @yield('content')
+        <!-- CRUD Skeleton Loading State (All CRUD Methods) -->
+        @include('partials.crud-skeleton')
+
+        <!-- Real Page Content Wrapper -->
+        <div id="crudPageContent" class="crud-content-wrapper is-loading">
+            @yield('content')
+        </div>
     </main>
 
     <!-- SweetAlert2 Standalone Engine -->
@@ -1173,6 +1538,92 @@
                         closeSidebar();
                     }
                 });
+            });
+
+            // ── CRUD Skeleton Transition & Loading Manager ──
+            const skeleton = document.getElementById('crudSkeletonLoader');
+            const content = document.getElementById('crudPageContent');
+            
+            function showContent() {
+                if (!content || !skeleton) return;
+                skeleton.classList.add('is-hidden');
+                content.classList.remove('is-loading');
+            }
+
+            function showSkeleton(targetType) {
+                if (!content || !skeleton) return;
+                clearInitialTimer();
+                
+                // Aktifkan layout skeleton yang sesuai target
+                if (targetType) {
+                    skeleton.querySelectorAll('.skeleton-layout').forEach(el => el.classList.remove('is-active'));
+                    const targetLayout = skeleton.querySelector('.skeleton-layout-' + targetType);
+                    if (targetLayout) targetLayout.classList.add('is-active');
+                    skeleton.setAttribute('data-active-type', targetType);
+                }
+
+                content.classList.add('is-loading');
+                skeleton.classList.remove('is-hidden');
+            }
+
+            // Expose globally agar bisa dipanggil dari child view atau AJAX
+            window.showCrudSkeleton = showSkeleton;
+            window.hideCrudSkeleton = showContent;
+
+            // Transisi smooth initial skeleton saat halaman dimuat (280ms)
+            let initialTimer = setTimeout(showContent, 280);
+
+            // Batalkan timeout inisial jika showSkeleton dipanggil manual
+            function clearInitialTimer() {
+                if (initialTimer) {
+                    clearTimeout(initialTimer);
+                    initialTimer = null;
+                }
+            }
+
+            // ── Intercept Navigasi CRUD Links ──
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('a');
+                if (!link) return;
+
+                const href = link.getAttribute('href');
+                if (!href || href.startsWith('#') || href.startsWith('javascript:') || link.target === '_blank' || href.includes('/logout')) return;
+                
+                // Deteksi jika link mengarah ke rute CRUD Admin
+                if (href.includes('/admin') || link.classList.contains('sidebar-link') || link.closest('.header') || link.closest('table')) {
+                    let type = 'table';
+                    if (href.includes('/create') || href.includes('/edit')) {
+                        type = 'form';
+                    } else if (href.includes('/ppdb/') && !href.includes('/export')) {
+                        type = 'detail';
+                    } else if (href.includes('/dashboard')) {
+                        type = 'dashboard';
+                    }
+
+                    showSkeleton(type);
+                }
+            });
+
+            // ── Intercept CRUD Form Submissions (Create/Store, Edit/Update, Status, Delete) ──
+            document.addEventListener('submit', function(e) {
+                const form = e.target;
+                if (!form) return;
+
+                const action = form.getAttribute('action') || '';
+                const method = (form.querySelector('input[name="_method"]')?.value || form.getAttribute('method') || 'POST').toUpperCase();
+
+                if (action.includes('/admin') || form.closest('.main-container')) {
+                    let type = 'table';
+                    if (method === 'DELETE') {
+                        type = 'table';
+                    } else if (action.includes('/news') || action.includes('/teachers') || action.includes('/majors')) {
+                        type = 'form';
+                    } else if (action.includes('/ppdb')) {
+                        type = 'detail';
+                    }
+
+                    showSkeleton(type);
+                }
             });
         });
     </script>

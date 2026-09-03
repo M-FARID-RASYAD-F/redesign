@@ -49,6 +49,9 @@
     <!-- Partial Footer -->
     @include('partials.footer')
 
+    <!-- SweetAlert2 Standalone Engine -->
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+
     <!-- Modal Konfirmasi Logout (Scale-in / Zoom-in Pop Effect) -->
     @include('partials.logout-modal')
 

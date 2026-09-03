@@ -1,4 +1,4 @@
-﻿{{-- Modal Konfirmasi Logout (Scale-in Pop Effect + Glassmorphism Dual-Ring Orbit Spinner) --}}
+{{-- Modal Konfirmasi Logout (Scale-in Pop Effect + Glassmorphism Dual-Ring Orbit Spinner) --}}
 <div id="logoutModal" class="logout-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="logoutModalTitle">
     <div class="logout-modal-backdrop" id="logoutModalBackdrop"></div>
     <div class="logout-modal-container">
@@ -519,7 +519,141 @@
     background: #e2e8f0;
     color: #0f172a;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   5. SWEETALERT2 PREMIUM ANIMATED GLASSMORPHISM STYLING
+   ═══════════════════════════════════════════════════════════ */
+.swal2-container.swal-logout-container {
+    z-index: 1000000 !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    background: rgba(15, 23, 42, 0.75) !important;
+}
+
+.swal2-popup.swal-logout-popup {
+    border-radius: 26px !important;
+    padding: 2.2rem 2.2rem 2rem !important;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.97) 100%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(16, 185, 129, 0.16) !important;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+    color: #ffffff !important;
+}
+
+/* SweetAlert Iconic Animated Success Icon Customization */
+.swal-logout-popup .swal2-icon.swal2-success {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.35) !important;
+    margin: 0.6rem auto 1.4rem !important;
+    width: 82px !important;
+    height: 82px !important;
+}
+
+.swal-logout-popup .swal2-icon.swal2-success [class^='swal2-success-line'] {
+    background-color: #10b981 !important;
+}
+
+.swal-logout-popup .swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(16, 185, 129, 0.35) !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.swal-logout-popup .swal2-icon.swal2-success [class^='swal2-circular-line'] {
+    background: transparent !important;
+}
+
+.swal-logout-popup .swal2-icon.swal2-success .swal2-success-fix {
+    background: transparent !important;
+}
+
+.swal-logout-title {
+    font-size: 1.45rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.015em !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 50%, #34d399 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    margin-bottom: 0.5rem !important;
+    padding: 0 !important;
+}
+
+.swal-logout-msg {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+}
+
+.swal-logout-sub {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.swal-logout-popup .swal2-actions {
+    margin-top: 1.6rem !important;
+    gap: 0.75rem;
+}
+
+.swal-logout-popup .swal2-confirm.swal-logout-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    border-radius: 14px !important;
+    padding: 0.72rem 2.4rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4) !important;
+    cursor: pointer !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.swal-logout-popup .swal2-confirm.swal-logout-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55) !important;
+}
+
+.swal-logout-popup .swal2-timer-progress-bar.swal-logout-progress {
+    background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%) !important;
+    height: 4px !important;
+    border-radius: 9999px !important;
+}
+
+/* Light Theme overrides for SweetAlert */
+[data-theme="light"] .swal2-container.swal-logout-container {
+    background: rgba(15, 23, 42, 0.45) !important;
+}
+
+[data-theme="light"] .swal2-popup.swal-logout-popup {
+    background: #ffffff !important;
+    border: 1.5px solid rgba(16, 185, 129, 0.25) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 0 35px rgba(16, 185, 129, 0.16) !important;
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .swal-logout-title {
+    background: linear-gradient(135deg, #0f172a 0%, #047857 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="light"] .swal-logout-msg {
+    color: #0f172a;
+}
+
+[data-theme="light"] .swal-logout-sub {
+    color: #64748b;
+}
 </style>
+
+{{-- Ensure SweetAlert2 Engine is Loaded --}}
+@once
+<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+@endonce
 
 <script>
 (function() {
@@ -562,6 +696,42 @@
             }, 220);
         }
 
+        function triggerSweetAlertLogout(logoutUrl, isLoggedOut) {
+            function proceedRedirect() {
+                window.location.href = isLoggedOut ? '/' : logoutUrl;
+            }
+
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Berhasil Logout!',
+                    html: `
+                        <div class="swal-logout-body">
+                            <p class="swal-logout-msg">Kamu telah berhasil logout.</p>
+                            <p class="swal-logout-sub">Sesi Anda telah aman diakhiri. Mengalihkan ke halaman utama...</p>
+                        </div>
+                    `,
+                    icon: 'success',
+                    timer: 2300,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    customClass: {
+                        container: 'swal-logout-container',
+                        popup: 'swal-logout-popup',
+                        title: 'swal-logout-title',
+                        confirmButton: 'swal-logout-btn',
+                        timerProgressBar: 'swal-logout-progress'
+                    }
+                }).then(function() {
+                    proceedRedirect();
+                });
+            } else {
+                proceedRedirect();
+            }
+        }
+
         // Attach to all logout links across desktop navbar, mobile menu, and admin sidebar
         const logoutSelectors = [
             '.nav-logout-link',
@@ -576,21 +746,40 @@
             }
         });
 
-        // Trigger Glassmorphism + Dual-Ring Orbit Spinner on Confirm
+        // Trigger Orbit Spinner Loading Transition -> SweetAlert Animated Alert on Confirm
         if (btnConfirm) {
             btnConfirm.addEventListener('click', function(e) {
                 e.preventDefault();
                 const logoutUrl = btnConfirm.getAttribute('data-logout-url') || '/logout';
 
-                // Switch to Orbit Loading Stage
+                // 1. Switch to Orbit Loading Stage (Transisi State Logout)
                 modal.classList.add('is-loading-active');
                 if (confirmStage) confirmStage.style.display = 'none';
                 if (loadingStage) loadingStage.style.display = 'flex';
 
-                // Graceful delay to let the elegant Orbit animation run before navigation
+                // Invalidate session on server via background fetch
+                let isLoggedOut = false;
+                fetch(logoutUrl, {
+                    method: 'GET',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    credentials: 'same-origin'
+                }).then(function() {
+                    isLoggedOut = true;
+                }).catch(function() {
+                    isLoggedOut = false;
+                });
+
+                // 2. Play Orbit loading transition, then trigger animated SweetAlert
                 setTimeout(function() {
-                    window.location.href = logoutUrl;
-                }, 950);
+                    // Close modal cleanly
+                    modal.classList.remove('is-active', 'is-loading-active');
+                    modal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                    resetStages();
+
+                    // 3. Show SweetAlert animation: "Kamu telah berhasil logout."
+                    triggerSweetAlertLogout(logoutUrl, isLoggedOut);
+                }, 1150);
             });
         }
 

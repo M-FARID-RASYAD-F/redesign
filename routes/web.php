@@ -46,8 +46,15 @@ Route::post('/register-process', [\App\Http\Controllers\Auth\RegisteredUserContr
     ->middleware('guest');
 
 // 5. Route Logout Guru
-Route::get('/logout', function () {
+Route::get('/logout', function (\Illuminate\Http\Request $request) {
     Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json(['status' => 'success', 'message' => 'Kamu telah berhasil logout.']);
+    }
+
     return redirect('/')->with('success', 'Anda telah berhasil Logout dari sistem.');
 })->name('logout');
 

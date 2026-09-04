@@ -479,45 +479,128 @@
     100% { transform: translateX(100%); }
 }
 
-/* Light Theme Adjustments */
+/* Light Theme Adjustments (White Mode ☀️) */
 [data-theme="light"] .logout-modal-backdrop {
-    background: rgba(15, 23, 42, 0.65);
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
+
 [data-theme="light"] .logout-modal-card {
     background: #ffffff;
-    border-color: rgba(239, 68, 68, 0.3);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22), 0 0 35px rgba(239, 68, 68, 0.12);
+    border: 1.5px solid rgba(239, 68, 68, 0.22);
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18), 0 0 30px rgba(239, 68, 68, 0.08);
 }
+
 [data-theme="light"] .logout-modal-overlay.is-loading-active .logout-modal-card {
-    border-color: rgba(14, 165, 233, 0.4);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22), 0 0 35px rgba(14, 165, 233, 0.18);
+    border-color: rgba(14, 165, 233, 0.35);
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18), 0 0 35px rgba(14, 165, 233, 0.12);
 }
+
+/* 1 & 2. Solusi Badge Ikon Pop & Pulse Glow di White Mode */
+[data-theme="light"] .logout-modal-badge-glow {
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.18) 0%, transparent 70%);
+}
+
+[data-theme="light"] .logout-modal-badge-icon {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 1.5px solid rgba(239, 68, 68, 0.35);
+    color: #dc2626;
+    box-shadow: 0 10px 24px rgba(239, 68, 68, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
 [data-theme="light"] .logout-modal-title {
     color: #0f172a;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
+
 [data-theme="light"] .logout-modal-desc {
-    color: #475569;
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
+
+/* 3. Solusi Tombol Aksi & Gradien Konfirmasi di White Mode */
+[data-theme="light"] .btn-logout-cancel {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    color: #475569;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .btn-logout-cancel:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .btn-logout-confirm {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: 1px solid rgba(220, 38, 38, 0.4);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="light"] .btn-logout-confirm:hover {
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    box-shadow: 0 10px 24px rgba(239, 68, 68, 0.45);
+    color: #ffffff;
+}
+
+/* 4. Solusi Lintasan Progress Track & Elemen Orbit Loading di White Mode */
+[data-theme="light"] .orbit-ambient-glow {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(244, 63, 94, 0.1) 50%, transparent 75%);
+}
+
+[data-theme="light"] .orbit-ring-outer {
+    border-top-color: #0284c7;
+    border-right-color: #0ea5e9;
+    border-bottom-color: rgba(14, 165, 233, 0.15);
+    box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+}
+
+[data-theme="light"] .orbit-satellite-outer {
+    background: #0284c7;
+    box-shadow: 0 0 10px 2.5px #0ea5e9;
+}
+
+[data-theme="light"] .orbit-ring-inner {
+    border-top-color: #e11d48;
+    border-left-color: #f43f5e;
+    border-bottom-color: rgba(244, 63, 94, 0.15);
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.35);
+}
+
+[data-theme="light"] .orbit-satellite-inner {
+    background: #e11d48;
+    box-shadow: 0 0 9px 2px #f43f5e;
+}
+
 [data-theme="light"] .orbit-loading-title {
     background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 [data-theme="light"] .orbit-loading-desc {
-    color: #475569;
+    color: #64748b;
 }
+
 [data-theme="light"] .orbit-core {
     background: #ffffff;
-    border-color: #cbd5e1;
+    border: 1.5px solid #e2e8f0;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
 }
-[data-theme="light"] .btn-logout-cancel {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-    color: #334155;
-}
-[data-theme="light"] .btn-logout-cancel:hover {
+
+[data-theme="light"] .orbit-progress-track {
     background: #e2e8f0;
-    color: #0f172a;
+}
+
+[data-theme="light"] .orbit-progress-bar {
+    background: linear-gradient(90deg, transparent 0%, #0284c7 45%, #ef4444 80%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════

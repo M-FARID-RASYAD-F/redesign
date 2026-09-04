@@ -61,10 +61,10 @@
                         <div style="display: inline-flex; gap: 8px;">
                             <a href="{{ route('admin.teachers.edit', $teacher->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
                             
-                            <form action="{{ route('admin.teachers.delete', $teacher->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data guru ini?')">
+                            <form action="{{ route('admin.teachers.delete', $teacher->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus data guru <strong>{{ $teacher->name }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
                             </form>
                         </div>
                     </td>

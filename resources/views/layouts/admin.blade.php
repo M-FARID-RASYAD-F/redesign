@@ -1629,5 +1629,213 @@
     </script>
 
     @stack('scripts')
+
+    {{-- ═══════════════════════════════════════════════════════════
+         GLOBAL DELETE CONFIRMATION ENGINE — SweetAlert2 Bounce-in
+         ═══════════════════════════════════════════════════════════ --}}
+    <style>
+        /* Bounce-in Keyframe untuk SweetAlert2 popup */
+        @keyframes swalBounceIn {
+            0%   { opacity: 0; transform: scale(0.4) translateY(-60px); }
+            55%  { opacity: 1; transform: scale(1.08) translateY(8px); }
+            75%  { transform: scale(0.95) translateY(-4px); }
+            90%  { transform: scale(1.02) translateY(2px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes swalBounceOut {
+            0%   { transform: scale(1); opacity: 1; }
+            25%  { transform: scale(1.05); }
+            100% { transform: scale(0.5); opacity: 0; }
+        }
+
+        /* Popup container delete */
+        .swal-delete-popup {
+            border-radius: 24px !important;
+            padding: 2rem 2rem 1.75rem !important;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.97) 0%, rgba(30, 41, 59, 0.98) 100%) !important;
+            border: 1.5px solid rgba(239, 68, 68, 0.35) !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(239, 68, 68, 0.2) !important;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+            animation: swalBounceIn 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+        }
+
+        .swal-delete-popup.swal2-hide {
+            animation: swalBounceOut 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+        }
+
+        .swal-delete-container {
+            z-index: 1000001 !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            background: rgba(7, 13, 30, 0.7) !important;
+        }
+
+        /* Icon trash */
+        .swal-delete-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.35) 100%);
+            border: 1.5px solid rgba(239, 68, 68, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+            animation: swalIconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+        }
+
+        @keyframes swalIconBounce {
+            0%   { transform: scale(0) rotate(-20deg); }
+            65%  { transform: scale(1.25) rotate(8deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .swal-delete-title {
+            font-size: 1.28rem !important;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            letter-spacing: -0.015em !important;
+            margin-bottom: 0.4rem !important;
+            padding: 0 !important;
+        }
+
+        .swal-delete-html {
+            font-size: 0.88rem !important;
+            color: #94a3b8 !important;
+            line-height: 1.6 !important;
+        }
+
+        .swal-delete-html strong {
+            color: #f87171;
+            font-weight: 700;
+        }
+
+        /* Tombol Konfirmasi Hapus */
+        .swal-delete-btn-confirm {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+            border: none !important;
+            border-radius: 12px !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 0.9rem !important;
+            padding: 0.7rem 1.8rem !important;
+            box-shadow: 0 6px 18px rgba(239, 68, 68, 0.38) !important;
+            transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        .swal-delete-btn-confirm:hover {
+            transform: translateY(-2px) scale(1.03) !important;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.52) !important;
+        }
+
+        /* Tombol Batal */
+        .swal-delete-btn-cancel {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+            border-radius: 12px !important;
+            color: #e2e8f0 !important;
+            font-weight: 700 !important;
+            font-size: 0.9rem !important;
+            padding: 0.7rem 1.8rem !important;
+            transition: all 0.22s ease !important;
+        }
+
+        .swal-delete-btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* White Mode overrides */
+        [data-theme="light"] .swal-delete-container {
+            background: rgba(15, 23, 42, 0.45) !important;
+            backdrop-filter: blur(12px) !important;
+        }
+
+        [data-theme="light"] .swal-delete-popup {
+            background: #ffffff !important;
+            border: 1.5px solid rgba(239, 68, 68, 0.2) !important;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.2), 0 0 30px rgba(239, 68, 68, 0.1) !important;
+        }
+
+        [data-theme="light"] .swal-delete-icon-wrap {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-color: rgba(239, 68, 68, 0.35);
+            box-shadow: 0 10px 24px rgba(239, 68, 68, 0.16);
+        }
+
+        [data-theme="light"] .swal-delete-title {
+            color: #0f172a !important;
+        }
+
+        [data-theme="light"] .swal-delete-html {
+            color: #64748b !important;
+        }
+
+        [data-theme="light"] .swal-delete-btn-cancel {
+            background: #f8fafc !important;
+            border: 1.5px solid #e2e8f0 !important;
+            color: #475569 !important;
+        }
+
+        [data-theme="light"] .swal-delete-btn-cancel:hover {
+            background: #f1f5f9 !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Intercept semua tombol hapus dan tampilkan SweetAlert2 Bounce-in
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn-delete-trigger');
+            if (!btn) return;
+
+            e.preventDefault();
+
+            const form = btn.closest('.form-delete-confirm');
+            if (!form) return;
+
+            const message = form.getAttribute('data-delete-message') || 'Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.';
+
+            Swal.fire({
+                html: `
+                    <div class="swal-delete-icon-wrap">🗑️</div>
+                    <div class="swal-delete-title">Konfirmasi Hapus</div>
+                    <div class="swal-delete-html" style="margin-top: 0.5rem;">${message}</div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '🗑️ Ya, Hapus',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    container: 'swal-delete-container',
+                    popup:     'swal-delete-popup',
+                    confirmButton: 'swal-delete-btn-confirm',
+                    cancelButton:  'swal-delete-btn-cancel',
+                    actions: 'gap-2',
+                },
+                buttonsStyling: false,
+                reverseButtons: true,
+                focusCancel: true,
+                allowOutsideClick: true,
+                showClass:  { popup: '' },
+                hideClass:  { popup: 'swal2-hide' },
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    // Tampilkan skeleton loading lalu submit form
+                    if (typeof window.showCrudSkeleton === 'function') {
+                        window.showCrudSkeleton('table');
+                    }
+                    form.submit();
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>

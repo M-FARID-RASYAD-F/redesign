@@ -99,7 +99,7 @@
                     <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Teknik Komputer & Jaringan</a></li>
                     <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Desain Komunikasi Visual</a></li>
                     <li><a href="{{ route('home') }}#sambutan"><span class="footer-link-arrow">›</span> Program Tahfizh Intensif</a></li>
-                    <li><a href="{{ route('home') }}#fasilitas"><span class="footer-link-arrow">›</span> Fasilitas Modern</a></li>
+                    <li><a href="{{ route('home') }}#cabang"><span class="footer-link-arrow">›</span> Cabang Sekolah</a></li>
                 </ul>
             </div>
         </div>

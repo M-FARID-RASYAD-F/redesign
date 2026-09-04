@@ -110,17 +110,20 @@
         </div>
     </section>
 
-    <!-- 5. Fasilitas Sekolah -->
-    <section class="section" id="fasilitas">
-        <div class="fasilitas-section">
+    <!-- 5. Info Cabang-Cabang Sekolah At-Tamam -->
+    <section class="section reveal" id="cabang">
+        {{-- Hidden anchor fallback untuk kompatibilitas tautan lama --}}
+        <span id="fasilitas" style="position: relative; top: -90px; display: block; visibility: hidden;"></span>
+
+        <div class="cabang-section fasilitas-section">
             <x-section-header 
-                tag="SARANA & PRASARANA" 
-                title="Fasilitas Modern Penunjang Pembelajaran" 
-                subtitle="Lingkungan belajar yang nyaman, kondusif, dan didukung perangkat berteknologi tinggi."
+                tag="JARINGAN KAMPUS & PUSAT BELAJAR" 
+                title="Cabang & Lokasi Belajar PKBM Tahfizh At-Tamam" 
+                subtitle="Hadir lebih dekat untuk mencetak generasi Qurani dan unggul teknologi dengan fasilitas representatif dan lingkungan kondusif di setiap kampus."
             />
 
-            {{-- Animated Tabs Container Component (contain.md) --}}
-            <x-animated-tabs :tabs="$fasilitas" />
+            {{-- Interactive Animated Tabs Component (Menampilkan detail cabang aktif) --}}
+            <x-animated-tabs :tabs="$cabang" />
         </div>
     </section>
 

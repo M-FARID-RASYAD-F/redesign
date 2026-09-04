@@ -75,7 +75,7 @@
                 <div class="tab-info-container flex flex-col gap-y-3 justify-center">
                     <div class="tab-badge-tag">
                         <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-[#00B4D8]/20 text-[#38bdf8] border border-[#00B4D8]/30">
-                            🏛️ Sarana Unggulan
+                            {{ $tab['tag'] ?? '🏛️ Sarana Unggulan' }}
                         </span>
                     </div>
                     <h2 class="tab-title text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">
@@ -85,14 +85,52 @@
                         {{ $tab['desc'] ?? $tab['deskripsi'] }}
                     </p>
 
+                    @if(isset($tab['alamat']))
+                        <div class="tab-location-card p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1.5 text-xs text-slate-200 my-1">
+                            <div class="flex items-start gap-2">
+                                <span class="text-rose-400 font-bold text-sm">📍</span>
+                                <div>
+                                    <strong class="text-white block font-semibold mb-0.5">Alamat Lokasi:</strong>
+                                    <span>{{ $tab['alamat'] }}</span>
+                                </div>
+                            </div>
+                            @if(isset($tab['jam']))
+                                <div class="flex items-center gap-2 text-slate-300 pt-1.5 border-t border-white/10 text-[11px]">
+                                    <span class="text-amber-400">🕒</span>
+                                    <span>{{ $tab['jam'] }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+
                     @if(isset($tab['features']) && is_array($tab['features']))
-                        <div class="tab-features-grid grid grid-cols-2 gap-2 pt-3 border-t border-white/10 mt-1">
+                        <div class="tab-features-grid grid grid-cols-2 gap-2 pt-2.5 border-t border-white/10 mt-1">
                             @foreach($tab['features'] as $feat)
                                 <div class="flex items-center gap-2 text-xs font-medium text-gray-300">
                                     <span class="text-emerald-400 font-bold">✓</span>
                                     <span>{{ $feat }}</span>
                                 </div>
                             @endforeach
+                        </div>
+                    @endif
+
+                    @if(isset($tab['maps_url']) || isset($tab['wa_url']) || isset($tab['telepon']))
+                        <div class="tab-action-buttons flex items-center gap-2 pt-2 flex-nowrap mt-1">
+                            @if(isset($tab['maps_url']))
+                                <a href="{{ $tab['maps_url'] }}" target="_blank" rel="noopener noreferrer" class="btn-tab-action btn-tab-maps inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 shadow-sm transition-all hover:scale-[1.02] whitespace-nowrap flex-shrink-0">
+                                    <span>📍 Petunjuk Arah (Maps)</span>
+                                </a>
+                            @endif
+                            @if(isset($tab['wa_url']))
+                                <a href="{{ $tab['wa_url'] }}" target="_blank" rel="noopener noreferrer" class="btn-tab-action btn-tab-wa inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-sm transition-all hover:scale-[1.02] whitespace-nowrap flex-shrink-0">
+                                    <span>💬 Hubungi Cabang</span>
+                                </a>
+                            @endif
+                            @if(isset($tab['telepon']))
+                                <a href="tel:{{ preg_replace('/[^0-9]/', '', $tab['telepon']) }}" class="btn-tab-action btn-tab-tel inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 bg-white/10 hover:bg-white/20 border border-white/15 transition-all whitespace-nowrap flex-shrink-0" title="Hubungi Telepon">
+                                    <span>📞 {{ $tab['telepon'] }}</span>
+                                </a>
+                            @endif
                         </div>
                     @endif
                 </div>

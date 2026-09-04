@@ -109,56 +109,111 @@ class SchoolController extends Controller
             ];
         }
 
-        // 6. Data Fasilitas Utama (Untuk Animated Tabs Container)
-        $fasilitas = [
+        // 6. Data Cabang-Cabang Sekolah PKBM Tahfizh At-Tamam
+        $cabang = [
             [
-                'id' => 'lab-komputer',
-                'label' => 'Lab Komputer',
-                'title' => 'Lab Komputer High-End',
-                'nama' => 'Lab Komputer High-End',
-                'desc' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic untuk menunjang praktikum pemrograman web, rekayasa perangkat lunak, dan konfigurasi jaringan industri.',
-                'deskripsi' => 'Lab modern dengan 120 unit PC Core i7, GPU dedicated, dan koneksi High Speed Fiber Optic.',
-                'icon' => '🖥️',
-                'image' => asset('sekolah.jpg'),
-                'features' => ['120 Unit PC Core i7', 'GPU Dedicated', 'Fiber Optic 1 Gbps', 'AC & Ergonomic Chair']
+                'id' => 'kampus-pusat',
+                'label' => 'Kampus Pusat',
+                'title' => 'Kampus Utama & Pusat Tahfizh At-Tamam',
+                'tag' => '⭐ KAMPUS PUSAT & ASRAMA',
+                'kota' => 'Tenayan Raya, Pekanbaru',
+                'alamat' => 'Jl. Hangtuah No. 45, Rejosari, Kec. Tenayan Raya, Kota Pekanbaru, Riau 28281',
+                'jam' => 'Senin – Sabtu: 07.30 – 16.30 WIB',
+                'telepon' => '(0761) 555-0192',
+                'wa' => '0812-7000-1920',
+                'wa_url' => 'https://wa.me/6281270001920?text=Halo%20Admin%20Kampus%20Pusat%20At-Tamam,%20saya%20ingin%20informasi%20pendaftaran',
+                'maps_url' => 'https://maps.google.com/?q=PKBM+Tahfizh+At-Tamam+Pekanbaru',
+                'desc' => 'Pusat pendidikan terpadu At-Tamam yang menaungi program Tahfizh Qur\'an intensif 30 juz, asrama santri modern putra/putri, serta kejuruan rekayasa perangkat lunak dengan fasilitas terlengkap.',
+                'icon' => '🏛️',
+                'image' => 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1200&auto=format&fit=crop',
+                'features' => [
+                    'Asrama Santri Nyaman & Ber-AC',
+                    'Masjid Jami\' At-Tamam 500 Jamaah',
+                    'Lab Komputer High-End 120 Unit PC',
+                    'Studio Podcast & Broadcast Kreatif',
+                    'Klinik Kesehatan Santri & Kantin',
+                    'Free WiFi High-Speed Fiber 1 Gbps'
+                ]
             ],
             [
-                'id' => 'perpustakaan-digital',
-                'label' => 'Perpustakaan Digital',
-                'title' => 'Perpustakaan Digital Hub',
-                'nama' => 'Perpustakaan Digital Hub',
-                'desc' => 'Akses ribuan e-book, jurnal akademik internasional, repositori karya siswa, serta ruang baca tenang ber-AC yang dilengkapi workstation digital mandiri.',
-                'deskripsi' => 'Akses ribuan e-book, repositori karya siswa, serta ruang baca ber-AC yang nyaman.',
-                'icon' => '📚',
-                'image' => 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop',
-                'features' => ['Ribuan Koleksi E-Book', 'Ruang Baca Nyaman Ber-AC', 'Katalog Digital', 'Akses Internet Cepat']
+                'id' => 'cabang-panam',
+                'label' => 'Cabang Panam',
+                'title' => 'Cabang Panam — Sentra Teknologi & Kejuruan',
+                'tag' => '💻 SENTRA IT & MULTIMEDIA',
+                'kota' => 'Tampan / Panam, Pekanbaru',
+                'alamat' => 'Jl. HR. Soebrantas Km. 12, Kel. Simpang Baru, Kec. Tampan, Kota Pekanbaru, Riau 28293',
+                'jam' => 'Senin – Sabtu: 08.00 – 17.00 WIB',
+                'telepon' => '(0761) 555-0193',
+                'wa' => '0812-7000-1921',
+                'wa_url' => 'https://wa.me/6281270001921?text=Halo%20Admin%20Cabang%20Panam%20At-Tamam,%20saya%20ingin%20tanya%20program%20kejuruan%20dan%20tahfizh',
+                'maps_url' => 'https://maps.google.com/?q=HR+Soebrantas+Panam+Pekanbaru',
+                'desc' => 'Sentra kejuruan digital & multimedia At-Tamam yang dirancang khusus untuk mencetak developer muda, teknisi jaringan bersertifikasi Cisco/Mikrotik, serta talenta kreatif animasi.',
+                'icon' => '💻',
+                'image' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
+                'features' => [
+                    'Smart Interactive Classrooms',
+                    'Laboratorium Cyber Security & Jaringan',
+                    'Studio Desain Komunikasi Visual (DKV)',
+                    'Co-Working Space Siswa Ber-AC',
+                    'Program Sertifikasi Industri Resmi',
+                    'Area Parkir Luas & Akses Strategis'
+                ]
             ],
             [
-                'id' => 'studio-multimedia',
-                'label' => 'Studio Multimedia',
-                'title' => 'Studio Animasi & Podcast',
-                'nama' => 'Studio Animasi & Podcast',
-                'desc' => 'Fasilitas produksi konten audio-visual standar penyiaran industri kreatif, lengkap dengan green screen studio, lighting kit broadcast profesional, dan soundproofing akustik.',
-                'deskripsi' => 'Fasilitas produksi konten audio-visual standar industri kreatif penyiaran.',
-                'icon' => '🎙️',
-                'image' => 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop',
-                'features' => ['Green Screen Studio', 'Podcast Mic Pro', 'Lighting Kit Broadcast', 'Soundproof Acoustic']
+                'id' => 'cabang-marpoyan',
+                'label' => 'Cabang Marpoyan',
+                'title' => 'Cabang Marpoyan — Tahfizh & Kewirausahaan',
+                'tag' => '📖 TAHFIZH & ENTREPRENEUR',
+                'kota' => 'Marpoyan Damai, Pekanbaru',
+                'alamat' => 'Jl. Kaharuddin Nasution No. 88, Kel. Maharatu, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28284',
+                'jam' => 'Senin – Sabtu: 07.30 – 16.30 WIB',
+                'telepon' => '(0761) 555-0194',
+                'wa' => '0812-7000-1922',
+                'wa_url' => 'https://wa.me/6281270001922?text=Halo%20Admin%20Cabang%20Marpoyan%20At-Tamam,%20saya%20ingin%20konsultasi%20program%20tahfizh%20dan%20wirausaha',
+                'maps_url' => 'https://maps.google.com/?q=Marpoyan+Damai+Pekanbaru',
+                'desc' => 'Kampus asri bernuansa green campus yang menitikberatkan pada hafalan Al-Qur\'an bersanad mutqin, pembinaan adab santri, serta pelatihan kewirausahaan digital dan bisnis mandiri.',
+                'icon' => '📖',
+                'image' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
+                'features' => [
+                    'Ruang Halaqah Al-Qur\'an Sejuk & Asri',
+                    'Arena Olahraga Sunnah (Panahan)',
+                    'Aula Pertemuan Serbaguna (300 Seat)',
+                    'Perpustakaan & Pojok Literasi Islam',
+                    'Greenhouse Edukasi Botani & Agribisnis',
+                    'Pengawasan Keamanan CCTV 24 Jam'
+                ]
             ],
             [
-                'id' => 'sarana-olahraga',
-                'label' => 'Sarana Olahraga',
-                'title' => 'Lapangan Olahraga Multifungsi',
-                'nama' => 'Lapangan Olahraga Multifungsi',
-                'desc' => 'Fasilitas olahraga outdoor & indoor untuk futsal, basket, voli, dan kebugaran jasmani guna membangun sportivitas, daya tahan, dan kesehatan fisik peserta didik.',
-                'deskripsi' => 'Fasilitas outdoor & indoor untuk futsal, basket, voli, dan kegiatan kebugaran.',
-                'icon' => '⚽',
-                'image' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop',
-                'features' => ['Lapangan Futsal & Basket', 'Area Olahraga Luas', 'Loker & Ruang Ganti', 'Standar Kompetisi']
+                'id' => 'cabang-rumbai',
+                'label' => 'Cabang Rumbai',
+                'title' => 'Cabang Rumbai — Sentra Bahasa & Sains',
+                'tag' => '🌐 SAINS & BAHASA DUNIA',
+                'kota' => 'Rumbai, Pekanbaru',
+                'alamat' => 'Jl. Yos Sudarso No. 102, Kel. Lembah Damai, Kec. Rumbai, Kota Pekanbaru, Riau 28265',
+                'jam' => 'Senin – Sabtu: 08.00 – 16.30 WIB',
+                'telepon' => '(0761) 555-0195',
+                'wa' => '0812-7000-1923',
+                'wa_url' => 'https://wa.me/6281270001923?text=Halo%20Admin%20Cabang%20Rumbai%20At-Tamam,%20saya%20ingin%20informasi%20program%20bilingual%20dan%20paket%20belajar',
+                'maps_url' => 'https://maps.google.com/?q=Rumbai+Pekanbaru',
+                'desc' => 'Kampus percontohan pengembangan kompetensi dwibahasa (Arab & Inggris aktif) yang terintegrasi dengan pembelajaran sains terapan, kelas fleksibel kesetaraan Paket B/C, dan tahfizh akhir pekan.',
+                'icon' => '🌐',
+                'image' => 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=1200&auto=format&fit=crop',
+                'features' => [
+                    'Laboratorium Bahasa Digital Interaktif',
+                    'Pusat Belajar Paket Kesetaraan Fleksibel',
+                    'Ruang Multimedia & Presentasi Audio',
+                    'Musholla Kampus yang Bersih & Luas',
+                    'Area Diskusi Terbuka Siswa Berpohon',
+                    'Konseling & Bimbingan Minat Karir'
+                ]
             ]
         ];
 
+        // Alias untuk kompatibilitas data view lama
+        $fasilitas = $cabang;
+
         // Kirim seluruh data ke view 'welcome'
-        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jurusan', 'berita', 'fasilitas'));
+        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jurusan', 'berita', 'fasilitas', 'cabang'));
     }
 
     /**

@@ -20,7 +20,7 @@
             <nav class="nav-desktop-links">
                 <a href="{{ route('home') }}#beranda" class="nav-link active" data-section="beranda"><span class="nav-link-text">Beranda</span></a>
                 <a href="{{ route('home') }}#jurusan" class="nav-link" data-section="jurusan"><span class="nav-link-text">Jurusan</span></a>
-                <a href="{{ route('home') }}#fasilitas" class="nav-link" data-section="fasilitas"><span class="nav-link-text">Fasilitas</span></a>
+                <a href="{{ route('home') }}#cabang" class="nav-link" data-section="cabang"><span class="nav-link-text">Cabang</span></a>
                 <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
                 <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
             </nav>
@@ -61,7 +61,7 @@
     <div class="nav-mobile-panel" id="navMobilePanel">
         <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda"><span class="nav-link-text">🏠 Beranda</span></a>
         <a href="{{ route('home') }}#jurusan" class="nav-mobile-link" data-section="jurusan"><span class="nav-link-text">📚 Jurusan</span></a>
-        <a href="{{ route('home') }}#fasilitas" class="nav-mobile-link" data-section="fasilitas"><span class="nav-link-text">🏢 Fasilitas</span></a>
+        <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang"><span class="nav-link-text">🏫 Cabang Sekolah</span></a>
         <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita"><span class="nav-link-text">📰 Berita</span></a>
         <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
         <hr class="nav-mobile-divider">
@@ -279,20 +279,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const jurusanEl   = document.getElementById('jurusan');
-        const fasilitasEl = document.getElementById('fasilitas');
+        const cabangEl    = document.getElementById('cabang') || document.getElementById('fasilitas');
         const beritaEl    = document.getElementById('berita');
 
         const navHeight = 90;
-        const jurusanTop   = jurusanEl   ? (jurusanEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
-        const fasilitasTop = fasilitasEl ? (fasilitasEl.getBoundingClientRect().top + scrollY - navHeight) : 2200;
-        const beritaTop    = beritaEl    ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight) : 3200;
+        const jurusanTop   = jurusanEl ? (jurusanEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
+        const cabangTop    = cabangEl  ? (cabangEl.getBoundingClientRect().top + scrollY - navHeight)  : 2200;
+        const beritaTop    = beritaEl  ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight)  : 3200;
 
         if (scrollY < jurusanTop - 80) {
             setActiveNav('beranda');
-        } else if (scrollY >= jurusanTop - 80 && scrollY < fasilitasTop - 80) {
+        } else if (scrollY >= jurusanTop - 80 && scrollY < cabangTop - 80) {
             setActiveNav('jurusan');
-        } else if (scrollY >= fasilitasTop - 80 && scrollY < beritaTop - 80) {
-            setActiveNav('fasilitas');
+        } else if (scrollY >= cabangTop - 80 && scrollY < beritaTop - 80) {
+            setActiveNav('cabang');
         } else {
             setActiveNav('berita');
         }

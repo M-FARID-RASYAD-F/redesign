@@ -1708,61 +1708,86 @@ a:hover {
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.cabang-section,
 .fasilitas-section {
   background: #ffffff;
-  padding: 3.5rem 2.5rem 3rem;
-  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem 2rem;
+  border-radius: 20px;
   border: 2px solid #94a3b8;
   box-shadow: 0 16px 45px -5px rgba(15, 23, 42, 0.14);
   position: relative;
   overflow: hidden;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+.cabang-section::before,
 .fasilitas-section::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 6px;
+  height: 5px;
   background: linear-gradient(90deg, #002147 0%, #00B4D8 50%, #10b981 100%);
-  border-radius: 24px 24px 0 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.cabang-section .section-header,
+.fasilitas-section .section-header {
+  margin-bottom: 1.35rem;
+}
+
+.cabang-section .section-title,
+.fasilitas-section .section-title {
+  font-size: 1.5rem;
+}
+
+.cabang-section .section-subtitle,
+.fasilitas-section .section-subtitle {
+  font-size: 0.86rem;
+  margin-top: 0.3rem;
 }
 
 .animated-tabs-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.95rem;
 }
 
-/* Nav Bar Tab Buttons */
+/* Nav Bar Tab Buttons - Compact & Centered */
 .tab-nav-bar {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  justify-content: center;
   flex-wrap: wrap;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.78);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 0.45rem;
-  border-radius: 16px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 14px;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  width: fit-content;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .tab-btn {
   position: relative;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.88rem;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  border-radius: 12px;
-  color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
   background: transparent;
   border: none;
   cursor: pointer;
   outline: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   font-family: inherit;
 }
@@ -1782,7 +1807,7 @@ a:hover {
   border: 1.5px solid rgba(0, 180, 216, 0.6);
   box-shadow: 0 0 20px rgba(0, 180, 216, 0.35);
   backdrop-filter: blur(6px);
-  border-radius: 12px;
+  border-radius: 10px;
   pointer-events: none;
   z-index: 1;
 }
@@ -1793,16 +1818,16 @@ a:hover {
   z-index: 2;
 }
 
-/* Tab Content Box */
+/* Tab Content Box - Compact & Balanced */
 .tab-content-box {
-  padding: 2rem;
-  background: rgba(15, 23, 42, 0.85);
+  padding: 1.5rem 1.75rem;
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-radius: 20px;
+  border-radius: 18px;
   border: 1px solid rgba(56, 189, 248, 0.25);
-  box-shadow: 0 20px 50px -8px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 180, 216, 0.15);
-  min-height: 340px;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 180, 216, 0.12);
+  min-height: auto;
   position: relative;
   overflow: hidden;
   color: #ffffff;
@@ -1810,8 +1835,8 @@ a:hover {
 
 .tab-panel {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 2.25rem;
+  grid-template-columns: 310px 1fr;
+  gap: 1.5rem;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -1823,12 +1848,12 @@ a:hover {
 
 .tab-image-container {
   position: relative;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.12);
   aspect-ratio: 16 / 10;
-  max-height: 320px;
+  max-height: 235px;
 }
 
 .tab-panel-img {
@@ -1852,16 +1877,16 @@ a:hover {
 
 .tab-image-badge {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
+  bottom: 10px;
+  left: 10px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.7);
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(8px);
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #38bdf8;
   border: 1px solid rgba(56, 189, 248, 0.35);
@@ -1870,14 +1895,14 @@ a:hover {
 .tab-info-container {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.6rem;
 }
 
 .tab-badge-tag span {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  font-size: 0.72rem;
+  padding: 3px 8px;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1889,33 +1914,35 @@ a:hover {
 
 .tab-title {
   font-family: var(--font-display);
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
   letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .tab-desc {
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   color: #cbd5e1;
-  line-height: 1.7;
+  line-height: 1.55;
+  margin: 0;
 }
 
 .tab-features-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding-top: 1rem;
+  gap: 6px 10px;
+  padding-top: 0.65rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 0.25rem;
+  margin-top: 0.1rem;
 }
 
 .tab-features-grid div {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
+  gap: 5px;
+  font-size: 0.76rem;
   font-weight: 600;
   color: #e2e8f0;
 }
@@ -1923,6 +1950,264 @@ a:hover {
 .tab-features-grid span:first-child {
   color: #34d399;
   font-weight: 800;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CABANG SEKOLAH SECTION & QUICK DIRECTORY CARDS
+   ═══════════════════════════════════════════════════════════ */
+.cabang-section {
+  position: relative;
+}
+
+/* Tab Location Info Card inside active panel - Compact */
+.tab-location-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  line-height: 1.4;
+  transition: border-color 0.25s ease;
+}
+
+.tab-location-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.tab-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.btn-tab-action {
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, opacity 0.2s;
+}
+
+.btn-tab-maps {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+}
+
+.btn-tab-maps:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+  color: #ffffff;
+}
+
+.btn-tab-wa {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.btn-tab-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  color: #ffffff;
+}
+
+.btn-tab-tel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e2e8f0;
+}
+
+.btn-tab-tel:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Quick Directory Cards Grid below animated tabs */
+.branch-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  margin-top: 2.25rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.18);
+}
+
+.branch-quick-card {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.branch-quick-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00B4D8, #10b981);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.branch-quick-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 180, 216, 0.45);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 180, 216, 0.18);
+}
+
+.branch-quick-card:hover::before {
+  opacity: 1;
+}
+
+.branch-quick-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.branch-quick-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(0, 180, 216, 0.14);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.branch-quick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.branch-quick-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.branch-quick-city {
+  font-size: 0.75rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.branch-quick-address {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3.6em;
+}
+
+.branch-quick-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.78rem;
+}
+
+.branch-quick-tel {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.76rem;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.branch-quick-tel:hover {
+  color: #38bdf8;
+}
+
+.branch-quick-links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.branch-quick-btn-maps,
+.branch-quick-btn-wa {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.branch-quick-btn-maps {
+  background: rgba(14, 165, 233, 0.2);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  color: #38bdf8;
+}
+
+.branch-quick-btn-maps:hover {
+  background: #0ea5e9;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.branch-quick-btn-wa {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.branch-quick-btn-wa:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .branch-quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .branch-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2994,6 +3279,9 @@ a:hover {
     grid-template-columns: 1fr;
     gap: 6px;
   }
+  .tab-action-buttons {
+    flex-wrap: wrap;
+  }
 
   /* Contact Section */
   .contact-container {
@@ -3656,19 +3944,23 @@ a:hover {
   color: #ffffff;
 }
 
-/* Fasilitas */
-[data-theme="light"] .content-area-constellation .fasilitas-section {
+/* Fasilitas & Cabang */
+[data-theme="light"] .content-area-constellation .fasilitas-section,
+[data-theme="light"] .content-area-constellation .cabang-section {
   background: oklch(27.1% 0.105 12.094 / 0.94);
   border: 1px solid oklch(58.6% 0.253 17.585 / 0.35);
   box-shadow: 0 16px 45px -5px rgba(0, 0, 0, 0.35);
 }
-[data-theme="light"] .content-area-constellation .fasilitas-section::before {
+[data-theme="light"] .content-area-constellation .fasilitas-section::before,
+[data-theme="light"] .content-area-constellation .cabang-section::before {
   background: linear-gradient(90deg, oklch(41% 0.159 10.272) 0%, oklch(58.6% 0.253 17.585) 100%);
 }
-[data-theme="light"] .content-area-constellation .fasilitas-section .section-title {
+[data-theme="light"] .content-area-constellation .fasilitas-section .section-title,
+[data-theme="light"] .content-area-constellation .cabang-section .section-title {
   color: #ffffff;
 }
-[data-theme="light"] .content-area-constellation .fasilitas-section .section-subtitle {
+[data-theme="light"] .content-area-constellation .fasilitas-section .section-subtitle,
+[data-theme="light"] .content-area-constellation .cabang-section .section-subtitle {
   color: #ffe4e6;
 }
 
@@ -3702,12 +3994,48 @@ a:hover {
   border-color: oklch(58.6% 0.253 17.585 / 0.4);
 }
 
+[data-theme="light"] .tab-location-card {
+  background: oklch(18% 0.07 11 / 0.7);
+  border-color: oklch(58.6% 0.253 17.585 / 0.25);
+}
+
 [data-theme="light"] .tab-features-grid div {
   color: #ffe4e6;
 }
 
 [data-theme="light"] .tab-features-grid span:first-child {
   color: #34d399;
+}
+
+[data-theme="light"] .branch-quick-card {
+  background: oklch(20% 0.08 11 / 0.85);
+  border-color: oklch(58.6% 0.253 17.585 / 0.25);
+}
+
+[data-theme="light"] .branch-quick-card:hover {
+  border-color: oklch(58.6% 0.253 17.585 / 0.6);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45), 0 0 20px oklch(58.6% 0.253 17.585 / 0.25);
+}
+
+[data-theme="light"] .branch-quick-icon {
+  background: oklch(58.6% 0.253 17.585 / 0.2);
+  border-color: oklch(58.6% 0.253 17.585 / 0.4);
+}
+
+[data-theme="light"] .branch-quick-city {
+  color: #fda4af;
+}
+
+[data-theme="light"] .branch-quick-address {
+  color: #fecdd3;
+}
+
+[data-theme="light"] .branch-quick-tel {
+  color: #fecdd3;
+}
+
+[data-theme="light"] .branch-quick-tel:hover {
+  color: #ffffff;
 }
 
 /* Contact Container */

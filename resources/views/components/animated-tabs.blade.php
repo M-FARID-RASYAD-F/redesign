@@ -41,7 +41,7 @@
                 data-active="{{ $tab['id'] === $active ? 'true' : 'false' }}"
             >
                 <span class="tab-highlight absolute inset-0 bg-[#00B4D8]/25 border border-[#00B4D8]/60 shadow-[0_0_20px_rgba(0,180,216,0.35)] backdrop-blur-sm !rounded-lg {{ $tab['id'] === $active ? '' : 'hidden' }}"></span>
-                @if(isset($tab['icon']))
+                @if(!empty($tab['icon']))
                     <span class="tab-btn-icon relative z-10 text-base">{{ $tab['icon'] }}</span>
                 @endif
                 <span class="tab-btn-label relative z-10">{{ $tab['label'] ?? $tab['nama'] ?? $tab['title'] }}</span>
@@ -64,17 +64,11 @@
                         loading="lazy"
                     />
                     <div class="tab-image-overlay"></div>
-                    @if(isset($tab['icon']) || isset($tab['label']))
-                        <div class="tab-image-badge">
-                            <span>{{ $tab['icon'] ?? '✨' }}</span>
-                            <span>{{ $tab['label'] ?? $tab['title'] }}</span>
-                        </div>
-                    @endif
                 </div>
 
                 <div class="tab-info-container">
                     <div class="tab-badge-tag">
-                        <span>{{ $tab['tag'] ?? '🏛️ Sarana Unggulan' }}</span>
+                        <span>{{ $tab['tag'] ?? 'Sarana Unggulan' }}</span>
                     </div>
 
                     <h2 class="tab-title">

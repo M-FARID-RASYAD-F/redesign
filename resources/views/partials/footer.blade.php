@@ -115,13 +115,17 @@
     </div>
 </footer>
 
-<!-- Floating Action Back-to-Top Rocket Button (Appears on Scroll) -->
+<!-- Floating Action Back-to-Top Button (Appears on Scroll) -->
 <button type="button" class="floating-back-to-top" id="floatingBackToTop" aria-label="Kembali ke atas halaman" title="Kembali ke Atas">
     <svg class="scroll-progress-ring" viewBox="0 0 36 36">
         <path class="scroll-progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
         <path class="scroll-progress-bar" id="scrollProgressBar" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
     </svg>
-    <span class="floating-btn-icon">🚀</span>
+    <span class="floating-btn-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </span>
 </button>
 
 @push('scripts')

@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     
     <!-- CSS Custom App -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ file_exists(public_path('css/style.css')) ? filemtime(public_path('css/style.css')) : time() }}">
 
     <!-- Theme Initialization (Anti-Flicker) -->
     <script>

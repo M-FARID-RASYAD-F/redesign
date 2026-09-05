@@ -4729,7 +4729,161 @@ a:hover {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: clamp(24px, 5vw, 45px);
+  overflow: visible;
+  perspective: 1500px;
+  -webkit-perspective: 1500px;
+  perspective-origin: center center;
 }
+
+/* 3D Paper Flip Stage */
+.ppdb-slide-deck {
+  position: relative;
+  width: 100%;
+  min-height: 580px;
+  perspective: 1600px;
+  -webkit-perspective: 1600px;
+  perspective-origin: center center;
+  transform-style: flat;
+  -webkit-transform-style: flat;
+}
+
+/* Setiap Slide adalah selembar kertas fisik dengan visual tactile */
+.ppdb-slide {
+  display: none;
+  width: 100%;
+  min-height: 580px;
+  background: #141e33;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 20px;
+  padding: clamp(22px, 3.5vw, 36px);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+}
+
+[data-theme="light"] .ppdb-slide {
+  background: oklch(29% 0.11 12.094 / 0.98);
+  border-color: oklch(58.6% 0.253 17.585 / 0.45);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.ppdb-slide.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.ppdb-slide.flipping-layer {
+  display: flex !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50 !important;
+  pointer-events: none;
+}
+
+.ppdb-slide.flip-page-next {
+  animation: ppdbTurnPageLeft 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  transform-origin: left center !important;
+}
+
+.ppdb-slide.flip-page-prev {
+  animation: ppdbTurnPageRight 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  transform-origin: right center !important;
+}
+
+.ppdb-slide.incoming-reveal-next {
+  animation: ppdbRevealNext 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+.ppdb-slide.incoming-reveal-prev {
+  animation: ppdbRevealPrev 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+@keyframes ppdbTurnPageLeft {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
+  }
+  40% {
+    transform: rotateY(40deg);
+    opacity: 1;
+    filter: brightness(0.88);
+    box-shadow: 20px 10px 40px rgba(0, 0, 0, 0.7);
+  }
+  80% {
+    transform: rotateY(80deg);
+    opacity: 0.95;
+    filter: brightness(0.65);
+    box-shadow: 35px 15px 50px rgba(0, 0, 0, 0.85);
+  }
+  95% {
+    transform: rotateY(89deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotateY(92deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ppdbTurnPageRight {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
+  }
+  40% {
+    transform: rotateY(-40deg);
+    opacity: 1;
+    filter: brightness(0.88);
+    box-shadow: -20px 10px 40px rgba(0, 0, 0, 0.7);
+  }
+  80% {
+    transform: rotateY(-80deg);
+    opacity: 0.95;
+    filter: brightness(0.65);
+    box-shadow: -35px 15px 50px rgba(0, 0, 0, 0.85);
+  }
+  95% {
+    transform: rotateY(-89deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotateY(-92deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ppdbRevealNext {
+  0% {
+    transform: scale(0.97) translateX(10px);
+    opacity: 0.85;
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+@keyframes ppdbRevealPrev {
+  0% {
+    transform: scale(0.97) translateX(-10px);
+    opacity: 0.85;
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
 .ppdb-step-header {
   display: flex;
   align-items: center;
@@ -4828,6 +4982,411 @@ a:hover {
   color: #cbd5e1;
   line-height: 1.5;
   margin: 0;
+}
+
+/* Multi-Step Wizard & Slide Styles */
+.ppdb-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+  gap: 12px;
+}
+
+.ppdb-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.55;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.ppdb-step-item.active {
+  opacity: 1;
+}
+
+.ppdb-step-item.completed {
+  opacity: 0.9;
+}
+
+.ppdb-step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(30, 41, 59, 0.7);
+  color: #94a3b8;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.ppdb-step-item.active .ppdb-step-circle {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+.ppdb-step-item.completed .ppdb-step-circle {
+  border-color: #10b981;
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+.ppdb-step-circle .step-check {
+  display: none;
+}
+
+.ppdb-step-item.completed .ppdb-step-circle .step-num {
+  display: none;
+}
+
+.ppdb-step-item.completed .ppdb-step-circle .step-check {
+  display: inline-block;
+  font-size: 1.1rem;
+}
+
+.ppdb-step-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ppdb-step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.ppdb-step-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.ppdb-step-item.active .ppdb-step-label {
+  color: #38bdf8;
+}
+
+.ppdb-step-item.active .ppdb-step-name {
+  color: #ffffff;
+}
+
+.ppdb-step-item.completed .ppdb-step-label {
+  color: #34d399;
+}
+
+.ppdb-step-item.completed .ppdb-step-name {
+  color: #e2e8f0;
+}
+
+.ppdb-step-connector {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 4px;
+  border-radius: 99px;
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ppdb-step-connector.completed {
+  background: #10b981;
+}
+
+.ppdb-progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.ppdb-progress-bar {
+  height: 100%;
+  width: 33.33%;
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+}
+
+.ppdb-slide {
+  display: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+}
+
+.ppdb-slide.active {
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+}
+
+.ppdb-slide-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ppdb-info-card {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-top: 10px;
+}
+
+/* 3D Paper Flip Stage */
+.ppdb-slide-deck {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  perspective: 1600px;
+  -webkit-perspective: 1600px;
+  perspective-origin: 50% 40%;
+}
+
+/* 3D Paper Flip Animation Engine */
+.ppdb-slide.paper-flip-out-next {
+  display: flex !important;
+  animation: ppdbPaperTurnOutNext 0.3s cubic-bezier(0.4, 0, 0.7, 1) forwards;
+  transform-origin: left center !important;
+  pointer-events: none;
+}
+
+.ppdb-slide.paper-flip-in-next {
+  display: flex !important;
+  animation: ppdbPaperTurnInNext 0.42s cubic-bezier(0.18, 0.9, 0.32, 1.15) forwards;
+  transform-origin: left center !important;
+}
+
+.ppdb-slide.paper-flip-out-prev {
+  display: flex !important;
+  animation: ppdbPaperTurnOutPrev 0.3s cubic-bezier(0.4, 0, 0.7, 1) forwards;
+  transform-origin: right center !important;
+  pointer-events: none;
+}
+
+.ppdb-slide.paper-flip-in-prev {
+  display: flex !important;
+  animation: ppdbPaperTurnInPrev 0.42s cubic-bezier(0.18, 0.9, 0.32, 1.15) forwards;
+  transform-origin: right center !important;
+}
+
+@keyframes ppdbPaperTurnOutNext {
+  0% {
+    opacity: 1;
+    transform: perspective(1600px) rotateY(0deg) scale(1);
+    filter: brightness(1);
+    box-shadow: 0 0 0 transparent;
+  }
+  40% {
+    filter: brightness(0.85);
+    box-shadow: 15px 0 35px rgba(0, 0, 0, 0.45);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1600px) rotateY(-85deg) scale(0.92) translateX(-25px);
+    filter: brightness(0.5);
+    box-shadow: 30px 0 50px rgba(0, 0, 0, 0.65);
+  }
+}
+
+@keyframes ppdbPaperTurnInNext {
+  0% {
+    opacity: 0;
+    transform: perspective(1600px) rotateY(85deg) scale(0.92) translateX(25px);
+    filter: brightness(1.25);
+    box-shadow: -30px 0 50px rgba(0, 0, 0, 0.65);
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(1.05);
+    box-shadow: -10px 0 25px rgba(0, 0, 0, 0.3);
+  }
+  80% {
+    transform: perspective(1600px) rotateY(-6deg) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1600px) rotateY(0deg) scale(1) translateX(0);
+    filter: brightness(1);
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@keyframes ppdbPaperTurnOutPrev {
+  0% {
+    opacity: 1;
+    transform: perspective(1600px) rotateY(0deg) scale(1);
+    filter: brightness(1);
+    box-shadow: 0 0 0 transparent;
+  }
+  40% {
+    filter: brightness(0.85);
+    box-shadow: -15px 0 35px rgba(0, 0, 0, 0.45);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1600px) rotateY(85deg) scale(0.92) translateX(25px);
+    filter: brightness(0.5);
+    box-shadow: -30px 0 50px rgba(0, 0, 0, 0.65);
+  }
+}
+
+@keyframes ppdbPaperTurnInPrev {
+  0% {
+    opacity: 0;
+    transform: perspective(1600px) rotateY(-85deg) scale(0.92) translateX(-25px);
+    filter: brightness(1.25);
+    box-shadow: 30px 0 50px rgba(0, 0, 0, 0.65);
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(1.05);
+    box-shadow: 10px 0 25px rgba(0, 0, 0, 0.3);
+  }
+  80% {
+    transform: perspective(1600px) rotateY(6deg) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1600px) rotateY(0deg) scale(1) translateX(0);
+    filter: brightness(1);
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ppdb-slide.paper-flip-out-next,
+  .ppdb-slide.paper-flip-out-prev,
+  .ppdb-slide.paper-flip-in-next,
+  .ppdb-slide.paper-flip-in-prev {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+.ppdb-slide-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ppdb-btn-prev {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.ppdb-btn-prev:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+  color: #ffffff;
+}
+
+.ppdb-btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: auto;
+}
+
+.ppdb-btn-next:hover {
+  background: linear-gradient(135deg, #0369a1, #1d4ed8);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  transform: translateX(2px);
+  color: #ffffff;
+}
+
+.ppdb-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: auto;
+}
+
+.ppdb-btn-submit:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.55);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .ppdb-stepper {
+    gap: 6px;
+  }
+  .ppdb-step-info {
+    display: none;
+  }
+  .ppdb-slide-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ppdb-btn-prev,
+  .ppdb-btn-next,
+  .ppdb-btn-submit {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
 }
 
 /* 8. Tracking & Results */
@@ -5083,6 +5642,48 @@ a:hover {
 }
 [data-theme="light"] .ppdb-pdp-desc {
   color: #ffe4e6;
+}
+
+/* Wizard & Stepper in White/Light Mode */
+[data-theme="light"] .ppdb-slide-actions {
+  border-top-color: oklch(58.6% 0.253 17.585 / 0.3);
+}
+[data-theme="light"] .ppdb-step-circle {
+  background: oklch(20% 0.08 11);
+  border-color: oklch(58.6% 0.253 17.585 / 0.4);
+  color: #cbd5e1;
+}
+[data-theme="light"] .ppdb-step-item.active .ppdb-step-circle {
+  border-color: oklch(75% 0.18 18);
+  background: oklch(58.6% 0.253 17.585 / 0.3);
+  color: #ffffff;
+  box-shadow: 0 0 16px oklch(58.6% 0.253 17.585 / 0.4);
+}
+[data-theme="light"] .ppdb-step-item.active .ppdb-step-label {
+  color: oklch(75% 0.18 18);
+}
+[data-theme="light"] .ppdb-step-item.completed .ppdb-step-label {
+  color: #34d399;
+}
+[data-theme="light"] .ppdb-btn-prev {
+  background: oklch(22% 0.09 11 / 0.8);
+  border-color: oklch(58.6% 0.253 17.585 / 0.4);
+  color: #ffffff;
+}
+[data-theme="light"] .ppdb-btn-prev:hover {
+  background: oklch(28% 0.12 12);
+  color: #ffffff;
+}
+[data-theme="light"] .ppdb-btn-next {
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(48% 0.22 17));
+  box-shadow: 0 4px 15px oklch(58.6% 0.253 17.585 / 0.4);
+}
+[data-theme="light"] .ppdb-btn-next:hover {
+  background: linear-gradient(135deg, oklch(62% 0.26 17.585), oklch(52% 0.23 17));
+}
+[data-theme="light"] .ppdb-info-card {
+  background: oklch(22% 0.09 11 / 0.85);
+  border-color: oklch(58.6% 0.253 17.585 / 0.45);
 }
 
 /* Tracking Card in White Mode */

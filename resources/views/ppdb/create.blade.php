@@ -4,158 +4,52 @@
 
 @push('styles')
 <style>
-/* 3D Paper Flip Stage */
+/* Panggung Pergeseran Kertas Modern (Smooth Tactile Paper Track - Zero Layout Reflow) */
 .ppdb-slide-deck {
     position: relative;
     width: 100%;
-    min-height: 580px;
-    perspective: 1600px;
-    -webkit-perspective: 1600px;
-    perspective-origin: center center;
-    transform-style: flat;
-    -webkit-transform-style: flat;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
-/* Setiap Slide adalah selembar kertas fisik dengan visual tactile */
+/* Track horizontal yang menampung seluruh lembaran secara fleksibel & sejajar */
+.ppdb-slide-track {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+/* Setiap Slide adalah selembar kertas fisik modern */
 .ppdb-slide {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    min-width: 100%;
     width: 100%;
     min-height: 580px;
-    background: #141e33;
-    border: 1px solid rgba(56, 189, 248, 0.28);
+    background: #141f36;
+    border: 1px solid rgba(56, 189, 248, 0.22);
     border-radius: 20px;
     padding: clamp(22px, 3.5vw, 36px);
-    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
     box-sizing: border-box;
+    transition: opacity 0.35s ease;
 }
 
 [data-theme="light"] .ppdb-slide {
-    background: oklch(29% 0.11 12.094 / 0.98);
+    background: oklch(27.1% 0.105 12.094 / 0.98);
     border-color: oklch(58.6% 0.253 17.585 / 0.45);
-    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+
+.ppdb-slide:not(.active) {
+    opacity: 0.85;
 }
 
 .ppdb-slide.active {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Layering saat membalik lembaran */
-.ppdb-slide.flipping-layer {
-    display: flex !important;
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 50 !important;
-    pointer-events: none;
-}
-
-/* 1. Lembar Kertas Membalik Keluar ke Kiri (Tombol Lanjut) */
-.ppdb-slide.flip-page-next {
-    animation: ppdbTurnPageLeft 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    transform-origin: left center !important;
-}
-
-@keyframes ppdbTurnPageLeft {
-    0% {
-        transform: rotateY(0deg);
-        opacity: 1;
-        filter: brightness(1);
-        box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
-    }
-    40% {
-        transform: rotateY(40deg);
-        opacity: 1;
-        filter: brightness(0.88);
-        box-shadow: 20px 10px 40px rgba(0, 0, 0, 0.7);
-    }
-    80% {
-        transform: rotateY(80deg);
-        opacity: 0.95;
-        filter: brightness(0.65);
-        box-shadow: 35px 15px 50px rgba(0, 0, 0, 0.85);
-    }
-    95% {
-        transform: rotateY(89deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: rotateY(92deg);
-        opacity: 0;
-    }
-}
-
-/* 2. Lembar Kertas Membalik Keluar ke Kanan (Tombol Kembali) */
-.ppdb-slide.flip-page-prev {
-    animation: ppdbTurnPageRight 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    transform-origin: right center !important;
-}
-
-@keyframes ppdbTurnPageRight {
-    0% {
-        transform: rotateY(0deg);
-        opacity: 1;
-        filter: brightness(1);
-        box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
-    }
-    40% {
-        transform: rotateY(-40deg);
-        opacity: 1;
-        filter: brightness(0.88);
-        box-shadow: -20px 10px 40px rgba(0, 0, 0, 0.7);
-    }
-    80% {
-        transform: rotateY(-80deg);
-        opacity: 0.95;
-        filter: brightness(0.65);
-        box-shadow: -35px 15px 50px rgba(0, 0, 0, 0.85);
-    }
-    95% {
-        transform: rotateY(-89deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: rotateY(-92deg);
-        opacity: 0;
-    }
-}
-
-/* 3. Lembaran Baru Terungkap dari Bawah saat Lanjut */
-.ppdb-slide.incoming-reveal-next {
-    animation: ppdbRevealNext 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-}
-
-@keyframes ppdbRevealNext {
-    0% {
-        transform: scale(0.97) translateX(10px);
-        opacity: 0.85;
-        filter: brightness(0.85);
-    }
-    100% {
-        transform: scale(1) translateX(0);
-        opacity: 1;
-        filter: brightness(1);
-    }
-}
-
-/* 4. Lembaran Baru Terungkap dari Bawah saat Kembali */
-.ppdb-slide.incoming-reveal-prev {
-    animation: ppdbRevealPrev 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-}
-
-@keyframes ppdbRevealPrev {
-    0% {
-        transform: scale(0.97) translateX(-10px);
-        opacity: 0.85;
-        filter: brightness(0.85);
-    }
-    100% {
-        transform: scale(1) translateX(0);
-        opacity: 1;
-        filter: brightness(1);
-    }
+    opacity: 1;
 }
 </style>
 @endpush
@@ -234,9 +128,10 @@
             <form id="ppdbForm" action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
                 <div class="ppdb-slide-deck">
+                    <div class="ppdb-slide-track" id="ppdbSlideTrack">
 
-                <!-- SLIDE 1: DATA CALON SISWA -->
-                <div class="ppdb-slide active" id="slide-1">
+                    <!-- SLIDE 1: DATA CALON SISWA -->
+                    <div class="ppdb-slide active" id="slide-1">
                     <div class="ppdb-slide-body">
                         <div class="ppdb-step-header">
                             <span class="ppdb-step-badge badge-blue">1</span>
@@ -467,6 +362,7 @@
                         Nomor Pendaftaran resmi akan otomatis digenerate setelah pengiriman berhasil.
                     </p>
                 </div>
+                    </div> <!-- /.ppdb-slide-track -->
                 </div> <!-- /.ppdb-slide-deck -->
             </form>
         </div>
@@ -526,44 +422,41 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Tampilkan slide tertentu dengan animasi 3D Paper Flip (Efek Membalik Lembaran Buku)
+    // Tampilkan slide tertentu melalui hardware-accelerated horizontal slide track (Zero Layout Reflow)
     function showSlide(targetStep, shouldScroll = true, immediate = false) {
         if (targetStep === currentStep && !immediate) return;
         if (isTransitioning) return;
+        if (targetStep < 1 || targetStep > totalSteps) return;
 
-        const outgoing = document.getElementById('slide-' + currentStep);
-        const incoming = document.getElementById('slide-' + targetStep);
+        const track = document.getElementById('ppdbSlideTrack');
+        if (!track) return;
 
-        if (!incoming) return;
-
-        // Inisialisasi awal tanpa animasi
-        if (immediate || !outgoing) {
-            for (let i = 1; i <= totalSteps; i++) {
-                const s = document.getElementById('slide-' + i);
-                if (s) {
-                    s.className = 'ppdb-slide';
-                }
-            }
-            incoming.className = 'ppdb-slide active';
-            updateStepperUI(targetStep);
-            currentStep = targetStep;
-            return;
+        if (immediate) {
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${(targetStep - 1) * 100}%)`;
+            void track.offsetWidth;
+            track.style.transition = '';
+        } else {
+            isTransitioning = true;
+            track.style.transform = `translateX(-${(targetStep - 1) * 100}%)`;
         }
 
-        isTransitioning = true;
-        const isNext = targetStep > currentStep;
+        // Tandai slide aktif & pasang inert pada slide tidak aktif untuk aksesibilitas form
+        for (let i = 1; i <= totalSteps; i++) {
+            const s = document.getElementById('slide-' + i);
+            if (s) {
+                if (i === targetStep) {
+                    s.classList.add('active');
+                    s.removeAttribute('inert');
+                } else {
+                    s.classList.remove('active');
+                    s.setAttribute('inert', '');
+                }
+            }
+        }
 
-        // Perbarui stepper seketika
         updateStepperUI(targetStep);
-
-        // 1. Munculkan slide target di layer bawah dengan efek tersingkap
-        incoming.className = 'ppdb-slide active ' + (isNext ? 'incoming-reveal-next' : 'incoming-reveal-prev');
-
-        // 2. Pasang slide saat ini di layer atas sebagai lembaran yang membalik
-        outgoing.className = 'ppdb-slide active flipping-layer ' + (isNext ? 'flip-page-next' : 'flip-page-prev');
-
-        // Force browser layout reflow (penting di Chromium/Brave agar animasi selalu dipicu)
-        void outgoing.offsetWidth;
+        currentStep = targetStep;
 
         if (shouldScroll) {
             setTimeout(() => {
@@ -574,16 +467,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         card.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
-            }, 350);
+            }, 100);
         }
 
-        // Setelah lembaran selesai membalik (650ms), bersihkan layer atas
-        setTimeout(() => {
-            outgoing.className = 'ppdb-slide';
-            incoming.className = 'ppdb-slide active';
-            currentStep = targetStep;
-            isTransitioning = false;
-        }, 670);
+        if (!immediate) {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
     }
 
     // Fungsi global untuk navigasi tombol

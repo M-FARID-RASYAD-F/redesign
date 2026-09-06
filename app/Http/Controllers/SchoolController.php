@@ -59,12 +59,18 @@ class SchoolController extends Controller
                 'desain-komunikasi-visual-dkv' => '🎨 Studio Kreatif Komplit',
             ];
 
+            $prospeks = [
+                'rekayasa-perangkat-lunak-rpl' => 'Fullstack Developer, Web & Mobile App Engineer',
+                'teknik-komputer-jaringan-tkj' => 'Network Engineer, Cloud Admin, Cyber Security',
+                'desain-komunikasi-visual-dkv' => 'Graphic Designer, UI/UX Designer, Video & Motion Animator',
+            ];
+
             return [
                 'id' => $item->slug,
                 'nama' => $item->name,
                 'kategori' => str_contains($item->slug, 'dkv') ? 'Industri Kreatif' : 'Teknologi Informasi',
                 'deskripsi' => $item->description,
-                'prospek' => 'Lulusan siap kerja di bidang ' . explode(' (', $item->name)[0],
+                'prospek' => $prospeks[$item->slug] ?? ('Lulusan siap kerja di bidang ' . explode(' (', $item->name)[0]),
                 'badge' => $badges[$item->slug] ?? '✨ Program Unggulan',
                 'icon' => $item->icon ?? '⚡'
             ];
@@ -74,13 +80,31 @@ class SchoolController extends Controller
         if (empty($jurusan)) {
             $jurusan = [
                 [
-                    'id' => 'rpl',
+                    'id' => 'rekayasa-perangkat-lunak-rpl',
                     'nama' => 'Rekayasa Perangkat Lunak (RPL)',
                     'kategori' => 'Teknologi Informasi',
                     'deskripsi' => 'Mempelajari pemrograman web (Laravel, React), aplikasi mobile, basis data, dan pengembangan software berbasis industri.',
-                    'prospek' => 'Fullstack Developer, Web Developer, Mobile App Engineer',
+                    'prospek' => 'Fullstack Developer, Web & Mobile App Engineer',
                     'badge' => '🔥 Paling Favorit',
                     'icon' => '⚡'
+                ],
+                [
+                    'id' => 'teknik-komputer-jaringan-tkj',
+                    'nama' => 'Teknik Komputer & Jaringan (TKJ)',
+                    'kategori' => 'Teknologi Informasi',
+                    'deskripsi' => 'Fokus pada arsitektur jaringan komputer, administrasi server Linux/Windows, cloud computing, dan siber security.',
+                    'prospek' => 'Network Engineer, Cloud Admin, Cyber Security',
+                    'badge' => '🌐 Sertifikasi Cisco/Mikrotik',
+                    'icon' => '📡'
+                ],
+                [
+                    'id' => 'desain-komunikasi-visual-dkv',
+                    'nama' => 'Desain Komunikasi Visual (DKV)',
+                    'kategori' => 'Industri Kreatif',
+                    'deskripsi' => 'Mengembangkan kreativitas seni visual, ilustrasi digital, fotografi, videografi konten, serta desain antarmuka UI/UX masa depan.',
+                    'prospek' => 'Graphic Designer, UI/UX Designer, Video & Motion Animator',
+                    'badge' => '🎨 Studio Kreatif Komplit',
+                    'icon' => '🎨'
                 ]
             ];
         }

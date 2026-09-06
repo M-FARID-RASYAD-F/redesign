@@ -76,36 +76,56 @@
     <x-constellation-grid class="content-area-constellation">
 
     <!-- 4. Program Keahlian / Jurusan -->
-    <section class="section" id="jurusan">
+    <section class="section reveal" id="jurusan">
         <x-section-header 
             tag="PROGRAM KEAHLIAN" 
             title="Pilih Masa Depanmu di Jurusan Unggulan" 
             subtitle="Kurikulum disesuaikan langsung dengan kebutuhan industri teknologi & bisnis masa kini."
         />
 
-        <div class="grid-3 reveal">
+        <div class="pc-12-jurusan-stage">
             @foreach($jurusan as $j)
                 @php
-                    $theme = match($loop->iteration % 3) {
-                        1 => 'primary',
-                        2 => 'secondary',
-                        0 => 'accent',
+                    $abbreviation = match(true) {
+                        str_contains(strtolower($j['nama']), 'rpl') => 'RPL',
+                        str_contains(strtolower($j['nama']), 'tkj') => 'TKJ',
+                        str_contains(strtolower($j['nama']), 'dkv') => 'DKV',
+                        default => substr($j['nama'], 0, 3),
+                    };
+                    $icon = match($abbreviation) {
+                        'RPL' => '💻',
+                        'TKJ' => '🌐',
+                        'DKV' => '🎨',
+                        default => $j['icon'] ?? '⚡',
                     };
                 @endphp
-                <x-card 
-                    :title="$j['nama']" 
-                    :badge="$j['badge']" 
-                    :icon="$j['icon']"
-                    :subtitle="$j['kategori']"
-                    :theme="$theme"
-                >
-                    <p style="margin-bottom: 1rem; line-height: 1.6;">{{ $j['deskripsi'] }}</p>
-                    
-                    <div class="card-prospek">
-                        <strong>💼 Prospek Karir Lulusan:</strong><br>
-                        <span>{{ $j['prospek'] }}</span>
+                <div class="pc-12__card">
+                    <div class="pc-12__pfp">
+                        <span class="pc-12__pfp-icon">{{ $icon }}</span>
+                        <span class="pc-12__pfp-abbr">{{ $abbreviation }}</span>
                     </div>
-                </x-card>
+                    <h3>{{ $j['nama'] }}</h3>
+                    <p class="pc-12__role">{{ $j['badge'] }} · {{ $j['kategori'] }}</p>
+                    <p class="pc-12__bio">{{ $j['deskripsi'] }}</p>
+                    
+                    <div class="pc-12__row">
+                        <div class="pc-12__stat">
+                            <b>3 Thn</b>
+                            <span>Masa Studi</span>
+                        </div>
+                        <div class="pc-12__stat">
+                            <b>Industri</b>
+                            <span>Kurikulum</span>
+                        </div>
+                    </div>
+
+                    <div class="pc-12__prospek">
+                        <span class="pc-12__prospek-label">💼 Peluang Karir:</span>
+                        <span class="pc-12__prospek-val">{{ $j['prospek'] }}</span>
+                    </div>
+
+                    <a href="{{ route('ppdb.create') }}" class="pc-12__cta">Daftar Jurusan Ini &rarr;</a>
+                </div>
             @endforeach
         </div>
     </section>

@@ -125,7 +125,7 @@
                 <div class="ppdb-progress-bar" id="ppdbProgressBar" style="width: 33.33%;"></div>
             </div>
 
-            <form id="ppdbForm" action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" novalidate>
+            <form id="ppdbForm" action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" novalidate data-initial-step="{{ $errors->hasAny(['doc_kk', 'doc_akta', 'doc_foto', 'doc_rapor', 'agreement']) ? 3 : ($errors->hasAny(['parent_name', 'parent_phone']) ? 2 : 1) }}">
                 @csrf
                 <div class="ppdb-slide-deck">
                     <div class="ppdb-slide-track" id="ppdbSlideTrack">
@@ -146,7 +146,7 @@
                             <label for="full_name" class="ppdb-form-label">
                                 Nama Lengkap Calon Siswa <span style="color: #ef4444;">*</span>
                             </label>
-                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Fatih Al-Ayyubi" class="ppdb-form-input">
+                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Fatih Al-Ayyubi" class="ppdb-form-input" />
                             @error('full_name')
                                 <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                             @enderror
@@ -172,7 +172,7 @@
                                 <label for="birth_date" class="ppdb-form-label">
                                     Tanggal Lahir <span style="color: #ef4444;">*</span>
                                 </label>
-                                <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required class="ppdb-form-input">
+                                <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required class="ppdb-form-input" />
                                 @error('birth_date')
                                     <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
@@ -236,7 +236,7 @@
                                 <label for="parent_name" class="ppdb-form-label">
                                     Nama Lengkap Orang Tua / Wali <span style="color: #ef4444;">*</span>
                                 </label>
-                                <input type="text" id="parent_name" name="parent_name" value="{{ old('parent_name') }}" required placeholder="Contoh: H. Agus Sulaiman, S.T." class="ppdb-form-input">
+                                <input type="text" id="parent_name" name="parent_name" value="{{ old('parent_name') }}" required placeholder="Contoh: H. Agus Sulaiman, S.T." class="ppdb-form-input" />
                                 @error('parent_name')
                                     <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
@@ -246,7 +246,7 @@
                                 <label for="parent_phone" class="ppdb-form-label">
                                     Nomor WhatsApp / Telepon Aktif <span style="color: #ef4444;">*</span>
                                 </label>
-                                <input type="tel" id="parent_phone" name="parent_phone" value="{{ old('parent_phone') }}" required placeholder="Contoh: 081234567890" class="ppdb-form-input">
+                                <input type="tel" id="parent_phone" name="parent_phone" value="{{ old('parent_phone') }}" required placeholder="Contoh: 081234567890" class="ppdb-form-input" />
                                 <span style="font-size: 0.75rem; color: #94a3b8; display: block; margin-top: 4px;">Akan digunakan panitia untuk konfirmasi dan notifikasi status</span>
                                 @error('parent_phone')
                                     <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
@@ -300,28 +300,28 @@
                             <div class="ppdb-upload-box">
                                 <label for="doc_kk" class="ppdb-upload-title">📄 Kartu Keluarga (KK)</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
-                                <input type="file" id="doc_kk" name="doc_kk" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;">
+                                <input type="file" id="doc_kk" name="doc_kk" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Akta Lahir -->
                             <div class="ppdb-upload-box">
                                 <label for="doc_akta" class="ppdb-upload-title">📜 Akta Kelahiran</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
-                                <input type="file" id="doc_akta" name="doc_akta" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;">
+                                <input type="file" id="doc_akta" name="doc_akta" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Pas Foto -->
                             <div class="ppdb-upload-box">
                                 <label for="doc_foto" class="ppdb-upload-title">🖼️ Pas Foto Siswa (3x4)</label>
                                 <span class="ppdb-upload-sub">JPG/PNG (Maks. 3 MB)</span>
-                                <input type="file" id="doc_foto" name="doc_foto" accept=".jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;">
+                                <input type="file" id="doc_foto" name="doc_foto" accept=".jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Rapor / SKL -->
                             <div class="ppdb-upload-box">
                                 <label for="doc_rapor" class="ppdb-upload-title">📑 Rapor Terakhir / SKL</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
-                                <input type="file" id="doc_rapor" name="doc_rapor" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;">
+                                <input type="file" id="doc_rapor" name="doc_rapor" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
                         </div>
 
@@ -329,7 +329,7 @@
                         <div class="ppdb-pdp-notice" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
                                 <span style="font-size: 1.3rem;">🛡️</span>
-                                <div>
+                                <div style="flex: 1;">
                                     <h4 class="ppdb-pdp-title">Kebijakan Pelindungan Data Pribadi (UU PDP No. 27/2022)</h4>
                                     <p class="ppdb-pdp-desc">
                                         Seluruh informasi dan berkas yang Anda kirimkan hanya akan digunakan untuk keperluan seleksi dan administrasi PPDB sekolah. Data tersimpan di server terenkripsi dan tidak akan dipindahtangankan kepada pihak ketiga tanpa izin orang tua/wali.
@@ -338,7 +338,7 @@
                             </div>
 
                             <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" />
                                 <label for="agreement" style="font-size: 0.85rem; color: #e2e8f0; line-height: 1.5; cursor: pointer;">
                                     <strong>Saya menyatakan bahwa seluruh data yang diisikan adalah benar dan valid.</strong> Saya menyetujui data ini diproses oleh Panitia PPDB PKBM Tahfizh At-Tamam. <span style="color: #ef4444;">*</span>
                                 </label>
@@ -368,21 +368,15 @@
         </div>
     </div>
 </div>
+@endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const totalSteps = 3;
-    let currentStep = 1;
-
-    // Deteksi error dari server-side Laravel validation
-    @if($errors->hasAny(['doc_kk', 'doc_akta', 'doc_foto', 'doc_rapor', 'agreement']))
-        currentStep = 3;
-    @elseif($errors->hasAny(['parent_name', 'parent_phone']))
-        currentStep = 2;
-    @else
-        currentStep = 1;
-    @endif
+    const form = document.getElementById('ppdbForm');
+    const initialStepFromErrors = form && form.dataset.initialStep ? parseInt(form.dataset.initialStep, 10) : 1;
+    let currentStep = initialStepFromErrors || 1;
 
     let isTransitioning = false;
 
@@ -492,7 +486,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Navigasi dengan tombol Enter di input slide 1 & 2
-    const form = document.getElementById('ppdbForm');
     if (form) {
         form.querySelectorAll('#slide-1 input, #slide-2 input').forEach(input => {
             input.addEventListener('keydown', function(e) {
@@ -532,4 +525,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 @endpush
-@endsection

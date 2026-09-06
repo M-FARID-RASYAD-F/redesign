@@ -49,6 +49,9 @@
     <!-- Partial Footer -->
     @include('partials.footer')
 
+    <!-- Floating WhatsApp Button (Pojok Kiri Bawah) -->
+    @include('partials.whatsapp-button')
+
     <!-- SweetAlert2 Standalone Engine -->
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 

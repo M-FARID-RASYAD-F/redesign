@@ -19,8 +19,8 @@
                     <a href="#kontak" class="btn btn-primary">
                         📝 Daftar PPDB Online
                     </a>
-                    <a href="#jurusan" class="btn btn-outline">
-                        🔍 Lihat Jurusan
+                    <a href="#jenjang" class="btn btn-outline">
+                        🔍 Lihat Jenjang
                     </a>
                 </div>
             </div>
@@ -75,34 +75,23 @@
     {{-- ═══ Area Konten Animasi Constellation Grid (bck.md) ═══ --}}
     <x-constellation-grid class="content-area-constellation">
 
-    <!-- 4. Program Keahlian / Jurusan -->
-    <section class="section reveal" id="jurusan">
+    <!-- 4. Jenjang Pendidikan (SD, SMP, SMK) -->
+    <section class="section reveal" id="jenjang">
+        {{-- Hidden anchor fallback untuk kompatibilitas tautan lama --}}
+        <span id="jurusan" style="position: relative; top: -90px; display: block; visibility: hidden;"></span>
+
         <x-section-header 
-            tag="PROGRAM KEAHLIAN" 
-            title="Pilih Masa Depanmu di Jurusan Unggulan" 
-            subtitle="Kurikulum disesuaikan langsung dengan kebutuhan industri teknologi & bisnis masa kini."
+            tag="JENJANG PENDIDIKAN" 
+            title="Pilihan Jenjang Pendidikan di PKBM At-Tamam" 
+            subtitle="Menyediakan pendidikan berjenjang mulai dari tingkat dasar, menengah pertama, hingga kejuruan berbasis karakter Qurani dan vokasi modern."
         />
 
-        <div class="pc-12-jurusan-stage">
-            @foreach($jurusan as $j)
-                @php
-                    $abbreviation = match(true) {
-                        str_contains(strtolower($j['nama']), 'rpl') => 'RPL',
-                        str_contains(strtolower($j['nama']), 'tkj') => 'TKJ',
-                        str_contains(strtolower($j['nama']), 'dkv') => 'DKV',
-                        default => substr($j['nama'], 0, 3),
-                    };
-                    $icon = match($abbreviation) {
-                        'RPL' => '💻',
-                        'TKJ' => '🌐',
-                        'DKV' => '🎨',
-                        default => $j['icon'] ?? '⚡',
-                    };
-                @endphp
+        <div class="pc-12-jenjang-stage pc-12-jurusan-stage">
+            @foreach($jenjang as $j)
                 <div class="pc-12__card">
                     <div class="pc-12__pfp">
-                        <span class="pc-12__pfp-icon">{{ $icon }}</span>
-                        <span class="pc-12__pfp-abbr">{{ $abbreviation }}</span>
+                        <span class="pc-12__pfp-icon">{{ $j['icon'] ?? '🎓' }}</span>
+                        <span class="pc-12__pfp-abbr">{{ $j['kode'] ?? substr($j['nama'], 0, 3) }}</span>
                     </div>
                     <h3>{{ $j['nama'] }}</h3>
                     <p class="pc-12__role">{{ $j['badge'] }} · {{ $j['kategori'] }}</p>
@@ -110,21 +99,21 @@
                     
                     <div class="pc-12__row">
                         <div class="pc-12__stat">
-                            <b>3 Thn</b>
+                            <b>{{ $j['masa_studi'] ?? '3 Thn' }}</b>
                             <span>Masa Studi</span>
                         </div>
                         <div class="pc-12__stat">
-                            <b>Industri</b>
-                            <span>Kurikulum</span>
+                            <b>{{ $j['fokus_kurikulum'] ?? 'Kurikulum' }}</b>
+                            <span>Fokus Utama</span>
                         </div>
                     </div>
 
                     <div class="pc-12__prospek">
-                        <span class="pc-12__prospek-label">💼 Peluang Karir:</span>
-                        <span class="pc-12__prospek-val">{{ $j['prospek'] }}</span>
+                        <span class="pc-12__prospek-label">{{ $j['keunggulan_label'] ?? '🎯 Keunggulan Program:' }}</span>
+                        <span class="pc-12__prospek-val">{{ $j['keunggulan'] ?? '' }}</span>
                     </div>
 
-                    <a href="{{ route('ppdb.create') }}" class="pc-12__cta">Daftar Jurusan Ini &rarr;</a>
+                    <a href="{{ $j['link_daftar'] ?? route('ppdb.create') }}" class="pc-12__cta">Daftar {{ $j['kode'] }} Ini &rarr;</a>
                 </div>
             @endforeach
         </div>

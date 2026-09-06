@@ -59,15 +59,15 @@
                 </ul>
             </div>
 
-            <!-- Program Kejuruan & Unggulan -->
+            <!-- Program Jenjang Pendidikan & Unggulan -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon">🎓</span> Program Unggulan
+                    <span class="footer-title-icon">🎓</span> Jenjang Pendidikan
                 </h3>
                 <ul class="footer-links">
-                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Rekayasa Perangkat Lunak</a></li>
-                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Teknik Komputer & Jaringan</a></li>
-                    <li><a href="{{ route('home') }}#jurusan"><span class="footer-link-arrow">›</span> Desain Komunikasi Visual</a></li>
+                    <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SD (Sekolah Dasar)</a></li>
+                    <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SMP (Menengah Pertama)</a></li>
+                    <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SMK (Kejuruan Vokasi)</a></li>
                     <li><a href="{{ route('home') }}#sambutan"><span class="footer-link-arrow">›</span> Program Tahfizh Intensif</a></li>
                     <li><a href="{{ route('home') }}#cabang"><span class="footer-link-arrow">›</span> Cabang Sekolah</a></li>
                 </ul>

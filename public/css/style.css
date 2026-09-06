@@ -1554,7 +1554,8 @@ a:hover {
    NEUMORPHIC SOFT-SHADOW JURUSAN CARDS (CodeFronts Component)
    Dual light/dark box-shadows, extruded avatar, inset wells & tactile button
    ═══════════════════════════════════════════════════════════ */
-.pc-12-jurusan-stage {
+.pc-12-jurusan-stage,
+.pc-12-jenjang-stage {
   --neu-bg: #141c2e;
   --neu-dark-shadow: #050811;
   --neu-light-shadow: #22304d;
@@ -1735,7 +1736,8 @@ a:hover {
    LIGHT THEME: SINKRONISASI DENGAN TEMA MERAH (CRIMSON / RUBY) WEBSITE
    oklch(27.1% 0.105 12.094) ruby base + oklch(58.6% 0.253 17.585) aksen merah
    ═══════════════════════════════════════════════════════════ */
-[data-theme="light"] .pc-12-jurusan-stage {
+[data-theme="light"] .pc-12-jurusan-stage,
+[data-theme="light"] .pc-12-jenjang-stage {
   --neu-bg: oklch(27.1% 0.105 12.094 / 0.96);
   --neu-dark-shadow: rgba(0, 0, 0, 0.35);
   --neu-light-shadow: oklch(58.6% 0.253 17.585 / 0.2);
@@ -1844,7 +1846,8 @@ a:hover {
 
 /* Responsive Styles for Neumorphic Jurusan Cards */
 @media (max-width: 768px) {
-  .pc-12-jurusan-stage {
+  .pc-12-jurusan-stage,
+  .pc-12-jenjang-stage {
     gap: 22px;
   }
 }

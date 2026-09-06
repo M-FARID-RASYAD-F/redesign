@@ -47,11 +47,57 @@ class SchoolController extends Controller
         $stats = [
             ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
             ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
-            ['label' => 'Program Keahlian', 'value' => ($jumlahJurusan > 0 ? $jumlahJurusan : 3) . ' Jurusan', 'icon' => '💻', 'color' => '#fffbeb'],
-            ['label' => 'Serapan Kerja', 'value' => '94% Pertahun', 'icon' => '🚀', 'color' => '#f3e8ff'],
+            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => '🏫', 'color' => '#fffbeb'],
+            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => '🚀', 'color' => '#f3e8ff'],
         ];
 
-        // 4. Data Program Keahlian / Jurusan (Dinamis dari Database)
+        // 4. Data Jenjang Pendidikan (SD, SMP, SMK) - Dummy Data Lengkap
+        $jenjang = [
+            [
+                'id' => 'sd',
+                'kode' => 'SD',
+                'nama' => 'Sekolah Dasar (SD)',
+                'kategori' => 'Pendidikan Dasar & Karakter',
+                'badge' => '🌱 Fondasi Qurani',
+                'deskripsi' => 'Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar literasi, numerasi, dan sains eksploratif dengan suasana belajar aktif.',
+                'masa_studi' => '6 Tahun',
+                'fokus_kurikulum' => 'Tahfizh & Adab',
+                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan' => 'Tahfizh Cilik, Bilingual Dasar, Islamic Character Building, Fun Science & Math',
+                'icon' => '🎒',
+                'link_daftar' => route('ppdb.create', ['jenjang' => 'sd']),
+            ],
+            [
+                'id' => 'smp',
+                'kode' => 'SMP',
+                'nama' => 'Sekolah Menengah Pertama (SMP)',
+                'kategori' => 'Pendidikan Menengah & Riset',
+                'badge' => '🌟 Karakter & Sains Terapan',
+                'deskripsi' => 'Penguatan tahfizh Al-Qur\'an berkesinambungan, pembentukan kepemimpinan santri, penguasaan sains terapan, serta pengenalan dasar teknologi digital.',
+                'masa_studi' => '3 Tahun',
+                'fokus_kurikulum' => 'Tahfizh & Sains',
+                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan' => 'Target 5–10 Juz Mutqin, Arabic & English Club, Basic Coding, Leadership Camp',
+                'icon' => '📚',
+                'link_daftar' => route('ppdb.create', ['jenjang' => 'smp']),
+            ],
+            [
+                'id' => 'smk',
+                'kode' => 'SMK',
+                'nama' => 'Sekolah Menengah Kejuruan (SMK)',
+                'kategori' => 'Pendidikan Vokasi & Siap Kerja',
+                'badge' => '🚀 Keahlian Industri & Digital',
+                'deskripsi' => 'Membekali keterampilan kejuruan vokasi berstandar industri (RPL, TKJ, DKV), sertifikasi BNSP/LSP, kurikulum industri, serta magang kerja nyata.',
+                'masa_studi' => '3 Tahun',
+                'fokus_kurikulum' => 'Industri & Vokasi',
+                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan' => 'Kelas Industri (RPL, TKJ, DKV), Magang Kerja (PKL), Sertifikasi BNSP, Inkubator Bisnis',
+                'icon' => '💻',
+                'link_daftar' => route('ppdb.create', ['jenjang' => 'smk']),
+            ],
+        ];
+
+        // 5. Data Program Keahlian / Jurusan (Dinamis dari Database - Tetap disimpan untuk kompatibilitas)
         $jurusan = Major::all()->map(function ($item) {
             $badges = [
                 'rekayasa-perangkat-lunak-rpl' => '🔥 Paling Favorit',
@@ -233,7 +279,7 @@ class SchoolController extends Controller
         $fasilitas = $cabang;
 
         // Kirim seluruh data ke view 'welcome'
-        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jurusan', 'berita', 'fasilitas', 'cabang'));
+        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang'));
     }
 
     /**

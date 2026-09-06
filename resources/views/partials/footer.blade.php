@@ -16,38 +16,8 @@
                 Lembaga pendidikan Islam & kejuruan terkemuka yang berdedikasi mencetak generasi penghafal Al-Qur'an yang unggul, kompeten di bidang teknologi modern, dan berakhlak mulia.
             </p>
 
-            <!-- Pill Badges -->
-            <div class="footer-badges">
-                <span class="footer-badge">🌟 Akreditasi B</span>
-                <span class="footer-badge">📖 Tahfizh Qur'an</span>
-                <span class="footer-badge">🚀 Berbasis Industri</span>
-            </div>
-
-            <!-- Quick Interactive Contact Buttons / Chips -->
-            <div class="footer-contact-list">
-                <a href="https://maps.google.com/?q=PKBM+Tahfizh+At-Tamam" target="_blank" rel="noopener noreferrer" class="footer-contact-item" title="Buka Lokasi di Google Maps">
-                    <span class="footer-contact-icon">📍</span>
-                    <span class="footer-contact-text">Jl. Pendidikan Teknologi No. 45, Cyber City</span>
-                </a>
-                <div class="footer-contact-row">
-                    <a href="tel:0215550192" class="footer-contact-item" title="Hubungi Telepon">
-                        <span class="footer-contact-icon">📞</span>
-                        <span class="footer-contact-text">(021) 555-0192</span>
-                    </a>
-                    <a href="mailto:info@pkbmtahfizhattamam.sch.id" class="footer-contact-item" title="Kirim Email">
-                        <span class="footer-contact-icon">✉️</span>
-                        <span class="footer-contact-text">info@pkbmtahfizhattamam.sch.id</span>
-                    </a>
-                </div>
-                <a href="https://wa.me/6281200000000?text=Halo%20Admin%20PKBM%20Tahfizh%20At-Tamam,%20saya%20ingin%20konsultasi%20pendaftaran" target="_blank" rel="noopener noreferrer" class="footer-contact-item footer-contact-item-highlight" title="Chat WhatsApp Sekolah">
-                    <span class="footer-contact-icon">💬</span>
-                    <span class="footer-contact-text">Chat WhatsApp Panitia PPDB (Fast Response)</span>
-                </a>
-            </div>
-
             <!-- Media Sosial Resmi (Clean & Interactive Icons) -->
             <div class="footer-social-section">
-                <span class="footer-social-title">🌐 Media Sosial Resmi</span>
                 <div class="footer-social-links">
                     <a href="https://wa.me/6281200000000" target="_blank" rel="noopener noreferrer" class="footer-social-btn social-whatsapp" aria-label="WhatsApp" title="WhatsApp Resmi">
                         <svg class="footer-social-svg" viewBox="0 0 24 24">

@@ -5231,13 +5231,14 @@ a:hover {
   width: 100%;
   overflow: hidden;
   border-radius: 20px;
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Track horizontal yang menampung seluruh lembaran secara fleksibel & sejajar */
 .ppdb-slide-track {
   display: flex;
   width: 100%;
-  align-items: stretch;
+  align-items: flex-start;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
@@ -5249,7 +5250,7 @@ a:hover {
   flex: 0 0 100%;
   min-width: 100%;
   width: 100%;
-  min-height: 580px;
+  min-height: 520px;
   background: #141f36;
   border: 1px solid rgba(56, 189, 248, 0.22);
   border-radius: 20px;
@@ -5613,6 +5614,18 @@ a:hover {
 }
 
 @media (max-width: 640px) {
+  .ppdb-form-card {
+    padding: 20px 14px;
+    border-radius: 18px;
+  }
+  .ppdb-slide {
+    min-height: auto;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .ppdb-slide-body {
+    flex: 0 0 auto;
+  }
   .ppdb-stepper {
     gap: 6px;
   }
@@ -5622,6 +5635,8 @@ a:hover {
   .ppdb-slide-actions {
     flex-direction: column;
     width: 100%;
+    margin-top: 20px;
+    padding-top: 18px;
   }
   .ppdb-btn-prev,
   .ppdb-btn-next,

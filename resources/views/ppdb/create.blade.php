@@ -10,13 +10,14 @@
     width: 100%;
     overflow: hidden;
     border-radius: 20px;
+    transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Track horizontal yang menampung seluruh lembaran secara fleksibel & sejajar */
 .ppdb-slide-track {
     display: flex;
     width: 100%;
-    align-items: stretch;
+    align-items: flex-start;
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
 }
@@ -28,7 +29,7 @@
     flex: 0 0 100%;
     min-width: 100%;
     width: 100%;
-    min-height: 580px;
+    min-height: 520px;
     background: #141f36;
     border: 1px solid rgba(56, 189, 248, 0.22);
     border-radius: 20px;
@@ -50,6 +51,25 @@
 
 .ppdb-slide.active {
     opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .ppdb-form-card {
+        padding: 20px 14px;
+        border-radius: 18px;
+    }
+    .ppdb-slide {
+        min-height: auto;
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+    .ppdb-slide-body {
+        flex: 0 0 auto;
+    }
+    .ppdb-slide-actions {
+        margin-top: 20px;
+        padding-top: 18px;
+    }
 }
 </style>
 @endpush
@@ -416,6 +436,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Sesuaikan tinggi container slide secara dinamis mengikuti tinggi konten aktif (Auto-Height)
+    function updateDeckHeight(targetStep, immediate = false) {
+        const step = targetStep || currentStep;
+        const activeSlide = document.getElementById('slide-' + step);
+        const deck = document.querySelector('.ppdb-slide-deck');
+        if (!activeSlide || !deck) return;
+
+        const h = activeSlide.offsetHeight;
+        if (!h || h === 0) return;
+
+        if (immediate) {
+            const prevTransition = deck.style.transition;
+            deck.style.transition = 'none';
+            deck.style.height = h + 'px';
+            void deck.offsetHeight;
+            deck.style.transition = prevTransition;
+        } else {
+            deck.style.height = h + 'px';
+        }
+    }
+
     // Tampilkan slide tertentu melalui hardware-accelerated horizontal slide track (Zero Layout Reflow)
     function showSlide(targetStep, shouldScroll = true, immediate = false) {
         if (targetStep === currentStep && !immediate) return;
@@ -449,6 +490,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        updateDeckHeight(targetStep, immediate);
         updateStepperUI(targetStep);
         currentStep = targetStep;
 
@@ -522,6 +564,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Inisialisasi slide awal tanpa auto-scroll dan tanpa animasi membalik
     showSlide(currentStep, false, true);
+
+    // Update tinggi saat resize atau rotasi perangkat
+    window.addEventListener('resize', function () {
+        updateDeckHeight(currentStep, true);
+    });
+
+    window.addEventListener('load', function () {
+        updateDeckHeight(currentStep, true);
+    });
+
+    // Auto-update jika ada elemen dalam slide yang berubah dimensi
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+            updateDeckHeight(currentStep, false);
+        });
+        for (let i = 1; i <= totalSteps; i++) {
+            const s = document.getElementById('slide-' + i);
+            if (s) ro.observe(s);
+        }
+    }
 });
 </script>
 @endpush

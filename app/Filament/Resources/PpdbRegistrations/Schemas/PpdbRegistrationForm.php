@@ -29,7 +29,6 @@ class PpdbRegistrationForm
                 Textarea::make('address')->label('Alamat')->columnSpanFull(),
                 TextInput::make('parent_name')->label('Nama Orang Tua/Wali'),
                 TextInput::make('parent_phone')->label('No. HP Orang Tua/Wali'),
-                TextInput::make('major_choice')->label('Pilihan Jurusan'),
                 Select::make('status')
                     ->label('Status Pendaftaran')
                     ->options([

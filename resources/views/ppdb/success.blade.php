@@ -61,14 +61,6 @@
                             <td>{{ $registration->birth_date ? $registration->birth_date->translatedFormat('d F Y') : '-' }}</td>
                         </tr>
                         <tr>
-                            <td>Pilihan Jurusan</td>
-                            <td>
-                                <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 10px; border-radius: 6px; font-weight: 700;">
-                                    {{ strtoupper($registration->major_choice) }}
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Nama Orang Tua / Wali</td>
                             <td>{{ $registration->parent_name }}</td>
                         </tr>

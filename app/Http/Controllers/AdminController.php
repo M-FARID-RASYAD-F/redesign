@@ -244,7 +244,6 @@ class AdminController extends Controller
                 'Alamat',
                 'Nama Orang Tua / Wali',
                 'No. HP Orang Tua',
-                'Pilihan Jurusan',
                 'Status Pendaftaran',
                 'Catatan Panitia',
                 'Tanggal Mendaftar'
@@ -260,7 +259,6 @@ class AdminController extends Controller
                     $reg->address,
                     $reg->parent_name,
                     $reg->parent_phone,
-                    strtoupper($reg->major_choice),
                     ucfirst($reg->status),
                     $reg->notes ?? '-',
                     $reg->created_at ? $reg->created_at->format('d/m/Y H:i') : '-',

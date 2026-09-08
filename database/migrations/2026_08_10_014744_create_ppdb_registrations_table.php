@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('address');
             $table->string('parent_name');
             $table->string('parent_phone');
-            $table->string('major_choice');
             $table->enum('status', ['pending', 'diverifikasi', 'diterima', 'ditolak'])->default('pending');
             $table->text('notes')->nullable();
             $table->timestamps();

@@ -37,10 +37,6 @@
                         <td style="border-bottom: none; padding: 12px 0;">{{ $registration->birth_date ? $registration->birth_date->format('d F Y') : '-' }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Jurusan Pilihan</td>
-                        <td style="border-bottom: none; padding: 12px 0;"><span class="badge badge-info">{{ strtoupper($registration->major_choice) }}</span></td>
-                    </tr>
-                    <tr>
                         <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Alamat Lengkap</td>
                         <td style="border-bottom: none; padding: 12px 0; line-height: 1.5;">{{ $registration->address }}</td>
                     </tr>

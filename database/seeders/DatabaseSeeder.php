@@ -142,7 +142,6 @@ class DatabaseSeeder extends Seeder
                 'address' => 'Jl. Merdeka No. 10, Jakarta Pusat',
                 'parent_name' => 'Bambang Hermawan',
                 'parent_phone' => '081234567890',
-                'major_choice' => 'rpl',
                 'status' => 'pending',
                 'notes' => 'Menunggu verifikasi rapor dan KK',
             ],
@@ -154,7 +153,6 @@ class DatabaseSeeder extends Seeder
                 'address' => 'Jl. Melati Indah Gg. 3 No. 14, Jakarta Barat',
                 'parent_name' => 'Sri Astuti',
                 'parent_phone' => '089876543210',
-                'major_choice' => 'dkv',
                 'status' => 'diverifikasi',
                 'notes' => 'Dokumen lengkap dan valid',
             ]

@@ -22,7 +22,6 @@ class PpdbRegistrationsTable
                 TextColumn::make('birth_date')->date()->sortable()->label('Tanggal Lahir'),
                 TextColumn::make('parent_name')->searchable()->label('Orang Tua/Wali'),
                 TextColumn::make('parent_phone')->searchable()->label('No. HP'),
-                TextColumn::make('major_choice')->searchable()->label('Pilihan Jurusan'),
                 SelectColumn::make('status')
                     ->options([
                         'pending' => 'Pending',

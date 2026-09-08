@@ -887,6 +887,7 @@
             .sidebar {
                 width: min(290px, 85vw);
                 transform: translateX(-100%);
+                padding-bottom: max(22px, env(safe-area-inset-bottom)) !important;
             }
             .sidebar.is-open {
                 transform: translateX(0);
@@ -905,6 +906,24 @@
             }
             .sidebar-close-btn {
                 display: flex !important;
+            }
+
+            /* Responsive reset untuk grid 2-kolom child views & dashboards */
+            .main-container div[style*="grid-template-columns: 2fr 1fr"],
+            .main-container div[style*="grid-template-columns:2fr 1fr"],
+            .main-container div[style*="grid-template-columns: 1fr 320px"],
+            .main-container div[style*="grid-template-columns:1fr 320px"],
+            .main-container div[style*="grid-template-columns: 2fr 1.2fr"],
+            .main-container div[style*="grid-template-columns:2fr 1.2fr"],
+            .dashboard-columns {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            .dashboard-hero {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 22px 20px !important;
             }
         }
 
@@ -953,10 +972,11 @@
             }
 
             .header-title {
-                font-size: 1.5rem !important;
+                font-size: 1.45rem !important;
             }
 
             .header > div:last-child,
+            .header > a.btn,
             .header .btn {
                 width: 100% !important;
                 justify-content: center !important;
@@ -968,9 +988,38 @@
                 margin-bottom: 16px !important;
             }
 
+            /* Header di dalam card (flex-between) agar tidak saling tabrak */
+            .card > div[style*="justify-content: space-between"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 10px !important;
+            }
+
+            .card > div[style*="justify-content: space-between"] > a.btn,
+            .card > div[style*="justify-content: space-between"] > .badge {
+                align-self: flex-start !important;
+            }
+
+            /* Responsive Stats Cards Grid (2 Kolom Rapi di Tablet & Mobile) */
+            .stats-grid,
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))"],
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+            }
+
+            /* Mini Stats Grid (PPDB breakdown dll) */
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr))"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
+
             /* Mencegah kolom tabel terhimpit */
             .table-responsive table {
-                min-width: 600px !important;
+                min-width: 620px !important;
             }
 
             .table-responsive th,
@@ -978,11 +1027,183 @@
                 padding: 11px 12px !important;
             }
 
+            td:last-child {
+                white-space: nowrap !important;
+            }
+
+            /* iOS Safari input zoom fix (font-size >= 16px) */
+            .form-control,
+            input.form-control,
+            select.form-control,
+            textarea.form-control {
+                font-size: 16px !important;
+            }
+
             /* Responsive reset untuk grid 2-kolom child views */
             .main-container div[style*="grid-template-columns: 1fr 320px"],
             .main-container div[style*="grid-template-columns:1fr 320px"] {
                 grid-template-columns: 1fr !important;
                 gap: 16px !important;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .dashboard-hero {
+                padding: 16px 14px !important;
+                border-radius: 16px !important;
+                gap: 14px !important;
+            }
+
+            .hero-title {
+                font-size: 1.35rem !important;
+            }
+
+            .hero-actions {
+                flex-direction: column !important;
+                width: 100% !important;
+                gap: 8px !important;
+            }
+
+            .hero-actions .btn {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+
+            /* Form Buttons Full-Width Stack */
+            .card form div[style*="display: flex"],
+            .card form div[style*="display:flex"] {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+
+            .card form div[style*="display: flex"] > .btn,
+            .card form div[style*="display: flex"] > button,
+            .card form div[style*="display: flex"] > a,
+            .card form div[style*="display:flex"] > .btn,
+            .card form div[style*="display:flex"] > button,
+            .card form div[style*="display:flex"] > a {
+                width: 100% !important;
+                justify-content: center !important;
+                text-align: center !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 10px 10px 45px 10px !important;
+            }
+
+            .admin-topbar {
+                padding: 8px 10px !important;
+                margin-bottom: 14px !important;
+                border-radius: 12px !important;
+            }
+
+            .topbar-status-badge {
+                padding: 4px 8px !important;
+                font-size: 0.68rem !important;
+            }
+
+            .adm-theme-toggle {
+                width: 34px !important;
+                height: 34px !important;
+                font-size: 0.95rem !important;
+            }
+
+            .btn-topbar-web {
+                padding: 6px 8px !important;
+                font-size: 0.72rem !important;
+            }
+
+            .card {
+                padding: 14px 12px !important;
+                border-radius: 12px !important;
+            }
+
+            /* Pada layar HP ramping (<=480px), kartu stats berubah 1 kolom agar angka & label leluasa */
+            .stats-grid,
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))"],
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))"],
+            .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"],
+            .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           KEY-VALUE DETAIL TABLE (PPDB SHOW & INFO PAGES)
+           ═══════════════════════════════════════════════════════════ */
+        .table-detail {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-detail td {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--adm-table-border);
+            vertical-align: top;
+        }
+
+        .table-detail tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 640px) {
+            .table-detail,
+            .table-detail tbody,
+            .table-detail tr,
+            .table-detail td,
+            .card table[style*="width: 100%"],
+            .card table[style*="width: 100%"] tbody,
+            .card table[style*="width: 100%"] tr,
+            .card table[style*="width: 100%"] td,
+            .card table[style*="width:100%"],
+            .card table[style*="width:100%"] tbody,
+            .card table[style*="width:100%"] tr,
+            .card table[style*="width:100%"] td {
+                display: block !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .table-detail tr,
+            .card table[style*="width: 100%"] tr,
+            .card table[style*="width:100%"] tr {
+                padding: 10px 0 !important;
+                border-bottom: 1px solid var(--adm-table-border) !important;
+            }
+
+            .table-detail tr:last-child,
+            .card table[style*="width: 100%"] tr:last-child,
+            .card table[style*="width:100%"] tr:last-child {
+                border-bottom: none !important;
+            }
+
+            .table-detail td:first-child,
+            .card table[style*="width: 100%"] td:first-child,
+            .card table[style*="width:100%"] td:first-child {
+                font-size: 0.76rem !important;
+                color: var(--adm-text-muted) !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.04em !important;
+                font-weight: 700 !important;
+                padding: 0 0 4px 0 !important;
+                border: none !important;
+                width: 100% !important;
+            }
+
+            .table-detail td:last-child,
+            .card table[style*="width: 100%"] td:last-child,
+            .card table[style*="width:100%"] td:last-child {
+                font-size: 0.95rem !important;
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                padding: 0 !important;
+                border: none !important;
+                word-break: break-word !important;
             }
         }
 
@@ -1959,6 +2180,42 @@
             background: #f1f5f9 !important;
             color: #0f172a !important;
             border-color: #cbd5e1 !important;
+        }
+
+        @media (max-width: 540px) {
+            .swal-delete-popup {
+                width: calc(100vw - 28px) !important;
+                max-width: 360px !important;
+                padding: 1.4rem 1.1rem !important;
+                border-radius: 20px !important;
+            }
+            .swal-delete-icon-wrap {
+                width: 52px !important;
+                height: 52px !important;
+                font-size: 1.4rem !important;
+                margin-bottom: 0.85rem !important;
+                border-radius: 14px !important;
+            }
+            .swal-delete-title {
+                font-size: 1.15rem !important;
+            }
+            .swal-delete-html {
+                font-size: 0.82rem !important;
+            }
+            .swal-delete-popup .swal2-actions {
+                flex-direction: column-reverse !important;
+                width: 100% !important;
+                gap: 8px !important;
+                margin-top: 1.15rem !important;
+            }
+            .swal-delete-btn-confirm,
+            .swal-delete-btn-cancel {
+                width: 100% !important;
+                justify-content: center !important;
+                text-align: center !important;
+                padding: 0.65rem 1rem !important;
+                font-size: 0.85rem !important;
+            }
         }
     </style>
 

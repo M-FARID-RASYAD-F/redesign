@@ -143,11 +143,6 @@
                     </div>
 
                     <div>
-                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Pilihan Jurusan:</span>
-                        <strong style="color: #38bdf8; font-weight: 800;">{{ strtoupper($registration->major_choice) }}</strong>
-                    </div>
-
-                    <div>
                         <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Nama Orang Tua / Wali:</span>
                         <strong style="color: #ffffff;">{{ $registration->parent_name }}</strong>
                     </div>

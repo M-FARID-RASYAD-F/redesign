@@ -23,7 +23,6 @@
                 <tr>
                     <th>No. Pendaftaran</th>
                     <th>Nama Calon Siswa</th>
-                    <th>Pilihan Jurusan</th>
                     <th>Nama Orang Tua</th>
                     <th>Telepon Orang Tua</th>
                     <th>Status Pendaftaran</th>
@@ -37,13 +36,10 @@
                         {{ $reg->no_pendaftaran }}
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px;">{{ $reg->full_name }}</div>
+                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 2px;">{{ $reg->full_name }}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">
                             {{ $reg->gender == 'L' ? 'Laki-laki' : 'Perempuan' }} · Lahir: {{ $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-' }}
                         </div>
-                    </td>
-                    <td>
-                        <span class="badge badge-info">{{ strtoupper($reg->major_choice) }}</span>
                     </td>
                     <td>
                         {{ $reg->parent_name }}
@@ -78,7 +74,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">Belum ada pendaftaran PPDB online masuk.</td>
+                    <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">Belum ada pendaftaran PPDB online masuk.</td>
                 </tr>
                 @endforelse
             </tbody>

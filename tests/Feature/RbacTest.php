@@ -140,7 +140,6 @@ class RbacTest extends TestCase
             'address' => 'Jl. Test No. 1',
             'parent_name' => 'Wali Uji',
             'parent_phone' => '081234567890',
-            'major_choice' => 'rpl',
             'status' => 'pending',
         ]);
 
@@ -163,7 +162,6 @@ class RbacTest extends TestCase
             'address' => 'Jl. Test No. 2',
             'parent_name' => 'Wali Uji',
             'parent_phone' => '081234567890',
-            'major_choice' => 'tahfizh',
             'status' => 'pending',
         ]);
 
@@ -254,7 +252,6 @@ class RbacTest extends TestCase
             'address' => 'Jl. Test No. 3',
             'parent_name' => 'Wali Uji',
             'parent_phone' => '081234567890',
-            'major_choice' => 'rpl',
             'status' => 'pending',
         ]);
 

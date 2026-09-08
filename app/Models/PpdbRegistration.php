@@ -19,7 +19,6 @@ class PpdbRegistration extends Model
         'address',
         'parent_name',
         'parent_phone',
-        'major_choice',
         'status',
         'notes',
     ];

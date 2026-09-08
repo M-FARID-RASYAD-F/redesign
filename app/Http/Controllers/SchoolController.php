@@ -323,7 +323,6 @@ class SchoolController extends Controller
             'address' => $validated['pesan'], // simpan pesan ke alamat
             'parent_name' => 'Wali Murid',
             'parent_phone' => '081200000000',
-            'major_choice' => $validated['jurusan_minat'],
             'status' => 'pending',
             'notes' => 'Registrasi otomatis dari form kontak landing page'
         ]);
@@ -385,7 +384,6 @@ class SchoolController extends Controller
             'gender' => 'required|in:L,P',
             'birth_date' => 'required|date|before:today',
             'address' => 'required|string|min:8',
-            'major_choice' => 'required|string',
 
             // Data Orang Tua / Wali
             'parent_name' => 'required|string|min:3|max:255',
@@ -410,7 +408,6 @@ class SchoolController extends Controller
             'address.required' => 'Alamat tempat tinggal lengkap wajib diisi.',
             'address.min' => 'Alamat minimal 8 karakter.',
 
-            'major_choice.required' => 'Pilih salah satu program keahlian / jurusan.',
             'parent_name.required' => 'Nama orang tua / wali wajib diisi.',
             'parent_phone.required' => 'Nomor WhatsApp / telepon orang tua wajib diisi.',
 
@@ -436,7 +433,6 @@ class SchoolController extends Controller
             'address' => $validated['address'],
             'parent_name' => $validated['parent_name'],
             'parent_phone' => $validated['parent_phone'],
-            'major_choice' => $validated['major_choice'],
             'status' => 'pending',
             'notes' => 'Pendaftaran online mandiri berhasil diajukan. Menunggu verifikasi berkas oleh panitia PPDB.',
         ]);

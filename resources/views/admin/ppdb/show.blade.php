@@ -14,43 +14,39 @@
     <!-- Main Detail Card -->
     <div>
         <div class="card">
-            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #ffffff; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
                 👤 Informasi Data Diri
             </h3>
             
-            <table style="width: 100%;">
+            <table class="table-detail">
                 <tbody>
                     <tr>
-                        <td style="font-weight: 600; width: 200px; border-bottom: none; padding: 12px 0;">No. Pendaftaran</td>
-                        <td style="font-family: monospace; font-weight: 700; font-size: 1.05rem; color: var(--primary); border-bottom: none; padding: 12px 0;">{{ $registration->no_pendaftaran }}</td>
+                        <td style="font-weight: 600;">No. Pendaftaran</td>
+                        <td style="font-family: monospace; font-weight: 700; font-size: 1.05rem; color: var(--primary);">{{ $registration->no_pendaftaran }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Nama Lengkap</td>
-                        <td style="border-bottom: none; padding: 12px 0;">{{ $registration->full_name }}</td>
+                        <td style="font-weight: 600;">Nama Lengkap</td>
+                        <td>{{ $registration->full_name }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Jenis Kelamin</td>
-                        <td style="border-bottom: none; padding: 12px 0;">{{ $registration->gender == 'L' ? 'Laki-laki (L)' : 'Perempuan (P)' }}</td>
+                        <td style="font-weight: 600;">Jenis Kelamin</td>
+                        <td>{{ $registration->gender == 'L' ? 'Laki-laki (L)' : 'Perempuan (P)' }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Tanggal Lahir</td>
-                        <td style="border-bottom: none; padding: 12px 0;">{{ $registration->birth_date ? $registration->birth_date->format('d F Y') : '-' }}</td>
+                        <td style="font-weight: 600;">Tanggal Lahir</td>
+                        <td>{{ $registration->birth_date ? $registration->birth_date->format('d F Y') : '-' }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Jurusan Pilihan</td>
-                        <td style="border-bottom: none; padding: 12px 0;"><span class="badge badge-info">{{ strtoupper($registration->major_choice) }}</span></td>
+                        <td style="font-weight: 600;">Alamat Lengkap</td>
+                        <td style="line-height: 1.5;">{{ $registration->address }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Alamat Lengkap</td>
-                        <td style="border-bottom: none; padding: 12px 0; line-height: 1.5;">{{ $registration->address }}</td>
+                        <td style="font-weight: 600;">Nama Orang Tua</td>
+                        <td>{{ $registration->parent_name }}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">Nama Orang Tua</td>
-                        <td style="border-bottom: none; padding: 12px 0;">{{ $registration->parent_name }}</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; border-bottom: none; padding: 12px 0;">No. Telepon Orang Tua</td>
-                        <td style="border-bottom: none; padding: 12px 0; font-family: monospace;">{{ $registration->parent_phone }}</td>
+                        <td style="font-weight: 600;">No. Telepon Orang Tua</td>
+                        <td style="font-family: monospace;">{{ $registration->parent_phone }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -58,7 +54,7 @@
 
         <!-- PPDB Documents -->
         <div class="card">
-            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #ffffff; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
                 📂 Dokumen Persyaratan
             </h3>
             
@@ -104,7 +100,7 @@
     <!-- Right Verification Sidebar -->
     <div>
         <div class="card">
-            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; color: #ffffff; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
                 🛡️ Status & Verifikasi
             </h3>
             

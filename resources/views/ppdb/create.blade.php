@@ -199,24 +199,6 @@
                             </div>
                         </div>
 
-                        <!-- Pilihan Program Keahlian / Jurusan -->
-                        <div class="form-group" style="margin-bottom: 20px;">
-                            <label for="major_choice" class="ppdb-form-label">
-                                Pilihan Program Keahlian (Jurusan) <span style="color: #ef4444;">*</span>
-                            </label>
-                            <select id="major_choice" name="major_choice" required class="ppdb-form-select">
-                                <option value="">-- Pilih Jurusan Impian Anda --</option>
-                                @foreach($majors as $major)
-                                    <option value="{{ $major->slug }}" {{ old('major_choice') == $major->slug ? 'selected' : '' }}>
-                                        {{ $major->icon ?? '⚡' }} {{ $major->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('major_choice')
-                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         <!-- Alamat Lengkap -->
                         <div class="form-group">
                             <label for="address" class="ppdb-form-label">

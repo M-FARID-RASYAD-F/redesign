@@ -33,7 +33,7 @@
                         {{ $major->icon ?? '💻' }}
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px;">{{ $major->name }}</div>
+                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 2px;">{{ $major->name }}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $major->slug }}</div>
                     </td>
                     <td style="line-height: 1.4; color: var(--text-muted); font-size: 0.85rem;">

@@ -40,7 +40,7 @@
                                     {{ strtoupper(substr($teacher->name, 0, 1)) }}
                                 @endif
                             </div>
-                            <div style="font-weight: 600; color: #0f172a;">{{ $teacher->name }}</div>
+                            <div style="font-weight: 600; color: #ffffff;">{{ $teacher->name }}</div>
                         </div>
                     </td>
                     <td style="font-family: monospace; font-size: 0.85rem;">

@@ -32,7 +32,7 @@
                 @forelse($newsList as $news)
                 <tr>
                     <td>
-                        <div style="font-weight: 600; color: #0f172a; margin-bottom: 4px;">{{ $news->title }}</div>
+                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 4px;">{{ $news->title }}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $news->slug }}</div>
                     </td>
                     <td>

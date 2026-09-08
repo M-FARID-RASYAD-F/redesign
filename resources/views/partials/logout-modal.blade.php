@@ -731,6 +731,40 @@
 [data-theme="light"] .swal-logout-sub {
     color: #64748b;
 }
+
+@media (max-width: 480px) {
+    .logout-modal-card {
+        padding: 1.75rem 1.25rem !important;
+        border-radius: 20px !important;
+    }
+    .logout-modal-actions {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    .btn-logout-confirm {
+        order: -1;
+    }
+    .swal2-popup.swal-logout-popup {
+        width: calc(100vw - 28px) !important;
+        max-width: 360px !important;
+        padding: 1.5rem 1.2rem !important;
+        border-radius: 20px !important;
+    }
+    .swal-logout-popup .swal2-icon.swal2-success {
+        width: 64px !important;
+        height: 64px !important;
+        margin: 0.4rem auto 1rem !important;
+    }
+    .swal-logout-title {
+        font-size: 1.25rem !important;
+    }
+    .swal-logout-msg {
+        font-size: 0.95rem !important;
+    }
+    .swal-logout-sub {
+        font-size: 0.82rem !important;
+    }
+}
 </style>
 
 {{-- Ensure SweetAlert2 Engine is Loaded --}}

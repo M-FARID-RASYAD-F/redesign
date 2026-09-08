@@ -523,26 +523,31 @@ a:hover {
 .nav-btn-menu {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
-  color: #ffffff;
+  color: #ffffff !important;
   font-weight: 700;
-  font-size: 0.8rem;
-  padding: 7px 14px;
-  border: 1.5px solid rgba(0, 180, 216, 0.45);
-  border-radius: 8px;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+  border: 1.5px solid #00B4D8;
+  border-radius: 10px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
-  background: rgba(0, 180, 216, 0.15);
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.4) 0%, rgba(0, 119, 182, 0.55) 100%);
+  box-shadow: 0 2px 14px rgba(0, 180, 216, 0.35);
   white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 }
 .nav-btn-menu:hover {
-  background: rgba(0, 180, 216, 0.32);
-  border-color: #38bdf8;
-  color: #ffffff;
+  background: linear-gradient(135deg, #00B4D8 0%, #0096c7 100%);
+  border-color: #ffffff;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0, 180, 216, 0.45);
+  box-shadow: 0 4px 20px rgba(0, 180, 216, 0.6);
 }
 .nav-btn-menu:active {
   transform: translateY(1px) scale(0.97);
@@ -3392,7 +3397,9 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
   }
   .navbar-center,
   .nav-desktop-links,
@@ -3400,13 +3407,32 @@ a:hover {
     display: none !important;
   }
   .navbar-left {
-    flex-shrink: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 130px);
+    overflow: hidden;
+  }
+  .navbar-brand {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .brand-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .brand-text-main {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .navbar-right {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-shrink: 0;
+    margin-left: auto;
   }
 
   /* Hero */
@@ -3987,24 +4013,36 @@ a:hover {
 @media (max-width: 480px) {
   /* Navbar */
   .navbar {
-    padding: 8px 14px;
+    padding: 8px 10px;
+  }
+  .navbar-container {
+    gap: 6px;
+    width: 100%;
   }
   .navbar-capsule {
-    height: 46px;
-    padding: 0 8px;
+    height: 44px;
+    padding: 0 6px;
     border-radius: 10px;
   }
   .navbar.scrolled .navbar-capsule {
-    height: 44px;
+    height: 42px;
+  }
+  .navbar-left {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 110px);
+    overflow: hidden;
+    padding: 0 8px;
   }
   .brand-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 6px;
+    flex-shrink: 0;
   }
   .brand-text-main {
-    font-size: clamp(0.70rem, 3.2vw, 0.82rem);
-    max-width: 165px;
+    font-size: clamp(0.66rem, 2.8vw, 0.78rem);
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -4012,15 +4050,26 @@ a:hover {
   .brand-text-sub {
     display: none;
   }
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: 0 6px;
+  }
   .nav-theme-toggle {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
   }
   .nav-btn-menu {
-    padding: 5px 8px;
-    font-size: 0.7rem;
+    padding: 5px 9px;
+    font-size: 0.72rem;
     gap: 4px;
+    border-radius: 8px;
+    flex-shrink: 0;
   }
 
   /* Hero */
@@ -4441,13 +4490,15 @@ a:hover {
 }
 
 [data-theme="light"] .nav-btn-menu {
-  border-color: oklch(58.6% 0.253 17.585 / 0.5);
-  background: oklch(58.6% 0.253 17.585 / 0.18);
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585) 0%, oklch(45% 0.22 17) 100%) !important;
+  border-color: oklch(75% 0.22 20) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 14px oklch(58.6% 0.253 17.585 / 0.5) !important;
 }
 [data-theme="light"] .nav-btn-menu:hover {
-  background: oklch(58.6% 0.253 17.585 / 0.35);
-  border-color: oklch(58.6% 0.253 17.585);
-  box-shadow: 0 4px 18px oklch(58.6% 0.253 17.585 / 0.5);
+  background: linear-gradient(135deg, oklch(65% 0.26 18) 0%, oklch(58.6% 0.253 17.585) 100%) !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 4px 20px oklch(58.6% 0.253 17.585 / 0.7) !important;
 }
 
 [data-theme="light"] .nav-mobile-panel {

@@ -47,14 +47,14 @@
             </div>
 
             {{-- Tombol Menu (kotak border putih) — hamburger --}}
-            <button class="nav-btn-menu" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-                <svg id="iconHamburger" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <button class="nav-btn-menu" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+                <svg id="iconHamburger" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline-block; flex-shrink:0;">
                     <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
                 </svg>
-                <svg id="iconClose" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;">
+                <svg id="iconClose" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none; flex-shrink:0;">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
-                <span class="nav-link-text">Menu</span>
+                <span class="nav-link-text" style="font-weight: 700; letter-spacing: 0.5px;">Menu</span>
             </button>
         </div>
     </div>

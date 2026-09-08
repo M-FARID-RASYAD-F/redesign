@@ -76,6 +76,39 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === $roles;
     }
 
+    /**
+     * RBAC Matrix (Section 3.4) Permissions
+     */
+    // Hak kelola pengguna admin (Hanya Super Admin)
+    public function canManageUsers(): bool
+    {
+        return $this->isSuperAdmin();
+    }
+
+    // Hak kelola berita & galeri (Super Admin & Admin CMS)
+    public function canManageCms(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin_cms']);
+    }
+
+    // Hak kelola data guru, staf & jurusan (Super Admin, Admin CMS, Editor Akademik)
+    public function canManageAcademic(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin_cms', 'editor_akademik']);
+    }
+
+    // Hak kelola pengumuman & agenda (Super Admin & Admin CMS)
+    public function canManageAnnouncements(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin_cms']);
+    }
+
+    // Hak kelola / aksi verifikasi & ubah status PPDB (Super Admin & Admin PPDB)
+    public function canManagePpdb(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin_ppdb']);
+    }
+
     // Relationships
     public function activityLogs()
     {

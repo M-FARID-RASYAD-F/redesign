@@ -10,6 +10,9 @@ use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
+use App\Models\Announcement;
+use App\Models\Agenda;
+use App\Models\Gallery;
 
 class SchoolController extends Controller
 {
@@ -278,8 +281,26 @@ class SchoolController extends Controller
         // Alias untuk kompatibilitas data view lama
         $fasilitas = $cabang;
 
+        // 7. Data Pengumuman Publik (3.3.3 Modul Pengumuman)
+        $pengumuman = Announcement::where('is_archived', false)
+            ->where(function ($q) {
+                $q->whereNull('end_date')
+                  ->orWhere('end_date', '>=', now()->toDateString());
+            })
+            ->orderBy('start_date', 'desc')
+            ->take(4)
+            ->get();
+
+        // 8. Data Agenda Sekolah (3.3.3 Modul Agenda)
+        $agendaList = Agenda::orderBy('date', 'desc')
+            ->take(4)
+            ->get();
+
+        // 9. Data Galeri Foto (3.3.2 Modul Galeri)
+        $galeriList = Gallery::latest()->take(6)->get();
+
         // Kirim seluruh data ke view 'welcome'
-        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang'));
+        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang', 'pengumuman', 'agendaList', 'galeriList'));
     }
 
     /**

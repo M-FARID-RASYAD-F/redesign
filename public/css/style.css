@@ -1252,6 +1252,21 @@ a:hover {
   perspective: 1200px;
 }
 
+.pengumuman-agenda-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+
 /* ═══════════════════════════════════════════════════════════
    CUSTOM CARD — 3D Tilt Card Architecture (Sesuai hover.md)
    ═══════════════════════════════════════════════════════════ */
@@ -1844,30 +1859,48 @@ a:hover {
     inset -2px -2px 5px rgba(255, 255, 255, 0.15);
 }
 
-/* Responsive Styles for Neumorphic Jurusan Cards */
+/* Responsive Styles for Neumorphic Jurusan & Jenjang Cards */
 @media (max-width: 768px) {
   .pc-12-jurusan-stage,
   .pc-12-jenjang-stage {
-    gap: 22px;
+    gap: 18px;
+    width: 100%;
+  }
+  .pc-12__card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 480px) {
   .pc-12__card {
     width: 100%;
-    max-width: 310px;
-    padding: 28px 20px 22px;
+    max-width: 100%;
+    padding: 22px 16px 18px;
+    box-sizing: border-box;
+    border-radius: 20px;
   }
   .pc-12__pfp {
-    width: 78px;
-    height: 78px;
-    margin-bottom: 14px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 12px;
   }
   .pc-12__card h3 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
   .pc-12__bio {
     font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .pc-12__row {
+    gap: 8px;
+  }
+  .pc-12__stat {
+    padding: 6px 4px;
+  }
+  .pc-12__stat b {
+    font-size: 0.82rem;
   }
 }
 
@@ -3622,11 +3655,11 @@ a:hover {
     padding-bottom: 2rem;
   }
   .section {
-    padding: 0 2rem;
-    margin-bottom: 3.5rem;
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
   }
   .section-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     text-align: center;
   }
   .section-tag {
@@ -3709,9 +3742,25 @@ a:hover {
   /* Contact Section */
   .contact-container {
     grid-template-columns: 1fr;
-    padding: 2.25rem 2rem;
-    gap: 2rem;
+    padding: 1.85rem 1.25rem;
+    gap: 1.75rem;
     border-radius: 18px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Pengumuman & Agenda Grid System */
+  .pengumuman-agenda-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Galeri Grid System */
+  .galeri-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
   }
   .contact-heading {
     font-size: 1.38rem;
@@ -3954,8 +4003,8 @@ a:hover {
     border-radius: 6px;
   }
   .brand-text-main {
-    font-size: 0.74rem;
-    max-width: 130px;
+    font-size: clamp(0.70rem, 3.2vw, 0.82rem);
+    max-width: 165px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -3976,7 +4025,7 @@ a:hover {
 
   /* Hero */
   .hero {
-    padding: 5.5rem 2rem 3rem;
+    padding: 5.25rem 1rem 2.5rem;
   }
   .hero-title {
     font-size: 1.5rem;
@@ -3994,7 +4043,7 @@ a:hover {
 
   /* Stats Grid */
   .stats-section {
-    padding: 1.75rem 2rem;
+    padding: 1.25rem 0.85rem;
   }
   .stats-grid {
     gap: 8px;
@@ -4018,7 +4067,7 @@ a:hover {
 
   /* Sambutan */
   .principal-section {
-    padding: 3rem 2rem;
+    padding: 2.25rem 1rem;
   }
   .principal-photo-col {
     max-width: 150px;
@@ -4036,8 +4085,8 @@ a:hover {
 
   /* Sections */
   .section {
-    padding: 0 2rem;
-    margin-bottom: 2.75rem;
+    padding: 0 0.85rem;
+    margin-bottom: 2.25rem;
   }
   .section-title {
     font-size: 1.2rem;
@@ -4049,18 +4098,29 @@ a:hover {
   /* Fasilitas */
   /* Fasilitas Section (Small Mobile) */
   .fasilitas-section {
-    padding: 1.6rem 1.15rem;
+    padding: 1.5rem 0.85rem;
     border-radius: 14px;
   }
   .tab-nav-bar {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+    width: 100%;
+    justify-content: flex-start;
     padding: 4px;
+    gap: 6px;
+  }
+  .tab-nav-bar::-webkit-scrollbar {
+    display: none;
   }
   .tab-btn {
-    padding: 0.45rem 0.55rem;
-    font-size: 0.72rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.74rem;
     justify-content: center;
   }
   .tab-title {
@@ -4072,8 +4132,8 @@ a:hover {
 
   /* Contact */
   .contact-container {
-    padding: 1.75rem 2rem;
-    gap: 1.5rem;
+    padding: 1.35rem 0.85rem;
+    gap: 1.25rem;
     border-radius: 14px;
   }
   .contact-heading {
@@ -4201,17 +4261,21 @@ a:hover {
 
   /* PPDB Small Mobile Containers */
   .ppdb-hero-section {
-    padding: 5.5rem 2rem 3rem;
+    padding: 5.25rem 1rem 2.5rem;
   }
   .ppdb-stats-wrapper {
-    padding: 0 2rem;
+    padding: 0 0.85rem;
   }
   .ppdb-section {
-    padding: 0 2rem;
-    margin-bottom: 2.75rem;
+    padding: 0 0.85rem;
+    margin-bottom: 2.25rem;
   }
   .ppdb-req-container {
-    padding: 1.5rem 1.15rem;
+    padding: 1.35rem 0.85rem;
+  }
+  .galeri-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
 }
 
@@ -5644,6 +5708,27 @@ a:hover {
     width: 100%;
     justify-content: center;
     margin-left: 0;
+  }
+  .ppdb-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ppdb-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px !important;
+    font-size: 0.92rem !important;
+  }
+  .ppdb-result-header,
+  .ppdb-timeline-bar,
+  .ppdb-tracking-box,
+  .ppdb-card-header,
+  .ppdb-reg-banner {
+    padding: 16px 14px;
+  }
+  .ppdb-result-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

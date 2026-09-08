@@ -10,18 +10,18 @@
     </div>
 </div>
 
-<div style="display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start;">
+<div class="admin-ppdb-detail-grid">
     <!-- Main Detail Card -->
     <div>
         <div class="card">
-            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main, #ffffff); border-bottom: 1px solid var(--border); padding-bottom: 12px;">
                 👤 Informasi Data Diri
             </h3>
             
             <table style="width: 100%;">
                 <tbody>
                     <tr>
-                        <td style="font-weight: 600; width: 200px; border-bottom: none; padding: 12px 0;">No. Pendaftaran</td>
+                        <td style="font-weight: 600; width: 140px; max-width: 42%; border-bottom: none; padding: 12px 0;">No. Pendaftaran</td>
                         <td style="font-family: monospace; font-weight: 700; font-size: 1.05rem; color: var(--primary); border-bottom: none; padding: 12px 0;">{{ $registration->no_pendaftaran }}</td>
                     </tr>
                     <tr>
@@ -54,7 +54,7 @@
 
         <!-- PPDB Documents -->
         <div class="card">
-            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+            <h3 style="font-size: 1.10rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main, #ffffff); border-bottom: 1px solid var(--border); padding-bottom: 12px;">
                 📂 Dokumen Persyaratan
             </h3>
             
@@ -65,6 +65,9 @@
                             <th>Jenis Dokumen</th>
                             <th>Status Validasi</th>
                             <th>Link File</th>
+                            @if(auth()->user()->canManagePpdb())
+                            <th style="text-align: right;">Verifikasi Berkas</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -83,12 +86,28 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ asset($doc->file_path) }}" target="_blank" class="btn btn-outline btn-sm" style="font-size: 0.75rem;">👀 Lihat Dokumen</a>
+                                <a href="{{ asset($doc->file_path) }}" target="_blank" class="btn btn-outline btn-sm" style="font-size: 0.75rem;">👀 Lihat File</a>
                             </td>
+                            @if(auth()->user()->canManagePpdb())
+                            <td style="text-align: right;">
+                                <div style="display: inline-flex; gap: 6px;">
+                                    <form action="{{ route('admin.ppdb.document.verify', $doc->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="verification_status" value="valid">
+                                        <button type="submit" class="btn btn-sm" style="background: #10b981; color: #fff; padding: 4px 8px; font-size: 0.75rem;" title="Set Valid">✓ Valid</button>
+                                    </form>
+                                    <form action="{{ route('admin.ppdb.document.verify', $doc->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="verification_status" value="tidak_valid">
+                                        <button type="submit" class="btn btn-sm" style="background: #ef4444; color: #fff; padding: 4px 8px; font-size: 0.75rem;" title="Set Tidak Valid">✕ Tolak</button>
+                                    </form>
+                                </div>
+                            </td>
+                            @endif
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada dokumen persyaratan yang diunggah.</td>
+                            <td colspan="{{ auth()->user()->canManagePpdb() ? 4 : 3 }}" style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada dokumen persyaratan yang diunggah.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -100,7 +119,7 @@
     <!-- Right Verification Sidebar -->
     <div>
         <div class="card">
-            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
                 🛡️ Status & Verifikasi
             </h3>
             
@@ -117,10 +136,11 @@
                 @endif
             </div>
 
+            @if(auth()->user()->canManagePpdb())
             <form action="{{ route('admin.ppdb.status', $registration->id) }}" method="POST">
                 @csrf
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 16px;">
                     <label class="form-label" for="status">Ubah Status *</label>
                     <select id="status" name="status" class="form-control" required>
                         <option value="pending" {{ $registration->status == 'pending' ? 'selected' : '' }}>Pending</option>
@@ -130,13 +150,27 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 20px;">
                     <label class="form-label" for="notes">Catatan Verifikasi</label>
                     <textarea id="notes" name="notes" class="form-control" rows="4" placeholder="Masukkan alasan penolakan, catatan validasi, atau detail penerimaan...">{{ old('notes', $registration->notes) }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Simpan Status</button>
             </form>
+            @else
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.4;">
+                ℹ️ <strong>Mode Read-Only (Lihat Rekap)</strong>: Akun Anda memiliki hak akses baca untuk PPDB. Perubahan status dan verifikasi berkas dikelola oleh Admin PPDB / Super Admin.
+            </div>
+
+            @if($registration->notes)
+            <div style="margin-top: 16px;">
+                <span class="form-label" style="margin-bottom: 6px; display: block; font-weight: 600;">Catatan Panitia:</span>
+                <p style="font-size: 0.88rem; color: #fff; background: var(--adm-card-solid); padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+                    {{ $registration->notes }}
+                </p>
+            </div>
+            @endif
+            @endif
         </div>
     </div>
 </div>

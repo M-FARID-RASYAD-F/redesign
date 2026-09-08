@@ -8,9 +8,11 @@
         <h1 class="header-title">Kelola Berita</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Terbitkan, perbarui, dan hapus artikel atau berita sekolah.</p>
     </div>
+    @if(auth()->user()->canManageCms())
     <a href="{{ route('admin.news.create') }}" class="btn btn-primary">
         <span>➕</span> Tulis Berita Baru
     </a>
+    @endif
 </div>
 
 <div class="card">
@@ -23,14 +25,16 @@
                     <th>Penulis</th>
                     <th>Tanggal Rilis</th>
                     <th>Status</th>
+                    @if(auth()->user()->canManageCms())
                     <th style="width: 150px; text-align: right;">Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @forelse($newsList as $news)
                 <tr>
                     <td>
-                        <div style="font-weight: 600; color: #0f172a; margin-bottom: 4px;">{{ $news->title }}</div>
+                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">{{ $news->title }}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $news->slug }}</div>
                     </td>
                     <td>
@@ -49,6 +53,7 @@
                             <span class="badge badge-warning">Draft / Jadwal</span>
                         @endif
                     </td>
+                    @if(auth()->user()->canManageCms())
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
                             <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
@@ -60,6 +65,7 @@
                             </form>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @empty
                 <tr>

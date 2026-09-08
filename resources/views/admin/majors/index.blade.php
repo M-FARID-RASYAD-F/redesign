@@ -8,9 +8,11 @@
         <h1 class="header-title">Kelola Jurusan</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Kelola data program keahlian/jurusan yang tersedia di sekolah.</p>
     </div>
+    @if(auth()->user()->canManageAcademic())
     <a href="{{ route('admin.majors.create') }}" class="btn btn-primary">
         <span>➕</span> Tambah Jurusan Baru
     </a>
+    @endif
 </div>
 
 <div class="card">
@@ -21,7 +23,9 @@
                     <th style="width: 80px;">Ikon</th>
                     <th>Nama Jurusan</th>
                     <th>Deskripsi Ringkas</th>
+                    @if(auth()->user()->canManageAcademic())
                     <th style="width: 150px; text-align: right;">Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -31,12 +35,13 @@
                         {{ $major->icon ?? '💻' }}
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px;">{{ $major->name }}</div>
+                        <div style="font-weight: 600; color: #fff; margin-bottom: 2px;">{{ $major->name }}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $major->slug }}</div>
                     </td>
                     <td style="line-height: 1.4; color: var(--text-muted); font-size: 0.85rem;">
                         {{ Str::limit($major->description, 100) }}
                     </td>
+                    @if(auth()->user()->canManageAcademic())
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
                             <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
@@ -48,6 +53,7 @@
                             </form>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @empty
                 <tr>

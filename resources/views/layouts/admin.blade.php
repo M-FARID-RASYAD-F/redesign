@@ -1308,9 +1308,17 @@
             gap: 24px;
         }
 
+        .admin-ppdb-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            align-items: start;
+        }
+
         @media (max-width: 900px) {
-            .skeleton-dash-content-grid {
-                grid-template-columns: 1fr;
+            .skeleton-dash-content-grid,
+            .admin-ppdb-detail-grid {
+                grid-template-columns: 1fr !important;
             }
             .skeleton-dashboard-hero {
                 flex-direction: column;
@@ -1384,15 +1392,15 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.teachers.index') }}" class="sidebar-link {{ Route::is('admin.teachers.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">👨‍🏫</span>
-                    <span>Guru & Staf</span>
+                <a href="{{ route('admin.galleries.index') }}" class="sidebar-link {{ Route::is('admin.galleries.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">🖼️</span>
+                    <span>Galeri Foto</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.ppdb.index') }}" class="sidebar-link {{ Route::is('admin.ppdb.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">📝</span>
-                    <span>PPDB Online</span>
+                <a href="{{ route('admin.teachers.index') }}" class="sidebar-link {{ Route::is('admin.teachers.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">👨‍🏫</span>
+                    <span>Guru & Staf</span>
                 </a>
             </li>
             <li>
@@ -1401,6 +1409,33 @@
                     <span>Program Jurusan</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.announcements.index') }}" class="sidebar-link {{ Route::is('admin.announcements.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">📢</span>
+                    <span>Pengumuman</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.agenda.index') }}" class="sidebar-link {{ Route::is('admin.agenda.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">📅</span>
+                    <span>Agenda Kegiatan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.ppdb.index') }}" class="sidebar-link {{ Route::is('admin.ppdb.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">📝</span>
+                    <span>PPDB Online</span>
+                </a>
+            </li>
+
+            @if(auth()->user()->isSuperAdmin())
+            <li style="margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 10px;">
+                <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}" style="color: #38bdf8;">
+                    <span class="sidebar-link-icon">👥</span>
+                    <span>Kelola Pengguna</span>
+                </a>
+            </li>
+            @endif
         </ul>
 
         <div class="sidebar-footer">

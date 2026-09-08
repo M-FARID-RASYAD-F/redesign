@@ -60,13 +60,17 @@
                     </td>
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
-                            <a href="{{ route('admin.ppdb.show', $reg->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Detail & Verifikasi</a>
+                            <a href="{{ route('admin.ppdb.show', $reg->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">
+                                {{ auth()->user()->canManagePpdb() ? 'Detail & Verifikasi' : 'Lihat Detail' }}
+                            </a>
                             
+                            @if(auth()->user()->canManagePpdb())
                             <form action="{{ route('admin.ppdb.delete', $reg->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus pendaftar <strong>{{ $reg->full_name }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
                             </form>
+                            @endif
                         </div>
                     </td>
                 </tr>

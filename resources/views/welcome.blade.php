@@ -169,6 +169,99 @@
         </div>
     </section>
 
+    <!-- 6b. Modul Pengumuman & Agenda (3.3.3 & 3.4) -->
+    <section class="section reveal" id="pengumuman">
+        <div class="section-header">
+            <span class="section-tag">INFORMASI TERKINI</span>
+            <h2 class="section-title">Pengumuman & Agenda Kegiatan</h2>
+            <p class="section-desc">Pemberitahuan resmi dan jadwal kegiatan akademik serta kesiswaan di PKBM Tahfizh At-Tamam.</p>
+        </div>
+
+        <div class="pengumuman-agenda-grid">
+            <!-- Kolom Pengumuman -->
+            <div class="glass-card" style="padding: 24px; border-radius: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                        <span>📢</span> Pengumuman Resmi
+                    </h3>
+                    <span class="badge badge-info">{{ count($pengumuman) }} Aktif</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    @forelse($pengumuman as $p)
+                        <div style="padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                                <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 600; text-transform: uppercase;">{{ $p->type ?? 'Umum' }}</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">{{ $p->start_date ? $p->start_date->format('d M Y') : '' }}</span>
+                            </div>
+                            <h4 style="font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 6px;">{{ $p->title }}</h4>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">{{ Str::limit(strip_tags($p->content), 120) }}</p>
+                        </div>
+                    @empty
+                        <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 20px 0;">Belum ada pengumuman aktif.</p>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- Kolom Agenda -->
+            <div class="glass-card" style="padding: 24px; border-radius: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                        <span>📅</span> Agenda Mendatang
+                    </h3>
+                    <span class="badge badge-info">{{ count($agendaList) }} Kegiatan</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    @forelse($agendaList as $a)
+                        <div style="padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; display: flex; gap: 14px; align-items: center;">
+                            <div style="min-width: 55px; text-align: center; background: var(--adm-primary, #b91c1c); padding: 8px 6px; border-radius: 8px; color: #fff;">
+                                <div style="font-size: 1.1rem; font-weight: 800; line-height: 1;">{{ $a->date ? $a->date->format('d') : '01' }}</div>
+                                <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">{{ $a->date ? $a->date->format('M') : 'JAN' }}</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 4px;">{{ $a->title }}</h4>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px;">
+                                    <span>📍</span> {{ $a->location ?? 'Kampus Sekolah' }}
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 20px 0;">Belum ada jadwal agenda mendatang.</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6c. Modul Galeri Foto (3.3.2) -->
+    <section class="section reveal" id="galeri">
+        <div class="section-header">
+            <span class="section-tag">DOKUMENTASI SEKOLAH</span>
+            <h2 class="section-title">Galeri Kegiatan & Fasilitas</h2>
+            <p class="section-desc">Potret aktivitas santri, pembelajaran kejuruan, dan fasilitas pendukung di lingkungan sekolah.</p>
+        </div>
+
+        <div class="galeri-grid">
+            @forelse($galeriList as $g)
+                <div style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--border); aspect-ratio: 4/3; background: #000;">
+                    <img src="{{ str_starts_with($g->image_path, 'http') ? $g->image_path : asset($g->image_path) }}" 
+                         alt="{{ $g->title }}" 
+                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
+                         onmouseover="this.style.transform='scale(1.05)'"
+                         onmouseout="this.style.transform='scale(1)'"
+                         onerror="this.src='https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=600'">
+                    <div style="position: absolute; inset: auto 0 0 0; padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: #fff;">
+                        <span style="font-size: 0.72rem; color: #38bdf8; font-weight: 600; text-transform: uppercase;">{{ $g->category ?? 'Kegiatan' }}</span>
+                        <div style="font-size: 0.88rem; font-weight: 600; margin-top: 2px;">{{ $g->title }}</div>
+                    </div>
+                </div>
+            @empty
+                <p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 30px;">Belum ada dokumentasi foto.</p>
+            @endforelse
+        </div>
+    </section>
+
     <!-- 7. Form Kontak & Pendaftaran PPDB -->
     <section class="section reveal" id="kontak">
         <div class="contact-container">

@@ -22,6 +22,8 @@
                 <a href="{{ route('home') }}#jenjang" class="nav-link" data-section="jenjang"><span class="nav-link-text">Jenjang</span></a>
                 <a href="{{ route('home') }}#cabang" class="nav-link" data-section="cabang"><span class="nav-link-text">Cabang</span></a>
                 <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
+                <a href="{{ route('home') }}#pengumuman" class="nav-link" data-section="pengumuman"><span class="nav-link-text">Pengumuman</span></a>
+                <a href="{{ route('home') }}#galeri" class="nav-link" data-section="galeri"><span class="nav-link-text">Galeri</span></a>
                 <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
             </nav>
         </div>
@@ -63,6 +65,8 @@
         <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang"><span class="nav-link-text">📚 Jenjang</span></a>
         <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang"><span class="nav-link-text">🏫 Cabang Sekolah</span></a>
         <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita"><span class="nav-link-text">📰 Berita</span></a>
+        <a href="{{ route('home') }}#pengumuman" class="nav-mobile-link" data-section="pengumuman"><span class="nav-link-text">📢 Pengumuman & Agenda</span></a>
+        <a href="{{ route('home') }}#galeri" class="nav-mobile-link" data-section="galeri"><span class="nav-link-text">🖼️ Galeri Foto</span></a>
         <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
         <hr class="nav-mobile-divider">
         <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button">

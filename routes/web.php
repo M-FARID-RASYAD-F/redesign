@@ -83,6 +83,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/ppdb/export', [AdminController::class, 'ppdbExportCsv'])->name('ppdb.export');
     Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
     Route::post('/ppdb/{id}/status', [AdminController::class, 'ppdbUpdateStatus'])->name('ppdb.status');
+    Route::post('/ppdb/document/{id}/verify', [AdminController::class, 'ppdbDocumentVerify'])->name('ppdb.document.verify');
     Route::delete('/ppdb/{id}', [AdminController::class, 'ppdbDelete'])->name('ppdb.delete');
 
     // Jurusan (CMS / Akademik)
@@ -92,4 +93,33 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/majors/{id}/edit', [AdminController::class, 'majorEdit'])->name('majors.edit');
     Route::post('/majors/{id}', [AdminController::class, 'majorUpdate'])->name('majors.update');
     Route::delete('/majors/{id}', [AdminController::class, 'majorDelete'])->name('majors.delete');
+
+    // Galeri Foto (CMS)
+    Route::get('/galleries', [AdminController::class, 'galleryIndex'])->name('galleries.index');
+    Route::get('/galleries/create', [AdminController::class, 'galleryCreate'])->name('galleries.create');
+    Route::post('/galleries', [AdminController::class, 'galleryStore'])->name('galleries.store');
+    Route::delete('/galleries/{id}', [AdminController::class, 'galleryDelete'])->name('galleries.delete');
+
+    // Pengumuman (Pengumuman & Agenda)
+    Route::get('/announcements', [AdminController::class, 'announcementIndex'])->name('announcements.index');
+    Route::get('/announcements/create', [AdminController::class, 'announcementCreate'])->name('announcements.create');
+    Route::post('/announcements', [AdminController::class, 'announcementStore'])->name('announcements.store');
+    Route::get('/announcements/{id}/edit', [AdminController::class, 'announcementEdit'])->name('announcements.edit');
+    Route::post('/announcements/{id}', [AdminController::class, 'announcementUpdate'])->name('announcements.update');
+    Route::delete('/announcements/{id}', [AdminController::class, 'announcementDelete'])->name('announcements.delete');
+
+    // Agenda Kegiatan (Pengumuman & Agenda)
+    Route::get('/agenda', [AdminController::class, 'agendaIndex'])->name('agenda.index');
+    Route::get('/agenda/create', [AdminController::class, 'agendaCreate'])->name('agenda.create');
+    Route::post('/agenda', [AdminController::class, 'agendaStore'])->name('agenda.store');
+    Route::get('/agenda/{id}/edit', [AdminController::class, 'agendaEdit'])->name('agenda.edit');
+    Route::post('/agenda/{id}', [AdminController::class, 'agendaUpdate'])->name('agenda.update');
+    Route::delete('/agenda/{id}', [AdminController::class, 'agendaDelete'])->name('agenda.delete');
+
+    // Pengguna Admin (Super Admin Only)
+    Route::get('/users', [AdminController::class, 'userIndex'])->name('users.index');
+    Route::post('/users', [AdminController::class, 'userStore'])->name('users.store');
+    Route::post('/users/{id}/role', [AdminController::class, 'userUpdateRole'])->name('users.role');
+    Route::post('/users/{id}/toggle-active', [AdminController::class, 'userToggleActive'])->name('users.toggle-active');
+    Route::delete('/users/{id}', [AdminController::class, 'userDelete'])->name('users.delete');
 });

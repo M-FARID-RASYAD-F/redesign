@@ -33,10 +33,10 @@ class PpdbRegistrationPolicy
     }
 
     /**
-     * Khusus super_admin (admin_ppdb tidak diizinkan menghapus data pendaftar sesuai role.md).
+     * Diizinkan untuk super_admin dan admin_ppdb.
      */
     public function delete(User $user, PpdbRegistration $registration): bool
     {
-        return $user->is_active && $user->role === 'super_admin';
+        return $user->is_active && in_array($user->role, ['super_admin', 'admin_ppdb']);
     }
 }

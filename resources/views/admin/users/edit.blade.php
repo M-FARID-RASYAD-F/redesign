@@ -48,7 +48,7 @@
             <select id="role" name="role" class="form-control" required>
                 <option value="super_admin" {{ old('role', $user->role) == 'super_admin' ? 'selected' : '' }}>👑 Super Admin (Akses Penuh Semua Modul & Kelola Akun)</option>
                 <option value="admin_cms" {{ old('role', $user->role) == 'admin_cms' ? 'selected' : '' }}>📰 Admin CMS (Kelola Berita, Galeri, Agenda & Pengumuman)</option>
-                <option value="admin_ppdb" {{ old('role', $user->role) == 'admin_ppdb' ? 'selected' : '' }}>📝 Admin PPDB (Verifikasi Pendaftar, Ubah Status & Ekspor CSV)</option>
+                <option value="admin_ppdb" {{ old('role', $user->role) == 'admin_ppdb' ? 'selected' : '' }}>📝 Admin PPDB (Verifikasi Pendaftar, Ubah Status, Hapus & Ekspor CSV)</option>
                 <option value="editor_akademik" {{ old('role', $user->role) == 'editor_akademik' ? 'selected' : '' }}>👨‍🏫 Editor Akademik (Kelola Dewan Guru, Staf & Program Jurusan)</option>
             </select>
             @error('role')

@@ -46,7 +46,7 @@
                 <option value="">-- Pilih Peran Admin --</option>
                 <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>👑 Super Admin (Akses Penuh Semua Modul & Kelola Akun)</option>
                 <option value="admin_cms" {{ old('role') == 'admin_cms' ? 'selected' : '' }}>📰 Admin CMS (Kelola Berita, Galeri, Agenda & Pengumuman)</option>
-                <option value="admin_ppdb" {{ old('role') == 'admin_ppdb' ? 'selected' : '' }}>📝 Admin PPDB (Verifikasi Pendaftar, Ubah Status & Ekspor CSV)</option>
+                <option value="admin_ppdb" {{ old('role') == 'admin_ppdb' ? 'selected' : '' }}>📝 Admin PPDB (Verifikasi Pendaftar, Ubah Status, Hapus & Ekspor CSV)</option>
                 <option value="editor_akademik" {{ old('role') == 'editor_akademik' ? 'selected' : '' }}>👨‍🏫 Editor Akademik (Kelola Dewan Guru, Staf & Program Jurusan)</option>
             </select>
             @error('role')

@@ -128,8 +128,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
             ->name('ppdb.status')
             ->middleware('role:super_admin,admin_ppdb');
     });
-    // Delete PPDB: KHUSUS super_admin (admin_ppdb tidak diizinkan menghapus)
+    // Delete PPDB: super_admin dan admin_ppdb
     Route::delete('/ppdb/{id}', [AdminController::class, 'ppdbDelete'])
         ->name('ppdb.delete')
-        ->middleware('role:super_admin');
+        ->middleware('role:super_admin,admin_ppdb');
 });

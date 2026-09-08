@@ -130,7 +130,7 @@ class RbacTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_admin_ppdb_cannot_delete_ppdb_record(): void
+    public function test_admin_ppdb_can_delete_ppdb_record(): void
     {
         $reg = PpdbRegistration::create([
             'no_pendaftaran' => 'REG-TEST-001',
@@ -144,6 +144,38 @@ class RbacTest extends TestCase
         ]);
 
         $this->actingAs($this->adminPpdb)
+            ->get('/admin/ppdb')
+            ->assertOk()
+            ->assertSee('🗑️ Hapus');
+
+        $this->actingAs($this->adminPpdb)
+            ->delete("/admin/ppdb/{$reg->id}")
+            ->assertRedirect(route('admin.ppdb.index'));
+
+        $this->assertDatabaseMissing('ppdb_registrations', [
+            'id' => $reg->id,
+        ]);
+    }
+
+    public function test_admin_cms_cannot_delete_ppdb_record(): void
+    {
+        $reg = PpdbRegistration::create([
+            'no_pendaftaran' => 'REG-TEST-CMS',
+            'full_name' => 'Siswa CMS',
+            'gender' => 'L',
+            'birth_date' => '2010-05-15',
+            'address' => 'Jl. Test No. 1',
+            'parent_name' => 'Wali Uji',
+            'parent_phone' => '081234567890',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($this->adminCms)
+            ->get('/admin/ppdb')
+            ->assertOk()
+            ->assertDontSee('🗑️ Hapus');
+
+        $this->actingAs($this->adminCms)
             ->delete("/admin/ppdb/{$reg->id}")
             ->assertForbidden();
 

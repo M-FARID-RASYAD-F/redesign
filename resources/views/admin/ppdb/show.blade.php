@@ -71,7 +71,7 @@
                         @forelse($registration->documents as $doc)
                         <tr>
                             <td style="font-weight: 600; text-transform: uppercase;">
-                                {{ str_replace('_', ' ', $doc->doc_type) }}
+                                {{ strtoupper(str_replace('_', ' ', $doc->doc_type)) }}
                             </td>
                             <td>
                                 @if($doc->verification_status == 'belum_diverifikasi')
@@ -83,7 +83,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ asset($doc->file_path) }}" target="_blank" class="btn btn-outline btn-sm" style="font-size: 0.75rem;">👀 Lihat Dokumen</a>
+                                <a href="{{ Storage::url($doc->file_path) }}" target="_blank" class="btn btn-outline btn-sm" style="font-size: 0.75rem;">👀 Lihat Dokumen</a>
                             </td>
                         </tr>
                         @empty
@@ -145,6 +145,18 @@
                 <div style="margin-top: 10px; font-size: 0.75rem; color: var(--text-muted); font-style: italic;">
                     🔒 Akun Anda dalam mode pratinjau (read-only).
                 </div>
+            </div>
+            @endcan
+
+            @can('delete', $registration)
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <form action="{{ route('admin.ppdb.delete', $registration->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus pendaftar <strong>{{ $registration->full_name }}</strong>? Tindakan ini tidak dapat dibatalkan.">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="btn btn-danger btn-sm btn-delete-trigger" style="width: 100%; justify-content: center; display: inline-flex; align-items: center; gap: 6px;">
+                        🗑️ Hapus Pendaftar
+                    </button>
+                </form>
             </div>
             @endcan
         </div>

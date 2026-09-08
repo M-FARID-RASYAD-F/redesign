@@ -26,7 +26,7 @@
                     <th>Nama Orang Tua</th>
                     <th>Telepon Orang Tua</th>
                     <th>Status Pendaftaran</th>
-                    <th style="width: 150px; text-align: right;">Aksi</th>
+                    <th style="width: 220px; text-align: right;">Aksi</th>
                 </tr>
             </thead>
             <tbody>

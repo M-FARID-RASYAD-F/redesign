@@ -44,7 +44,7 @@
                         <a href="{{ route('logout') }}" class="nav-logout-link"><span class="nav-link-text">Logout</span></a>
                     @endauth
                     @guest
-                        <a href="{{ route('login') }}" class="nav-btn-search"><span class="nav-link-text">🔑 Login</span></a>
+                        <a href="{{ route('login') }}" class="nav-login-link nav-btn-search"><span class="nav-link-text">🔑 Login</span></a>
                     @endguest
                 </div>
 

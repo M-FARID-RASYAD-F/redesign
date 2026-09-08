@@ -3,6 +3,16 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Major;
+use App\Models\NewsCategory;
+use App\Models\News;
+use App\Models\TeacherStaff;
+use App\Models\PpdbRegistration;
+use App\Models\PpdbDocument;
+use App\Models\ActivityLog;
+use App\Models\Gallery;
+use App\Models\Announcement;
+use App\Models\Agenda;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,13 +25,43 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Seed Super Admin User
-        $admin = User::updateOrCreate(
-            ['email' => 'budi.guru@sekolah.sch.id'],
+        // 1. Seed Users untuk Tiap Role (Admin Dummy)
+        $superAdmin = User::updateOrCreate(
+            ['email' => 'superadmin@attamam.sch.id'],
             [
-                'name' => 'Budi Santoso, S.Pd. (Admin Utama)',
+                'name' => 'Budi Santoso, S.Pd. (Super Admin)',
                 'password' => bcrypt('password123'),
                 'role' => 'super_admin',
+                'is_active' => true,
+            ]
+        );
+
+        $adminCms = User::updateOrCreate(
+            ['email' => 'cms@attamam.sch.id'],
+            [
+                'name' => 'Siti Rahmah, S.Kom. (Admin CMS)',
+                'password' => bcrypt('password123'),
+                'role' => 'admin_cms',
+                'is_active' => true,
+            ]
+        );
+
+        $adminPpdb = User::updateOrCreate(
+            ['email' => 'ppdb@attamam.sch.id'],
+            [
+                'name' => 'Ahmad Fauzan, S.Pd. (Admin PPDB)',
+                'password' => bcrypt('password123'),
+                'role' => 'admin_ppdb',
+                'is_active' => true,
+            ]
+        );
+
+        $editorAkademik = User::updateOrCreate(
+            ['email' => 'akademik@attamam.sch.id'],
+            [
+                'name' => 'Dewi Lestari, M.Pd. (Editor Akademik)',
+                'password' => bcrypt('password123'),
+                'role' => 'editor_akademik',
                 'is_active' => true,
             ]
         );
@@ -49,7 +89,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($jurusanList as $jur) {
-            \App\Models\Major::firstOrCreate(['slug' => $jur['slug']], $jur);
+            Major::firstOrCreate(['slug' => $jur['slug']], $jur);
         }
 
         // 3. Seed News Categories
@@ -62,7 +102,7 @@ class DatabaseSeeder extends Seeder
 
         $cats = [];
         foreach ($categories as $cat) {
-            $cats[$cat['slug']] = \App\Models\NewsCategory::firstOrCreate(['slug' => $cat['slug']], $cat);
+            $cats[$cat['slug']] = NewsCategory::firstOrCreate(['slug' => $cat['slug']], $cat);
         }
 
         // 4. Seed News
@@ -73,7 +113,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'tim-rpl-smkn-1-nusantara-meraih-juara-1-lks-pemrograman-web-2026',
                 'thumbnail' => 'https://picsum.photos/800/400?random=1',
                 'content' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi yang diadakan minggu lalu di Gedung Pusat Kebudayaan.',
-                'author_id' => $admin->id,
+                'author_id' => $adminCms->id,
                 'published_at' => now(),
             ],
             [
@@ -82,7 +122,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'penandatanganan-mou-kemitraan-kerja-dengan-12-perusahaan-it-nasional',
                 'thumbnail' => 'https://picsum.photos/800/400?random=2',
                 'content' => 'SMKN 1 Nusantara memperluas jangkauan magang dan rekrutmen lulusan secara langsung sebelum wisuda kelulusan melalui penandatanganan kerja sama strategis ini.',
-                'author_id' => $admin->id,
+                'author_id' => $adminCms->id,
                 'published_at' => now(),
             ],
             [
@@ -91,16 +131,90 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'pembukaan-pendaftaran-siswa-baru-ppdb-gelombang-2-tahun-2026-2027',
                 'thumbnail' => 'https://picsum.photos/800/400?random=3',
                 'content' => 'Informasi lengkap persyaratan dan alur pendaftaran calon peserta didik baru gelombang 2 dapat diakses melalui portal PPDB online di website resmi ini.',
-                'author_id' => $admin->id,
+                'author_id' => $adminCms->id,
                 'published_at' => now(),
             ]
         ];
 
         foreach ($newsList as $n) {
-            \App\Models\News::firstOrCreate(['slug' => $n['slug']], $n);
+            News::firstOrCreate(['slug' => $n['slug']], $n);
         }
 
-        // 5. Seed Teachers & Staff
+        // 5. Seed Galleries
+        $galleries = [
+            [
+                'title' => 'Kegiatan Halaqah Tahfizh Pagi Santri',
+                'image_path' => 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=800',
+                'category' => 'Kegiatan Santri',
+                'uploaded_by' => $adminCms->id,
+            ],
+            [
+                'title' => 'Praktikum Jaringan Fiber Optic di Lab Komputer',
+                'image_path' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800',
+                'category' => 'Akademik & Lab',
+                'uploaded_by' => $adminCms->id,
+            ],
+            [
+                'title' => 'Pameran Karya Desain Grafis & Motion Animasi DKV',
+                'image_path' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800',
+                'category' => 'Pameran Karya',
+                'uploaded_by' => $adminCms->id,
+            ],
+        ];
+
+        foreach ($galleries as $g) {
+            Gallery::firstOrCreate(['title' => $g['title']], $g);
+        }
+
+        // 6. Seed Announcements
+        $announcements = [
+            [
+                'title' => 'Jadwal Tes Wawancara & Observasi PPDB Gelombang II',
+                'content' => 'Pelaksanaan observasi dan wawancara calon santri baru dijadwalkan pada hari Sabtu dan Ahad di Kampus Pusat.',
+                'type' => 'ppdb',
+                'start_date' => now()->subDays(2)->toDateString(),
+                'end_date' => now()->addDays(10)->toDateString(),
+                'is_archived' => false,
+                'created_by' => $adminCms->id,
+            ],
+            [
+                'title' => 'Pelatihan Sertifikasi Mikrotik & Cisco untuk Guru Produktif',
+                'content' => 'Seluruh pengajar jurusan teknik diwajibkan mengikuti agenda upskilling industri selama 3 hari.',
+                'type' => 'akademik',
+                'start_date' => now()->subDays(30)->toDateString(),
+                'end_date' => now()->subDays(5)->toDateString(),
+                'is_archived' => true,
+                'created_by' => $adminCms->id,
+            ],
+        ];
+
+        foreach ($announcements as $a) {
+            Announcement::firstOrCreate(['title' => $a['title']], $a);
+        }
+
+        // 7. Seed Agenda
+        $agendas = [
+            [
+                'title' => 'Workshop UI/UX Bersama Praktisi Startup Unicorn',
+                'date' => now()->addDays(7)->toDateString(),
+                'location' => 'Aula Serbaguna Lt. 2 Kampus Panam',
+                'description' => 'Membahas tren desain produk digital masa depan dan standar portfolio industri.',
+                'created_by' => $adminCms->id,
+            ],
+            [
+                'title' => 'Tasmi\' Akbar Hafalan 30 Juz Sekali Duduk',
+                'date' => now()->addDays(14)->toDateString(),
+                'location' => 'Masjid Jami\' At-Tamam',
+                'description' => 'Ujian kelulusan mutqin para santri kelas akhir disaksikan oleh wali santri dan dewan asatidz.',
+                'created_by' => $adminCms->id,
+            ],
+        ];
+
+        foreach ($agendas as $ag) {
+            Agenda::firstOrCreate(['title' => $ag['title']], $ag);
+        }
+
+        // 8. Seed Teachers & Staff
         $teachers = [
             [
                 'name' => 'Dr. H. Ahmad Fauzi, M.Pd.',
@@ -129,56 +243,92 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($teachers as $t) {
-            \App\Models\TeacherStaff::firstOrCreate(['nip' => $t['nip']], $t);
+            TeacherStaff::firstOrCreate(['nip' => $t['nip']], $t);
         }
 
-        // 6. Seed PPDB Registrations
+        // 9. Seed PPDB Registrations
         $ppdbList = [
             [
                 'no_pendaftaran' => 'PPDB20260001',
                 'full_name' => 'Muhammad Rifqi',
                 'gender' => 'L',
                 'birth_date' => '2010-04-15',
-                'address' => 'Jl. Merdeka No. 10, Jakarta Pusat',
+                'address' => 'Jl. Merdeka No. 10, Pekanbaru',
                 'parent_name' => 'Bambang Hermawan',
                 'parent_phone' => '081234567890',
-                'major_choice' => 'rpl',
+                'major_choice' => 'rekayasa-perangkat-lunak-rpl',
                 'status' => 'pending',
-                'notes' => 'Menunggu verifikasi rapor dan KK',
+                'notes' => 'Menunggu verifikasi berkas kartu keluarga dan pas foto oleh panitia.',
             ],
             [
                 'no_pendaftaran' => 'PPDB20260002',
                 'full_name' => 'Laras Ayu Wandira',
                 'gender' => 'P',
                 'birth_date' => '2010-09-22',
-                'address' => 'Jl. Melati Indah Gg. 3 No. 14, Jakarta Barat',
+                'address' => 'Jl. Melati Indah Gg. 3 No. 14, Pekanbaru',
                 'parent_name' => 'Sri Astuti',
                 'parent_phone' => '089876543210',
-                'major_choice' => 'dkv',
+                'major_choice' => 'desain-komunikasi-visual-dkv',
                 'status' => 'diverifikasi',
-                'notes' => 'Dokumen lengkap dan valid',
+                'notes' => 'Seluruh dokumen lengkap dan terverifikasi valid.',
+            ],
+            [
+                'no_pendaftaran' => 'PPDB20260003',
+                'full_name' => 'Fadhil Rahman Al-Farisi',
+                'gender' => 'L',
+                'birth_date' => '2010-01-18',
+                'address' => 'Jl. HR. Soebrantas Km. 11, Pekanbaru',
+                'parent_name' => 'Rahman Hakim',
+                'parent_phone' => '081399887766',
+                'major_choice' => 'teknik-komputer-jaringan-tkj',
+                'status' => 'diterima',
+                'notes' => 'Lulus tes observasi dan wawancara. Siap daftar ulang.',
+            ],
+            [
+                'no_pendaftaran' => 'PPDB20260004',
+                'full_name' => 'Zahra Amelia Putri',
+                'gender' => 'P',
+                'birth_date' => '2011-03-05',
+                'address' => 'Jl. Kaharuddin Nasution No. 55, Pekanbaru',
+                'parent_name' => 'Amran Syah',
+                'parent_phone' => '082155443322',
+                'major_choice' => 'desain-komunikasi-visual-dkv',
+                'status' => 'ditolak',
+                'notes' => 'Usia belum mencukupi batas persyaratan penerimaan tahun ajaran 2026/2027.',
             ]
         ];
 
         foreach ($ppdbList as $p) {
-            $reg = \App\Models\PpdbRegistration::firstOrCreate(['no_pendaftaran' => $p['no_pendaftaran']], $p);
+            $reg = PpdbRegistration::firstOrCreate(['no_pendaftaran' => $p['no_pendaftaran']], $p);
             
             // Seed mock document for each
-            \App\Models\PpdbDocument::firstOrCreate(
+            PpdbDocument::firstOrCreate(
                 ['registration_id' => $reg->id, 'doc_type' => 'kk'],
                 [
-                    'file_path' => 'storage/ppdb/kk_' . $reg->id . '.pdf',
-                    'verification_status' => $reg->status == 'diverifikasi' ? 'valid' : 'belum_diverifikasi',
+                    'file_path' => 'ppdb_documents/kk_' . $reg->id . '.pdf',
+                    'verification_status' => in_array($reg->status, ['diverifikasi', 'diterima']) ? 'valid' : 'belum_diverifikasi',
                 ]
             );
         }
 
-        // 7. Seed Initial Activity Logs
-        \App\Models\ActivityLog::create([
-            'user_id' => $admin->id,
+        // 10. Seed Initial Activity Logs
+        ActivityLog::create([
+            'user_id' => $superAdmin->id,
             'module' => 'auth',
-            'action' => 'create',
-            'description' => 'System seeding data awal berhasil dijalankan',
+            'action' => 'seed',
+            'description' => 'System seeding data awal seluruh modul dan role admin berhasil dijalankan',
+        ]);
+        ActivityLog::create([
+            'user_id' => $adminPpdb->id,
+            'module' => 'ppdb',
+            'action' => 'verify',
+            'description' => 'Verifikasi berkas persyaratan PPDB pendaftar Laras Ayu Wandira',
+        ]);
+        ActivityLog::create([
+            'user_id' => $adminCms->id,
+            'module' => 'news',
+            'action' => 'publish',
+            'description' => 'Mempublikasikan artikel berita prestasi lomba LKS 2026',
         ]);
     }
 }

@@ -8,9 +8,11 @@
         <h1 class="header-title">Kelola Berita</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Terbitkan, perbarui, dan hapus artikel atau berita sekolah.</p>
     </div>
+    @can('create', App\Models\News::class)
     <a href="{{ route('admin.news.create') }}" class="btn btn-primary">
         <span>➕</span> Tulis Berita Baru
     </a>
+    @endcan
 </div>
 
 <div class="card">
@@ -51,13 +53,17 @@
                     </td>
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
+                            @can('update', $news)
                             <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
+                            @endcan
                             
+                            @can('delete', $news)
                             <form action="{{ route('admin.news.delete', $news->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus berita <strong>{{ $news->title }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
                             </form>
+                            @endcan
                         </div>
                     </td>
                 </tr>

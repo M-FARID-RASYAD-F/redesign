@@ -524,23 +524,6 @@
             <span>At-Tamam Master Control Panel</span>
         </div>
         <h1 class="hero-title">Selamat Datang, {{ auth()->user()->name }}! 👋</h1>
-        <p class="hero-desc">
-            Pusat manajemen terpadu PKBM Tahfizh At-Tamam. Pantau dan kelola pendaftaran siswa baru, publikasi berita resmi, staf pendidik, serta program keahlian secara real-time.
-        </p>
-        <div class="hero-meta-chips">
-            <div class="hero-chip">
-                <span>👤</span>
-                <span>Hak Akses: {{ ucfirst(str_replace('_', ' ', auth()->user()->role)) }}</span>
-            </div>
-            <div class="hero-chip">
-                <span>📅</span>
-                <span>{{ now()->translatedFormat('l, d F Y') }}</span>
-            </div>
-            <div class="hero-chip">
-                <span>🟢</span>
-                <span>Sistem Operasional Normal</span>
-            </div>
-        </div>
     </div>
     <div class="hero-actions">
         <a href="{{ route('admin.news.create') }}" class="btn btn-primary btn-sm">

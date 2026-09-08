@@ -8,9 +8,11 @@
         <h1 class="header-title">Kelola Jurusan</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Kelola data program keahlian/jurusan yang tersedia di sekolah.</p>
     </div>
+    @can('create', App\Models\Major::class)
     <a href="{{ route('admin.majors.create') }}" class="btn btn-primary">
         <span>➕</span> Tambah Jurusan Baru
     </a>
+    @endcan
 </div>
 
 <div class="card">
@@ -39,13 +41,17 @@
                     </td>
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
+                            @can('update', $major)
                             <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
+                            @endcan
                             
+                            @can('delete', $major)
                             <form action="{{ route('admin.majors.delete', $major->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus jurusan <strong>{{ $major->name }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
                             </form>
+                            @endcan
                         </div>
                     </td>
                 </tr>

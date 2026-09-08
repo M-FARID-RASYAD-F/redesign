@@ -28,15 +28,20 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+
+        // Redirect otomatis sesuai role pengguna (PRD 3.4 & role.md)
+        $targetUrl = $user ? $user->dashboard_url : route('admin.dashboard');
+
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'status' => 'success',
-                'message' => 'Autentikasi berhasil! Selamat datang kembali.',
-                'redirect' => redirect()->intended(route('admin.dashboard', absolute: false))->getTargetUrl()
+                'message' => 'Autentikasi berhasil! Selamat datang kembali, ' . ($user ? $user->name : '') . '.',
+                'redirect' => $targetUrl,
             ]);
         }
 
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        return redirect($targetUrl);
     }
 
     /**

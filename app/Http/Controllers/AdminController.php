@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\News;
@@ -284,6 +285,7 @@ class AdminController extends Controller
     public function ppdbUpdateStatus(Request $request, $id)
     {
         $registration = PpdbRegistration::findOrFail($id);
+        Gate::authorize('update', $registration);
 
         $validated = $request->validate([
             'status' => 'required|in:pending,diverifikasi,diterima,ditolak',
@@ -301,6 +303,8 @@ class AdminController extends Controller
     public function ppdbDelete($id)
     {
         $registration = PpdbRegistration::findOrFail($id);
+        Gate::authorize('delete', $registration);
+
         $noPendaftaran = $registration->no_pendaftaran;
         $fullName = $registration->full_name;
         $registration->delete();

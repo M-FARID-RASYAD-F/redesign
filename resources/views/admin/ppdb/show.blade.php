@@ -121,6 +121,7 @@
                 @endif
             </div>
 
+            @can('update', $registration)
             <form action="{{ route('admin.ppdb.status', $registration->id) }}" method="POST">
                 @csrf
                 
@@ -141,6 +142,15 @@
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Simpan Status</button>
             </form>
+            @else
+            <div style="padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">Catatan Panitia:</div>
+                <div style="font-size: 0.9rem; color: #ffffff;">{{ $registration->notes ?? 'Tidak ada catatan.' }}</div>
+                <div style="margin-top: 10px; font-size: 0.75rem; color: var(--text-muted); font-style: italic;">
+                    🔒 Akun Anda dalam mode pratinjau (read-only).
+                </div>
+            </div>
+            @endcan
         </div>
     </div>
 </div>

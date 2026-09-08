@@ -76,6 +76,28 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === $roles;
     }
 
+    public function getDashboardUrlAttribute(): string
+    {
+        return match ($this->role) {
+            'super_admin' => route('admin.dashboard'),
+            'admin_cms' => route('admin.cms.dashboard'),
+            'admin_ppdb' => route('admin.ppdb.dashboard'),
+            'editor_akademik' => route('admin.akademik.dashboard'),
+            default => route('admin.dashboard'),
+        };
+    }
+
+    public function getRoleLabelAttribute(): string
+    {
+        return match ($this->role) {
+            'super_admin' => 'Super Admin',
+            'admin_cms' => 'Admin CMS',
+            'admin_ppdb' => 'Admin PPDB',
+            'editor_akademik' => 'Editor Akademik',
+            default => 'Pengguna',
+        };
+    }
+
     // Relationships
     public function activityLogs()
     {

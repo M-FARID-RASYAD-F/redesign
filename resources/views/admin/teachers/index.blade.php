@@ -8,9 +8,11 @@
         <h1 class="header-title">Kelola Guru & Staf</h1>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Daftar guru, tenaga pengajar, dan staf administrasi sekolah.</p>
     </div>
+    @can('create', App\Models\TeacherStaff::class)
     <a href="{{ route('admin.teachers.create') }}" class="btn btn-primary">
         <span>➕</span> Tambah Guru / Staf
     </a>
+    @endcan
 </div>
 
 <div class="card">
@@ -59,13 +61,17 @@
                     </td>
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
+                            @can('update', $teacher)
                             <a href="{{ route('admin.teachers.edit', $teacher->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
+                            @endcan
                             
+                            @can('delete', $teacher)
                             <form action="{{ route('admin.teachers.delete', $teacher->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus data guru <strong>{{ $teacher->name }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
                             </form>
+                            @endcan
                         </div>
                     </td>
                 </tr>

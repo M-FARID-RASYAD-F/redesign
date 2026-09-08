@@ -987,6 +987,109 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
+           DASHBOARD HERO BANNER (SHARED FOR ALL ROLE DASHBOARDS)
+           ═══════════════════════════════════════════════════════════ */
+        .dashboard-hero {
+            position: relative;
+            border-radius: 20px;
+            padding: 26px 30px;
+            margin-bottom: 26px;
+            background: var(--adm-card-bg);
+            border: 1.5px solid var(--adm-border);
+            box-shadow: var(--adm-shadow);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+            transition: border-color 0.3s ease;
+        }
+
+        .dashboard-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, var(--adm-primary-glow) 0%, transparent 65%);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+        }
+
+        .hero-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--adm-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--adm-border);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff !important;
+            line-height: 1.25;
+            margin-bottom: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-hero {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 22px 20px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .dashboard-hero {
+                padding: 18px 16px;
+                border-radius: 16px;
+                gap: 16px;
+            }
+
+            .hero-title {
+                font-size: 1.4rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
            CRUD SKELETON LOADING ENGINE (FOR ALL CRUD METHODS)
            ═══════════════════════════════════════════════════════════ */
         :root {
@@ -1372,35 +1475,56 @@
         <div class="sidebar-category">Menu Navigasi</div>
         <ul class="sidebar-menu">
             <li>
-                <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                <a href="{{ auth()->user()->dashboard_url }}" class="sidebar-link {{ Route::is('admin.dashboard', 'admin.cms.dashboard', 'admin.ppdb.dashboard', 'admin.akademik.dashboard') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">📊</span>
                     <span>Dashboard</span>
                 </a>
             </li>
+
+            @can('viewAny', App\Models\News::class)
             <li>
                 <a href="{{ route('admin.news.index') }}" class="sidebar-link {{ Route::is('admin.news.*') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">📰</span>
                     <span>Berita (CMS)</span>
                 </a>
             </li>
+            @endcan
+
+            @can('viewAny', App\Models\TeacherStaff::class)
             <li>
                 <a href="{{ route('admin.teachers.index') }}" class="sidebar-link {{ Route::is('admin.teachers.*') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">👨‍🏫</span>
                     <span>Guru & Staf</span>
                 </a>
             </li>
+            @endcan
+
+            @can('viewAny', App\Models\PpdbRegistration::class)
             <li>
-                <a href="{{ route('admin.ppdb.index') }}" class="sidebar-link {{ Route::is('admin.ppdb.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.ppdb.index') }}" class="sidebar-link {{ (Route::is('admin.ppdb.*') && !Route::is('admin.ppdb.dashboard')) ? 'active' : '' }}">
                     <span class="sidebar-link-icon">📝</span>
                     <span>PPDB Online</span>
                 </a>
             </li>
+            @endcan
+
+            @can('viewAny', App\Models\Major::class)
             <li>
                 <a href="{{ route('admin.majors.index') }}" class="sidebar-link {{ Route::is('admin.majors.*') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">💻</span>
                     <span>Program Jurusan</span>
                 </a>
             </li>
+            @endcan
+
+            @can('viewAny', App\Models\User::class)
+            <li>
+                <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">👥</span>
+                    <span>Kelola Pengguna</span>
+                </a>
+            </li>
+            @endcan
         </ul>
 
         <div class="sidebar-footer">
@@ -1412,7 +1536,7 @@
                     <span class="user-meta-name">{{ auth()->user()->name }}</span>
                     <span class="user-meta-role">
                         <span class="role-indicator-dot"></span>
-                        {{ ucfirst(str_replace('_', ' ', auth()->user()->role)) }}
+                        {{ auth()->user()->role_label }}
                     </span>
                 </div>
             </div>
@@ -1543,8 +1667,18 @@
             // ── CRUD Skeleton Transition & Loading Manager ──
             const skeleton = document.getElementById('crudSkeletonLoader');
             const content = document.getElementById('crudPageContent');
+            let initialTimer = null;
+            let safetyTimer = null;
             
             function showContent() {
+                if (safetyTimer) {
+                    clearTimeout(safetyTimer);
+                    safetyTimer = null;
+                }
+                if (initialTimer) {
+                    clearTimeout(initialTimer);
+                    initialTimer = null;
+                }
                 if (!content || !skeleton) return;
                 skeleton.classList.add('is-hidden');
                 content.classList.remove('is-loading');
@@ -1553,6 +1687,7 @@
             function showSkeleton(targetType) {
                 if (!content || !skeleton) return;
                 clearInitialTimer();
+                if (safetyTimer) clearTimeout(safetyTimer);
                 
                 // Aktifkan layout skeleton yang sesuai target
                 if (targetType) {
@@ -1564,14 +1699,17 @@
 
                 content.classList.add('is-loading');
                 skeleton.classList.remove('is-hidden');
+
+                // Safety timeout: jika navigasi tertunda, dibatalkan, atau undo, sembunyikan skeleton otomatis
+                safetyTimer = setTimeout(showContent, 3000);
             }
 
             // Expose globally agar bisa dipanggil dari child view atau AJAX
             window.showCrudSkeleton = showSkeleton;
             window.hideCrudSkeleton = showContent;
 
-            // Transisi smooth initial skeleton saat halaman dimuat (280ms)
-            let initialTimer = setTimeout(showContent, 280);
+            // Transisi smooth initial skeleton saat halaman dimuat (180ms)
+            initialTimer = setTimeout(showContent, 180);
 
             // Batalkan timeout inisial jika showSkeleton dipanggil manual
             function clearInitialTimer() {
@@ -1581,14 +1719,35 @@
                 }
             }
 
+            // ── Tangani Back-Forward Cache (bfcache) & History Navigation (Undo / Back / Forward) ──
+            window.addEventListener('pageshow', function(event) {
+                showContent();
+            });
+
+            window.addEventListener('popstate', function() {
+                showContent();
+            });
+
             // ── Intercept Navigasi CRUD Links ──
             document.addEventListener('click', function(e) {
+                // Abaikan jika modifier key ditekan (buka tab baru) atau bukan klik kiri
+                if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
                 const link = e.target.closest('a');
                 if (!link) return;
 
                 const href = link.getAttribute('href');
-                if (!href || href.startsWith('#') || href.startsWith('javascript:') || link.target === '_blank' || href.includes('/logout')) return;
+                if (!href || href.startsWith('#') || href.startsWith('javascript:') || link.target === '_blank' || href.includes('/logout') || href.includes('mailto:') || href.includes('tel:')) return;
                 
+                // Jangan picu skeleton untuk download file (seperti ekspor CSV)
+                if (href.includes('/export') || link.hasAttribute('download')) return;
+
+                // Jangan picu jika link mengarah ke halaman yang persis sama
+                try {
+                    const targetUrl = new URL(link.href, window.location.origin);
+                    if (targetUrl.href === window.location.href) return;
+                } catch(err) {}
+
                 // Deteksi jika link mengarah ke rute CRUD Admin
                 if (href.includes('/admin') || link.classList.contains('sidebar-link') || link.closest('.header') || link.closest('table')) {
                     let type = 'table';
@@ -1625,6 +1784,20 @@
                     showSkeleton(type);
                 }
             });
+        });
+
+        // Emergency global listener untuk BFCache & history popstate di level window
+        window.addEventListener('pageshow', function (event) {
+            const skeleton = document.getElementById('crudSkeletonLoader');
+            const content = document.getElementById('crudPageContent');
+            if (skeleton) skeleton.classList.add('is-hidden');
+            if (content) content.classList.remove('is-loading');
+        });
+        window.addEventListener('popstate', function () {
+            const skeleton = document.getElementById('crudSkeletonLoader');
+            const content = document.getElementById('crudPageContent');
+            if (skeleton) skeleton.classList.add('is-hidden');
+            if (content) content.classList.remove('is-loading');
         });
     </script>
 

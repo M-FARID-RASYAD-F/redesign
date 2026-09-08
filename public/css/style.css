@@ -224,8 +224,9 @@ a:hover {
 
 /* 3 Kapsul Kontainer Terpisah (Island / Segmented Navbar) */
 .navbar-capsule {
-  height: 64px;
-  padding: 0 1.25rem;
+  min-height: 64px;
+  height: auto;
+  padding: 6px 1.25rem;
   background: linear-gradient(135deg, rgba(0, 33, 71, 0.96) 0%, rgba(10, 21, 40, 0.98) 100%);
   border: 2px solid #00B4D8;
   border-radius: 16px;
@@ -524,21 +525,22 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   color: #ffffff !important;
   font-weight: 700;
-  font-size: 0.82rem;
-  padding: 8px 14px;
+  font-size: 0.75rem;
+  padding: 4px 10px;
   border: 1.5px solid #00B4D8;
-  border-radius: 10px;
-  letter-spacing: 0.05em;
+  border-radius: 7px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
-  background: linear-gradient(135deg, rgba(0, 180, 216, 0.4) 0%, rgba(0, 119, 182, 0.55) 100%);
-  box-shadow: 0 2px 14px rgba(0, 180, 216, 0.35);
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.45) 0%, rgba(0, 119, 182, 0.65) 100%);
+  box-shadow: 0 2px 10px rgba(0, 180, 216, 0.35);
   white-space: nowrap;
   flex-shrink: 0;
+  width: 100%;
   position: relative;
   z-index: 10;
 }
@@ -546,8 +548,8 @@ a:hover {
   background: linear-gradient(135deg, #00B4D8 0%, #0096c7 100%);
   border-color: #ffffff;
   color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 180, 216, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 180, 216, 0.6);
 }
 .nav-btn-menu:active {
   transform: translateY(1px) scale(0.97);
@@ -572,73 +574,57 @@ a:hover {
   color: #fef08a;
 }
 
-/* Desktop Auth area */
+/* Kolom Aksi Kanan Vertikal (Admin/Logout di atas, Tombol Menu di bawah) */
+.nav-auth-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.nav-auth-row,
 .nav-auth-desktop {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: 8px;
-}
-
-.nav-auth-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 50px;
-  padding: 4px 12px 4px 5px;
-}
-
-.nav-auth-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.72rem;
-  flex-shrink: 0;
-}
-
-.nav-auth-name {
-  font-size: 0.82rem;
-  color: #e2e8f0;
-  font-weight: 600;
-  max-width: 110px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  gap: 6px;
 }
 
 .nav-admin-link {
-  background: rgba(245,158,11,0.14);
-  color: #f59e0b;
-  padding: 5px 12px;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  padding: 3px 9px;
   border-radius: 50px;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   white-space: nowrap;
+  line-height: 1.2;
+  transition: all 0.25s ease;
+  text-decoration: none;
 }
 .nav-admin-link:hover {
-  background: rgba(245,158,11,0.24);
-  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.32);
+  color: #ffffff;
+  border-color: #f59e0b;
   transform: translateY(-1px);
 }
 
 .nav-logout-link {
   color: #f87171;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 5px 8px;
+  padding: 3px 6px;
   border-radius: 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  text-decoration: none;
 }
-.nav-logout-link:hover { color: #fca5a5; background: rgba(248,113,113,0.08); }
+.nav-logout-link:hover {
+  color: #fca5a5;
+  background: rgba(248, 113, 113, 0.12);
+}
 
 .btn-nav-login {
   display: inline-flex;
@@ -4580,11 +4566,7 @@ a:hover {
   }
 }
 
-@media (min-width: 1025px) {
-  .nav-btn-menu {
-    display: none !important;
-  }
-}
+
 
 /* 2. Hero Transition & Navy/Rose Sections (oklch(41% 0.159 10.272)) */
 [data-theme="light"] .hero::after {

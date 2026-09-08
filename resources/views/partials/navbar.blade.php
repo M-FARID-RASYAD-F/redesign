@@ -36,26 +36,32 @@
                 <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
             </button>
 
-            <div class="nav-auth-desktop">
-                @auth
-                    <a href="{{ route('admin.dashboard') }}" class="nav-admin-link"><span class="nav-link-text">🛡️ Admin</span></a>
-                    <a href="{{ route('logout') }}" class="nav-logout-link"><span class="nav-link-text">Logout</span></a>
-                @endauth
-                @guest
-                    <a href="{{ route('login') }}" class="nav-btn-search"><span class="nav-link-text">🔑 Login</span></a>
-                @endguest
-            </div>
+            {{-- Kolom Vertikal: Baris Atas (Admin/Logout atau Login) & Baris Bawah (Tombol Menu) --}}
+            <div class="nav-auth-column">
+                <div class="nav-auth-row">
+                    @auth
+                        <a href="{{ route('admin.dashboard') }}" class="nav-admin-link"><span class="nav-link-text">🛡️ Admin</span></a>
+                        <a href="{{ route('logout') }}" class="nav-logout-link"><span class="nav-link-text">Logout</span></a>
+                    @endauth
+                    @guest
+                        <a href="{{ route('login') }}" class="nav-btn-search"><span class="nav-link-text">🔑 Login</span></a>
+                    @endguest
+                </div>
 
-            {{-- Tombol Menu (kotak border putih) — hamburger --}}
-            <button class="nav-btn-menu" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
-                <svg id="iconHamburger" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline-block; flex-shrink:0;">
-                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-                <svg id="iconClose" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none; flex-shrink:0;">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-                <span class="nav-link-text" style="font-weight: 700; letter-spacing: 0.5px;">Menu</span>
-            </button>
+                {{-- Tombol Menu (ditaruh tepat di bawah tombol admin dan logout) --}}
+                <button class="nav-btn-menu" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+                    <svg id="iconHamburger" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline-block; flex-shrink:0;">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                    <svg id="iconClose" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none; flex-shrink:0;">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                    <span class="nav-link-text" style="font-weight: 700; letter-spacing: 0.5px;">Menu</span>
+                </button>
+            </div>
         </div>
     </div>
 

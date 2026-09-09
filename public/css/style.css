@@ -787,17 +787,17 @@ a:hover {
   padding: 8rem 0 6rem;
 }
 
-/* Overlay gradient gelap dari bawah ke atas */
+/* Overlay gradient lembut — menjaga foto kampus tetap terang, jernih, dan tidak gelap */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.50) 35%,
-    rgba(0, 0, 0, 0.18) 65%,
-    rgba(0, 0, 0, 0.06) 100%
+    rgba(0, 0, 0, 0.70) 0%,
+    rgba(0, 0, 0, 0.30) 35%,
+    rgba(0, 0, 0, 0.08) 65%,
+    transparent 100%
   );
   pointer-events: none;
   z-index: 1;
@@ -851,15 +851,19 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(59, 130, 246, 0.15);
-  color: #93c5fd;
-  border: 1px solid rgba(147, 197, 253, 0.20);
-  padding: 5px 16px;
+  background: rgba(0, 33, 71, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.50);
+  padding: 6px 18px;
   border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   margin-bottom: 1.35rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 180, 216, 0.25);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
 }
 
@@ -869,27 +873,37 @@ a:hover {
   font-weight: 800;
   line-height: 1.18;
   margin-bottom: 1.15rem;
-  background: linear-gradient(to right, #ffffff, #93c5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.90),
+    0 4px 18px rgba(0, 0, 0, 0.85);
   letter-spacing: -0.01em;
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.20s both;
 }
 
 .hero-subtitle {
-  font-size: 1.05rem;
-  color: #94a3b8;
-  margin-bottom: 0.85rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.95rem;
   max-width: 600px;
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.90);
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
 }
 
 .hero-desc {
-  color: #cbd5e1;
-  font-size: 0.9rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
   margin-bottom: 1.75rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.85);
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both;
 }
 
@@ -914,25 +928,35 @@ a:hover {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #0284c7, #0077b6);
   color: white;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.40);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 4px 18px rgba(0, 180, 216, 0.45), 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
-  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.55);
+  background: linear-gradient(135deg, #0369a1, #075985);
+  box-shadow: 0 8px 28px rgba(0, 180, 216, 0.60);
   transform: translateY(-2px);
   color: white;
 }
 
 .btn-outline {
-  background: rgba(255,255,255,0.05);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0, 25, 55, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.40);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  font-weight: 650;
 }
 .btn-outline:hover {
-  background: rgba(255,255,255,0.15);
-  color: white;
+  background: rgba(0, 35, 75, 0.95);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 6px 20px rgba(0, 180, 216, 0.35);
+  transform: translateY(-2px);
 }
 
 /* Submit button — emerald + shimmer */
@@ -4788,24 +4812,29 @@ a:hover {
 
 /* 6. Harmonisasi Warna Merah/Crimson untuk Seluruh Elemen Aksen di White Mode */
 [data-theme="light"] .hero-title {
-  background: linear-gradient(to right, #ffffff 15%, #fecdd3 45%, oklch(75% 0.18 18) 75%, oklch(58.6% 0.253 17.585) 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 6px 24px rgba(0, 0, 0, 0.85), 0 0 30px oklch(58.6% 0.253 17.585 / 0.5) !important;
 }
 
 [data-theme="light"] .hero-subtitle {
   color: #fecdd3 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 4px 16px rgba(0, 0, 0, 0.85) !important;
 }
 
 [data-theme="light"] .hero-desc {
-  color: #ffe4e6 !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 4px 14px rgba(0, 0, 0, 0.80) !important;
 }
 
 [data-theme="light"] .hero-badge {
-  background: oklch(58.6% 0.253 17.585 / 0.22);
-  color: #ffffff;
-  border-color: oklch(58.6% 0.253 17.585 / 0.5);
+  background: oklch(27.1% 0.105 12.094 / 0.88) !important;
+  color: #ffffff !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.65) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 18px oklch(58.6% 0.253 17.585 / 0.4) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
 }
 
 [data-theme="light"] .custom-card::before {

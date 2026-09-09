@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpeg') }}">
     
     <!-- Script Anti-Flicker Sinkronisasi Tema dengan Halaman Utama -->
     <script>
@@ -1681,7 +1681,7 @@
         <div class="sidebar-brand-wrapper">
             <a href="{{ route('home') }}" class="sidebar-brand">
                 <div class="brand-logo-wrap">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam">
                 </div>
                 <div class="brand-meta">
                     <span class="brand-title">At-Tamam Edu</span>

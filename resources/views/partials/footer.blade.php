@@ -4,7 +4,7 @@
         <div class="footer-col-brand">
             <div class="footer-brand-header">
                 <div class="footer-logo-box">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="footer-logo-img">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="footer-logo-img">
                 </div>
                 <div class="footer-brand-text">
                     <div class="footer-brand-name">PKBM Tahfizh At-Tamam</div>

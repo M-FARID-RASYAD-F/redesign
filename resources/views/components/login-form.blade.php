@@ -25,7 +25,7 @@
                 <input type="hidden" name="form_type" value="login">
 
                 <div class="brand-badge">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam">
                     <span>Portal Pendidik & Staf</span>
                 </div>
 
@@ -117,7 +117,7 @@
                 <input type="hidden" name="form_type" value="register">
 
                 <div class="brand-badge">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam">
                     <span>Pendaftaran Akun Baru</span>
                 </div>
 
@@ -219,7 +219,7 @@
         <div class="panel left-panel">
             <div class="content">
                 <div class="panel-logo">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo At-Tamam">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo At-Tamam">
                 </div>
                 <h3>New here?</h3>
                 <p>Join us today and discover a world of possibilities. Create your account in seconds!</p>
@@ -230,7 +230,7 @@
         <div class="panel right-panel">
             <div class="content">
                 <div class="panel-logo">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo At-Tamam">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo At-Tamam">
                 </div>
                 <h3>One of us?</h3>
                 <p>Welcome back! Sign in to continue your journey with us.</p>

@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Portal Masuk & Registrasi — PKBM Tahfizh At-Tamam</title>
     
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpeg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -2024,7 +2024,7 @@
                 <div class="loader-orbit-ring ring-outer"></div>
                 <div class="loader-orbit-ring ring-inner"></div>
                 <div class="loader-logo-card">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="loader-logo-img">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="loader-logo-img">
                 </div>
             </div>
             
@@ -2079,7 +2079,7 @@
                     <input type="hidden" name="form_type" value="login">
 
                     <div class="brand-badge">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam">
                         <span>Portal Pendidik & Staf</span>
                     </div>
 
@@ -2180,7 +2180,7 @@
                     <input type="hidden" name="form_type" value="register">
 
                     <div class="brand-badge">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam">
                         <span>Pendaftaran Akun Baru</span>
                     </div>
 
@@ -2294,7 +2294,7 @@
             <div class="panel left-panel">
                 <div class="content">
                     <div class="panel-logo">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo At-Tamam">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo At-Tamam">
                     </div>
                     <h3>New here?</h3>
                     <p>Join us today and discover a world of possibilities. Create your account in seconds!</p>
@@ -2306,7 +2306,7 @@
             <div class="panel right-panel">
                 <div class="content">
                     <div class="panel-logo">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo At-Tamam">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo At-Tamam">
                     </div>
                     <h3>One of us?</h3>
                     <p>Welcome back! Sign in to continue your journey with us.</p>

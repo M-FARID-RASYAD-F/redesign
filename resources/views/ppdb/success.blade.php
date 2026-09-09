@@ -22,7 +22,7 @@
             <div class="ppdb-card-header">
                 <div style="display: flex; align-items: center; gap: 14px;">
                     <div style="width: 48px; height: 48px; background: white; border-radius: 10px; padding: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
                     </div>
                     <div>
                         <span style="font-size: 0.8rem; color: #93c5fd; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">KARTU BUKTI PENDAFTARAN</span>

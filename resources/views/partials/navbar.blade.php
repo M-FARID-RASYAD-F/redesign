@@ -6,7 +6,7 @@
         <div class="navbar-capsule navbar-left">
             <a href="{{ route('home') }}" class="navbar-brand">
                 <div class="brand-icon">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
                 </div>
                 <div class="brand-text">
                     <span class="brand-text-main">PKBM Tahfizh At-Tamam</span>

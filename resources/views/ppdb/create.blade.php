@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@php
+    /** @var \Illuminate\Support\ViewErrorBag $errors */
+    /** @var \Illuminate\Database\Eloquent\Collection<\App\Models\Major> $majors */
+    /** @var string|null $selectedJenjang */
+@endphp
+
 @section('title', 'Formulir Pendaftaran Siswa Baru (PPDB) — PKBM Tahfizh At-Tamam')
 
 @push('styles')
@@ -238,6 +244,60 @@
         padding-top: 18px;
     }
 }
+
+/* Pilihan Jenjang Pendidikan Modern */
+.jenjang-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+}
+@media (max-width: 768px) {
+    .jenjang-selector-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.jenjang-card-option {
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    background: rgba(15, 23, 42, 0.6);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.jenjang-card-option:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+    background: rgba(15, 23, 42, 0.85);
+    transform: translateY(-2px);
+}
+.jenjang-card-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.jenjang-card-option.selected-sd {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.14);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+.jenjang-card-option.selected-smp {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.14);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+.jenjang-card-option.selected-smk {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.14);
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
+}
+[data-theme="light"] .jenjang-card-option {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
 </style>
 @endpush
 
@@ -329,6 +389,82 @@
                             </div>
                         </div>
 
+                        <!-- Pilihan Jenjang Pendidikan (SD, SMP, SMK) -->
+                        <div class="form-group" style="margin-bottom: 24px;">
+                            <label class="ppdb-form-label" style="font-size: 0.95rem; margin-bottom: 6px;">
+                                Pilih Jenjang / Tingkat Pendidikan <span style="color: #ef4444;">*</span>
+                            </label>
+                            <span style="display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px;">
+                                Tentukan tingkatan sekolah yang dituju untuk calon peserta didik baru:
+                            </span>
+
+                            @php
+                                $currentJenjang = old('jenjang', $selectedJenjang ?? 'sd');
+                            @endphp
+
+                            <div class="jenjang-selector-grid">
+                                <!-- Opsi SD -->
+                                <label class="jenjang-card-option {{ $currentJenjang == 'sd' ? 'selected-sd' : '' }}" id="card-jenjang-sd">
+                                    <input type="radio" name="jenjang" value="sd" @checked($currentJenjang == 'sd') required onchange="handleJenjangChange('sd')" />
+                                    <span style="display: block;">
+                                        <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                            <span style="font-size: 1.6rem;">🎒</span>
+                                            <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SD</span>
+                                        </span>
+                                        <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Sekolah Dasar (SD)</strong>
+                                        <span style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; display: block;">Tahfizh Cilik Juz 30 & Pembentukan Karakter Dasar</span>
+                                    </span>
+                                </label>
+
+                                <!-- Opsi SMP -->
+                                <label class="jenjang-card-option {{ $currentJenjang == 'smp' ? 'selected-smp' : '' }}" id="card-jenjang-smp">
+                                    <input type="radio" name="jenjang" value="smp" @checked($currentJenjang == 'smp') required onchange="handleJenjangChange('smp')" />
+                                    <span style="display: block;">
+                                        <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                            <span style="font-size: 1.6rem;">📚</span>
+                                            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMP</span>
+                                        </span>
+                                        <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Menengah Pertama (SMP)</strong>
+                                        <span style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; display: block;">Target 5-10 Juz Mutqin, Bahasa & Sains Terapan</span>
+                                    </span>
+                                </label>
+
+                                <!-- Opsi SMK -->
+                                <label class="jenjang-card-option {{ $currentJenjang == 'smk' ? 'selected-smk' : '' }}" id="card-jenjang-smk">
+                                    <input type="radio" name="jenjang" value="smk" @checked($currentJenjang == 'smk') required onchange="handleJenjangChange('smk')" />
+                                    <span style="display: block;">
+                                        <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                            <span style="font-size: 1.6rem;">💻</span>
+                                            <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMK</span>
+                                        </span>
+                                        <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Kejuruan (SMK)</strong>
+                                        <span style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; display: block;">Vokasi Industri, Magang & Sertifikasi BNSP</span>
+                                    </span>
+                                </label>
+                            </div>
+                            @error('jenjang')
+                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Sub-Pilihan Jurusan (Muncul Jika Jenjang SMK Dipilih) -->
+                        <div id="smkMajorContainer" class="form-group" style="margin-bottom: 24px; padding: 16px 20px; border-radius: 14px; background: rgba(168, 85, 247, 0.08); border: 1px dashed rgba(168, 85, 247, 0.4); display: {{ $currentJenjang == 'smk' ? 'block' : 'none' }};">
+                            <label for="major_choice" class="ppdb-form-label" style="color: #d8b4fe;">
+                                Peminatan Jurusan / Program Keahlian SMK <span style="font-size: 0.8rem; color: #a855f7;">(Khusus SMK)</span>
+                            </label>
+                            <select id="major_choice" name="major_choice" class="ppdb-form-select" style="border-color: rgba(168, 85, 247, 0.4);">
+                                <option value="">-- Pilih Jurusan Kejuruan (Bisa dikonfirmasi saat verifikasi) --</option>
+                                @foreach($majors as $m)
+                                    <option value="{{ $m->name }}" @selected(old('major_choice') == $m->name)>
+                                        {{ $m->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <span style="font-size: 0.78rem; color: #c084fc; display: block; margin-top: 6px;">
+                                Siswa SMK dapat memilih kompetensi keahlian unggulan (RPL, TKJ, atau DKV).
+                            </span>
+                        </div>
+
                         <!-- Nama Lengkap -->
                         <div class="form-group" style="margin-bottom: 20px;">
                             <label for="full_name" class="ppdb-form-label">
@@ -348,8 +484,8 @@
                                 </label>
                                 <select id="gender" name="gender" required class="ppdb-form-select">
                                     <option value="">-- Pilih Jenis Kelamin --</option>
-                                    <option value="L" {{ old('gender') == 'L' ? 'selected' : '' }}>Laki-laki (Ikhwan)</option>
-                                    <option value="P" {{ old('gender') == 'P' ? 'selected' : '' }}>Perempuan (Akhwat)</option>
+                                    <option value="L" @selected(old('gender') == 'L')>Laki-laki (Ikhwan)</option>
+                                    <option value="P" @selected(old('gender') == 'P')>Perempuan (Akhwat)</option>
                                 </select>
                                 @error('gender')
                                     <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
@@ -763,6 +899,24 @@ document.addEventListener('DOMContentLoaded', function () {
             isTransitioning = false;
         }, 580);
     }
+
+    // Fungsi interaktif pilihan jenjang
+    function handleJenjangChange(val) {
+        const cardSd = document.getElementById('card-jenjang-sd');
+        const cardSmp = document.getElementById('card-jenjang-smp');
+        const cardSmk = document.getElementById('card-jenjang-smk');
+        const smkBox = document.getElementById('smkMajorContainer');
+
+        if (cardSd) cardSd.classList.toggle('selected-sd', val === 'sd');
+        if (cardSmp) cardSmp.classList.toggle('selected-smp', val === 'smp');
+        if (cardSmk) cardSmk.classList.toggle('selected-smk', val === 'smk');
+
+        if (smkBox) {
+            smkBox.style.display = val === 'smk' ? 'block' : 'none';
+        }
+        updateDeckHeight(currentStep, false);
+    }
+    window.handleJenjangChange = handleJenjangChange;
 
     // Fungsi global untuk navigasi tombol
     window.nextSlide = function (targetStep) {

@@ -143,6 +143,16 @@
                     </div>
 
                     <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Jenjang Pendidikan:</span>
+                        <strong style="color: #38bdf8;">{{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}</strong>
+                        @if($registration->jenjang === 'smk' && $registration->major_choice)
+                            <div style="font-size: 0.78rem; color: #c084fc; margin-top: 2px;">
+                                Jurusan: <strong>{{ $registration->major_choice }}</strong>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div>
                         <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Nama Orang Tua / Wali:</span>
                         <strong style="color: #ffffff;">{{ $registration->parent_name }}</strong>
                     </div>

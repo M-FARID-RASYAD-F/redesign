@@ -51,6 +51,80 @@
     </div>
 </section>
 
+<!-- Pilihan Jenjang Pendidikan (SD, SMP, SMK) -->
+<section class="ppdb-section" id="pilih-jenjang">
+    <div class="ppdb-section-header">
+        <span class="ppdb-section-tag">Pilihan Tingkatan</span>
+        <h2 class="ppdb-section-title">Daftar Sesuai Tingkatan Pendidikan</h2>
+        <p class="ppdb-section-desc">Pilih jenjang yang Anda tuju untuk langsung membuka formulir pendaftaran yang sesuai.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        <!-- SD -->
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(16, 185, 129, 0.35);">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="font-size: 2.2rem;">🎒</span>
+                    <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(16, 185, 129, 0.3);">🌱 Fondasi Qurani</span>
+                </div>
+                <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Dasar (SD)</h3>
+                <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
+                    Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar calistung dan sains eksploratif.
+                </p>
+                <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Tahfizh Cilik & Islamic Character</span></div>
+                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 6 Tahun</span></div>
+                </div>
+            </div>
+            <a href="{{ route('ppdb.create', ['jenjang' => 'sd']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+                Daftar Jenjang SD ➜
+            </a>
+        </div>
+
+        <!-- SMP -->
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(56, 189, 248, 0.35);">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="font-size: 2.2rem;">📚</span>
+                    <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(56, 189, 248, 0.3);">🌟 Karakter & Riset</span>
+                </div>
+                <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Pertama (SMP)</h3>
+                <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
+                    Penguatan hafalan Al-Qur'an (target 5–10 juz), pembentukan jiwa kepemimpinan, sains terapan, dan pengenalan coding.
+                </p>
+                <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Tahfizh Intensif & English/Arabic Club</span></div>
+                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 3 Tahun</span></div>
+                </div>
+            </div>
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #0284c7, #2563eb); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+                Daftar Jenjang SMP ➜
+            </a>
+        </div>
+
+        <!-- SMK -->
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(168, 85, 247, 0.35);">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="font-size: 2.2rem;">💻</span>
+                    <span style="background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(168, 85, 247, 0.3);">🚀 Vokasi Industri</span>
+                </div>
+                <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Kejuruan (SMK)</h3>
+                <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
+                    Keahlian kejuruan vokasi berstandar industri dengan 3 pilihan program keahlian (RPL, TKJ, DKV) & sertifikasi BNSP.
+                </p>
+                <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Kelas Industri RPL, TKJ, DKV & PKL</span></div>
+                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 3 Tahun</span></div>
+                </div>
+            </div>
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #7c3aed, #9333ea); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+                Daftar Jenjang SMK ➜
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Alur Pendaftaran PPDB 4 Langkah -->
 <section class="ppdb-section">
     <div class="ppdb-section-header">

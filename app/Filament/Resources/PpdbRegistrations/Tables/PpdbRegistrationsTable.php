@@ -17,6 +17,22 @@ class PpdbRegistrationsTable
         return $table
             ->columns([
                 TextColumn::make('no_pendaftaran')->searchable()->sortable()->label('No. Pendaftaran'),
+                TextColumn::make('jenjang')
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => match (strtolower($state ?? '')) {
+                        'sd' => '🎒 SD',
+                        'smp' => '📚 SMP',
+                        'smk' => '💻 SMK',
+                        default => strtoupper($state ?? '-'),
+                    })
+                    ->color(fn ($state) => match (strtolower($state ?? '')) {
+                        'sd' => 'success',
+                        'smp' => 'info',
+                        'smk' => 'primary',
+                        default => 'gray',
+                    })
+                    ->sortable()
+                    ->label('Tingkat'),
                 TextColumn::make('full_name')->searchable()->sortable()->label('Nama Lengkap'),
                 TextColumn::make('gender')->badge()->label('Jenis Kelamin'),
                 TextColumn::make('birth_date')->date()->sortable()->label('Tanggal Lahir'),
@@ -41,7 +57,13 @@ class PpdbRegistrationsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('jenjang')
+                    ->label('Tingkat / Jenjang')
+                    ->options([
+                        'sd' => '🎒 SD (Sekolah Dasar)',
+                        'smp' => '📚 SMP (Menengah Pertama)',
+                        'smk' => '💻 SMK (Kejuruan)',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

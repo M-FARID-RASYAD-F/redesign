@@ -18,6 +18,18 @@ class PpdbRegistrationForm
                     ->label('No. Pendaftaran')
                     ->placeholder('Otomatis dibuat saat disimpan')
                     ->disabled(),
+                Select::make('jenjang')
+                    ->label('Tingkat / Jenjang')
+                    ->options([
+                        'sd' => '🎒 SD (Sekolah Dasar)',
+                        'smp' => '📚 SMP (Menengah Pertama)',
+                        'smk' => '💻 SMK (Kejuruan)',
+                    ])
+                    ->default('sd')
+                    ->required(),
+                TextInput::make('major_choice')
+                    ->label('Pilihan Jurusan (Khusus SMK)')
+                    ->placeholder('Contoh: Rekayasa Perangkat Lunak (RPL)'),
                 TextInput::make('full_name')->label('Nama Lengkap')->required(),
                 Select::make('gender')
                     ->label('Jenis Kelamin')

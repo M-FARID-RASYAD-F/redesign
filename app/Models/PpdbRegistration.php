@@ -19,9 +19,36 @@ class PpdbRegistration extends Model
         'address',
         'parent_name',
         'parent_phone',
+        'jenjang',
+        'major_choice',
         'status',
         'notes',
     ];
+
+    public function getJenjangLabelAttribute(): string
+    {
+        return match (strtolower($this->jenjang ?? '')) {
+            'sd' => 'Sekolah Dasar (SD)',
+            'smp' => 'Sekolah Menengah Pertama (SMP)',
+            'smk' => 'Sekolah Menengah Kejuruan (SMK)',
+            default => strtoupper($this->jenjang ?? '-'),
+        };
+    }
+
+    public function getJenjangCodeAttribute(): string
+    {
+        return strtoupper($this->jenjang ?? '-');
+    }
+
+    public function getJenjangIconAttribute(): string
+    {
+        return match (strtolower($this->jenjang ?? '')) {
+            'sd' => '🎒',
+            'smp' => '📚',
+            'smk' => '💻',
+            default => '🏫',
+        };
+    }
 
     protected $casts = [
         'birth_date' => 'date',

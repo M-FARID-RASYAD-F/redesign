@@ -209,19 +209,46 @@ class AdminController extends Controller
      * MODUL PPDB ONLINE (PPDB)
      * ==========================================
      */
-    public function ppdbIndex()
+    public function ppdbIndex(Request $request)
     {
-        $registrations = PpdbRegistration::orderBy('created_at', 'desc')->get();
-        return view('admin.ppdb.index', compact('registrations'));
+        $currentJenjang = strtolower($request->query('jenjang', ''));
+        $query = PpdbRegistration::query();
+
+        if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
+            $query->where('jenjang', $currentJenjang);
+        } else {
+            $currentJenjang = 'all';
+        }
+
+        $registrations = $query->orderBy('created_at', 'desc')->get();
+
+        $counts = [
+            'all' => PpdbRegistration::count(),
+            'sd'  => PpdbRegistration::where('jenjang', 'sd')->count(),
+            'smp' => PpdbRegistration::where('jenjang', 'smp')->count(),
+            'smk' => PpdbRegistration::where('jenjang', 'smk')->count(),
+        ];
+
+        return view('admin.ppdb.index', compact('registrations', 'currentJenjang', 'counts'));
     }
 
     /**
      * Ekspor Data PPDB ke format CSV (FR-C06)
      */
-    public function ppdbExportCsv()
+    public function ppdbExportCsv(Request $request)
     {
-        $registrations = PpdbRegistration::orderBy('created_at', 'desc')->get();
-        $filename = 'rekap-ppdb-' . date('Y-m-d_His') . '.csv';
+        $currentJenjang = strtolower($request->query('jenjang', ''));
+        $query = PpdbRegistration::query();
+
+        if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
+            $query->where('jenjang', $currentJenjang);
+            $suffix = '-' . $currentJenjang;
+        } else {
+            $suffix = '-semua-jenjang';
+        }
+
+        $registrations = $query->orderBy('created_at', 'desc')->get();
+        $filename = 'rekap-ppdb' . $suffix . '-' . date('Y-m-d_His') . '.csv';
 
         $headers = [
             'Content-Type' => 'text/csv; charset=UTF-8',
@@ -239,6 +266,8 @@ class AdminController extends Controller
             // Header Kolom CSV
             fputcsv($file, [
                 'No. Pendaftaran',
+                'Jenjang Pendidikan',
+                'Jurusan (SMK)',
                 'Nama Lengkap',
                 'Jenis Kelamin',
                 'Tanggal Lahir',
@@ -254,6 +283,8 @@ class AdminController extends Controller
             foreach ($registrations as $reg) {
                 fputcsv($file, [
                     $reg->no_pendaftaran,
+                    $reg->jenjang_label,
+                    $reg->major_choice ?? '-',
                     $reg->full_name,
                     $reg->gender == 'L' ? 'Laki-laki' : 'Perempuan',
                     $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-',
@@ -269,7 +300,7 @@ class AdminController extends Controller
             fclose($file);
         };
 
-        $this->logActivity('ppdb', 'export', 'Mengekspor seluruh rekap data pendaftar PPDB ke format file CSV');
+        $this->logActivity('ppdb', 'export', 'Mengekspor rekap data pendaftar PPDB ke format file CSV');
 
         return response()->stream($callback, 200, $headers);
     }
@@ -277,7 +308,8 @@ class AdminController extends Controller
     public function ppdbShow($id)
     {
         $registration = PpdbRegistration::with('documents')->findOrFail($id);
-        return view('admin.ppdb.show', compact('registration'));
+        $majors = Major::all();
+        return view('admin.ppdb.show', compact('registration', 'majors'));
     }
 
     public function ppdbUpdateStatus(Request $request, $id)
@@ -288,14 +320,26 @@ class AdminController extends Controller
         $validated = $request->validate([
             'status' => 'required|in:pending,diverifikasi,diterima,ditolak',
             'notes' => 'nullable|string',
+            'jenjang' => 'nullable|in:sd,smp,smk',
+            'major_choice' => 'nullable|string|max:100',
         ]);
 
         $oldStatus = $registration->status;
-        $registration->update($validated);
+        $updateData = [
+            'status' => $validated['status'],
+            'notes' => $validated['notes'] ?? null,
+        ];
+
+        if (!empty($validated['jenjang'])) {
+            $updateData['jenjang'] = $validated['jenjang'];
+            $updateData['major_choice'] = $validated['jenjang'] === 'smk' ? ($validated['major_choice'] ?? null) : null;
+        }
+
+        $registration->update($updateData);
 
         $this->logActivity('ppdb', 'verify', "Mengubah status PPDB {$registration->no_pendaftaran} ({$registration->full_name}) dari {$oldStatus} ke {$validated['status']}");
 
-        return redirect()->route('admin.ppdb.show', $id)->with('success', 'Status pendaftaran PPDB berhasil diperbarui!');
+        return redirect()->route('admin.ppdb.show', $id)->with('success', 'Data & status pendaftaran PPDB berhasil diperbarui!');
     }
 
     public function ppdbDelete($id)

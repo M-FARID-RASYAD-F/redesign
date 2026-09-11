@@ -60,6 +60,50 @@
     </div>
 </div>
 
+<!-- REKAP PENDAFTAR PER TINGKATAN (SD, SMP, SMK) -->
+<div style="margin-bottom: 26px;">
+    <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <span>🏫</span> Pendaftar Berdasarkan Tingkatan Pendidikan
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+        <!-- SD -->
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'sd']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); transition: transform 0.2s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <span style="font-size: 0.8rem; color: #34d399; font-weight: 800; text-transform: uppercase;">SEKOLAH DASAR (SD)</span>
+                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['sd_total'] }}</div>
+                    <span style="font-size: 0.78rem; color: #a7f3d0; font-weight: 600;">Kelola Pendaftar SD →</span>
+                </div>
+                <span style="font-size: 2.2rem;">🎒</span>
+            </div>
+        </a>
+
+        <!-- SMP -->
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smp']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); transition: transform 0.2s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 800; text-transform: uppercase;">MENENGAH PERTAMA (SMP)</span>
+                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['smp_total'] }}</div>
+                    <span style="font-size: 0.78rem; color: #bae6fd; font-weight: 600;">Kelola Pendaftar SMP →</span>
+                </div>
+                <span style="font-size: 2.2rem;">📚</span>
+            </div>
+        </a>
+
+        <!-- SMK -->
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smk']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08); transition: transform 0.2s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <span style="font-size: 0.8rem; color: #c084fc; font-weight: 800; text-transform: uppercase;">KEJURUAN (SMK)</span>
+                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['smk_total'] }}</div>
+                    <span style="font-size: 0.78rem; color: #e9d5ff; font-weight: 600;">Kelola Pendaftar SMK →</span>
+                </div>
+                <span style="font-size: 2.2rem;">💻</span>
+            </div>
+        </a>
+    </div>
+</div>
+
 <!-- VISUAL BAR STATUS PROGRESS CHART -->
 <div class="card" style="margin-bottom: 26px;">
     <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">
@@ -112,6 +156,7 @@
             <thead>
                 <tr>
                     <th>No. Pendaftaran</th>
+                    <th>Tingkat</th>
                     <th>Nama Calon Siswa</th>
                     <th>Orang Tua / HP</th>
                     <th>Berkas Diunggah</th>
@@ -124,6 +169,17 @@
                 <tr>
                     <td style="font-weight: 700; font-family: monospace; color: var(--adm-primary);">
                         {{ $reg->no_pendaftaran }}
+                    </td>
+                    <td>
+                        @if($reg->jenjang === 'sd')
+                            <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); font-size: 0.75rem;">🎒 SD</span>
+                        @elseif($reg->jenjang === 'smp')
+                            <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-size: 0.75rem;">📚 SMP</span>
+                        @elseif($reg->jenjang === 'smk')
+                            <span class="badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); font-size: 0.75rem;">💻 SMK</span>
+                        @else
+                            <span class="badge">{{ strtoupper($reg->jenjang ?? '-') }}</span>
+                        @endif
                     </td>
                     <td>
                         <div style="font-weight: 700; color: #ffffff;">{{ $reg->full_name }}</div>
@@ -149,7 +205,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; color: #34d399; padding: 30px; font-weight: 700;">
+                    <td colspan="7" style="text-align: center; color: #34d399; padding: 30px; font-weight: 700;">
                         ✨ Luar biasa! Seluruh antrean pendaftar telah selesai diverifikasi oleh panitia.
                     </td>
                 </tr>

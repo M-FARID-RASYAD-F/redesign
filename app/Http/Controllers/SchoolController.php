@@ -367,10 +367,14 @@ class SchoolController extends Controller
     /**
      * Halaman Formulir Pendaftaran Siswa Baru Mandiri
      */
-    public function ppdbCreate()
+    public function ppdbCreate(Request $request)
     {
+        $selectedJenjang = strtolower($request->query('jenjang', ''));
+        if (!in_array($selectedJenjang, ['sd', 'smp', 'smk'])) {
+            $selectedJenjang = null;
+        }
         $majors = Major::all();
-        return view('ppdb.create', compact('majors'));
+        return view('ppdb.create', compact('majors', 'selectedJenjang'));
     }
 
     /**
@@ -379,6 +383,10 @@ class SchoolController extends Controller
     public function ppdbStore(Request $request)
     {
         $validated = $request->validate([
+            // Pilihan Jenjang & Jurusan
+            'jenjang' => 'required|in:sd,smp,smk',
+            'major_choice' => 'nullable|string|max:100',
+
             // Data Calon Siswa
             'full_name' => 'required|string|min:3|max:255',
             'gender' => 'required|in:L,P',
@@ -398,6 +406,9 @@ class SchoolController extends Controller
             // Pernyataan UU PDP & Kebenaran Data
             'agreement' => 'accepted',
         ], [
+            'jenjang.required' => 'Pilih tingkatan / jenjang pendidikan (SD, SMP, atau SMK).',
+            'jenjang.in' => 'Pilihan jenjang pendidikan tidak valid.',
+
             'full_name.required' => 'Nama lengkap calon siswa wajib diisi.',
             'full_name.min' => 'Nama lengkap minimal 3 karakter.',
 
@@ -427,6 +438,8 @@ class SchoolController extends Controller
 
         // Simpan data pendaftaran
         $registration = PpdbRegistration::create([
+            'jenjang' => $validated['jenjang'],
+            'major_choice' => $validated['jenjang'] === 'smk' ? ($request->input('major_choice') ?: null) : null,
             'full_name' => $validated['full_name'],
             'gender' => $validated['gender'],
             'birth_date' => $validated['birth_date'],
@@ -462,7 +475,7 @@ class SchoolController extends Controller
             'user_id' => null,
             'module' => 'ppdb',
             'action' => 'create',
-            'description' => "Pendaftaran PPDB mandiri berhasil diajukan oleh {$registration->full_name} (No: {$registration->no_pendaftaran})",
+            'description' => "Pendaftaran PPDB mandiri ({$registration->jenjang_label}) berhasil diajukan oleh {$registration->full_name} (No: {$registration->no_pendaftaran})",
         ]);
 
         return redirect()->route('ppdb.success', $registration->no_pendaftaran);

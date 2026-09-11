@@ -24,6 +24,9 @@ class PpdbDashboardController extends Controller
             'ditolak' => PpdbRegistration::where('status', 'ditolak')->count(),
             'docs_unverified' => PpdbDocument::where('verification_status', 'belum_diverifikasi')->count(),
             'docs_valid' => PpdbDocument::where('verification_status', 'valid')->count(),
+            'sd_total' => PpdbRegistration::where('jenjang', 'sd')->count(),
+            'smp_total' => PpdbRegistration::where('jenjang', 'smp')->count(),
+            'smk_total' => PpdbRegistration::where('jenjang', 'smk')->count(),
         ];
 
         $pendingRegistrations = PpdbRegistration::with('documents')

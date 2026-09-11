@@ -39,6 +39,7 @@ class PpdbWorkflowTest extends TestCase
         $fileRapor = UploadedFile::fake()->create('rapor.pdf', 1000, 'application/pdf');
 
         $payload = [
+            'jenjang' => 'smp',
             'full_name' => 'Ahmad Santoso',
             'gender' => 'L',
             'birth_date' => '2012-05-15',
@@ -58,6 +59,7 @@ class PpdbWorkflowTest extends TestCase
         $registration = PpdbRegistration::where('full_name', 'Ahmad Santoso')->first();
         $this->assertNotNull($registration, 'Data registrasi santri harus tersimpan di database.');
         $this->assertStringStartsWith('PPDB-', $registration->no_pendaftaran);
+        $this->assertEquals('smp', $registration->jenjang);
         $this->assertEquals('pending', $registration->status);
 
         $response->assertRedirect(route('ppdb.success', $registration->no_pendaftaran));
@@ -74,33 +76,49 @@ class PpdbWorkflowTest extends TestCase
         $this->get(route('ppdb.success', $registration->no_pendaftaran))
             ->assertOk()
             ->assertSee($registration->no_pendaftaran)
-            ->assertSee('Ahmad Santoso');
+            ->assertSee('Ahmad Santoso')
+            ->assertSee('Sekolah Menengah Pertama (SMP)');
 
         // 5. Publik bisa tracking status mandiri
         $this->post('/ppdb/cek-status', ['no_pendaftaran' => $registration->no_pendaftaran])
             ->assertOk()
             ->assertSee($registration->no_pendaftaran)
-            ->assertSee('Menunggu verifikasi berkas');
+            ->assertSee('Menunggu verifikasi berkas')
+            ->assertSee('SMP');
 
         // 6. Admin PPDB login dan melihat pendaftar di daftar admin
         $this->actingAs($this->adminPpdb)
             ->get('/admin/ppdb')
             ->assertOk()
             ->assertSee($registration->no_pendaftaran)
+            ->assertSee('Ahmad Santoso')
+            ->assertSee('SMP');
+
+        // 6b. Admin PPDB filter berdasarkan tingkatan
+        $this->actingAs($this->adminPpdb)
+            ->get('/admin/ppdb?jenjang=smp')
+            ->assertOk()
             ->assertSee('Ahmad Santoso');
+
+        $this->actingAs($this->adminPpdb)
+            ->get('/admin/ppdb?jenjang=sd')
+            ->assertOk()
+            ->assertDontSee('Ahmad Santoso');
 
         // 7. Admin melihat berkas di halaman detail
         $this->actingAs($this->adminPpdb)
             ->get("/admin/ppdb/{$registration->id}")
             ->assertOk()
             ->assertSee('Ahmad Santoso')
+            ->assertSee('SMP')
             ->assertSee('KK')
             ->assertSee('AKTA LAHIR');
 
-        // 8. Admin melakukan verifikasi & mengubah status kelulusan
+        // 8. Admin melakukan verifikasi & mengubah status kelulusan dan jenjang
         $this->actingAs($this->adminPpdb)
             ->post("/admin/ppdb/{$registration->id}/status", [
                 'status' => 'diterima',
+                'jenjang' => 'smp',
                 'notes' => 'Selamat, berkas lengkap dan lolos seleksi berkas!',
             ])
             ->assertRedirect("/admin/ppdb/{$registration->id}");
@@ -109,9 +127,9 @@ class PpdbWorkflowTest extends TestCase
         $this->assertEquals('diterima', $registration->status);
         $this->assertEquals('Selamat, berkas lengkap dan lolos seleksi berkas!', $registration->notes);
 
-        // 9. Admin PPDB bisa ekspor CSV
+        // 9. Admin PPDB bisa ekspor CSV dengan filter tingkatan
         $this->actingAs($this->adminPpdb)
-            ->get('/admin/ppdb/export')
+            ->get('/admin/ppdb/export?jenjang=smp')
             ->assertOk()
             ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
     }

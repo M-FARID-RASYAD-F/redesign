@@ -53,6 +53,19 @@
                             <td>{{ $registration->full_name }}</td>
                         </tr>
                         <tr>
+                            <td>Jenjang Pendidikan</td>
+                            <td>
+                                <strong style="color: #38bdf8; font-size: 0.95rem;">
+                                    {{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}
+                                </strong>
+                                @if($registration->jenjang === 'smk' && $registration->major_choice)
+                                    <div style="font-size: 0.82rem; color: #c084fc; margin-top: 3px;">
+                                        Peminatan Jurusan: <strong>{{ $registration->major_choice }}</strong>
+                                    </div>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Jenis Kelamin</td>
                             <td>{{ $registration->gender == 'L' ? 'Laki-laki (Ikhwan)' : 'Perempuan (Akhwat)' }}</td>
                         </tr>

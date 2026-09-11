@@ -250,6 +250,8 @@ class DatabaseSeeder extends Seeder
         $ppdbList = [
             [
                 'no_pendaftaran' => 'PPDB20260001',
+                'jenjang' => 'smk',
+                'major_choice' => 'Rekayasa Perangkat Lunak (RPL)',
                 'full_name' => 'Muhammad Rifqi',
                 'gender' => 'L',
                 'birth_date' => '2010-04-15',
@@ -261,6 +263,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'no_pendaftaran' => 'PPDB20260002',
+                'jenjang' => 'smp',
+                'major_choice' => null,
                 'full_name' => 'Laras Ayu Wandira',
                 'gender' => 'P',
                 'birth_date' => '2010-09-22',
@@ -272,6 +276,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'no_pendaftaran' => 'PPDB20260003',
+                'jenjang' => 'sd',
+                'major_choice' => null,
                 'full_name' => 'Fadhil Rahman Al-Farisi',
                 'gender' => 'L',
                 'birth_date' => '2010-01-18',
@@ -283,6 +289,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'no_pendaftaran' => 'PPDB20260004',
+                'jenjang' => 'smk',
+                'major_choice' => 'Desain Komunikasi Visual (DKV)',
                 'full_name' => 'Zahra Amelia Putri',
                 'gender' => 'P',
                 'birth_date' => '2011-03-05',

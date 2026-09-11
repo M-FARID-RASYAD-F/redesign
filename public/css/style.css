@@ -1106,6 +1106,12 @@ a:hover {
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  #constellation-canvas {
+    display: none !important;
+  }
+}
+
 .content-area-constellation .section-title {
   color: #ffffff;
 }
@@ -3866,6 +3872,9 @@ a:hover {
     border-radius: 20px 20px 0 0;
     padding-top: 3rem;
     padding-bottom: 2rem;
+  }
+  #constellation-canvas {
+    display: none !important;
   }
   .section {
     padding: 0 1.25rem;

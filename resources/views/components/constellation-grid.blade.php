@@ -32,6 +32,12 @@
     const canvas = document.getElementById('constellation-canvas');
     if (!canvas) return;
 
+    // Jika layout mobile (lebar layar <= 768px), matikan canvas dan hentikan script agar HP ringan
+    if (window.innerWidth <= 768) {
+        canvas.style.display = 'none';
+        return;
+    }
+
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
@@ -101,6 +107,12 @@
     }
 
     function handleResize() {
+        if (window.innerWidth <= 768) {
+            canvas.style.display = 'none';
+            return;
+        }
+        canvas.style.display = 'block';
+
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const parent = canvas.parentElement || document.body;
         const slotWrapper = parent.querySelector('.constellation-slot-wrapper') || parent;
@@ -156,6 +168,11 @@
     let lastTime = performance.now();
 
     function render(now) {
+        if (window.innerWidth <= 768) {
+            animationFrameId = requestAnimationFrame(render);
+            return;
+        }
+
         const dt = Math.min((now - lastTime) / 1000, 0.05);
         lastTime = now;
 

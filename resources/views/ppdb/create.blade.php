@@ -13,6 +13,14 @@
 /* Panggung Story Stack Deck PPDB */
 .ppdb-page-container {
     overflow-x: clip;
+    padding: 24px 20px 60px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+    .ppdb-page-container {
+        padding: 14px 12px 48px;
+    }
 }
 
 /* Panel Stepper di atas Kartu Stage */
@@ -226,22 +234,197 @@
 }
 
 @media (max-width: 640px) {
-    .ppdb-stepper-panel {
-        padding: 18px 14px 14px;
-        border-radius: 16px;
+    /* Story Stack Card Animation Mobile - Gerakan Halus & Tetap Dalam Batas Layar */
+    @keyframes ppdbStoryExitForward {
+        0% {
+            transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            transform-origin: top left;
+            opacity: 1;
+        }
+        35% {
+            opacity: 0.95;
+        }
+        70% {
+            opacity: 0.55;
+        }
+        100% {
+            transform: translate3d(4%, 60px, 0) rotate(1.5deg) scale(0.96);
+            transform-origin: top left;
+            opacity: 0;
+        }
     }
+
+    @keyframes ppdbStoryEnterBackward {
+        0% {
+            transform: translate3d(4%, 60px, 0) rotate(1.5deg) scale(0.96);
+            transform-origin: top left;
+            opacity: 0;
+        }
+        35% {
+            opacity: 0.65;
+        }
+        70% {
+            opacity: 0.95;
+        }
+        100% {
+            transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            transform-origin: top left;
+            opacity: 1;
+        }
+    }
+
+    /* Stepper Panel Responsif */
+    .ppdb-stepper-panel {
+        padding: 14px 12px 12px;
+        border-radius: 16px;
+        margin-bottom: 16px;
+    }
+    .ppdb-stepper {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .ppdb-step-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+    .ppdb-step-connector {
+        height: 2px;
+        margin: 0 2px;
+    }
+    .ppdb-progress-track {
+        margin-top: 8px;
+        margin-bottom: 0;
+        height: 4px;
+    }
+
+    /* Kartu Form Slide Responsif */
     .ppdb-section-card,
     .ppdb-slide {
         min-height: auto;
-        padding: 20px 16px;
+        padding: 18px 14px;
         border-radius: 18px;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
     }
     .ppdb-slide-body {
         flex: 0 0 auto;
     }
+    .ppdb-step-header {
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+    .ppdb-step-heading {
+        font-size: 1.15rem;
+        line-height: 1.3;
+    }
+    .ppdb-step-badge {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    /* Tombol Aksi Bawah: Tombol Utama di Atas, Tombol Kembali di Bawah */
     .ppdb-slide-actions {
-        margin-top: 20px;
+        flex-direction: column-reverse;
+        gap: 10px;
+        width: 100%;
+        margin-top: 22px;
         padding-top: 18px;
+    }
+    .ppdb-btn-prev,
+    .ppdb-btn-next,
+    .ppdb-btn-submit {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        margin-left: 0;
+        font-size: 0.95rem;
+        padding: 13px 18px;
+        box-sizing: border-box;
+    }
+    .ppdb-btn-prev:active,
+    .ppdb-btn-next:active,
+    .ppdb-btn-submit:active {
+        transform: scale(0.985);
+    }
+}
+
+/* Header Form Responsif */
+.ppdb-form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+@media (max-width: 640px) {
+    .ppdb-form-header {
+        margin-bottom: 18px;
+    }
+    .ppdb-form-header .ppdb-section-title {
+        font-size: clamp(1.4rem, 6vw, 1.85rem) !important;
+    }
+    .ppdb-form-header .ppdb-section-desc {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+        margin-top: 4px !important;
+    }
+}
+
+/* Badge Indikator Langkah Aktif Khusus Mobile */
+.ppdb-mobile-step-badge {
+    display: none;
+}
+@media (max-width: 640px) {
+    .ppdb-mobile-step-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        border-radius: 9999px;
+        padding: 6px 14px;
+        margin-bottom: 8px;
+        font-size: 0.78rem;
+        color: #e0f2fe;
+    }
+    .ppdb-mobile-step-badge .badge-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow: 0 0 8px #38bdf8;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+}
+
+/* Grid Kolom Formulir Responsif */
+.ppdb-form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+@media (max-width: 640px) {
+    .ppdb-form-grid-2 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+.ppdb-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+@media (max-width: 640px) {
+    .ppdb-upload-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 18px;
     }
 }
 
@@ -255,6 +438,8 @@
 @media (max-width: 768px) {
     .jenjang-selector-grid {
         grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
     }
 }
 .jenjang-card-option {
@@ -268,6 +453,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+@media (max-width: 640px) {
+    .jenjang-card-option {
+        padding: 12px 14px;
+        border-radius: 14px;
+    }
+    .jenjang-card-option:active {
+        transform: scale(0.985);
+    }
 }
 .jenjang-card-option:hover {
     border-color: rgba(56, 189, 248, 0.5);
@@ -298,6 +492,37 @@
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.2);
 }
+
+/* Optimasi Input Form di Mobile (Cegah Auto-Zoom iOS Safari & Ukuran Sentuh Nyaman) */
+@media (max-width: 768px) {
+    .ppdb-form-input,
+    .ppdb-form-select,
+    .ppdb-form-textarea {
+        font-size: 16px !important;
+        min-height: 48px;
+        padding: 12px 14px;
+    }
+    .ppdb-form-textarea {
+        min-height: 85px;
+    }
+    .ppdb-info-card {
+        padding: 14px 16px;
+        border-radius: 14px;
+        margin-top: 8px;
+    }
+    .ppdb-upload-box {
+        padding: 13px 14px;
+        border-radius: 12px;
+    }
+    .ppdb-upload-box input[type="file"] {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .ppdb-pdp-notice {
+        padding: 14px;
+        border-radius: 14px;
+    }
+}
 </style>
 @endpush
 
@@ -306,18 +531,18 @@
     <div style="max-width: 840px; margin: 0 auto;">
         
         <!-- Header Formulir -->
-        <div style="text-align: center; margin-bottom: 35px;">
-            <a href="{{ route('ppdb.index') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 700; color: #38bdf8; margin-bottom: 12px; text-decoration: none;">
+        <div class="ppdb-form-header">
+            <a href="{{ route('ppdb.index') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px; text-decoration: none;">
                 ← Kembali ke Portal PPDB
             </a>
-            <h1 class="ppdb-section-title" style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 0;">Formulir Pendaftaran Siswa Baru</h1>
+            <h1 class="ppdb-section-title" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin: 0;">Formulir Pendaftaran Siswa Baru</h1>
             <p class="ppdb-section-desc" style="margin-top: 6px;">Tahun Ajaran 2026/2027 · Silakan lengkapi data calon siswa dengan jujur dan teliti.</p>
         </div>
 
         @if($errors->any())
-        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 18px 24px; margin-bottom: 30px; color: #fca5a5;">
+        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; color: #fca5a5;">
             <div style="font-weight: 700; margin-bottom: 6px; color: #ffffff;">⚠️ Terdapat beberapa kolom yang belum terisi dengan benar:</div>
-            <ul style="padding-left: 20px; font-size: 0.9rem; margin: 0;">
+            <ul style="padding-left: 20px; font-size: 0.88rem; margin: 0;">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -364,6 +589,12 @@
                         <span class="ppdb-step-name">Berkas & Selesai</span>
                     </div>
                 </button>
+            </div>
+
+            <!-- Mobile Step Indicator Badge (Khusus Tampilan Mobile) -->
+            <div class="ppdb-mobile-step-badge" id="ppdbMobileStepBadge">
+                <span class="badge-dot"></span>
+                <span id="ppdbMobileStepText">Langkah 1 dari 3: <strong>Data Calon Siswa</strong></span>
             </div>
 
             <!-- Progress Bar -->
@@ -477,7 +708,7 @@
                         </div>
 
                         <!-- Jenis Kelamin & Tanggal Lahir (2 Kolom) -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                        <div class="ppdb-form-grid-2">
                             <div>
                                 <label for="gender" class="ppdb-form-label">
                                     Jenis Kelamin <span style="color: #ef4444;">*</span>
@@ -537,7 +768,7 @@
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 22px;">
+                        <div class="ppdb-form-grid-2">
                             <div>
                                 <label for="parent_name" class="ppdb-form-label">
                                     Nama Lengkap Orang Tua / Wali <span style="color: #ef4444;">*</span>
@@ -601,7 +832,7 @@
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 22px;">
+                        <div class="ppdb-upload-grid">
                             <!-- KK -->
                             <div class="ppdb-upload-box">
                                 <label for="doc_kk" class="ppdb-upload-title">📄 Kartu Keluarga (KK)</label>
@@ -634,7 +865,7 @@
                         <!-- Privacy Notice & Persetujuan -->
                         <div class="ppdb-pdp-notice" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
-                                <span style="font-size: 1.3rem;">🛡️</span>
+                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;">🛡️</span>
                                 <div style="flex: 1;">
                                     <h4 class="ppdb-pdp-title">Kebijakan Pelindungan Data Pribadi (UU PDP No. 27/2022)</h4>
                                     <p class="ppdb-pdp-desc">
@@ -643,8 +874,8 @@
                                 </div>
                             </div>
 
-                            <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;" />
+                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">
+                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 2px; width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; accent-color: #38bdf8;" />
                                 <label for="agreement" style="font-size: 0.85rem; color: #e2e8f0; line-height: 1.5; cursor: pointer;">
                                     <strong>Saya menyatakan bahwa seluruh data yang diisikan adalah benar dan valid.</strong> Saya menyetujui data ini diproses oleh Panitia PPDB PKBM Tahfizh At-Tamam. <span style="color: #ef4444;">*</span>
                                 </label>
@@ -718,6 +949,16 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 progressBar.style.background = 'linear-gradient(90deg, #38bdf8, #2563eb)';
             }
+        }
+
+        const stepNames = {
+            1: 'Data Calon Siswa',
+            2: 'Orang Tua / Wali',
+            3: 'Berkas & Selesai'
+        };
+        const mobileBadgeText = document.getElementById('ppdbMobileStepText');
+        if (mobileBadgeText && stepNames[targetStep]) {
+            mobileBadgeText.innerHTML = `Langkah ${targetStep} dari ${totalSteps}: <strong>${stepNames[targetStep]}</strong>`;
         }
     }
 
@@ -859,7 +1100,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (deckEl) {
                     const rect = deckEl.getBoundingClientRect();
                     if (rect.top < 30 || rect.top > 250) {
-                        const targetY = window.pageYOffset + rect.top - 80;
+                        const navOffset = window.innerWidth <= 640 ? 64 : 80;
+                        const targetY = Math.max(0, window.pageYOffset + rect.top - navOffset);
                         window.scrollTo({ top: targetY, behavior: 'smooth' });
                     }
                 }

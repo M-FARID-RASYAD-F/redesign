@@ -33,17 +33,13 @@
     width: 100%;
     overflow: visible;
     border-radius: 24px;
-    perspective: 1400px;
-    -webkit-perspective: 1400px;
-    transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: height 0.58s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Track Penampung Kartu Bertumpuk */
 .ppdb-slide-track {
     position: relative;
     width: 100%;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
 }
 
 /* Setiap Section adalah selembar kartu fisik Story modern */
@@ -88,13 +84,20 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   ANIMASI STORY STACK SCROLL: MAJU (TOMBOL LANJUT)
-   - Kartu baru muncul dari bawah tengah dengan ujung kiri atas memimpin.
-   - Bergerak ke arah kiri untuk menstabilkan diri sepenuhnya.
-   - Kartu lama di bawahnya terdorong mundur ke lapisan tumpukan (depth & blur).
+   ANIMASI STORY STACK SCROLL (DIBALIK & DIPERHALUS ULTRA-SMOOTH)
+   1. MAJU (TOMBOL LANJUT):
+      - Kartu aktif meluncur keluar ke arah bawah-tengah dengan rotasi terbalik,
+        membuka kartu berikutnya di bawahnya.
+      - Kartu baru di lapisan tumpukan bawah tersingkap mulus ke permukaan depan.
+   2. TIMBAL BALIK (TOMBOL KEMBALI):
+      - Kartu sebelumnya meluncur masuk kembali dari bawah-tengah dengan sudut kiri atas
+        memimpin mendarat di atas kartu panggung.
+      - Kartu aktif tenggelam mundur ke lapisan tumpukan bawah secara tenang.
    ───────────────────────────────────────────────────────────────────────────── */
-.ppdb-section-card.story-enter-forward,
-.ppdb-slide.story-enter-forward {
+
+/* ─── 1. MAJU (TOMBOL LANJUT) ─── */
+.ppdb-section-card.story-exit-forward,
+.ppdb-slide.story-exit-forward {
     display: flex !important;
     position: absolute !important;
     top: 0;
@@ -103,12 +106,74 @@
     z-index: 25 !important;
     visibility: visible !important;
     pointer-events: none;
-    will-change: transform, opacity, box-shadow;
-    animation: ppdbStoryEnterForward 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+    will-change: transform, opacity;
+    animation: ppdbStoryExitForward 0.58s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
 }
 
-.ppdb-section-card.story-underneath-forward,
-.ppdb-slide.story-underneath-forward {
+.ppdb-section-card.story-reveal-forward,
+.ppdb-slide.story-reveal-forward {
+    display: flex !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10 !important;
+    visibility: visible !important;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ppdbStoryRevealForward 0.58s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes ppdbStoryExitForward {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+        transform-origin: top left;
+        opacity: 1;
+    }
+    35% {
+        opacity: 0.95;
+    }
+    70% {
+        opacity: 0.55;
+    }
+    100% {
+        transform: translate3d(16%, 150px, 0) rotate(5.5deg) scale(0.92);
+        transform-origin: top left;
+        opacity: 0;
+    }
+}
+
+@keyframes ppdbStoryRevealForward {
+    0% {
+        transform: translate3d(0, -22px, 0) scale(0.95);
+        opacity: 0.45;
+    }
+    45% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ─── 2. MUNDUR (TOMBOL KEMBALI) ─── */
+.ppdb-section-card.story-enter-backward,
+.ppdb-slide.story-enter-backward {
+    display: flex !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 25 !important;
+    visibility: visible !important;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ppdbStoryEnterBackward 0.58s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.ppdb-section-card.story-underneath-backward,
+.ppdb-slide.story-underneath-backward {
     display: flex !important;
     position: absolute !important;
     top: 0;
@@ -117,115 +182,40 @@
     z-index: 5 !important;
     visibility: visible !important;
     pointer-events: none;
-    will-change: transform, filter, opacity;
-    animation: ppdbStoryUnderneathForward 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+    will-change: transform, opacity;
+    animation: ppdbStoryUnderneathBackward 0.58s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
 }
 
-@keyframes ppdbStoryEnterForward {
+@keyframes ppdbStoryEnterBackward {
     0% {
         transform: translate3d(16%, 150px, 0) rotate(5.5deg) scale(0.92);
         transform-origin: top left;
-        opacity: 0.5;
-        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.7), -12px 14px 35px rgba(56, 189, 248, 0.35);
-    }
-    42% {
-        transform: translate3d(7%, 60px, 0) rotate(2.4deg) scale(0.97);
-        opacity: 0.95;
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), -8px 10px 30px rgba(56, 189, 248, 0.25);
-    }
-    75% {
-        transform: translate3d(0%, 10px, 0) rotate(0.6deg) scale(0.995);
-        opacity: 1;
-        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5);
-    }
-    100% {
-        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-        transform-origin: top left;
-        opacity: 1;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-    }
-}
-
-@keyframes ppdbStoryUnderneathForward {
-    0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        filter: brightness(1) blur(0px);
-        opacity: 1;
-    }
-    100% {
-        transform: translate3d(0, -26px, 0) scale(0.95);
-        filter: brightness(0.55) blur(1.5px);
-        opacity: 0.45;
-    }
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   ANIMASI STORY STACK SCROLL: TIMBAL BALIK (TOMBOL KEMBALI)
-   - Kartu aktif meluncur keluar berbalik ke arah bawah tengah.
-   - Kartu sebelumnya di lapisan tumpukan tersingkap kembali ke permukaan.
-   ───────────────────────────────────────────────────────────────────────────── */
-.ppdb-section-card.story-exit-backward,
-.ppdb-slide.story-exit-backward {
-    display: flex !important;
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 25 !important;
-    visibility: visible !important;
-    pointer-events: none;
-    will-change: transform, opacity, box-shadow;
-    animation: ppdbStoryExitBackward 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
-}
-
-.ppdb-section-card.story-reveal-backward,
-.ppdb-slide.story-reveal-backward {
-    display: flex !important;
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 5 !important;
-    visibility: visible !important;
-    pointer-events: none;
-    will-change: transform, filter, opacity;
-    animation: ppdbStoryRevealBackward 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
-}
-
-@keyframes ppdbStoryExitBackward {
-    0% {
-        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-        transform-origin: top left;
-        opacity: 1;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-    }
-    30% {
-        transform: translate3d(6%, 50px, 0) rotate(2deg) scale(0.98);
-        opacity: 0.9;
-    }
-    65% {
-        transform: translate3d(12%, 105px, 0) rotate(3.8deg) scale(0.95);
-        opacity: 0.65;
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), -8px 10px 30px rgba(56, 189, 248, 0.25);
-    }
-    100% {
-        transform: translate3d(16%, 160px, 0) rotate(5.5deg) scale(0.92);
-        transform-origin: top left;
         opacity: 0;
-        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.7), -12px 14px 35px rgba(56, 189, 248, 0.35);
+    }
+    35% {
+        opacity: 0.65;
+    }
+    70% {
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+        transform-origin: top left;
+        opacity: 1;
     }
 }
 
-@keyframes ppdbStoryRevealBackward {
+@keyframes ppdbStoryUnderneathBackward {
     0% {
-        transform: translate3d(0, -26px, 0) scale(0.95);
-        filter: brightness(0.55) blur(1.5px);
-        opacity: 0.45;
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.7;
     }
     100% {
-        transform: translate3d(0, 0, 0) scale(1);
-        filter: brightness(1) blur(0px);
-        opacity: 1;
+        transform: translate3d(0, -22px, 0) scale(0.95);
+        opacity: 0.45;
     }
 }
 
@@ -629,10 +619,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!incoming) return;
 
         const animClasses = [
-            'story-enter-forward',
-            'story-underneath-forward',
-            'story-exit-backward',
-            'story-reveal-backward'
+            'story-exit-forward',
+            'story-reveal-forward',
+            'story-enter-backward',
+            'story-underneath-backward'
         ];
 
         // Inisialisasi awal tanpa animasi (load pertama / validasi error)
@@ -682,7 +672,7 @@ document.addEventListener('DOMContentLoaded', function () {
         incoming.style.top = '0';
         incoming.style.left = '0';
         incoming.style.width = '100%';
-        incoming.style.zIndex = isNext ? '25' : '5';
+        incoming.style.zIndex = isNext ? '10' : '25';
         incoming.removeAttribute('inert');
 
         outgoing.style.display = 'flex';
@@ -690,10 +680,10 @@ document.addEventListener('DOMContentLoaded', function () {
         outgoing.style.top = '0';
         outgoing.style.left = '0';
         outgoing.style.width = '100%';
-        outgoing.style.zIndex = isNext ? '5' : '25';
+        outgoing.style.zIndex = isNext ? '25' : '5';
         outgoing.setAttribute('inert', '');
 
-        // Kunci tinggi deck agar tidak terjadi lonjakan tata letak
+        // Kunci tinggi deck agar transisi berjalan mulus
         const targetH = incoming.offsetHeight || 550;
         const currentH = outgoing.offsetHeight || targetH;
         const maxH = Math.max(targetH, currentH);
@@ -709,24 +699,24 @@ document.addEventListener('DOMContentLoaded', function () {
         void incoming.offsetWidth;
         void outgoing.offsetWidth;
 
-        // 2. Koreografi Animasi Story Stack Scroll
+        // 2. Koreografi Animasi Story Stack Scroll (Dibalik & Ultra-Smooth)
         if (isNext) {
-            // MAJU: Kartu baru muncul dari bawah tengah dengan sudut kiri atas memimpin,
-            // meluncur diagonal ke arah kiri untuk menstabilkan diri.
-            outgoing.classList.add('story-underneath-forward');
-            incoming.classList.add('story-enter-forward');
+            // MAJU (Lanjut): Kartu aktif meluncur keluar ke arah bawah-tengah,
+            // menyingkap kartu baru dari tumpukan bawah ke permukaan depan.
+            outgoing.classList.add('story-exit-forward');
+            incoming.classList.add('story-reveal-forward');
         } else {
-            // TIMBAL BALIK: Kartu atas meluncur keluar ke arah bawah tengah,
-            // kartu bawah tersingkap kembali ke permukaan aktif.
-            outgoing.classList.add('story-exit-backward');
-            incoming.classList.add('story-reveal-backward');
+            // TIMBAL BALIK (Kembali): Kartu sebelumnya meluncur masuk kembali dari arah bawah-tengah,
+            // sementara kartu aktif tenggelam tenang ke tumpukan bawah.
+            incoming.classList.add('story-enter-backward');
+            outgoing.classList.add('story-underneath-backward');
         }
 
         // Perbarui nomor langkah pada stepper
         updateStepperUI(targetStep);
         currentStep = targetStep;
 
-        // 3. Geser halaman ke atas memenuhi tampilan saat sudut kiri kartu menstabilkan posisinya
+        // 3. Geser halaman ke atas memenuhi tampilan secara halus
         if (shouldScroll) {
             setTimeout(() => {
                 const deckEl = document.getElementById('ppdbSlideDeck') || incoming;
@@ -737,17 +727,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.scrollTo({ top: targetY, behavior: 'smooth' });
                     }
                 }
-            }, isNext ? 350 : 180);
+            }, 200);
         }
 
-        // 4. Penyesuaian tinggi ke targetHeight secara bertahap
-        if (deck && targetH !== currentH) {
-            setTimeout(() => {
+        // 4. Penyesuaian tinggi deck secara halus
+        if (deck) {
+            requestAnimationFrame(() => {
                 deck.style.height = targetH + 'px';
-            }, 350);
+            });
         }
 
-        // 5. Bersihkan kelas animasi & stabilkan elemen setelah animasi 650ms tuntas
+        // 5. Bersihkan kelas animasi & stabilkan elemen setelah animasi 580ms tuntas
         setTimeout(() => {
             outgoing.classList.remove('active', ...animClasses);
             outgoing.style.display = 'none';
@@ -771,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             isTransitioning = false;
-        }, 650);
+        }, 580);
     }
 
     // Fungsi global untuk navigasi tombol

@@ -75,9 +75,6 @@
     <!-- Animated Tabs Engine -->
     <script src="{{ asset('js/animated-tabs.js') }}"></script>
 
-    <!-- macOS Interactive Dock Engine -->
-    <script src="{{ asset('js/dock.js') }}"></script>
-
     @stack('scripts')
 </body>
 </html>

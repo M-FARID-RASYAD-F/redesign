@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use App\Models\PpdbDocument;
 use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
-use App\Models\PpdbDocument;
 use App\Models\Major;
 use App\Models\ActivityLog;
 use Illuminate\Support\Str;
@@ -28,28 +26,6 @@ class AdminController extends Controller
             'action' => $action,
             'description' => $description,
         ]);
-    }
-
-    /**
-     * Dashboard Panel Admin
-     */
-    public function dashboard()
-    {
-        $stats = [
-            'news' => News::count(),
-            'teachers' => TeacherStaff::count(),
-            'ppdb' => PpdbRegistration::count(),
-            'majors' => Major::count(),
-        ];
-
-        $recentLogs = ActivityLog::with('user')
-            ->orderBy('created_at', 'desc')
-            ->limit(10)
-            ->get();
-
-        $ppdbPending = PpdbRegistration::where('status', 'pending')->count();
-
-        return view('admin.dashboard', compact('stats', 'recentLogs', 'ppdbPending'));
     }
 
     /**

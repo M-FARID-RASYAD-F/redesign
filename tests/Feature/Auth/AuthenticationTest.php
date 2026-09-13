@@ -21,9 +21,10 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create([
             'role' => 'super_admin',
+            'is_active' => true,
         ]);
 
-        $response = $this->post('/login', [
+        $response = $this->post('/login-process', [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -36,7 +37,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
+        $this->post('/login-process', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
@@ -48,7 +49,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post('/logout');
+        $response = $this->actingAs($user)->get('/logout');
 
         $this->assertGuest();
         $response->assertRedirect('/');

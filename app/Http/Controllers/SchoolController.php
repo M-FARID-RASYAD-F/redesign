@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SchoolProfile;
 use App\Models\Major;
 use App\Models\News;
 use App\Models\TeacherStaff;
@@ -22,11 +21,11 @@ class SchoolController extends Controller
         $sekolah = [
             'nama' => 'PKBM TAHFIZH ATTAMAM',
             'slogan' => 'Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital',
-            'deskripsi' => 'Sekolah menengah kejuruan terkemuka yang memadukan kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
+            'deskripsi' => 'Lembaga pendidikan Islam & kejuruan terkemuka yang memadukan kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
             'tahun_berdiri' => '2018',
             'akreditasi' => 'B (Baik)',
-            'alamat' => 'Jl. Pendidikan Teknologi No. 45, Cyber City, Nusantara',
-            'telepon' => '(021) 555-0192',
+            'alamat' => 'Jl. Hangtuah No. 45, Tenayan Raya, Pekanbaru, Riau',
+            'telepon' => '(0761) 555-0192',
             'email' => 'info@pkbmtahfizhattamam.sch.id'
         ];
 
@@ -34,8 +33,8 @@ class SchoolController extends Controller
         $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
         $sambutan = [
             'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
-            'jabatan' => 'Kepala Sekolah PKBM Tahfizh At-Tamam',
-            'pesan' => 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam Edu. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, berkarakter Qurani, dan relevan dengan kebutuhan masa depan. Mari bersama mewujudkan potensi terbaik para peserta didik!',
+            'jabatan' => 'Kepala PKBM Tahfizh At-Tamam',
+            'pesan' => 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan berlandaskan nilai-nilai Al-Qur\'an serta kejuruan modern.',
             'foto_initials' => 'AF'
         ];
 
@@ -170,10 +169,10 @@ class SchoolController extends Controller
         if (empty($berita)) {
             $berita = [
                 [
-                    'judul' => 'Tim RPL SMKN 1 Nusantara Meraih Juara 1 LKS Pemrograman Web 2026',
+                    'judul' => 'Santri PKBM Tahfizh At-Tamam Raih Juara 1 Musabaqah Hifdzil Quran 2026',
                     'tanggal' => '28 Juli 2026',
                     'kategori' => 'Prestasi',
-                    'ringkasan' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi.',
+                    'ringkasan' => 'Santri binaan kami berhasil memboyong prestasi gemilang dalam kejuaraan tahfizh tingkat provinsi.',
                     'baca_waktu' => '3 menit baca'
                 ]
             ];

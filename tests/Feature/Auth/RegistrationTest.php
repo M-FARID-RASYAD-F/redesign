@@ -18,7 +18,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post('/register-process', [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password',
@@ -27,6 +27,7 @@ class RegistrationTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
+            'role' => 'editor_akademik',
             'is_active' => false,
         ]);
         $this->assertGuest();

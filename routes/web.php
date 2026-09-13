@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\SuperAdminDashboardController;
@@ -10,6 +9,8 @@ use App\Http\Controllers\Admin\CmsDashboardController;
 use App\Http\Controllers\Admin\PpdbDashboardController;
 use App\Http\Controllers\Admin\AkademikDashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,20 +53,20 @@ Route::get('/register', function () {
 })->name('register')->middleware('guest');
 
 // POST Login (mendukung /login dan /login-process dengan throttle 10 per menit)
-Route::post('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->name('login.post')
     ->middleware(['guest', 'throttle:10,1']);
 
-Route::post('/login-process', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
+Route::post('/login-process', [AuthenticatedSessionController::class, 'store'])
     ->name('login.process')
     ->middleware(['guest', 'throttle:10,1']);
 
 // POST Register (mendukung /register dan /register-process dengan throttle 10 per menit)
-Route::post('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
+Route::post('/register', [RegisteredUserController::class, 'store'])
     ->name('register.post')
     ->middleware(['guest', 'throttle:10,1']);
 
-Route::post('/register-process', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
+Route::post('/register-process', [RegisteredUserController::class, 'store'])
     ->name('register.process')
     ->middleware(['guest', 'throttle:10,1']);
 

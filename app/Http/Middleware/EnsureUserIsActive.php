@@ -12,7 +12,13 @@ class EnsureUserIsActive
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user() && !$request->user()->is_active) {
-            abort(403, 'Akun Anda dinonaktifkan. Silakan hubungi Administrator.');
+            // Logout user nonaktif agar tidak terjebak di loop redirect
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')
+                ->withErrors(['email' => 'Akun Anda telah dinonaktifkan. Silakan hubungi Administrator untuk mengaktifkan kembali.']);
         }
 
         return $next($request);

@@ -1,8 +1,8 @@
-@props(['label', 'value', 'icon' => '⭐', 'color' => '#eff6ff'])
+@props(['label', 'value', 'icon' => 'check-circle', 'color' => 'var(--primary-light)'])
 
 <div class="stat-card">
     <div class="stat-icon-wrapper" style="background-color: {{ $color }};">
-        <span>{{ $icon }}</span>
+        <x-icon :name="$icon" />
     </div>
     <div>
         <div class="stat-value">{{ $value }}</div>

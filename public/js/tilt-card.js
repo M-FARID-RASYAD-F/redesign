@@ -7,7 +7,7 @@
   'use strict';
 
   function init3DTiltCards() {
-    const cards = document.querySelectorAll('.tilt-card-3d, .custom-card');
+    const cards = document.querySelectorAll('.tilt-card-3d');
     if (!cards.length) return;
 
     // Disable 3D tilt calculations on mobile/touch screens to preserve 60-120fps touch scrolling

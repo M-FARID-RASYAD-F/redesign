@@ -1139,6 +1139,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   font-size: 1.35rem;
+  color: #132a1c;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
   flex-shrink: 0;
 }
@@ -1400,57 +1401,6 @@ a:hover {
   z-index: 5;
 }
 
-/* Layer 2: Shine / Glare Effect yang mengikuti kursor */
-.card-glare {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: var(--glare-opacity, 0);
-  background: radial-gradient(circle 380px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.28), transparent 75%);
-  mix-blend-mode: overlay;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 12;
-  transform: translateZ(1px);
-}
-
-/* Layer 3: Indikator Status (Pulsing Dot) pojok kanan atas */
-.card-status-dot {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #c9962b;
-  box-shadow: 0 0 10px #c9962b;
-  opacity: 0;
-  transform: translateZ(36px);
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 15;
-  pointer-events: none;
-}
-.card-status-dot::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1.5px solid #c9962b;
-  animation: pulseDotRing 1.8s infinite cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0;
-}
-.custom-card:hover .card-status-dot {
-  opacity: 1;
-}
-.custom-card:hover .card-status-dot::after {
-  opacity: 1;
-}
-
-@keyframes pulseDotRing {
-  0%   { transform: scale(0.6); opacity: 1; }
-  100% { transform: scale(2.3); opacity: 0; }
-}
-
 /* Stagger delay */
 .grid-2 .custom-card:nth-child(1), .grid-3 .custom-card:nth-child(1) { transition-delay: 0.03s; }
 .grid-2 .custom-card:nth-child(2), .grid-3 .custom-card:nth-child(2) { transition-delay: 0.08s; }
@@ -1568,44 +1518,6 @@ a:hover {
   transform: translateZ(40px);
 }
 
-/* Layer 7: Elemen CTA Reveal (Explore Hint - Sesuai hover.md poin 7) */
-.card-explore-hint {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 1.25rem;
-  padding-top: 0.75rem;
-  border-top: 1px dashed rgba(255, 255, 255, 0.14);
-  opacity: 0;
-  transform: translateX(-10px) translateZ(24px);
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-}
-
-.custom-card:hover .card-explore-hint {
-  opacity: 1;
-  transform: translateX(0) translateZ(32px);
-}
-
-.explore-line {
-  width: 18px;
-  height: 2px;
-  background: #c9962b;
-  border-radius: 2px;
-  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.custom-card:hover .explore-line {
-  width: 28px;
-}
-
-.explore-text {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #e0b563;
-}
-
 /* ═══════════════════════════════════════════════════════════
    3 THEME VARIANTS (theme-primary, theme-secondary, theme-accent)
    ═══════════════════════════════════════════════════════════ */
@@ -1618,61 +1530,34 @@ a:hover {
   background: linear-gradient(90deg, #c9962b 0%, #e0b563 100%);
 }
 
-/* Varian 2: Secondary (Emerald / Green) */
+/* Varian 2: Secondary (Forest green, dipakai untuk konten bernuansa "berhasil/aktif") */
 .custom-card.theme-secondary:hover {
-  border-color: #10b981;
-  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(16, 185, 129, 0.35);
+  border-color: #3ea666;
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(62, 166, 102, 0.35);
 }
 .custom-card.theme-secondary:hover::before {
-  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
-}
-.custom-card.theme-secondary .card-status-dot {
-  background: #10b981;
-  box-shadow: 0 0 10px #10b981;
-}
-.custom-card.theme-secondary .card-status-dot::after {
-  border-color: #10b981;
-}
-.custom-card.theme-secondary .explore-line {
-  background: #10b981;
-}
-.custom-card.theme-secondary .explore-text {
-  color: #34d399;
+  background: linear-gradient(90deg, #1f8a4c 0%, #3ea666 100%);
 }
 
-/* Varian 3: Accent (Amber / Gold) */
+/* Varian 3: Accent — nuansa amber lebih hangat, tetap satu keluarga warna dengan primary */
 .custom-card.theme-accent:hover {
-  border-color: #f59e0b;
-  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 158, 11, 0.35);
+  border-color: #d9a53a;
+  box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(217, 165, 58, 0.35);
 }
 .custom-card.theme-accent:hover::before {
-  background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+  background: linear-gradient(90deg, #a97417 0%, #d9a53a 100%);
 }
-.custom-card.theme-accent .card-status-dot {
-  background: #f59e0b;
-  box-shadow: 0 0 10px #f59e0b;
-}
-.custom-card.theme-accent .card-status-dot::after {
-  border-color: #f59e0b;
-}
-.custom-card.theme-accent .explore-line {
-  background: #f59e0b;
-}
-.custom-card.theme-accent .explore-text {
-  color: #fbbf24;
-}
-
 /* ═══════════════════════════════════════════════════════════
    NEUMORPHIC SOFT-SHADOW JURUSAN CARDS (CodeFronts Component)
    Dual light/dark box-shadows, extruded avatar, inset wells & tactile button
    ═══════════════════════════════════════════════════════════ */
 .pc-12-jurusan-stage,
 .pc-12-jenjang-stage {
-  --neu-bg: #141c2e;
-  --neu-dark-shadow: #050811;
-  --neu-light-shadow: #22304d;
-  --neu-inset-dark: #080c16;
-  --neu-inset-light: #1f2b43;
+  --neu-bg: #122b1e;
+  --neu-dark-shadow: #050d08;
+  --neu-light-shadow: #1c3524;
+  --neu-inset-dark: #070f0a;
+  --neu-inset-light: #1a3323;
   --neu-text-title: #ffffff;
   --neu-text-role: #e0b563;
   --neu-text-bio: #94a3b8;
@@ -4683,28 +4568,6 @@ a:hover {
   background: oklch(94.1% 0.025 152 / 0.98);
   border-color: oklch(58.6% 0.182 75);
   box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.5), 0 0 35px oklch(58.6% 0.182 75 / 0.45) !important;
-}
-
-[data-theme="light"] .card-glare {
-  background: radial-gradient(circle 380px at var(--glare-x, 50%) var(--glare-y, 50%), oklch(75% 0.13 75 / 0.35), transparent 75%);
-}
-
-[data-theme="light"] .card-status-dot {
-  background: oklch(58.6% 0.182 75) !important;
-  box-shadow: 0 0 10px oklch(58.6% 0.182 75) !important;
-}
-[data-theme="light"] .card-status-dot::after {
-  border-color: oklch(58.6% 0.182 75) !important;
-}
-
-[data-theme="light"] .card-explore-hint {
-  border-top-color: oklch(58.6% 0.182 75 / 0.3) !important;
-}
-[data-theme="light"] .explore-line {
-  background: oklch(58.6% 0.182 75) !important;
-}
-[data-theme="light"] .explore-text {
-  color: oklch(35.0% 0.09 152) !important;
 }
 
 [data-theme="light"] .content-area-constellation .card-title {

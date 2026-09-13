@@ -48,7 +48,7 @@
             <!-- Navigasi Utama -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon">🧭</span> Navigasi Sekolah
+                    <span class="footer-title-icon"><x-icon name="map-pin" /></span> Navigasi Sekolah
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#beranda"><span class="footer-link-arrow">›</span> Beranda Utama</a></li>
@@ -62,7 +62,7 @@
             <!-- Program Jenjang Pendidikan & Unggulan -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon">🎓</span> Jenjang Pendidikan
+                    <span class="footer-title-icon"><x-icon name="graduation-cap" /></span> Jenjang Pendidikan
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SD (Sekolah Dasar)</a></li>
@@ -126,61 +126,13 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // 2. Rocket Launch & Particle Burst Animation
-    function createLaunchParticles(originElement) {
-        if (!originElement) return;
-        const rect = originElement.getBoundingClientRect();
-        const particleCount = 14;
-        const colors = ['#00B4D8', '#38bdf8', '#34d399', '#f59e0b', '#ec4899', '#ffffff'];
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('span');
-            particle.className = 'back-to-top-spark';
-            
-            const startX = rect.left + rect.width / 2;
-            const startY = rect.top + rect.height / 2;
-            
-            const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
-            const distance = 25 + Math.random() * 55;
-            const destX = Math.cos(angle) * distance;
-            const destY = Math.sin(angle) * distance - 25; // Bias burst upwards
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const size = 3 + Math.random() * 5;
-
-            particle.style.cssText = `
-                position: fixed;
-                left: ${startX}px;
-                top: ${startY}px;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${color};
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 999999;
-                box-shadow: 0 0 10px ${color};
-                transform: translate(-50%, -50%) scale(1);
-                transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-            `;
-
-            document.body.appendChild(particle);
-
-            requestAnimationFrame(() => {
-                particle.style.transform = `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(0)`;
-                particle.style.opacity = '0';
-            });
-
-            setTimeout(() => {
-                particle.remove();
-            }, 800);
-        }
-    }
-
-    // 3. Smooth Kinetic Momentum Scroll to Top
+    // 2. Smooth Momentum Scroll to Top — feedback dibatasi ke animasi CSS
+    // (.is-launching, sudah ada thrust + icon blast-off di style.css), tanpa
+    // burst partikel yang berlebihan untuk aksi sesederhana "kembali ke atas".
     function triggerRocketLaunch(btn) {
         if (!btn || btn.classList.contains('is-launching')) return;
 
         btn.classList.add('is-launching');
-        createLaunchParticles(btn);
 
         const startPosition = window.pageYOffset || document.documentElement.scrollTop;
         const duration = Math.min(900, Math.max(450, startPosition * 0.35));

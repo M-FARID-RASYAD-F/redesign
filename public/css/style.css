@@ -1144,12 +1144,6 @@ a:hover {
   /* Shadow ekstra tegas ke atas dengan glow border */
   box-shadow: 0 -16px 50px rgba(0, 21, 71, 0.45);
   border-top: 2px solid #00B4D8;
-  /* Token warna background canvas constellation — dibaca via getComputedStyle oleh JS,
-     jadi satu sumber kebenaran dengan tema situs (tidak di-hardcode terpisah di JS). */
-  --constellation-bg: #020617;
-  --constellation-line-rgb: 148, 163, 184;
-  --constellation-node-rgb: 226, 232, 240;
-  --constellation-accent-rgb: 0, 180, 216;
 }
 
 #constellation-canvas {
@@ -4649,10 +4643,6 @@ a:hover {
   background: #ffffff;
   box-shadow: 0 -16px 50px oklch(41% 0.159 10.272 / 0.25);
   border-top: 2px solid oklch(58.6% 0.253 17.585);
-  --constellation-bg: #ffffff;
-  --constellation-line-rgb: 100, 116, 139;
-  --constellation-node-rgb: 71, 85, 105;
-  --constellation-accent-rgb: 225, 29, 72;
 }
 
 [data-theme="light"] .content-area-constellation .section-title {

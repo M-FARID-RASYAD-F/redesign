@@ -7,7 +7,7 @@
 <section class="ppdb-hero-section">
     <div class="ppdb-hero-inner">
         <span class="ppdb-badge">
-            🎓 Penerimaan Peserta Didik Baru (PPDB) Online
+            Penerimaan Peserta Didik Baru (PPDB) Online
         </span>
         <h1 class="ppdb-hero-title">
             Raih Masa Depan Gemilang & Berkarakter Mulia
@@ -19,10 +19,10 @@
         <!-- CTA Buttons -->
         <div class="ppdb-hero-actions">
             <a href="{{ route('ppdb.create') }}" class="btn btn-primary" style="padding: 14px 32px; font-size: 1rem; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
-                ✍️ Isi Formulir Pendaftaran Sekarang
+                Isi Formulir Pendaftaran Sekarang
             </a>
             <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline" style="padding: 14px 28px; font-size: 1rem; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
-                🔍 Lacak / Cek Status Pendaftaran
+                Lacak / Cek Status Pendaftaran
             </a>
         </div>
     </div>
@@ -64,16 +64,16 @@
         <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(16, 185, 129, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;">🎒</span>
-                    <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(16, 185, 129, 0.3);">🌱 Fondasi Qurani</span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="plant" /></span>
+                    <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(16, 185, 129, 0.3);">Fondasi Qurani</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Dasar (SD)</h3>
                 <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
                     Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar calistung dan sains eksploratif.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Tahfizh Cilik & Islamic Character</span></div>
-                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 6 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Tahfizh Cilik & Islamic Character</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 6 Tahun</span></div>
                 </div>
             </div>
             <a href="{{ route('ppdb.create', ['jenjang' => 'sd']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
@@ -82,43 +82,43 @@
         </div>
 
         <!-- SMP -->
-        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(56, 189, 248, 0.35);">
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(214, 190, 140, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;">📚</span>
-                    <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(56, 189, 248, 0.3);">🌟 Karakter & Riset</span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="book-open" /></span>
+                    <span style="background: rgba(214, 190, 140, 0.15); color: #D6BE8C; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(214, 190, 140, 0.3);">Karakter & Riset</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Pertama (SMP)</h3>
                 <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
                     Penguatan hafalan Al-Qur'an (target 5–10 juz), pembentukan jiwa kepemimpinan, sains terapan, dan pengenalan coding.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Tahfizh Intensif & English/Arabic Club</span></div>
-                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 3 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Tahfizh Intensif & English/Arabic Club</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
-            <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #0284c7, #2563eb); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #C8A96B, #C8A96B); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
                 Daftar Jenjang SMP ➜
             </a>
         </div>
 
         <!-- SMK -->
-        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(168, 85, 247, 0.35);">
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(168, 137, 81, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;">💻</span>
-                    <span style="background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(168, 85, 247, 0.3);">🚀 Vokasi Industri</span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="laptop" /></span>
+                    <span style="background: rgba(168, 137, 81, 0.15); color: #D6BE8C; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(168, 137, 81, 0.3);">Vokasi Industri</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Kejuruan (SMK)</h3>
                 <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
                     Keahlian kejuruan vokasi berstandar industri dengan 3 pilihan program keahlian (RPL, TKJ, DKV) & sertifikasi BNSP.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span>🎯</span> <span>Kelas Industri RPL, TKJ, DKV & PKL</span></div>
-                    <div style="display: flex; gap: 8px;"><span>⏱️</span> <span>Masa Studi: 3 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Kelas Industri RPL, TKJ, DKV & PKL</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
-            <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #7c3aed, #9333ea); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #8F7440, #8F7440); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
                 Daftar Jenjang SMK ➜
             </a>
         </div>
@@ -177,7 +177,7 @@
 
                 <ul class="ppdb-checklist-list">
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon">✔️</span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Kartu Keluarga (KK)</strong>
                             <span class="ppdb-check-sub">Scan atau foto jelas KK yang masih berlaku</span>
@@ -185,7 +185,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon">✔️</span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Akta Kelahiran Calon Siswa</strong>
                             <span class="ppdb-check-sub">Sebagai bukti keabsahan identitas dan usia</span>
@@ -193,7 +193,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon">✔️</span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Pas Foto Berwarna (3x4)</strong>
                             <span class="ppdb-check-sub">Latar belakang merah atau biru berpakaian rapi</span>
@@ -201,7 +201,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon">✔️</span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Rapor Terakhir / SKL</strong>
                             <span class="ppdb-check-sub">Surat Keterangan Lulus dari sekolah asal (SMP/MTs)</span>

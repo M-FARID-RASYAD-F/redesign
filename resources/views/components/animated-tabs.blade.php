@@ -82,7 +82,7 @@
                     @if(isset($tab['alamat']))
                         <div class="tab-location-card">
                             <div class="tab-location-row">
-                                <span class="tab-location-pin"><x-icon name="map-pin" /></span>
+                                <span class="tab-location-pin"><x-app-icon name="map-pin" /></span>
                                 <div class="tab-location-body">
                                     <strong class="tab-location-label">Alamat Kampus:</strong>
                                     <span class="tab-location-address">{{ $tab['alamat'] }}</span>
@@ -90,7 +90,7 @@
                             </div>
                             @if(isset($tab['jam']))
                                 <div class="tab-hours-row">
-                                    <span class="tab-hours-icon"><x-icon name="clock" /></span>
+                                    <span class="tab-hours-icon"><x-app-icon name="clock" /></span>
                                     <span class="tab-hours-text">{{ $tab['jam'] }}</span>
                                 </div>
                             @endif
@@ -101,7 +101,7 @@
                         <div class="tab-features-grid">
                             @foreach($tab['features'] as $feat)
                                 <div class="tab-feature-item">
-                                    <span class="tab-feature-check"><x-icon name="check-circle" /></span>
+                                    <span class="tab-feature-check"><x-app-icon name="check-circle" /></span>
                                     <span class="tab-feature-text">{{ $feat }}</span>
                                 </div>
                             @endforeach
@@ -112,19 +112,19 @@
                         <div class="tab-action-buttons">
                             @if(isset($tab['maps_url']))
                                 <a href="{{ $tab['maps_url'] }}" target="_blank" rel="noopener noreferrer" class="btn-tab-action btn-tab-maps" title="Buka Petunjuk Arah di Google Maps">
-                                    <span class="btn-tab-icon"><x-icon name="map-pin" /></span>
+                                    <span class="btn-tab-icon"><x-app-icon name="map-pin" /></span>
                                     <span class="btn-tab-text">Petunjuk Arah (Maps)</span>
                                 </a>
                             @endif
                             @if(isset($tab['wa_url']))
                                 <a href="{{ $tab['wa_url'] }}" target="_blank" rel="noopener noreferrer" class="btn-tab-action btn-tab-wa" title="Hubungi WhatsApp Cabang">
-                                    <span class="btn-tab-icon"><x-icon name="whatsapp" /></span>
+                                    <span class="btn-tab-icon"><x-app-icon name="whatsapp" /></span>
                                     <span class="btn-tab-text">Hubungi Cabang</span>
                                 </a>
                             @endif
                             @if(isset($tab['telepon']))
                                 <a href="tel:{{ preg_replace('/[^0-9]/', '', $tab['telepon']) }}" class="btn-tab-action btn-tab-tel" title="Hubungi Telepon Langsung">
-                                    <span class="btn-tab-icon"><x-icon name="phone" /></span>
+                                    <span class="btn-tab-icon"><x-app-icon name="phone" /></span>
                                     <span class="btn-tab-text">{{ $tab['telepon'] }}</span>
                                 </a>
                             @endif

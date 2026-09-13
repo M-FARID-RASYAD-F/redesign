@@ -48,7 +48,7 @@
             <!-- Navigasi Utama -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon"><x-icon name="map-pin" /></span> Navigasi Sekolah
+                    <span class="footer-title-icon"><x-app-icon name="map-pin" /></span> Navigasi Sekolah
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#beranda"><span class="footer-link-arrow">›</span> Beranda Utama</a></li>
@@ -62,7 +62,7 @@
             <!-- Program Jenjang Pendidikan & Unggulan -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon"><x-icon name="graduation-cap" /></span> Jenjang Pendidikan
+                    <span class="footer-title-icon"><x-app-icon name="graduation-cap" /></span> Jenjang Pendidikan
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SD (Sekolah Dasar)</a></li>

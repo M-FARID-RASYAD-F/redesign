@@ -541,7 +541,7 @@
 
         @if($errors->any())
         <div style="background: rgba(193, 80, 58, 0.12); border: 1px solid rgba(193, 80, 58, 0.4); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; color: #e8b3a3;">
-            <div style="font-weight: 700; margin-bottom: 6px; color: #ffffff; display: flex; align-items: center; gap: 8px;"><x-icon name="warning" /> Terdapat beberapa kolom yang belum terisi dengan benar:</div>
+            <div style="font-weight: 700; margin-bottom: 6px; color: #ffffff; display: flex; align-items: center; gap: 8px;"><x-app-icon name="warning" /> Terdapat beberapa kolom yang belum terisi dengan benar:</div>
             <ul style="padding-left: 20px; font-size: 0.88rem; margin: 0;">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -556,7 +556,7 @@
                 <button type="button" class="ppdb-step-item active" data-step="1" onclick="jumpToStep(1)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">1</span>
-                        <span class="step-check"><x-icon name="check" /></span>
+                        <span class="step-check"><x-app-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 1</span>
@@ -569,7 +569,7 @@
                 <button type="button" class="ppdb-step-item" data-step="2" onclick="jumpToStep(2)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">2</span>
-                        <span class="step-check"><x-icon name="check" /></span>
+                        <span class="step-check"><x-app-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 2</span>
@@ -582,7 +582,7 @@
                 <button type="button" class="ppdb-step-item" data-step="3" onclick="jumpToStep(3)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">3</span>
-                        <span class="step-check"><x-icon name="check" /></span>
+                        <span class="step-check"><x-app-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 3</span>
@@ -639,7 +639,7 @@
                                     <input type="radio" name="jenjang" value="sd" @checked($currentJenjang == 'sd') required onchange="handleJenjangChange('sd')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;"><x-icon name="plant" /></span>
+                                            <span style="font-size: 1.6rem;"><x-app-icon name="plant" /></span>
                                             <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SD</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Sekolah Dasar (SD)</strong>
@@ -652,7 +652,7 @@
                                     <input type="radio" name="jenjang" value="smp" @checked($currentJenjang == 'smp') required onchange="handleJenjangChange('smp')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;"><x-icon name="book-open" /></span>
+                                            <span style="font-size: 1.6rem;"><x-app-icon name="book-open" /></span>
                                             <span class="badge" style="background: rgba(224, 181, 99, 0.2); color: #e0b563; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMP</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Menengah Pertama (SMP)</strong>
@@ -665,7 +665,7 @@
                                     <input type="radio" name="jenjang" value="smk" @checked($currentJenjang == 'smk') required onchange="handleJenjangChange('smk')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;"><x-icon name="laptop" /></span>
+                                            <span style="font-size: 1.6rem;"><x-app-icon name="laptop" /></span>
                                             <span class="badge" style="background: rgba(169, 116, 23, 0.2); color: #e0b563; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMK</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Kejuruan (SMK)</strong>
@@ -794,7 +794,7 @@
                         <!-- Panduan & Info Komunikasi Orang Tua -->
                         <div class="ppdb-info-card">
                             <div style="display: flex; gap: 14px; align-items: flex-start;">
-                                <span style="font-size: 1.6rem; line-height: 1;"><x-icon name="phone" /></span>
+                                <span style="font-size: 1.6rem; line-height: 1;"><x-app-icon name="phone" /></span>
                                 <div>
                                     <h4 style="font-size: 0.95rem; font-weight: 800; color: #fbbf24; margin: 0 0 6px;">Pemberitahuan & Verifikasi Kontak</h4>
                                     <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 10px;">
@@ -865,7 +865,7 @@
                         <!-- Privacy Notice & Persetujuan -->
                         <div class="ppdb-pdp-notice" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
-                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;"><x-icon name="shield-check" /></span>
+                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;"><x-app-icon name="shield-check" /></span>
                                 <div style="flex: 1;">
                                     <h4 class="ppdb-pdp-title">Kebijakan Pelindungan Data Pribadi (UU PDP No. 27/2022)</h4>
                                     <p class="ppdb-pdp-desc">

@@ -64,7 +64,7 @@
         <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(16, 185, 129, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;"><x-icon name="plant" /></span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="plant" /></span>
                     <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(16, 185, 129, 0.3);">Fondasi Qurani</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Dasar (SD)</h3>
@@ -72,8 +72,8 @@
                     Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar calistung dan sains eksploratif.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-icon name="check-circle" /></span> <span>Tahfizh Cilik & Islamic Character</span></div>
-                    <div style="display: flex; gap: 8px;"><span><x-icon name="clock" /></span> <span>Masa Studi: 6 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Tahfizh Cilik & Islamic Character</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 6 Tahun</span></div>
                 </div>
             </div>
             <a href="{{ route('ppdb.create', ['jenjang' => 'sd']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
@@ -85,7 +85,7 @@
         <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(224, 181, 99, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;"><x-icon name="book-open" /></span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="book-open" /></span>
                     <span style="background: rgba(224, 181, 99, 0.15); color: #e0b563; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(224, 181, 99, 0.3);">Karakter & Riset</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Pertama (SMP)</h3>
@@ -93,8 +93,8 @@
                     Penguatan hafalan Al-Qur'an (target 5–10 juz), pembentukan jiwa kepemimpinan, sains terapan, dan pengenalan coding.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-icon name="check-circle" /></span> <span>Tahfizh Intensif & English/Arabic Club</span></div>
-                    <div style="display: flex; gap: 8px;"><span><x-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Tahfizh Intensif & English/Arabic Club</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
             <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #c9962b, #c9962b); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
@@ -106,7 +106,7 @@
         <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(169, 116, 23, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <span style="font-size: 2.2rem;"><x-icon name="laptop" /></span>
+                    <span style="font-size: 2.2rem;"><x-app-icon name="laptop" /></span>
                     <span style="background: rgba(169, 116, 23, 0.15); color: #e0b563; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(169, 116, 23, 0.3);">Vokasi Industri</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Kejuruan (SMK)</h3>
@@ -114,8 +114,8 @@
                     Keahlian kejuruan vokasi berstandar industri dengan 3 pilihan program keahlian (RPL, TKJ, DKV) & sertifikasi BNSP.
                 </p>
                 <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-icon name="check-circle" /></span> <span>Kelas Industri RPL, TKJ, DKV & PKL</span></div>
-                    <div style="display: flex; gap: 8px;"><span><x-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 6px;"><span><x-app-icon name="check-circle" /></span> <span>Kelas Industri RPL, TKJ, DKV & PKL</span></div>
+                    <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
             <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #8a5f13, #8a5f13); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
@@ -177,7 +177,7 @@
 
                 <ul class="ppdb-checklist-list">
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon"><x-icon name="check-circle" /></span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Kartu Keluarga (KK)</strong>
                             <span class="ppdb-check-sub">Scan atau foto jelas KK yang masih berlaku</span>
@@ -185,7 +185,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon"><x-icon name="check-circle" /></span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Akta Kelahiran Calon Siswa</strong>
                             <span class="ppdb-check-sub">Sebagai bukti keabsahan identitas dan usia</span>
@@ -193,7 +193,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon"><x-icon name="check-circle" /></span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Pas Foto Berwarna (3x4)</strong>
                             <span class="ppdb-check-sub">Latar belakang merah atau biru berpakaian rapi</span>
@@ -201,7 +201,7 @@
                     </li>
 
                     <li class="ppdb-checklist-item">
-                        <span class="ppdb-check-icon"><x-icon name="check-circle" /></span>
+                        <span class="ppdb-check-icon"><x-app-icon name="check-circle" /></span>
                         <div>
                             <strong class="ppdb-check-title">Rapor Terakhir / SKL</strong>
                             <span class="ppdb-check-sub">Surat Keterangan Lulus dari sekolah asal (SMP/MTs)</span>

@@ -171,7 +171,7 @@
         <span class="news-badge">{{ $news->category ? $news->category->name : 'Umum' }}</span>
         <h1 class="news-title">{{ $news->title }}</h1>
         <div class="news-meta">
-            <span><x-icon name="calendar" /> {{ $news->created_at ? $news->created_at->format('d F Y') : '-' }}</span>
+            <span><x-app-icon name="calendar" /> {{ $news->created_at ? $news->created_at->format('d F Y') : '-' }}</span>
             <span>{{ $news->author ? $news->author->name : 'Admin Sekolah' }}</span>
             <span>⏱️ {{ ceil(str_word_count(strip_tags($news->content)) / 200) }} menit baca</span>
         </div>
@@ -191,7 +191,7 @@
     @if($relatedNews->isNotEmpty())
     <div class="related-news-section">
         <h3 class="related-news-title">
-            <span><x-icon name="newspaper" /></span>
+            <span><x-app-icon name="newspaper" /></span>
             <span>Berita & Pengumuman Lainnya</span>
         </h3>
         <div class="related-grid">

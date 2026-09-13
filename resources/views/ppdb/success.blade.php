@@ -9,7 +9,7 @@
         <!-- Header Sukses -->
         <div style="text-align: center; margin-bottom: 30px;">
             <div style="width: 72px; height: 72px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 2px solid #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px; box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);">
-                <x-icon name="check" />
+                <x-app-icon name="check" />
             </div>
             <h1 class="ppdb-section-title" style="font-size: 2.2rem; margin-bottom: 6px;">Pendaftaran PPDB Berhasil!</h1>
             <p class="ppdb-section-desc" style="font-size: 1rem;">Data calon peserta didik baru telah tersimpan di sistem kami.</p>
@@ -110,13 +110,13 @@
         <!-- Tombol Aksi -->
         <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px;">
             <button onclick="window.print()" class="btn btn-primary" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                <x-icon name="printer" /> Cetak Kartu Bukti
+                <x-app-icon name="printer" /> Cetak Kartu Bukti
             </button>
             <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
-                <x-icon name="search" /> Lacak Status Pendaftaran
+                <x-app-icon name="search" /> Lacak Status Pendaftaran
             </a>
             <a href="{{ route('home') }}" class="btn btn-outline" style="padding: 12px 20px; font-weight: 600; border-radius: 10px;">
-                <x-icon name="home" /> Kembali ke Beranda
+                <x-app-icon name="home" /> Kembali ke Beranda
             </a>
         </div>
 

@@ -23,10 +23,10 @@
 
                 <div class="hero-actions">
                     <a href="{{ route('ppdb.index') }}" class="btn btn-primary">
-                        <x-icon name="upload" /> Daftar PPDB Online
+                        <x-app-icon name="upload" /> Daftar PPDB Online
                     </a>
                     <a href="#jenjang" class="btn btn-outline">
-                        <x-icon name="search" /> Lihat Jenjang
+                        <x-app-icon name="search" /> Lihat Jenjang
                     </a>
                 </div>
             </div>
@@ -96,7 +96,7 @@
             @foreach($jenjang as $j)
                 <div class="pc-12__card">
                     <div class="pc-12__pfp">
-                        <span class="pc-12__pfp-icon"><x-icon :name="$j['icon'] ?? 'graduation-cap'" /></span>
+                        <span class="pc-12__pfp-icon"><x-app-icon :name="$j['icon'] ?? 'graduation-cap'" /></span>
                         <span class="pc-12__pfp-abbr">{{ $j['kode'] ?? substr($j['nama'], 0, 3) }}</span>
                     </div>
                     <h3>{{ $j['nama'] }}</h3>
@@ -179,7 +179,7 @@
 
                 <div class="contact-info-list">
                     <div class="contact-info-item">
-                        <div class="contact-info-icon"><x-icon name="map-pin" /></div>
+                        <div class="contact-info-icon"><x-app-icon name="map-pin" /></div>
                         <div>
                             <div class="contact-info-label">ALAMAT SEKOLAH</div>
                             <div class="contact-info-value">{{ $sekolah['alamat'] }}</div>
@@ -187,7 +187,7 @@
                     </div>
 
                     <div class="contact-info-item">
-                        <div class="contact-info-icon"><x-icon name="phone" /></div>
+                        <div class="contact-info-icon"><x-app-icon name="phone" /></div>
                         <div>
                             <div class="contact-info-label">CALL CENTER / WA</div>
                             <div class="contact-info-value">{{ $sekolah['telepon'] }}</div>
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="contact-info-item">
-                        <div class="contact-info-icon"><x-icon name="envelope" /></div>
+                        <div class="contact-info-icon"><x-app-icon name="envelope" /></div>
                         <div>
                             <div class="contact-info-label">EMAIL OFFICIAL</div>
                             <div class="contact-info-value">{{ $sekolah['email'] }}</div>
@@ -213,7 +213,7 @@
                         <label class="form-label" for="nama">Nama Lengkap Siswa / Orang Tua:</label>
                         <input type="text" id="nama" name="nama" class="form-control" placeholder="Contoh: Muhammad Rizky" value="{{ old('nama') }}">
                         @error('nama')
-                            <span class="error-text"><x-icon name="warning" /> {{ $message }}</span>
+                            <span class="error-text"><x-app-icon name="warning" /> {{ $message }}</span>
                         @enderror
                     </div>
 
@@ -221,7 +221,7 @@
                         <label class="form-label" for="email">Alamat Email Aktif:</label>
                         <input type="email" id="email" name="email" class="form-control" placeholder="Contoh: rizky@gmail.com" value="{{ old('email') }}">
                         @error('email')
-                            <span class="error-text"><x-icon name="warning" /> {{ $message }}</span>
+                            <span class="error-text"><x-app-icon name="warning" /> {{ $message }}</span>
                         @enderror
                     </div>
 
@@ -234,7 +234,7 @@
                             <option value="dkv" {{ old('jurusan_minat') == 'dkv' ? 'selected' : '' }}>Desain Komunikasi Visual (DKV)</option>
                         </select>
                         @error('jurusan_minat')
-                            <span class="error-text"><x-icon name="warning" /> {{ $message }}</span>
+                            <span class="error-text"><x-app-icon name="warning" /> {{ $message }}</span>
                         @enderror
                     </div>
 
@@ -242,7 +242,7 @@
                         <label class="form-label" for="pesan">Pesan / Pertanyaan Tambahan:</label>
                         <textarea id="pesan" name="pesan" rows="4" class="form-control" placeholder="Tuliskan pertanyaan Anda di sini...">{{ old('pesan') }}</textarea>
                         @error('pesan')
-                            <span class="error-text"><x-icon name="warning" /> {{ $message }}</span>
+                            <span class="error-text"><x-app-icon name="warning" /> {{ $message }}</span>
                         @enderror
                     </div>
 
@@ -250,7 +250,7 @@
                         <label class="form-label" for="berkas">Unggah Berkas PPDB (Raport/Ijazah - PDF/JPG, Max 2MB):</label>
                         <input type="file" id="berkas" name="berkas" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
                         @error('berkas')
-                            <span class="error-text"><x-icon name="warning" /> {{ $message }}</span>
+                            <span class="error-text"><x-app-icon name="warning" /> {{ $message }}</span>
                         @enderror
                     </div>
 

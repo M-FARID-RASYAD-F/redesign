@@ -2,7 +2,7 @@
 
 <div class="stat-card">
     <div class="stat-icon-wrapper" style="background-color: {{ $color }};">
-        <x-icon :name="$icon" />
+        <x-app-icon :name="$icon" />
     </div>
     <div>
         <div class="stat-value">{{ $value }}</div>

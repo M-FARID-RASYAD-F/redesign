@@ -212,12 +212,19 @@ class AdminController extends Controller
     public function ppdbIndex(Request $request)
     {
         $currentJenjang = strtolower($request->query('jenjang', ''));
+        $currentStatus = strtolower($request->query('status', ''));
         $query = PpdbRegistration::query();
 
         if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
             $query->where('jenjang', $currentJenjang);
         } else {
             $currentJenjang = 'all';
+        }
+
+        if (in_array($currentStatus, ['pending', 'diverifikasi', 'diterima', 'ditolak'])) {
+            $query->where('status', $currentStatus);
+        } else {
+            $currentStatus = 'all';
         }
 
         $registrations = $query->orderBy('created_at', 'desc')->get();
@@ -229,7 +236,21 @@ class AdminController extends Controller
             'smk' => PpdbRegistration::where('jenjang', 'smk')->count(),
         ];
 
-        return view('admin.ppdb.index', compact('registrations', 'currentJenjang', 'counts'));
+        // Hitung total status berdasarkan konteks jenjang yang sedang dipilih
+        $statusBaseQuery = PpdbRegistration::query();
+        if ($currentJenjang !== 'all') {
+            $statusBaseQuery->where('jenjang', $currentJenjang);
+        }
+
+        $statusCounts = [
+            'all'          => (clone $statusBaseQuery)->count(),
+            'pending'      => (clone $statusBaseQuery)->where('status', 'pending')->count(),
+            'diverifikasi' => (clone $statusBaseQuery)->where('status', 'diverifikasi')->count(),
+            'diterima'     => (clone $statusBaseQuery)->where('status', 'diterima')->count(),
+            'ditolak'      => (clone $statusBaseQuery)->where('status', 'ditolak')->count(),
+        ];
+
+        return view('admin.ppdb.index', compact('registrations', 'currentJenjang', 'currentStatus', 'counts', 'statusCounts'));
     }
 
     /**
@@ -238,14 +259,26 @@ class AdminController extends Controller
     public function ppdbExportCsv(Request $request)
     {
         $currentJenjang = strtolower($request->query('jenjang', ''));
+        $currentStatus = strtolower($request->query('status', ''));
         $query = PpdbRegistration::query();
+
+        $suffixParts = [];
 
         if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
             $query->where('jenjang', $currentJenjang);
-            $suffix = '-' . $currentJenjang;
+            $suffixParts[] = $currentJenjang;
         } else {
-            $suffix = '-semua-jenjang';
+            $currentJenjang = 'all';
         }
+
+        if (in_array($currentStatus, ['pending', 'diverifikasi', 'diterima', 'ditolak'])) {
+            $query->where('status', $currentStatus);
+            $suffixParts[] = $currentStatus;
+        } else {
+            $currentStatus = 'all';
+        }
+
+        $suffix = !empty($suffixParts) ? '-' . implode('-', $suffixParts) : '-semua-data';
 
         $registrations = $query->orderBy('created_at', 'desc')->get();
         $filename = 'rekap-ppdb' . $suffix . '-' . date('Y-m-d_His') . '.csv';

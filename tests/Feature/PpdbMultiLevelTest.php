@@ -155,4 +155,85 @@ class PpdbMultiLevelTest extends TestCase
         $this->assertEquals('diverifikasi', $reg->status);
         $this->assertEquals('smp', $reg->jenjang);
     }
+
+    public function test_admin_can_filter_registrations_by_status(): void
+    {
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa Pending 1',
+            'status' => 'pending',
+        ]);
+
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa Diterima 1',
+            'status' => 'diterima',
+        ]);
+
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa Ditolak 1',
+            'status' => 'ditolak',
+        ]);
+
+        // Filter Pending
+        $this->actingAs($this->adminPpdb)
+            ->get(route('admin.ppdb.index', ['status' => 'pending']))
+            ->assertOk()
+            ->assertSee('Siswa Pending 1')
+            ->assertDontSee('Siswa Diterima 1')
+            ->assertDontSee('Siswa Ditolak 1');
+
+        // Filter Diterima
+        $this->actingAs($this->adminPpdb)
+            ->get(route('admin.ppdb.index', ['status' => 'diterima']))
+            ->assertOk()
+            ->assertSee('Siswa Diterima 1')
+            ->assertDontSee('Siswa Pending 1')
+            ->assertDontSee('Siswa Ditolak 1');
+    }
+
+    public function test_admin_can_filter_registrations_by_jenjang_and_status(): void
+    {
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa SD Pending',
+            'jenjang' => 'sd',
+            'status' => 'pending',
+        ]);
+
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa SD Diterima',
+            'jenjang' => 'sd',
+            'status' => 'diterima',
+        ]);
+
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa SMP Diterima',
+            'jenjang' => 'smp',
+            'status' => 'diterima',
+        ]);
+
+        $this->actingAs($this->adminPpdb)
+            ->get(route('admin.ppdb.index', ['jenjang' => 'sd', 'status' => 'diterima']))
+            ->assertOk()
+            ->assertSee('Siswa SD Diterima')
+            ->assertDontSee('Siswa SD Pending')
+            ->assertDontSee('Siswa SMP Diterima');
+    }
+
+    public function test_admin_can_export_csv_with_status_filter(): void
+    {
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa CSV Pending',
+            'status' => 'pending',
+        ]);
+
+        PpdbRegistration::factory()->create([
+            'full_name' => 'Siswa CSV Diterima',
+            'status' => 'diterima',
+        ]);
+
+        $response = $this->actingAs($this->adminPpdb)
+            ->get(route('admin.ppdb.export', ['status' => 'diterima']));
+
+        $response->assertOk();
+        $this->assertStringContainsString('rekap-ppdb-diterima', $response->headers->get('content-disposition'));
+    }
 }

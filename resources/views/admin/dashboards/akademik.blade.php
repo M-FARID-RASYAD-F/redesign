@@ -66,7 +66,7 @@
 </div>
 
 <!-- DUA KOLOM: GURU TERBARU & DAFTAR JURUSAN -->
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+<div class="admin-grid-2col">
     <!-- Kolom 1: Data Guru & Staf Terbaru -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">

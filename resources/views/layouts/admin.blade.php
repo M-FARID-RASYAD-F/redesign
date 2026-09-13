@@ -881,6 +881,22 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
+           GLOBAL GRID & DETAIL LAYOUT HELPERS (RESPONSIVE READY)
+           ═══════════════════════════════════════════════════════════ */
+        .admin-grid-2col {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .admin-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
            RESPONSIVE MOBILE ENGINE (RAPI & ANTI-TERPOTONG)
            ═══════════════════════════════════════════════════════════ */
         @media (max-width: 1024px) {
@@ -900,6 +916,8 @@
                 width: 100% !important;
                 max-width: 100vw !important;
                 padding: 14px 14px 45px 14px !important;
+                overflow-x: clip !important;
+                box-sizing: border-box !important;
             }
             .topbar-hamburger {
                 display: inline-flex !important;
@@ -909,6 +927,8 @@
             }
 
             /* Responsive reset untuk grid 2-kolom child views & dashboards */
+            .admin-grid-2col,
+            .admin-detail-layout,
             .main-container div[style*="grid-template-columns: 2fr 1fr"],
             .main-container div[style*="grid-template-columns:2fr 1fr"],
             .main-container div[style*="grid-template-columns: 1fr 320px"],
@@ -967,37 +987,84 @@
             .header {
                 flex-direction: column !important;
                 align-items: stretch !important;
-                gap: 12px !important;
+                gap: 14px !important;
                 margin-bottom: 20px !important;
             }
 
             .header-title {
-                font-size: 1.45rem !important;
+                font-size: 1.4rem !important;
+                line-height: 1.3 !important;
             }
 
             .header > div:last-child,
+            .header .header-actions {
+                display: flex !important;
+                flex-direction: column !important;
+                width: 100% !important;
+                gap: 10px !important;
+            }
+
+            .header > div:last-child > .btn,
+            .header .header-actions > .btn,
             .header > a.btn,
             .header .btn {
                 width: 100% !important;
                 justify-content: center !important;
+                min-height: 44px !important;
+                box-sizing: border-box !important;
+                padding: 11px 16px !important;
+                font-size: 0.9rem !important;
             }
 
             .card {
-                padding: 18px 14px !important;
+                padding: 16px 14px !important;
                 border-radius: 14px !important;
                 margin-bottom: 16px !important;
+                box-sizing: border-box !important;
             }
 
             /* Header di dalam card (flex-between) agar tidak saling tabrak */
             .card > div[style*="justify-content: space-between"] {
                 flex-direction: column !important;
                 align-items: stretch !important;
-                gap: 10px !important;
+                gap: 12px !important;
             }
 
             .card > div[style*="justify-content: space-between"] > a.btn,
             .card > div[style*="justify-content: space-between"] > .badge {
                 align-self: flex-start !important;
+            }
+
+            /* PPDB Filter Panel Mobile Responsive */
+            .ppdb-filter-panel {
+                padding: 16px 14px !important;
+                margin-bottom: 18px !important;
+            }
+            .ppdb-filter-row {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 10px !important;
+            }
+            .ppdb-filter-label {
+                min-width: unset !important;
+                width: 100% !important;
+            }
+            .ppdb-filter-options {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+                width: 100% !important;
+            }
+            .ppdb-filter-options > a {
+                justify-content: center !important;
+                padding: 9px 10px !important;
+                font-size: 0.8rem !important;
+                text-align: center !important;
+                box-sizing: border-box !important;
+                min-height: 40px !important;
+            }
+            .ppdb-filter-options > a:first-child {
+                grid-column: 1 / -1 !important; /* Tombol 'Semua' membentang penuh 1 baris */
             }
 
             /* Responsive Stats Cards Grid (2 Kolom Rapi di Tablet & Mobile) */
@@ -1010,6 +1077,11 @@
                 gap: 12px !important;
             }
 
+            .stats-grid .card div[style*="font-size: 2.2rem"],
+            .stats-grid .card div[style*="font-size: 2rem"] {
+                font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
+            }
+
             /* Mini Stats Grid (PPDB breakdown dll) */
             .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"],
             .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr))"] {
@@ -1017,18 +1089,30 @@
                 gap: 10px !important;
             }
 
-            /* Mencegah kolom tabel terhimpit */
+            /* Mencegah kolom tabel terhimpit & optimasi scrolling sentuh */
+            .table-responsive {
+                border-radius: 10px !important;
+                margin-bottom: 8px !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
             .table-responsive table {
                 min-width: 620px !important;
             }
 
             .table-responsive th,
             .table-responsive td {
-                padding: 11px 12px !important;
+                padding: 10px 12px !important;
+                font-size: 0.85rem !important;
             }
 
-            td:last-child {
+            .table-responsive td:last-child {
                 white-space: nowrap !important;
+            }
+
+            .table-responsive td .btn {
+                padding: 6px 12px !important;
+                font-size: 0.8rem !important;
+                min-height: 34px !important;
             }
 
             /* iOS Safari input zoom fix (font-size >= 16px) */
@@ -1040,10 +1124,47 @@
             }
 
             /* Responsive reset untuk grid 2-kolom child views */
+            .admin-grid-2col,
+            .admin-detail-layout,
             .main-container div[style*="grid-template-columns: 1fr 320px"],
             .main-container div[style*="grid-template-columns:1fr 320px"] {
                 grid-template-columns: 1fr !important;
                 gap: 16px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* Form Action Buttons: Stack vertikal & tombol full width di mobile */
+            .form-actions-bar,
+            .card form div[style*="display: flex"]:has(button),
+            .card form div[style*="display:flex"]:has(button),
+            .card form div[style*="display: flex"]:has(.btn),
+            .card form div[style*="display:flex"]:has(.btn) {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                gap: 10px !important;
+                width: 100% !important;
+                margin-top: 20px !important;
+            }
+
+            .form-actions-bar > button,
+            .form-actions-bar > .btn,
+            .form-actions-bar > a,
+            .card form div[style*="display: flex"]:has(button) > button,
+            .card form div[style*="display: flex"]:has(button) > a,
+            .card form div[style*="display: flex"]:has(.btn) > .btn,
+            .card form div[style*="display: flex"]:has(.btn) > button,
+            .card form div[style*="display: flex"]:has(.btn) > a {
+                width: 100% !important;
+                min-height: 44px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                text-align: center !important;
+                box-sizing: border-box !important;
+                padding: 12px 18px !important;
+                font-size: 0.95rem !important;
+                border-radius: 10px !important;
             }
         }
 
@@ -1067,24 +1188,6 @@
             .hero-actions .btn {
                 width: 100% !important;
                 justify-content: center !important;
-            }
-
-            /* Form Buttons Full-Width Stack */
-            .card form div[style*="display: flex"],
-            .card form div[style*="display:flex"] {
-                flex-direction: column !important;
-                gap: 10px !important;
-            }
-
-            .card form div[style*="display: flex"] > .btn,
-            .card form div[style*="display: flex"] > button,
-            .card form div[style*="display: flex"] > a,
-            .card form div[style*="display:flex"] > .btn,
-            .card form div[style*="display:flex"] > button,
-            .card form div[style*="display:flex"] > a {
-                width: 100% !important;
-                justify-content: center !important;
-                text-align: center !important;
             }
         }
 
@@ -1130,6 +1233,14 @@
             .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr))"] {
                 grid-template-columns: 1fr !important;
                 gap: 10px !important;
+            }
+
+            /* Filter chips di layar sangat ramping (<=480px) */
+            .ppdb-filter-options {
+                grid-template-columns: 1fr !important;
+            }
+            .ppdb-filter-options > a:first-child {
+                grid-column: auto !important;
             }
         }
 

@@ -91,7 +91,7 @@
 </div>
 
 <!-- DUA KOLOM: AUDIT LOGS & USER ADMIN TERBARU -->
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+<div class="admin-grid-2col">
     <!-- Kolom 1: Log Aktivitas Audit Trail -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">

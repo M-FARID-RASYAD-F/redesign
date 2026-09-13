@@ -25,39 +25,39 @@
 <!-- STATISTIK KARTU SELEKSI PPDB -->
 <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 26px;">
     <!-- Total Pendaftar -->
-    <div class="card" style="margin-bottom: 0;">
+    <a href="{{ route('admin.ppdb.index') }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; transition: transform 0.2s ease;">
         <div style="font-size: 0.82rem; color: var(--adm-text-muted); font-weight: 700; text-transform: uppercase;">TOTAL PENDAFTAR</div>
         <div style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['total'] }}</div>
-        <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px;">Tahun Ajaran 2026/2027</div>
-    </div>
+        <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px;">Tahun Ajaran 2026/2027 ↗</div>
+    </a>
 
     <!-- Menunggu Verifikasi (Pending) -->
-    <div class="card" style="margin-bottom: 0; border-color: rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.08);">
+    <a href="{{ route('admin.ppdb.index', ['status' => 'pending']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.08); transition: transform 0.2s ease;">
         <div style="font-size: 0.82rem; color: #fbbf24; font-weight: 700; text-transform: uppercase;">⏳ PERLU VERIFIKASI</div>
         <div style="font-size: 2.2rem; font-weight: 800; color: #fbbf24; margin-top: 4px;">{{ $stats['pending'] }}</div>
-        <div style="font-size: 0.78rem; color: #fde68a; margin-top: 4px;">Menunggu tindakan panitia</div>
-    </div>
+        <div style="font-size: 0.78rem; color: #fde68a; margin-top: 4px;">Menunggu tindakan panitia ↗</div>
+    </a>
 
     <!-- Terverifikasi -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="font-size: 0.82rem; color: var(--adm-text-muted); font-weight: 700; text-transform: uppercase;">📑 BERKAS VALID</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'diverifikasi']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); transition: transform 0.2s ease;">
+        <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 700; text-transform: uppercase;">📑 BERKAS VALID</div>
         <div style="font-size: 2.2rem; font-weight: 800; color: #38bdf8; margin-top: 4px;">{{ $stats['diverifikasi'] }}</div>
-        <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px;">Dokumen lengkap & lolos cek</div>
-    </div>
+        <div style="font-size: 0.78rem; color: #bae6fd; margin-top: 4px;">Dokumen lengkap & lolos cek ↗</div>
+    </a>
 
     <!-- Diterima -->
-    <div class="card" style="margin-bottom: 0; border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08);">
+    <a href="{{ route('admin.ppdb.index', ['status' => 'diterima']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08); transition: transform 0.2s ease;">
         <div style="font-size: 0.82rem; color: #34d399; font-weight: 700; text-transform: uppercase;">🎉 SISWA DITERIMA</div>
         <div style="font-size: 2.2rem; font-weight: 800; color: #34d399; margin-top: 4px;">{{ $stats['diterima'] }}</div>
-        <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 4px;">Siap registrasi ulang</div>
-    </div>
+        <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 4px;">Siap registrasi ulang ↗</div>
+    </a>
 
     <!-- Ditolak -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="font-size: 0.82rem; color: var(--adm-text-muted); font-weight: 700; text-transform: uppercase;">❌ TIDAK LOLOS</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'ditolak']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); transition: transform 0.2s ease;">
+        <div style="font-size: 0.82rem; color: #f87171; font-weight: 700; text-transform: uppercase;">❌ TIDAK LOLOS</div>
         <div style="font-size: 2.2rem; font-weight: 800; color: #f87171; margin-top: 4px;">{{ $stats['ditolak'] }}</div>
-        <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px;">Tidak memenuhi kriteria</div>
-    </div>
+        <div style="font-size: 0.78rem; color: #fca5a5; margin-top: 4px;">Tidak memenuhi kriteria ↗</div>
+    </a>
 </div>
 
 <!-- REKAP PENDAFTAR PER TINGKATAN (SD, SMP, SMK) -->

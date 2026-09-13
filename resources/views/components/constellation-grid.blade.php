@@ -14,7 +14,7 @@
 <div
     {{ $attributes->merge(['class' => 'relative w-full overflow-hidden select-none content-area-constellation']) }}
 >
-    <canvas id="constellation-canvas" class="absolute inset-0 block w-full h-full pointer-events-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; filter: blur(22px);"></canvas>
+    <canvas id="constellation-canvas" class="absolute inset-0 block w-full pointer-events-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 0; z-index: 1; pointer-events: none; filter: blur(22px);"></canvas>
 
     <div class="constellation-slot-wrapper relative w-full" style="position: relative; z-index: 10;">
         {{ $slot }}
@@ -91,26 +91,43 @@
         beams = Array.from({ length: count }, () => createBeam(width, height));
     }
 
+    function stopLoop() {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+        if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     function handleResize() {
         if (isMobile()) {
+            // Sembunyikan canvas & hentikan loop — cegah ruang kosong di bawah konten
             canvas.style.display = 'none';
+            canvas.style.height = '0';
+            stopLoop();
             return;
         }
         canvas.style.display = 'block';
+        canvas.style.height = '100%';
 
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const slotWrapper = root.querySelector('.constellation-slot-wrapper') || root;
 
         canvas.style.width = '100%';
-        canvas.style.height = '100%';
 
+        // FIX: ukur slot-wrapper tanpa fallback window.innerHeight
+        // agar canvas tidak memperluas parent saat layout belum stabil
         const rect = slotWrapper.getBoundingClientRect();
-        width = Math.round(rect.width || root.clientWidth || window.innerWidth);
-        height = Math.round(rect.height || slotWrapper.offsetHeight || root.clientHeight || window.innerHeight);
+        const measuredWidth  = rect.width  || root.clientWidth  || window.innerWidth;
+        const measuredHeight = rect.height || slotWrapper.offsetHeight || root.clientHeight;
 
-        if (width <= 0 || height <= 0) return;
+        // Jika belum ada tinggi (layout belum reflow), tunda dan coba lagi
+        if (measuredWidth <= 0 || measuredHeight <= 0) return;
 
-        canvas.width = Math.floor(width * dpr);
+        width  = Math.round(measuredWidth);
+        height = Math.round(measuredHeight);
+
+        canvas.width  = Math.floor(width  * dpr);
         canvas.height = Math.floor(height * dpr);
 
         ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -125,13 +142,15 @@
     document.addEventListener('DOMContentLoaded', handleResize);
 
     // Re-check ukuran setelah gambar/font selesai load (tinggi wrapper bisa berubah)
-    setTimeout(handleResize, 200);
-    setTimeout(handleResize, 800);
-    setTimeout(handleResize, 1800);
+    // Guard isMobile() agar tidak re-trigger di mobile
+    setTimeout(() => { if (!isMobile()) handleResize(); }, 200);
+    setTimeout(() => { if (!isMobile()) handleResize(); }, 800);
+    setTimeout(() => { if (!isMobile()) handleResize(); }, 1800);
 
     if (window.ResizeObserver) {
         const slotWrapper = root.querySelector('.constellation-slot-wrapper') || root;
-        new ResizeObserver(() => handleResize()).observe(slotWrapper);
+        // Guard isMobile() di ResizeObserver: cegah re-trigger saat DevTools switch ke mobile
+        new ResizeObserver(() => { if (!isMobile()) handleResize(); }).observe(slotWrapper);
     }
 
     function drawBeam(beam) {

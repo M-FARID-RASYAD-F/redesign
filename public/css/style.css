@@ -200,6 +200,23 @@ body {
   min-height: 100%;
 }
 
+/* FIX: Di mobile, ScrollSmoother tidak aktif (dimatikan via JS).
+   Override inline style height yang mungkin tersisa dari sesi desktop
+   sebelum JS sempat kill() smoother — cegah ruang kosong ghost. */
+@media (max-width: 768px) {
+  #smooth-wrapper {
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  #smooth-content {
+    position: static !important;
+    transform: none !important;
+    height: auto !important;
+    will-change: auto !important;
+  }
+}
+
 a {
   color: var(--primary);
   text-decoration: none;

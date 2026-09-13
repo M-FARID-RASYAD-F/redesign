@@ -23,7 +23,7 @@
                 <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                     <input type="text" id="no_pendaftaran" name="no_pendaftaran" value="{{ old('no_pendaftaran', $search ?? '') }}" required placeholder="Contoh: PPDB-2026-0001" class="ppdb-form-input" style="flex: 1; min-width: 240px; font-family: monospace; font-weight: 700; text-transform: uppercase;">
                     <button type="submit" class="btn btn-primary" style="padding: 12px 28px; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                        🔍 Cari Data
+                        <x-icon name="search" /> Cari Data
                     </button>
                 </div>
             </form>
@@ -31,8 +31,8 @@
 
         <!-- Alert Jika Nomor Tidak Ditemukan -->
         @if(session('error'))
-        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 20px; color: #fca5a5; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="font-size: 1.4rem;">❌</span>
+        <div style="background: rgba(193, 80, 58, 0.12); border: 1px solid rgba(193, 80, 58, 0.4); border-radius: 16px; padding: 20px; color: #e8b3a3; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="font-size: 1.4rem;"><x-icon name="x-circle" /></span>
             <div>
                 <strong style="display: block; font-size: 0.95rem; margin-bottom: 2px; color: #ffffff;">Data Tidak Ditemukan!</strong>
                 <span style="font-size: 0.9rem;">{{ session('error') }}</span>
@@ -58,16 +58,16 @@
                             ⏳ Status: Pending (Menunggu Verifikasi)
                         </span>
                     @elseif($registration->status == 'diverifikasi')
-                        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
-                            📋 Status: Berkas Diverifikasi (Dalam Seleksi)
+                        <span style="background: rgba(224, 181, 99, 0.15); color: #e0b563; border: 1px solid rgba(224, 181, 99, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            Status: Berkas Diverifikasi (Dalam Seleksi)
                         </span>
                     @elseif($registration->status == 'diterima')
                         <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
-                            🎉 Status: DITERIMA (LULUS SELEKSI)
+                            Status: DITERIMA (LULUS SELEKSI)
                         </span>
                     @elseif($registration->status == 'ditolak')
-                        <span style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
-                            ❌ Status: Ditolak / Belum Memenuhi Syarat
+                        <span style="background: rgba(193, 80, 58, 0.15); color: #d97a5f; border: 1px solid rgba(193, 80, 58, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            Status: Ditolak / Belum Memenuhi Syarat
                         </span>
                     @endif
                 </div>
@@ -79,7 +79,7 @@
                     
                     <!-- Step 1: Pengajuan -->
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);"><x-icon name="check" /></div>
                         <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">1. Pendaftaran</span>
                         <span style="font-size: 0.75rem; color: #94a3b8;">Selesai diajukan</span>
                     </div>
@@ -91,7 +91,7 @@
                             <span style="font-size: 0.85rem; font-weight: 700; color: #fbbf24;">2. Verifikasi</span>
                             <span style="font-size: 0.75rem; color: #fbbf24;">Sedang diproses</span>
                         @else
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);"><x-icon name="check" /></div>
                             <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">2. Verifikasi</span>
                             <span style="font-size: 0.75rem; color: #34d399;">Berkas selesai dicek</span>
                         @endif
@@ -100,13 +100,13 @@
                     <!-- Step 3: Keputusan -->
                     <div style="display: flex; flex-direction: column; align-items: center;">
                         @if($registration->status == 'diterima')
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);"><x-icon name="check" /></div>
                             <span style="font-size: 0.85rem; font-weight: 700; color: #34d399;">3. Diterima</span>
                             <span style="font-size: 0.75rem; color: #34d399;">Siap daftar ulang</span>
                         @elseif($registration->status == 'ditolak')
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);">✕</div>
-                            <span style="font-size: 0.85rem; font-weight: 700; color: #f87171;">3. Ditolak</span>
-                            <span style="font-size: 0.75rem; color: #f87171;">Tidak lolos seleksi</span>
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #c1503a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(193, 80, 58, 0.4);"><x-icon name="x" /></div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #d97a5f;">3. Ditolak</span>
+                            <span style="font-size: 0.75rem; color: #d97a5f;">Tidak lolos seleksi</span>
                         @else
                             <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px;">3</div>
                             <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">3. Pengumuman</span>
@@ -117,9 +117,9 @@
             </div>
 
             <!-- Catatan / Catatan Panitia PPDB -->
-            <div style="padding: 24px 30px; background: rgba(30, 41, 59, 0.4); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+            <div style="padding: 24px 30px; background: rgba(18, 43, 29, 0.4); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
                 <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
-                    📝 Catatan dari Panitia PPDB:
+                    <x-icon name="warning" /> Catatan dari Panitia PPDB:
                 </h4>
                 <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
                     {{ $registration->notes ?? 'Belum ada catatan khusus dari panitia pemeriksa berkas.' }}
@@ -144,9 +144,9 @@
 
                     <div>
                         <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Jenjang Pendidikan:</span>
-                        <strong style="color: #38bdf8;">{{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}</strong>
+                        <strong style="color: #e0b563;">{{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}</strong>
                         @if($registration->jenjang === 'smk' && $registration->major_choice)
-                            <div style="font-size: 0.78rem; color: #c084fc; margin-top: 2px;">
+                            <div style="font-size: 0.78rem; color: #e0b563; margin-top: 2px;">
                                 Jurusan: <strong>{{ $registration->major_choice }}</strong>
                             </div>
                         @endif
@@ -168,9 +168,9 @@
                     <h5 style="font-size: 0.85rem; font-weight: 700; color: #cbd5e1; margin-bottom: 10px;">Status Dokumen Pendukung:</h5>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         @forelse($registration->documents as $doc)
-                            <span style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; color: #ffffff; display: inline-flex; align-items: center; gap: 6px;">
-                                📄 {{ strtoupper(str_replace('_', ' ', $doc->doc_type)) }}
-                                <span style="color: {{ $doc->verification_status == 'valid' ? '#34d399' : ($doc->verification_status == 'tidak_valid' ? '#f87171' : '#fbbf24') }}; font-weight: 700;">
+                            <span style="background: rgba(18, 43, 29, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; color: #ffffff; display: inline-flex; align-items: center; gap: 6px;">
+                                {{ strtoupper(str_replace('_', ' ', $doc->doc_type)) }}
+                                <span style="color: {{ $doc->verification_status == 'valid' ? '#34d399' : ($doc->verification_status == 'tidak_valid' ? '#d97a5f' : '#fbbf24') }}; font-weight: 700;">
                                     ({{ ucfirst($doc->verification_status) }})
                                 </span>
                             </span>
@@ -182,9 +182,9 @@
             </div>
 
             <!-- Footer Card Action -->
-            <div style="background: rgba(30, 41, 59, 0.4); padding: 18px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="background: rgba(18, 43, 29, 0.4); padding: 18px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                 <a href="{{ route('ppdb.success', $registration->no_pendaftaran) }}" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px; border-radius: 8px;">
-                    🖨️ Buka Kartu Pendaftaran
+                    <x-icon name="printer" /> Buka Kartu Pendaftaran
                 </a>
                 <span style="font-size: 0.8rem; color: #94a3b8;">Pembaruan status terakhir: {{ $registration->updated_at ? $registration->updated_at->diffForHumans() : '-' }}</span>
             </div>

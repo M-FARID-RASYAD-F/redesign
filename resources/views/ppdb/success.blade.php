@@ -9,7 +9,7 @@
         <!-- Header Sukses -->
         <div style="text-align: center; margin-bottom: 30px;">
             <div style="width: 72px; height: 72px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 2px solid #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px; box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);">
-                ✓
+                <x-icon name="check" />
             </div>
             <h1 class="ppdb-section-title" style="font-size: 2.2rem; margin-bottom: 6px;">Pendaftaran PPDB Berhasil!</h1>
             <p class="ppdb-section-desc" style="font-size: 1rem;">Data calon peserta didik baru telah tersimpan di sistem kami.</p>
@@ -55,11 +55,11 @@
                         <tr>
                             <td>Jenjang Pendidikan</td>
                             <td>
-                                <strong style="color: #38bdf8; font-size: 0.95rem;">
+                                <strong style="color: #e0b563; font-size: 0.95rem;">
                                     {{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}
                                 </strong>
                                 @if($registration->jenjang === 'smk' && $registration->major_choice)
-                                    <div style="font-size: 0.82rem; color: #c084fc; margin-top: 3px;">
+                                    <div style="font-size: 0.82rem; color: #e0b563; margin-top: 3px;">
                                         Peminatan Jurusan: <strong>{{ $registration->major_choice }}</strong>
                                     </div>
                                 @endif
@@ -102,7 +102,7 @@
             </div>
 
             <!-- Footer Bukti -->
-            <div style="background: rgba(30, 41, 59, 0.5); padding: 16px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; color: #94a3b8; text-align: center;">
+            <div style="background: rgba(18, 43, 29, 0.5); padding: 16px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; color: #94a3b8; text-align: center;">
                 Kartu ini diterbitkan secara sah oleh Sistem PPDB Online PKBM Tahfizh At-Tamam.
             </div>
         </div>
@@ -110,19 +110,19 @@
         <!-- Tombol Aksi -->
         <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px;">
             <button onclick="window.print()" class="btn btn-primary" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                🖨️ Cetak Kartu Bukti
+                <x-icon name="printer" /> Cetak Kartu Bukti
             </button>
             <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
-                🔍 Lacak Status Pendaftaran
+                <x-icon name="search" /> Lacak Status Pendaftaran
             </a>
             <a href="{{ route('home') }}" class="btn btn-outline" style="padding: 12px 20px; font-weight: 600; border-radius: 10px;">
-                🏠 Kembali ke Beranda
+                <x-icon name="home" /> Kembali ke Beranda
             </a>
         </div>
 
         <!-- Panduan Tahap Selanjutnya -->
         <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 16px; padding: 22px 26px;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; margin-bottom: 8px;">📌 Langkah Selanjutnya:</h3>
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; margin-bottom: 8px;">Langkah Selanjutnya:</h3>
             <ol style="color: #cbd5e1; font-size: 0.9rem; padding-left: 20px; line-height: 1.7; margin: 0;">
                 <li>Panitia PPDB akan memverifikasi data dan berkas yang Anda unggah dalam 1x24 jam kerja.</li>
                 <li>Simpan atau tangkap layar (*screenshot*) <strong>Nomor Pendaftaran</strong> Anda.</li>

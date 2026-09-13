@@ -25,7 +25,7 @@
 
 /* Panel Stepper di atas Kartu Stage */
 .ppdb-stepper-panel {
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(15, 36, 25, 0.75);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -63,10 +63,10 @@
     flex-direction: column;
     width: 100%;
     min-height: 520px;
-    background: #141f36;
+    background: #122b1e;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(224, 181, 99, 0.3);
     border-radius: 24px;
     padding: clamp(24px, 4vw, 42px);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -380,8 +380,8 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: rgba(56, 189, 248, 0.08);
-        border: 1px solid rgba(56, 189, 248, 0.22);
+        background: rgba(224, 181, 99, 0.08);
+        border: 1px solid rgba(224, 181, 99, 0.22);
         border-radius: 9999px;
         padding: 6px 14px;
         margin-bottom: 8px;
@@ -392,8 +392,8 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: #38bdf8;
-        box-shadow: 0 0 8px #38bdf8;
+        background: #e0b563;
+        box-shadow: 0 0 8px #e0b563;
         display: inline-block;
         flex-shrink: 0;
     }
@@ -448,7 +448,7 @@
     border-radius: 14px;
     padding: 14px 16px;
     cursor: pointer;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(15, 36, 25, 0.6);
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
@@ -464,8 +464,8 @@
     }
 }
 .jenjang-card-option:hover {
-    border-color: rgba(56, 189, 248, 0.5);
-    background: rgba(15, 23, 42, 0.85);
+    border-color: rgba(224, 181, 99, 0.5);
+    background: rgba(15, 36, 25, 0.85);
     transform: translateY(-2px);
 }
 .jenjang-card-option input[type="radio"] {
@@ -479,14 +479,14 @@
     box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
 }
 .jenjang-card-option.selected-smp {
-    border-color: #38bdf8;
-    background: rgba(56, 189, 248, 0.14);
-    box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    border-color: #e0b563;
+    background: rgba(224, 181, 99, 0.14);
+    box-shadow: 0 0 16px rgba(224, 181, 99, 0.25);
 }
 .jenjang-card-option.selected-smk {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.14);
-    box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
+    border-color: #a97417;
+    background: rgba(169, 116, 23, 0.14);
+    box-shadow: 0 0 16px rgba(169, 116, 23, 0.25);
 }
 [data-theme="light"] .jenjang-card-option {
     background: rgba(255, 255, 255, 0.08);
@@ -532,7 +532,7 @@
         
         <!-- Header Formulir -->
         <div class="ppdb-form-header">
-            <a href="{{ route('ppdb.index') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px; text-decoration: none;">
+            <a href="{{ route('ppdb.index') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 700; color: #e0b563; margin-bottom: 10px; text-decoration: none;">
                 ← Kembali ke Portal PPDB
             </a>
             <h1 class="ppdb-section-title" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin: 0;">Formulir Pendaftaran Siswa Baru</h1>
@@ -540,8 +540,8 @@
         </div>
 
         @if($errors->any())
-        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; color: #fca5a5;">
-            <div style="font-weight: 700; margin-bottom: 6px; color: #ffffff;">⚠️ Terdapat beberapa kolom yang belum terisi dengan benar:</div>
+        <div style="background: rgba(193, 80, 58, 0.12); border: 1px solid rgba(193, 80, 58, 0.4); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; color: #e8b3a3;">
+            <div style="font-weight: 700; margin-bottom: 6px; color: #ffffff; display: flex; align-items: center; gap: 8px;"><x-icon name="warning" /> Terdapat beberapa kolom yang belum terisi dengan benar:</div>
             <ul style="padding-left: 20px; font-size: 0.88rem; margin: 0;">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -556,7 +556,7 @@
                 <button type="button" class="ppdb-step-item active" data-step="1" onclick="jumpToStep(1)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">1</span>
-                        <span class="step-check">✓</span>
+                        <span class="step-check"><x-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 1</span>
@@ -569,7 +569,7 @@
                 <button type="button" class="ppdb-step-item" data-step="2" onclick="jumpToStep(2)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">2</span>
-                        <span class="step-check">✓</span>
+                        <span class="step-check"><x-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 2</span>
@@ -582,7 +582,7 @@
                 <button type="button" class="ppdb-step-item" data-step="3" onclick="jumpToStep(3)">
                     <div class="ppdb-step-circle">
                         <span class="step-num">3</span>
-                        <span class="step-check">✓</span>
+                        <span class="step-check"><x-icon name="check" /></span>
                     </div>
                     <div class="ppdb-step-info">
                         <span class="ppdb-step-label">Langkah 3</span>
@@ -623,7 +623,7 @@
                         <!-- Pilihan Jenjang Pendidikan (SD, SMP, SMK) -->
                         <div class="form-group" style="margin-bottom: 24px;">
                             <label class="ppdb-form-label" style="font-size: 0.95rem; margin-bottom: 6px;">
-                                Pilih Jenjang / Tingkat Pendidikan <span style="color: #ef4444;">*</span>
+                                Pilih Jenjang / Tingkat Pendidikan <span style="color: #c1503a;">*</span>
                             </label>
                             <span style="display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px;">
                                 Tentukan tingkatan sekolah yang dituju untuk calon peserta didik baru:
@@ -639,7 +639,7 @@
                                     <input type="radio" name="jenjang" value="sd" @checked($currentJenjang == 'sd') required onchange="handleJenjangChange('sd')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">🎒</span>
+                                            <span style="font-size: 1.6rem;"><x-icon name="plant" /></span>
                                             <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SD</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Sekolah Dasar (SD)</strong>
@@ -652,8 +652,8 @@
                                     <input type="radio" name="jenjang" value="smp" @checked($currentJenjang == 'smp') required onchange="handleJenjangChange('smp')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">📚</span>
-                                            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMP</span>
+                                            <span style="font-size: 1.6rem;"><x-icon name="book-open" /></span>
+                                            <span class="badge" style="background: rgba(224, 181, 99, 0.2); color: #e0b563; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMP</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Menengah Pertama (SMP)</strong>
                                         <span style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; display: block;">Target 5-10 Juz Mutqin, Bahasa & Sains Terapan</span>
@@ -665,8 +665,8 @@
                                     <input type="radio" name="jenjang" value="smk" @checked($currentJenjang == 'smk') required onchange="handleJenjangChange('smk')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">💻</span>
-                                            <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMK</span>
+                                            <span style="font-size: 1.6rem;"><x-icon name="laptop" /></span>
+                                            <span class="badge" style="background: rgba(169, 116, 23, 0.2); color: #e0b563; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMK</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Kejuruan (SMK)</strong>
                                         <span style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; display: block;">Vokasi Industri, Magang & Sertifikasi BNSP</span>
@@ -674,16 +674,16 @@
                                 </label>
                             </div>
                             @error('jenjang')
-                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <!-- Sub-Pilihan Jurusan (Muncul Jika Jenjang SMK Dipilih) -->
-                        <div id="smkMajorContainer" class="form-group" style="margin-bottom: 24px; padding: 16px 20px; border-radius: 14px; background: rgba(168, 85, 247, 0.08); border: 1px dashed rgba(168, 85, 247, 0.4); display: {{ $currentJenjang == 'smk' ? 'block' : 'none' }};">
-                            <label for="major_choice" class="ppdb-form-label" style="color: #d8b4fe;">
-                                Peminatan Jurusan / Program Keahlian SMK <span style="font-size: 0.8rem; color: #a855f7;">(Khusus SMK)</span>
+                        <div id="smkMajorContainer" class="form-group" style="margin-bottom: 24px; padding: 16px 20px; border-radius: 14px; background: rgba(169, 116, 23, 0.08); border: 1px dashed rgba(169, 116, 23, 0.4); display: {{ $currentJenjang == 'smk' ? 'block' : 'none' }};">
+                            <label for="major_choice" class="ppdb-form-label" style="color: #e0b563;">
+                                Peminatan Jurusan / Program Keahlian SMK <span style="font-size: 0.8rem; color: #a97417;">(Khusus SMK)</span>
                             </label>
-                            <select id="major_choice" name="major_choice" class="ppdb-form-select" style="border-color: rgba(168, 85, 247, 0.4);">
+                            <select id="major_choice" name="major_choice" class="ppdb-form-select" style="border-color: rgba(169, 116, 23, 0.4);">
                                 <option value="">-- Pilih Jurusan Kejuruan (Bisa dikonfirmasi saat verifikasi) --</option>
                                 @foreach($majors as $m)
                                     <option value="{{ $m->name }}" @selected(old('major_choice') == $m->name)>
@@ -691,7 +691,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <span style="font-size: 0.78rem; color: #c084fc; display: block; margin-top: 6px;">
+                            <span style="font-size: 0.78rem; color: #e0b563; display: block; margin-top: 6px;">
                                 Siswa SMK dapat memilih kompetensi keahlian unggulan (RPL, TKJ, atau DKV).
                             </span>
                         </div>
@@ -699,11 +699,11 @@
                         <!-- Nama Lengkap -->
                         <div class="form-group" style="margin-bottom: 20px;">
                             <label for="full_name" class="ppdb-form-label">
-                                Nama Lengkap Calon Siswa <span style="color: #ef4444;">*</span>
+                                Nama Lengkap Calon Siswa <span style="color: #c1503a;">*</span>
                             </label>
                             <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Fatih Al-Ayyubi" class="ppdb-form-input" />
                             @error('full_name')
-                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -711,7 +711,7 @@
                         <div class="ppdb-form-grid-2">
                             <div>
                                 <label for="gender" class="ppdb-form-label">
-                                    Jenis Kelamin <span style="color: #ef4444;">*</span>
+                                    Jenis Kelamin <span style="color: #c1503a;">*</span>
                                 </label>
                                 <select id="gender" name="gender" required class="ppdb-form-select">
                                     <option value="">-- Pilih Jenis Kelamin --</option>
@@ -719,17 +719,17 @@
                                     <option value="P" @selected(old('gender') == 'P')>Perempuan (Akhwat)</option>
                                 </select>
                                 @error('gender')
-                                    <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                    <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div>
                                 <label for="birth_date" class="ppdb-form-label">
-                                    Tanggal Lahir <span style="color: #ef4444;">*</span>
+                                    Tanggal Lahir <span style="color: #c1503a;">*</span>
                                 </label>
                                 <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required class="ppdb-form-input" />
                                 @error('birth_date')
-                                    <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                    <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -737,11 +737,11 @@
                         <!-- Alamat Lengkap -->
                         <div class="form-group">
                             <label for="address" class="ppdb-form-label">
-                                Alamat Domisili / Tempat Tinggal <span style="color: #ef4444;">*</span>
+                                Alamat Domisili / Tempat Tinggal <span style="color: #c1503a;">*</span>
                             </label>
                             <textarea id="address" name="address" rows="3" required placeholder="Jl. Nama Jalan, No. Rumah, RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten" class="ppdb-form-textarea">{{ old('address') }}</textarea>
                             @error('address')
-                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -771,22 +771,22 @@
                         <div class="ppdb-form-grid-2">
                             <div>
                                 <label for="parent_name" class="ppdb-form-label">
-                                    Nama Lengkap Orang Tua / Wali <span style="color: #ef4444;">*</span>
+                                    Nama Lengkap Orang Tua / Wali <span style="color: #c1503a;">*</span>
                                 </label>
                                 <input type="text" id="parent_name" name="parent_name" value="{{ old('parent_name') }}" required placeholder="Contoh: H. Agus Sulaiman, S.T." class="ppdb-form-input" />
                                 @error('parent_name')
-                                    <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                    <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div>
                                 <label for="parent_phone" class="ppdb-form-label">
-                                    Nomor WhatsApp / Telepon Aktif <span style="color: #ef4444;">*</span>
+                                    Nomor WhatsApp / Telepon Aktif <span style="color: #c1503a;">*</span>
                                 </label>
                                 <input type="tel" id="parent_phone" name="parent_phone" value="{{ old('parent_phone') }}" required placeholder="Contoh: 081234567890" class="ppdb-form-input" />
                                 <span style="font-size: 0.75rem; color: #94a3b8; display: block; margin-top: 4px;">Akan digunakan panitia untuk konfirmasi dan notifikasi status</span>
                                 @error('parent_phone')
-                                    <p style="color: #ef4444; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
+                                    <p style="color: #c1503a; font-size: 0.85rem; margin-top: 4px;">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -794,7 +794,7 @@
                         <!-- Panduan & Info Komunikasi Orang Tua -->
                         <div class="ppdb-info-card">
                             <div style="display: flex; gap: 14px; align-items: flex-start;">
-                                <span style="font-size: 1.6rem; line-height: 1;">📱</span>
+                                <span style="font-size: 1.6rem; line-height: 1;"><x-icon name="phone" /></span>
                                 <div>
                                     <h4 style="font-size: 0.95rem; font-weight: 800; color: #fbbf24; margin: 0 0 6px;">Pemberitahuan & Verifikasi Kontak</h4>
                                     <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 10px;">
@@ -835,28 +835,28 @@
                         <div class="ppdb-upload-grid">
                             <!-- KK -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_kk" class="ppdb-upload-title">📄 Kartu Keluarga (KK)</label>
+                                <label for="doc_kk" class="ppdb-upload-title">Kartu Keluarga (KK)</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_kk" name="doc_kk" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Akta Lahir -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_akta" class="ppdb-upload-title">📜 Akta Kelahiran</label>
+                                <label for="doc_akta" class="ppdb-upload-title">Akta Kelahiran</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_akta" name="doc_akta" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Pas Foto -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_foto" class="ppdb-upload-title">🖼️ Pas Foto Siswa (3x4)</label>
+                                <label for="doc_foto" class="ppdb-upload-title">Pas Foto Siswa (3x4)</label>
                                 <span class="ppdb-upload-sub">JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_foto" name="doc_foto" accept=".jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Rapor / SKL -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_rapor" class="ppdb-upload-title">📑 Rapor Terakhir / SKL</label>
+                                <label for="doc_rapor" class="ppdb-upload-title">Rapor Terakhir / SKL</label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_rapor" name="doc_rapor" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
@@ -865,7 +865,7 @@
                         <!-- Privacy Notice & Persetujuan -->
                         <div class="ppdb-pdp-notice" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
-                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;">🛡️</span>
+                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;"><x-icon name="shield-check" /></span>
                                 <div style="flex: 1;">
                                     <h4 class="ppdb-pdp-title">Kebijakan Pelindungan Data Pribadi (UU PDP No. 27/2022)</h4>
                                     <p class="ppdb-pdp-desc">
@@ -875,13 +875,13 @@
                             </div>
 
                             <div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">
-                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 2px; width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; accent-color: #38bdf8;" />
+                                <input type="checkbox" id="agreement" name="agreement" value="1" required style="margin-top: 2px; width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; accent-color: #e0b563;" />
                                 <label for="agreement" style="font-size: 0.85rem; color: #e2e8f0; line-height: 1.5; cursor: pointer;">
-                                    <strong>Saya menyatakan bahwa seluruh data yang diisikan adalah benar dan valid.</strong> Saya menyetujui data ini diproses oleh Panitia PPDB PKBM Tahfizh At-Tamam. <span style="color: #ef4444;">*</span>
+                                    <strong>Saya menyatakan bahwa seluruh data yang diisikan adalah benar dan valid.</strong> Saya menyetujui data ini diproses oleh Panitia PPDB PKBM Tahfizh At-Tamam. <span style="color: #c1503a;">*</span>
                                 </label>
                             </div>
                             @error('agreement')
-                                <p style="color: #ef4444; font-size: 0.85rem; margin-top: 6px;">{{ $message }}</p>
+                                <p style="color: #c1503a; font-size: 0.85rem; margin-top: 6px;">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -892,7 +892,7 @@
                             ← Kembali ke Data Orang Tua
                         </button>
                         <button type="submit" id="btnSubmitForm" class="ppdb-btn-submit">
-                            🚀 Kirim Pendaftaran PPDB
+                            Kirim Pendaftaran PPDB
                         </button>
                     </div>
                     <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 12px; margin-bottom: 0;">
@@ -945,9 +945,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const percent = (targetStep / totalSteps) * 100;
             progressBar.style.width = percent + '%';
             if (targetStep === 3) {
-                progressBar.style.background = 'linear-gradient(90deg, #38bdf8, #10b981)';
+                progressBar.style.background = 'linear-gradient(90deg, #e0b563, #10b981)';
             } else {
-                progressBar.style.background = 'linear-gradient(90deg, #38bdf8, #2563eb)';
+                progressBar.style.background = 'linear-gradient(90deg, #e0b563, #c9962b)';
             }
         }
 

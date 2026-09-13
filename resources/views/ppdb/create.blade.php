@@ -25,7 +25,7 @@
 
 /* Panel Stepper di atas Kartu Stage */
 .ppdb-stepper-panel {
-    background: rgba(35, 41, 34, 0.75);
+    background: rgba(46, 54, 40, 0.75);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -63,7 +63,7 @@
     flex-direction: column;
     width: 100%;
     min-height: 520px;
-    background: #212820;
+    background: #2E3628;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(214, 190, 140, 0.3);
@@ -448,7 +448,7 @@
     border-radius: 14px;
     padding: 14px 16px;
     cursor: pointer;
-    background: rgba(35, 41, 34, 0.6);
+    background: rgba(46, 54, 40, 0.6);
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
@@ -465,7 +465,7 @@
 }
 .jenjang-card-option:hover {
     border-color: rgba(214, 190, 140, 0.5);
-    background: rgba(35, 41, 34, 0.85);
+    background: rgba(46, 54, 40, 0.85);
     transform: translateY(-2px);
 }
 .jenjang-card-option input[type="radio"] {

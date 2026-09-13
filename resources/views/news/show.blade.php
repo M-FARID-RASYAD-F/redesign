@@ -32,7 +32,7 @@
     }
 
     .news-header-card {
-        background: var(--card-bg, rgba(35, 41, 34, 0.8));
+        background: var(--card-bg, rgba(46, 54, 40, 0.8));
         border: 1px solid var(--border, rgba(200, 169, 107, 0.3));
         border-radius: 16px;
         padding: 32px;
@@ -83,7 +83,7 @@
     }
 
     .news-content {
-        background: var(--card-bg, rgba(35, 41, 34, 0.6));
+        background: var(--card-bg, rgba(46, 54, 40, 0.6));
         border: 1px solid var(--border, rgba(200, 169, 107, 0.25));
         border-radius: 16px;
         padding: 32px;
@@ -118,7 +118,7 @@
     }
 
     .related-card {
-        background: var(--card-bg, rgba(35, 41, 34, 0.7));
+        background: var(--card-bg, rgba(46, 54, 40, 0.7));
         border: 1px solid var(--border, rgba(200, 169, 107, 0.25));
         border-radius: 12px;
         padding: 20px;

@@ -8,25 +8,26 @@
    DESIGN TOKENS
    ═══════════════════════════════════════════════════════════ */
 :root {
-  /* Palet sage/krem/emas milik user — dipakai untuk semuanya, dark & light mode */
+  /* Palet sage/krem/emas milik user — dark mode = gelapkan sage yang SAMA
+     (bukan hitam baru), supaya kedua mode kelihatan jelas satu keluarga warna. */
   --primary: #C8A96B;
   --primary-hover: #A88951;
-  --primary-light: #232922;
+  --primary-light: #3A4432;
   --secondary: #F7F4ED;
   --accent: #D6BE8C;
   --success: #8FA28A;
   --danger: #B5674A;
-  --background: #1A1F18;
-  --surface: #232922;
-  --surface-hover: #2C3327;
+  --background: #23291F;
+  --surface: #2E3628;
+  --surface-hover: #3A4432;
   --text-main: #F7F4ED;
   --text-muted: #C7D3C0;
-  --border: rgba(199, 211, 192, 0.14);
+  --border: rgba(199, 211, 192, 0.16);
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-md: 0 10px 25px -5px rgba(8, 21, 14, 0.35);
+  --shadow-md: 0 10px 25px -5px rgba(35, 41, 31, 0.35);
   --shadow-lg: 0 20px 35px -10px rgba(200, 169, 107, 0.2);
   --font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -43,22 +44,22 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);       /* Symmetric smooth */
 }
 
-/* Light mode — genuinely light (bone), not a second dark theme. Same tokens, same roles. */
+/* Light mode — teks gelapnya juga diturunkan dari sage yang sama (bukan hitam/navy). */
 [data-theme="light"] {
   --primary: #A88951;
   --primary-hover: #8F7440;
   --primary-light: #F7F4ED;
-  --secondary: #2F362B;
+  --secondary: #242A20;
   --accent: #C8A96B;
-  --success: #6E7F68;
+  --success: #46583F;
   --danger: #A8563C;
   --background: #F7F4ED;
   --surface: #ffffff;
-  --surface-hover: #F0EEE5;
-  --text-main: #2F362B;
-  --text-muted: #5C6B56;
-  --border: rgba(143, 162, 138, 0.28);
-  --shadow-md: 0 10px 25px -5px rgba(47, 54, 43, 0.1);
+  --surface-hover: #EFEDE3;
+  --text-main: #242A20;
+  --text-muted: #54634F;
+  --border: rgba(143, 162, 138, 0.32);
+  --shadow-md: 0 10px 25px -5px rgba(36, 42, 32, 0.1);
   --shadow-lg: 0 20px 35px -10px rgba(168, 137, 81, 0.2);
 }
 
@@ -192,7 +193,7 @@ section[id], div[id] {
 
 body {
   font-family: var(--font-family);
-  background-color: #1A1F18; /* Navy gelap — tidak ada celah putih di antara hero, stats, dan sambutan */
+  background-color: #23291F; /* Navy gelap — tidak ada celah putih di antara hero, stats, dan sambutan */
   color: var(--text-main);
   font-size: 0.935rem;
   line-height: 1.6;
@@ -272,12 +273,12 @@ a:hover {
 .navbar-capsule {
   height: 64px;
   padding: 0 1.25rem;
-  background: linear-gradient(135deg, rgba(26, 31, 24, 0.96) 0%, rgba(35, 41, 34, 0.98) 100%);
+  background: linear-gradient(135deg, rgba(35, 41, 31, 0.96) 0%, rgba(46, 54, 40, 0.98) 100%);
   border: 2px solid #C8A96B;
   border-radius: 16px;
   backdrop-filter: blur(20px) saturate(200%);
   -webkit-backdrop-filter: blur(20px) saturate(200%);
-  box-shadow: 0 14px 40px rgba(14, 17, 13, 0.65), 0 0 28px rgba(200, 169, 107, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 14px 40px rgba(20, 24, 18, 0.65), 0 0 28px rgba(200, 169, 107, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -285,9 +286,9 @@ a:hover {
 
 /* Hover Effect pada Masing-masing Kapsul dengan cubic-bezier */
 .navbar-capsule:hover {
-  background: linear-gradient(135deg, rgba(35, 41, 34, 0.98) 0%, rgba(18, 46, 30, 1) 100%);
+  background: linear-gradient(135deg, rgba(46, 54, 40, 0.98) 0%, rgba(58, 68, 50, 1) 100%);
   border-color: #D6BE8C;
-  box-shadow: 0 18px 50px rgba(14, 17, 13, 0.75), 0 0 40px rgba(200, 169, 107, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 18px 50px rgba(20, 24, 18, 0.75), 0 0 40px rgba(200, 169, 107, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
   transform: translateY(-3px);
 }
 
@@ -317,7 +318,7 @@ a:hover {
 
 .navbar.scrolled .navbar-capsule {
   height: 58px;
-  background: linear-gradient(135deg, rgba(28, 33, 27, 0.99) 0%, rgba(10, 24, 16, 1) 100%);
+  background: linear-gradient(135deg, rgba(46, 54, 40, 0.99) 0%, rgba(35, 41, 31, 1) 100%);
   border-color: #C8A96B;
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.75), 0 0 32px rgba(200, 169, 107, 0.35);
 }
@@ -734,7 +735,7 @@ a:hover {
 .nav-island-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 14, 9, 0.55);
+  background: rgba(20, 24, 18, 0.55);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   opacity: 0;
@@ -758,10 +759,10 @@ a:hover {
   margin: 10px auto 0;
   border: 2px solid #C8A96B;
   border-radius: 16px;
-  background: rgba(35, 41, 34, 0.98);
+  background: rgba(46, 54, 40, 0.98);
   backdrop-filter: blur(20px) saturate(200%);
   -webkit-backdrop-filter: blur(20px) saturate(200%);
-  box-shadow: 0 16px 40px rgba(14, 17, 13, 0.65), 0 0 28px rgba(200, 169, 107, 0.3);
+  box-shadow: 0 16px 40px rgba(20, 24, 18, 0.65), 0 0 28px rgba(200, 169, 107, 0.3);
   padding: 14px 18px 22px;
 }
 .nav-mobile-panel.is-open {
@@ -897,12 +898,12 @@ a:hover {
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(26, 31, 24, 0.04) 15%,
-    rgba(26, 31, 24, 0.16) 32%,
-    rgba(26, 31, 24, 0.38) 50%,
-    rgba(26, 31, 24, 0.68) 70%,
-    rgba(26, 31, 24, 0.90) 88%,
-    rgba(26, 31, 24, 0.98) 96%,
+    rgba(35, 41, 31, 0.04) 15%,
+    rgba(35, 41, 31, 0.16) 32%,
+    rgba(35, 41, 31, 0.38) 50%,
+    rgba(35, 41, 31, 0.68) 70%,
+    rgba(35, 41, 31, 0.90) 88%,
+    rgba(35, 41, 31, 0.98) 96%,
     #002147 100%
   );
   pointer-events: none;
@@ -933,7 +934,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(26, 31, 24, 0.85);
+  background: rgba(35, 41, 31, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #D6BE8C;
@@ -1024,7 +1025,7 @@ a:hover {
 }
 
 .btn-outline {
-  background: rgba(28, 33, 27, 0.75);
+  background: rgba(46, 54, 40, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: #ffffff;
@@ -1139,7 +1140,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   font-size: 1.35rem;
-  color: #2F362B;
+  color: #242A20;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
   flex-shrink: 0;
 }
@@ -1536,7 +1537,7 @@ a:hover {
   box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(62, 166, 102, 0.35);
 }
 .custom-card.theme-secondary:hover::before {
-  background: linear-gradient(90deg, #6E7F68 0%, #8FA28A 100%);
+  background: linear-gradient(90deg, #46583F 0%, #8FA28A 100%);
 }
 
 /* Varian 3: Accent — nuansa amber lebih hangat, tetap satu keluarga warna dengan primary */
@@ -1553,11 +1554,11 @@ a:hover {
    ═══════════════════════════════════════════════════════════ */
 .pc-12-jurusan-stage,
 .pc-12-jenjang-stage {
-  --neu-bg: #212820;
-  --neu-dark-shadow: #0E110D;
-  --neu-light-shadow: #282F23;
-  --neu-inset-dark: #10130E;
-  --neu-inset-light: #262D21;
+  --neu-bg: #2E3628;
+  --neu-dark-shadow: #181C14;
+  --neu-light-shadow: #3A4432;
+  --neu-inset-dark: #181C14;
+  --neu-inset-light: #2E3628;
   --neu-text-title: #ffffff;
   --neu-text-role: #D6BE8C;
   --neu-text-bio: #94a3b8;
@@ -1740,7 +1741,7 @@ a:hover {
   --neu-light-shadow: oklch(75.0% 0.09 84 / 0.2);
   --neu-inset-dark: rgba(0, 0, 0, 0.12);
   --neu-inset-light: oklch(97% 0.01 152 / 0.6);
-  --neu-text-title: #2F362B;
+  --neu-text-title: #242A20;
   --neu-text-role: oklch(35% 0.09 152);
   --neu-text-bio: #3D4A38;
   --neu-text-btn: #ffffff;
@@ -1917,7 +1918,7 @@ a:hover {
   font-weight: 800;
   color: rgba(0,180,216,0.4);
   font-family: var(--font-display);
-  background: linear-gradient(145deg, #002d5c, #1A1F18);
+  background: linear-gradient(145deg, #002d5c, #23291F);
   letter-spacing: -0.02em;
 }
 

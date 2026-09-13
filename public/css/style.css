@@ -2640,10 +2640,9 @@ a:hover {
   justify-content: center;
   font-size: 1.2rem;
   flex-shrink: 0;
+  background: var(--primary-light);
+  color: var(--primary);
 }
-.contact-info-icon.blue   { background: var(--primary-light); color: var(--primary); }
-.contact-info-icon.green  { background: #ecfdf5; color: var(--success); }
-.contact-info-icon.yellow { background: #fffbeb; color: var(--accent); }
 
 .contact-info-label {
   font-size: 0.75rem;
@@ -4908,9 +4907,7 @@ a:hover {
   border: 1px solid oklch(58.6% 0.182 75 / 0.45);
 }
 
-[data-theme="light"] .contact-info-icon.blue,
-[data-theme="light"] .contact-info-icon.green,
-[data-theme="light"] .contact-info-icon.yellow {
+[data-theme="light"] .contact-info-icon {
   background: oklch(58.6% 0.182 75 / 0.25);
   color: oklch(27.5% 0.09 152);
   border: 1px solid oklch(58.6% 0.182 75 / 0.4);

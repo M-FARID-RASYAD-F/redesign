@@ -3,8 +3,8 @@
 
     Background "Beams" ambient — berkas cahaya lembut yang mengambang naik perlahan,
     diadaptasi dari komponen "Beams Background" (kokonutui.com, MIT) versi vanilla JS
-    (situs publik ini tidak pakai React/Framer Motion). Warna beam mengikuti aksen
-    tema situs: cyan di dark mode, merah marun di light mode.
+    (situs publik ini tidak pakai React/Framer Motion). Warna beam mengikuti palet
+    Forest situs: hijau di dark mode, amber/emas di light mode.
 
     Dibuat seringan mungkin: canvas transparan (background asli tema tetap kepakai),
     blur cukup lewat CSS filter (bukan ctx.filter tiap frame), dan animasi berhenti
@@ -55,7 +55,7 @@
     let beams = [];
 
     function createBeam(canvasWidth, canvasHeight) {
-        const hueBase = isDark ? 188 : 340;
+        const hueBase = isDark ? 150 : 42;
         const hueRange = 22;
         return {
             x: Math.random() * canvasWidth,
@@ -74,7 +74,7 @@
     function resetBeam(beam, index, total) {
         const column = index % 3;
         const spacing = width / 3;
-        const hueBase = isDark ? 188 : 340;
+        const hueBase = isDark ? 150 : 42;
 
         beam.y = height + 100;
         beam.x = column * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.6;

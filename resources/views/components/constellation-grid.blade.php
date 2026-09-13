@@ -1,30 +1,19 @@
 {{--
     resources/views/components/constellation-grid.blade.php
 
-    Komponen Background Animasi Grid Interaktif Constellation (Vanilla JS Canvas)
-    Berdasarkan spesifikasi bck.md
+    Background grid ambient — titik-titik halus yang bergeser lembut menjauhi kursor,
+    warnanya mengikuti tema situs (dark navy/cyan atau light/merah) lewat CSS variable
+    di .content-area-constellation, bukan warna yang di-hardcode terpisah di JS.
 --}}
 
 <div
-    {{ $attributes->merge(['class' => 'relative w-full overflow-hidden select-none bg-slate-950 content-area-constellation']) }}
+    {{ $attributes->merge(['class' => 'relative w-full overflow-hidden select-none content-area-constellation']) }}
 >
     <canvas id="constellation-canvas" class="absolute inset-0 block w-full h-full pointer-events-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></canvas>
 
-    @if(isset($slot) && !empty(trim($slot)))
-        <div class="constellation-slot-wrapper relative w-full" style="position: relative; z-index: 10;">
-            {{ $slot }}
-        </div>
-    @else
-        {{-- Overlay judul default --}}
-        <div class="constellation-slot-wrapper relative z-10 flex h-full min-h-[400px] flex-col items-center justify-center text-center px-4 pointer-events-none mix-blend-difference text-white">
-            <h1 class="font-mono text-6xl md:text-9xl font-black tracking-tighter uppercase leading-none">
-                Constellation
-            </h1>
-            <p class="mt-4 font-mono text-xs md:text-sm max-w-lg opacity-70">
-                High-velocity dynamic mesh. Sweep your cursor quickly across the grid to unleash kinetic shockwaves.
-            </p>
-        </div>
-    @endif
+    <div class="constellation-slot-wrapper relative w-full" style="position: relative; z-index: 10;">
+        {{ $slot }}
+    </div>
 </div>
 
 <script>
@@ -32,8 +21,11 @@
     const canvas = document.getElementById('constellation-canvas');
     if (!canvas) return;
 
-    // Jika layout mobile (lebar layar <= 768px), matikan canvas dan hentikan script agar HP ringan
-    if (window.innerWidth <= 768) {
+    const root = canvas.parentElement;
+    const isMobile = () => window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isMobile()) {
         canvas.style.display = 'none';
         return;
     }
@@ -45,45 +37,32 @@
     let width = 0;
     let height = 0;
 
-    // Deteksi mode tema dari data-theme dan preferensi sistem
-    function checkIsLight() {
-        return document.documentElement.getAttribute('data-theme') === 'light';
+    // ── Warna mengikuti tema situs (CSS variable di .content-area-constellation) ──
+    let colors = { bg: '#020617', line: '148, 163, 184', node: '226, 232, 240', accent: '0, 180, 216' };
+
+    function readThemeColors() {
+        const cs = getComputedStyle(root);
+        colors = {
+            bg: (cs.getPropertyValue('--constellation-bg') || colors.bg).trim(),
+            line: (cs.getPropertyValue('--constellation-line-rgb') || colors.line).trim(),
+            node: (cs.getPropertyValue('--constellation-node-rgb') || colors.node).trim(),
+            accent: (cs.getPropertyValue('--constellation-accent-rgb') || colors.accent).trim(),
+        };
     }
-    let isLightMode = checkIsLight();
-    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    readThemeColors();
 
-    window.addEventListener('theme-changed', (e) => {
-        isLightMode = e.detail?.theme === 'light';
-    });
+    window.addEventListener('theme-changed', readThemeColors);
+    new MutationObserver(readThemeColors)
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    const themeObserver = new MutationObserver(() => {
-        isLightMode = checkIsLight();
-    });
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    if (darkModeQuery && darkModeQuery.addEventListener) {
-        darkModeQuery.addEventListener('change', (e) => {
-            isDarkMode = e.matches;
-        });
-    }
-
-    // Mouse velocity & inertial tracking
-    const mouse = {
-        x: -1000,
-        y: -1000,
-        prevX: -1000,
-        prevY: -1000,
-        vx: 0,
-        vy: 0,
-        radius: 240,
-    };
+    // Posisi kursor halus (tidak ada lagi kecepatan/shockwave — cuma tarikan lembut menjauh)
+    const mouse = { x: -1000, y: -1000, radius: 130 };
 
     let nodes = [];
 
     function initNodes() {
         nodes = [];
-        const spacing = 58; // Kerapatan grid
+        const spacing = 66; // Grid lega — ambient, bukan pusat perhatian
         const cols = Math.ceil(width / spacing) + 1;
         const rows = Math.ceil(height / spacing) + 1;
 
@@ -92,14 +71,10 @@
                 const x = i * spacing;
                 const y = j * spacing;
                 nodes.push({
-                    x,
-                    y,
-                    vx: 0,
-                    vy: 0,
-                    baseX: x,
-                    baseY: y,
-                    radius: Math.random() * 1.4 + 1.4,
-                    label: `${(i * 7).toString(16).toUpperCase()}:${(j * 11).toString(16).toUpperCase()}`,
+                    x, y,
+                    vx: 0, vy: 0,
+                    baseX: x, baseY: y,
+                    radius: Math.random() * 1.1 + 1.1,
                     pulse: Math.random() * Math.PI * 2,
                 });
             }
@@ -107,24 +82,21 @@
     }
 
     function handleResize() {
-        if (window.innerWidth <= 768) {
+        if (isMobile()) {
             canvas.style.display = 'none';
             return;
         }
         canvas.style.display = 'block';
 
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const parent = canvas.parentElement || document.body;
-        const slotWrapper = parent.querySelector('.constellation-slot-wrapper') || parent;
+        const slotWrapper = root.querySelector('.constellation-slot-wrapper') || root;
 
-        // Reset inline CSS height/width agar tidak mengunci tinggi parent saat transisi layar mobile -> desktop
         canvas.style.width = '100%';
         canvas.style.height = '100%';
 
-        // Ukur dimensi aktual dari elemen konten
         const rect = slotWrapper.getBoundingClientRect();
-        width = Math.round(rect.width || parent.clientWidth || window.innerWidth);
-        height = Math.round(rect.height || slotWrapper.offsetHeight || parent.clientHeight || window.innerHeight);
+        width = Math.round(rect.width || root.clientWidth || window.innerWidth);
+        height = Math.round(rect.height || slotWrapper.offsetHeight || root.clientHeight || window.innerHeight);
 
         if (width <= 0 || height <= 0) return;
 
@@ -134,6 +106,7 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
         initNodes();
+        if (prefersReducedMotion) drawStatic();
     }
 
     function handleMouseMove(e) {
@@ -151,96 +124,67 @@
     window.addEventListener('resize', handleResize);
     window.addEventListener('load', handleResize);
     document.addEventListener('DOMContentLoaded', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
 
-    // Re-check size after images / fonts load
+    if (!prefersReducedMotion) {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    // Re-check ukuran setelah gambar/font selesai load
     setTimeout(handleResize, 200);
     setTimeout(handleResize, 800);
     setTimeout(handleResize, 1800);
 
-    if (window.ResizeObserver && canvas.parentElement) {
-        const slotWrapper = canvas.parentElement.querySelector('.constellation-slot-wrapper') || canvas.parentElement;
-        const ro = new ResizeObserver(() => handleResize());
-        ro.observe(slotWrapper);
+    if (window.ResizeObserver) {
+        const slotWrapper = root.querySelector('.constellation-slot-wrapper') || root;
+        new ResizeObserver(() => handleResize()).observe(slotWrapper);
     }
 
-    let lastTime = performance.now();
+    // Fisika lembut: spring-damping ringan, tanpa lonjakan kecepatan kursor
+    const SPRING_K = 22;
+    const DAMPING = 0.88;
+    const MAX_CONN_DIST = 64;
+    const MAX_CONN_DIST_SQ = MAX_CONN_DIST * MAX_CONN_DIST;
 
-    function render(now) {
-        if (window.innerWidth <= 768) {
-            animationFrameId = requestAnimationFrame(render);
-            return;
-        }
-
-        const dt = Math.min((now - lastTime) / 1000, 0.05);
-        lastTime = now;
-
-        // Kecepatan mouse
-        mouse.vx = (mouse.x - mouse.prevX) / (dt * 1000 || 1);
-        mouse.vy = (mouse.y - mouse.prevY) / (dt * 1000 || 1);
-        mouse.prevX = mouse.x;
-        mouse.prevY = mouse.y;
-
-        const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
-
-        // Palet warna adaptif Dark Mode vs White Mode
-        const bgColor = isLightMode ? '#ffffff' : (isDarkMode ? '#030407' : '#030712');
-        const nodeColor = isLightMode ? '229, 36, 68' : (isDarkMode ? '255, 255, 255' : '226, 232, 240');
-        const accentColor = isLightMode ? '229, 36, 68' : (isDarkMode ? '56, 189, 248' : '0, 180, 216');
-
-        ctx.fillStyle = bgColor;
+    function paintFrame(dt) {
+        ctx.fillStyle = colors.bg;
         ctx.fillRect(0, 0, width, height);
 
-        // Physics: Spring-Mass-Damping
-        const SPRING_K = 18;
-        const DAMPING = 0.82;
-
-        // Viewport bounds untuk culling (hanya proses node yang terlihat di layar agar 60fps konstan)
-        const rect = canvas.getBoundingClientRect();
-        const canvasScrollY = -rect.top;
-        const viewTop = Math.max(0, canvasScrollY - 250);
-        const viewBottom = canvasScrollY + window.innerHeight + 250;
+        const canvasTop = -canvas.getBoundingClientRect().top;
+        const viewTop = Math.max(0, canvasTop - 250);
+        const viewBottom = canvasTop + window.innerHeight + 250;
 
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
-            
-            // Skip node yang jauh di luar viewport saat ini
             if (n.baseY < viewTop - 100 || n.baseY > viewBottom + 100) continue;
 
-            n.pulse += dt * 3;
+            n.pulse += dt * 1.6;
 
-            const dx = mouse.x - n.x;
-            const dy = mouse.y - n.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dt > 0) {
+                const dx = mouse.x - n.x;
+                const dy = mouse.y - n.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist < mouse.radius && dist > 0) {
-                const power = (1 - dist / mouse.radius);
-                const force = power * (1600 + speed * 160);
-                const angle = Math.atan2(dy, dx);
+                if (dist < mouse.radius && dist > 0) {
+                    // Dorongan halus menjauhi kursor — bukan ledakan/shockwave
+                    const power = 1 - dist / mouse.radius;
+                    const force = power * 180;
+                    const angle = Math.atan2(dy, dx);
+                    n.vx -= Math.cos(angle) * force * dt;
+                    n.vy -= Math.sin(angle) * force * dt;
+                }
 
-                n.vx -= Math.cos(angle) * force * dt;
-                n.vy -= Math.sin(angle) * force * dt;
+                n.vx += (n.baseX - n.x) * SPRING_K * dt;
+                n.vy += (n.baseY - n.y) * SPRING_K * dt;
+                n.vx *= DAMPING;
+                n.vy *= DAMPING;
+                n.x += n.vx * dt * 60;
+                n.y += n.vy * dt * 60;
             }
-
-            const homeDx = n.baseX - n.x;
-            const homeDy = n.baseY - n.y;
-
-            n.vx += homeDx * SPRING_K * dt;
-            n.vy += homeDy * SPRING_K * dt;
-
-            n.vx *= DAMPING;
-            n.vy *= DAMPING;
-
-            n.x += n.vx * dt * 60;
-            n.y += n.vy * dt * 60;
         }
 
-        // Garis koneksi antar node (Visible & Sharp)
-        const MAX_CONN_DIST = 75;
-        const MAX_CONN_DIST_SQ = MAX_CONN_DIST * MAX_CONN_DIST;
-        const lineBaseAlphaFactor = isLightMode ? 0.38 : 0.20;
-
+        // Garis koneksi — tipis & redup, sekadar tekstur ambient
+        const lineAlphaFactor = 0.12;
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
             if (n.baseY < viewTop || n.baseY > viewBottom) continue;
@@ -255,10 +199,10 @@
 
                 if (distSq < MAX_CONN_DIST_SQ) {
                     const nDist = Math.sqrt(distSq);
-                    const alpha = (1 - nDist / MAX_CONN_DIST) * lineBaseAlphaFactor;
+                    const alpha = (1 - nDist / MAX_CONN_DIST) * lineAlphaFactor;
 
-                    ctx.strokeStyle = `rgba(${nodeColor}, ${alpha})`;
-                    ctx.lineWidth = isLightMode ? 0.9 : 0.7;
+                    ctx.strokeStyle = `rgba(${colors.line}, ${alpha})`;
+                    ctx.lineWidth = 0.7;
                     ctx.beginPath();
                     ctx.moveTo(n.x, n.y);
                     ctx.lineTo(n2.x, n2.y);
@@ -267,56 +211,51 @@
             }
         }
 
-        // Render titik node + highlight interaktif (High Contrast & Visible)
+        // Titik node — redup, sedikit menyala lembut saat dekat kursor (tanpa ring/label)
         for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
             if (n.baseY < viewTop || n.baseY > viewBottom) continue;
 
             const dx = mouse.x - n.x;
             const dy = mouse.y - n.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const isNear = dist < mouse.radius;
+            const isNear = Math.sqrt(dx * dx + dy * dy) < mouse.radius;
 
-            const baseAlpha = isLightMode
-                ? (isNear ? 1.0 : 0.65 + Math.sin(n.pulse) * 0.15)
-                : (isNear ? 0.95 : 0.35 + Math.sin(n.pulse) * 0.1);
+            const baseAlpha = isNear ? 0.6 : 0.22 + Math.sin(n.pulse) * 0.06;
 
             ctx.fillStyle = isNear
-                ? `rgba(${accentColor}, ${baseAlpha})`
-                : `rgba(${nodeColor}, ${baseAlpha})`;
+                ? `rgba(${colors.accent}, ${baseAlpha})`
+                : `rgba(${colors.node}, ${baseAlpha})`;
 
-            const currentRadius = isNear
-                ? n.radius * 2.2
-                : n.radius + Math.sin(n.pulse) * 0.3;
-
+            const r = isNear ? n.radius * 1.5 : n.radius;
             ctx.beginPath();
-            ctx.arc(n.x, n.y, Math.max(0.8, currentRadius), 0, Math.PI * 2);
+            ctx.arc(n.x, n.y, Math.max(0.7, r), 0, Math.PI * 2);
             ctx.fill();
-
-            if (dist < 90) {
-                const pulseRing = ((n.pulse * 20) % 30) + 4;
-                const ringAlpha = isLightMode
-                    ? (1 - pulseRing / 34) * 0.7
-                    : (1 - pulseRing / 34) * 0.45;
-
-                ctx.strokeStyle = `rgba(${accentColor}, ${ringAlpha})`;
-                ctx.lineWidth = isLightMode ? 1.4 : 1;
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, pulseRing, 0, Math.PI * 2);
-                ctx.stroke();
-
-                ctx.font = '8px ui-monospace, SFMono-Regular, Consolas, monospace';
-                ctx.fillStyle = `rgba(${accentColor}, ${isLightMode ? 0.95 : 0.85})`;
-                ctx.fillText(n.label, n.x + 10, n.y - 10);
-            }
         }
+    }
 
+    function drawStatic() {
+        paintFrame(0);
+    }
+
+    let lastTime = performance.now();
+
+    function render(now) {
+        if (isMobile()) {
+            animationFrameId = requestAnimationFrame(render);
+            return;
+        }
+        const dt = Math.min((now - lastTime) / 1000, 0.05);
+        lastTime = now;
+        paintFrame(dt);
         animationFrameId = requestAnimationFrame(render);
     }
 
-    animationFrameId = requestAnimationFrame(render);
+    if (prefersReducedMotion) {
+        drawStatic();
+    } else {
+        animationFrameId = requestAnimationFrame(render);
+    }
 
-    // Cleanup kalau elemen dilepas dari DOM
     window.addEventListener('beforeunload', () => {
         cancelAnimationFrame(animationFrameId);
         window.removeEventListener('resize', handleResize);

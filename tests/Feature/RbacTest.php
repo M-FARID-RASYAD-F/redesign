@@ -215,7 +215,7 @@ class RbacTest extends TestCase
 
         $this->actingAs($inactive)
             ->get('/admin/cms/dashboard')
-            ->assertForbidden();
+            ->assertRedirect(route('login'));
     }
 
     public function test_login_redirects_to_appropriate_role_dashboard(): void

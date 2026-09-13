@@ -708,36 +708,37 @@ a:hover {
 }
 .nav-hamburger:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
-/* ═══ Nav Island — kapsul menu yang melebar (orkestrasi GSAP easeReverse) ═══ */
-.nav-island {
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
-}
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR MOBILE OVERLAY & PANEL
+   Modern segmented mobile drawer with smooth blur backdrop
+   ═══════════════════════════════════════════════════════════ */
 
-.island-toggle-label { white-space: nowrap; }
-
-/* Bar hamburger di dalam tombol island, dimorph jadi X via GSAP attr tween */
-.island-bar { transition: none; }
-
-.nav-island-backdrop {
+/* Backdrop Overlay untuk Menu Mobile */
+.nav-mobile-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(5, 10, 20, 0.55);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(4, 10, 24, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 998;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1050;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
 }
 
-.nav-island.is-open .nav-island-toggle {
-  border-color: #38bdf8;
-  background: rgba(0, 180, 216, 0.32);
+.nav-mobile-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-/* Mobile panel — Floating Capsule Card */
+body.nav-mobile-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+/* Mobile Panel — Floating Modern Sheet Card */
 .nav-mobile-panel {
   display: none !important;
   opacity: 0;
@@ -745,79 +746,269 @@ a:hover {
   pointer-events: none;
   max-width: 1400px;
   margin: 10px auto 0;
-  border: 2px solid #00B4D8;
-  border-radius: 16px;
-  background: rgba(10, 21, 40, 0.98);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  box-shadow: 0 16px 40px rgba(0, 15, 35, 0.65), 0 0 28px rgba(0, 180, 216, 0.3);
-  padding: 14px 18px 22px;
+  border: 1.5px solid rgba(0, 180, 216, 0.45);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(10, 23, 44, 0.98) 0%, rgba(6, 14, 28, 0.99) 100%);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  box-shadow: 0 20px 50px rgba(0, 12, 30, 0.75), 0 0 32px rgba(0, 180, 216, 0.25);
+  padding: 16px;
+  position: relative;
+  z-index: 1001;
 }
+
 .nav-mobile-panel.is-open {
   display: block !important;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: mobilePanelSlide 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Stagger entrance for items in mobile panel */
-.nav-mobile-panel.is-open > *:nth-child(1) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both; }
-.nav-mobile-panel.is-open > *:nth-child(2) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
-.nav-mobile-panel.is-open > *:nth-child(3) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
-.nav-mobile-panel.is-open > *:nth-child(4) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both; }
-.nav-mobile-panel.is-open > *:nth-child(5) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.20s both; }
-.nav-mobile-panel.is-open > *:nth-child(7) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
-.nav-mobile-panel.is-open > *:nth-child(9) { animation: mobileItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+@keyframes mobilePanelSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header Mini di dalam Panel */
+.nav-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-mobile-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-mobile-pill-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.nav-mobile-pill-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.02em;
+}
+
+.nav-mobile-status-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(0, 180, 216, 0.14);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Daftar Navigasi Utama */
+.nav-mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
 .nav-mobile-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #cbd5e1;
-  padding: 12px 16px;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  gap: 12px;
+  color: #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  background: transparent;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
 }
-.nav-mobile-link:hover {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  transform: translateX(4px);
+
+.nav-mobile-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: transform 0.22s ease, background 0.22s ease;
 }
-.nav-mobile-link:active {
-  transform: translateX(4px) scale(0.98);
+
+.nav-mobile-link-text {
+  flex: 1;
+}
+
+.nav-mobile-arrow {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.1rem;
+  font-weight: 400;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+.nav-mobile-link:hover,
+.nav-mobile-link:focus {
+  background: rgba(0, 180, 216, 0.14);
+  color: #38bdf8;
+  transform: translateX(3px);
+}
+
+.nav-mobile-link:hover .nav-mobile-icon-box {
+  background: rgba(0, 180, 216, 0.25);
+  border-color: rgba(0, 180, 216, 0.4);
+  transform: scale(1.05);
+}
+
+.nav-mobile-link:hover .nav-mobile-arrow {
+  color: #38bdf8;
+  transform: translateX(2px);
+}
+
+.nav-mobile-link.active {
+  background: rgba(0, 180, 216, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(0, 180, 216, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.18);
+}
+
+.nav-mobile-link.active .nav-mobile-icon-box {
+  background: rgba(0, 180, 216, 0.35);
+  border-color: #38bdf8;
+}
+
+.nav-mobile-link.active .nav-mobile-arrow {
+  color: #38bdf8;
+}
+
+/* PPDB Section Card di Mobile */
+.nav-mobile-ppdb-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .nav-mobile-cta {
-  display: block;
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  background: linear-gradient(135deg, #10b981, #14b8a6);
-  color: white !important;
-  padding: 13px;
-  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
   font-weight: 700;
-  font-size: 0.92rem;
-  box-shadow: 0 4px 16px rgba(16,185,129,0.3);
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.nav-mobile-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(16,185,129,0.45);
-  color: white !important;
-}
-.nav-mobile-cta:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 2px 10px rgba(16,185,129,0.35);
+  font-size: 0.9rem;
+  padding: 11px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.nav-mobile-divider {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  margin: 10px 0;
+.nav-mobile-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.nav-mobile-sublink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-mobile-sublink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.nav-sublink-text {
+  flex: 1;
+}
+
+.nav-sublink-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 1px 6px;
+  border-radius: 6px;
+}
+
+/* Footer Controls: Theme & Auth */
+.nav-mobile-footer-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-mobile-auth-btn {
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+}
+
+.nav-mobile-auth-login {
+  background: rgba(0, 180, 216, 0.14);
+  border: 1px solid rgba(0, 180, 216, 0.35);
+  color: #38bdf8;
+}
+
+.nav-mobile-auth-login:hover {
+  background: rgba(0, 180, 216, 0.24);
+  color: #ffffff;
+}
+
+.nav-mobile-auth-admin {
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+.nav-mobile-auth-logout {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
 }
 
 /* Layout Main */
@@ -895,13 +1086,13 @@ a:hover {
     #002147 100%
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* Konten hero — dinaikkan posisinya, layout lebar penuh */
 .hero-container {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -979,6 +1170,8 @@ a:hover {
 }
 
 .hero-actions {
+  position: relative;
+  z-index: 5;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -3519,7 +3712,7 @@ a:hover {
     gap: 8px;
   }
   .navbar-capsule {
-    height: 50px;
+    height: 48px;
     padding: 0 10px;
     border-radius: 12px;
   }
@@ -3527,71 +3720,108 @@ a:hover {
     height: 46px;
   }
   .navbar-capsule.navbar-left {
-    height: 52px;
-    padding: 0 5px;
+    height: 48px;
+    padding: 0 12px 0 6px;
     border-radius: 12px;
+    gap: 8px;
   }
   .navbar.scrolled .navbar-capsule.navbar-left {
-    height: 48px;
-    padding: 0 4px;
+    height: 46px;
+    padding: 0 10px 0 5px;
   }
   .navbar-brand {
-    gap: 0;
+    gap: 8px;
+    display: flex;
+    align-items: center;
   }
   .brand-icon {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     padding: 1px;
-    border-radius: 10px;
+    border-radius: 9px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 180, 216, 0.35);
+    flex-shrink: 0;
   }
   .navbar.scrolled .brand-icon {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
   }
   .brand-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 7px;
   }
-  /* Sembunyikan tulisan nama sekolah di samping logo pada layout mobile */
-  .brand-text,
-  .brand-text-main,
-  .brand-text-sub {
-    display: none !important;
-  }
-  /* Sembunyikan tombol ganti tema di bar navbar mobile (tersedia di dalam dropdown panel) */
-  .navbar-right .nav-theme-toggle {
-    display: none !important;
-  }
-  .navbar-capsule.navbar-right {
-    height: 52px;
-    padding: 0 5px;
+  /* Tampilkan identitas sekolah dengan tipografi rapi dan proporsional */
+  .brand-text {
+    display: flex !important;
+    flex-direction: column;
     justify-content: center;
+    text-align: left;
+  }
+  .brand-text-main {
+    display: block !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #ffffff;
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-text-sub {
+    display: block !important;
+    font-size: 0.58rem;
+    color: #94a3b8;
+    line-height: 1.1;
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Sembunyikan elemen desktop yang dipindah ke dalam drawer mobile */
+  .navbar-right .nav-theme-toggle,
+  .nav-auth-desktop {
+    display: none !important;
+  }
+  /* Kapsul kanan disederhanakan menjadi pulau tombol bulat/kotak mandiri tanpa nested double border */
+  .navbar-capsule.navbar-right {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
     border-radius: 12px;
   }
   .navbar.scrolled .navbar-capsule.navbar-right {
-    height: 48px;
-    padding: 0 4px;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    padding: 0;
   }
   .nav-btn-menu,
   .nav-island-toggle {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     padding: 0;
-    border-radius: 10px;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
   }
 
-  /* Mobile Dropdown Panel — Tersembunyi rapi sebelum di-expand */
+  /* Mobile Dropdown Panel */
   .nav-mobile-panel {
     margin: 8px 0 0;
-    border-radius: 16px;
-    padding: 12px 14px 18px;
-    max-height: calc(100vh - 75px);
+    border-radius: 18px;
+    padding: 14px;
+    max-height: calc(100dvh - 75px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -3608,25 +3838,34 @@ a:hover {
     pointer-events: auto !important;
   }
   .nav-mobile-link {
-    padding: 12px 14px;
-    font-size: 0.92rem;
-    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 0.90rem;
+    border-radius: 11px;
     min-height: 44px;
   }
   .nav-mobile-cta {
-    padding: 13px;
-    font-size: 0.95rem;
+    padding: 12px;
+    font-size: 0.92rem;
     border-radius: 12px;
-    min-height: 48px;
+    min-height: 46px;
   }
 
   /* Hero Section */
   .hero {
     min-height: auto;
-    padding: 6.5rem 2rem 3.5rem;
+    padding: 6.5rem 1.75rem 4.5rem;
     justify-content: flex-start;
   }
+  /* Overlay gradien bawah dikurangi tingginya dan di bawah konten */
+  .hero::after {
+    height: 35%;
+    min-height: 120px;
+    z-index: 1;
+    pointer-events: none;
+  }
   .hero-container {
+    position: relative;
+    z-index: 4;
     padding: 0;
   }
   .hero-content {
@@ -3654,19 +3893,33 @@ a:hover {
     margin-bottom: 1.5rem;
   }
   .hero-actions {
+    position: relative;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
+    gap: 12px;
   }
   .hero-actions .btn {
     width: 100%;
-    min-height: 46px;
-    padding: 11px 18px;
+    min-height: 48px;
+    padding: 12px 18px;
     font-size: 0.88rem;
     font-weight: 700;
     justify-content: center;
     border-radius: 12px;
+  }
+  /* Tombol Lihat Jenjang & Jurusan di Mobile — solid, tegas, kontras, dan tidak pudar */
+  .hero-actions .btn-outline {
+    background: rgba(0, 25, 55, 0.90);
+    border: 1.5px solid rgba(0, 180, 216, 0.65);
+    box-shadow: 0 4px 16px rgba(0, 15, 35, 0.6), 0 0 12px rgba(0, 180, 216, 0.2);
+    color: #ffffff;
+  }
+  .hero-actions .btn-outline:active {
+    background: rgba(0, 35, 75, 0.98);
+    border-color: #38bdf8;
+    color: #38bdf8;
   }
 
   /* Statistics Section */
@@ -3761,8 +4014,11 @@ a:hover {
   .content-area-white,
   .content-area-constellation {
     border-radius: 20px 20px 0 0;
-    padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .content-area-constellation .section:last-child {
+    margin-bottom: 1.5rem;
   }
   #constellation-canvas {
     display: none !important;
@@ -3896,6 +4152,7 @@ a:hover {
 
   /* Footer - Compact Mobile Layout (<= 768px) */
   .footer {
+    margin-top: 0;
     padding: 2.25rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
   }
   .footer-container {
@@ -4084,7 +4341,10 @@ a:hover {
 @media (max-width: 480px) {
   /* Navbar */
   .navbar {
-    padding: 8px 14px;
+    padding: 8px 12px;
+  }
+  .navbar-container {
+    gap: 6px;
   }
   .navbar-capsule {
     height: 46px;
@@ -4095,49 +4355,61 @@ a:hover {
     height: 44px;
   }
   .navbar-capsule.navbar-left {
-    height: 48px;
-    padding: 0 4px;
+    height: 46px;
+    padding: 0 10px 0 5px;
+    gap: 6px;
     border-radius: 10px;
   }
   .navbar.scrolled .navbar-capsule.navbar-left {
     height: 44px;
-    padding: 0 3px;
+    padding: 0 8px 0 4px;
   }
   .brand-icon {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     padding: 1px;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 180, 216, 0.3);
   }
   .navbar.scrolled .brand-icon {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
+  }
+  .brand-text-main {
+    font-size: 0.76rem;
+    max-width: 150px;
+  }
+  .brand-text-sub {
+    font-size: 0.54rem;
+    max-width: 150px;
   }
   .navbar-capsule.navbar-right {
-    height: 48px;
-    padding: 0 4px;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    padding: 0;
     justify-content: center;
     border-radius: 10px;
   }
   .navbar.scrolled .navbar-capsule.navbar-right {
+    width: 44px;
     height: 44px;
-    padding: 0 3px;
+    min-width: 44px;
+    padding: 0;
   }
   .nav-btn-menu,
   .nav-island-toggle {
-    width: 38px;
-    height: 38px;
-    padding: 0;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    width: 46px;
+    height: 46px;
   }
 
   /* Hero */
   .hero {
-    padding: 5.5rem 2rem 3rem;
+    padding: 5.5rem 1.25rem 4.25rem;
+  }
+  .hero::after {
+    height: 30%;
+    min-height: 100px;
   }
   .hero-title {
     font-size: 1.5rem;
@@ -4151,6 +4423,14 @@ a:hover {
   .hero-badge {
     font-size: 0.68rem;
     padding: 3px 9px;
+  }
+  .hero-actions {
+    gap: 10px;
+  }
+  .hero-actions .btn {
+    min-height: 46px;
+    font-size: 0.86rem;
+    padding: 11px 16px;
   }
 
   /* Stats Grid */
@@ -4242,6 +4522,7 @@ a:hover {
   }
   /* Footer Small Mobile (Ultra Compact) */
   .footer {
+    margin-top: 0;
     padding: 1.5rem 1rem max(0.85rem, env(safe-area-inset-bottom));
   }
   .footer-container {
@@ -4373,6 +4654,26 @@ a:hover {
   }
   .ppdb-req-container {
     padding: 1.5rem 1.15rem;
+  }
+}
+
+/* ────────────────────────────────────────────────────────
+   4. Micro Smartphone Screens (≤ 360px)
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+  .brand-text-sub {
+    display: none !important;
+  }
+  .brand-text-main {
+    font-size: 0.72rem;
+    max-width: 125px;
+  }
+  .hero-title {
+    font-size: 1.35rem;
+  }
+  .hero-actions .btn {
+    font-size: 0.82rem;
+    padding: 10px 14px;
   }
 }
 
@@ -4584,6 +4885,54 @@ a:hover {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 28px oklch(58.6% 0.253 17.585 / 0.35);
 }
 
+[data-theme="light"] .nav-mobile-header {
+  border-bottom-color: oklch(58.6% 0.253 17.585 / 0.25);
+}
+
+[data-theme="light"] .nav-mobile-pill-text {
+  color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-status-badge {
+  color: oklch(85% 0.12 18);
+  background: oklch(58.6% 0.253 17.585 / 0.25);
+  border-color: oklch(58.6% 0.253 17.585 / 0.5);
+}
+
+[data-theme="light"] .nav-mobile-link {
+  color: #e2e8f0;
+}
+
+[data-theme="light"] .nav-mobile-icon-box {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: oklch(58.6% 0.253 17.585 / 0.3);
+}
+
+[data-theme="light"] .nav-mobile-link:hover {
+  background: oklch(58.6% 0.253 17.585 / 0.35);
+  color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-link.active {
+  background: oklch(58.6% 0.253 17.585 / 0.7);
+  color: #ffffff;
+  border: 1px solid oklch(58.6% 0.253 17.585);
+}
+
+[data-theme="light"] .nav-mobile-ppdb-box {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: oklch(58.6% 0.253 17.585 / 0.3);
+}
+
+[data-theme="light"] .nav-mobile-sublink {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-footer-row {
+  border-top-color: oklch(58.6% 0.253 17.585 / 0.25);
+}
+
 [data-theme="light"] .nav-mobile-theme-btn {
   background: rgba(255, 255, 255, 0.12);
   border-color: oklch(58.6% 0.253 17.585 / 0.5);
@@ -4594,6 +4943,17 @@ a:hover {
 [data-theme="light"] .nav-mobile-theme-btn:hover {
   background: oklch(58.6% 0.253 17.585 / 0.3);
   border-color: oklch(58.6% 0.253 17.585);
+  color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-auth-login {
+  background: oklch(58.6% 0.253 17.585 / 0.25);
+  border-color: oklch(58.6% 0.253 17.585 / 0.6);
+  color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-auth-login:hover {
+  background: oklch(58.6% 0.253 17.585 / 0.45);
   color: #ffffff;
 }
 
@@ -5069,17 +5429,20 @@ a:hover {
   color: #ffffff !important;
 }
 
+[data-theme="light"] .hero-actions .btn-outline,
 [data-theme="light"] .btn-outline {
-  border-color: oklch(58.6% 0.253 17.585 / 0.6) !important;
+  background: oklch(27.1% 0.105 12.094 / 0.88) !important;
+  border: 1.5px solid oklch(58.6% 0.253 17.585 / 0.75) !important;
   color: #ffffff !important;
-  background: oklch(58.6% 0.253 17.585 / 0.14) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35), 0 0 12px oklch(58.6% 0.253 17.585 / 0.25) !important;
 }
 
+[data-theme="light"] .hero-actions .btn-outline:hover,
 [data-theme="light"] .btn-outline:hover {
-  background: oklch(58.6% 0.253 17.585 / 0.30) !important;
+  background: oklch(33% 0.125 13 / 0.95) !important;
   border-color: oklch(58.6% 0.253 17.585) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.35);
+  box-shadow: 0 6px 20px oklch(58.6% 0.253 17.585 / 0.45) !important;
 }
 
 [data-theme="light"] .btn-submit-ppdb,

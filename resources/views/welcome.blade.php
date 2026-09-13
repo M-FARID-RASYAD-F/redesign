@@ -26,7 +26,7 @@
                         📝 Daftar PPDB Online
                     </a>
                     <a href="#jenjang" class="btn btn-outline">
-                        🔍 Lihat Jenjang
+                        🔍 Lihat Jenjang & Jurusan
                     </a>
                 </div>
             </div>

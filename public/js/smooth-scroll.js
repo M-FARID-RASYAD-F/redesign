@@ -81,6 +81,7 @@
                 window.smoother.kill();
                 window.smoother = null;
             }
+            document.body.style.removeProperty('height');
             ScrollTrigger.refresh();
 
             // Buat ulang hanya jika sekarang desktop

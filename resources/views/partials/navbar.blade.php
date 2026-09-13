@@ -59,36 +59,86 @@
         </div>
     </div>
 
-    {{-- ── Mobile Panel ── --}}
+    {{-- ── Backdrop Overlay saat Menu Mobile Terbuka ── --}}
+    <div class="nav-mobile-backdrop" id="navMobileBackdrop"></div>
+
+    {{-- ── Mobile Panel Sheet ── --}}
     <div class="nav-mobile-panel" id="navMobilePanel">
-        <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda"><span class="nav-link-text">🏠 Beranda</span></a>
-        <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang"><span class="nav-link-text">📚 Jenjang</span></a>
-        <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang"><span class="nav-link-text">🏫 Cabang Sekolah</span></a>
-        <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita"><span class="nav-link-text">📰 Berita</span></a>
-        <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
-        <hr class="nav-mobile-divider">
-        <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button" aria-label="Ganti Tema Tampilan">
-            <span class="theme-btn-content theme-btn-dark">
-                <span class="theme-mobile-icon">☀️</span>
-                <span class="theme-mobile-text">Ganti ke Mode Terang</span>
-            </span>
-            <span class="theme-btn-content theme-btn-light">
-                <span class="theme-mobile-icon">🌙</span>
-                <span class="theme-mobile-text">Ganti ke Mode Gelap</span>
-            </span>
-        </button>
-        <hr class="nav-mobile-divider">
-        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb"><span class="nav-link-text">🎓 Daftar PPDB Online</span></a>
+        <div class="nav-mobile-inner">
+            {{-- Header Mini Panel --}}
+            <div class="nav-mobile-header">
+                <div class="nav-mobile-brand-pill">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="nav-mobile-pill-logo">
+                    <span class="nav-mobile-pill-text">PKBM Tahfizh At-Tamam</span>
+                </div>
+                <span class="nav-mobile-status-badge">Edu Portal</span>
+            </div>
 
-        @auth
-        <hr class="nav-mobile-divider">
-        <a href="{{ route('admin.dashboard') }}" class="nav-mobile-link"><span class="nav-link-text">🛡️ Admin Panel</span></a>
-        <a href="{{ route('logout') }}" class="nav-mobile-link" style="color: #f87171;"><span class="nav-link-text">🚪 Logout</span></a>
-        @endauth
+            {{-- 1. Navigasi Halaman Utama --}}
+            <div class="nav-mobile-nav-list">
+                <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda">
+                    <span class="nav-mobile-icon-box">🏠</span>
+                    <span class="nav-mobile-link-text">Beranda</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
+                <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang">
+                    <span class="nav-mobile-icon-box">📚</span>
+                    <span class="nav-mobile-link-text">Jenjang Pendidikan</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
+                <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang">
+                    <span class="nav-mobile-icon-box">🏫</span>
+                    <span class="nav-mobile-link-text">Cabang Sekolah</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
+                <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">
+                    <span class="nav-mobile-icon-box">📰</span>
+                    <span class="nav-mobile-link-text">Berita & Informasi</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
+            </div>
 
-        @guest
-        <a href="{{ route('login') }}" class="nav-mobile-link"><span class="nav-link-text">🔑 Login Guru</span></a>
-        @endguest
+            {{-- 2. Kartu Layanan PPDB Online --}}
+            <div class="nav-mobile-ppdb-box">
+                <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb">
+                    <span class="nav-cta-text">🎓 Daftar PPDB Online</span>
+                </a>
+                <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-sublink">
+                    <span class="nav-sublink-icon">🔍</span>
+                    <span class="nav-sublink-text">Cek Status Pendaftaran</span>
+                    <span class="nav-sublink-badge">Online</span>
+                </a>
+            </div>
+
+            {{-- 3. Utility & Akun Footer --}}
+            <div class="nav-mobile-footer-row">
+                <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button" aria-label="Ganti Tema Tampilan">
+                    <span class="theme-btn-content theme-btn-dark">
+                        <span class="theme-mobile-icon">☀️</span>
+                        <span class="theme-mobile-text">Mode Terang</span>
+                    </span>
+                    <span class="theme-btn-content theme-btn-light">
+                        <span class="theme-mobile-icon">🌙</span>
+                        <span class="theme-mobile-text">Mode Gelap</span>
+                    </span>
+                </button>
+
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="nav-mobile-auth-btn nav-mobile-auth-admin">
+                        <span>🛡️ Admin</span>
+                    </a>
+                    <a href="{{ route('logout') }}" class="nav-mobile-auth-btn nav-mobile-auth-logout">
+                        <span>🚪 Keluar</span>
+                    </a>
+                @endauth
+
+                @guest
+                    <a href="{{ route('login') }}" class="nav-mobile-auth-btn nav-mobile-auth-login">
+                        <span>🔑 Login Guru</span>
+                    </a>
+                @endguest
+            </div>
+        </div>
     </div>
 </header>
 
@@ -124,12 +174,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // ── Hamburger Toggle & Mobile Panel ──
     const toggleBtn   = document.getElementById('navToggle');
     const mobilePanel = document.getElementById('navMobilePanel');
+    const backdrop    = document.getElementById('navMobileBackdrop');
     const iconOpen    = document.getElementById('iconHamburger');
     const iconClose   = document.getElementById('iconClose');
 
     function closeMobileMenu() {
         if (mobilePanel && mobilePanel.classList.contains('is-open')) {
             mobilePanel.classList.remove('is-open');
+            backdrop?.classList.remove('is-open');
+            document.body.classList.remove('nav-mobile-open');
             if (iconOpen && iconClose) {
                 iconOpen.style.display  = 'block';
                 iconClose.style.display = 'none';
@@ -142,6 +195,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function openMobileMenu() {
         if (mobilePanel) {
             mobilePanel.classList.add('is-open');
+            backdrop?.classList.add('is-open');
+            document.body.classList.add('nav-mobile-open');
             if (iconOpen && iconClose) {
                 iconOpen.style.display  = 'none';
                 iconClose.style.display = 'block';
@@ -160,11 +215,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Tutup saat backdrop diklik
+    backdrop?.addEventListener('click', closeMobileMenu);
+
     // Tutup menu saat klik di luar area navbar
     document.addEventListener('click', function (e) {
         if (mobilePanel?.classList.contains('is-open')) {
             const navbar = document.getElementById('mainNavbar');
-            if (navbar && !navbar.contains(e.target)) {
+            if (navbar && !navbar.contains(e.target) && e.target !== backdrop) {
                 closeMobileMenu();
             }
         }
@@ -178,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Tutup menu saat klik link di panel mobile
-    document.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
+    document.querySelectorAll('.nav-mobile-link, .nav-mobile-cta, .nav-mobile-sublink, .nav-mobile-auth-btn').forEach(link => {
         link.addEventListener('click', () => {
             closeMobileMenu();
         });

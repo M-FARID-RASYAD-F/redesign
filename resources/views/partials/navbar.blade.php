@@ -44,43 +44,46 @@
                 @endguest
             </div>
 
-            {{-- Tombol Menu (kotak border putih) — hamburger --}}
-            <button class="nav-btn-menu" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-                <svg id="iconHamburger" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-                <svg id="iconClose" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-                <span class="nav-link-text">Menu</span>
-            </button>
+            {{-- Island Menu: kapsul kecil yang melebar jadi panel (orkestrasi GSAP easeReverse) --}}
+            <div class="nav-island" id="navIsland">
+                <button class="nav-island-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navMobilePanel">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <line class="island-bar island-bar-top" x1="3" y1="5" x2="13" y2="5"/>
+                        <line class="island-bar island-bar-mid" x1="3" y1="8" x2="13" y2="8"/>
+                        <line class="island-bar island-bar-bot" x1="3" y1="11" x2="13" y2="11"/>
+                    </svg>
+                    <span class="nav-link-text island-toggle-label">Menu</span>
+                </button>
+
+                <div class="nav-island-backdrop" id="navIslandBackdrop"></div>
+
+                {{-- ── Panel Menu (terbuka dari dalam island) ── --}}
+                <div class="nav-mobile-panel" id="navMobilePanel" role="menu">
+                    <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda" tabindex="-1"><span class="nav-link-text">🏠 Beranda</span></a>
+                    <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang" tabindex="-1"><span class="nav-link-text">📚 Jenjang</span></a>
+                    <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang" tabindex="-1"><span class="nav-link-text">🏫 Cabang Sekolah</span></a>
+                    <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita" tabindex="-1"><span class="nav-link-text">📰 Berita</span></a>
+                    <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link" tabindex="-1"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
+                    <hr class="nav-mobile-divider">
+                    <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button" tabindex="-1">
+                        <span class="theme-mobile-icon">🌗</span>
+                        <span class="theme-mobile-text">Ganti Tema (Dark / White)</span>
+                    </button>
+                    <hr class="nav-mobile-divider">
+                    <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb" tabindex="-1"><span class="nav-link-text">🎓 Daftar PPDB Online</span></a>
+
+                    @auth
+                    <hr class="nav-mobile-divider">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-mobile-link" tabindex="-1"><span class="nav-link-text">🛡️ Admin Panel</span></a>
+                    <a href="{{ route('logout') }}" class="nav-mobile-link" style="color: #f87171;" tabindex="-1"><span class="nav-link-text">🚪 Logout</span></a>
+                    @endauth
+
+                    @guest
+                    <a href="{{ route('login') }}" class="nav-mobile-link" tabindex="-1"><span class="nav-link-text">🔑 Login Guru</span></a>
+                    @endguest
+                </div>
+            </div>
         </div>
-    </div>
-
-    {{-- ── Mobile Panel ── --}}
-    <div class="nav-mobile-panel" id="navMobilePanel">
-        <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda"><span class="nav-link-text">🏠 Beranda</span></a>
-        <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang"><span class="nav-link-text">📚 Jenjang</span></a>
-        <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang"><span class="nav-link-text">🏫 Cabang Sekolah</span></a>
-        <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita"><span class="nav-link-text">📰 Berita</span></a>
-        <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-link"><span class="nav-link-text">🔍 Cek Status Pendaftaran</span></a>
-        <hr class="nav-mobile-divider">
-        <button class="nav-mobile-theme-btn" id="mobileThemeToggleBtn" type="button">
-            <span class="theme-mobile-icon">🌗</span>
-            <span class="theme-mobile-text">Ganti Tema (Dark / White)</span>
-        </button>
-        <hr class="nav-mobile-divider">
-        <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb"><span class="nav-link-text">🎓 Daftar PPDB Online</span></a>
-
-        @auth
-        <hr class="nav-mobile-divider">
-        <a href="{{ route('admin.dashboard') }}" class="nav-mobile-link"><span class="nav-link-text">🛡️ Admin Panel</span></a>
-        <a href="{{ route('logout') }}" class="nav-mobile-link" style="color: #f87171;"><span class="nav-link-text">🚪 Logout</span></a>
-        @endauth
-
-        @guest
-        <a href="{{ route('login') }}" class="nav-mobile-link"><span class="nav-link-text">🔑 Login Guru</span></a>
-        @endguest
     </div>
 </header>
 
@@ -113,29 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
     themeBtn?.addEventListener('click', toggleTheme);
     mobileThemeBtn?.addEventListener('click', toggleTheme);
 
-    // ── Hamburger Toggle ──
-    const toggleBtn   = document.getElementById('navToggle');
-    const mobilePanel = document.getElementById('navMobilePanel');
-    const iconOpen    = document.getElementById('iconHamburger');
-    const iconClose   = document.getElementById('iconClose');
-
-    toggleBtn?.addEventListener('click', function () {
-        const isOpen = mobilePanel.classList.toggle('is-open');
-        this.setAttribute('aria-expanded', isOpen);
-        iconOpen.style.display  = isOpen ? 'none'  : 'block';
-        iconClose.style.display = isOpen ? 'block' : 'none';
-    });
-
-    // Tutup menu saat klik link
+    // ── Island Menu Toggle (lihat public/js/nav-island.js untuk animasi GSAP) ──
+    // Tutup island saat klik link/menu item di dalamnya
     document.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
-        link.addEventListener('click', () => {
-            mobilePanel?.classList.remove('is-open');
-            if (iconOpen && iconClose) {
-                iconOpen.style.display  = 'block';
-                iconClose.style.display = 'none';
-                toggleBtn?.setAttribute('aria-expanded', 'false');
-            }
-        });
+        link.addEventListener('click', () => window.closeNavIsland?.());
     });
 
     // ── Navbar Scroll Shadow ──
@@ -189,19 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
         link.classList.add('nav-link-pressed');
         setTimeout(() => link.classList.remove('nav-link-pressed'), 250);
 
-        // Tutup mobile panel jika sedang terbuka
-        const mobilePanel = document.getElementById('navMobilePanel');
-        if (mobilePanel && mobilePanel.classList.contains('is-open')) {
-            mobilePanel.classList.remove('is-open');
-            const iconOpen = document.getElementById('iconHamburger');
-            const iconClose = document.getElementById('iconClose');
-            const toggleBtn = document.getElementById('navToggle');
-            if (iconOpen && iconClose) {
-                iconOpen.style.display = 'block';
-                iconClose.style.display = 'none';
-                toggleBtn?.setAttribute('aria-expanded', 'false');
-            }
-        }
+        // Tutup island menu jika sedang terbuka
+        window.closeNavIsland?.();
 
         const navHeight = 78;
         const targetPosition = targetId === 'beranda' ? 0 : Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);

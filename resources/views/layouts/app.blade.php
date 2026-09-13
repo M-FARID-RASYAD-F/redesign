@@ -75,6 +75,9 @@
     <!-- Animated Tabs Engine -->
     <script src="{{ asset('js/animated-tabs.js') }}"></script>
 
+    <!-- GSAP + Nav Island Menu (orkestrasi easeReverse) -->
+    <script src="{{ asset('js/gsap.min.js') }}"></script>
+    <script src="{{ asset('js/nav-island.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

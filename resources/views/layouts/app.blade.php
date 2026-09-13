@@ -92,12 +92,11 @@
     <!-- Animated Tabs Engine -->
     <script defer src="{{ $jsv('js/animated-tabs.js') }}"></script>
 
-    <!-- GSAP + Plugin (ScrollTrigger, ScrollSmoother) + Nav Island Menu (orkestrasi easeReverse) -->
+    <!-- GSAP + Plugin (ScrollTrigger, ScrollSmoother) untuk smooth scroll -->
     <script defer src="{{ $jsv('js/gsap.min.js') }}"></script>
     <script defer src="{{ $jsv('js/ScrollTrigger.min.js') }}"></script>
     <script defer src="{{ $jsv('js/ScrollSmoother.min.js') }}"></script>
     <script defer src="{{ $jsv('js/smooth-scroll.js') }}"></script>
-    <script defer src="{{ $jsv('js/nav-island.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

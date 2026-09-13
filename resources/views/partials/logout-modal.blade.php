@@ -99,7 +99,7 @@
 .logout-modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(7, 13, 30, 0.82);
+    background: rgba(24, 28, 20, 0.82);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: opacity 0.28s ease;
@@ -115,12 +115,12 @@
 
 /* Glassmorphism Card with Scale-in Pop Effect */
 .logout-modal-card {
-    background: rgba(15, 23, 42, 0.95);
-    border: 1.5px solid rgba(239, 68, 68, 0.35);
+    background: rgba(46, 54, 40, 0.95);
+    border: 1.5px solid rgba(181, 103, 74, 0.35);
     border-radius: 28px;
     padding: 2.25rem 2rem;
     text-align: center;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(239, 68, 68, 0.18);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(181, 103, 74, 0.18);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     transform: scale(0.6) translateY(25px);
@@ -130,8 +130,8 @@
 }
 
 .logout-modal-overlay.is-loading-active .logout-modal-card {
-    border-color: rgba(56, 189, 248, 0.45);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.25);
+    border-color: rgba(214, 190, 140, 0.45);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 50px rgba(214, 190, 140, 0.25);
 }
 
 .logout-modal-overlay.is-active .logout-modal-card {
@@ -194,7 +194,7 @@
     position: absolute;
     inset: -8px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.5) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(181, 103, 74, 0.5) 0%, transparent 70%);
     animation: badgePulse 2s ease-in-out infinite alternate;
 }
 
@@ -209,13 +209,13 @@
     width: 68px;
     height: 68px;
     border-radius: 20px;
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.38) 100%);
-    border: 1.5px solid rgba(239, 68, 68, 0.55);
+    background: linear-gradient(135deg, rgba(181, 103, 74, 0.2) 0%, rgba(115, 53, 39, 0.38) 100%);
+    border: 1.5px solid rgba(181, 103, 74, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f87171;
-    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+    color: #C97D5E;
+    box-shadow: 0 10px 25px rgba(181, 103, 74, 0.25);
     transform: scale(0);
 }
 
@@ -272,8 +272,8 @@
 }
 
 .btn-logout-confirm {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
-    border: 1.5px solid rgba(239, 68, 68, 0.6);
+    background: linear-gradient(135deg, #B5674A 0%, #A8563C 50%, #733527 100%);
+    border: 1.5px solid rgba(181, 103, 74, 0.6);
     color: #ffffff;
     font-size: 0.9rem;
     font-weight: 800;
@@ -281,7 +281,7 @@
     padding: 0.75rem 1.25rem;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+    box-shadow: 0 8px 20px rgba(181, 103, 74, 0.35);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -292,8 +292,8 @@
 
 .btn-logout-confirm:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 28px rgba(239, 68, 68, 0.5);
-    background: linear-gradient(135deg, #f87171 0%, #ef4444 50%, #b91c1c 100%);
+    box-shadow: 0 12px 28px rgba(181, 103, 74, 0.5);
+    background: linear-gradient(135deg, #C97D5E 0%, #B5674A 50%, #8F4430 100%);
     color: #ffffff;
 }
 
@@ -342,7 +342,7 @@
     position: absolute;
     inset: -16px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, rgba(244, 63, 94, 0.18) 50%, transparent 75%);
+    background: radial-gradient(circle, rgba(214, 190, 140, 0.3) 0%, rgba(168, 86, 60, 0.18) 50%, transparent 75%);
     filter: blur(14px);
     animation: orbitAmbientPulse 2s ease-in-out infinite alternate;
 }
@@ -359,10 +359,10 @@
     height: 100px;
     border-radius: 50%;
     border: 2.5px solid transparent;
-    border-top-color: #38bdf8;
-    border-right-color: #0284c7;
-    border-bottom-color: rgba(56, 189, 248, 0.15);
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+    border-top-color: #D6BE8C;
+    border-right-color: #A88951;
+    border-bottom-color: rgba(214, 190, 140, 0.15);
+    box-shadow: 0 0 18px rgba(214, 190, 140, 0.45);
     animation: orbitClockwise 1.35s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
@@ -373,8 +373,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #38bdf8;
-    box-shadow: 0 0 10px 2.5px #38bdf8;
+    background: #D6BE8C;
+    box-shadow: 0 0 10px 2.5px #D6BE8C;
 }
 
 /* Inner Orbit Ring (Counter-Clockwise Rotation with Rose Accent) */
@@ -384,10 +384,10 @@
     height: 68px;
     border-radius: 50%;
     border: 2.5px solid transparent;
-    border-top-color: #f43f5e;
-    border-left-color: #e11d48;
-    border-bottom-color: rgba(244, 63, 94, 0.15);
-    box-shadow: 0 0 14px rgba(244, 63, 94, 0.45);
+    border-top-color: #B5674A;
+    border-left-color: #A8563C;
+    border-bottom-color: rgba(168, 86, 60, 0.15);
+    box-shadow: 0 0 14px rgba(168, 86, 60, 0.45);
     animation: orbitCounterClockwise 1.05s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
@@ -398,8 +398,8 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #f43f5e;
-    box-shadow: 0 0 9px 2px #f43f5e;
+    background: #B5674A;
+    box-shadow: 0 0 9px 2px #B5674A;
 }
 
 /* Core Center Glass Element */
@@ -409,7 +409,7 @@
     width: 42px;
     height: 42px;
     border-radius: 14px;
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(46, 54, 40, 0.85);
     border: 1.5px solid rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(16px);
     display: flex;
@@ -432,7 +432,7 @@
 
 @keyframes corePulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(56, 189, 248, 0.45); }
+    50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(214, 190, 140, 0.45); }
 }
 
 /* Orbit Loading Text */
@@ -441,7 +441,7 @@
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 0.45rem;
-    background: linear-gradient(135deg, #ffffff 0%, #bae6fd 60%, #38bdf8 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #EFEDE3 60%, #D6BE8C 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.01em;
@@ -470,7 +470,7 @@
 .orbit-progress-bar {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 0%, #38bdf8 45%, #f43f5e 80%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, #D6BE8C 45%, #B5674A 80%, transparent 100%);
     animation: orbitShimmer 1.15s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -481,36 +481,36 @@
 
 /* Light Theme Adjustments (White Mode ☀️) */
 [data-theme="light"] .logout-modal-backdrop {
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(46, 54, 40, 0.45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
 
 [data-theme="light"] .logout-modal-card {
     background: #ffffff;
-    border: 1.5px solid rgba(239, 68, 68, 0.22);
-    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18), 0 0 30px rgba(239, 68, 68, 0.08);
+    border: 1.5px solid rgba(181, 103, 74, 0.22);
+    box-shadow: 0 25px 50px -12px rgba(46, 54, 40, 0.18), 0 0 30px rgba(181, 103, 74, 0.08);
 }
 
 [data-theme="light"] .logout-modal-overlay.is-loading-active .logout-modal-card {
-    border-color: rgba(14, 165, 233, 0.35);
-    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18), 0 0 35px rgba(14, 165, 233, 0.12);
+    border-color: rgba(168, 137, 81, 0.35);
+    box-shadow: 0 25px 50px -12px rgba(46, 54, 40, 0.18), 0 0 35px rgba(168, 137, 81, 0.12);
 }
 
 /* 1 & 2. Solusi Badge Ikon Pop & Pulse Glow di White Mode */
 [data-theme="light"] .logout-modal-badge-glow {
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(181, 103, 74, 0.18) 0%, transparent 70%);
 }
 
 [data-theme="light"] .logout-modal-badge-icon {
-    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-    border: 1.5px solid rgba(239, 68, 68, 0.35);
-    color: #dc2626;
-    box-shadow: 0 10px 24px rgba(239, 68, 68, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, #F0EEE5 0%, #D9B7A8 100%);
+    border: 1.5px solid rgba(181, 103, 74, 0.35);
+    color: #A8563C;
+    box-shadow: 0 10px 24px rgba(181, 103, 74, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 [data-theme="light"] .logout-modal-title {
-    color: #0f172a;
+    color: #242A20;
     font-weight: 800;
     letter-spacing: -0.02em;
 }
@@ -532,55 +532,55 @@
 [data-theme="light"] .btn-logout-cancel:hover {
     background: #f1f5f9;
     border-color: #cbd5e1;
-    color: #0f172a;
+    color: #242A20;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .btn-logout-confirm {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    border: 1px solid rgba(220, 38, 38, 0.4);
+    background: linear-gradient(135deg, #B5674A 0%, #A8563C 100%);
+    border: 1px solid rgba(168, 86, 60, 0.4);
     color: #ffffff;
-    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 18px rgba(181, 103, 74, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
 
 [data-theme="light"] .btn-logout-confirm:hover {
-    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-    box-shadow: 0 10px 24px rgba(239, 68, 68, 0.45);
+    background: linear-gradient(135deg, #C97D5E 0%, #B5674A 100%);
+    box-shadow: 0 10px 24px rgba(181, 103, 74, 0.45);
     color: #ffffff;
 }
 
 /* 4. Solusi Lintasan Progress Track & Elemen Orbit Loading di White Mode */
 [data-theme="light"] .orbit-ambient-glow {
-    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(244, 63, 94, 0.1) 50%, transparent 75%);
+    background: radial-gradient(circle, rgba(168, 137, 81, 0.15) 0%, rgba(168, 86, 60, 0.1) 50%, transparent 75%);
 }
 
 [data-theme="light"] .orbit-ring-outer {
-    border-top-color: #0284c7;
-    border-right-color: #0ea5e9;
-    border-bottom-color: rgba(14, 165, 233, 0.15);
-    box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+    border-top-color: #A88951;
+    border-right-color: #A88951;
+    border-bottom-color: rgba(168, 137, 81, 0.15);
+    box-shadow: 0 0 16px rgba(168, 137, 81, 0.35);
 }
 
 [data-theme="light"] .orbit-satellite-outer {
-    background: #0284c7;
-    box-shadow: 0 0 10px 2.5px #0ea5e9;
+    background: #A88951;
+    box-shadow: 0 0 10px 2.5px #A88951;
 }
 
 [data-theme="light"] .orbit-ring-inner {
-    border-top-color: #e11d48;
-    border-left-color: #f43f5e;
-    border-bottom-color: rgba(244, 63, 94, 0.15);
-    box-shadow: 0 0 14px rgba(244, 63, 94, 0.35);
+    border-top-color: #A8563C;
+    border-left-color: #B5674A;
+    border-bottom-color: rgba(168, 86, 60, 0.15);
+    box-shadow: 0 0 14px rgba(168, 86, 60, 0.35);
 }
 
 [data-theme="light"] .orbit-satellite-inner {
-    background: #e11d48;
-    box-shadow: 0 0 9px 2px #f43f5e;
+    background: #A8563C;
+    box-shadow: 0 0 9px 2px #B5674A;
 }
 
 [data-theme="light"] .orbit-loading-title {
-    background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+    background: linear-gradient(135deg, #242A20 0%, #8F7440 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -592,7 +592,7 @@
 [data-theme="light"] .orbit-core {
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 6px 18px rgba(46, 54, 40, 0.1);
 }
 
 [data-theme="light"] .orbit-progress-track {
@@ -600,7 +600,7 @@
 }
 
 [data-theme="light"] .orbit-progress-bar {
-    background: linear-gradient(90deg, transparent 0%, #0284c7 45%, #ef4444 80%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, #A88951 45%, #B5674A 80%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -610,34 +610,34 @@
     z-index: 1000000 !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
-    background: rgba(15, 23, 42, 0.75) !important;
+    background: rgba(46, 54, 40, 0.75) !important;
 }
 
 .swal2-popup.swal-logout-popup {
     border-radius: 26px !important;
     padding: 2.2rem 2.2rem 2rem !important;
-    background: linear-gradient(145deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.97) 100%) !important;
+    background: linear-gradient(145deg, rgba(46, 54, 40, 0.96) 0%, rgba(46, 54, 40, 0.97) 100%) !important;
     border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(16, 185, 129, 0.16) !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(143, 162, 138, 0.16) !important;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
     color: #ffffff !important;
 }
 
 /* SweetAlert Iconic Animated Success Icon Customization */
 .swal-logout-popup .swal2-icon.swal2-success {
-    border-color: #10b981 !important;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.35) !important;
+    border-color: #8FA28A !important;
+    box-shadow: 0 0 30px rgba(143, 162, 138, 0.35) !important;
     margin: 0.6rem auto 1.4rem !important;
     width: 82px !important;
     height: 82px !important;
 }
 
 .swal-logout-popup .swal2-icon.swal2-success [class^='swal2-success-line'] {
-    background-color: #10b981 !important;
+    background-color: #8FA28A !important;
 }
 
 .swal-logout-popup .swal2-icon.swal2-success .swal2-success-ring {
-    border-color: rgba(16, 185, 129, 0.35) !important;
+    border-color: rgba(143, 162, 138, 0.35) !important;
     width: 100% !important;
     height: 100% !important;
 }
@@ -655,7 +655,7 @@
     font-weight: 800 !important;
     letter-spacing: -0.015em !important;
     color: #ffffff !important;
-    background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 50%, #34d399 100%) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #C7D3C0 50%, #8FA28A 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     margin-bottom: 0.5rem !important;
@@ -683,49 +683,49 @@
 }
 
 .swal-logout-popup .swal2-confirm.swal-logout-btn {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    background: linear-gradient(135deg, #8FA28A 0%, #46583F 100%) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     font-size: 0.95rem !important;
     border-radius: 14px !important;
     padding: 0.72rem 2.4rem !important;
     border: 1px solid rgba(255, 255, 255, 0.22) !important;
-    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4) !important;
+    box-shadow: 0 4px 18px rgba(143, 162, 138, 0.4) !important;
     cursor: pointer !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .swal-logout-popup .swal2-confirm.swal-logout-btn:hover {
     transform: translateY(-2px) scale(1.02) !important;
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55) !important;
+    box-shadow: 0 8px 25px rgba(143, 162, 138, 0.55) !important;
 }
 
 .swal-logout-popup .swal2-timer-progress-bar.swal-logout-progress {
-    background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%) !important;
+    background: linear-gradient(90deg, #8FA28A 0%, #D6BE8C 50%, #A88951 100%) !important;
     height: 4px !important;
     border-radius: 9999px !important;
 }
 
 /* Light Theme overrides for SweetAlert */
 [data-theme="light"] .swal2-container.swal-logout-container {
-    background: rgba(15, 23, 42, 0.45) !important;
+    background: rgba(46, 54, 40, 0.45) !important;
 }
 
 [data-theme="light"] .swal2-popup.swal-logout-popup {
     background: #ffffff !important;
-    border: 1.5px solid rgba(16, 185, 129, 0.25) !important;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 0 35px rgba(16, 185, 129, 0.16) !important;
-    color: #0f172a !important;
+    border: 1.5px solid rgba(143, 162, 138, 0.25) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 0 35px rgba(143, 162, 138, 0.16) !important;
+    color: #242A20 !important;
 }
 
 [data-theme="light"] .swal-logout-title {
-    background: linear-gradient(135deg, #0f172a 0%, #047857 100%) !important;
+    background: linear-gradient(135deg, #242A20 0%, #3A4A34 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
 }
 
 [data-theme="light"] .swal-logout-msg {
-    color: #0f172a;
+    color: #242A20;
 }
 
 [data-theme="light"] .swal-logout-sub {

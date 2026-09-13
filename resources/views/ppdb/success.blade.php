@@ -25,7 +25,7 @@
                         <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
                     </div>
                     <div>
-                        <span style="font-size: 0.8rem; color: #93c5fd; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">KARTU BUKTI PENDAFTARAN</span>
+                        <span style="font-size: 0.8rem; color: #D6BE8C; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">KARTU BUKTI PENDAFTARAN</span>
                         <h2 style="font-size: 1.25rem; font-weight: 800; margin: 2px 0 0; color: #ffffff;">PKBM Tahfizh At-Tamam</h2>
                     </div>
                 </div>

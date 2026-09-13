@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SMK Negeri 1 Nusantara - Website Official Sekolah')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'PKBM Tahfizh At-Tamam - Website Resmi Sekolah')</title>
+    
+    <!-- Meta SEO & Social Graph (OpenGraph / Twitter) -->
+    <meta name="description" content="Portal Resmi PKBM Tahfizh At-Tamam Edu — Sekolah berkarakter Qurani, unggul teknologi, dan siap kerja dengan pilihan jenjang SD, SMP, dan SMK.">
+    <meta name="keywords" content="At-Tamam Edu, PKBM Tahfizh, PPDB Online, SD Tahfizh, SMP Tahfizh, SMK Pekanbaru, Sekolah Islam">
+    <meta property="og:title" content="@yield('title', 'PKBM Tahfizh At-Tamam — Portal Resmi Sekolah')">
+    <meta property="og:description" content="Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital. Pendaftaran PPDB Online SD, SMP, SMK telah dibuka.">
+    <meta property="og:image" content="{{ asset('images/logo.jpeg') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

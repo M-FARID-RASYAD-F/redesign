@@ -215,5 +215,11 @@
             </tbody>
         </table>
     </div>
+
+    @if($registrations->hasPages())
+    <div style="margin-top: 20px; display: flex; justify-content: flex-end; overflow-x: auto;">
+        {{ $registrations->links() }}
+    </div>
+    @endif
 </div>
 @endsection

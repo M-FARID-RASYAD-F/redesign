@@ -83,5 +83,11 @@
             </tbody>
         </table>
     </div>
+
+    @if($teachers->hasPages())
+    <div style="margin-top: 20px; display: flex; justify-content: flex-end; overflow-x: auto;">
+        {{ $teachers->links() }}
+    </div>
+    @endif
 </div>
 @endsection

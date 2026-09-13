@@ -34,8 +34,8 @@ class SchoolController extends Controller
         $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
         $sambutan = [
             'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
-            'jabatan' => 'Kepala Sekolah SMK Negeri 1 Nusantara',
-            'pesan' => 'Selamat datang di portal resmi SMK Negeri 1 Nusantara. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan relevan dengan kebutuhan dunia kerja masa depan. Mari bersama mewujudkan impian dan potensi terbaik para siswa!',
+            'jabatan' => 'Kepala Sekolah PKBM Tahfizh At-Tamam',
+            'pesan' => 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam Edu. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, berkarakter Qurani, dan relevan dengan kebutuhan masa depan. Mari bersama mewujudkan potensi terbaik para peserta didik!',
             'foto_initials' => 'AF'
         ];
 
@@ -524,5 +524,21 @@ class SchoolController extends Controller
             'registration' => $registration,
             'search' => $query,
         ]);
+    }
+
+    /**
+     * Menampilkan Halaman Detail Berita / Pengumuman Publik
+     */
+    public function newsShow($slug)
+    {
+        $news = News::with(['category', 'author'])->where('slug', $slug)->firstOrFail();
+        
+        $relatedNews = News::where('id', '!=', $news->id)
+            ->where('category_id', $news->category_id)
+            ->orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+
+        return view('news.show', compact('news', 'relatedNews'));
     }
 }

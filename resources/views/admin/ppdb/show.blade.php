@@ -580,7 +580,7 @@
                     </div>
 
                     <div class="ppdb-doc-action">
-                        <a href="{{ Storage::url($doc->file_path) }}" target="_blank" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <a href="{{ route('admin.ppdb.document', $doc->id) }}" target="_blank" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
                             <span>👀 Buka Dokumen</span>
                             <span style="font-size: 0.75rem;">↗</span>
                         </a>

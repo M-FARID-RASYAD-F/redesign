@@ -20,17 +20,26 @@ use App\Http\Controllers\Admin\UserController;
 // 1. Route Halaman Utama Landing Page Sekolah
 Route::get('/', [SchoolController::class, 'index'])->name('home');
 
-// 2. Route Memproses Form Kontak Cepat
-Route::post('/kontak', [SchoolController::class, 'submitContact'])->name('kontak.submit');
+// 1.1 Route Baca Artikel Berita Publik
+Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
+
+// 2. Route Memproses Form Kontak Cepat (Rate Limited: 10 per menit)
+Route::post('/kontak', [SchoolController::class, 'submitContact'])
+    ->name('kontak.submit')
+    ->middleware('throttle:10,1');
 
 // 3. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');
     Route::get('/daftar', [SchoolController::class, 'ppdbCreate'])->name('create');
-    Route::post('/daftar', [SchoolController::class, 'ppdbStore'])->name('store');
+    Route::post('/daftar', [SchoolController::class, 'ppdbStore'])
+        ->name('store')
+        ->middleware('throttle:10,1');
     Route::get('/sukses/{no_pendaftaran}', [SchoolController::class, 'ppdbSuccess'])->name('success');
     Route::get('/cek-status', [SchoolController::class, 'ppdbTracking'])->name('tracking');
-    Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])->name('check');
+    Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])
+        ->name('check')
+        ->middleware('throttle:20,1');
 });
 
 // 4. Route Login & Registrasi Guru (Custom UI) + proses autentikasi
@@ -42,16 +51,26 @@ Route::get('/register', function () {
     return view('auth.login', ['defaultTab' => 'register']);
 })->name('register')->middleware('guest');
 
+// POST Login (mendukung /login dan /login-process dengan throttle 10 per menit)
+Route::post('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
+    ->name('login.post')
+    ->middleware(['guest', 'throttle:10,1']);
+
 Route::post('/login-process', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
     ->name('login.process')
-    ->middleware('guest');
+    ->middleware(['guest', 'throttle:10,1']);
+
+// POST Register (mendukung /register dan /register-process dengan throttle 10 per menit)
+Route::post('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
+    ->name('register.post')
+    ->middleware(['guest', 'throttle:10,1']);
 
 Route::post('/register-process', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
     ->name('register.process')
-    ->middleware('guest');
+    ->middleware(['guest', 'throttle:10,1']);
 
-// 5. Route Logout Guru
-Route::get('/logout', function (\Illuminate\Http\Request $request) {
+// 5. Route Logout Guru (Mendukung GET dan POST dengan proteksi sesi)
+Route::match(['get', 'post'], '/logout', function (\Illuminate\Http\Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
@@ -63,8 +82,8 @@ Route::get('/logout', function (\Illuminate\Http\Request $request) {
     return redirect('/')->with('success', 'Anda telah berhasil Logout dari sistem.');
 })->name('logout');
 
-// 6. Route Group Admin
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+// 6. Route Group Admin (Proteksi Otentikasi & Akun Aktif)
+Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(function () {
     // 6.1 Role Dashboards
     Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/cms/dashboard', [CmsDashboardController::class, 'index'])
@@ -81,8 +100,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class)->middleware('role:super_admin');
 
     // 6.3 Modul Berita (CMS)
-    // Read: super_admin, admin_cms, admin_ppdb, editor_akademik
-    // Write (Create/Edit/Delete): super_admin, admin_cms
     Route::get('/news', [AdminController::class, 'newsIndex'])->name('news.index');
     Route::middleware('role:super_admin,admin_cms')->group(function () {
         Route::get('/news/create', [AdminController::class, 'newsCreate'])->name('news.create');
@@ -93,8 +110,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     // 6.4 Modul Guru & Staf (Akademik & CMS)
-    // Read: super_admin, admin_cms, editor_akademik
-    // Write: super_admin, admin_cms, editor_akademik
     Route::get('/teachers', [AdminController::class, 'teacherIndex'])->name('teachers.index');
     Route::middleware('role:super_admin,admin_cms,editor_akademik')->group(function () {
         Route::get('/teachers/create', [AdminController::class, 'teacherCreate'])->name('teachers.create');
@@ -105,8 +120,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     // 6.5 Modul Program Jurusan (Akademik & CMS)
-    // Read: super_admin, admin_cms, editor_akademik
-    // Write: super_admin, admin_cms, editor_akademik
     Route::get('/majors', [AdminController::class, 'majorIndex'])->name('majors.index');
     Route::middleware('role:super_admin,admin_cms,editor_akademik')->group(function () {
         Route::get('/majors/create', [AdminController::class, 'majorCreate'])->name('majors.create');
@@ -117,13 +130,14 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     // 6.6 Modul PPDB Online
-    // Read (Index, Show): super_admin, admin_ppdb, admin_cms
     Route::middleware('role:super_admin,admin_ppdb,admin_cms')->group(function () {
         Route::get('/ppdb', [AdminController::class, 'ppdbIndex'])->name('ppdb.index');
         Route::get('/ppdb/export', [AdminController::class, 'ppdbExportCsv'])
             ->name('ppdb.export')
             ->middleware('role:super_admin,admin_ppdb');
         Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
+        Route::get('/ppdb/document/{id}', [AdminController::class, 'ppdbViewDocument'])
+            ->name('ppdb.document');
         Route::post('/ppdb/{id}/status', [AdminController::class, 'ppdbUpdateStatus'])
             ->name('ppdb.status')
             ->middleware('role:super_admin,admin_ppdb');

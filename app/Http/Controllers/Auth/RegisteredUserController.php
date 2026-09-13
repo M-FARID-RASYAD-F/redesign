@@ -41,13 +41,11 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'editor_akademik',
-            'is_active' => true,
+            'is_active' => false, // Menunggu persetujuan & aktivasi oleh Super Admin
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(route('admin.dashboard', absolute: false));
+        return redirect()->route('login')->with('success', 'Pendaftaran akun staf berhasil diajukan! Akun Anda menunggu aktivasi oleh Super Admin sebelum dapat digunakan.');
     }
 }

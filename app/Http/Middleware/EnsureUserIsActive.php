@@ -12,12 +12,7 @@ class EnsureUserIsActive
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user() && !$request->user()->is_active) {
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-
-            return redirect()->route('login')
-                ->with('error', 'Akun Anda dinonaktifkan. Silakan hubungi Guru Pembimbing.');
+            abort(403, 'Akun Anda dinonaktifkan. Silakan hubungi Administrator.');
         }
 
         return $next($request);

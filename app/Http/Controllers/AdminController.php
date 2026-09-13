@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\News;
 use App\Models\NewsCategory;
@@ -57,7 +59,7 @@ class AdminController extends Controller
      */
     public function newsIndex()
     {
-        $newsList = News::with(['category', 'author'])->orderBy('created_at', 'desc')->get();
+        $newsList = News::with(['category', 'author'])->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
         return view('admin.news.index', compact('newsList'));
     }
 
@@ -140,7 +142,7 @@ class AdminController extends Controller
      */
     public function teacherIndex()
     {
-        $teachers = TeacherStaff::orderBy('name', 'asc')->get();
+        $teachers = TeacherStaff::orderBy('name', 'asc')->paginate(15)->withQueryString();
         return view('admin.teachers.index', compact('teachers'));
     }
 
@@ -227,27 +229,33 @@ class AdminController extends Controller
             $currentStatus = 'all';
         }
 
-        $registrations = $query->orderBy('created_at', 'desc')->get();
+        $registrations = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
+
+        // Agregasi jumlah pendaftar per jenjang dalam 1 query cepat
+        $jenjangAgg = PpdbRegistration::select('jenjang', DB::raw('count(*) as total'))
+            ->groupBy('jenjang')
+            ->pluck('total', 'jenjang');
 
         $counts = [
-            'all' => PpdbRegistration::count(),
-            'sd'  => PpdbRegistration::where('jenjang', 'sd')->count(),
-            'smp' => PpdbRegistration::where('jenjang', 'smp')->count(),
-            'smk' => PpdbRegistration::where('jenjang', 'smk')->count(),
+            'all' => $jenjangAgg->sum(),
+            'sd'  => (int) ($jenjangAgg->get('sd') ?? 0),
+            'smp' => (int) ($jenjangAgg->get('smp') ?? 0),
+            'smk' => (int) ($jenjangAgg->get('smk') ?? 0),
         ];
 
-        // Hitung total status berdasarkan konteks jenjang yang sedang dipilih
-        $statusBaseQuery = PpdbRegistration::query();
+        // Agregasi jumlah status pendaftar berdasarkan jenjang terpilih dalam 1 query cepat
+        $statusQuery = PpdbRegistration::select('status', DB::raw('count(*) as total'));
         if ($currentJenjang !== 'all') {
-            $statusBaseQuery->where('jenjang', $currentJenjang);
+            $statusQuery->where('jenjang', $currentJenjang);
         }
+        $statusAgg = $statusQuery->groupBy('status')->pluck('total', 'status');
 
         $statusCounts = [
-            'all'          => (clone $statusBaseQuery)->count(),
-            'pending'      => (clone $statusBaseQuery)->where('status', 'pending')->count(),
-            'diverifikasi' => (clone $statusBaseQuery)->where('status', 'diverifikasi')->count(),
-            'diterima'     => (clone $statusBaseQuery)->where('status', 'diterima')->count(),
-            'ditolak'      => (clone $statusBaseQuery)->where('status', 'ditolak')->count(),
+            'all'          => $statusAgg->sum(),
+            'pending'      => (int) ($statusAgg->get('pending') ?? 0),
+            'diverifikasi' => (int) ($statusAgg->get('diverifikasi') ?? 0),
+            'diterima'     => (int) ($statusAgg->get('diterima') ?? 0),
+            'ditolak'      => (int) ($statusAgg->get('ditolak') ?? 0),
         ];
 
         return view('admin.ppdb.index', compact('registrations', 'currentJenjang', 'currentStatus', 'counts', 'statusCounts'));
@@ -343,6 +351,32 @@ class AdminController extends Controller
         $registration = PpdbRegistration::with('documents')->findOrFail($id);
         $majors = Major::all();
         return view('admin.ppdb.show', compact('registration', 'majors'));
+    }
+
+    /**
+     * Membuka / Mengunduh Berkas Dokumen Persyaratan PPDB secara Aman (Private Disk)
+     */
+    public function ppdbViewDocument($id)
+    {
+        $document = PpdbDocument::findOrFail($id);
+
+        if (!Auth::check() || !in_array(Auth::user()->role, ['super_admin', 'admin_ppdb', 'admin_cms'])) {
+            abort(403, 'Anda tidak memiliki hak akses untuk membuka berkas persyaratan ini.');
+        }
+
+        $filePath = $document->file_path;
+
+        // Cek penyimpanan private (local) terlebih dahulu
+        if (Storage::disk('local')->exists($filePath)) {
+            return Storage::disk('local')->response($filePath);
+        }
+
+        // Fallback untuk berkas lama yang masih tersimpan di storage/public
+        if (Storage::disk('public')->exists($filePath)) {
+            return Storage::disk('public')->response($filePath);
+        }
+
+        abort(404, 'Berkas fisik dokumen tidak ditemukan di penyimpanan server.');
     }
 
     public function ppdbUpdateStatus(Request $request, $id)

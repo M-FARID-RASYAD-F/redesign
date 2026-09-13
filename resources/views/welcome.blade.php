@@ -16,7 +16,7 @@
                 <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
 
                 <div class="hero-actions">
-                    <a href="#kontak" class="btn btn-primary">
+                    <a href="{{ route('ppdb.index') }}" class="btn btn-primary">
                         📝 Daftar PPDB Online
                     </a>
                     <a href="#jenjang" class="btn btn-outline">
@@ -161,7 +161,7 @@
                 >
                     <p style="margin-bottom: 1rem; font-size: 0.9rem;">{{ $b['ringkasan'] }}</p>
                     
-                    <a href="#" class="card-read-more">
+                    <a href="{{ route('news.show', $b['slug'] ?? Str::slug($b['judul'])) }}" class="card-read-more">
                         Baca Selengkapnya &rarr;
                     </a>
                 </x-card>

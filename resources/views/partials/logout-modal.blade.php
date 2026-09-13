@@ -769,7 +769,7 @@
 
 {{-- Ensure SweetAlert2 Engine is Loaded --}}
 @once
-<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+<script defer src="{{ asset('js/sweetalert2.all.min.js') }}?v={{ file_exists(public_path('js/sweetalert2.all.min.js')) ? filemtime(public_path('js/sweetalert2.all.min.js')) : time() }}"></script>
 @endonce
 
 <script>

@@ -70,24 +70,34 @@
     <!-- Floating WhatsApp Button (Pojok Kiri Bawah) — di luar smooth-wrapper, tetap fixed -->
     @include('partials.whatsapp-button')
 
-    <!-- SweetAlert2 Standalone Engine -->
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    {{-- Modal Konfirmasi Logout — hanya relevan untuk user yang sudah login (tautan logout
+         cuma muncul di dalam @auth), jadi SweetAlert2 (~79KB) & markup modal ini tidak perlu
+         ikut didownload/parse oleh pengunjung tamu (mayoritas trafik: calon siswa/wali cek PPDB). --}}
+    @auth
+        @include('partials.logout-modal')
+    @endauth
 
-    <!-- Modal Konfirmasi Logout (Scale-in / Zoom-in Pop Effect) -->
-    @include('partials.logout-modal')
+    {{--
+        Semua script lokal dipasangi ?v={filemtime} (sama seperti style.css di <head>)
+        supaya aman dipasangi Cache-Control 1 tahun di .htaccess — begitu file ini diubah,
+        URL-nya otomatis berubah, jadi tidak ada risiko browser mengunci versi lama.
+    --}}
+    @php
+        $jsv = fn (string $path) => asset($path) . '?v=' . (file_exists(public_path($path)) ? filemtime(public_path($path)) : time());
+    @endphp
 
     <!-- 3D Tilt Card Interactive Physics Engine -->
-    <script src="{{ asset('js/tilt-card.js') }}"></script>
-    
+    <script defer src="{{ $jsv('js/tilt-card.js') }}"></script>
+
     <!-- Animated Tabs Engine -->
-    <script src="{{ asset('js/animated-tabs.js') }}"></script>
+    <script defer src="{{ $jsv('js/animated-tabs.js') }}"></script>
 
     <!-- GSAP + Plugin (ScrollTrigger, ScrollSmoother) + Nav Island Menu (orkestrasi easeReverse) -->
-    <script src="{{ asset('js/gsap.min.js') }}"></script>
-    <script src="{{ asset('js/ScrollTrigger.min.js') }}"></script>
-    <script src="{{ asset('js/ScrollSmoother.min.js') }}"></script>
-    <script src="{{ asset('js/smooth-scroll.js') }}"></script>
-    <script src="{{ asset('js/nav-island.js') }}"></script>
+    <script defer src="{{ $jsv('js/gsap.min.js') }}"></script>
+    <script defer src="{{ $jsv('js/ScrollTrigger.min.js') }}"></script>
+    <script defer src="{{ $jsv('js/ScrollSmoother.min.js') }}"></script>
+    <script defer src="{{ $jsv('js/smooth-scroll.js') }}"></script>
+    <script defer src="{{ $jsv('js/nav-island.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

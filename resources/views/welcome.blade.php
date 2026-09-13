@@ -2,6 +2,12 @@
 
 @section('title', $sekolah['nama'] . ' - Portal Resmi Sekolah')
 
+@push('styles')
+    {{-- Hero pakai background-image CSS — browser baru tahu URL-nya setelah parse CSS,
+         jadi LCP telat mulai fetch. Preload di <head> supaya request-nya mulai sejak awal. --}}
+    <link rel="preload" as="image" href="{{ asset('images/sch5.jpg') }}" fetchpriority="high">
+@endpush
+
 @section('konten_utama')
 
     <!-- 1. Hero Banner Section — Full Width Academic Style -->

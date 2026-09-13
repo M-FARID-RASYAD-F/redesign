@@ -25,7 +25,7 @@
 
         if (prefersReducedMotion) {
             tl = gsap.timeline({ paused: true })
-                .set(panel, { pointerEvents: 'auto' })
+                .set(panel, { pointerEvents: 'auto', clipPath: 'circle(150% at 100% 0%)' })
                 .to(panel, { autoAlpha: 1, duration: 0.01 }, 0)
                 .to(backdrop, { autoAlpha: 1, duration: 0.01 }, 0);
             return;
@@ -33,22 +33,23 @@
 
         tl = gsap.timeline({ paused: true })
             .set(panel, { pointerEvents: 'auto' })
-            // Kapsul toggle "melebar" — feedback bouncy saat buka, susut halus saat tutup
-            .to(toggleBtn, { scale: 1.08, duration: 0.4, ease: 'back.out(2)', easeReverse: 'power2.out' }, 0)
+            // Kapsul toggle "melebar" — feedback bouncy saat buka, susut cepat & halus saat tutup
+            .to(toggleBtn, { scale: 1.08, duration: 0.4, ease: 'back.out(2)', easeReverse: 'power3.out' }, 0)
             // Bar hamburger morph jadi X (garis atas & bawah), bar tengah memudar
             .to('.island-bar-mid', { opacity: 0, duration: 0.15, ease: 'power2.in', easeReverse: true }, 0)
-            .to('.island-bar-top', { attr: { x1: 3, y1: 3, x2: 13, y2: 13 }, duration: 0.32, ease: 'power3.inOut' }, 0.02)
-            .to('.island-bar-bot', { attr: { x1: 13, y1: 3, x2: 3, y2: 11 }, duration: 0.32, ease: 'power3.inOut' }, 0.02)
+            .to('.island-bar-top', { attr: { x1: 3, y1: 3, x2: 13, y2: 13 }, duration: 0.32, ease: 'power3.inOut', easeReverse: 'power2.in' }, 0.02)
+            .to('.island-bar-bot', { attr: { x1: 13, y1: 3, x2: 3, y2: 11 }, duration: 0.32, ease: 'power3.inOut', easeReverse: 'power2.in' }, 0.02)
             // Backdrop tipis di belakang panel
-            .to(backdrop, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }, 0)
-            // Panel melebar keluar dari island dengan bounce, menutup dengan mulus
+            .to(backdrop, { autoAlpha: 1, duration: 0.3, ease: 'power2.out', easeReverse: 'power1.in' }, 0)
+            // Panel benar-benar "melebar" keluar dari sudut tombol island (clip-path circle reveal),
+            // bukan sekadar fade/scale — buka terasa expo yang meluncur, tutup menyusut mulus & cepat
             .fromTo(panel,
-                { autoAlpha: 0, scale: 0.85, y: -10 },
-                { autoAlpha: 1, scale: 1, y: 0, duration: 0.5, transformOrigin: 'top right', ease: 'back.out(1.7)', easeReverse: 'power2.out' },
-                0.05
+                { autoAlpha: 0, clipPath: 'circle(0% at 100% 0%)' },
+                { autoAlpha: 1, clipPath: 'circle(150% at 100% 0%)', duration: 0.55, ease: 'expo.out', easeReverse: 'power2.inOut' },
+                0.04
             )
-            // Item menu muncul stagger
-            .from(links, { opacity: 0, y: 8, duration: 0.32, ease: 'power2.out', easeReverse: true, stagger: 0.045 }, 0.16);
+            // Item menu meluncur masuk dari samping dengan stagger, keluar cepat & rapi (bukan mirror)
+            .from(links, { opacity: 0, x: 16, duration: 0.36, ease: 'back.out(1.6)', easeReverse: 'power2.in', stagger: 0.045 }, 0.22);
     }
 
     function setLinksFocusable(focusable) {

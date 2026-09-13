@@ -42,25 +42,32 @@
 </head>
 <body>
 
-    <!-- Partial Navbar Header -->
+    <!-- Partial Navbar Header (di luar smooth-wrapper — tetap fixed ke viewport) -->
     @include('partials.navbar')
 
-    <!-- Flash Message Notifikasi -->
-    @if(session('success'))
-        <div class="alert-success">
-            ✨ {{ session('success') }}
+    <!-- Smooth Scroll Wrapper (ScrollSmoother) — bungkus semua konten yang ikut scroll -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- Flash Message Notifikasi -->
+            @if(session('success'))
+                <div class="alert-success">
+                    ✨ {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Main Content Dynamic Section -->
+            <main class="main-content">
+                @yield('konten_utama')
+            </main>
+
+            <!-- Partial Footer -->
+            @include('partials.footer')
+
         </div>
-    @endif
+    </div>
 
-    <!-- Main Content Dynamic Section -->
-    <main class="main-content">
-        @yield('konten_utama')
-    </main>
-
-    <!-- Partial Footer -->
-    @include('partials.footer')
-
-    <!-- Floating WhatsApp Button (Pojok Kiri Bawah) -->
+    <!-- Floating WhatsApp Button (Pojok Kiri Bawah) — di luar smooth-wrapper, tetap fixed -->
     @include('partials.whatsapp-button')
 
     <!-- SweetAlert2 Standalone Engine -->
@@ -75,8 +82,11 @@
     <!-- Animated Tabs Engine -->
     <script src="{{ asset('js/animated-tabs.js') }}"></script>
 
-    <!-- GSAP + Nav Island Menu (orkestrasi easeReverse) -->
+    <!-- GSAP + Plugin (ScrollTrigger, ScrollSmoother) + Nav Island Menu (orkestrasi easeReverse) -->
     <script src="{{ asset('js/gsap.min.js') }}"></script>
+    <script src="{{ asset('js/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('js/ScrollSmoother.min.js') }}"></script>
+    <script src="{{ asset('js/smooth-scroll.js') }}"></script>
     <script src="{{ asset('js/nav-island.js') }}"></script>
     @stack('scripts')
 </body>

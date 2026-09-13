@@ -4,7 +4,7 @@
     Background "Beams" ambient — berkas cahaya lembut yang mengambang naik perlahan,
     diadaptasi dari komponen "Beams Background" (kokonutui.com, MIT) versi vanilla JS
     (situs publik ini tidak pakai React/Framer Motion). Warna beam mengikuti palet
-    Forest situs: hijau di dark mode, amber/emas di light mode.
+    situs: sage hijau di dark mode, emas pudar di light mode.
 
     Dibuat seringan mungkin: canvas transparan (background asli tema tetap kepakai),
     blur cukup lewat CSS filter (bukan ctx.filter tiap frame), dan animasi berhenti
@@ -55,7 +55,7 @@
     let beams = [];
 
     function createBeam(canvasWidth, canvasHeight) {
-        const hueBase = isDark ? 150 : 42;
+        const hueBase = isDark ? 107 : 40;
         const hueRange = 22;
         return {
             x: Math.random() * canvasWidth,
@@ -74,7 +74,7 @@
     function resetBeam(beam, index, total) {
         const column = index % 3;
         const spacing = width / 3;
-        const hueBase = isDark ? 150 : 42;
+        const hueBase = isDark ? 107 : 40;
 
         beam.y = height + 100;
         beam.x = column * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.6;
@@ -140,8 +140,8 @@
         ctx.rotate((beam.angle * Math.PI) / 180);
 
         const pulsingOpacity = beam.opacity * (0.8 + Math.sin(beam.pulse) * 0.2);
-        const saturation = isDark ? '85%' : '75%';
-        const lightness = isDark ? '65%' : '45%';
+        const saturation = isDark ? '38%' : '42%';
+        const lightness = isDark ? '58%' : '50%';
 
         const gradient = ctx.createLinearGradient(0, 0, 0, beam.length);
         gradient.addColorStop(0, `hsla(${beam.hue}, ${saturation}, ${lightness}, 0)`);

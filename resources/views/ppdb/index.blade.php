@@ -82,11 +82,11 @@
         </div>
 
         <!-- SMP -->
-        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(224, 181, 99, 0.35);">
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(214, 190, 140, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                     <span style="font-size: 2.2rem;"><x-app-icon name="book-open" /></span>
-                    <span style="background: rgba(224, 181, 99, 0.15); color: #e0b563; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(224, 181, 99, 0.3);">Karakter & Riset</span>
+                    <span style="background: rgba(214, 190, 140, 0.15); color: #D6BE8C; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(214, 190, 140, 0.3);">Karakter & Riset</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Pertama (SMP)</h3>
                 <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
@@ -97,17 +97,17 @@
                     <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
-            <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #c9962b, #c9962b); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smp']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #C8A96B, #C8A96B); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
                 Daftar Jenjang SMP ➜
             </a>
         </div>
 
         <!-- SMK -->
-        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(169, 116, 23, 0.35);">
+        <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(168, 137, 81, 0.35);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                     <span style="font-size: 2.2rem;"><x-app-icon name="laptop" /></span>
-                    <span style="background: rgba(169, 116, 23, 0.15); color: #e0b563; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(169, 116, 23, 0.3);">Vokasi Industri</span>
+                    <span style="background: rgba(168, 137, 81, 0.15); color: #D6BE8C; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(168, 137, 81, 0.3);">Vokasi Industri</span>
                 </div>
                 <h3 class="ppdb-step-title" style="font-size: 1.2rem;">Sekolah Menengah Kejuruan (SMK)</h3>
                 <p class="ppdb-step-desc" style="line-height: 1.6; margin-bottom: 16px;">
@@ -118,7 +118,7 @@
                     <div style="display: flex; gap: 8px;"><span><x-app-icon name="clock" /></span> <span>Masa Studi: 3 Tahun</span></div>
                 </div>
             </div>
-            <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #8a5f13, #8a5f13); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
+            <a href="{{ route('ppdb.create', ['jenjang' => 'smk']) }}" class="btn btn-primary" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #8F7440, #8F7440); border: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; text-decoration: none;">
                 Daftar Jenjang SMK ➜
             </a>
         </div>

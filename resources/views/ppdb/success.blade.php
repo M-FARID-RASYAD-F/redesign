@@ -55,11 +55,11 @@
                         <tr>
                             <td>Jenjang Pendidikan</td>
                             <td>
-                                <strong style="color: #e0b563; font-size: 0.95rem;">
+                                <strong style="color: #D6BE8C; font-size: 0.95rem;">
                                     {{ $registration->jenjang_icon }} {{ $registration->jenjang_label }}
                                 </strong>
                                 @if($registration->jenjang === 'smk' && $registration->major_choice)
-                                    <div style="font-size: 0.82rem; color: #e0b563; margin-top: 3px;">
+                                    <div style="font-size: 0.82rem; color: #D6BE8C; margin-top: 3px;">
                                         Peminatan Jurusan: <strong>{{ $registration->major_choice }}</strong>
                                     </div>
                                 @endif
@@ -102,7 +102,7 @@
             </div>
 
             <!-- Footer Bukti -->
-            <div style="background: rgba(18, 43, 29, 0.5); padding: 16px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; color: #94a3b8; text-align: center;">
+            <div style="background: rgba(44, 51, 39, 0.5); padding: 16px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; color: #94a3b8; text-align: center;">
                 Kartu ini diterbitkan secara sah oleh Sistem PPDB Online PKBM Tahfizh At-Tamam.
             </div>
         </div>

@@ -44,10 +44,10 @@ class SchoolController extends Controller
         $jumlahJurusan = Major::count();
 
         $stats = [
-            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => 'graduation-cap', 'color' => '#e8f5ec'],
-            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => 'users-three', 'color' => '#f5ecd6'],
-            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => 'buildings', 'color' => '#eef2ec'],
-            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => 'shield-check', 'color' => '#faf1de'],
+            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => 'graduation-cap', 'color' => '#C7D3C0'],
+            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => 'users-three', 'color' => '#EDE0C8'],
+            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => 'buildings', 'color' => '#E4E9E0'],
+            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => 'shield-check', 'color' => '#F2E9D3'],
         ];
 
         // 4. Data Jenjang Pendidikan (SD, SMP, SMK) - Dummy Data Lengkap

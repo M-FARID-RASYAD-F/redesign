@@ -15,13 +15,13 @@
         align-items: center;
         gap: 8px;
         font-size: 0.88rem;
-        color: var(--text-muted, #a8c4b0);
+        color: var(--text-muted, #C7D3C0);
         margin-bottom: 24px;
         flex-wrap: wrap;
     }
 
     .news-breadcrumb a {
-        color: var(--primary, #c9962b);
+        color: var(--primary, #C8A96B);
         text-decoration: none;
         font-weight: 600;
         transition: color 0.2s ease;
@@ -32,8 +32,8 @@
     }
 
     .news-header-card {
-        background: var(--card-bg, rgba(15, 36, 25, 0.8));
-        border: 1px solid var(--border, rgba(201, 150, 43, 0.3));
+        background: var(--card-bg, rgba(35, 41, 34, 0.8));
+        border: 1px solid var(--border, rgba(200, 169, 107, 0.3));
         border-radius: 16px;
         padding: 32px;
         margin-bottom: 30px;
@@ -48,9 +48,9 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        background: rgba(201, 150, 43, 0.15);
-        color: var(--primary, #c9962b);
-        border: 1px solid rgba(201, 150, 43, 0.35);
+        background: rgba(200, 169, 107, 0.15);
+        color: var(--primary, #C8A96B);
+        border: 1px solid rgba(200, 169, 107, 0.35);
         margin-bottom: 14px;
     }
 
@@ -67,7 +67,7 @@
         align-items: center;
         gap: 18px;
         font-size: 0.86rem;
-        color: var(--text-muted, #a8c4b0);
+        color: var(--text-muted, #C7D3C0);
         flex-wrap: wrap;
         padding-top: 14px;
         border-top: 1px solid var(--border, rgba(255, 255, 255, 0.1));
@@ -79,12 +79,12 @@
         object-fit: cover;
         border-radius: 14px;
         margin-bottom: 30px;
-        border: 1px solid var(--border, rgba(201, 150, 43, 0.25));
+        border: 1px solid var(--border, rgba(200, 169, 107, 0.25));
     }
 
     .news-content {
-        background: var(--card-bg, rgba(15, 36, 25, 0.6));
-        border: 1px solid var(--border, rgba(201, 150, 43, 0.25));
+        background: var(--card-bg, rgba(35, 41, 34, 0.6));
+        border: 1px solid var(--border, rgba(200, 169, 107, 0.25));
         border-radius: 16px;
         padding: 32px;
         color: #f1f5f9;
@@ -118,8 +118,8 @@
     }
 
     .related-card {
-        background: var(--card-bg, rgba(15, 36, 25, 0.7));
-        border: 1px solid var(--border, rgba(201, 150, 43, 0.25));
+        background: var(--card-bg, rgba(35, 41, 34, 0.7));
+        border: 1px solid var(--border, rgba(200, 169, 107, 0.25));
         border-radius: 12px;
         padding: 20px;
         text-decoration: none;
@@ -129,7 +129,7 @@
 
     .related-card:hover {
         transform: translateY(-3px);
-        border-color: var(--primary, #c9962b);
+        border-color: var(--primary, #C8A96B);
     }
 
     .related-card h4 {
@@ -142,7 +142,7 @@
 
     .related-card span {
         font-size: 0.78rem;
-        color: var(--text-muted, #a8c4b0);
+        color: var(--text-muted, #C7D3C0);
     }
 
     @media (max-width: 640px) {

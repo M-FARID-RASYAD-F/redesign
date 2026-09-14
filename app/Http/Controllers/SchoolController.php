@@ -282,63 +282,6 @@ class SchoolController extends Controller
     }
 
     /**
-     * Memproses Form Pendaftaran / Kontak dari Pengunjung dan menyimpannya ke database
-     */
-    public function submitContact(Request $request)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'nama' => 'required|min:3',
-            'email' => 'required|email',
-            'jurusan_minat' => 'required',
-            'pesan' => 'required|min:10',
-            'berkas' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        ], [
-            'nama.required' => 'Nama lengkap wajib diisi!',
-            'nama.min' => 'Nama minimal terdiri dari 3 karakter.',
-            'email.required' => 'Email wajib diisi!',
-            'email.email' => 'Format email tidak valid!',
-            'jurusan_minat.required' => 'Pilih jurusan yang diminati!',
-            'pesan.required' => 'Pesan/pertanyaan wajib diisi!',
-            'pesan.min' => 'Pesan minimal terdiri dari 10 karakter.',
-            'berkas.file' => 'Berkas harus berupa file yang valid.',
-            'berkas.mimes' => 'Berkas harus berformat PDF, JPG, JPEG, atau PNG.',
-            'berkas.max' => 'Ukuran berkas maksimal 2MB.',
-        ]);
-
-        $berkasInfo = '';
-        if ($request->hasFile('berkas')) {
-            $request->file('berkas')->store('berkas_ppdb', 'public');
-            $berkasInfo = ' serta berkas persyaratan berhasil diunggah';
-        }
-
-        // Simpan pendaftaran ke database ppdb_registrations
-        $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . rand(1000, 9999);
-        $registration = PpdbRegistration::create([
-            'no_pendaftaran' => $noPendaftaran,
-            'full_name' => $validated['nama'],
-            'gender' => 'L', // default value
-            'birth_date' => now()->subYears(15)->format('Y-m-d'), // default value
-            'address' => $validated['pesan'], // simpan pesan ke alamat
-            'parent_name' => 'Wali Murid',
-            'parent_phone' => '081200000000',
-            'status' => 'pending',
-            'notes' => 'Registrasi otomatis dari form kontak landing page'
-        ]);
-
-        // Catat log aktivitas admin/sistem
-        ActivityLog::create([
-            'user_id' => 1, // Hubungkan ke user Budi Santoso yang pertama kali diseed
-            'module' => 'ppdb',
-            'action' => 'create',
-            'description' => 'Pendaftaran PPDB baru oleh ' . $validated['nama'] . ' (No. Reg: ' . $noPendaftaran . ')',
-        ]);
-
-        // Kirim response flash message kembali ke halaman sebelumnya
-        return redirect()->back()->with('success', 'Halo ' . $validated['nama'] . ', terima kasih! Pesan dan pendaftaran informasi Anda mengenai jurusan ' . strtoupper($validated['jurusan_minat']) . ' telah berhasil terkirim' . $berkasInfo . '. Nomor Pendaftaran Anda: ' . $noPendaftaran);
-    }
-
-    /**
      * ========================================================
      * MODUL PPDB MANDIRI PUBLIK (PRD 2.5.3 & SAD 3.5.1)
      * ========================================================

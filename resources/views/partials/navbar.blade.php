@@ -22,7 +22,6 @@
                 <a href="{{ route('home') }}#jenjang" class="nav-link" data-section="jenjang"><span class="nav-link-text">Jenjang</span></a>
                 <a href="{{ route('home') }}#cabang" class="nav-link" data-section="cabang"><span class="nav-link-text">Cabang</span></a>
                 <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
-                <a href="{{ route('home') }}#kontak" class="nav-link" data-section="kontak"><span class="nav-link-text">Kontak</span></a>
                 <a href="{{ route('ppdb.index') }}" class="nav-link {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
             </nav>
         </div>
@@ -95,11 +94,6 @@
                 <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">
                     <span class="nav-mobile-icon-box">📰</span>
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
-                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
-                </a>
-                <a href="{{ route('home') }}#kontak" class="nav-mobile-link" data-section="kontak">
-                    <span class="nav-mobile-icon-box">📞</span>
-                    <span class="nav-mobile-link-text">Hubungi Kami</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
             </div>
@@ -380,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ── Scrollspy Otomatis: Beranda, Jenjang, Cabang, Berita, Kontak ──
+    // ── Scrollspy Otomatis: Beranda, Jenjang, Cabang, Berita ──
     function updateScrollspy() {
         const scrollY = window.pageYOffset;
 
@@ -392,13 +386,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const jenjangEl   = document.getElementById('jenjang') || document.getElementById('jurusan');
         const cabangEl    = document.getElementById('cabang') || document.getElementById('fasilitas');
         const beritaEl    = document.getElementById('berita');
-        const kontakEl    = document.getElementById('kontak');
 
         const navHeight = 90;
         const jenjangTop   = jenjangEl ? (jenjangEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
         const cabangTop    = cabangEl  ? (cabangEl.getBoundingClientRect().top + scrollY - navHeight)  : 2200;
         const beritaTop    = beritaEl  ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight)  : 3200;
-        const kontakTop    = kontakEl  ? (kontakEl.getBoundingClientRect().top + scrollY - navHeight)  : 4000;
 
         if (scrollY < jenjangTop - 80) {
             setActiveNav('beranda');
@@ -406,10 +398,8 @@ document.addEventListener('DOMContentLoaded', function () {
             setActiveNav('jenjang');
         } else if (scrollY >= cabangTop - 80 && scrollY < beritaTop - 80) {
             setActiveNav('cabang');
-        } else if (scrollY >= beritaTop - 80 && scrollY < kontakTop - 80) {
-            setActiveNav('berita');
         } else {
-            setActiveNav('kontak');
+            setActiveNav('berita');
         }
     }
 

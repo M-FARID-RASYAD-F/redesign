@@ -23,13 +23,7 @@ Route::get('/', [SchoolController::class, 'index'])->name('home');
 
 // 1.1 Route Baca Artikel Berita Publik
 Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
-
-// 2. Route Memproses Form Kontak Cepat (Rate Limited: 10 per menit)
-Route::post('/kontak', [SchoolController::class, 'submitContact'])
-    ->name('kontak.submit')
-    ->middleware('throttle:10,1');
-
-// 3. Route Modul PPDB Online Mandiri (Publik)
+// 2. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');
     Route::get('/daftar', [SchoolController::class, 'ppdbCreate'])->name('create');

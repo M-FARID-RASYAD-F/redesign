@@ -1738,6 +1738,15 @@
             </li>
             @endcan
 
+            @if(in_array(auth()->user()->role, ['super_admin', 'admin_cms']))
+            <li>
+                <a href="{{ route('admin.profile.index') }}" class="sidebar-link {{ Route::is('admin.profile.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">🏛️</span>
+                    <span>Profil &amp; Cabang</span>
+                </a>
+            </li>
+            @endif
+
             @can('viewAny', App\Models\User::class)
             <li>
                 <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">

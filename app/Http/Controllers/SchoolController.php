@@ -18,86 +18,44 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        // 1. Data Informasi Sekolah (Default fallback jika DB kosong)
-        $sekolah = [
-            'nama' => 'PKBM TAHFIZH ATTAMAM',
-            'slogan' => 'Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital',
-            'deskripsi' => 'Sekolah menengah kejuruan terkemuka yang memadukan kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
-            'tahun_berdiri' => '2018',
-            'akreditasi' => 'B (Baik)',
-            'alamat' => 'Jl. Pendidikan Teknologi No. 45, Cyber City, Nusantara',
-            'telepon' => '(021) 555-0192',
-            'email' => 'info@pkbmtahfizhattamam.sch.id'
-        ];
+        // 1. Data Informasi Sekolah (Dari Database SchoolProfile / fallback)
+        $sekolah = SchoolProfile::getVal('general');
 
         // 2. Data Sambutan Kepala Sekolah
         $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
+        $sambutanConfig = SchoolProfile::getVal('sambutan');
         $sambutan = [
-            'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
-            'jabatan' => 'Kepala Sekolah SMK Negeri 1 Nusantara',
-            'pesan' => 'Selamat datang di portal resmi SMK Negeri 1 Nusantara. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan relevan dengan kebutuhan dunia kerja masa depan. Mari bersama mewujudkan impian dan potensi terbaik para siswa!',
-            'foto_initials' => 'AF'
+            'nama' => $kepsek ? $kepsek->name : ($sambutanConfig['nama'] ?? 'Dr. H. Ahmad Fauzi, M.Pd.'),
+            'jabatan' => $sambutanConfig['jabatan'] ?? 'Kepala Sekolah PKBM Tahfizh At-Tamam',
+            'pesan' => $sambutanConfig['pesan'] ?? 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam. Kami berdedikasi menciptakan lingkungan belajar Qurani yang inspiratif, berkarakter, dan relevan dengan kebutuhan masa depan.',
+            'foto_initials' => $sambutanConfig['foto_initials'] ?? 'AF',
         ];
 
-        // 3. Data Statistik Sekolah
-        $jumlahSiswa = PpdbRegistration::count() + 1250; // Simulasi dengan penambahan pendaftar
-        $jumlahGuru = TeacherStaff::count();
-        $jumlahJurusan = Major::count();
+        // 3. Data Statistik Sekolah (Konfigurasi baseline marketing dari SchoolProfile, tanpa hardcoded math di logika)
+        $statsConfig = SchoolProfile::getVal('stats');
+        $baselineSiswa = (int) ($statsConfig['siswa_baseline'] ?? 0);
+        $jumlahSiswa = PpdbRegistration::count() + $baselineSiswa;
+        $jumlahGuruAktif = TeacherStaff::where('status', 'aktif')->count();
+        $fallbackGuru = (int) ($statsConfig['guru_fallback'] ?? 85);
+        $jumlahGuruDisplay = $jumlahGuruAktif > 0 ? $jumlahGuruAktif : $fallbackGuru;
 
         $stats = [
             ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
-            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
-            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => '🏫', 'color' => '#fffbeb'],
-            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => '🚀', 'color' => '#f3e8ff'],
+            ['label' => 'Guru & Staf', 'value' => $jumlahGuruDisplay . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
+            ['label' => 'Jenjang Pendidikan', 'value' => $statsConfig['jenjang_label'] ?? '3 Jenjang (SD, SMP, SMK)', 'icon' => '🏫', 'color' => '#fffbeb'],
+            ['label' => 'Serapan Kerja & Prestasi', 'value' => $statsConfig['serapan_prestasi'] ?? '96% Sukses', 'icon' => '🚀', 'color' => '#f3e8ff'],
         ];
 
-        // 4. Data Jenjang Pendidikan (SD, SMP, SMK) - Dummy Data Lengkap
-        $jenjang = [
-            [
-                'id' => 'sd',
-                'kode' => 'SD',
-                'nama' => 'Sekolah Dasar (SD)',
-                'kategori' => 'Pendidikan Dasar & Karakter',
-                'badge' => '🌱 Fondasi Qurani',
-                'deskripsi' => 'Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar literasi, numerasi, dan sains eksploratif dengan suasana belajar aktif.',
-                'masa_studi' => '6 Tahun',
-                'fokus_kurikulum' => 'Tahfizh & Adab',
-                'keunggulan_label' => '🎯 Program Unggulan:',
-                'keunggulan' => 'Tahfizh Cilik, Bilingual Dasar, Islamic Character Building, Fun Science & Math',
-                'icon' => '🎒',
-                'link_daftar' => route('ppdb.create', ['jenjang' => 'sd']),
-            ],
-            [
-                'id' => 'smp',
-                'kode' => 'SMP',
-                'nama' => 'Sekolah Menengah Pertama (SMP)',
-                'kategori' => 'Pendidikan Menengah & Riset',
-                'badge' => '🌟 Karakter & Sains Terapan',
-                'deskripsi' => 'Penguatan tahfizh Al-Qur\'an berkesinambungan, pembentukan kepemimpinan santri, penguasaan sains terapan, serta pengenalan dasar teknologi digital.',
-                'masa_studi' => '3 Tahun',
-                'fokus_kurikulum' => 'Tahfizh & Sains',
-                'keunggulan_label' => '🎯 Program Unggulan:',
-                'keunggulan' => 'Target 5–10 Juz Mutqin, Arabic & English Club, Basic Coding, Leadership Camp',
-                'icon' => '📚',
-                'link_daftar' => route('ppdb.create', ['jenjang' => 'smp']),
-            ],
-            [
-                'id' => 'smk',
-                'kode' => 'SMK',
-                'nama' => 'Sekolah Menengah Kejuruan (SMK)',
-                'kategori' => 'Pendidikan Vokasi & Siap Kerja',
-                'badge' => '🚀 Keahlian Industri & Digital',
-                'deskripsi' => 'Membekali keterampilan kejuruan vokasi berstandar industri (RPL, TKJ, DKV), sertifikasi BNSP/LSP, kurikulum industri, serta magang kerja nyata.',
-                'masa_studi' => '3 Tahun',
-                'fokus_kurikulum' => 'Industri & Vokasi',
-                'keunggulan_label' => '🎯 Program Unggulan:',
-                'keunggulan' => 'Kelas Industri (RPL, TKJ, DKV), Magang Kerja (PKL), Sertifikasi BNSP, Inkubator Bisnis',
-                'icon' => '💻',
-                'link_daftar' => route('ppdb.create', ['jenjang' => 'smk']),
-            ],
-        ];
+        // 4. Data Jenjang Pendidikan (SD, SMP, SMK dari SchoolProfile)
+        $jenjang = SchoolProfile::getVal('jenjang');
+        foreach ($jenjang as &$j) {
+            if (empty($j['link_daftar']) && isset($j['id'])) {
+                $j['link_daftar'] = route('ppdb.create', ['jenjang' => $j['id']]);
+            }
+        }
+        unset($j);
 
-        // 5. Data Program Keahlian / Jurusan (Dinamis dari Database - Tetap disimpan untuk kompatibilitas)
+        // 5. Data Program Keahlian / Jurusan (Dinamis dari Database)
         $jurusan = Major::all()->map(function ($item) {
             $badges = [
                 'rekayasa-perangkat-lunak-rpl' => '🔥 Paling Favorit',
@@ -118,164 +76,36 @@ class SchoolController extends Controller
                 'deskripsi' => $item->description,
                 'prospek' => $prospeks[$item->slug] ?? ('Lulusan siap kerja di bidang ' . explode(' (', $item->name)[0]),
                 'badge' => $badges[$item->slug] ?? '✨ Program Unggulan',
-                'icon' => $item->icon ?? '⚡'
+                'icon' => $item->icon ?? '⚡',
             ];
         })->toArray();
 
-        // Fallback jika database belum di-seed
-        if (empty($jurusan)) {
-            $jurusan = [
-                [
-                    'id' => 'rekayasa-perangkat-lunak-rpl',
-                    'nama' => 'Rekayasa Perangkat Lunak (RPL)',
-                    'kategori' => 'Teknologi Informasi',
-                    'deskripsi' => 'Mempelajari pemrograman web (Laravel, React), aplikasi mobile, basis data, dan pengembangan software berbasis industri.',
-                    'prospek' => 'Fullstack Developer, Web & Mobile App Engineer',
-                    'badge' => '🔥 Paling Favorit',
-                    'icon' => '⚡'
-                ],
-                [
-                    'id' => 'teknik-komputer-jaringan-tkj',
-                    'nama' => 'Teknik Komputer & Jaringan (TKJ)',
-                    'kategori' => 'Teknologi Informasi',
-                    'deskripsi' => 'Fokus pada arsitektur jaringan komputer, administrasi server Linux/Windows, cloud computing, dan siber security.',
-                    'prospek' => 'Network Engineer, Cloud Admin, Cyber Security',
-                    'badge' => '🌐 Sertifikasi Cisco/Mikrotik',
-                    'icon' => '📡'
-                ],
-                [
-                    'id' => 'desain-komunikasi-visual-dkv',
-                    'nama' => 'Desain Komunikasi Visual (DKV)',
-                    'kategori' => 'Industri Kreatif',
-                    'deskripsi' => 'Mengembangkan kreativitas seni visual, ilustrasi digital, fotografi, videografi konten, serta desain antarmuka UI/UX masa depan.',
-                    'prospek' => 'Graphic Designer, UI/UX Designer, Video & Motion Animator',
-                    'badge' => '🎨 Studio Kreatif Komplit',
-                    'icon' => '🎨'
-                ]
-            ];
-        }
-
-        // 5. Data Berita Terbaru (Dinamis dari Database)
+        // 6. Data Berita Terbaru (Dinamis dari Database)
         $berita = News::with('category')->latest()->take(3)->get()->map(function ($item) {
             return [
                 'judul' => $item->title,
                 'tanggal' => $item->created_at->translatedFormat('d F Y') ?? $item->created_at->format('d M Y'),
                 'kategori' => $item->category ? $item->category->name : 'Umum',
                 'ringkasan' => substr(strip_tags($item->content), 0, 120) . '...',
-                'baca_waktu' => '3 menit baca'
+                'baca_waktu' => '3 menit baca',
             ];
         })->toArray();
 
-        // Fallback jika database belum di-seed
+        // Fallback jika database berita kosong
         if (empty($berita)) {
             $berita = [
                 [
-                    'judul' => 'Tim RPL SMKN 1 Nusantara Meraih Juara 1 LKS Pemrograman Web 2026',
-                    'tanggal' => '28 Juli 2026',
+                    'judul' => 'Tim RPL PKBM Tahfizh At-Tamam Meraih Juara 1 LKS Pemrograman Web 2026',
+                    'tanggal' => date('d F Y'),
                     'kategori' => 'Prestasi',
                     'ringkasan' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi.',
-                    'baca_waktu' => '3 menit baca'
-                ]
+                    'baca_waktu' => '3 menit baca',
+                ],
             ];
         }
 
-        // 6. Data Cabang-Cabang Sekolah PKBM Tahfizh At-Tamam
-        $cabang = [
-            [
-                'id' => 'kampus-pusat',
-                'label' => 'Kampus Pusat',
-                'title' => 'Kampus Utama & Pusat Tahfizh At-Tamam',
-                'tag' => 'KAMPUS PUSAT & ASRAMA',
-                'kota' => 'Tenayan Raya, Pekanbaru',
-                'alamat' => 'Jl. Hangtuah No. 45, Rejosari, Kec. Tenayan Raya, Kota Pekanbaru, Riau 28281',
-                'jam' => 'Senin – Sabtu: 07.30 – 16.30 WIB',
-                'telepon' => '(0761) 555-0192',
-                'wa' => '0812-7000-1920',
-                'wa_url' => 'https://wa.me/6281270001920?text=Halo%20Admin%20Kampus%20Pusat%20At-Tamam,%20saya%20ingin%20informasi%20pendaftaran',
-                'maps_url' => 'https://maps.google.com/?q=PKBM+Tahfizh+At-Tamam+Pekanbaru',
-                'desc' => 'Pusat pendidikan terpadu At-Tamam yang menaungi program Tahfizh Qur\'an intensif 30 juz, asrama santri modern putra/putri, serta kejuruan rekayasa perangkat lunak dengan fasilitas terlengkap.',
-                'image' => 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1200&auto=format&fit=crop',
-                'features' => [
-                    'Asrama Santri Nyaman & Ber-AC',
-                    'Masjid Jami\' At-Tamam 500 Jamaah',
-                    'Lab Komputer High-End 120 Unit PC',
-                    'Studio Podcast & Broadcast Kreatif',
-                    'Klinik Kesehatan Santri & Kantin',
-                    'Free WiFi High-Speed Fiber 1 Gbps'
-                ]
-            ],
-            [
-                'id' => 'cabang-panam',
-                'label' => 'Cabang Panam',
-                'title' => 'Cabang Panam — Sentra Teknologi & Kejuruan',
-                'tag' => 'SENTRA IT & MULTIMEDIA',
-                'kota' => 'Tampan / Panam, Pekanbaru',
-                'alamat' => 'Jl. HR. Soebrantas Km. 12, Kel. Simpang Baru, Kec. Tampan, Kota Pekanbaru, Riau 28293',
-                'jam' => 'Senin – Sabtu: 08.00 – 17.00 WIB',
-                'telepon' => '(0761) 555-0193',
-                'wa' => '0812-7000-1921',
-                'wa_url' => 'https://wa.me/6281270001921?text=Halo%20Admin%20Cabang%20Panam%20At-Tamam,%20saya%20ingin%20tanya%20program%20kejuruan%20dan%20tahfizh',
-                'maps_url' => 'https://maps.google.com/?q=HR+Soebrantas+Panam+Pekanbaru',
-                'desc' => 'Sentra kejuruan digital & multimedia At-Tamam yang dirancang khusus untuk mencetak developer muda, teknisi jaringan bersertifikasi Cisco/Mikrotik, serta talenta kreatif animasi.',
-                'image' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
-                'features' => [
-                    'Smart Interactive Classrooms',
-                    'Laboratorium Cyber Security & Jaringan',
-                    'Studio Desain Komunikasi Visual (DKV)',
-                    'Co-Working Space Siswa Ber-AC',
-                    'Program Sertifikasi Industri Resmi',
-                    'Area Parkir Luas & Akses Strategis'
-                ]
-            ],
-            [
-                'id' => 'cabang-marpoyan',
-                'label' => 'Cabang Marpoyan',
-                'title' => 'Cabang Marpoyan — Tahfizh & Kewirausahaan',
-                'tag' => 'TAHFIZH & ENTREPRENEUR',
-                'kota' => 'Marpoyan Damai, Pekanbaru',
-                'alamat' => 'Jl. Kaharuddin Nasution No. 88, Kel. Maharatu, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28284',
-                'jam' => 'Senin – Sabtu: 07.30 – 16.30 WIB',
-                'telepon' => '(0761) 555-0194',
-                'wa' => '0812-7000-1922',
-                'wa_url' => 'https://wa.me/6281270001922?text=Halo%20Admin%20Cabang%20Marpoyan%20At-Tamam,%20saya%20ingin%20konsultasi%20program%20tahfizh%20dan%20wirausaha',
-                'maps_url' => 'https://maps.google.com/?q=Marpoyan+Damai+Pekanbaru',
-                'desc' => 'Kampus asri bernuansa green campus yang menitikberatkan pada hafalan Al-Qur\'an bersanad mutqin, pembinaan adab santri, serta pelatihan kewirausahaan digital dan bisnis mandiri.',
-                'image' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
-                'features' => [
-                    'Ruang Halaqah Al-Qur\'an Sejuk & Asri',
-                    'Arena Olahraga Sunnah (Panahan)',
-                    'Aula Pertemuan Serbaguna (300 Seat)',
-                    'Perpustakaan & Pojok Literasi Islam',
-                    'Greenhouse Edukasi Botani & Agribisnis',
-                    'Pengawasan Keamanan CCTV 24 Jam'
-                ]
-            ],
-            [
-                'id' => 'cabang-rumbai',
-                'label' => 'Cabang Rumbai',
-                'title' => 'Cabang Rumbai — Sentra Bahasa & Sains',
-                'tag' => 'SAINS & BAHASA DUNIA',
-                'kota' => 'Rumbai, Pekanbaru',
-                'alamat' => 'Jl. Yos Sudarso No. 102, Kel. Lembah Damai, Kec. Rumbai, Kota Pekanbaru, Riau 28265',
-                'jam' => 'Senin – Sabtu: 08.00 – 16.30 WIB',
-                'telepon' => '(0761) 555-0195',
-                'wa' => '0812-7000-1923',
-                'wa_url' => 'https://wa.me/6281270001923?text=Halo%20Admin%20Cabang%20Rumbai%20At-Tamam,%20saya%20ingin%20informasi%20program%20bilingual%20dan%20paket%20belajar',
-                'maps_url' => 'https://maps.google.com/?q=Rumbai+Pekanbaru',
-                'desc' => 'Kampus percontohan pengembangan kompetensi dwibahasa (Arab & Inggris aktif) yang terintegrasi dengan pembelajaran sains terapan, kelas fleksibel kesetaraan Paket B/C, dan tahfizh akhir pekan.',
-                'image' => 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=1200&auto=format&fit=crop',
-                'features' => [
-                    'Laboratorium Bahasa Digital Interaktif',
-                    'Pusat Belajar Paket Kesetaraan Fleksibel',
-                    'Ruang Multimedia & Presentasi Audio',
-                    'Musholla Kampus yang Bersih & Luas',
-                    'Area Diskusi Terbuka Siswa Berpohon',
-                    'Konseling & Bimbingan Minat Karir'
-                ]
-            ]
-        ];
-
-        // Alias untuk kompatibilitas data view lama
+        // 7. Data Cabang-Cabang Sekolah (Dinamis dari Database SchoolProfile)
+        $cabang = SchoolProfile::getVal('cabang');
         $fasilitas = $cabang;
 
         // Kirim seluruh data ke view 'welcome'
@@ -324,12 +154,12 @@ class SchoolController extends Controller
             'parent_name' => 'Wali Murid',
             'parent_phone' => '081200000000',
             'status' => 'pending',
-            'notes' => 'Registrasi otomatis dari form kontak landing page'
+            'notes' => 'Registrasi otomatis dari form kontak landing page',
         ]);
 
         // Catat log aktivitas admin/sistem
         ActivityLog::create([
-            'user_id' => 1, // Hubungkan ke user Budi Santoso yang pertama kali diseed
+            'user_id' => 1,
             'module' => 'ppdb',
             'action' => 'create',
             'description' => 'Pendaftaran PPDB baru oleh ' . $validated['nama'] . ' (No. Reg: ' . $noPendaftaran . ')',
@@ -351,14 +181,23 @@ class SchoolController extends Controller
     public function ppdbIndex()
     {
         $majors = Major::all();
-        $totalPendaftar = PpdbRegistration::count() + 85;
-        $totalDiterima = PpdbRegistration::where('status', 'diterima')->count() + 60;
+
+        // Konfigurasi baseline PPDB dari SchoolProfile, tanpa hardcoded math di logika
+        $statsConfig = SchoolProfile::getVal('ppdb_stats', [
+            'baseline_pendaftar' => 85,
+            'baseline_diterima' => 60,
+            'gelombang' => 'Gelombang II (Tahun Ajaran 2026/2027)',
+            'deadline' => '30 Agustus 2026',
+        ]);
+
+        $totalPendaftar = PpdbRegistration::count() + (int) ($statsConfig['baseline_pendaftar'] ?? 0);
+        $totalDiterima = PpdbRegistration::where('status', 'diterima')->count() + (int) ($statsConfig['baseline_diterima'] ?? 0);
 
         $stats = [
             'total' => $totalPendaftar,
             'diterima' => $totalDiterima,
-            'gelombang' => 'Gelombang II (Tahun Ajaran 2026/2027)',
-            'deadline' => '30 Agustus 2026'
+            'gelombang' => $statsConfig['gelombang'] ?? 'Gelombang II (Tahun Ajaran 2026/2027)',
+            'deadline' => $statsConfig['deadline'] ?? '30 Agustus 2026',
         ];
 
         return view('ppdb.index', compact('majors', 'stats'));

@@ -13,6 +13,7 @@ use App\Models\ActivityLog;
 use App\Models\Gallery;
 use App\Models\Announcement;
 use App\Models\Agenda;
+use App\Models\SchoolProfile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -109,8 +110,8 @@ class DatabaseSeeder extends Seeder
         $newsList = [
             [
                 'category_id' => $cats['prestasi']->id,
-                'title' => 'Tim RPL SMKN 1 Nusantara Meraih Juara 1 LKS Pemrograman Web 2026',
-                'slug' => 'tim-rpl-smkn-1-nusantara-meraih-juara-1-lks-pemrograman-web-2026',
+                'title' => 'Tim RPL PKBM Tahfizh At-Tamam Meraih Juara 1 LKS Pemrograman Web 2026',
+                'slug' => 'tim-rpl-pkbm-tahfizh-at-tamam-meraih-juara-1-lks-pemrograman-web-2026',
                 'thumbnail' => 'https://picsum.photos/800/400?random=1',
                 'content' => 'Siswa kami berhasil memboyong piala emas dalam kejuaraan Lomba Kompetensi Siswa tingkat provinsi yang diadakan minggu lalu di Gedung Pusat Kebudayaan.',
                 'author_id' => $adminCms->id,
@@ -121,7 +122,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Penandatanganan MoU Kemitraan Kerja dengan 12 Perusahaan IT Nasional',
                 'slug' => 'penandatanganan-mou-kemitraan-kerja-dengan-12-perusahaan-it-nasional',
                 'thumbnail' => 'https://picsum.photos/800/400?random=2',
-                'content' => 'SMKN 1 Nusantara memperluas jangkauan magang dan rekrutmen lulusan secara langsung sebelum wisuda kelulusan melalui penandatanganan kerja sama strategis ini.',
+                'content' => 'PKBM Tahfizh At-Tamam memperluas jangkauan magang dan rekrutmen lulusan secara langsung sebelum wisuda kelulusan melalui penandatanganan kerja sama strategis ini.',
                 'author_id' => $adminCms->id,
                 'published_at' => now(),
             ],
@@ -334,5 +335,10 @@ class DatabaseSeeder extends Seeder
             'action' => 'publish',
             'description' => 'Mempublikasikan artikel berita prestasi lomba LKS 2026',
         ]);
+
+        // 11. Seed School Profile (Identitas, Sambutan, Cabang, Stats, Jenjang)
+        foreach (SchoolProfile::defaultValues() as $key => $val) {
+            SchoolProfile::setVal($key, $val);
+        }
     }
 }

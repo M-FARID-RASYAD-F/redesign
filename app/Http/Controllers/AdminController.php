@@ -3,33 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Response;
-use App\Models\User;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\MajorController;
+use App\Http\Controllers\Admin\PpdbController;
 use App\Models\News;
-use App\Models\NewsCategory;
 use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
-use App\Models\PpdbDocument;
 use App\Models\Major;
 use App\Models\ActivityLog;
-use Illuminate\Support\Str;
 
+/**
+ * AdminController (Legacy facade & centralized routing forwarder)
+ * 
+ * Logika modul telah dipecah ke controller modular tersendiri:
+ * - NewsController    -> App\Http\Controllers\Admin\NewsController
+ * - TeacherController -> App\Http\Controllers\Admin\TeacherController
+ * - MajorController   -> App\Http\Controllers\Admin\MajorController
+ * - PpdbController    -> App\Http\Controllers\Admin\PpdbController
+ */
 class AdminController extends Controller
 {
-    protected function logActivity($module, $action, $description)
-    {
-        ActivityLog::create([
-            'user_id' => Auth::id(),
-            'module' => $module,
-            'action' => $action,
-            'description' => $description,
-        ]);
-    }
-
     /**
-     * Dashboard Panel Admin
+     * Dashboard ringkas admin
      */
     public function dashboard()
     {
@@ -50,379 +46,42 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('stats', 'recentLogs', 'ppdbPending'));
     }
 
-    /**
-     * ==========================================
-     * MODUL BERITA (CMS)
-     * ==========================================
-     */
-    public function newsIndex()
-    {
-        $newsList = News::with(['category', 'author'])->orderBy('created_at', 'desc')->get();
-        return view('admin.news.index', compact('newsList'));
-    }
-
-    public function newsCreate()
-    {
-        $categories = NewsCategory::all();
-        // Fallback category if none exist
-        if ($categories->isEmpty()) {
-            $defaultCat = NewsCategory::create(['name' => 'Umum', 'slug' => 'umum']);
-            $categories = collect([$defaultCat]);
-        }
-        return view('admin.news.create', compact('categories'));
-    }
-
-    public function newsStore(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
-            'content' => 'required|string',
-            'thumbnail' => 'nullable|string', // Simple url/path string
-            'published_at' => 'nullable|date',
-        ]);
-
-        $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
-        $validated['author_id'] = Auth::id();
-
-        $news = News::create($validated);
-
-        $this->logActivity('berita', 'create', "Membuat berita baru: '{$news->title}'");
-
-        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diterbitkan!');
-    }
-
-    public function newsEdit($id)
-    {
-        $news = News::findOrFail($id);
-        $categories = NewsCategory::all();
-        return view('admin.news.edit', compact('news', 'categories'));
-    }
-
-    public function newsUpdate(Request $request, $id)
-    {
-        $news = News::findOrFail($id);
-
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
-            'content' => 'required|string',
-            'thumbnail' => 'nullable|string',
-            'published_at' => 'nullable|date',
-        ]);
-
-        if ($news->title !== $validated['title']) {
-            $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
-        }
-
-        $news->update($validated);
-
-        $this->logActivity('berita', 'update', "Mengubah berita: '{$news->title}'");
-
-        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diperbarui!');
-    }
-
-    public function newsDelete($id)
-    {
-        $news = News::findOrFail($id);
-        $title = $news->title;
-        $news->delete();
-
-        $this->logActivity('berita', 'delete', "Menghapus berita: '{$title}'");
-
-        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil dihapus!');
-    }
-
-    /**
-     * ==========================================
-     * MODUL GURU & STAF (AKADEMIK)
-     * ==========================================
-     */
-    public function teacherIndex()
-    {
-        $teachers = TeacherStaff::orderBy('name', 'asc')->get();
-        return view('admin.teachers.index', compact('teachers'));
-    }
-
-    public function teacherCreate()
-    {
-        return view('admin.teachers.create');
-    }
-
-    public function teacherStore(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'subject' => 'nullable|string|max:255',
-            'photo' => 'nullable|string',
-            'nip' => 'nullable|string|max:255',
-            'status' => 'required|in:aktif,nonaktif',
-        ]);
-
-        $teacher = TeacherStaff::create($validated);
-
-        $this->logActivity('guru', 'create', "Menambah data guru/staf: '{$teacher->name}'");
-
-        return redirect()->route('admin.teachers.index')->with('success', 'Data guru/staf berhasil ditambahkan!');
-    }
-
-    public function teacherEdit($id)
-    {
-        $teacher = TeacherStaff::findOrFail($id);
-        return view('admin.teachers.edit', compact('teacher'));
-    }
-
-    public function teacherUpdate(Request $request, $id)
-    {
-        $teacher = TeacherStaff::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'subject' => 'nullable|string|max:255',
-            'photo' => 'nullable|string',
-            'nip' => 'nullable|string|max:255',
-            'status' => 'required|in:aktif,nonaktif',
-        ]);
-
-        $teacher->update($validated);
-
-        $this->logActivity('guru', 'update', "Mengubah data guru/staf: '{$teacher->name}'");
-
-        return redirect()->route('admin.teachers.index')->with('success', 'Data guru/staf berhasil diperbarui!');
-    }
-
-    public function teacherDelete($id)
-    {
-        $teacher = TeacherStaff::findOrFail($id);
-        $name = $teacher->name;
-        $teacher->delete();
-
-        $this->logActivity('guru', 'delete', "Menghapus data guru/staf: '{$name}'");
-
-        return redirect()->route('admin.teachers.index')->with('success', 'Data guru/staf berhasil dihapus!');
-    }
-
-    /**
-     * ==========================================
-     * MODUL PPDB ONLINE (PPDB)
-     * ==========================================
-     */
-    public function ppdbIndex(Request $request)
-    {
-        $currentJenjang = strtolower($request->query('jenjang', ''));
-        $query = PpdbRegistration::query();
-
-        if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
-            $query->where('jenjang', $currentJenjang);
-        } else {
-            $currentJenjang = 'all';
-        }
-
-        $registrations = $query->orderBy('created_at', 'desc')->get();
-
-        $counts = [
-            'all' => PpdbRegistration::count(),
-            'sd'  => PpdbRegistration::where('jenjang', 'sd')->count(),
-            'smp' => PpdbRegistration::where('jenjang', 'smp')->count(),
-            'smk' => PpdbRegistration::where('jenjang', 'smk')->count(),
-        ];
-
-        return view('admin.ppdb.index', compact('registrations', 'currentJenjang', 'counts'));
-    }
-
-    /**
-     * Ekspor Data PPDB ke format CSV (FR-C06)
-     */
-    public function ppdbExportCsv(Request $request)
-    {
-        $currentJenjang = strtolower($request->query('jenjang', ''));
-        $query = PpdbRegistration::query();
-
-        if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
-            $query->where('jenjang', $currentJenjang);
-            $suffix = '-' . $currentJenjang;
-        } else {
-            $suffix = '-semua-jenjang';
-        }
-
-        $registrations = $query->orderBy('created_at', 'desc')->get();
-        $filename = 'rekap-ppdb' . $suffix . '-' . date('Y-m-d_His') . '.csv';
-
-        $headers = [
-            'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
-            'Pragma' => 'no-cache',
-            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires' => '0',
-        ];
-
-        $callback = function () use ($registrations) {
-            $file = fopen('php://output', 'w');
-            // Tambahkan UTF-8 BOM untuk kompatibilitas Excel (tidak rusak saat dibuka di Windows/Mac)
-            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
-
-            // Header Kolom CSV
-            fputcsv($file, [
-                'No. Pendaftaran',
-                'Jenjang Pendidikan',
-                'Jurusan (SMK)',
-                'Nama Lengkap',
-                'Jenis Kelamin',
-                'Tanggal Lahir',
-                'Alamat',
-                'Nama Orang Tua / Wali',
-                'No. HP Orang Tua',
-                'Status Pendaftaran',
-                'Catatan Panitia',
-                'Tanggal Mendaftar'
-            ], ';');
-
-            // Data Baris
-            foreach ($registrations as $reg) {
-                fputcsv($file, [
-                    $reg->no_pendaftaran,
-                    $reg->jenjang_label,
-                    $reg->major_choice ?? '-',
-                    $reg->full_name,
-                    $reg->gender == 'L' ? 'Laki-laki' : 'Perempuan',
-                    $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-',
-                    $reg->address,
-                    $reg->parent_name,
-                    $reg->parent_phone,
-                    ucfirst($reg->status),
-                    $reg->notes ?? '-',
-                    $reg->created_at ? $reg->created_at->format('d/m/Y H:i') : '-',
-                ], ';');
-            }
-
-            fclose($file);
-        };
-
-        $this->logActivity('ppdb', 'export', 'Mengekspor rekap data pendaftar PPDB ke format file CSV');
-
-        return response()->stream($callback, 200, $headers);
-    }
-
-    public function ppdbShow($id)
-    {
-        $registration = PpdbRegistration::with('documents')->findOrFail($id);
-        $majors = Major::all();
-        return view('admin.ppdb.show', compact('registration', 'majors'));
-    }
-
-    public function ppdbUpdateStatus(Request $request, $id)
-    {
-        $registration = PpdbRegistration::findOrFail($id);
-        Gate::authorize('update', $registration);
-
-        $validated = $request->validate([
-            'status' => 'required|in:pending,diverifikasi,diterima,ditolak',
-            'notes' => 'nullable|string',
-            'jenjang' => 'nullable|in:sd,smp,smk',
-            'major_choice' => 'nullable|string|max:100',
-        ]);
-
-        $oldStatus = $registration->status;
-        $updateData = [
-            'status' => $validated['status'],
-            'notes' => $validated['notes'] ?? null,
-        ];
-
-        if (!empty($validated['jenjang'])) {
-            $updateData['jenjang'] = $validated['jenjang'];
-            $updateData['major_choice'] = $validated['jenjang'] === 'smk' ? ($validated['major_choice'] ?? null) : null;
-        }
-
-        $registration->update($updateData);
-
-        $this->logActivity('ppdb', 'verify', "Mengubah status PPDB {$registration->no_pendaftaran} ({$registration->full_name}) dari {$oldStatus} ke {$validated['status']}");
-
-        return redirect()->route('admin.ppdb.show', $id)->with('success', 'Data & status pendaftaran PPDB berhasil diperbarui!');
-    }
-
-    public function ppdbDelete($id)
-    {
-        $registration = PpdbRegistration::findOrFail($id);
-        Gate::authorize('delete', $registration);
-
-        $noPendaftaran = $registration->no_pendaftaran;
-        $fullName = $registration->full_name;
-        $registration->delete();
-
-        $this->logActivity('ppdb', 'delete', "Menghapus data PPDB {$noPendaftaran} ({$fullName})");
-
-        return redirect()->route('admin.ppdb.index')->with('success', 'Data pendaftaran PPDB berhasil dihapus!');
-    }
-
-    /**
-     * ==========================================
-     * MODUL JURUSAN (AKADEMIK / CMS)
-     * ==========================================
-     */
-    public function majorIndex()
-    {
-        $majors = Major::orderBy('name', 'asc')->get();
-        return view('admin.majors.index', compact('majors'));
-    }
-
-    public function majorCreate()
-    {
-        return view('admin.majors.create');
-    }
-
-    public function majorStore(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'icon' => 'nullable|string|max:255',
-        ]);
-
-        $validated['slug'] = Str::slug($validated['name']);
-        $major = Major::create($validated);
-
-        $this->logActivity('jurusan', 'create', "Menambah jurusan baru: '{$major->name}'");
-
-        return redirect()->route('admin.majors.index')->with('success', 'Jurusan baru berhasil ditambahkan!');
-    }
-
-    public function majorEdit($id)
-    {
-        $major = Major::findOrFail($id);
-        return view('admin.majors.edit', compact('major'));
-    }
-
-    public function majorUpdate(Request $request, $id)
-    {
-        $major = Major::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'icon' => 'nullable|string|max:255',
-        ]);
-
-        if ($major->name !== $validated['name']) {
-            $validated['slug'] = Str::slug($validated['name']);
-        }
-
-        $major->update($validated);
-
-        $this->logActivity('jurusan', 'update', "Mengubah jurusan: '{$major->name}'");
-
-        return redirect()->route('admin.majors.index')->with('success', 'Data jurusan berhasil diperbarui!');
-    }
-
-    public function majorDelete($id)
-    {
-        $major = Major::findOrFail($id);
-        $name = $major->name;
-        $major->delete();
-
-        $this->logActivity('jurusan', 'delete', "Menghapus jurusan: '{$name}'");
-
-        return redirect()->route('admin.majors.index')->with('success', 'Jurusan berhasil dihapus!');
-    }
+    // ==========================================
+    // MODUL BERITA (Forwarding ke NewsController)
+    // ==========================================
+    public function newsIndex() { return app(NewsController::class)->index(); }
+    public function newsCreate() { return app(NewsController::class)->create(); }
+    public function newsStore(Request $request) { return app(NewsController::class)->store($request); }
+    public function newsEdit($id) { return app(NewsController::class)->edit($id); }
+    public function newsUpdate(Request $request, $id) { return app(NewsController::class)->update($request, $id); }
+    public function newsDelete($id) { return app(NewsController::class)->destroy($id); }
+
+    // ==========================================
+    // MODUL GURU (Forwarding ke TeacherController)
+    // ==========================================
+    public function teacherIndex() { return app(TeacherController::class)->index(); }
+    public function teacherCreate() { return app(TeacherController::class)->create(); }
+    public function teacherStore(Request $request) { return app(TeacherController::class)->store($request); }
+    public function teacherEdit($id) { return app(TeacherController::class)->edit($id); }
+    public function teacherUpdate(Request $request, $id) { return app(TeacherController::class)->update($request, $id); }
+    public function teacherDelete($id) { return app(TeacherController::class)->destroy($id); }
+
+    // ==========================================
+    // MODUL PPDB (Forwarding ke PpdbController)
+    // ==========================================
+    public function ppdbIndex(Request $request) { return app(PpdbController::class)->index($request); }
+    public function ppdbExportCsv(Request $request) { return app(PpdbController::class)->exportCsv($request); }
+    public function ppdbShow($id) { return app(PpdbController::class)->show($id); }
+    public function ppdbUpdateStatus(Request $request, $id) { return app(PpdbController::class)->updateStatus($request, $id); }
+    public function ppdbDelete($id) { return app(PpdbController::class)->destroy($id); }
+
+    // ==========================================
+    // MODUL JURUSAN (Forwarding ke MajorController)
+    // ==========================================
+    public function majorIndex() { return app(MajorController::class)->index(); }
+    public function majorCreate() { return app(MajorController::class)->create(); }
+    public function majorStore(Request $request) { return app(MajorController::class)->store($request); }
+    public function majorEdit($id) { return app(MajorController::class)->edit($id); }
+    public function majorUpdate(Request $request, $id) { return app(MajorController::class)->update($request, $id); }
+    public function majorDelete($id) { return app(MajorController::class)->destroy($id); }
 }

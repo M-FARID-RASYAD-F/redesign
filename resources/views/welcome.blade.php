@@ -284,6 +284,6 @@
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        console.log('Website Sekolah SMKN 1 Nusantara - Dimuat dengan sukses!');
+        console.log('Website PKBM Tahfizh At-Tamam - Dimuat dengan sukses!');
     </script>
 @endpush

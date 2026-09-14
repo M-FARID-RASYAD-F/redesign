@@ -19,6 +19,11 @@
             @if($currentJenjang !== 'all') ({{ strtoupper($currentJenjang) }}) @endif
             @if($currentStatus !== 'all') [{{ ucfirst($currentStatus) }}] @endif
         </a>
+        <a href="{{ route('admin.ppdb.export-zip', ['jenjang' => $currentJenjang !== 'all' ? $currentJenjang : null, 'status' => $currentStatus !== 'all' ? $currentStatus : null]) }}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 10px 18px; border-radius: 8px; text-decoration: none; color: white; background: #4f46e5; border-color: #4338ca;">
+            📦 Unduh Rekap ZIP (Berkas)
+            @if($currentJenjang !== 'all') ({{ strtoupper($currentJenjang) }}) @endif
+            @if($currentStatus !== 'all') [{{ ucfirst($currentStatus) }}] @endif
+        </a>
     </div>
 </div>
 

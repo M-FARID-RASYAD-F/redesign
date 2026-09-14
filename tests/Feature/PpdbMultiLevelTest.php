@@ -236,4 +236,76 @@ class PpdbMultiLevelTest extends TestCase
         $response->assertOk();
         $this->assertStringContainsString('rekap-ppdb-diterima', $response->headers->get('content-disposition'));
     }
+
+    public function test_admin_can_export_zip_per_jenjang(): void
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+
+        $sdFile = \Illuminate\Http\UploadedFile::fake()->create('kartu_keluarga.pdf', 100, 'application/pdf');
+        $sdPath = $sdFile->store('ppdb_documents', 'public');
+
+        $regSd = PpdbRegistration::factory()->create([
+            'full_name' => 'Ahmad Santoso',
+            'jenjang' => 'sd',
+            'status' => 'diterima',
+        ]);
+
+        \App\Models\PpdbDocument::create([
+            'registration_id' => $regSd->id,
+            'doc_type' => 'kk',
+            'file_path' => $sdPath,
+            'verification_status' => 'valid',
+        ]);
+
+        $regSmk = PpdbRegistration::factory()->create([
+            'full_name' => 'Budi SMK',
+            'jenjang' => 'smk',
+            'status' => 'diterima',
+        ]);
+
+        $response = $this->actingAs($this->adminPpdb)
+            ->get(route('admin.ppdb.export-zip', ['jenjang' => 'sd']));
+
+        $response->assertOk();
+        $this->assertStringContainsString('rekap-berkas-ppdb-sd', $response->headers->get('content-disposition'));
+        $this->assertStringContainsString('.zip', $response->headers->get('content-disposition'));
+
+        // Simpan binary stream response ke file temp untuk membaca isi ZIP
+        $tempZip = tempnam(sys_get_temp_dir(), 'test_zip_');
+        file_put_contents($tempZip, $response->streamedContent());
+
+        $zip = new \ZipArchive();
+        $this->assertTrue($zip->open($tempZip) === true);
+
+        // Pastikan folder siswa SD ada di dalam ZIP
+        $sdFolder = $regSd->no_pendaftaran . ' - Ahmad Santoso';
+        $smkFolder = $regSmk->no_pendaftaran . ' - Budi SMK';
+
+        $this->assertNotFalse($zip->locateName($sdFolder . '/Formulir_Pendaftaran.html'));
+        $this->assertNotFalse($zip->locateName($sdFolder . '/Ringkasan_Data.txt'));
+        $this->assertNotFalse($zip->locateName($sdFolder . '/Berkas_Kartu_Keluarga.pdf'));
+
+        // Pastikan siswa SMK TIDAK ikut masuk karena filter jenjang = sd
+        $this->assertFalse($zip->locateName($smkFolder . '/Formulir_Pendaftaran.html'));
+
+        $zip->close();
+        @unlink($tempZip);
+    }
+
+    public function test_guest_and_unauthorized_role_cannot_export_zip(): void
+    {
+        // Guest dialihkan ke login
+        $this->get(route('admin.ppdb.export-zip'))
+            ->assertRedirect(route('login'));
+
+        // Admin CMS dilarang mengakses modul ekspor PPDB (403 Forbidden)
+        $adminCms = User::factory()->create([
+            'role' => 'admin_cms',
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($adminCms)
+            ->get(route('admin.ppdb.export-zip'))
+            ->assertForbidden();
+    }
 }

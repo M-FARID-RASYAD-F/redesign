@@ -869,6 +869,20 @@
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
         }
 
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.18);
+            color: #f87171;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            margin-bottom: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
         /* Backdrop Overlay Mobile */
         .sidebar-overlay {
             display: none;
@@ -1922,6 +1936,13 @@
             <div class="alert-success">
                 <span>✨</span>
                 <span>{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert-danger">
+                <span>⚠️</span>
+                <span>{{ session('error') }}</span>
             </div>
         @endif
 

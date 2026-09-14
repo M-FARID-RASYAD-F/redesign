@@ -15,6 +15,7 @@ use App\Models\PpdbRegistration;
 use App\Models\Major;
 use App\Models\ActivityLog;
 use Illuminate\Support\Str;
+use ZipArchive;
 
 class AdminController extends Controller
 {
@@ -320,6 +321,141 @@ class AdminController extends Controller
         $this->logActivity('ppdb', 'export', 'Mengekspor rekap data pendaftar PPDB ke format file CSV');
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Ekspor Data & Seluruh Berkas Persyaratan Siswa ke format ZIP (Per Siswa 1 Folder)
+     */
+    public function ppdbExportZip(Request $request)
+    {
+        $currentJenjang = strtolower($request->query('jenjang', ''));
+        $currentStatus = strtolower($request->query('status', ''));
+        $query = PpdbRegistration::with('documents');
+
+        $suffixParts = [];
+
+        if (in_array($currentJenjang, ['sd', 'smp', 'smk'])) {
+            $query->where('jenjang', $currentJenjang);
+            $suffixParts[] = $currentJenjang;
+        } else {
+            $currentJenjang = 'all';
+        }
+
+        if (in_array($currentStatus, ['pending', 'diverifikasi', 'diterima', 'ditolak'])) {
+            $query->where('status', $currentStatus);
+            $suffixParts[] = $currentStatus;
+        } else {
+            $currentStatus = 'all';
+        }
+
+        $registrations = $query->orderBy('created_at', 'desc')->get();
+
+        if ($registrations->isEmpty()) {
+            return redirect()->back()->with('error', 'Tidak ada data pendaftar yang sesuai dengan filter yang dipilih untuk diekspor ke ZIP.');
+        }
+
+        $suffix = !empty($suffixParts) ? '-' . implode('-', $suffixParts) : '-semua-tingkat';
+        $downloadFileName = 'rekap-berkas-ppdb' . $suffix . '-' . date('Y-m-d_His') . '.zip';
+
+        // Pastikan folder temporary di storage tersedia
+        $tempDir = storage_path('app/temp');
+        if (!file_exists($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+
+        $zipPath = $tempDir . '/' . uniqid('ppdb_zip_', true) . '.zip';
+        $zip = new ZipArchive();
+
+        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+            return redirect()->back()->with('error', 'Gagal menginisialisasi pembuatan file kompresi ZIP.');
+        }
+
+        foreach ($registrations as $reg) {
+            // Bersihkan nama siswa untuk penamaan folder yang aman di seluruh OS
+            $cleanName = preg_replace('/[^\w\s\-]/u', '', $reg->full_name);
+            $cleanName = trim(preg_replace('/\s+/', ' ', $cleanName));
+            $folderName = $reg->no_pendaftaran . ' - ' . $cleanName;
+
+            // 1. Tambahkan Formulir Pendaftaran HTML Berdesain Resmi & Siap Cetak
+            $htmlContent = view('admin.ppdb.summary-export', compact('reg'))->render();
+            $zip->addFromString($folderName . '/Formulir_Pendaftaran.html', $htmlContent);
+
+            // 2. Tambahkan Ringkasan Teks Cepat
+            $txtContent = "=====================================================\n";
+            $txtContent .= "  RINGKASAN DATA PENDAFTARAN SISWA - PPDB ONLINE\n";
+            $txtContent .= "  PKBM TAHFIZH AT-TAMAM (TAHUN AJARAN 2026/2027)\n";
+            $txtContent .= "=====================================================\n\n";
+            $txtContent .= "No. Pendaftaran        : " . $reg->no_pendaftaran . "\n";
+            $txtContent .= "Tanggal Mendaftar      : " . ($reg->created_at ? $reg->created_at->format('d/m/Y H:i') : '-') . " WIB\n";
+            $txtContent .= "Jenjang Pendidikan     : " . $reg->jenjang_label . " (" . strtoupper($reg->jenjang) . ")\n";
+            if ($reg->jenjang === 'smk') {
+                $txtContent .= "Program Jurusan        : " . ($reg->major_choice ?: '-') . "\n";
+            }
+            $txtContent .= "Status Seleksi         : " . ucfirst($reg->status) . "\n";
+            $txtContent .= "Catatan Panitia        : " . ($reg->notes ?: '-') . "\n\n";
+            $txtContent .= "-----------------------------------------------------\n";
+            $txtContent .= "BIODATA CALON SISWA\n";
+            $txtContent .= "-----------------------------------------------------\n";
+            $txtContent .= "Nama Lengkap           : " . $reg->full_name . "\n";
+            $txtContent .= "Jenis Kelamin          : " . ($reg->gender === 'L' ? 'Laki-laki' : 'Perempuan') . "\n";
+            $txtContent .= "Tanggal Lahir          : " . ($reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-') . "\n";
+            $txtContent .= "Alamat Domisili        : " . $reg->address . "\n\n";
+            $txtContent .= "-----------------------------------------------------\n";
+            $txtContent .= "DATA ORANG TUA / WALI\n";
+            $txtContent .= "-----------------------------------------------------\n";
+            $txtContent .= "Nama Orang Tua / Wali  : " . $reg->parent_name . "\n";
+            $txtContent .= "Nomor HP / WhatsApp    : " . $reg->parent_phone . "\n\n";
+            $txtContent .= "-----------------------------------------------------\n";
+            $txtContent .= "STATUS BERKAS PERSYARATAN DI FOLDER INI\n";
+            $txtContent .= "-----------------------------------------------------\n";
+
+            $docsByTipe = $reg->documents->keyBy('doc_type');
+            $docTypes = [
+                'kk' => 'Kartu Keluarga (KK)',
+                'akta_lahir' => 'Akta Kelahiran',
+                'foto' => 'Pas Foto Formal (3x4)',
+                'rapor_terakhir' => 'Rapor Pendidikan Terakhir',
+            ];
+
+            foreach ($docTypes as $type => $label) {
+                $doc = $docsByTipe->get($type);
+                $statusStr = $doc ? 'Dilampirkan' : 'Belum/Tidak Dilampirkan';
+                $txtContent .= "- " . str_pad($label, 30) . ": " . $statusStr . "\n";
+            }
+
+            $zip->addFromString($folderName . '/Ringkasan_Data.txt', $txtContent);
+
+            // 3. Masukkan Berkas Fisik Persyaratan yang Diunggah Siswa
+            foreach ($reg->documents as $doc) {
+                $filePath = $doc->file_path;
+                $fileContent = null;
+
+                if (Storage::disk('local')->exists($filePath)) {
+                    $fileContent = Storage::disk('local')->get($filePath);
+                } elseif (Storage::disk('public')->exists($filePath)) {
+                    $fileContent = Storage::disk('public')->get($filePath);
+                }
+
+                if ($fileContent !== null) {
+                    $ext = pathinfo($filePath, PATHINFO_EXTENSION) ?: 'pdf';
+                    $cleanDocName = match ($doc->doc_type) {
+                        'kk' => 'Berkas_Kartu_Keluarga.' . $ext,
+                        'akta_lahir' => 'Berkas_Akta_Kelahiran.' . $ext,
+                        'foto' => 'Pas_Foto.' . $ext,
+                        'rapor_terakhir' => 'Berkas_Rapor_Terakhir.' . $ext,
+                        default => 'Berkas_' . preg_replace('/[^\w\-]/', '_', $doc->doc_type) . '.' . $ext,
+                    };
+
+                    $zip->addFromString($folderName . '/' . $cleanDocName, $fileContent);
+                }
+            }
+        }
+
+        $zip->close();
+
+        $this->logActivity('ppdb', 'export', 'Mengekspor rekap berkas pendaftar PPDB ke format file ZIP (' . count($registrations) . ' siswa)');
+
+        return response()->download($zipPath, $downloadFileName)->deleteFileAfterSend(true);
     }
 
     public function ppdbShow($id)

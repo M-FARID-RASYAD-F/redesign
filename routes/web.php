@@ -130,6 +130,9 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/ppdb/export', [AdminController::class, 'ppdbExportCsv'])
             ->name('ppdb.export')
             ->middleware('role:super_admin,admin_ppdb');
+        Route::get('/ppdb/export-zip', [AdminController::class, 'ppdbExportZip'])
+            ->name('ppdb.export-zip')
+            ->middleware('role:super_admin,admin_ppdb');
         Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
         Route::get('/ppdb/document/{id}', [AdminController::class, 'ppdbViewDocument'])
             ->name('ppdb.document');

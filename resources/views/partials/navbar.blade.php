@@ -18,11 +18,12 @@
         {{-- 2. Kapsul Tengah: Menu Navigasi Utama --}}
         <div class="navbar-capsule navbar-center">
             <nav class="nav-desktop-links">
-                <a href="{{ route('home') }}#beranda" class="nav-link active" data-section="beranda"><span class="nav-link-text">Beranda</span></a>
+                <a href="{{ route('home') }}#beranda" class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda"><span class="nav-link-text">Beranda</span></a>
                 <a href="{{ route('home') }}#jenjang" class="nav-link" data-section="jenjang"><span class="nav-link-text">Jenjang</span></a>
                 <a href="{{ route('home') }}#cabang" class="nav-link" data-section="cabang"><span class="nav-link-text">Cabang</span></a>
                 <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
-                <a href="{{ route('ppdb.index') }}" class="nav-link" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
+                <a href="{{ route('home') }}#kontak" class="nav-link" data-section="kontak"><span class="nav-link-text">Kontak</span></a>
+                <a href="{{ route('ppdb.index') }}" class="nav-link {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
             </nav>
         </div>
 
@@ -76,7 +77,7 @@
 
             {{-- 1. Navigasi Halaman Utama --}}
             <div class="nav-mobile-nav-list">
-                <a href="{{ route('home') }}#beranda" class="nav-mobile-link active" data-section="beranda">
+                <a href="{{ route('home') }}#beranda" class="nav-mobile-link {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda">
                     <span class="nav-mobile-icon-box">🏠</span>
                     <span class="nav-mobile-link-text">Beranda</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
@@ -96,11 +97,16 @@
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
+                <a href="{{ route('home') }}#kontak" class="nav-mobile-link" data-section="kontak">
+                    <span class="nav-mobile-icon-box">📞</span>
+                    <span class="nav-mobile-link-text">Hubungi Kami</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
             </div>
 
             {{-- 2. Kartu Layanan PPDB Online --}}
             <div class="nav-mobile-ppdb-box">
-                <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta" data-section="ppdb">
+                <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb">
                     <span class="nav-cta-text">🎓 Daftar PPDB Online</span>
                 </a>
                 <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-sublink">
@@ -270,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 700);
     }
 
-    const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link');
+    const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link, .nav-mobile-panel .nav-mobile-cta');
 
     function setActiveNav(sectionName) {
         navLinks.forEach(link => {
@@ -299,8 +305,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const navHeight = 78;
         const targetPosition = targetId === 'beranda' ? 0 : Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
 
-        // Pindah posisi langsung tanpa animasi scrolling lambat
-        window.scrollTo({ top: targetPosition, behavior: 'auto' });
+        // Scroll mulus tersinkronisasi (ScrollSmoother di desktop atau native smooth scroll di mobile)
+        if (window.smoother && typeof window.smoother.scrollTo === 'function') {
+            window.smoother.scrollTo(targetId === 'beranda' ? 0 : targetEl, true, targetId === 'beranda' ? 'top' : 'top ' + navHeight + 'px');
+        } else {
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
 
         // Pertahankan efek transisi visual cubic-bezier pada section target
         triggerSectionTransition(targetEl);
@@ -337,7 +347,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const berandaEl = document.getElementById('beranda');
                     if (berandaEl) {
                         e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'auto' });
+                        if (window.smoother && typeof window.smoother.scrollTo === 'function') {
+                            window.smoother.scrollTo(0, true);
+                        } else {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
                         triggerSectionTransition(berandaEl);
                         setActiveNav('beranda');
                         history.pushState(null, null, window.location.pathname);
@@ -355,14 +369,18 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 const navHeight = 78;
                 const targetPosition = initialTargetId === 'beranda' ? 0 : Math.max(0, initialTargetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
-                window.scrollTo({ top: targetPosition, behavior: 'auto' });
+                if (window.smoother && typeof window.smoother.scrollTo === 'function') {
+                    window.smoother.scrollTo(initialTargetId === 'beranda' ? 0 : initialTargetEl, false, initialTargetId === 'beranda' ? 'top' : 'top ' + navHeight + 'px');
+                } else {
+                    window.scrollTo({ top: targetPosition, behavior: 'auto' });
+                }
                 triggerSectionTransition(initialTargetEl);
                 setActiveNav(initialTargetId);
             }, 50);
         }
     }
 
-    // ── Scrollspy Otomatis: Beranda di paling atas, lalu Jurusan, Fasilitas, Berita ──
+    // ── Scrollspy Otomatis: Beranda, Jenjang, Cabang, Berita, Kontak ──
     function updateScrollspy() {
         const scrollY = window.pageYOffset;
 
@@ -374,11 +392,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const jenjangEl   = document.getElementById('jenjang') || document.getElementById('jurusan');
         const cabangEl    = document.getElementById('cabang') || document.getElementById('fasilitas');
         const beritaEl    = document.getElementById('berita');
+        const kontakEl    = document.getElementById('kontak');
 
         const navHeight = 90;
         const jenjangTop   = jenjangEl ? (jenjangEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
         const cabangTop    = cabangEl  ? (cabangEl.getBoundingClientRect().top + scrollY - navHeight)  : 2200;
         const beritaTop    = beritaEl  ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight)  : 3200;
+        const kontakTop    = kontakEl  ? (kontakEl.getBoundingClientRect().top + scrollY - navHeight)  : 4000;
 
         if (scrollY < jenjangTop - 80) {
             setActiveNav('beranda');
@@ -386,8 +406,10 @@ document.addEventListener('DOMContentLoaded', function () {
             setActiveNav('jenjang');
         } else if (scrollY >= cabangTop - 80 && scrollY < beritaTop - 80) {
             setActiveNav('cabang');
-        } else {
+        } else if (scrollY >= beritaTop - 80 && scrollY < kontakTop - 80) {
             setActiveNav('berita');
+        } else {
+            setActiveNav('kontak');
         }
     }
 

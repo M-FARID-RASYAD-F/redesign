@@ -37,7 +37,7 @@
                     <th>Peran (Role)</th>
                     <th>Status</th>
                     <th>Terdaftar</th>
-                    <th style="width: 150px; text-align: right;">Aksi</th>
+                    <th style="width: 190px; text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,17 +91,21 @@
                     <td style="font-size: 0.82rem; color: var(--adm-text-muted);">
                         {{ $user->created_at ? $user->created_at->format('d/m/Y') : '-' }}
                     </td>
-                    <td style="text-align: right;">
-                        <div style="display: inline-flex; gap: 8px;">
-                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline btn-sm">
-                                ✏️ Edit
-                            </a>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 175px;">
+                            @if($user->id === auth()->id())
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center; display: inline-flex; align-items: center; gap: 6px;">
+                                    ✏️ Edit
+                                </a>
+                            @else
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline btn-sm" style="flex: 1; justify-content: center; display: inline-flex; align-items: center; gap: 4px;">
+                                    ✏️ Edit
+                                </a>
 
-                            @if($user->id !== auth()->id())
-                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun admin {{ $user->name }}? Tindakan ini tidak dapat dibatalkan.');">
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus akun admin <strong>{{ $user->name }}</strong>? Tindakan ini tidak dapat dibatalkan." style="flex: 1; margin: 0; display: inline-flex;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun admin {{ $user->name }}? Tindakan ini tidak dapat dibatalkan.');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline btn-sm" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171;">
+                                    <button type="submit" class="btn btn-outline btn-sm btn-delete-trigger" style="width: 100%; justify-content: center; border-color: rgba(239, 68, 68, 0.4); color: #f87171; display: inline-flex; align-items: center; gap: 4px;">
                                         🗑️ Hapus
                                     </button>
                                 </form>

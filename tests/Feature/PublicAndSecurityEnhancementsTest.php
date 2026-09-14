@@ -45,6 +45,21 @@ class PublicAndSecurityEnhancementsTest extends TestCase
             ->assertSee(route('ppdb.index'));
     }
 
+    public function test_homepage_renders_expandable_tabs_navigation(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk()
+            ->assertSee('id="react-main-nav"', false)
+            ->assertSee('class="expandable-nav-tabs"', false)
+            ->assertSee('Beranda')
+            ->assertSee('Jenjang')
+            ->assertSee('Cabang')
+            ->assertSee('Berita')
+            ->assertSee('PPDB Online');
+    }
+
+
     public function test_guest_cannot_access_protected_ppdb_document(): void
     {
         $reg = PpdbRegistration::create([

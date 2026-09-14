@@ -498,6 +498,128 @@ a:hover {
   box-shadow: 0 10px 30px rgba(16, 185, 129, 0.55);
   color: #ffffff !important;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   EXPANDABLE TABS NAVIGATION (Desktop Capsule)
+   ═══════════════════════════════════════════════════════════ */
+.react-main-nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expandable-nav-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.expandable-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 8px 11px;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  box-sizing: border-box;
+}
+
+.expandable-tab-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  gap: 6px;
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+.expandable-tab-btn .tab-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.25s ease;
+}
+
+.expandable-tab-btn:hover .tab-icon {
+  transform: scale(1.08);
+}
+
+.expandable-tab-btn .tab-label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), margin-left 0.25s ease;
+  margin-left: 0;
+  vertical-align: middle;
+}
+
+/* Active or Hover State */
+.expandable-tab-btn.active,
+.expandable-tab-btn:hover {
+  gap: 6px;
+  padding: 8px 14px;
+}
+
+.expandable-tab-btn.active {
+  color: #38bdf8;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 16px rgba(0, 180, 216, 0.32);
+}
+
+.expandable-tab-btn.active .tab-label,
+.expandable-tab-btn:hover .tab-label {
+  max-width: 140px;
+  opacity: 1;
+  margin-left: 3px;
+}
+
+.expandable-tab-separator {
+  width: 1.5px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.22);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Light Theme Adaptations */
+[data-theme="light"] .expandable-tab-btn {
+  color: #334155;
+}
+
+[data-theme="light"] .expandable-tab-btn:hover {
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .expandable-tab-btn.active {
+  color: #0284c7;
+  background: rgba(0, 180, 216, 0.14);
+  box-shadow: 0 0 14px rgba(0, 180, 216, 0.25);
+}
+
+[data-theme="light"] .expandable-tab-separator {
+  background: rgba(0, 0, 0, 0.18);
+}
+
 .nav-cta-ppdb:active {
   transform: translateY(1px) scale(0.96);
   transition-duration: 0.12s;

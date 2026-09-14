@@ -899,7 +899,7 @@
            ═══════════════════════════════════════════════════════════ */
         .admin-grid-2col {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
             gap: 24px;
         }
 

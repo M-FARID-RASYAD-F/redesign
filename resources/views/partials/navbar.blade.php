@@ -15,15 +15,33 @@
             </a>
         </div>
 
-        {{-- 2. Kapsul Tengah: Menu Navigasi Utama --}}
+        {{-- 2. Kapsul Tengah: Menu Navigasi Utama (Expandable Tabs) --}}
         <div class="navbar-capsule navbar-center">
-            <nav class="nav-desktop-links">
-                <a href="{{ route('home') }}#beranda" class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda"><span class="nav-link-text">Beranda</span></a>
-                <a href="{{ route('home') }}#jenjang" class="nav-link" data-section="jenjang"><span class="nav-link-text">Jenjang</span></a>
-                <a href="{{ route('home') }}#cabang" class="nav-link" data-section="cabang"><span class="nav-link-text">Cabang</span></a>
-                <a href="{{ route('home') }}#berita" class="nav-link" data-section="berita"><span class="nav-link-text">Berita</span></a>
-                <a href="{{ route('ppdb.index') }}" class="nav-link {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb"><span class="nav-link-text">PPDB</span></a>
-            </nav>
+            <div id="react-main-nav" class="react-main-nav-wrapper">
+                <nav class="expandable-nav-tabs" aria-label="Navigasi Utama">
+                    <a href="{{ route('home') }}#beranda" class="expandable-tab-btn {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda" aria-label="Beranda">
+                        <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <span class="tab-label">Beranda</span>
+                    </a>
+                    <a href="{{ route('home') }}#jenjang" class="expandable-tab-btn" data-section="jenjang" aria-label="Jenjang">
+                        <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-.838L12.83 3.18a2 2 0 0 0-1.66 0L2.6 10.084a1 1 0 0 0 0 1.832l8.57 6.908a2 2 0 0 0 1.66 0l8.57-6.908a1 1 0 0 0 .02-.994z"/><path d="M6 12.5v5a6 3 0 0 0 12 0v-5"/></svg>
+                        <span class="tab-label">Jenjang</span>
+                    </a>
+                    <a href="{{ route('home') }}#cabang" class="expandable-tab-btn" data-section="cabang" aria-label="Cabang">
+                        <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+                        <span class="tab-label">Cabang</span>
+                    </a>
+                    <a href="{{ route('home') }}#berita" class="expandable-tab-btn" data-section="berita" aria-label="Berita">
+                        <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                        <span class="tab-label">Berita</span>
+                    </a>
+                    <div class="expandable-tab-separator" aria-hidden="true"></div>
+                    <a href="{{ route('ppdb.index') }}" class="expandable-tab-btn {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb" aria-label="PPDB Online">
+                        <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                        <span class="tab-label">PPDB Online</span>
+                    </a>
+                </nav>
+            </div>
         </div>
 
         {{-- 3. Kapsul Kanan: Theme Switcher, Login / Admin & Menu Mobile --}}
@@ -270,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 700);
     }
 
-    const navLinks = document.querySelectorAll('.nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link, .nav-mobile-panel .nav-mobile-cta');
+    const navLinks = document.querySelectorAll('.expandable-tab-btn, .nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link, .nav-mobile-panel .nav-mobile-cta');
 
     function setActiveNav(sectionName) {
         navLinks.forEach(link => {

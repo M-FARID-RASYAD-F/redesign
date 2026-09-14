@@ -26,6 +26,9 @@
     <!-- CSS Custom App -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ file_exists(public_path('css/style.css')) ? filemtime(public_path('css/style.css')) : time() }}">
 
+    <!-- Vite React & Tailwind Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <!-- Theme Initialization (Anti-Flicker) -->
     <script>
         (function() {

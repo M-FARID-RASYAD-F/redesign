@@ -145,32 +145,40 @@
     <!-- Kolom 2: Daftar Akun Pengelola Sistem -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">Pengelola Sistem</h3>
-            <a href="{{ route('admin.users.index') }}" style="font-size: 0.8rem; color: var(--adm-primary); font-weight: 700; text-decoration: none;">Semua →</a>
+            <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">Pengelola Sistem</h3>
+                <span style="font-size: 0.78rem; color: var(--adm-text-muted);">Akun administrator aktif</span>
+            </div>
+            <a href="{{ route('admin.users.index') }}" style="font-size: 0.8rem; color: var(--adm-primary); font-weight: 700; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(0, 180, 216, 0.1);">Semua →</a>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
             @foreach($recentUsers as $u)
-            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--adm-border); border-radius: 10px;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--adm-primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 11px 13px; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--adm-border); border-radius: 12px; transition: border-color 0.2s ease;">
+                <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--adm-primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.88rem; flex-shrink: 0; box-shadow: 0 2px 8px var(--adm-primary-glow);">
                     {{ strtoupper(substr($u->name, 0, 1)) }}
                 </div>
                 <div style="flex: 1; min-width: 0;">
-                    <div style="font-size: 0.88rem; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $u->name }}</div>
-                    <div style="font-size: 0.76rem; color: var(--adm-text-muted);">{{ $u->email }}</div>
-                </div>
-                <div>
-                    <span class="badge {{ $u->role === 'super_admin' ? 'badge-danger' : ($u->role === 'admin_cms' ? 'badge-info' : ($u->role === 'admin_ppdb' ? 'badge-warning' : 'badge-success')) }}" style="font-size: 0.7rem;">
-                        {{ $u->role_label }}
-                    </span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px;">
+                        <div style="font-size: 0.88rem; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $u->name }}">
+                            {{ $u->name }}
+                        </div>
+                        <span class="badge {{ $u->role === 'super_admin' ? 'badge-danger' : ($u->role === 'admin_cms' ? 'badge-info' : ($u->role === 'admin_ppdb' ? 'badge-warning' : 'badge-success')) }}" style="font-size: 0.68rem; padding: 2px 7px; flex-shrink: 0; white-space: nowrap;">
+                            {{ $u->role_label }}
+                        </span>
+                    </div>
+                    <div style="font-size: 0.77rem; font-family: 'JetBrains Mono', monospace; color: var(--adm-text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px;" title="{{ $u->email }}">
+                        <span style="opacity: 0.6; font-size: 0.72rem; flex-shrink: 0;">✉</span>
+                        <span style="overflow: hidden; text-overflow: ellipsis;">{{ $u->email }}</span>
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
 
-        <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--adm-border);">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
-                ➕ Tambah Pengguna Admin Baru
+        <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--adm-border);">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center; display: inline-flex; align-items: center; gap: 6px;">
+                <span>➕</span> Tambah Pengguna Admin Baru
             </a>
         </div>
     </div>

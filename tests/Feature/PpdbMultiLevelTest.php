@@ -281,12 +281,17 @@ class PpdbMultiLevelTest extends TestCase
         $sdFolder = $regSd->no_pendaftaran . ' - Ahmad Santoso';
         $smkFolder = $regSmk->no_pendaftaran . ' - Budi SMK';
 
-        $this->assertNotFalse($zip->locateName($sdFolder . '/Formulir_Pendaftaran.html'));
+        $this->assertNotFalse($zip->locateName($sdFolder . '/Formulir_Pendaftaran.pdf'));
+        $pdfContent = $zip->getFromName($sdFolder . '/Formulir_Pendaftaran.pdf');
+        $this->assertStringStartsWith('%PDF-', $pdfContent);
         $this->assertNotFalse($zip->locateName($sdFolder . '/Ringkasan_Data.txt'));
         $this->assertNotFalse($zip->locateName($sdFolder . '/Berkas_Kartu_Keluarga.pdf'));
 
+        // Pastikan file format HTML tidak ada lagi di dalam arsip ZIP
+        $this->assertFalse($zip->locateName($sdFolder . '/Formulir_Pendaftaran.html'));
+
         // Pastikan siswa SMK TIDAK ikut masuk karena filter jenjang = sd
-        $this->assertFalse($zip->locateName($smkFolder . '/Formulir_Pendaftaran.html'));
+        $this->assertFalse($zip->locateName($smkFolder . '/Formulir_Pendaftaran.pdf'));
 
         $zip->close();
         @unlink($tempZip);

@@ -16,6 +16,7 @@ use App\Models\Major;
 use App\Models\ActivityLog;
 use Illuminate\Support\Str;
 use ZipArchive;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -363,6 +364,10 @@ class AdminController extends Controller
             mkdir($tempDir, 0755, true);
         }
 
+        // Pastikan alokasi resource memadai untuk rendering PDF banyak pendaftar
+        @ini_set('max_execution_time', 300);
+        @ini_set('memory_limit', '512M');
+
         $zipPath = $tempDir . '/' . uniqid('ppdb_zip_', true) . '.zip';
         $zip = new ZipArchive();
 
@@ -376,9 +381,10 @@ class AdminController extends Controller
             $cleanName = trim(preg_replace('/\s+/', ' ', $cleanName));
             $folderName = $reg->no_pendaftaran . ' - ' . $cleanName;
 
-            // 1. Tambahkan Formulir Pendaftaran HTML Berdesain Resmi & Siap Cetak
-            $htmlContent = view('admin.ppdb.summary-export', compact('reg'))->render();
-            $zip->addFromString($folderName . '/Formulir_Pendaftaran.html', $htmlContent);
+            // 1. Tambahkan Formulir Pendaftaran Dokumen PDF Resmi & Siap Cetak
+            $pdf = Pdf::loadView('admin.ppdb.summary-export', compact('reg'))
+                ->setPaper('a4', 'portrait');
+            $zip->addFromString($folderName . '/Formulir_Pendaftaran.pdf', $pdf->output());
 
             // 2. Tambahkan Ringkasan Teks Cepat
             $txtContent = "=====================================================\n";

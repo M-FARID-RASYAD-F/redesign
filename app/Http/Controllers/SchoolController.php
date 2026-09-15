@@ -155,13 +155,23 @@ class SchoolController extends Controller
         }
 
         // 5. Data Berita Terbaru (Dinamis dari Database)
-        $berita = News::with('category')->latest()->take(3)->get()->map(function ($item) {
+        $localNewsImages = [
+            'images/sch1.jpeg',
+            'images/sch2.jpeg',
+            'images/sch3.jpeg',
+            'images/sch5.jpg',
+        ];
+
+        $berita = News::with('category')->latest()->take(3)->get()->values()->map(function ($item, $idx) use ($localNewsImages) {
             return [
+                'id' => $item->id,
+                'slug' => $item->slug ?? \Illuminate\Support\Str::slug($item->title),
                 'judul' => $item->title,
                 'tanggal' => $item->created_at->translatedFormat('d F Y') ?? $item->created_at->format('d M Y'),
                 'kategori' => $item->category ? $item->category->name : 'Umum',
-                'ringkasan' => substr(strip_tags($item->content), 0, 120) . '...',
-                'baca_waktu' => '3 menit baca'
+                'ringkasan' => \Illuminate\Support\Str::limit(strip_tags($item->content), 130),
+                'baca_waktu' => '3 menit baca',
+                'gambar' => $localNewsImages[$idx % count($localNewsImages)],
             ];
         })->toArray();
 
@@ -169,11 +179,14 @@ class SchoolController extends Controller
         if (empty($berita)) {
             $berita = [
                 [
+                    'id' => 1,
+                    'slug' => 'santri-pkbm-tahfizh-attamam-raih-juara-1',
                     'judul' => 'Santri PKBM Tahfizh At-Tamam Raih Juara 1 Musabaqah Hifdzil Quran 2026',
                     'tanggal' => '28 Juli 2026',
                     'kategori' => 'Prestasi',
                     'ringkasan' => 'Santri binaan kami berhasil memboyong prestasi gemilang dalam kejuaraan tahfizh tingkat provinsi.',
-                    'baca_waktu' => '3 menit baca'
+                    'baca_waktu' => '3 menit baca',
+                    'gambar' => 'images/sch1.jpeg',
                 ]
             ];
         }

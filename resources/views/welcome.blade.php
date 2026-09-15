@@ -150,7 +150,15 @@
             subtitle="Ikuti perkembangan aktivitas, prestasi, dan agenda kegiatan sekolah kami."
         />
 
-        <div class="grid-3">
+        <div class="grid-3 news-cards-grid">
+            @php
+                $localImagePool = [
+                    'images/sch1.jpeg',
+                    'images/sch2.jpeg',
+                    'images/sch3.jpeg',
+                    'images/sch5.jpg',
+                ];
+            @endphp
             @foreach($berita as $b)
                 @php
                     $theme = match($loop->iteration % 3) {
@@ -158,17 +166,25 @@
                         2 => 'secondary',
                         0 => 'accent',
                     };
+                    $newsImage = !empty($b['gambar']) ? $b['gambar'] : $localImagePool[$loop->index % count($localImagePool)];
+                    $newsSlug = $b['slug'] ?? Str::slug($b['judul']);
+                    $newsUrl = route('news.show', $newsSlug);
                 @endphp
                 <x-card 
                     :title="$b['judul']" 
                     :badge="$b['kategori']"
                     :subtitle="$b['tanggal'] . ' • ' . $b['baca_waktu']"
+                    :date="$b['tanggal']"
+                    :read-time="$b['baca_waktu']"
                     :theme="$theme"
+                    :image="$newsImage"
+                    :link="$newsUrl"
                 >
-                    <p style="margin-bottom: 1rem; font-size: 0.9rem;">{{ $b['ringkasan'] }}</p>
+                    <p class="news-excerpt">{{ $b['ringkasan'] }}</p>
                     
-                    <a href="{{ route('news.show', $b['slug'] ?? Str::slug($b['judul'])) }}" class="card-read-more">
-                        Baca Selengkapnya &rarr;
+                    <a href="{{ $newsUrl }}" class="card-read-more">
+                        <span>Baca Selengkapnya</span>
+                        <span class="read-more-arrow">&rarr;</span>
                     </a>
                 </x-card>
             @endforeach

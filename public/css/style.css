@@ -1965,6 +1965,281 @@ body.nav-mobile-open {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   NEWS CARD WITH IMAGE & COLOR BLUR OVERLAY (Section Berita)
+   Layout proporsional (panjang disesuaikan, lebar tetap)
+   Blur warna sebelum text (overlay gradasi, frosted badge, ambient glow)
+   ═══════════════════════════════════════════════════════════ */
+.custom-card.card-with-image {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* 1. Area Gambar Berita */
+.custom-card .card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 205px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: calc(var(--radius-md) - 2px) calc(var(--radius-md) - 2px) 0 0;
+  transform: translateZ(12px);
+  background: #001529;
+}
+
+.custom-card .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.65s ease;
+}
+
+.custom-card:hover .card-image {
+  transform: scale(1.08);
+}
+
+/* 2. Overlay Gradasi Blur Warna Transisi dari Gambar ke Body */
+.custom-card .card-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 21, 41, 0.05) 0%,
+    rgba(0, 21, 41, 0.25) 45%,
+    rgba(15, 23, 42, 0.78) 78%,
+    rgba(15, 23, 42, 0.98) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.35s ease;
+}
+
+/* 3. Frosted Badge dengan Blur Warna sebelum teks (persis hero-badge pada head) */
+.custom-card .card-badge-container {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  z-index: 3;
+  transform: translateZ(36px);
+  pointer-events: none;
+}
+
+.custom-card .card-badge-blur {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 33, 71, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.50);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 180, 216, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.custom-card .card-badge-blur .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00B4D8;
+  box-shadow: 0 0 8px #00B4D8;
+  display: inline-block;
+}
+
+.custom-card:hover .card-badge-blur {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+  border-color: #38bdf8;
+}
+
+/* Badge theme-secondary */
+.custom-card .card-badge-blur.theme-secondary {
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #34d399;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px rgba(16, 185, 129, 0.25);
+}
+.custom-card .card-badge-blur.theme-secondary .badge-dot {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* Badge theme-accent */
+.custom-card .card-badge-blur.theme-accent {
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px rgba(245, 158, 11, 0.25);
+}
+.custom-card .card-badge-blur.theme-accent .badge-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+/* 4. Ambient Color Blur Glow sebelum teks (pendaran warna lembut seperti pada head) */
+.custom-card .card-ambient-glow {
+  position: absolute;
+  top: 175px;
+  left: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  filter: blur(30px);
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.26) 0%, rgba(37, 99, 235, 0.10) 50%, transparent 70%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.custom-card .card-ambient-glow.theme-secondary {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.26) 0%, rgba(5, 150, 105, 0.10) 50%, transparent 70%);
+}
+
+.custom-card .card-ambient-glow.theme-accent {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.26) 0%, rgba(217, 119, 6, 0.10) 50%, transparent 70%);
+}
+
+.custom-card:hover .card-ambient-glow {
+  transform: scale(1.3) translateY(-6px);
+  opacity: 1;
+}
+
+/* 5. Konten Body Berita & Penyesuaian Panjang (Height Proportions) */
+.custom-card .card-content-wrap {
+  padding: 1.35rem 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 4;
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+}
+
+/* Meta Bar (Tanggal & Read Time) */
+.custom-card .card-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.77rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+  font-weight: 550;
+  letter-spacing: 0.01em;
+  transform: translateZ(26px);
+}
+
+.custom-card .meta-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  color: #38bdf8;
+  margin-right: 3px;
+  flex-shrink: 0;
+}
+
+.custom-card .card-meta-sep {
+  color: rgba(148, 163, 184, 0.45);
+  font-size: 0.75rem;
+}
+
+/* Judul Berita dengan tinggi baris terkontrol */
+.custom-card.card-with-image .card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.38;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.76em;
+  transform: translateZ(32px);
+  transition: color 0.25s ease;
+}
+
+.custom-card.card-with-image .card-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.custom-card.card-with-image .card-title-link:hover {
+  color: #38bdf8;
+}
+
+/* Body / Ringkasan Berita dengan tinggi seragam */
+.custom-card.card-with-image .card-body {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 4.8em;
+  flex: none;
+  transform: translateZ(22px);
+}
+
+.custom-card.card-with-image .news-excerpt {
+  margin: 0;
+}
+
+/* Tombol Baca Selengkapnya di footer card */
+.custom-card.card-with-image .card-read-more {
+  margin-top: auto;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #38bdf8;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transform: translateZ(30px);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.custom-card.card-with-image .card-read-more:hover {
+  color: #7dd3fc;
+  transform: translateX(3px) translateZ(36px);
+}
+
+.custom-card.card-with-image .read-more-arrow {
+  font-size: 1rem;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-card.card-with-image:hover .read-more-arrow {
+  transform: translateX(5px);
+}
+
+/* Explore hint di card dengan gambar */
+.custom-card.card-with-image .card-explore-hint {
+  padding: 0 1.6rem 1.1rem;
+  margin-top: -0.25rem;
+  border-top: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
    NEUMORPHIC SOFT-SHADOW JURUSAN CARDS (CodeFronts Component)
    Dual light/dark box-shadows, extruded avatar, inset wells & tactile button
    ═══════════════════════════════════════════════════════════ */
@@ -4579,6 +4854,26 @@ body.nav-mobile-open {
     box-sizing: border-box;
     width: 100%;
   }
+  .custom-card.card-with-image {
+    padding: 0 !important;
+  }
+  .custom-card .card-image-wrap {
+    height: 185px;
+  }
+  .custom-card .card-content-wrap {
+    padding: 1.15rem 1.25rem 1.35rem;
+  }
+  .custom-card.card-with-image .card-title {
+    font-size: 1.05rem;
+    height: auto;
+    min-height: auto;
+  }
+  .custom-card.card-with-image .card-body {
+    font-size: 0.82rem;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 1rem;
+  }
   .card-header {
     display: flex;
     flex-wrap: wrap;
@@ -4617,10 +4912,10 @@ body.nav-mobile-open {
     word-break: break-word;
   }
 
-  /* ── Footer ── */
+  /* ── Footer ── (Tinggikan padding bawah agar tidak tertutupi tombol WA floating) */
   .footer {
     margin-top: 0;
-    padding: 2rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+    padding: 2.5rem 1.25rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
     box-sizing: border-box;
     width: 100%;
   }
@@ -4913,8 +5208,10 @@ body.nav-mobile-open {
   .cabang-section {
     padding: 1.25rem 0.75rem;
   }
+  /* Footer Small Mobile (<= 480px): Tinggikan padding bawah agar tidak tertutupi tombol WA floating */
   .footer {
-    padding: 1.75rem 1rem max(1rem, env(safe-area-inset-bottom));
+    margin-top: 0;
+    padding: 1.75rem 1rem calc(6.25rem + env(safe-area-inset-bottom, 0px));
   }
   .ppdb-hero-section {
     padding: 4.5rem 1rem 2rem !important;
@@ -5462,6 +5759,64 @@ body.nav-mobile-open {
   color: oklch(75% 0.18 18);
 }
 [data-theme="light"] .content-area-constellation .card-read-more:hover {
+  color: #ffffff;
+}
+
+/* Light Theme overrides untuk News Card with Image */
+[data-theme="light"] .custom-card.card-with-image {
+  background: oklch(27.1% 0.105 12.094 / 0.94);
+  border-color: oklch(58.6% 0.253 17.585 / 0.35);
+}
+
+[data-theme="light"] .custom-card.card-with-image:hover {
+  background: oklch(33% 0.125 13 / 0.98);
+  border-color: oklch(58.6% 0.253 17.585);
+}
+
+[data-theme="light"] .custom-card .card-image-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(43, 8, 12, 0.35) 45%,
+    oklch(27.1% 0.105 12.094 / 0.82) 75%,
+    oklch(27.1% 0.105 12.094 / 0.98) 100%
+  );
+}
+
+[data-theme="light"] .custom-card .card-badge-blur {
+  background: oklch(20% 0.08 11 / 0.88);
+  border-color: oklch(58.6% 0.253 17.585 / 0.5);
+  color: #fda4af;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px oklch(58.6% 0.253 17.585 / 0.35);
+}
+
+[data-theme="light"] .custom-card .card-badge-blur .badge-dot {
+  background: oklch(58.6% 0.253 17.585);
+  box-shadow: 0 0 8px oklch(58.6% 0.253 17.585);
+}
+
+[data-theme="light"] .custom-card .card-ambient-glow {
+  background: radial-gradient(circle, oklch(58.6% 0.253 17.585 / 0.30) 0%, oklch(41% 0.159 10.272 / 0.12) 50%, transparent 70%);
+}
+
+[data-theme="light"] .custom-card .card-meta-row {
+  color: #fecdd3;
+}
+
+[data-theme="light"] .custom-card .meta-icon {
+  color: oklch(75% 0.18 18);
+}
+
+[data-theme="light"] .custom-card.card-with-image .card-title-link:hover {
+  color: #fda4af;
+}
+
+[data-theme="light"] .custom-card.card-with-image .card-read-more {
+  border-top-color: oklch(58.6% 0.253 17.585 / 0.25);
+  color: oklch(75% 0.18 18);
+}
+
+[data-theme="light"] .custom-card.card-with-image .card-read-more:hover {
   color: #ffffff;
 }
 

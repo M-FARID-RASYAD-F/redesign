@@ -4,7 +4,7 @@
     <div class="stat-icon-wrapper" style="background-color: {{ $color }};">
         <span>{{ $icon }}</span>
     </div>
-    <div>
+    <div class="stat-info">
         <div class="stat-value">{{ $value }}</div>
         <div class="stat-label">{{ $label }}</div>
     </div>

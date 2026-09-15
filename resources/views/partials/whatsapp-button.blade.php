@@ -178,15 +178,16 @@
 /* Responsive Mobile Screen: Bulatan Murni Logo WhatsApp */
 @media (max-width: 768px) {
   .floating-wa-wrapper {
-    bottom: 20px;
-    left: 20px;
+    bottom: calc(76px + max(10px, env(safe-area-inset-bottom, 10px)));
+    left: max(14px, env(safe-area-inset-left, 14px));
+    z-index: 980;
   }
 
   .floating-wa-btn {
-    width: 54px;
-    height: 54px;
-    min-width: 54px;
-    min-height: 54px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     padding: 0 !important;
     border-radius: 50% !important;
     justify-content: center !important;

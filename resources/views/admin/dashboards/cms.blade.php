@@ -23,48 +23,45 @@
 </div>
 
 <!-- KARTU STATISTIK CMS -->
-<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 26px;">
+<div class="stats-grid">
     <!-- Berita Terbit -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">BERITA TAYANG</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📰</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">BERITA TAYANG</span>
+            <div class="stat-card-icon icon-emerald">📰</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #34d399;">{{ $stats['published_news'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Dari total {{ $stats['total_news'] }} artikel dibuat</div>
+        <div class="stat-card-val" style="color: #34d399;">{{ $stats['published_news'] }}</div>
+        <div class="stat-card-sub">Dari {{ $stats['total_news'] }} artikel dibuat</div>
     </div>
 
     <!-- Foto Galeri -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">GALERI FOTO</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(0, 180, 216, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🖼️</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">GALERI FOTO</span>
+            <div class="stat-card-icon icon-cyan">🖼️</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_galleries'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Dokumentasi kegiatan santri</div>
+        <div class="stat-card-val">{{ $stats['total_galleries'] }}</div>
+        <div class="stat-card-sub">Dokumentasi kegiatan santri</div>
     </div>
 
     <!-- Pengumuman Aktif vs Expired -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">PENGUMUMAN</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📢</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">PENGUMUMAN</span>
+            <div class="stat-card-icon icon-amber">📢</div>
         </div>
-        <div style="display: flex; align-items: baseline; gap: 10px;">
-            <span style="font-size: 2rem; font-weight: 800; color: #fbbf24;">{{ $stats['active_announcements'] }}</span>
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted);">aktif · {{ $stats['expired_announcements'] }} arsip</span>
-        </div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Info siaran publik & internal</div>
+        <div class="stat-card-val" style="color: #fbbf24;">{{ $stats['active_announcements'] }}</div>
+        <div class="stat-card-sub">Aktif ({{ $stats['expired_announcements'] }} arsip)</div>
     </div>
 
     <!-- Agenda Sekolah -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">AGENDA MENDATANG</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📅</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">AGENDA MENDATANG</span>
+            <div class="stat-card-icon icon-purple">📅</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #c084fc;">{{ $stats['upcoming_agendas'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Kegiatan terjadwal berikutnya</div>
+        <div class="stat-card-val" style="color: #c084fc;">{{ $stats['upcoming_agendas'] }}</div>
+        <div class="stat-card-sub">Kegiatan terjadwal berikutnya</div>
     </div>
 </div>
 

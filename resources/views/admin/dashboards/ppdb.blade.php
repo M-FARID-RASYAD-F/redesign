@@ -23,40 +23,55 @@
 </div>
 
 <!-- STATISTIK KARTU SELEKSI PPDB -->
-<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 26px;">
+<div class="stats-grid-5">
     <!-- Total Pendaftar -->
-    <a href="{{ route('admin.ppdb.index') }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; transition: transform 0.2s ease;">
-        <div style="font-size: 0.82rem; color: var(--adm-text-muted); font-weight: 700; text-transform: uppercase;">TOTAL PENDAFTAR</div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['total'] }}</div>
-        <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px;">Tahun Ajaran 2026/2027 ↗</div>
+    <a href="{{ route('admin.ppdb.index') }}" class="card stat-card-item" style="text-decoration: none;">
+        <div class="stat-card-header">
+            <span class="stat-card-label">TOTAL PENDAFTAR</span>
+            <div class="stat-card-icon icon-sky">📝</div>
+        </div>
+        <div class="stat-card-val">{{ $stats['total'] }}</div>
+        <div class="stat-card-sub">Tahun 2026/2027 ↗</div>
     </a>
 
     <!-- Menunggu Verifikasi (Pending) -->
-    <a href="{{ route('admin.ppdb.index', ['status' => 'pending']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.08); transition: transform 0.2s ease;">
-        <div style="font-size: 0.82rem; color: #fbbf24; font-weight: 700; text-transform: uppercase;">⏳ PERLU VERIFIKASI</div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #fbbf24; margin-top: 4px;">{{ $stats['pending'] }}</div>
-        <div style="font-size: 0.78rem; color: #fde68a; margin-top: 4px;">Menunggu tindakan panitia ↗</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'pending']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.08);">
+        <div class="stat-card-header">
+            <span class="stat-card-label" style="color: #fbbf24;">PERLU VERIFIKASI</span>
+            <div class="stat-card-icon icon-amber">⏳</div>
+        </div>
+        <div class="stat-card-val" style="color: #fbbf24;">{{ $stats['pending'] }}</div>
+        <div class="stat-card-sub" style="color: #fde68a;">Menunggu panitia ↗</div>
     </a>
 
     <!-- Terverifikasi -->
-    <a href="{{ route('admin.ppdb.index', ['status' => 'diverifikasi']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); transition: transform 0.2s ease;">
-        <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 700; text-transform: uppercase;">📑 BERKAS VALID</div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #38bdf8; margin-top: 4px;">{{ $stats['diverifikasi'] }}</div>
-        <div style="font-size: 0.78rem; color: #bae6fd; margin-top: 4px;">Dokumen lengkap & lolos cek ↗</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'diverifikasi']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08);">
+        <div class="stat-card-header">
+            <span class="stat-card-label" style="color: #38bdf8;">BERKAS VALID</span>
+            <div class="stat-card-icon icon-cyan">📑</div>
+        </div>
+        <div class="stat-card-val" style="color: #38bdf8;">{{ $stats['diverifikasi'] }}</div>
+        <div class="stat-card-sub" style="color: #bae6fd;">Dokumen lolos ↗</div>
     </a>
 
     <!-- Diterima -->
-    <a href="{{ route('admin.ppdb.index', ['status' => 'diterima']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08); transition: transform 0.2s ease;">
-        <div style="font-size: 0.82rem; color: #34d399; font-weight: 700; text-transform: uppercase;">🎉 SISWA DITERIMA</div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #34d399; margin-top: 4px;">{{ $stats['diterima'] }}</div>
-        <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 4px;">Siap registrasi ulang ↗</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'diterima']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08);">
+        <div class="stat-card-header">
+            <span class="stat-card-label" style="color: #34d399;">SISWA DITERIMA</span>
+            <div class="stat-card-icon icon-emerald">🎉</div>
+        </div>
+        <div class="stat-card-val" style="color: #34d399;">{{ $stats['diterima'] }}</div>
+        <div class="stat-card-sub" style="color: #a7f3d0;">Siap registrasi ↗</div>
     </a>
 
     <!-- Ditolak -->
-    <a href="{{ route('admin.ppdb.index', ['status' => 'ditolak']) }}" class="card" style="margin-bottom: 0; text-decoration: none; display: block; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); transition: transform 0.2s ease;">
-        <div style="font-size: 0.82rem; color: #f87171; font-weight: 700; text-transform: uppercase;">❌ TIDAK LOLOS</div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #f87171; margin-top: 4px;">{{ $stats['ditolak'] }}</div>
-        <div style="font-size: 0.78rem; color: #fca5a5; margin-top: 4px;">Tidak memenuhi kriteria ↗</div>
+    <a href="{{ route('admin.ppdb.index', ['status' => 'ditolak']) }}" class="card stat-card-item ppdb-card-rejected" style="text-decoration: none; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08);">
+        <div class="stat-card-header">
+            <span class="stat-card-label" style="color: #f87171;">TIDAK LOLOS</span>
+            <div class="stat-card-icon icon-rose">❌</div>
+        </div>
+        <div class="stat-card-val" style="color: #f87171;">{{ $stats['ditolak'] }}</div>
+        <div class="stat-card-sub" style="color: #fca5a5;">Tidak memenuhi ↗</div>
     </a>
 </div>
 
@@ -65,13 +80,13 @@
     <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
         <span>🏫</span> Pendaftar Berdasarkan Tingkatan Pendidikan
     </h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+    <div class="stats-grid-3">
         <!-- SD -->
-        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'sd']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); transition: transform 0.2s ease;">
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'sd']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
                     <span style="font-size: 0.8rem; color: #34d399; font-weight: 800; text-transform: uppercase;">SEKOLAH DASAR (SD)</span>
-                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['sd_total'] }}</div>
+                    <div class="stat-card-val" style="margin-top: 4px;">{{ $stats['sd_total'] }}</div>
                     <span style="font-size: 0.78rem; color: #a7f3d0; font-weight: 600;">Kelola Pendaftar SD →</span>
                 </div>
                 <span style="font-size: 2.2rem;">🎒</span>
@@ -79,11 +94,11 @@
         </a>
 
         <!-- SMP -->
-        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smp']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); transition: transform 0.2s ease;">
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smp']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08);">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
                     <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 800; text-transform: uppercase;">MENENGAH PERTAMA (SMP)</span>
-                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['smp_total'] }}</div>
+                    <div class="stat-card-val" style="margin-top: 4px;">{{ $stats['smp_total'] }}</div>
                     <span style="font-size: 0.78rem; color: #bae6fd; font-weight: 600;">Kelola Pendaftar SMP →</span>
                 </div>
                 <span style="font-size: 2.2rem;">📚</span>
@@ -91,11 +106,11 @@
         </a>
 
         <!-- SMK -->
-        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smk']) }}" class="card" style="margin-bottom: 0; text-decoration: none; border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08); transition: transform 0.2s ease;">
+        <a href="{{ route('admin.ppdb.index', ['jenjang' => 'smk']) }}" class="card stat-card-item" style="text-decoration: none; border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08);">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
                     <span style="font-size: 0.8rem; color: #c084fc; font-weight: 800; text-transform: uppercase;">KEJURUAN (SMK)</span>
-                    <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 4px;">{{ $stats['smk_total'] }}</div>
+                    <div class="stat-card-val" style="margin-top: 4px;">{{ $stats['smk_total'] }}</div>
                     <span style="font-size: 0.78rem; color: #e9d5ff; font-weight: 600;">Kelola Pendaftar SMK →</span>
                 </div>
                 <span style="font-size: 2.2rem;">💻</span>

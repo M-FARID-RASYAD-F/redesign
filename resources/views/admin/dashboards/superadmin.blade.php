@@ -22,70 +22,73 @@
     </div>
 </div>
 
-<!-- STATISTIK UTAMA (GRID KARTU) -->
-<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 26px;">
+<!-- STATISTIK UTAMA (GRID KARTU PROPORSIONAL) -->
+<div class="stats-grid">
     <!-- Card User Admin -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">ADMIN AKTIF</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(0, 180, 216, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👥</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">ADMIN AKTIF</span>
+            <div class="stat-card-icon icon-cyan">👥</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_users'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Akun pengelola sistem</div>
+        <div class="stat-card-val">{{ $stats['total_users'] }}</div>
+        <div class="stat-card-sub">Akun pengelola sistem</div>
     </div>
 
     <!-- Card Berita -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">TOTAL BERITA</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📰</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">TOTAL BERITA</span>
+            <div class="stat-card-icon icon-sky">📰</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_news'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Artikel & pengumuman CMS</div>
+        <div class="stat-card-val">{{ $stats['total_news'] }}</div>
+        <div class="stat-card-sub">Artikel & pengumuman CMS</div>
     </div>
 
     <!-- Card Guru & Staf -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">GURU & STAF</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👨‍🏫</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">GURU & STAF</span>
+            <div class="stat-card-icon icon-emerald">👨‍🏫</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_teachers'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Tenaga pendidik & staf</div>
+        <div class="stat-card-val">{{ $stats['total_teachers'] }}</div>
+        <div class="stat-card-sub">Tenaga pendidik & staf</div>
     </div>
 
     <!-- Card Pendaftar PPDB -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">PENDAFTAR PPDB</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📝</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">PENDAFTAR PPDB</span>
+            <div class="stat-card-icon icon-amber">📝</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_ppdb'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Calon peserta didik baru</div>
+        <div class="stat-card-val">{{ $stats['total_ppdb'] }}</div>
+        <div class="stat-card-sub">Calon peserta didik baru</div>
     </div>
 </div>
 
 <!-- BREAKDOWN STATUS PPDB (MINI STATS) -->
-<div class="card" style="margin-bottom: 26px;">
-    <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-        <span>📊</span> Distribusi Status Seleksi PPDB Online
-    </h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
-        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 16px;">
-            <span style="font-size: 0.8rem; color: #fbbf24; font-weight: 700; text-transform: uppercase;">⏳ Menunggu Verifikasi</span>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-top: 4px;">{{ $stats['ppdb_pending'] }}</div>
+<div class="card card-ppdb-breakdown">
+    <div class="ppdb-breakdown-header">
+        <h3 class="ppdb-breakdown-title">
+            <span>📊</span> Distribusi Status Seleksi PPDB Online
+        </h3>
+        <span class="ppdb-breakdown-badge">Total {{ $stats['total_ppdb'] }} Calon Siswa</span>
+    </div>
+    <div class="ppdb-mini-stats-grid">
+        <div class="ppdb-mini-stat ppdb-stat-pending">
+            <div class="ppdb-mini-label">⏳ Menunggu Verifikasi</div>
+            <div class="ppdb-mini-val">{{ $stats['ppdb_pending'] }}</div>
         </div>
-        <div style="background: rgba(0, 180, 216, 0.1); border: 1px solid rgba(0, 180, 216, 0.3); border-radius: 12px; padding: 16px;">
-            <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 700; text-transform: uppercase;">📑 Terverifikasi Berkas</span>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #38bdf8; margin-top: 4px;">{{ $stats['ppdb_diverifikasi'] }}</div>
+        <div class="ppdb-mini-stat ppdb-stat-verified">
+            <div class="ppdb-mini-label">📑 Terverifikasi Berkas</div>
+            <div class="ppdb-mini-val">{{ $stats['ppdb_diverifikasi'] }}</div>
         </div>
-        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 16px;">
-            <span style="font-size: 0.8rem; color: #34d399; font-weight: 700; text-transform: uppercase;">✅ Diterima (Lolos)</span>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #34d399; margin-top: 4px;">{{ $stats['ppdb_diterima'] }}</div>
+        <div class="ppdb-mini-stat ppdb-stat-accepted">
+            <div class="ppdb-mini-label">✅ Diterima (Lolos)</div>
+            <div class="ppdb-mini-val">{{ $stats['ppdb_diterima'] }}</div>
         </div>
-        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 16px;">
-            <span style="font-size: 0.8rem; color: #f87171; font-weight: 700; text-transform: uppercase;">❌ Ditolak / Gugur</span>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #f87171; margin-top: 4px;">{{ $stats['ppdb_ditolak'] }}</div>
+        <div class="ppdb-mini-stat ppdb-stat-rejected">
+            <div class="ppdb-mini-label">❌ Ditolak / Gugur</div>
+            <div class="ppdb-mini-val">{{ $stats['ppdb_ditolak'] }}</div>
         </div>
     </div>
 </div>

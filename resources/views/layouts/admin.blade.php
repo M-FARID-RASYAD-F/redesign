@@ -496,6 +496,20 @@
             position: relative;
             z-index: 1;
             overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Pembatasan lebar maksimal agar kontainer & kotak dashboard proporsional di layar lebar */
+        .admin-topbar,
+        #crudPageContent,
+        #crudSkeletonLoader,
+        .alert-success,
+        .alert-danger {
+            width: 100%;
+            max-width: 1240px;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
         }
 
         .admin-topbar {
@@ -637,17 +651,243 @@
             border-radius: 16px;
             border: 1.5px solid var(--adm-border);
             box-shadow: var(--adm-shadow);
-            padding: 24px;
-            margin-bottom: 24px;
+            padding: 20px 22px;
+            margin-bottom: 20px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             transition: all 0.3s ease;
             max-width: 100%;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         .card:hover {
             border-color: var(--adm-border-hover);
+        }
+
+        /* ── Grid Statistik Proporsional ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+            }
+        }
+
+        .stats-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        @media (max-width: 1200px) {
+            .stats-grid-5 {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid-5 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
+        }
+
+        .stats-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid-3 {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+        }
+
+        /* ── Komponen Card Statistik Ringkas & Proporsional ── */
+        .stat-card-item {
+            padding: 16px 18px !important;
+            margin-bottom: 0 !important;
+            border-radius: 14px !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .stat-card-label {
+            font-size: 0.78rem;
+            color: var(--adm-text-muted);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .stat-card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+
+        .stat-card-icon.icon-cyan {
+            background: rgba(0, 180, 216, 0.15);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+        .stat-card-icon.icon-sky {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .stat-card-icon.icon-emerald {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .stat-card-icon.icon-amber {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .stat-card-icon.icon-purple {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+        .stat-card-icon.icon-rose {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .stat-card-val {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .stat-card-sub {
+            font-size: 0.75rem;
+            color: var(--adm-text-muted);
+            line-height: 1.3;
+        }
+
+        /* ── Breakdown Status PPDB (Compact & Sleek) ── */
+        .card-ppdb-breakdown {
+            padding: 18px 22px !important;
+            margin-bottom: 22px !important;
+            border-radius: 16px !important;
+        }
+
+        .ppdb-breakdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            gap: 10px;
+        }
+
+        .ppdb-breakdown-title {
+            font-size: 0.98rem !important;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .ppdb-breakdown-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--adm-text-muted);
+            background: rgba(255, 255, 255, 0.06);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--adm-border);
+            white-space: nowrap;
+        }
+
+        .ppdb-mini-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .ppdb-mini-stat {
+            padding: 12px 14px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            transition: transform 0.2s ease;
+        }
+
+        .ppdb-mini-stat:hover {
+            transform: translateY(-2px);
+        }
+
+        .ppdb-mini-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .ppdb-mini-val {
+            font-size: 1.55rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .ppdb-stat-pending {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+
+        .ppdb-stat-verified {
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            color: #38bdf8;
+        }
+
+        .ppdb-stat-accepted {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        .ppdb-stat-rejected {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
+        @media (max-width: 900px) {
+            .ppdb-mini-stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
         }
 
         /* Buttons System */
@@ -900,7 +1140,8 @@
         .admin-grid-2col {
             display: grid;
             grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
-            gap: 24px;
+            gap: 20px;
+            align-items: start;
         }
 
         .admin-detail-layout {
@@ -1237,16 +1478,97 @@
                 border-radius: 12px !important;
             }
 
-            /* Pada layar HP ramping (<=480px), kartu stats berubah 1 kolom agar angka & label leluasa */
+            /* Pada layar HP ramping (<=480px), kartu stats & mini stats tetap 2 kolom proporsional agar tidak memanjang */
             .stats-grid,
+            .stats-grid-5,
+            .ppdb-mini-stats-grid,
             .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))"],
             .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"],
             .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))"],
             .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))"],
             .main-container div[style*="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"],
             .main-container div[style*="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr))"] {
-                grid-template-columns: 1fr !important;
-                gap: 10px !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+
+            .stats-grid-5 .ppdb-card-rejected {
+                grid-column: 1 / -1 !important;
+            }
+
+            .stats-grid .card,
+            .stats-grid-5 .card,
+            .stat-card-item {
+                padding: 12px 11px !important;
+                border-radius: 12px !important;
+            }
+
+            .stat-card-header {
+                margin-bottom: 6px !important;
+            }
+
+            .stats-grid .card div[style*="font-size: 2rem"],
+            .stats-grid .card div[style*="font-size: 2.2rem"],
+            .stat-card-val {
+                font-size: 1.45rem !important;
+                margin-top: 2px !important;
+                margin-bottom: 2px !important;
+            }
+
+            .stat-card-icon,
+            .stats-grid .card div[style*="width: 40px"] {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 0.95rem !important;
+                border-radius: 8px !important;
+            }
+
+            .stat-card-label,
+            .stats-grid .card span[style*="font-size: 0.85rem"] {
+                font-size: 0.7rem !important;
+            }
+
+            .stat-card-sub,
+            .stats-grid .card div[style*="font-size: 0.8rem"],
+            .stats-grid .card div[style*="font-size: 0.78rem"] {
+                font-size: 0.68rem !important;
+                line-height: 1.2 !important;
+            }
+
+            /* Breakdown Status PPDB di HP ramping (<=480px) */
+            .card-ppdb-breakdown {
+                padding: 14px 12px !important;
+                margin-bottom: 16px !important;
+                border-radius: 14px !important;
+            }
+
+            .ppdb-breakdown-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 6px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .ppdb-breakdown-title {
+                font-size: 0.88rem !important;
+            }
+
+            .ppdb-breakdown-badge {
+                font-size: 0.7rem !important;
+                padding: 3px 8px !important;
+            }
+
+            .ppdb-mini-stat {
+                padding: 10px 10px !important;
+                border-radius: 10px !important;
+            }
+
+            .ppdb-mini-val {
+                font-size: 1.35rem !important;
+            }
+
+            .ppdb-mini-label {
+                font-size: 0.68rem !important;
             }
 
             /* Filter chips di layar sangat ramping (<=480px) */
@@ -1337,9 +1659,9 @@
            ═══════════════════════════════════════════════════════════ */
         .dashboard-hero {
             position: relative;
-            border-radius: 20px;
-            padding: 26px 30px;
-            margin-bottom: 26px;
+            border-radius: 18px;
+            padding: 20px 24px;
+            margin-bottom: 22px;
             background: var(--adm-card-bg);
             border: 1.5px solid var(--adm-border);
             box-shadow: var(--adm-shadow);
@@ -1349,7 +1671,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 22px;
+            gap: 18px;
             transition: border-color 0.3s ease;
         }
 

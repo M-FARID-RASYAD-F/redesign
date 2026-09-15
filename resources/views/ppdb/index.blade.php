@@ -18,10 +18,10 @@
 
         <!-- CTA Buttons -->
         <div class="ppdb-hero-actions">
-            <a href="{{ route('ppdb.create') }}" class="btn btn-primary" style="padding: 14px 32px; font-size: 1rem; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+            <a href="{{ route('ppdb.create') }}" class="btn btn-primary ppdb-btn-hero">
                 ✍️ Isi Formulir Pendaftaran Sekarang
             </a>
-            <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline" style="padding: 14px 28px; font-size: 1rem; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+            <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline ppdb-btn-hero">
                 🔍 Lacak / Cek Status Pendaftaran
             </a>
         </div>
@@ -59,7 +59,7 @@
         <p class="ppdb-section-desc">Pilih jenjang yang Anda tuju untuk langsung membuka formulir pendaftaran yang sesuai.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+    <div class="ppdb-jenjang-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
         <!-- SD -->
         <div class="ppdb-step-card" style="display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(16, 185, 129, 0.35);">
             <div>

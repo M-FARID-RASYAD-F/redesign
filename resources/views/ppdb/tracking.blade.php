@@ -20,7 +20,7 @@
                 <label for="no_pendaftaran" class="ppdb-form-label" style="margin-bottom: 8px;">
                     Nomor Pendaftaran PPDB:
                 </label>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <div class="ppdb-tracking-form-row" style="display: flex; gap: 12px; flex-wrap: wrap;">
                     <input type="text" id="no_pendaftaran" name="no_pendaftaran" value="{{ old('no_pendaftaran', $search ?? '') }}" required placeholder="Contoh: PPDB-2026-0001" class="ppdb-form-input" style="flex: 1; min-width: 240px; font-family: monospace; font-weight: 700; text-transform: uppercase;">
                     <button type="submit" class="btn btn-primary" style="padding: 12px 28px; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
                         🔍 Cari Data
@@ -134,7 +134,7 @@
             </div>
 
             <!-- Detail Data Calon Siswa Terdaftar -->
-            <div style="padding: 30px;">
+            <div class="ppdb-result-body" style="padding: 30px;">
                 <h4 style="font-size: 1rem; font-weight: 800; color: #ffffff; margin-bottom: 16px;">Ringkasan Data Calon Siswa</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; font-size: 0.9rem;">
                     <div>

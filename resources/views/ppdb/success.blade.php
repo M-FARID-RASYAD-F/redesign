@@ -45,7 +45,7 @@
             </div>
 
             <!-- Detail Data Calon Siswa -->
-            <div style="padding: 30px;">
+            <div class="ppdb-printable-body" style="padding: 30px;">
                 <table class="ppdb-summary-table">
                     <tbody>
                         <tr>

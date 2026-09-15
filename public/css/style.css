@@ -873,6 +873,11 @@ body.nav-mobile-open {
   overflow: hidden !important;
 }
 
+/* Floating Modern Mobile Navigation Dock (Hidden on Desktop) */
+.mobile-bottom-dock {
+  display: none;
+}
+
 /* Mobile Panel — Floating Modern Sheet Card */
 .nav-mobile-panel {
   display: none !important;
@@ -990,6 +995,14 @@ body.nav-mobile-open {
   transition: transform 0.22s ease, background 0.22s ease;
 }
 
+.nav-mobile-icon-box svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  display: block;
+}
+
 .nav-mobile-link-text {
   flex: 1;
 }
@@ -1063,6 +1076,14 @@ body.nav-mobile-open {
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
+.nav-mobile-cta svg {
+  width: 19px;
+  height: 19px;
+  stroke: #ffffff;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+
 .nav-mobile-cta:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
@@ -1080,6 +1101,21 @@ body.nav-mobile-open {
   background: rgba(255, 255, 255, 0.05);
   text-decoration: none;
   transition: all 0.2s ease;
+}
+
+.nav-sublink-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-sublink-icon svg {
+  width: 15px;
+  height: 15px;
+  stroke: #38bdf8;
+  stroke-width: 2.2;
+  display: block;
 }
 
 .nav-mobile-sublink:hover {
@@ -3725,44 +3761,71 @@ body.nav-mobile-open {
    2. Tablet Portrait & Large Smartphones (≤ 768px)
    ──────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Global Overflow Guard */
+  /* Global Overflow Guard & Safe Scaling */
   html, body {
-    overflow-x: hidden;
-    width: 100%;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
   }
 
-  /* Navbar */
+  body {
+    padding-bottom: calc(76px + max(12px, env(safe-area-inset-bottom, 12px)));
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  img, svg, video, canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  input, select, textarea {
+    font-size: 16px !important; /* Cegah auto-zoom di iOS */
+  }
+
+  /* ── Navbar ── */
   .navbar {
-    padding: 10px 18px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
   .navbar.scrolled {
-    padding: 8px 18px;
+    padding: 6px 12px;
   }
   .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 8px;
-  }
-  .navbar-capsule {
-    height: 48px;
-    padding: 0 10px;
-    border-radius: 12px;
-  }
-  .navbar.scrolled .navbar-capsule {
-    height: 46px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .navbar-capsule.navbar-left {
+    flex: 1;
+    min-width: 0;
     height: 48px;
-    padding: 0 12px 0 6px;
+    padding: 0 10px 0 6px;
     border-radius: 12px;
-    gap: 8px;
+    box-sizing: border-box;
   }
   .navbar.scrolled .navbar-capsule.navbar-left {
-    height: 46px;
-    padding: 0 10px 0 5px;
+    height: 44px;
+    padding: 0 8px 0 5px;
   }
   .navbar-brand {
-    gap: 8px;
     display: flex;
     align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+    width: 100%;
+    text-decoration: none;
   }
   .brand-icon {
     width: 36px;
@@ -3773,8 +3836,8 @@ body.nav-mobile-open {
     flex-shrink: 0;
   }
   .navbar.scrolled .brand-icon {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
   .brand-logo-img {
     width: 100%;
@@ -3782,59 +3845,80 @@ body.nav-mobile-open {
     object-fit: contain;
     border-radius: 7px;
   }
-  /* Tampilkan identitas sekolah dengan tipografi rapi dan proporsional */
   .brand-text {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    min-width: 0;
+    flex: 1;
+    overflow: visible;
   }
   .brand-text-main {
     display: block !important;
-    font-size: 0.82rem;
+    font-size: clamp(0.72rem, 3.6vw, 0.85rem);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.2;
     color: #ffffff;
     white-space: nowrap;
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none !important;
   }
   .brand-text-sub {
     display: block !important;
-    font-size: 0.58rem;
+    font-size: clamp(0.50rem, 2.2vw, 0.60rem);
     color: #94a3b8;
-    line-height: 1.1;
+    line-height: 1.15;
     white-space: nowrap;
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none !important;
   }
-  /* Sembunyikan elemen desktop yang dipindah ke dalam drawer mobile */
-  .navbar-right .nav-theme-toggle,
+  .navbar-center,
   .nav-auth-desktop {
     display: none !important;
   }
-  /* Kapsul kanan disederhanakan menjadi pulau tombol bulat/kotak mandiri tanpa nested double border */
   .navbar-capsule.navbar-right {
-    width: 48px;
+    width: auto;
+    min-width: 0;
     height: 48px;
-    min-width: 48px;
+    padding: 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  .navbar.scrolled .navbar-capsule.navbar-right {
+    height: 44px;
+    padding: 0 4px;
+  }
+  .navbar-right .nav-theme-toggle {
+    display: inline-flex !important;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
     padding: 0;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 9px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
   }
-  .navbar.scrolled .navbar-capsule.navbar-right {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    padding: 0;
+  .navbar.scrolled .navbar-right .nav-theme-toggle {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
   }
   .nav-btn-menu,
   .nav-island-toggle {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     padding: 0;
     border: none !important;
     background: transparent !important;
@@ -3845,15 +3929,22 @@ body.nav-mobile-open {
     color: #ffffff;
     cursor: pointer;
   }
+  .navbar.scrolled .nav-btn-menu {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
 
-  /* Mobile Dropdown Panel */
+  /* ── Mobile Dropdown Panel ── */
   .nav-mobile-panel {
     margin: 8px 0 0;
     border-radius: 18px;
     padding: 14px;
-    max-height: calc(100dvh - 75px);
+    max-height: calc(100dvh - 72px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-sizing: border-box;
   }
   .nav-mobile-panel:not(.is-open) {
     display: none !important;
@@ -3868,25 +3959,192 @@ body.nav-mobile-open {
     pointer-events: auto !important;
   }
   .nav-mobile-link {
-    padding: 11px 14px;
-    font-size: 0.90rem;
+    padding: 10px 14px;
+    font-size: 0.88rem;
     border-radius: 11px;
     min-height: 44px;
   }
   .nav-mobile-cta {
     padding: 12px;
-    font-size: 0.92rem;
+    font-size: 0.90rem;
     border-radius: 12px;
     min-height: 46px;
+    justify-content: center;
+    text-align: center;
+  }
+  .nav-mobile-footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .nav-mobile-theme-btn,
+  .nav-mobile-auth-btn {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+    height: 42px;
+    padding: 0 10px;
+    font-size: 0.82rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
   }
 
-  /* Hero Section */
+  /* ── Navigasi Dock yang Dipindahkan ke Dalam Panel Menu Garis Tiga ── */
+  .nav-mobile-dock-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 64px;
+    background: linear-gradient(135deg, rgba(0, 26, 56, 0.92) 0%, rgba(10, 21, 40, 0.96) 100%);
+    border: 1.5px solid rgba(0, 180, 216, 0.42);
+    border-radius: 18px;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.16), 0 6px 22px rgba(0, 12, 30, 0.45);
+    padding: 4px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+
+  .nav-mobile-ppdb-sub {
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  /* Hilangkan floating bottom dock bar pada mobile screen */
+  .mobile-bottom-dock {
+    display: none !important;
+  }
+
+  .mobile-dock-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    gap: 4px;
+  }
+
+  .mobile-dock-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 100%;
+    min-width: 0;
+    padding: 4px 2px;
+    text-decoration: none;
+    color: #94a3b8;
+    border-radius: 14px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-dock-btn:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 24px;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.22s ease;
+  }
+
+  .mobile-dock-icon svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    stroke-width: 2.1;
+  }
+
+  .mobile-dock-label {
+    font-size: clamp(0.62rem, 2.7vw, 0.68rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: color 0.22s ease, font-weight 0.22s ease;
+  }
+
+  /* Active State pada Mobile Dock */
+  .mobile-dock-btn.active {
+    color: #38bdf8;
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.18) 0%, rgba(3, 105, 161, 0.26) 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 180, 216, 0.25);
+  }
+
+  .mobile-dock-btn.active .mobile-dock-icon {
+    transform: translateY(-1px);
+    color: #38bdf8;
+  }
+
+  .mobile-dock-btn.active .mobile-dock-label {
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  /* Indikator Titik Glow pada Tombol Aktif */
+  .mobile-dock-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #00B4D8;
+    box-shadow: 0 0 8px #00B4D8, 0 0 14px #38bdf8;
+  }
+
+  /* Highlight Khusus PPDB Online */
+  .mobile-dock-btn.mobile-dock-ppdb {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.18) 0%, rgba(2, 132, 199, 0.25) 100%);
+    border: 1px solid rgba(0, 180, 216, 0.35);
+    color: #38bdf8;
+  }
+
+  .mobile-dock-btn.mobile-dock-ppdb .mobile-dock-label {
+    font-weight: 700;
+    color: #38bdf8;
+  }
+
+  .mobile-dock-btn.mobile-dock-ppdb.active {
+    background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+    border-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 180, 216, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+
+  .mobile-dock-btn.mobile-dock-ppdb.active .mobile-dock-label {
+    color: #ffffff;
+  }
+
+  .mobile-dock-btn.mobile-dock-ppdb.active::after {
+    display: none;
+  }
+
+  /* ── Hero Section ── */
   .hero {
     min-height: auto;
-    padding: 6.5rem 1.75rem 4.5rem;
+    padding: 5.75rem 1.25rem 3.5rem;
     justify-content: flex-start;
+    box-sizing: border-box;
+    width: 100%;
   }
-  /* Overlay gradien bawah dikurangi tingginya dan di bawah konten */
   .hero::after {
     height: 35%;
     min-height: 120px;
@@ -3897,30 +4155,43 @@ body.nav-mobile-open {
     position: relative;
     z-index: 4;
     padding: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .hero-content {
     margin-top: 0;
     max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
   .hero-badge {
-    font-size: 0.75rem;
-    padding: 5px 14px;
-    margin-bottom: 1.15rem;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    box-sizing: border-box;
   }
   .hero-title {
-    font-size: clamp(1.65rem, 5.5vw, 2.05rem);
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
     line-height: 1.2;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.75rem;
+    word-break: break-word;
   }
   .hero-subtitle {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     line-height: 1.5;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
+    word-break: break-word;
   }
   .hero-desc {
     font-size: 0.82rem;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    word-break: break-word;
   }
   .hero-actions {
     position: relative;
@@ -3928,7 +4199,8 @@ body.nav-mobile-open {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
+    box-sizing: border-box;
   }
   .hero-actions .btn {
     width: 100%;
@@ -3937,73 +4209,94 @@ body.nav-mobile-open {
     font-size: 0.88rem;
     font-weight: 700;
     justify-content: center;
+    text-align: center;
     border-radius: 12px;
+    box-sizing: border-box;
   }
-  /* Tombol Lihat Jenjang & Jurusan di Mobile — solid, tegas, kontras, dan tidak pudar */
   .hero-actions .btn-outline {
     background: rgba(0, 25, 55, 0.90);
     border: 1.5px solid rgba(0, 180, 216, 0.65);
     box-shadow: 0 4px 16px rgba(0, 15, 35, 0.6), 0 0 12px rgba(0, 180, 216, 0.2);
     color: #ffffff;
   }
-  .hero-actions .btn-outline:active {
-    background: rgba(0, 35, 75, 0.98);
-    border-color: #38bdf8;
-    color: #38bdf8;
-  }
 
-  /* Statistics Section */
+  /* ── Statistics Section ── */
   .stats-section {
     background: #002147;
-    padding: 2.25rem 2rem;
+    padding: 1.75rem 1.25rem;
     margin: 0;
     width: 100%;
+    box-sizing: border-box;
   }
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .stat-card {
-    padding: 0.95rem 0.8rem;
-    gap: 10px;
-    border-radius: 14px;
+    padding: 0.85rem 0.75rem;
+    gap: 8px;
+    border-radius: 12px;
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
   }
   .stat-icon-wrapper {
-    width: 42px;
-    height: 42px;
-    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
     border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .stat-card > div:last-child,
+  .stat-info {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
   }
   .stat-value {
-    font-size: 1.25rem;
-    line-height: 1.1;
+    font-size: clamp(1.1rem, 3.8vw, 1.3rem);
+    line-height: 1.15;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: visible;
   }
   .stat-label {
-    font-size: 0.72rem;
-    line-height: 1.3;
+    font-size: clamp(0.66rem, 2.3vw, 0.75rem);
+    line-height: 1.25;
+    word-break: break-word;
+    margin-top: 2px;
   }
 
-  /* Sambutan Kepala Sekolah */
+  /* ── Sambutan Kepala Sekolah ── */
   .principal-section {
-    padding: 3.5rem 2rem 4rem;
+    padding: 3rem 1.25rem 3.5rem;
+    box-sizing: border-box;
+    width: 100%;
   }
   .principal-section-inner {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 2rem;
     padding: 0;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
   }
   .principal-photo-col {
-    max-width: 180px;
+    max-width: 160px;
     margin: 0 auto;
+    width: 100%;
   }
   .principal-photo-frame {
     aspect-ratio: 1/1;
-    border-radius: 20px;
+    border-radius: 18px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   }
   .principal-photo-initials {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   .principal-eyebrow {
     justify-content: center;
@@ -4014,20 +4307,22 @@ body.nav-mobile-open {
     display: none;
   }
   .principal-heading {
-    font-size: clamp(1.35rem, 4.8vw, 1.65rem);
+    font-size: clamp(1.3rem, 4.5vw, 1.65rem);
     margin-bottom: 1.15rem;
     line-height: 1.25;
+    word-break: break-word;
   }
   .principal-quote {
-    font-size: 0.86rem;
-    line-height: 1.75;
-    padding: 1.15rem 0.95rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    padding: 1.15rem 1rem;
     border-left: none;
     border-top: 3px solid #00B4D8;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 14px;
-    margin-bottom: 1.35rem;
+    margin-bottom: 1.25rem;
     text-align: center;
+    word-break: break-word;
   }
   .principal-name-block {
     align-items: center;
@@ -4040,12 +4335,15 @@ body.nav-mobile-open {
     font-size: 0.75rem;
   }
 
-  /* Constellation Content Area */
+  /* ── Content Area & Sections ── */
   .content-area-white,
   .content-area-constellation {
     border-radius: 20px 20px 0 0;
-    padding-top: 2.5rem;
+    padding-top: 2rem;
     padding-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   .content-area-constellation .section:last-child {
     margin-bottom: 1.5rem;
@@ -4054,232 +4352,339 @@ body.nav-mobile-open {
     display: none !important;
   }
   .section {
-    padding: 0 2rem;
-    margin-bottom: 3.5rem;
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .section-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     text-align: center;
+    padding: 0 4px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .section-tag {
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+    font-size: 0.70rem;
+    letter-spacing: 0.8px;
+    word-break: break-word;
+    display: inline-block;
+    max-width: 100%;
   }
   .section-title {
-    font-size: clamp(1.3rem, 4.5vw, 1.65rem);
+    font-size: clamp(1.25rem, 4.5vw, 1.6rem);
     line-height: 1.25;
+    word-break: break-word;
   }
   .section-subtitle {
     font-size: 0.82rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    word-break: break-word;
+    max-width: 100%;
   }
 
-  /* Jurusan & Berita Grid */
-  .grid-2, .grid-3 {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  /* ── Jenjang Pendidikan Stage (pc-12) ── */
+  .pc-12-jenjang-stage,
+  .pc-12-jurusan-stage {
+    width: 100%;
+    padding: 0;
+    gap: 20px;
+    box-sizing: border-box;
   }
-  .custom-card {
-    padding: 1.35rem 1.15rem;
-    border-radius: 16px;
+  .pc-12__card {
+    width: 100%;
+    max-width: 340px;
+    padding: 26px 18px 22px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    margin: 0 auto;
   }
-  .card-title {
-    font-size: 1.05rem;
+  .pc-12__pfp {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 14px;
   }
-  .card-body {
-    font-size: 0.82rem;
-    line-height: 1.6;
-    margin-bottom: 1.15rem;
+  .pc-12__card h3 {
+    font-size: 1.18rem;
+    word-break: break-word;
   }
-  .card-prospek {
-    padding: 11px 13px;
-    font-size: 0.78rem;
-    border-radius: 10px;
+  .pc-12__role {
+    font-size: 0.76rem;
+    word-break: break-word;
   }
-
-  /* Fasilitas Section (Animated Tabs Responsive) */
-  .fasilitas-section {
-    padding: 2.25rem 1.5rem 1.75rem;
-    border-radius: 18px;
+  .pc-12__bio {
+    font-size: 0.80rem;
+    line-height: 1.55;
+    word-break: break-word;
+    margin-top: 10px;
+    margin-bottom: 14px;
   }
-  .tab-nav-bar {
-    gap: 0.35rem;
-    padding: 0.35rem;
+  .pc-12__row {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .pc-12__stat {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 4px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  .pc-12__stat b {
+    font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+    line-height: 1.25;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .pc-12__stat span {
+    font-size: 0.65rem;
+    margin-top: 2px;
+  }
+  .pc-12__prospek {
+    padding: 10px 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-size: 0.76rem;
+    word-break: break-word;
+    box-sizing: border-box;
+  }
+  .pc-12__prospek-val {
+    word-break: break-word;
+    line-height: 1.45;
+  }
+  .pc-12__cta {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    border-radius: 14px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
+
+  /* ── Fasilitas & Cabang (Animated Tabs) ── */
+  .cabang-section,
+  .fasilitas-section {
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .tab-nav-bar {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 auto 0.75rem !important;
+  }
   .tab-btn {
-    padding: 0.5rem 0.85rem;
-    font-size: 0.78rem;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 10px !important;
+    font-size: 0.78rem !important;
+    box-sizing: border-box !important;
+  }
+  .tab-btn-label {
+    white-space: normal !important;
+    text-align: center !important;
+    word-break: break-word !important;
   }
   .tab-content-box {
-    padding: 1.25rem 1rem;
-    min-height: auto;
+    padding: 1.15rem 0.85rem;
+    border-radius: 14px;
+    box-sizing: border-box;
+    width: 100%;
   }
   .tab-panel {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.15rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .tab-image-container {
     aspect-ratio: 16 / 10;
-    max-height: 220px;
+    max-height: 200px;
+    min-height: auto;
+    border-radius: 12px;
+    width: 100%;
   }
   .tab-title {
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+    line-height: 1.25;
+    word-break: break-word;
   }
   .tab-desc {
     font-size: 0.82rem;
+    line-height: 1.55;
+    word-break: break-word;
+  }
+  .tab-location-card {
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  .tab-location-address {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    word-break: break-word;
   }
   .tab-features-grid {
     grid-template-columns: 1fr;
     gap: 6px;
+    padding-top: 0.6rem;
+  }
+  .tab-feature-text {
+    font-size: 0.78rem;
+    word-break: break-word;
   }
   .tab-action-buttons {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
   }
-  .form-control {
-    font-size: 16px; /* Cegah auto-zoom di iOS */
-    padding: 11px 13px;
-    border-radius: 10px;
+  .btn-tab-action {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+  .btn-tab-text {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-word;
   }
 
-  /* Footer - Compact Mobile Layout (<= 768px) */
+  /* ── Berita & Pengumuman Cards ── */
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .custom-card {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .card-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.85rem;
+  }
+  .card-header-main {
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+  .card-title-group {
+    min-width: 0;
+    flex: 1;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .card-subtitle {
+    font-size: 0.78rem;
+    word-break: break-word;
+  }
+  .badge {
+    flex-shrink: 0;
+    align-self: flex-start;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+  }
+  .card-body {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    word-break: break-word;
+  }
+
+  /* ── Footer ── */
   .footer {
     margin-top: 0;
-    padding: 2.25rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+    padding: 2rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    width: 100%;
   }
   .footer-container {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
     margin-bottom: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .footer-col-brand {
     width: 100%;
   }
-  .footer-brand-header {
-    gap: 10px;
-    margin-bottom: 0.6rem;
-  }
-  .footer-logo-box {
-    width: 38px;
-    height: 38px;
-    border-radius: 9px;
-  }
   .footer-brand-name {
     font-size: 0.98rem;
-  }
-  .footer-brand-tagline {
-    font-size: 0.68rem;
+    word-break: break-word;
   }
   .footer-description {
-    font-size: 0.78rem;
-    line-height: 1.45;
+    font-size: 0.80rem;
+    line-height: 1.55;
     color: #94a3b8;
-    margin-bottom: 0.65rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .footer-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
     margin-bottom: 0.75rem;
-  }
-  .footer-badge {
-    font-size: 0.65rem;
-    padding: 2px 7px;
-    border-radius: 6px;
-  }
-  .footer-contact-list {
-    gap: 6px;
-  }
-  .footer-contact-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-  }
-  .footer-contact-item {
-    min-height: 36px;
-    padding: 6px 10px;
-    font-size: 0.78rem;
-    border-radius: 8px;
-    gap: 7px;
-  }
-  .footer-contact-icon {
-    font-size: 0.85rem;
-  }
-  .footer-email-full,
-  .footer-wa-full {
-    display: none;
-  }
-  .footer-email-short,
-  .footer-wa-short {
-    display: inline;
-  }
-  .footer-social-section {
-    margin-top: 0.65rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .footer-social-title {
-    font-size: 0.72rem;
-    margin: 0;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+    word-break: break-word;
   }
   .footer-social-links {
+    display: flex;
     gap: 8px;
-  }
-  .footer-social-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-  }
-  .footer-social-svg {
-    width: 16px;
-    height: 16px;
+    flex-wrap: wrap;
   }
   .footer-nav-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-top: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .footer-title {
     font-size: 0.86rem;
-    margin-bottom: 0.4rem;
-    gap: 5px;
-  }
-  .footer-title-icon {
-    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
   }
   .footer-links {
-    gap: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
   .footer-links a {
-    min-height: auto;
-    padding: 3px 0;
     font-size: 0.76rem;
-    background: transparent;
-    border: none;
-    gap: 5px;
+    line-height: 1.45;
+    word-break: break-word;
+    white-space: normal;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 4px;
     color: #94a3b8;
-  }
-  .footer-links a:hover {
-    padding-left: 5px;
-    background: transparent;
-    color: #38bdf8;
+    padding: 2px 0;
   }
   .footer-link-arrow {
-    font-size: 0.8rem;
-  }
-  .footer-bottom {
-    padding-top: 0.85rem;
-    margin-top: 0.25rem;
+    flex-shrink: 0;
+    margin-top: 1px;
   }
   .footer-bottom-container {
     flex-direction: column;
@@ -4289,42 +4694,174 @@ body.nav-mobile-open {
   }
   .footer-copyright {
     font-size: 0.72rem;
-    line-height: 1.4;
-  }
-  .footer-back-to-top {
-    width: 100%;
-    max-width: 220px;
-    justify-content: center;
-    min-height: 38px;
-    font-size: 0.78rem;
+    line-height: 1.45;
+    word-break: break-word;
   }
   .floating-back-to-top {
-    bottom: max(1.25rem, env(safe-area-inset-bottom));
-    right: 1.25rem;
+    bottom: calc(76px + max(10px, env(safe-area-inset-bottom, 10px)));
+    right: max(14px, env(safe-area-inset-right, 14px));
     width: 44px;
     height: 44px;
+    z-index: 980;
   }
 
-  /* Alert */
-  .alert-success {
-    margin: 1rem 1rem 0;
-    padding: 0.85rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  /* PPDB Mobile Containers */
+  /* ── PPDB Module Global Overrides ── */
   .ppdb-hero-section {
-    padding: 6.5rem 2rem 3.5rem;
+    padding: 5rem 1.25rem 2.5rem !important;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .ppdb-hero-title {
+    font-size: clamp(1.45rem, 5.5vw, 1.95rem) !important;
+    line-height: 1.25 !important;
+    word-break: break-word;
+  }
+  .ppdb-hero-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    word-break: break-word;
+  }
+  .ppdb-hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .ppdb-hero-actions .btn,
+  .ppdb-btn-hero {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 16px !important;
+    font-size: 0.90rem !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
   .ppdb-stats-wrapper {
-    padding: 0 2rem;
+    margin: -1.5rem auto 2.5rem !important;
+    padding: 0 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  .ppdb-stat-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.15rem 1rem !important;
   }
   .ppdb-section {
-    padding: 0 2rem;
-    margin-bottom: 3.5rem;
+    padding: 0 1.25rem !important;
+    margin-bottom: 2.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-jenjang-grid,
+  .ppdb-jenjang-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+  .ppdb-steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  .ppdb-step-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .ppdb-req-container {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.15rem !important;
+    border-radius: 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-req-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
+  .ppdb-checklist-item {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+    box-sizing: border-box;
+  }
+  .ppdb-check-title {
+    font-size: 0.90rem !important;
+    word-break: break-word;
+  }
+  .ppdb-check-sub {
+    font-size: 0.78rem !important;
+    word-break: break-word;
+  }
+  .ppdb-major-item {
+    padding: 12px 14px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    box-sizing: border-box;
+  }
+  .ppdb-major-item .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .ppdb-tracking-box {
+    padding: 16px 14px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box;
+  }
+  .ppdb-tracking-form-row {
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .ppdb-tracking-form-row input {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-tracking-form-row button {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-result-header {
+    padding: 16px 14px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    box-sizing: border-box;
+  }
+  .ppdb-timeline-bar {
+    padding: 16px 10px !important;
+    box-sizing: border-box;
+  }
+  .ppdb-result-body,
+  .ppdb-printable-body,
+  .ppdb-result-card > div[style*="padding: 30px"],
+  .ppdb-printable-card > div[style*="padding: 30px"] {
+    padding: 18px 14px !important;
+    box-sizing: border-box !important;
+  }
+  .ppdb-reg-number {
+    font-size: clamp(1.4rem, 6vw, 1.9rem) !important;
+    word-break: break-all !important;
+  }
+  .ppdb-summary-table td {
+    padding: 9px 0 !important;
+    font-size: 0.84rem !important;
+  }
+  .ppdb-summary-table td:first-child {
+    width: 38% !important;
+    font-size: 0.80rem !important;
+  }
+  .ppdb-summary-table td:last-child {
+    font-size: 0.84rem !important;
+    word-break: break-word !important;
   }
 }
 
@@ -4332,332 +4869,117 @@ body.nav-mobile-open {
    3. Small Smartphone Screens (≤ 480px)
    ──────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  /* Navbar */
-  .navbar {
-    padding: 8px 12px;
+  .section {
+    padding: 0 1rem;
+    margin-bottom: 2.5rem;
   }
-  .navbar-container {
-    gap: 6px;
-  }
-  .navbar-capsule {
-    height: 46px;
-    padding: 0 8px;
-    border-radius: 10px;
-  }
-  .navbar.scrolled .navbar-capsule {
-    height: 44px;
-  }
-  .navbar-capsule.navbar-left {
-    height: 46px;
-    padding: 0 10px 0 5px;
-    gap: 6px;
-    border-radius: 10px;
-  }
-  .navbar.scrolled .navbar-capsule.navbar-left {
-    height: 44px;
-    padding: 0 8px 0 4px;
-  }
-  .brand-icon {
-    width: 34px;
-    height: 34px;
-    padding: 1px;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 180, 216, 0.3);
-  }
-  .navbar.scrolled .brand-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .brand-text-main {
-    font-size: 0.76rem;
-    max-width: 150px;
-  }
-  .brand-text-sub {
-    font-size: 0.54rem;
-    max-width: 150px;
-  }
-  .navbar-capsule.navbar-right {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    padding: 0;
-    justify-content: center;
-    border-radius: 10px;
-  }
-  .navbar.scrolled .navbar-capsule.navbar-right {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    padding: 0;
-  }
-  .nav-btn-menu,
-  .nav-island-toggle {
-    width: 46px;
-    height: 46px;
-  }
-
-  /* Hero */
-  .hero {
-    padding: 5.5rem 1.25rem 4.25rem;
-  }
-  .hero::after {
-    height: 30%;
-    min-height: 100px;
-  }
-  .hero-title {
-    font-size: 1.5rem;
-  }
-  .hero-subtitle {
-    font-size: 0.82rem;
-  }
-  .hero-desc {
-    font-size: 0.78rem;
-  }
-  .hero-badge {
-    font-size: 0.68rem;
-    padding: 3px 9px;
-  }
-  .hero-actions {
-    gap: 10px;
-  }
-  .hero-actions .btn {
-    min-height: 46px;
-    font-size: 0.86rem;
-    padding: 11px 16px;
-  }
-
-  /* Stats Grid */
   .stats-section {
-    padding: 1.75rem 2rem;
+    padding: 1.5rem 1rem;
   }
   .stats-grid {
     gap: 8px;
   }
   .stat-card {
-    padding: 0.875rem 0.65rem;
-    gap: 8px;
-    border-radius: 12px;
+    padding: 0.75rem 0.65rem;
+    gap: 6px;
   }
   .stat-icon-wrapper {
-    width: 36px;
-    height: 36px;
-    font-size: 1.08rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
   }
   .stat-value {
-    font-size: 1.08rem;
+    font-size: 1.15rem;
   }
   .stat-label {
     font-size: 0.68rem;
   }
-
-  /* Sambutan */
+  .hero {
+    padding: 5.25rem 1rem 3rem;
+  }
+  .hero-title {
+    font-size: clamp(1.4rem, 6vw, 1.75rem);
+  }
   .principal-section {
-    padding: 3rem 2rem;
+    padding: 2.5rem 1rem 3rem;
   }
   .principal-photo-col {
-    max-width: 150px;
+    max-width: 140px;
   }
   .principal-photo-initials {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
-  .principal-heading {
-    font-size: 1.25rem;
+  .fasilitas-section,
+  .cabang-section {
+    padding: 1.25rem 0.75rem;
   }
-  .principal-quote {
-    font-size: 0.82rem;
-    padding: 0.95rem 0.8rem;
-  }
-
-  /* Sections */
-  .section {
-    padding: 0 2rem;
-    margin-bottom: 2.75rem;
-  }
-  .section-title {
-    font-size: 1.2rem;
-  }
-  .custom-card {
-    padding: 1.15rem 0.9rem;
-  }
-
-  /* Fasilitas */
-  /* Fasilitas Section (Small Mobile) */
-  .fasilitas-section {
-    padding: 1.6rem 1.15rem;
-    border-radius: 14px;
-  }
-  .tab-nav-bar {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-    padding: 4px;
-  }
-  .tab-btn {
-    padding: 0.45rem 0.55rem;
-    font-size: 0.72rem;
-    justify-content: center;
-  }
-  .tab-title {
-    font-size: 1.1rem;
-  }
-  .tab-desc {
-    font-size: 0.76rem;
-  }
-
-  /* Footer Small Mobile (Ultra Compact) */
   .footer {
-    margin-top: 0;
-    padding: 1.5rem 1rem max(0.85rem, env(safe-area-inset-bottom));
+    padding: 1.75rem 1rem max(1rem, env(safe-area-inset-bottom));
   }
-  .footer-container {
-    gap: 0.85rem;
-    margin-bottom: 0.75rem;
-  }
-  .footer-brand-header {
-    gap: 8px;
-    margin-bottom: 0.4rem;
-  }
-  .footer-logo-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 7px;
-    padding: 3px;
-  }
-  .footer-brand-name {
-    font-size: 0.9rem;
-  }
-  .footer-brand-tagline {
-    font-size: 0.64rem;
-  }
-  .footer-description {
-    font-size: 0.72rem;
-    line-height: 1.4;
-    margin-bottom: 0.45rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .footer-badges {
-    gap: 3px;
-    margin-bottom: 0.55rem;
-  }
-  .footer-badge {
-    font-size: 0.6rem;
-    padding: 1px 6px;
-  }
-  .footer-contact-list {
-    gap: 4px;
-  }
-  .footer-contact-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-  }
-  .footer-contact-item {
-    font-size: 0.7rem;
-    padding: 4px 7px;
-    min-height: 30px;
-    gap: 5px;
-    border-radius: 6px;
-  }
-  .footer-contact-icon {
-    font-size: 0.8rem;
-  }
-  .footer-social-section {
-    margin-top: 0.5rem;
-    gap: 8px;
-  }
-  .footer-social-title {
-    font-size: 0.68rem;
-  }
-  .footer-social-links {
-    gap: 6px;
-  }
-  .footer-social-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-  }
-  .footer-social-svg {
-    width: 14px;
-    height: 14px;
-  }
-  /* Pertahankan 2 kolom pada mobile kecil agar tidak memanjang ke bawah */
-  .footer-nav-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.65rem;
-    margin-top: 0.2rem;
-  }
-  .footer-title {
-    font-size: 0.78rem;
-    margin-bottom: 0.3rem;
-    gap: 4px;
-  }
-  .footer-title-icon {
-    font-size: 0.8rem;
-  }
-  .footer-links {
-    gap: 2px;
-  }
-  .footer-links a {
-    font-size: 0.7rem;
-    min-height: auto;
-    padding: 2px 0;
-    gap: 3px;
-    background: transparent;
-    border: none;
-    line-height: 1.35;
-  }
-  .footer-link-arrow {
-    font-size: 0.7rem;
-  }
-  .footer-bottom {
-    padding-top: 0.65rem;
-  }
-  .footer-copyright {
-    font-size: 0.66rem;
-    line-height: 1.35;
-  }
-  .footer-back-to-top {
-    font-size: 0.72rem;
-    padding: 6px 12px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* PPDB Small Mobile Containers */
   .ppdb-hero-section {
-    padding: 5.5rem 2rem 3rem;
+    padding: 4.5rem 1rem 2rem !important;
   }
   .ppdb-stats-wrapper {
-    padding: 0 2rem;
+    padding: 0 1rem !important;
   }
   .ppdb-section {
-    padding: 0 2rem;
-    margin-bottom: 2.75rem;
+    padding: 0 1rem !important;
   }
   .ppdb-req-container {
-    padding: 1.5rem 1.15rem;
+    padding: 1.25rem 0.85rem !important;
   }
 }
 
 /* ────────────────────────────────────────────────────────
-   4. Micro Smartphone Screens (≤ 360px)
+   4. Micro Smartphone Screens (≤ 380px)
    ──────────────────────────────────────────────────────── */
-@media (max-width: 360px) {
-  .brand-text-sub {
-    display: none !important;
+@media (max-width: 380px) {
+  .navbar {
+    padding: 6px 8px;
+  }
+  .navbar-container {
+    gap: 6px;
+  }
+  .brand-icon {
+    width: 30px;
+    height: 30px;
   }
   .brand-text-main {
-    font-size: 0.72rem;
-    max-width: 125px;
+    font-size: 0.70rem;
+    white-space: nowrap;
+    overflow: visible;
   }
-  .hero-title {
-    font-size: 1.35rem;
+  .brand-text-sub {
+    font-size: 0.50rem;
+    white-space: nowrap;
+    overflow: visible;
   }
-  .hero-actions .btn {
-    font-size: 0.82rem;
-    padding: 10px 14px;
+  .navbar-capsule.navbar-right {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+  .nav-btn-menu {
+    width: 42px;
+    height: 42px;
+  }
+  .tab-nav-bar {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-nav-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .stat-card {
+    padding: 0.75rem 0.85rem;
+  }
+  .pc-12__row {
+    flex-direction: column;
+    gap: 6px;
   }
 }
 
@@ -4964,6 +5286,49 @@ body.nav-mobile-open {
 [data-theme="light"] .nav-mobile-auth-login:hover {
   background: oklch(58.6% 0.253 17.585 / 0.45);
   color: #ffffff;
+}
+
+/* ── Mobile Dock Navigation Light Theme ── */
+[data-theme="light"] .nav-mobile-dock-box {
+  background: linear-gradient(135deg, oklch(27.1% 0.105 12.094 / 0.96) 0%, oklch(22% 0.09 11 / 0.98) 100%);
+  border-color: oklch(58.6% 0.253 17.585);
+  box-shadow: 0 4px 18px oklch(20% 0.08 12 / 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .mobile-dock-btn {
+  color: #fecdd3;
+}
+
+[data-theme="light"] .mobile-dock-btn.active {
+  color: #ffffff;
+  background: oklch(58.6% 0.253 17.585 / 0.4);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 2px 10px oklch(58.6% 0.253 17.585 / 0.4);
+}
+
+[data-theme="light"] .mobile-dock-btn.active .mobile-dock-label {
+  color: #ffffff;
+}
+
+[data-theme="light"] .mobile-dock-btn.active::after {
+  background: oklch(75% 0.22 18);
+  box-shadow: 0 0 8px oklch(75% 0.22 18), 0 0 14px oklch(58.6% 0.253 17.585);
+}
+
+[data-theme="light"] .mobile-dock-btn.mobile-dock-ppdb {
+  background: oklch(58.6% 0.253 17.585 / 0.3);
+  border-color: oklch(58.6% 0.253 17.585);
+  color: #ffffff;
+}
+
+[data-theme="light"] .mobile-dock-btn.mobile-dock-ppdb .mobile-dock-label {
+  color: #ffffff;
+}
+
+[data-theme="light"] .mobile-dock-btn.mobile-dock-ppdb.active {
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585) 0%, oklch(48% 0.22 17) 100%);
+  border-color: oklch(75% 0.22 18);
+  color: #ffffff;
+  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 /* 2. Hero Transition & Navy/Rose Sections (oklch(41% 0.159 10.272)) */
@@ -6915,8 +7280,9 @@ input:-webkit-autofill:active {
 /* Responsive Mobile Screen: Bulatan Murni Logo WhatsApp */
 @media (max-width: 768px) {
   .floating-wa-wrapper {
-    bottom: 20px;
-    left: 20px;
+    bottom: calc(76px + max(10px, env(safe-area-inset-bottom, 10px)));
+    left: max(14px, env(safe-area-inset-left, 14px));
+    z-index: 980;
   }
 
   .floating-wa-btn {

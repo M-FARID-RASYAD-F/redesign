@@ -32,7 +32,7 @@
 
 <div class="animated-tabs-wrapper w-full flex flex-col gap-y-3" data-animated-tabs>
     {{-- Tabs Navigation Bar --}}
-    <div class="tab-nav-bar flex gap-2 flex-wrap bg-[#11111198] bg-opacity-50 backdrop-blur-md p-1.5 rounded-xl relative border border-white/10 shadow-lg">
+    <div class="tab-nav-bar bg-[#11111198] bg-opacity-50 backdrop-blur-md p-1.5 rounded-xl relative border border-white/10 shadow-lg">
         @foreach ($tabs as $tab)
             <button
                 type="button"

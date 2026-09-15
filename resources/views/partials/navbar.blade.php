@@ -95,22 +95,30 @@
             {{-- 1. Navigasi Halaman Utama --}}
             <div class="nav-mobile-nav-list">
                 <a href="{{ route('home') }}#beranda" class="nav-mobile-link {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda">
-                    <span class="nav-mobile-icon-box">🏠</span>
+                    <span class="nav-mobile-icon-box">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </span>
                     <span class="nav-mobile-link-text">Beranda</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
                 <a href="{{ route('home') }}#jenjang" class="nav-mobile-link" data-section="jenjang">
-                    <span class="nav-mobile-icon-box">📚</span>
+                    <span class="nav-mobile-icon-box">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-.838L12.83 3.18a2 2 0 0 0-1.66 0L2.6 10.084a1 1 0 0 0 0 1.832l8.57 6.908a2 2 0 0 0 1.66 0l8.57-6.908a1 1 0 0 0 .02-.994z"/><path d="M6 12.5v5a6 3 0 0 0 12 0v-5"/></svg>
+                    </span>
                     <span class="nav-mobile-link-text">Jenjang Pendidikan</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
                 <a href="{{ route('home') }}#cabang" class="nav-mobile-link" data-section="cabang">
-                    <span class="nav-mobile-icon-box">🏫</span>
+                    <span class="nav-mobile-icon-box">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+                    </span>
                     <span class="nav-mobile-link-text">Cabang Sekolah</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
                 <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">
-                    <span class="nav-mobile-icon-box">📰</span>
+                    <span class="nav-mobile-icon-box">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                    </span>
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
@@ -119,10 +127,13 @@
             {{-- 2. Kartu Layanan PPDB Online --}}
             <div class="nav-mobile-ppdb-box">
                 <a href="{{ route('ppdb.index') }}" class="nav-mobile-cta {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb">
-                    <span class="nav-cta-text">🎓 Daftar PPDB Online</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                    <span class="nav-cta-text">Daftar PPDB Online</span>
                 </a>
                 <a href="{{ route('ppdb.tracking') }}" class="nav-mobile-sublink">
-                    <span class="nav-sublink-icon">🔍</span>
+                    <span class="nav-sublink-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </span>
                     <span class="nav-sublink-text">Cek Status Pendaftaran</span>
                     <span class="nav-sublink-badge">Online</span>
                 </a>
@@ -254,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Tutup menu saat klik link di panel mobile
-    document.querySelectorAll('.nav-mobile-link, .nav-mobile-cta, .nav-mobile-sublink, .nav-mobile-auth-btn').forEach(link => {
+    document.querySelectorAll('.nav-mobile-link, .nav-mobile-cta, .nav-mobile-sublink, .nav-mobile-auth-btn, .mobile-dock-btn').forEach(link => {
         link.addEventListener('click', () => {
             closeMobileMenu();
         });
@@ -288,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 700);
     }
 
-    const navLinks = document.querySelectorAll('.expandable-tab-btn, .nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link, .nav-mobile-panel .nav-mobile-cta');
+    const navLinks = document.querySelectorAll('.expandable-tab-btn, .nav-desktop-links .nav-link, .nav-mobile-panel .nav-mobile-link, .nav-mobile-panel .nav-mobile-cta, .mobile-dock-btn');
 
     function setActiveNav(sectionName) {
         navLinks.forEach(link => {

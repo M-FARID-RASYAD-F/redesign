@@ -23,45 +23,45 @@
 </div>
 
 <!-- KARTU STATISTIK AKADEMIK -->
-<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 26px;">
+<div class="stats-grid">
     <!-- Total Guru & Staf -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">TOTAL DEWAN GURU</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(0, 180, 216, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👨‍🏫</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">TOTAL DEWAN GURU</span>
+            <div class="stat-card-icon icon-cyan">👨‍🏫</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #ffffff;">{{ $stats['total_teachers'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Pendidik & staf terdaftar</div>
+        <div class="stat-card-val">{{ $stats['total_teachers'] }}</div>
+        <div class="stat-card-sub">Pendidik & staf terdaftar</div>
     </div>
 
     <!-- Guru Aktif Mengajar -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">GURU AKTIF</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">✅</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">GURU AKTIF</span>
+            <div class="stat-card-icon icon-emerald">✅</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #34d399;">{{ $stats['active_teachers'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Aktif dalam proses KBM</div>
+        <div class="stat-card-val" style="color: #34d399;">{{ $stats['active_teachers'] }}</div>
+        <div class="stat-card-sub">Aktif dalam proses KBM</div>
     </div>
 
     <!-- Guru Nonaktif -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">NONAKTIF / CUTI</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⏸️</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">NONAKTIF / CUTI</span>
+            <div class="stat-card-icon icon-rose">⏸️</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #f87171;">{{ $stats['inactive_teachers'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Sedang cuti / tugas luar</div>
+        <div class="stat-card-val" style="color: #f87171;">{{ $stats['inactive_teachers'] }}</div>
+        <div class="stat-card-sub">Sedang cuti / tugas luar</div>
     </div>
 
     <!-- Program Jurusan -->
-    <div class="card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 0.85rem; color: var(--adm-text-muted); font-weight: 700;">PROGRAM JURUSAN</span>
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">💻</div>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">PROGRAM JURUSAN</span>
+            <div class="stat-card-icon icon-purple">💻</div>
         </div>
-        <div style="font-size: 2rem; font-weight: 800; color: #c084fc;">{{ $stats['total_majors'] }}</div>
-        <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px;">Konsentrasi keahlian santri</div>
+        <div class="stat-card-val" style="color: #c084fc;">{{ $stats['total_majors'] }}</div>
+        <div class="stat-card-sub">Konsentrasi keahlian santri</div>
     </div>
 </div>
 

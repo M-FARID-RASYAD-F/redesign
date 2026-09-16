@@ -874,14 +874,19 @@
                 if (confirmStage) confirmStage.style.display = 'none';
                 if (loadingStage) loadingStage.style.display = 'flex';
 
-                // Invalidate session on server via background fetch
+                // Invalidate session on server via background POST fetch with CSRF protection
                 let isLoggedOut = false;
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
                 fetch(logoutUrl, {
-                    method: 'GET',
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Content-Type': 'application/json'
+                    },
                     credentials: 'same-origin'
-                }).then(function() {
-                    isLoggedOut = true;
+                }).then(function(res) {
+                    isLoggedOut = res.ok;
                 }).catch(function() {
                     isLoggedOut = false;
                 });

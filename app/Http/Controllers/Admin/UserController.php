@@ -81,6 +81,12 @@ class UserController extends Controller
             'is_active' => $request->has('is_active'),
         ];
 
+        // Pencegahan self-lockout: Super admin yang sedang login tidak dapat menonaktifkan atau menurunkan hak akses akun sendiri
+        if ($user->id === Auth::id()) {
+            $data['is_active'] = true;
+            $data['role'] = 'super_admin';
+        }
+
         if (!empty($validated['password'])) {
             $data['password'] = Hash::make($validated['password']);
         }

@@ -2682,16 +2682,20 @@
 
             e.preventDefault();
 
-            const form = btn.closest('.form-delete-confirm');
-            if (!form) return;
+            const rawMessage = form.getAttribute('data-delete-message') || 'Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.';
 
-            const message = form.getAttribute('data-delete-message') || 'Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.';
+            // Sanitasi ketat terhadap pesan konfirmasi: cegah eksekusi payload script/DOM XSS
+            const safeContainer = document.createElement('div');
+            safeContainer.textContent = rawMessage;
+            const safeMessageHtml = safeContainer.innerHTML
+                .replace(/&lt;strong&gt;/gi, '<strong>')
+                .replace(/&lt;\/strong&gt;/gi, '</strong>');
 
             Swal.fire({
                 html: `
                     <div class="swal-delete-icon-wrap">🗑️</div>
                     <div class="swal-delete-title">Konfirmasi Hapus</div>
-                    <div class="swal-delete-html" style="margin-top: 0.5rem;">${message}</div>
+                    <div class="swal-delete-html" style="margin-top: 0.5rem;">${safeMessageHtml}</div>
                 `,
                 showCancelButton: true,
                 confirmButtonText: '🗑️ Ya, Hapus',

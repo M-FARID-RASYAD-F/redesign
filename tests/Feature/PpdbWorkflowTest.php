@@ -30,7 +30,7 @@ class PpdbWorkflowTest extends TestCase
 
     public function test_full_ppdb_registration_submission_storage_and_admin_workflow(): void
     {
-        Storage::fake('public');
+        Storage::fake('local');
 
         // 1. Publik mengisi form pendaftaran di /ppdb/daftar
         $fileKk = UploadedFile::fake()->create('kk.pdf', 500, 'application/pdf');
@@ -68,7 +68,7 @@ class PpdbWorkflowTest extends TestCase
         $this->assertCount(4, $registration->documents);
 
         foreach ($registration->documents as $doc) {
-            $this->assertTrue(Storage::disk('public')->exists($doc->file_path));
+            $this->assertTrue(Storage::disk('local')->exists($doc->file_path));
             $this->assertEquals('belum_diverifikasi', $doc->verification_status);
         }
 

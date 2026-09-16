@@ -226,7 +226,7 @@ class RbacTest extends TestCase
             'password' => 'password',
         ]);
         $response->assertRedirect(route('admin.dashboard'));
-        $this->get('/logout');
+        $this->post('/logout');
 
         // 2. Admin CMS
         $response = $this->post('/login-process', [
@@ -234,7 +234,7 @@ class RbacTest extends TestCase
             'password' => 'password',
         ]);
         $response->assertRedirect(route('admin.cms.dashboard'));
-        $this->get('/logout');
+        $this->post('/logout');
 
         // 3. Admin PPDB
         $response = $this->post('/login-process', [
@@ -242,7 +242,7 @@ class RbacTest extends TestCase
             'password' => 'password',
         ]);
         $response->assertRedirect(route('admin.ppdb.dashboard'));
-        $this->get('/logout');
+        $this->post('/logout');
 
         // 4. Editor Akademik
         $response = $this->post('/login-process', [

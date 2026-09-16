@@ -10,6 +10,7 @@ use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolController extends Controller
 {
@@ -392,21 +393,23 @@ class SchoolController extends Controller
             'agreement.accepted' => 'Anda wajib menyetujui pernyataan kebenaran data dan kebijakan privasi.',
         ]);
 
-        // Simpan data pendaftaran
+        // Simpan data pendaftaran (Sanitasi data masukan dari karakter berbahaya/tag HTML)
         $registration = PpdbRegistration::create([
             'jenjang' => $validated['jenjang'],
-            'major_choice' => $validated['jenjang'] === 'smk' ? ($request->input('major_choice') ?: null) : null,
-            'full_name' => $validated['full_name'],
+            'major_choice' => $validated['jenjang'] === 'smk' && !empty($request->input('major_choice'))
+                ? strip_tags(trim($request->input('major_choice')))
+                : null,
+            'full_name' => strip_tags(trim($validated['full_name'])),
             'gender' => $validated['gender'],
             'birth_date' => $validated['birth_date'],
-            'address' => $validated['address'],
-            'parent_name' => $validated['parent_name'],
-            'parent_phone' => $validated['parent_phone'],
+            'address' => strip_tags(trim($validated['address'])),
+            'parent_name' => strip_tags(trim($validated['parent_name'])),
+            'parent_phone' => preg_replace('/[^0-9\+\-\s]/', '', $validated['parent_phone']),
             'status' => 'pending',
             'notes' => 'Pendaftaran online mandiri berhasil diajukan. Menunggu verifikasi berkas oleh panitia PPDB.',
         ]);
 
-        // Upload Dokumen Pendukung jika dilampirkan
+        // Upload Dokumen Pendukung ke Private Disk (Storage local/private) demi keamanan privasi berkas
         $docMapping = [
             'doc_kk' => 'kk',
             'doc_akta' => 'akta_lahir',
@@ -416,7 +419,7 @@ class SchoolController extends Controller
 
         foreach ($docMapping as $field => $type) {
             if ($request->hasFile($field)) {
-                $path = $request->file($field)->store('ppdb_documents', 'public');
+                $path = $request->file($field)->store('ppdb_documents', 'local');
                 PpdbDocument::create([
                     'registration_id' => $registration->id,
                     'doc_type' => $type,
@@ -434,15 +437,29 @@ class SchoolController extends Controller
             'description' => "Pendaftaran PPDB mandiri ({$registration->jenjang_label}) berhasil diajukan oleh {$registration->full_name} (No: {$registration->no_pendaftaran})",
         ]);
 
+        // Berikan izin akses sesi untuk melihat bukti pendaftaran yang baru saja dibuat
+        session(['submitted_ppdb_no' => $registration->no_pendaftaran]);
+
         return redirect()->route('ppdb.success', $registration->no_pendaftaran);
     }
 
     /**
      * Halaman Sukses Pendaftaran & Bukti Registrasi Digital
      */
-    public function ppdbSuccess($no_pendaftaran)
+    public function ppdbSuccess(Request $request, $no_pendaftaran)
     {
         $registration = PpdbRegistration::with('documents')->where('no_pendaftaran', $no_pendaftaran)->firstOrFail();
+
+        // Otorisasi: hanya pengaju pada sesi pendaftaran/lacak status saat ini atau admin yang dapat membuka kartu bukti
+        $isAuthorizedSession = session('submitted_ppdb_no') === $no_pendaftaran
+            || session('verified_tracking_no') === $no_pendaftaran
+            || Auth::check();
+
+        if (!$isAuthorizedSession) {
+            return redirect()->route('ppdb.tracking')
+                ->with('error', 'Sesi akses bukti pendaftaran tidak ditemukan atau telah kedaluwarsa. Silakan cari nomor pendaftaran Anda melalui form di bawah ini.');
+        }
+
         return view('ppdb.success', compact('registration'));
     }
 
@@ -475,6 +492,9 @@ class SchoolController extends Controller
                 ->withInput()
                 ->with('error', "Nomor pendaftaran '{$query}' tidak ditemukan dalam basis data sistem. Pastikan format nomor yang Anda masukkan sudah sesuai.");
         }
+
+        // Izinkan sesi pengguna saat ini membuka kartu bukti pendaftaran
+        session(['verified_tracking_no' => $registration->no_pendaftaran]);
 
         return view('ppdb.tracking', [
             'registration' => $registration,

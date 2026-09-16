@@ -31,7 +31,9 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::post('/daftar', [SchoolController::class, 'ppdbStore'])
         ->name('store')
         ->middleware('throttle:10,1');
-    Route::get('/sukses/{no_pendaftaran}', [SchoolController::class, 'ppdbSuccess'])->name('success');
+    Route::get('/sukses/{no_pendaftaran}', [SchoolController::class, 'ppdbSuccess'])
+        ->name('success')
+        ->middleware('throttle:30,1');
     Route::get('/cek-status', [SchoolController::class, 'ppdbTracking'])->name('tracking');
     Route::post('/cek-status', [SchoolController::class, 'ppdbCheckStatus'])
         ->name('check')
@@ -65,8 +67,8 @@ Route::post('/register-process', [RegisteredUserController::class, 'store'])
     ->name('register.process')
     ->middleware(['guest', 'throttle:10,1']);
 
-// 5. Route Logout Guru (Mendukung GET dan POST dengan proteksi sesi)
-Route::match(['get', 'post'], '/logout', function (\Illuminate\Http\Request $request) {
+// 5. Route Logout (Mewajibkan HTTP POST dengan proteksi CSRF demi keamanan sesi)
+Route::post('/logout', function (\Illuminate\Http\Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
@@ -81,7 +83,9 @@ Route::match(['get', 'post'], '/logout', function (\Illuminate\Http\Request $req
 // 6. Route Group Admin (Proteksi Otentikasi & Akun Aktif)
 Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(function () {
     // 6.1 Role Dashboards
-    Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('role:super_admin');
     Route::get('/cms/dashboard', [CmsDashboardController::class, 'index'])
         ->name('cms.dashboard')
         ->middleware('role:super_admin,admin_cms');
@@ -133,7 +137,7 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
             ->middleware('role:super_admin,admin_ppdb');
         Route::get('/ppdb/export-zip', [AdminController::class, 'ppdbExportZip'])
             ->name('ppdb.export-zip')
-            ->middleware('role:super_admin,admin_ppdb');
+            ->middleware(['role:super_admin,admin_ppdb', 'throttle:5,1']);
         Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
         Route::get('/ppdb/document/{id}', [AdminController::class, 'ppdbViewDocument'])
             ->name('ppdb.document');

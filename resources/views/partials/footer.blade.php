@@ -3,8 +3,8 @@
         <!-- Col 1: Brand, Deskripsi, Badge & Kontak Interaktif -->
         <div class="footer-col-brand">
             <div class="footer-brand-header">
-                <div class="footer-logo-box">
-                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="footer-logo-img">
+                <div class="brand-icon footer-logo-box">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img footer-logo-img">
                 </div>
                 <div class="footer-brand-text">
                     <div class="footer-brand-name">PKBM Tahfizh At-Tamam</div>
@@ -48,7 +48,9 @@
             <!-- Navigasi Utama -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon">🧭</span> Navigasi Sekolah
+                    <span class="footer-title-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    </span> Navigasi Sekolah
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#beranda"><span class="footer-link-arrow">›</span> Beranda Utama</a></li>
@@ -62,7 +64,9 @@
             <!-- Program Jenjang Pendidikan & Unggulan -->
             <div class="footer-col-links">
                 <h3 class="footer-title">
-                    <span class="footer-title-icon">🎓</span> Jenjang Pendidikan
+                    <span class="footer-title-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-.838L12.83 3.18a2 2 0 0 0-1.66 0L2.6 10.084a1 1 0 0 0 0 1.832l8.57 6.908a2 2 0 0 0 1.66 0l8.57-6.908a1 1 0 0 0 .02-.994z"/><path d="M6 12.5v5a6 3 0 0 0 12 0v-5"/></svg>
+                    </span> Jenjang Pendidikan
                 </h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SD (Sekolah Dasar)</a></li>

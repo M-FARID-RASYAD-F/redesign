@@ -25,7 +25,7 @@
            CSS CUSTOM PROPERTIES / TOKENS (DUAL THEME ENGINE)
            ═══════════════════════════════════════════════════════════ */
         
-        /* 1. Tipe 1: Dark Mode (Oxford Navy & Cyan Neon 🌙) */
+        /* 1. Tipe 1: Dark Mode (Oxford Navy & Cyan Neon) */
         :root, [data-theme="dark"] {
             --adm-bg: #001529;
             --adm-bg-gradient: radial-gradient(circle at 12% 18%, rgba(0, 180, 216, 0.16) 0%, transparent 45%),
@@ -74,7 +74,7 @@
             --shadow: var(--adm-shadow);
         }
 
-        /* 2. Tipe 2: White / Light Mode (Deep Maroon & Crimson Rose ☀️ - btnswitch.md) */
+        /* 2. Tipe 2: White / Light Mode (Deep Maroon & Crimson Rose - btnswitch.md) */
         [data-theme="light"] {
             --adm-bg: oklch(41% 0.159 10.272); /* Sesuai btnswitch.md */
             --adm-bg-gradient: radial-gradient(circle at 12% 18%, oklch(58.6% 0.253 17.585 / 0.18) 0%, transparent 45%),
@@ -365,6 +365,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-link-icon svg {
+            width: 19px;
+            height: 19px;
+            stroke-width: 2;
+            display: block;
             flex-shrink: 0;
         }
 
@@ -751,30 +759,51 @@
             flex-shrink: 0;
         }
 
+        .stat-card-icon svg {
+            width: 19px;
+            height: 19px;
+            stroke-width: 2;
+            display: block;
+            flex-shrink: 0;
+        }
+
         .stat-card-icon.icon-cyan {
             background: rgba(0, 180, 216, 0.15);
             border: 1px solid rgba(0, 180, 216, 0.3);
+            color: #00b4d8;
         }
         .stat-card-icon.icon-sky {
             background: rgba(56, 189, 248, 0.15);
             border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
         }
         .stat-card-icon.icon-emerald {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
         }
         .stat-card-icon.icon-amber {
             background: rgba(245, 158, 11, 0.15);
             border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
         }
         .stat-card-icon.icon-purple {
             background: rgba(168, 85, 247, 0.15);
             border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
         }
         .stat-card-icon.icon-rose {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
         }
+
+        [data-theme="light"] .stat-card-icon.icon-cyan { color: #0284c7; }
+        [data-theme="light"] .stat-card-icon.icon-sky { color: #0284c7; }
+        [data-theme="light"] .stat-card-icon.icon-emerald { color: #059669; }
+        [data-theme="light"] .stat-card-icon.icon-amber { color: #d97706; }
+        [data-theme="light"] .stat-card-icon.icon-purple { color: #9333ea; }
+        [data-theme="light"] .stat-card-icon.icon-rose { color: #dc2626; }
 
         .stat-card-val {
             font-size: 1.85rem;
@@ -2132,11 +2161,14 @@
                 </div>
                 <div class="brand-meta">
                     <span class="brand-title">At-Tamam Edu</span>
-                    <span class="brand-badge">⚡ Admin Center</span>
+                    <span class="brand-badge" style="display: inline-flex; align-items: center; gap: 4px;">
+                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        Admin Center
+                    </span>
                 </div>
             </a>
             <button class="sidebar-close-btn" id="sidebarCloseBtn" type="button" aria-label="Tutup Menu Sidebar">
-                ✕
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
 
@@ -2144,7 +2176,9 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="{{ auth()->user()->dashboard_url }}" class="sidebar-link {{ Route::is('admin.dashboard', 'admin.cms.dashboard', 'admin.ppdb.dashboard', 'admin.akademik.dashboard') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">📊</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    </span>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -2152,7 +2186,9 @@
             @can('viewAny', App\Models\News::class)
             <li>
                 <a href="{{ route('admin.news.index') }}" class="sidebar-link {{ Route::is('admin.news.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">📰</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                    </span>
                     <span>Berita (CMS)</span>
                 </a>
             </li>
@@ -2161,7 +2197,9 @@
             @can('viewAny', App\Models\TeacherStaff::class)
             <li>
                 <a href="{{ route('admin.teachers.index') }}" class="sidebar-link {{ Route::is('admin.teachers.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">👨‍🏫</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </span>
                     <span>Guru & Staf</span>
                 </a>
             </li>
@@ -2170,7 +2208,9 @@
             @can('viewAny', App\Models\PpdbRegistration::class)
             <li>
                 <a href="{{ route('admin.ppdb.index') }}" class="sidebar-link {{ (Route::is('admin.ppdb.*') && !Route::is('admin.ppdb.dashboard')) ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">📝</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
+                    </span>
                     <span>PPDB Online</span>
                 </a>
             </li>
@@ -2179,7 +2219,9 @@
             @can('viewAny', App\Models\Major::class)
             <li>
                 <a href="{{ route('admin.majors.index') }}" class="sidebar-link {{ Route::is('admin.majors.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">💻</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </span>
                     <span>Program Jurusan</span>
                 </a>
             </li>
@@ -2188,7 +2230,9 @@
             @can('viewAny', App\Models\User::class)
             <li>
                 <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
-                    <span class="sidebar-link-icon">👥</span>
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
                     <span>Kelola Pengguna</span>
                 </a>
             </li>
@@ -2210,10 +2254,12 @@
             </div>
 
             <a href="{{ route('home') }}" class="btn-sidebar-action">
-                <span>🌐</span> Lihat Website
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>Lihat Website</span>
             </a>
             <a href="{{ route('logout') }}" class="btn-sidebar-action btn-sidebar-logout">
-                <span>🚪</span> Logout Sesi
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Logout Sesi</span>
             </a>
         </div>
     </aside>
@@ -2240,30 +2286,34 @@
             <div class="topbar-right">
                 <!-- Theme Switcher Button (Dark / White Mode) -->
                 <button class="adm-theme-toggle" id="adminThemeToggleBtn" type="button" aria-label="Ganti Tema Tampilan" title="Ganti Tema (Dark / White Mode)">
-                    <span class="icon-sun" aria-hidden="true">☀️</span>
-                    <span class="icon-moon" aria-hidden="true">🌙</span>
+                    <span class="icon-sun" aria-hidden="true">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </span>
+                    <span class="icon-moon" aria-hidden="true">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    </span>
                 </button>
 
                 <!-- Tombol Shortcut ke Website Depan -->
                 <a href="{{ route('home') }}" class="btn-topbar-web" title="Lihat Tampilan Website">
-                    <span>🏠</span>
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <span class="web-text-long">Portal Sekolah</span>
                     <span class="web-text-short" style="display: none;">Web</span>
-                    <span>↗</span>
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                 </a>
             </div>
         </header>
 
         @if(session('success'))
             <div class="alert-success">
-                <span>✨</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 <span>{{ session('success') }}</span>
             </div>
         @endif
 
         @if(session('error'))
             <div class="alert-danger">
-                <span>⚠️</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <span>{{ session('error') }}</span>
             </div>
         @endif
@@ -2693,12 +2743,14 @@
 
             Swal.fire({
                 html: `
-                    <div class="swal-delete-icon-wrap">🗑️</div>
+                    <div class="swal-delete-icon-wrap">
+                        <svg width="28" height="28" fill="none" stroke="#ef4444" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    </div>
                     <div class="swal-delete-title">Konfirmasi Hapus</div>
                     <div class="swal-delete-html" style="margin-top: 0.5rem;">${safeMessageHtml}</div>
                 `,
                 showCancelButton: true,
-                confirmButtonText: '🗑️ Ya, Hapus',
+                confirmButtonText: '<span style="display:inline-flex;align-items:center;gap:6px;"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg> Ya, Hapus</span>',
                 cancelButtonText: 'Batal',
                 customClass: {
                     container: 'swal-delete-container',

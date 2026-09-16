@@ -46,10 +46,10 @@ class SchoolController extends Controller
         $jumlahJurusan = Major::count();
 
         $stats = [
-            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => '👨‍🎓', 'color' => '#eff6ff'],
-            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => '👩‍🏫', 'color' => '#ecfdf5'],
-            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => '🏫', 'color' => '#fffbeb'],
-            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => '🚀', 'color' => '#f3e8ff'],
+            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => 'users', 'color' => '#00B4D8'],
+            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => 'teachers', 'color' => '#10b981'],
+            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => 'school', 'color' => '#f59e0b'],
+            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => 'trending-up', 'color' => '#a855f7'],
         ];
 
         // 4. Data Jenjang Pendidikan (SD, SMP, SMK) - Dummy Data Lengkap
@@ -59,13 +59,14 @@ class SchoolController extends Controller
                 'kode' => 'SD',
                 'nama' => 'Sekolah Dasar (SD)',
                 'kategori' => 'Pendidikan Dasar & Karakter',
-                'badge' => '🌱 Fondasi Qurani',
+                'badge' => 'Fondasi Qurani',
+                'badge_icon' => 'sprout',
                 'deskripsi' => 'Membangun aqidah shohihah, adab islami, tahfizh juz 30 mutqin, serta dasar literasi, numerasi, dan sains eksploratif dengan suasana belajar aktif.',
                 'masa_studi' => '6 Tahun',
                 'fokus_kurikulum' => 'Tahfizh & Adab',
-                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan_label' => 'Program Unggulan:',
                 'keunggulan' => 'Tahfizh Cilik, Bilingual Dasar, Islamic Character Building, Fun Science & Math',
-                'icon' => '🎒',
+                'icon' => 'book-open',
                 'link_daftar' => route('ppdb.create', ['jenjang' => 'sd']),
             ],
             [
@@ -73,13 +74,14 @@ class SchoolController extends Controller
                 'kode' => 'SMP',
                 'nama' => 'Sekolah Menengah Pertama (SMP)',
                 'kategori' => 'Pendidikan Menengah & Riset',
-                'badge' => '🌟 Karakter & Sains Terapan',
+                'badge' => 'Karakter & Sains Terapan',
+                'badge_icon' => 'sparkles',
                 'deskripsi' => 'Penguatan tahfizh Al-Qur\'an berkesinambungan, pembentukan kepemimpinan santri, penguasaan sains terapan, serta pengenalan dasar teknologi digital.',
                 'masa_studi' => '3 Tahun',
                 'fokus_kurikulum' => 'Tahfizh & Sains',
-                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan_label' => 'Program Unggulan:',
                 'keunggulan' => 'Target 5–10 Juz Mutqin, Arabic & English Club, Basic Coding, Leadership Camp',
-                'icon' => '📚',
+                'icon' => 'compass',
                 'link_daftar' => route('ppdb.create', ['jenjang' => 'smp']),
             ],
             [
@@ -87,13 +89,14 @@ class SchoolController extends Controller
                 'kode' => 'SMK',
                 'nama' => 'Sekolah Menengah Kejuruan (SMK)',
                 'kategori' => 'Pendidikan Vokasi & Siap Kerja',
-                'badge' => '🚀 Keahlian Industri & Digital',
+                'badge' => 'Keahlian Industri & Digital',
+                'badge_icon' => 'rocket',
                 'deskripsi' => 'Membekali keterampilan kejuruan vokasi berstandar industri (RPL, TKJ, DKV), sertifikasi BNSP/LSP, kurikulum industri, serta magang kerja nyata.',
                 'masa_studi' => '3 Tahun',
                 'fokus_kurikulum' => 'Industri & Vokasi',
-                'keunggulan_label' => '🎯 Program Unggulan:',
+                'keunggulan_label' => 'Program Unggulan:',
                 'keunggulan' => 'Kelas Industri (RPL, TKJ, DKV), Magang Kerja (PKL), Sertifikasi BNSP, Inkubator Bisnis',
-                'icon' => '💻',
+                'icon' => 'laptop',
                 'link_daftar' => route('ppdb.create', ['jenjang' => 'smk']),
             ],
         ];

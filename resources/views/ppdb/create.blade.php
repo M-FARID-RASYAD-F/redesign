@@ -639,7 +639,9 @@
                                     <input type="radio" name="jenjang" value="sd" @checked($currentJenjang == 'sd') required onchange="handleJenjangChange('sd')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">🎒</span>
+                                            <span style="color: #34d399; display: flex; align-items: center;">
+                                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                                            </span>
                                             <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SD</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Sekolah Dasar (SD)</strong>
@@ -652,7 +654,9 @@
                                     <input type="radio" name="jenjang" value="smp" @checked($currentJenjang == 'smp') required onchange="handleJenjangChange('smp')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">📚</span>
+                                            <span style="color: #38bdf8; display: flex; align-items: center;">
+                                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                                            </span>
                                             <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMP</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Menengah Pertama (SMP)</strong>
@@ -665,7 +669,9 @@
                                     <input type="radio" name="jenjang" value="smk" @checked($currentJenjang == 'smk') required onchange="handleJenjangChange('smk')" />
                                     <span style="display: block;">
                                         <span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="font-size: 1.6rem;">💻</span>
+                                            <span style="color: #c084fc; display: flex; align-items: center;">
+                                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+                                            </span>
                                             <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">Tingkat SMK</span>
                                         </span>
                                         <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 2px;">Kejuruan (SMK)</strong>
@@ -794,7 +800,9 @@
                         <!-- Panduan & Info Komunikasi Orang Tua -->
                         <div class="ppdb-info-card">
                             <div style="display: flex; gap: 14px; align-items: flex-start;">
-                                <span style="font-size: 1.6rem; line-height: 1;">📱</span>
+                                <span style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: rgba(245, 158, 11, 0.15); color: #fbbf24; flex-shrink: 0;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                                </span>
                                 <div>
                                     <h4 style="font-size: 0.95rem; font-weight: 800; color: #fbbf24; margin: 0 0 6px;">Pemberitahuan & Verifikasi Kontak</h4>
                                     <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 10px;">
@@ -835,28 +843,40 @@
                         <div class="ppdb-upload-grid">
                             <!-- KK -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_kk" class="ppdb-upload-title">📄 Kartu Keluarga (KK)</label>
+                                <label for="doc_kk" class="ppdb-upload-title" style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <span>Kartu Keluarga (KK)</span>
+                                </label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_kk" name="doc_kk" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Akta Lahir -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_akta" class="ppdb-upload-title">📜 Akta Kelahiran</label>
+                                <label for="doc_akta" class="ppdb-upload-title" style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    <span>Akta Kelahiran</span>
+                                </label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_akta" name="doc_akta" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Pas Foto -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_foto" class="ppdb-upload-title">🖼️ Pas Foto Siswa (3x4)</label>
+                                <label for="doc_foto" class="ppdb-upload-title" style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                    <span>Pas Foto Siswa (3x4)</span>
+                                </label>
                                 <span class="ppdb-upload-sub">JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_foto" name="doc_foto" accept=".jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
 
                             <!-- Rapor / SKL -->
                             <div class="ppdb-upload-box">
-                                <label for="doc_rapor" class="ppdb-upload-title">📑 Rapor Terakhir / SKL</label>
+                                <label for="doc_rapor" class="ppdb-upload-title" style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><polyline points="10 2 10 10 13 7 16 10 16 2"/></svg>
+                                    <span>Rapor Terakhir / SKL</span>
+                                </label>
                                 <span class="ppdb-upload-sub">PDF/JPG/PNG (Maks. 3 MB)</span>
                                 <input type="file" id="doc_rapor" name="doc_rapor" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.85rem; width: 100%; color: #cbd5e1;" />
                             </div>
@@ -865,7 +885,9 @@
                         <!-- Privacy Notice & Persetujuan -->
                         <div class="ppdb-pdp-notice" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
-                                <span style="font-size: 1.3rem; flex-shrink: 0; line-height: 1.2;">🛡️</span>
+                                <span style="color: #38bdf8; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(56, 189, 248, 0.15); flex-shrink: 0;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                </span>
                                 <div style="flex: 1;">
                                     <h4 class="ppdb-pdp-title">Kebijakan Pelindungan Data Pribadi (UU PDP No. 27/2022)</h4>
                                     <p class="ppdb-pdp-desc">
@@ -892,7 +914,8 @@
                             ← Kembali ke Data Orang Tua
                         </button>
                         <button type="submit" id="btnSubmitForm" class="ppdb-btn-submit">
-                            🚀 Kirim Pendaftaran PPDB
+                            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            <span>Kirim Pendaftaran PPDB</span>
                         </button>
                     </div>
                     <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 12px; margin-bottom: 0;">

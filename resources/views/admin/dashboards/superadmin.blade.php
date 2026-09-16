@@ -7,17 +7,19 @@
 <div class="dashboard-hero">
     <div class="hero-content">
         <div class="hero-badge-pill">
-            <span>🛡️</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <span>SUPER ADMIN CONTROL CENTER</span>
         </div>
         <h1 class="hero-title">Pusat Kendali Eksekutif & Sistem Terintegrasi</h1>
     </div>
     <div class="hero-actions">
         <a href="{{ route('admin.users.index') }}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
-            <span>👥</span> Kelola Pengguna Admin
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Kelola Pengguna Admin</span>
         </a>
         <a href="{{ route('admin.ppdb.index') }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 8px;">
-            <span>📝</span> Data PPDB
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
+            <span>Data PPDB</span>
         </a>
     </div>
 </div>
@@ -28,7 +30,9 @@
     <div class="card stat-card-item">
         <div class="stat-card-header">
             <span class="stat-card-label">ADMIN AKTIF</span>
-            <div class="stat-card-icon icon-cyan">👥</div>
+            <div class="stat-card-icon icon-cyan">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
         </div>
         <div class="stat-card-val">{{ $stats['total_users'] }}</div>
         <div class="stat-card-sub">Akun pengelola sistem</div>
@@ -38,7 +42,9 @@
     <div class="card stat-card-item">
         <div class="stat-card-header">
             <span class="stat-card-label">TOTAL BERITA</span>
-            <div class="stat-card-icon icon-sky">📰</div>
+            <div class="stat-card-icon icon-sky">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+            </div>
         </div>
         <div class="stat-card-val">{{ $stats['total_news'] }}</div>
         <div class="stat-card-sub">Artikel & pengumuman CMS</div>
@@ -48,7 +54,9 @@
     <div class="card stat-card-item">
         <div class="stat-card-header">
             <span class="stat-card-label">GURU & STAF</span>
-            <div class="stat-card-icon icon-emerald">👨‍🏫</div>
+            <div class="stat-card-icon icon-emerald">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
         </div>
         <div class="stat-card-val">{{ $stats['total_teachers'] }}</div>
         <div class="stat-card-sub">Tenaga pendidik & staf</div>
@@ -58,7 +66,9 @@
     <div class="card stat-card-item">
         <div class="stat-card-header">
             <span class="stat-card-label">PENDAFTAR PPDB</span>
-            <div class="stat-card-icon icon-amber">📝</div>
+            <div class="stat-card-icon icon-amber">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
+            </div>
         </div>
         <div class="stat-card-val">{{ $stats['total_ppdb'] }}</div>
         <div class="stat-card-sub">Calon peserta didik baru</div>
@@ -68,26 +78,39 @@
 <!-- BREAKDOWN STATUS PPDB (MINI STATS) -->
 <div class="card card-ppdb-breakdown">
     <div class="ppdb-breakdown-header">
-        <h3 class="ppdb-breakdown-title">
-            <span>📊</span> Distribusi Status Seleksi PPDB Online
+        <h3 class="ppdb-breakdown-title" style="display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Distribusi Status Seleksi PPDB Online</span>
         </h3>
         <span class="ppdb-breakdown-badge">Total {{ $stats['total_ppdb'] }} Calon Siswa</span>
     </div>
     <div class="ppdb-mini-stats-grid">
         <div class="ppdb-mini-stat ppdb-stat-pending">
-            <div class="ppdb-mini-label">⏳ Menunggu Verifikasi</div>
+            <div class="ppdb-mini-label" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Menunggu Verifikasi</span>
+            </div>
             <div class="ppdb-mini-val">{{ $stats['ppdb_pending'] }}</div>
         </div>
         <div class="ppdb-mini-stat ppdb-stat-verified">
-            <div class="ppdb-mini-label">📑 Terverifikasi Berkas</div>
+            <div class="ppdb-mini-label" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+                <span>Terverifikasi Berkas</span>
+            </div>
             <div class="ppdb-mini-val">{{ $stats['ppdb_diverifikasi'] }}</div>
         </div>
         <div class="ppdb-mini-stat ppdb-stat-accepted">
-            <div class="ppdb-mini-label">✅ Diterima (Lolos)</div>
+            <div class="ppdb-mini-label" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Diterima (Lolos)</span>
+            </div>
             <div class="ppdb-mini-val">{{ $stats['ppdb_diterima'] }}</div>
         </div>
         <div class="ppdb-mini-stat ppdb-stat-rejected">
-            <div class="ppdb-mini-label">❌ Ditolak / Gugur</div>
+            <div class="ppdb-mini-label" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <span>Ditolak / Gugur</span>
+            </div>
             <div class="ppdb-mini-val">{{ $stats['ppdb_ditolak'] }}</div>
         </div>
     </div>
@@ -170,8 +193,8 @@
                             {{ $u->role_label }}
                         </span>
                     </div>
-                    <div style="font-size: 0.77rem; font-family: 'JetBrains Mono', monospace; color: var(--adm-text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px;" title="{{ $u->email }}">
-                        <span style="opacity: 0.6; font-size: 0.72rem; flex-shrink: 0;">✉</span>
+                    <div style="font-size: 0.77rem; font-family: 'JetBrains Mono', monospace; color: var(--adm-text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px;" title="{{ $u->email }}">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="opacity: 0.7; flex-shrink: 0;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         <span style="overflow: hidden; text-overflow: ellipsis;">{{ $u->email }}</span>
                     </div>
                 </div>
@@ -181,7 +204,8 @@
 
         <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--adm-border);">
             <a href="{{ route('admin.users.create') }}" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center; display: inline-flex; align-items: center; gap: 6px;">
-                <span>➕</span> Tambah Pengguna Admin Baru
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Tambah Pengguna Admin Baru</span>
             </a>
         </div>
     </div>

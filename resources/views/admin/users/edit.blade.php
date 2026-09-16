@@ -46,10 +46,10 @@
         <div class="form-group">
             <label class="form-label" for="role">Peran & Hak Akses (Role) *</label>
             <select id="role" name="role" class="form-control" required>
-                <option value="super_admin" {{ old('role', $user->role) == 'super_admin' ? 'selected' : '' }}>👑 Super Admin (Akses Penuh Semua Modul & Kelola Akun)</option>
-                <option value="admin_cms" {{ old('role', $user->role) == 'admin_cms' ? 'selected' : '' }}>📰 Admin CMS (Kelola Berita, Galeri, Agenda & Pengumuman)</option>
-                <option value="admin_ppdb" {{ old('role', $user->role) == 'admin_ppdb' ? 'selected' : '' }}>📝 Admin PPDB (Verifikasi Pendaftar, Ubah Status, Hapus & Ekspor CSV)</option>
-                <option value="editor_akademik" {{ old('role', $user->role) == 'editor_akademik' ? 'selected' : '' }}>👨‍🏫 Editor Akademik (Kelola Dewan Guru, Staf & Program Jurusan)</option>
+                <option value="super_admin" {{ old('role', $user->role) == 'super_admin' ? 'selected' : '' }}>Super Admin (Akses Penuh Semua Modul & Kelola Akun)</option>
+                <option value="admin_cms" {{ old('role', $user->role) == 'admin_cms' ? 'selected' : '' }}>Admin CMS (Kelola Berita, Galeri, Agenda & Pengumuman)</option>
+                <option value="admin_ppdb" {{ old('role', $user->role) == 'admin_ppdb' ? 'selected' : '' }}>Admin PPDB (Verifikasi Pendaftar, Ubah Status, Hapus & Ekspor CSV)</option>
+                <option value="editor_akademik" {{ old('role', $user->role) == 'editor_akademik' ? 'selected' : '' }}>Editor Akademik (Kelola Dewan Guru, Staf & Program Jurusan)</option>
             </select>
             @error('role')
                 <div style="color: var(--danger); font-size: 0.8rem; margin-top: 4px;">{{ $message }}</div>
@@ -68,7 +68,8 @@
 
         <div style="margin-top: 28px; display: flex; gap: 12px;">
             <button type="submit" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
-                <span>💾</span> Perbarui Akun
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span>Perbarui Akun</span>
             </button>
             <a href="{{ route('admin.users.index') }}" class="btn btn-outline">Batal</a>
         </div>

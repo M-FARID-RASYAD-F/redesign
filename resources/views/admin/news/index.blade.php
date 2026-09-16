@@ -9,8 +9,9 @@
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Terbitkan, perbarui, dan hapus artikel atau berita sekolah.</p>
     </div>
     @can('create', App\Models\News::class)
-    <a href="{{ route('admin.news.create') }}" class="btn btn-primary">
-        <span>➕</span> Tulis Berita Baru
+    <a href="{{ route('admin.news.create') }}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Tulis Berita Baru</span>
     </a>
     @endcan
 </div>
@@ -54,14 +55,20 @@
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 8px;">
                             @can('update', $news)
-                            <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary);">Edit</a>
+                            <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary); border-color: var(--primary); display: inline-flex; align-items: center; gap: 4px;">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                                <span>Edit</span>
+                            </a>
                             @endcan
                             
                             @can('delete', $news)
                             <form action="{{ route('admin.news.delete', $news->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus berita <strong>{{ $news->title }}</strong>? Tindakan ini tidak dapat dibatalkan.">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger btn-sm btn-delete-trigger">🗑️ Hapus</button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-trigger" style="display: inline-flex; align-items: center; gap: 4px;">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                    <span>Hapus</span>
+                                </button>
                             </form>
                             @endcan
                         </div>

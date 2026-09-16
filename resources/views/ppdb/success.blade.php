@@ -110,19 +110,25 @@
         <!-- Tombol Aksi -->
         <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px;">
             <button onclick="window.print()" class="btn btn-primary" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                🖨️ Cetak Kartu Bukti
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                <span>Cetak Kartu Bukti</span>
             </button>
             <a href="{{ route('ppdb.tracking') }}" class="btn btn-outline" style="padding: 12px 24px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
-                🔍 Lacak Status Pendaftaran
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Lacak Status Pendaftaran</span>
             </a>
-            <a href="{{ route('home') }}" class="btn btn-outline" style="padding: 12px 20px; font-weight: 600; border-radius: 10px;">
-                🏠 Kembali ke Beranda
+            <a href="{{ route('home') }}" class="btn btn-outline" style="padding: 12px 20px; font-weight: 600; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Kembali ke Beranda</span>
             </a>
         </div>
 
         <!-- Panduan Tahap Selanjutnya -->
         <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 16px; padding: 22px 26px;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; margin-bottom: 8px;">📌 Langkah Selanjutnya:</h3>
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                <span>Langkah Selanjutnya:</span>
+            </h3>
             <ol style="color: #cbd5e1; font-size: 0.9rem; padding-left: 20px; line-height: 1.7; margin: 0;">
                 <li>Panitia PPDB akan memverifikasi data dan berkas yang Anda unggah dalam 1x24 jam kerja.</li>
                 <li>Simpan atau tangkap layar (*screenshot*) <strong>Nomor Pendaftaran</strong> Anda.</li>

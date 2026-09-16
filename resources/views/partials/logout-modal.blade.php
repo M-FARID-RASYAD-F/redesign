@@ -32,7 +32,8 @@
                         <span>Batal</span>
                     </button>
                     <button type="button" class="btn-logout-confirm" id="btnConfirmLogout" data-logout-url="{{ route('logout') }}">
-                        <span>🚪 Ya, Logout</span>
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        <span>Ya, Logout</span>
                     </button>
                 </div>
             </div>
@@ -54,7 +55,7 @@
                     
                     {{-- Core Glassmorphism Center --}}
                     <div class="orbit-core">
-                        <span>🔒</span>
+                        <svg width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     </div>
                 </div>
 
@@ -479,7 +480,7 @@
     100% { transform: translateX(100%); }
 }
 
-/* Light Theme Adjustments (White Mode ☀️) */
+/* Light Theme Adjustments (White Mode) */
 [data-theme="light"] .logout-modal-backdrop {
     background: rgba(15, 23, 42, 0.45);
     backdrop-filter: blur(12px);

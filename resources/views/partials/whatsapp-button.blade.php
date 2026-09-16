@@ -247,7 +247,7 @@
 <div class="floating-wa-wrapper" id="floatingWaWrapper">
     <!-- Tooltip Balon Informasi saat Kursor Diarahkan -->
     <div class="floating-wa-tooltip" role="tooltip" aria-hidden="true">
-        <span>Tanya seputar PPDB & program sekolah via WhatsApp 👋</span>
+        <span>Tanya seputar PPDB & program sekolah via WhatsApp</span>
     </div>
 
     <!-- Tombol WhatsApp Mengambang (Pojok Kiri Bawah) -->

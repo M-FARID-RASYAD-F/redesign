@@ -146,7 +146,7 @@ class RbacTest extends TestCase
         $this->actingAs($this->adminPpdb)
             ->get('/admin/ppdb')
             ->assertOk()
-            ->assertSee('🗑️ Hapus');
+            ->assertSee('<span>Hapus</span>', false);
 
         $this->actingAs($this->adminPpdb)
             ->delete("/admin/ppdb/{$reg->id}")
@@ -173,7 +173,7 @@ class RbacTest extends TestCase
         $this->actingAs($this->adminCms)
             ->get('/admin/ppdb')
             ->assertOk()
-            ->assertDontSee('🗑️ Hapus');
+            ->assertDontSee('<span>Hapus</span>', false);
 
         $this->actingAs($this->adminCms)
             ->delete("/admin/ppdb/{$reg->id}")

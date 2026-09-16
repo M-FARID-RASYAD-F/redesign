@@ -14,19 +14,35 @@
     <section class="hero" id="beranda">
         <div class="hero-container">
             <div class="hero-content">
-                <span class="hero-badge">
-                    ★ Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
-                </span>
+                {{-- Brand Capsule Identik dengan Logo di Navigation --}}
+                <div class="hero-brand-wrapper">
+                    <div class="hero-brand-capsule">
+                        <div class="brand-icon">
+                            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
+                        </div>
+                        <div class="hero-brand-text">
+                            <span class="hero-brand-title">PKBM Tahfizh At-Tamam</span>
+                            <span class="hero-brand-subtitle">Sekolah Unggulan Berkarakter</span>
+                        </div>
+                    </div>
+                    <span class="hero-badge" style="margin-bottom: 0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:inline-block; vertical-align: -1px; margin-right: 4px; color: #fbbf24;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
+                    </span>
+                </div>
+
                 <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
                 <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
                 <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
 
                 <div class="hero-actions">
                     <a href="{{ route('ppdb.index') }}" class="btn btn-primary">
-                        📝 Daftar PPDB Online
+                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        <span>Daftar PPDB Online</span>
                     </a>
                     <a href="#jenjang" class="btn btn-outline">
-                        🔍 Lihat Jenjang & Jurusan
+                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Lihat Jenjang & Jurusan</span>
                     </a>
                 </div>
             </div>
@@ -96,11 +112,34 @@
             @foreach($jenjang as $j)
                 <div class="pc-12__card">
                     <div class="pc-12__pfp">
-                        <span class="pc-12__pfp-icon">{{ $j['icon'] ?? '🎓' }}</span>
+                        <span class="pc-12__pfp-icon">
+                            @if(($j['id'] ?? '') === 'sd' || in_array($j['icon'] ?? '', ['🎒', 'sd', 'book-open']))
+                                {{-- Lucide BookOpen SVG Line Icon --}}
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            @elseif(($j['id'] ?? '') === 'smp' || in_array($j['icon'] ?? '', ['📚', 'smp', 'compass']))
+                                {{-- Lucide Compass SVG Line Icon --}}
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                            @elseif(($j['id'] ?? '') === 'smk' || in_array($j['icon'] ?? '', ['💻', 'smk', 'laptop']))
+                                {{-- Lucide Laptop SVG Line Icon --}}
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+                            @else
+                                {{-- Default GraduationCap SVG Line Icon --}}
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-.838L12.83 3.18a2 2 0 0 0-1.66 0L2.6 10.084a1 1 0 0 0 0 1.832l8.57 6.908a2 2 0 0 0 1.66 0l8.57-6.908a1 1 0 0 0 .02-.994z"/><path d="M6 12.5v5a6 3 0 0 0 12 0v-5"/></svg>
+                            @endif
+                        </span>
                         <span class="pc-12__pfp-abbr">{{ $j['kode'] ?? substr($j['nama'], 0, 3) }}</span>
                     </div>
                     <h3>{{ $j['nama'] }}</h3>
-                    <p class="pc-12__role">{{ $j['badge'] }} · {{ $j['kategori'] }}</p>
+                    <p class="pc-12__role">
+                        @if(str_contains($j['badge'] ?? '', '🌱') || ($j['badge_icon'] ?? '') === 'sprout' || ($j['id'] ?? '') === 'sd')
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-1px; margin-right:3px;" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 1 1.1 4c-1.2 0-2.8-.6-3.8-1.5-.9-.9-1.4-2.1-1.4-3.5 2.5 0 3.4.5 4.1 1z"/></svg>
+                        @elseif(str_contains($j['badge'] ?? '', '🌟') || ($j['badge_icon'] ?? '') === 'sparkles' || ($j['id'] ?? '') === 'smp')
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-1px; margin-right:3px;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        @elseif(str_contains($j['badge'] ?? '', '🚀') || ($j['badge_icon'] ?? '') === 'rocket' || ($j['id'] ?? '') === 'smk')
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-1px; margin-right:3px;" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                        @endif
+                        {{ trim(preg_replace('/[\x{1F300}-\x{1F9FF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}]\s*/u', '', $j['badge'] ?? '')) }} · {{ $j['kategori'] }}
+                    </p>
                     <p class="pc-12__bio">{{ $j['deskripsi'] }}</p>
                     
                     <div class="pc-12__row">
@@ -115,7 +154,10 @@
                     </div>
 
                     <div class="pc-12__prospek">
-                        <span class="pc-12__prospek-label">{{ $j['keunggulan_label'] ?? '🎯 Keunggulan Program:' }}</span>
+                        <span class="pc-12__prospek-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                            {{ trim(str_replace(['🎯', '🎯 '], '', $j['keunggulan_label'] ?? 'Keunggulan Program:')) }}
+                        </span>
                         <span class="pc-12__prospek-val">{{ $j['keunggulan'] ?? '' }}</span>
                     </div>
 

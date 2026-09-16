@@ -100,6 +100,9 @@
     <script defer src="{{ $jsv('js/ScrollTrigger.min.js') }}"></script>
     <script defer src="{{ $jsv('js/ScrollSmoother.min.js') }}"></script>
     <script defer src="{{ $jsv('js/smooth-scroll.js') }}"></script>
+
+    <!-- Bidirectional Cubic-Bezier Scroll Reveal Engine -->
+    <script defer src="{{ $jsv('js/scroll-reveal.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

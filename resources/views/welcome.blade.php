@@ -197,17 +197,6 @@
 
 @push('scripts')
     <script>
-        // ── Scroll Reveal ──
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(el => {
-                if (el.isIntersecting) {
-                    el.target.classList.add('visible');
-                    observer.unobserve(el.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
         console.log('Website Sekolah SMKN 1 Nusantara - Dimuat dengan sukses!');
     </script>
 @endpush

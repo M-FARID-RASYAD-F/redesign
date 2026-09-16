@@ -14,22 +14,10 @@
     <section class="hero" id="beranda">
         <div class="hero-container">
             <div class="hero-content">
-                {{-- Brand Capsule Identik dengan Logo di Navigation --}}
-                <div class="hero-brand-wrapper">
-                    <div class="hero-brand-capsule">
-                        <div class="brand-icon">
-                            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
-                        </div>
-                        <div class="hero-brand-text">
-                            <span class="hero-brand-title">PKBM Tahfizh At-Tamam</span>
-                            <span class="hero-brand-subtitle">Sekolah Unggulan Berkarakter</span>
-                        </div>
-                    </div>
-                    <span class="hero-badge" style="margin-bottom: 0;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:inline-block; vertical-align: -1px; margin-right: 4px; color: #fbbf24;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
-                    </span>
-                </div>
+                <span class="hero-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:inline-block; vertical-align: -1px; margin-right: 4px; color: #fbbf24;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
+                </span>
 
                 <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
                 <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>

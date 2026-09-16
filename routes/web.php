@@ -21,7 +21,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 // 1. Route Halaman Utama Landing Page Sekolah
 Route::get('/', [SchoolController::class, 'index'])->name('home');
 
-// 1.1 Route Baca Artikel Berita Publik
+// 1.1 Route Portal Berita Publik & Detail Artikel
+Route::get('/berita', [SchoolController::class, 'newsIndex'])->name('berita.index');
 Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
 // 2. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Major;
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
@@ -479,6 +480,58 @@ class SchoolController extends Controller
             'registration' => $registration,
             'search' => $query,
         ]);
+    }
+
+    /**
+     * Menampilkan Portal Berita & Pengumuman Sekolah (Publik)
+     */
+    public function newsIndex(Request $request)
+    {
+        $search = trim((string) $request->input('search', ''));
+        $kategori = trim((string) $request->input('kategori', ''));
+
+        $query = News::with(['category', 'author'])
+            ->where(function ($q) {
+                $q->whereNull('published_at')
+                  ->orWhere('published_at', '<=', now());
+            });
+
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        if ($kategori !== '') {
+            $query->whereHas('category', function ($q) use ($kategori) {
+                $q->where('slug', $kategori);
+            });
+        }
+
+        $headline = null;
+        if ($search === '' && $kategori === '' && (int) $request->get('page', 1) === 1) {
+            $headlineQuery = clone $query;
+            $headline = $headlineQuery->whereNotNull('thumbnail')->where('thumbnail', '!=', '')->latest('created_at')->first();
+            if (!$headline) {
+                $headline = (clone $query)->latest('created_at')->first();
+            }
+            if ($headline) {
+                $query->where('id', '!=', $headline->id);
+            }
+        }
+
+        $news = $query->latest('created_at')->paginate(9)->withQueryString();
+        $categories = NewsCategory::withCount('news')->get();
+
+        $localNewsImages = [
+            'images/sch1.jpeg',
+            'images/sch2.jpeg',
+            'images/sch3.jpeg',
+            'images/sch5.jpg',
+        ];
+
+        return view('news.index', compact('news', 'headline', 'categories', 'search', 'kategori', 'localNewsImages'));
     }
 
     /**

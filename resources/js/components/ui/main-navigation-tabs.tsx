@@ -36,7 +36,7 @@ export const defaultHomeNavTabs: MainNavTabItem[] = [
   { title: "Beranda", href: "#beranda", sectionId: "beranda", icon: Home },
   { title: "Jenjang", href: "#jenjang", sectionId: "jenjang", icon: GraduationCap },
   { title: "Cabang", href: "#cabang", sectionId: "cabang", icon: Building2 },
-  { title: "Berita", href: "#berita", sectionId: "berita", icon: Newspaper },
+  { title: "Berita", href: "/berita", icon: Newspaper },
   { type: "separator" },
   { title: "PPDB Online", href: "/ppdb", icon: FileText },
 ];
@@ -82,6 +82,11 @@ export function MainNavigationTabs({
       return;
     }
 
+    if (window.location.pathname.startsWith("/berita")) {
+      setSelected(3);
+      return;
+    }
+
     if (window.location.hash) {
       const hash = window.location.hash;
       const foundIdx = tabs.findIndex(t => t.type !== "separator" && t.href === hash);
@@ -100,6 +105,8 @@ export function MainNavigationTabs({
       if (!isHomePage) {
         if (window.location.pathname.startsWith("/ppdb")) {
           setSelected(5);
+        } else if (window.location.pathname.startsWith("/berita")) {
+          setSelected(3);
         }
         return;
       }

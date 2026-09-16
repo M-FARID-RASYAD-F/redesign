@@ -161,7 +161,7 @@
     <div class="news-breadcrumb">
         <a href="{{ route('home') }}">Beranda</a>
         <span>&rsaquo;</span>
-        <a href="{{ route('home') }}#berita">Kabar Berita</a>
+        <a href="{{ route('berita.index') }}">Portal Berita</a>
         <span>&rsaquo;</span>
         <span>{{ Str::limit($news->title, 40) }}</span>
     </div>

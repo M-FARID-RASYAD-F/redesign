@@ -211,7 +211,7 @@ class SchoolController extends Controller
                 'wa_url' => 'https://wa.me/6281270001920?text=Halo%20Admin%20Kampus%20Pusat%20At-Tamam,%20saya%20ingin%20informasi%20pendaftaran',
                 'maps_url' => 'https://maps.google.com/?q=PKBM+Tahfizh+At-Tamam+Pekanbaru',
                 'desc' => 'Pusat pendidikan terpadu At-Tamam yang menaungi program Tahfizh Qur\'an intensif 30 juz, asrama santri modern putra/putri, serta kejuruan rekayasa perangkat lunak dengan fasilitas terlengkap.',
-                'image' => 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1200&auto=format&fit=crop',
+                'image' => asset('images/sch1.jpeg'),
                 'features' => [
                     'Asrama Santri Nyaman & Ber-AC',
                     'Masjid Jami\' At-Tamam 500 Jamaah',
@@ -234,7 +234,7 @@ class SchoolController extends Controller
                 'wa_url' => 'https://wa.me/6281270001921?text=Halo%20Admin%20Cabang%20Panam%20At-Tamam,%20saya%20ingin%20tanya%20program%20kejuruan%20dan%20tahfizh',
                 'maps_url' => 'https://maps.google.com/?q=HR+Soebrantas+Panam+Pekanbaru',
                 'desc' => 'Sentra kejuruan digital & multimedia At-Tamam yang dirancang khusus untuk mencetak developer muda, teknisi jaringan bersertifikasi Cisco/Mikrotik, serta talenta kreatif animasi.',
-                'image' => 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
+                'image' => asset('images/sch2.jpeg'),
                 'features' => [
                     'Smart Interactive Classrooms',
                     'Laboratorium Cyber Security & Jaringan',
@@ -257,7 +257,7 @@ class SchoolController extends Controller
                 'wa_url' => 'https://wa.me/6281270001922?text=Halo%20Admin%20Cabang%20Marpoyan%20At-Tamam,%20saya%20ingin%20konsultasi%20program%20tahfizh%20dan%20wirausaha',
                 'maps_url' => 'https://maps.google.com/?q=Marpoyan+Damai+Pekanbaru',
                 'desc' => 'Kampus asri bernuansa green campus yang menitikberatkan pada hafalan Al-Qur\'an bersanad mutqin, pembinaan adab santri, serta pelatihan kewirausahaan digital dan bisnis mandiri.',
-                'image' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
+                'image' => asset('images/sch3.jpeg'),
                 'features' => [
                     'Ruang Halaqah Al-Qur\'an Sejuk & Asri',
                     'Arena Olahraga Sunnah (Panahan)',
@@ -280,7 +280,7 @@ class SchoolController extends Controller
                 'wa_url' => 'https://wa.me/6281270001923?text=Halo%20Admin%20Cabang%20Rumbai%20At-Tamam,%20saya%20ingin%20informasi%20program%20bilingual%20dan%20paket%20belajar',
                 'maps_url' => 'https://maps.google.com/?q=Rumbai+Pekanbaru',
                 'desc' => 'Kampus percontohan pengembangan kompetensi dwibahasa (Arab & Inggris aktif) yang terintegrasi dengan pembelajaran sains terapan, kelas fleksibel kesetaraan Paket B/C, dan tahfizh akhir pekan.',
-                'image' => 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=1200&auto=format&fit=crop',
+                'image' => asset('images/sch5.jpg'),
                 'features' => [
                     'Laboratorium Bahasa Digital Interaktif',
                     'Pusat Belajar Paket Kesetaraan Fleksibel',

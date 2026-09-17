@@ -2499,10 +2499,11 @@ body.nav-mobile-open {
 }
 
 .pc-12__stat span {
-  font-size: 0.68rem;
-  color: var(--neu-text-role);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #7dd3fc;
   display: block;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .pc-12__prospek {
@@ -2512,21 +2513,23 @@ body.nav-mobile-open {
   box-shadow: inset 3px 3px 7px var(--neu-inset-dark), inset -3px -3px 7px var(--neu-inset-light);
   margin-bottom: 18px;
   text-align: left;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   line-height: 1.45;
 }
 
 .pc-12__prospek-label {
   display: block;
   font-weight: 700;
-  color: var(--neu-accent);
-  margin-bottom: 3px;
-  font-size: 0.72rem;
+  color: #00B4D8;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
 }
 
 .pc-12__prospek-val {
-  color: var(--neu-text-bio);
+  color: #e2e8f0;
   display: block;
+  font-size: 0.82rem;
+  line-height: 1.4;
 }
 
 .pc-12__cta {
@@ -4898,26 +4901,36 @@ body.nav-mobile-open {
     width: 100%;
   }
   .tab-nav-bar {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px !important;
     padding: 6px !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
     margin: 0 auto 0.75rem !important;
+    justify-content: flex-start !important;
+    scrollbar-width: none;
+  }
+  .tab-nav-bar::-webkit-scrollbar {
+    display: none;
   }
   .tab-btn {
-    width: 100% !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    scroll-snap-align: start;
+    white-space: nowrap !important;
     justify-content: center !important;
-    padding: 8px 10px !important;
-    font-size: 0.78rem !important;
+    padding: 10px 18px !important;
+    font-size: 0.82rem !important;
     box-sizing: border-box !important;
   }
   .tab-btn-label {
-    white-space: normal !important;
+    white-space: nowrap !important;
     text-align: center !important;
-    word-break: break-word !important;
   }
   .tab-content-box {
     padding: 1.15rem 0.85rem;

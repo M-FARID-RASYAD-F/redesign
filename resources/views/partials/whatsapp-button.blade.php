@@ -251,7 +251,7 @@
     </div>
 
     <!-- Tombol WhatsApp Mengambang (Pojok Kiri Bawah) -->
-    <a href="https://wa.me/6281200000000?text=Halo%20Admin%20PKBM%20Tahfizh%20At-Tamam,%20saya%20ingin%20konsultasi%20pendaftaran" 
+    <a href="{{ config('school.whatsapp_url', 'https://wa.me/6281270001920') }}?text=Halo%20Admin%20PKBM%20Tahfizh%20At-Tamam,%20saya%20ingin%20konsultasi%20pendaftaran" 
        target="_blank" 
        rel="noopener noreferrer" 
        class="floating-wa-btn" 

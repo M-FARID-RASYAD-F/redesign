@@ -58,7 +58,7 @@
             >
                 <div class="tab-image-container group">
                     <img
-                        src="{{ $tab['image'] ?? 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop' }}"
+                        src="{{ $tab['image'] ?? asset('images/sch1.jpeg') }}"
                         alt="{{ $tab['label'] ?? $tab['title'] ?? 'Fasilitas' }}"
                         class="tab-panel-img"
                         loading="lazy"

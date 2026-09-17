@@ -43,7 +43,8 @@
                         <div class="card-badge-container">
                             <span class="card-badge-blur theme-primary">
                                 <span class="badge-dot" aria-hidden="true"></span>
-                                ⭐ {{ $headlineCategory }}
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1" aria-hidden="true" style="display:inline-block; vertical-align:-1px; margin-right:3px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                {{ $headlineCategory }}
                             </span>
                         </div>
                     </div>
@@ -200,7 +201,9 @@
         @else
             {{-- State Kosong (Empty State) --}}
             <div class="news-empty-container">
-                <div class="empty-icon-wrap">📰</div>
+                <div class="empty-icon-wrap">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                </div>
                 <h3 class="empty-title">Tidak Ada Berita Ditemukan</h3>
                 <p class="empty-desc">
                     @if($search && $kategori)

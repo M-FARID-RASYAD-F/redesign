@@ -35,6 +35,26 @@
         width: 100% !important;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        box-shadow: inset -14px 0 12px -8px rgba(0, 0, 0, 0.45);
+    }
+
+    .ppdb-swipe-hint {
+        display: none;
+        padding: 9px 18px;
+        background: rgba(0, 180, 216, 0.08);
+        border-bottom: 1px solid var(--adm-table-border);
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #38bdf8;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    @media (max-width: 991px) {
+        .ppdb-swipe-hint {
+            display: flex;
+        }
     }
 
     .ppdb-table-card table {
@@ -200,6 +220,10 @@
 </div>
 
 <div class="card ppdb-table-card">
+    <div class="ppdb-swipe-hint" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Geser tabel ke kanan untuk melihat kolom aksi &rarr;</span>
+    </div>
     <div class="table-responsive">
         <table>
             <thead>

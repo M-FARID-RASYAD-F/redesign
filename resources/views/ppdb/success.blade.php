@@ -133,7 +133,7 @@
                 <li>Panitia PPDB akan memverifikasi data dan berkas yang Anda unggah dalam 1x24 jam kerja.</li>
                 <li>Simpan atau tangkap layar (*screenshot*) <strong>Nomor Pendaftaran</strong> Anda.</li>
                 <li>Anda dapat memantau status verifikasi dan hasil seleksi secara berkala pada menu <strong>Cek Status PPDB</strong>.</li>
-                <li>Jika terdapat kendala atau pertanyaan, silakan hubungi kontak panitia di <strong>(021) 555-0192</strong> atau WhatsApp <strong>0812-0000-0000</strong>.</li>
+                <li>Jika terdapat kendala atau pertanyaan, silakan hubungi kontak panitia di <strong>{{ config('school.phone', '(0761) 555-0192') }}</strong> atau WhatsApp <strong>{{ config('school.whatsapp_formatted', '0812-7000-1920') }}</strong>.</li>
             </ol>
         </div>
     </div>

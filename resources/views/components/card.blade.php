@@ -21,7 +21,7 @@
     @if($image)
         {{-- Area Gambar Berita dengan Flush Layout --}}
         <div class="card-image-wrap">
-            <img src="{{ asset($image) }}" alt="{{ $imageAlt ?? $title }}" class="card-image" loading="lazy">
+            <img src="{{ asset($image) }}" alt="{{ $imageAlt ?? $title }}" class="card-image" loading="lazy" onerror="this.onerror=null; this.src='{{ asset('images/sch1.jpeg') }}';">
             
             {{-- Gradasi Overlay Blur Warna Transisi ke Body (seperti gradasi pada hero head) --}}
             <div class="card-image-overlay" aria-hidden="true"></div>

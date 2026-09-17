@@ -62,6 +62,7 @@
                         alt="{{ $tab['label'] ?? $tab['title'] ?? 'Fasilitas' }}"
                         class="tab-panel-img"
                         loading="lazy"
+                        onerror="this.onerror=null; this.src='{{ asset('images/sch1.jpeg') }}';"
                     />
                     <div class="tab-image-overlay"></div>
                 </div>

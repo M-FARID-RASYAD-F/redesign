@@ -97,6 +97,36 @@
         margin-bottom: 1.4rem;
     }
 
+    .news-content h1, .news-content h2, .news-content h3, .news-content h4 {
+        color: #ffffff;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .news-content ul, .news-content ol {
+        margin-bottom: 1.4rem;
+        padding-left: 1.6rem;
+    }
+
+    .news-content li {
+        margin-bottom: 0.4rem;
+    }
+
+    .news-content blockquote {
+        border-left: 4px solid var(--primary, #00B4D8);
+        padding-left: 1rem;
+        margin: 1.2rem 0;
+        color: var(--text-muted, #cbd5e1);
+        font-style: italic;
+    }
+
+    .news-content a {
+        color: var(--primary, #00B4D8);
+        text-decoration: underline;
+    }
+
     .related-news-section {
         margin-top: 50px;
     }
@@ -163,7 +193,7 @@
         <span>&rsaquo;</span>
         <a href="{{ route('berita.index') }}">Portal Berita</a>
         <span>&rsaquo;</span>
-        <span>{{ Str::limit($news->title, 40) }}</span>
+        <span title="{{ $news->title }}">{{ Str::limit($news->title, 40) }}</span>
     </div>
 
     <!-- Header Artikel -->
@@ -184,7 +214,11 @@
 
     <!-- Isi Konten Artikel -->
     <article class="news-content">
-        {!! nl2br(e($news->content)) !!}
+        @if(strip_tags($news->content) !== $news->content)
+            {!! strip_tags($news->content, '<p><br><b><strong><i><em><u><s><h1><h2><h3><h4><h5><h6><blockquote><ul><ol><li><a><hr><span><div>') !!}
+        @else
+            {!! nl2br(e($news->content)) !!}
+        @endif
     </article>
 
     <!-- Artikel Terkait -->

@@ -1216,7 +1216,7 @@ body.nav-mobile-open {
    ═══════════════════════════════════════════════════════════ */
 .hero {
   /* Foto kampus full-bleed */
-  background-image: url('/images/sch5.jpg');
+  background-image: url('../images/sch5.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;

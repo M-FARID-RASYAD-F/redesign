@@ -58,9 +58,16 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:news_categories,id',
             'content' => 'required|string',
-            'thumbnail' => 'nullable|string', // Simple url/path string
+            'thumbnail' => 'nullable|string|max:1000',
+            'thumbnail_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
             'published_at' => 'nullable|date',
         ]);
+
+        if ($request->hasFile('thumbnail_file')) {
+            $path = $request->file('thumbnail_file')->store('news', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        }
+        unset($validated['thumbnail_file']);
 
         $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
         $validated['author_id'] = Auth::id();
@@ -87,9 +94,29 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:news_categories,id',
             'content' => 'required|string',
-            'thumbnail' => 'nullable|string',
+            'thumbnail' => 'nullable|string|max:1000',
+            'thumbnail_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
+            'remove_thumbnail' => 'nullable|boolean',
             'published_at' => 'nullable|date',
         ]);
+
+        if ($request->hasFile('thumbnail_file')) {
+            if (!empty($news->thumbnail) && Str::startsWith($news->thumbnail, 'storage/news/')) {
+                $oldFile = Str::after($news->thumbnail, 'storage/');
+                Storage::disk('public')->delete($oldFile);
+            }
+            $path = $request->file('thumbnail_file')->store('news', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        } elseif ($request->boolean('remove_thumbnail')) {
+            if (!empty($news->thumbnail) && Str::startsWith($news->thumbnail, 'storage/news/')) {
+                $oldFile = Str::after($news->thumbnail, 'storage/');
+                Storage::disk('public')->delete($oldFile);
+            }
+            $validated['thumbnail'] = null;
+        } elseif (!array_key_exists('thumbnail', $validated) || ($validated['thumbnail'] === null && !$request->has('thumbnail'))) {
+            $validated['thumbnail'] = $news->thumbnail;
+        }
+        unset($validated['thumbnail_file'], $validated['remove_thumbnail']);
 
         if ($news->title !== $validated['title']) {
             $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
@@ -106,6 +133,10 @@ class AdminController extends Controller
     {
         $news = News::findOrFail($id);
         $title = $news->title;
+        if (!empty($news->thumbnail) && Str::startsWith($news->thumbnail, 'storage/news/')) {
+            $oldFile = Str::after($news->thumbnail, 'storage/');
+            Storage::disk('public')->delete($oldFile);
+        }
         $news->delete();
 
         $this->logActivity('berita', 'delete', "Menghapus berita: '{$title}'");

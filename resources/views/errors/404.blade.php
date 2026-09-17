@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>403 - Akses Ditolak | PKBM Tahfizh At-Tamam</title>
+    <title>404 - Halaman Tidak Ditemukan | PKBM Tahfizh At-Tamam</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,9 +38,9 @@
             --primary: #00B4D8;
             --primary-hover: #38bdf8;
             --primary-text: #001529;
-            --danger: #f87171;
-            --danger-bg: rgba(239, 68, 68, 0.15);
-            --danger-border: rgba(239, 68, 68, 0.35);
+            --warning: #fbbf24;
+            --warning-bg: rgba(245, 158, 11, 0.15);
+            --warning-border: rgba(245, 158, 11, 0.35);
             --btn-outline-border: rgba(255, 255, 255, 0.2);
             --btn-outline-text: #f1f5f9;
             --btn-outline-hover: rgba(255, 255, 255, 0.08);
@@ -58,9 +58,9 @@
             --primary: #0284c7;
             --primary-hover: #0369a1;
             --primary-text: #ffffff;
-            --danger: #dc2626;
-            --danger-bg: #fee2e2;
-            --danger-border: #fca5a5;
+            --warning: #d97706;
+            --warning-bg: #fef3c7;
+            --warning-border: #fde68a;
             --btn-outline-border: #cbd5e1;
             --btn-outline-text: #334155;
             --btn-outline-hover: #f1f5f9;
@@ -144,17 +144,13 @@
             align-items: center;
             gap: 6px;
             padding: 6px 14px;
-            background: var(--danger-bg);
-            border: 1px solid var(--danger-border);
-            color: var(--danger);
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            color: var(--warning);
             border-radius: 999px;
             font-size: 0.82rem;
             font-weight: 700;
             margin-bottom: 18px;
-        }
-
-        .status-badge svg {
-            flex-shrink: 0;
         }
 
         .error-code {
@@ -223,16 +219,6 @@
             border-color: var(--primary-hover);
         }
 
-        .btn-secondary {
-            background: rgba(0, 180, 216, 0.15);
-            color: var(--primary);
-            border-color: rgba(0, 180, 216, 0.35);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 180, 216, 0.25);
-        }
-
         .btn-outline {
             background: transparent;
             color: var(--btn-outline-text);
@@ -260,8 +246,7 @@
                 flex-direction: column;
                 width: 100%;
             }
-            .actions-group .btn,
-            .actions-group form {
+            .actions-group .btn {
                 width: 100%;
             }
         }
@@ -284,19 +269,20 @@
             <span class="status-badge">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
                 </svg>
-                HTTP 403 Forbidden
+                HTTP 404 Not Found
             </span>
         </div>
 
-        <div class="error-code">403</div>
-        <h1 class="error-title">Akses Ditolak!</h1>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Halaman Tidak Ditemukan</h1>
         <p class="error-message">
-            {{ $exception->getMessage() ?: 'Anda tidak diizinkan mengakses halaman ini. Periksa kembali peran akun Anda atau hubungi Administrator jika ini merupakan kesalahan.' }}
+            Mohon maaf, halaman yang Anda tuju tidak ditemukan, telah dipindahkan, atau tautan yang Anda gunakan sudah tidak aktif.
         </p>
 
-        <!-- Tombol Aksi Terintegrasi -->
+        <!-- Tombol Aksi -->
         <div class="actions-group">
             <a href="{{ route('home') }}" class="btn btn-primary">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -306,38 +292,12 @@
                 Kembali ke Beranda
             </a>
 
-            @auth
-                @if(Auth::user()->role === 'super_admin')
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Dashboard Admin</a>
-                @elseif(Auth::user()->role === 'admin_cms')
-                    <a href="{{ route('admin.cms.dashboard') }}" class="btn btn-secondary">Dashboard CMS</a>
-                @elseif(Auth::user()->role === 'admin_ppdb')
-                    <a href="{{ route('admin.ppdb.dashboard') }}" class="btn btn-secondary">Dashboard PPDB</a>
-                @elseif(Auth::user()->role === 'editor_akademik')
-                    <a href="{{ route('admin.akademik.dashboard') }}" class="btn btn-secondary">Dashboard Akademik</a>
-                @endif
-
-                <form method="POST" action="{{ route('logout') }}" style="display: inline-block;">
-                    @csrf
-                    <button type="submit" class="btn btn-outline">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        Logout
-                    </button>
-                </form>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-secondary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                        <polyline points="10 17 15 12 10 7"></polyline>
-                        <line x1="15" y1="12" x2="3" y2="12"></line>
-                    </svg>
-                    Halaman Login
-                </a>
-            @endauth
+            <a href="{{ route('berita.index') }}" class="btn btn-outline">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                </svg>
+                Portal Berita
+            </a>
         </div>
     </div>
 

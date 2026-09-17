@@ -8,20 +8,28 @@
 (function () {
     'use strict';
 
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
     function initReveal() {
         const elements = document.querySelectorAll('.reveal');
         if (!elements.length) return;
 
-        // Mobile screens: Langsung tampilkan semua komponen tanpa delay/fade
-        // agar komponen tidak hilang saat di-scroll pada layar kecil
-        const isMobile = window.innerWidth <= 768;
-        if (isMobile) {
+        // Khusus tampilan HP / Layar Mobile: Langsung tampilkan semua komponen
+        // agar tidak hilang saat di-scroll pada layar kecil
+        if (isMobile()) {
             elements.forEach((el) => {
                 el.classList.remove('reveal-reverse');
                 el.classList.add('visible');
             });
             return;
         }
+
+        // ══════════════════════════════════════════════════════════
+        // KHUSUS TAMPILAN PC (DESKTOP > 768px):
+        // 100% Bidirectional Cubic-Bezier Engine Asli (Sebelum Prompt Terakhir)
+        // ══════════════════════════════════════════════════════════
 
         // 1. Prioritas Utama: Integrasi GSAP ScrollTrigger (Sempurna dengan ScrollSmoother)
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -30,18 +38,29 @@
             elements.forEach((el) => {
                 ScrollTrigger.create({
                     trigger: el,
-                    start: 'top 90%',
-                    // Masuk saat scroll ke bawah — sekali terlihat, tetap terlihat
+                    start: 'top 88%',
+                    end: 'bottom 12%',
+                    // Masuk saat scroll ke bawah
                     onEnter: () => {
                         el.classList.remove('reveal-reverse');
                         void el.offsetWidth;
                         el.classList.add('visible');
                     },
-                    // Masuk kembali saat scroll ke atas
+                    // Keluar saat scroll ke bawah (lewat atas)
+                    onLeave: () => {
+                        el.classList.remove('visible');
+                        el.classList.add('reveal-reverse');
+                    },
+                    // Masuk kembali saat scroll ke atas (REVERSE)
                     onEnterBack: () => {
-                        el.classList.remove('reveal-reverse');
+                        el.classList.add('reveal-reverse');
                         void el.offsetWidth;
                         el.classList.add('visible');
+                    },
+                    // Keluar saat scroll ke atas (lewat bawah)
+                    onLeaveBack: () => {
+                        el.classList.remove('visible');
+                        el.classList.remove('reveal-reverse');
                     },
                 });
             });
@@ -53,18 +72,40 @@
 
         // 2. Fallback: IntersectionObserver jika GSAP tidak tersedia
         if ('IntersectionObserver' in window) {
+            let lastY = window.pageYOffset || document.documentElement.scrollTop;
+            let currentDir = 'down';
+
+            window.addEventListener('scroll', () => {
+                const y = window.pageYOffset || document.documentElement.scrollTop;
+                if (Math.abs(y - lastY) > 2) {
+                    currentDir = y > lastY ? 'down' : 'up';
+                    lastY = y <= 0 ? 0 : y;
+                }
+            }, { passive: true });
+
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     const el = entry.target;
                     if (entry.isIntersecting) {
-                        el.classList.remove('reveal-reverse');
+                        if (currentDir === 'up') {
+                            el.classList.add('reveal-reverse');
+                        } else {
+                            el.classList.remove('reveal-reverse');
+                        }
+                        void el.offsetWidth;
                         el.classList.add('visible');
-                        obs.unobserve(el); // Sekali tampil, pertahankan tetap terlihat
+                    } else {
+                        el.classList.remove('visible');
+                        if (entry.boundingClientRect.top < 0) {
+                            el.classList.add('reveal-reverse');
+                        } else {
+                            el.classList.remove('reveal-reverse');
+                        }
                     }
                 });
             }, {
-                threshold: 0.05,
-                rootMargin: '0px 0px 40px 0px'
+                threshold: 0.08,
+                rootMargin: '0px 0px -20px 0px'
             });
 
             elements.forEach((el) => obs.observe(el));
@@ -77,25 +118,16 @@
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            initReveal();
-            setTimeout(initReveal, 80);
+            setTimeout(initReveal, 60);
         });
     } else {
-        initReveal();
-        setTimeout(initReveal, 80);
+        setTimeout(initReveal, 60);
     }
 
-    window.addEventListener('load', () => {
-        initReveal();
-        if (typeof ScrollTrigger !== 'undefined') {
-            ScrollTrigger.refresh();
-        }
-    });
-
-    // Re-check saat resize window (misal rotasi smartphone atau DevTools toggle)
+    // Re-check saat resize window (misal rotasi smartphone atau DevTools toggle ke HP)
     window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-            document.querySelectorAll('.reveal').forEach(el => {
+        if (isMobile()) {
+            document.querySelectorAll('.reveal').forEach((el) => {
                 el.classList.remove('reveal-reverse');
                 el.classList.add('visible');
             });

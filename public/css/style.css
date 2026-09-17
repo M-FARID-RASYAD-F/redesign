@@ -147,18 +147,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-    transition: none !important;
-  }
-  .reveal.reveal-reverse {
-    transform: none !important;
-  }
-}
-
 /* ═══════════════════════════════════════════════════════════
    SAME-PAGE NAVIGATION TRANSITION (Unified Component Effect)
    Uses the signature cubic-bezier deceleration, blur-in, and lift

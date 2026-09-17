@@ -59,5 +59,11 @@ class MobileVisibilityTest extends TestCase
         // JS scroll-reveal harus langsung menampilkan elemen pada layar mobile (<= 768px)
         $this->assertStringContainsString('window.innerWidth <= 768', $js);
         $this->assertStringContainsString("el.classList.add('visible')", $js);
+
+        // JS scroll-reveal harus mempertahankan Bidirectional Engine asli untuk tampilan PC / Desktop
+        $this->assertStringContainsString("KHUSUS TAMPILAN PC (DESKTOP > 768px)", $js);
+        $this->assertStringContainsString("onLeaveBack:", $js);
+        $this->assertStringContainsString("start: 'top 88%'", $js);
+        $this->assertStringContainsString("end: 'bottom 12%'", $js);
     }
 }

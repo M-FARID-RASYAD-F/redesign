@@ -16,13 +16,93 @@
         const elements = document.querySelectorAll('.reveal');
         if (!elements.length) return;
 
-        // Khusus tampilan HP / Layar Mobile: Langsung tampilkan semua komponen
-        // agar tidak hilang saat di-scroll pada layar kecil
+        // ══════════════════════════════════════════════════════════
+        // KHUSUS TAMPILAN HP (MOBILE <= 768px):
+        // Bidirectional Cubic-Bezier Engine untuk Layar HP
+        // ══════════════════════════════════════════════════════════
         if (isMobile()) {
-            elements.forEach((el) => {
-                el.classList.remove('reveal-reverse');
-                el.classList.add('visible');
-            });
+            // 1. Prioritas Utama di Mobile: GSAP ScrollTrigger
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                elements.forEach((el) => {
+                    ScrollTrigger.create({
+                        trigger: el,
+                        start: 'top 92%',
+                        end: 'bottom top',
+                        // Masuk saat scroll ke bawah — transisi cubic-bezier
+                        onEnter: () => {
+                            el.classList.remove('reveal-reverse');
+                            void el.offsetWidth;
+                            el.classList.add('visible');
+                        },
+                        // Keluar saat benar-benar lewat atas layar
+                        onLeave: () => {
+                            el.classList.remove('visible');
+                            el.classList.add('reveal-reverse');
+                        },
+                        // Masuk kembali saat scroll ke atas (REVERSE)
+                        onEnterBack: () => {
+                            el.classList.add('reveal-reverse');
+                            void el.offsetWidth;
+                            el.classList.add('visible');
+                        },
+                        // Keluar saat benar-benar lewat bawah layar
+                        onLeaveBack: () => {
+                            el.classList.remove('visible');
+                            el.classList.remove('reveal-reverse');
+                        },
+                    });
+                });
+
+                ScrollTrigger.refresh();
+                return;
+            }
+
+            // 2. Fallback di Mobile: IntersectionObserver
+            if ('IntersectionObserver' in window) {
+                let lastY = window.pageYOffset || document.documentElement.scrollTop;
+                let currentDir = 'down';
+
+                window.addEventListener('scroll', () => {
+                    const y = window.pageYOffset || document.documentElement.scrollTop;
+                    if (Math.abs(y - lastY) > 2) {
+                        currentDir = y > lastY ? 'down' : 'up';
+                        lastY = y <= 0 ? 0 : y;
+                    }
+                }, { passive: true });
+
+                const mobileObs = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        const el = entry.target;
+                        if (entry.isIntersecting) {
+                            if (currentDir === 'up') {
+                                el.classList.add('reveal-reverse');
+                            } else {
+                                el.classList.remove('reveal-reverse');
+                            }
+                            void el.offsetWidth;
+                            el.classList.add('visible');
+                        } else {
+                            el.classList.remove('visible');
+                            if (entry.boundingClientRect.top < 0) {
+                                el.classList.add('reveal-reverse');
+                            } else {
+                                el.classList.remove('reveal-reverse');
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -20px 0px'
+                });
+
+                elements.forEach((el) => mobileObs.observe(el));
+                return;
+            }
+
+            // 3. Fallback browser lawas: Langsung tampilkan
+            elements.forEach((el) => el.classList.add('visible'));
             return;
         }
 
@@ -125,13 +205,20 @@
     }
 
     // Re-check saat resize window (misal rotasi smartphone atau DevTools toggle ke HP)
+    let resizeTimer = null;
+    let lastMode = isMobile();
+
     window.addEventListener('resize', () => {
-        if (isMobile()) {
-            document.querySelectorAll('.reveal').forEach((el) => {
-                el.classList.remove('reveal-reverse');
-                el.classList.add('visible');
-            });
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const currentMode = isMobile();
+            if (currentMode !== lastMode) {
+                lastMode = currentMode;
+                initReveal();
+            } else if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
+        }, 120);
     });
 
     window.refreshScrollReveal = initReveal;

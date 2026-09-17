@@ -134,16 +134,23 @@
   transform: translateY(0);
 }
 
-/* Fallback Garansi Komponen Selalu Muncul di Mode HP / Smartphone */
+/* Animasi Cubic-Bezier Scroll Reveal khusus tampilan HP / Layar Mobile */
 @media (max-width: 768px) {
   .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-    transition: none !important;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
   }
+
   .reveal.reveal-reverse {
-    transform: none !important;
+    transform: translateY(-26px);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

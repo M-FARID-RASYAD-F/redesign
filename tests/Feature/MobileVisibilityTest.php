@@ -47,18 +47,19 @@ class MobileVisibilityTest extends TestCase
         $css = file_get_contents(public_path('css/style.css'));
         $js = file_get_contents(public_path('js/scroll-reveal.js'));
 
-        // CSS harus memastikan .reveal selalu tampak (opacity: 1 !important) pada mobile
+        // CSS harus memastikan transisi cubic-bezier aktif pada mobile
         $this->assertStringContainsString('@media (max-width: 768px)', $css);
         $this->assertStringContainsString('.reveal {', $css);
-        $this->assertStringContainsString('opacity: 1 !important', $css);
+        $this->assertStringContainsString('cubic-bezier(0.16, 1, 0.3, 1)', $css);
 
         // CSS harus memastikan .mobile-bottom-dock tampil di mobile
         $this->assertStringContainsString('.mobile-bottom-dock {', $css);
         $this->assertStringContainsString('display: block !important', $css);
 
-        // JS scroll-reveal harus langsung menampilkan elemen pada layar mobile (<= 768px)
-        $this->assertStringContainsString('window.innerWidth <= 768', $js);
-        $this->assertStringContainsString("el.classList.add('visible')", $js);
+        // JS scroll-reveal harus menjalankan Bidirectional Cubic-Bezier Engine pada mobile
+        $this->assertStringContainsString('KHUSUS TAMPILAN HP (MOBILE <= 768px)', $js);
+        $this->assertStringContainsString("start: 'top 92%'", $js);
+        $this->assertStringContainsString("end: 'bottom top'", $js);
 
         // JS scroll-reveal harus mempertahankan Bidirectional Engine asli untuk tampilan PC / Desktop
         $this->assertStringContainsString("KHUSUS TAMPILAN PC (DESKTOP > 768px)", $js);

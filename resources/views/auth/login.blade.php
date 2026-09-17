@@ -281,12 +281,67 @@
             text-align: center;
         }
 
+        /* Form Field Group & Visible Semantic Label (WCAG 3.3.2) */
+        .form-field-group {
+            max-width: 380px;
+            width: 100%;
+            margin: 4px 0 6px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .field-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--social-text);
+            margin-bottom: 4px;
+            padding-left: 14px;
+            letter-spacing: 0.02em;
+        }
+
+        /* Assistance Notice pengganti Social Login Palsu */
+        .auth-help-notice {
+            margin-top: 1rem;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: rgba(0, 180, 216, 0.08);
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--social-text);
+            max-width: 380px;
+            width: 100%;
+            line-height: 1.5;
+        }
+
+        [data-theme="light"] .auth-help-notice {
+            background: oklch(58.6% 0.253 17.585 / 0.1);
+            border-color: oklch(58.6% 0.253 17.585 / 0.25);
+            color: #ffe4e6;
+        }
+
+        .auth-help-notice a {
+            color: var(--badge-text);
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 4px;
+            transition: color 0.2s;
+        }
+
+        .auth-help-notice a:hover {
+            color: #ffffff;
+        }
+
         /* Input Fields */
         .input-field {
             max-width: 380px;
             width: 100%;
             background-color: var(--input-bg);
-            margin: 8px 0;
+            margin: 0;
             height: 52px;
             border-radius: 55px;
             display: grid;
@@ -867,10 +922,15 @@
                 line-height: 1.45;
             }
 
+            .form-field-group {
+                max-width: 360px;
+                margin: 3px 0 5px;
+            }
+
             .input-field {
                 max-width: 360px;
                 height: 48px;
-                margin: 6px 0;
+                margin: 0;
                 grid-template-columns: 44px 1fr 40px;
                 padding: 0 0.6rem 0 0.3rem;
             }
@@ -881,7 +941,7 @@
             }
 
             .input-field input {
-                font-size: 0.9rem;
+                font-size: 16px !important; /* Anti iOS Safari auto-zoom */
             }
 
             .brand-badge {
@@ -933,7 +993,11 @@
 
             .container {
                 border-radius: 22px;
-                min-height: 830px;
+                min-height: 680px;
+            }
+
+            .container.sign-up-mode {
+                min-height: 750px;
             }
 
             form {
@@ -949,10 +1013,21 @@
                 margin-bottom: 0.6rem;
             }
 
+            .form-field-group {
+                max-width: 100%;
+                margin: 2px 0 4px;
+            }
+
+            .field-label {
+                font-size: 0.78rem;
+                padding-left: 10px;
+                margin-bottom: 2px;
+            }
+
             .input-field {
                 max-width: 100%;
                 height: 46px;
-                margin: 5px 0;
+                margin: 0;
                 grid-template-columns: 40px 1fr 38px;
             }
 
@@ -961,7 +1036,7 @@
             }
 
             .input-field input {
-                font-size: 0.86rem;
+                font-size: 16px !important; /* Anti iOS Safari auto-zoom */
             }
 
             .top-action-bar {
@@ -2125,35 +2200,45 @@
                     @endif
 
                     {{-- Email Field --}}
-                    <div class="input-field no-toggle">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </i>
-                        <input type="email" name="email" id="login_email" value="{{ old('form_type') === 'register' ? '' : old('email') }}" placeholder="Email" required autofocus autocomplete="email" spellcheck="false" />
+                    <div class="form-field-group">
+                        <label for="login_email" class="field-label">
+                            <span>Alamat Email</span>
+                        </label>
+                        <div class="input-field no-toggle">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </i>
+                            <input type="email" name="email" id="login_email" value="{{ old('form_type') === 'register' ? '' : old('email') }}" placeholder="nama@email.com" required autofocus autocomplete="email" spellcheck="false" />
+                        </div>
                     </div>
 
                     {{-- Password Field --}}
-                    <div class="input-field">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </i>
-                        <input type="password" name="password" id="login_password" placeholder="Password" required autocomplete="current-password" />
-                        <button type="button" class="btn-field-toggle" data-toggle-password="login_password" aria-label="Tampilkan kata sandi">
-                            <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                            </svg>
-                        </button>
+                    <div class="form-field-group">
+                        <label for="login_password" class="field-label">
+                            <span>Kata Sandi</span>
+                        </label>
+                        <div class="input-field">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </i>
+                            <input type="password" name="password" id="login_password" placeholder="Masukkan kata sandi" required autocomplete="current-password" />
+                            <button type="button" class="btn-field-toggle" data-toggle-password="login_password" aria-label="Tampilkan kata sandi">
+                                <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-meta-row">
@@ -2169,37 +2254,10 @@
                         Belum punya akun? <a href="javascript:void(0)" data-switch-action="signup">Daftar sekarang</a>
                     </div>
 
-                    <p class="social-text">Or sign in with social platforms</p>
-
-                    {{-- Social Icons --}}
-                    <div class="social-media">
-                        {{-- Google --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Google" aria-label="Google">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-                            </svg>
-                        </a>
-                        {{-- Facebook --}}
-                        <a href="https://www.facebook.com/groups/309658054507585" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" fill="#1877F2">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                            </svg>
-                        </a>
-                        {{-- Twitter (X) --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Twitter" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="#1DA1F2">
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
-                        {{-- LinkedIn --}}
-                        <a href="javascript:void(0)" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="#0A66C2">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
+                    {{-- Helpdesk Notice (Pengganti dead social links) --}}
+                    <div class="auth-help-notice">
+                        <span>Kendala akun atau pendaftaran staf?</span><br>
+                        <span>Hubungi <a href="https://wa.me/6281270001920?text=Halo%20Admin%20At-Tamam,%20saya%20butuh%20bantuan%20akses%20akun%20portal" target="_blank" rel="noopener noreferrer">WhatsApp Helpdesk</a></span>
                     </div>
                 </form>
 
@@ -2226,66 +2284,86 @@
                     @endif
 
                     {{-- Username / Name Field --}}
-                    <div class="input-field no-toggle">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                        </i>
-                        <input type="text" name="name" value="{{ old('form_type') === 'register' ? old('name') : '' }}" placeholder="Username / Nama Lengkap" required autocomplete="name" />
+                    <div class="form-field-group">
+                        <label for="reg_name" class="field-label">
+                            <span>Nama Lengkap / Username</span>
+                        </label>
+                        <div class="input-field no-toggle">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </i>
+                            <input type="text" name="name" id="reg_name" value="{{ old('form_type') === 'register' ? old('name') : '' }}" placeholder="Masukkan nama lengkap" required autocomplete="name" />
+                        </div>
                     </div>
 
                     {{-- Email Field --}}
-                    <div class="input-field no-toggle">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </i>
-                        <input type="email" name="email" id="reg_email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="Email" required autocomplete="email" spellcheck="false" />
+                    <div class="form-field-group">
+                        <label for="reg_email" class="field-label">
+                            <span>Alamat Email</span>
+                        </label>
+                        <div class="input-field no-toggle">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </i>
+                            <input type="email" name="email" id="reg_email" value="{{ old('form_type') === 'register' ? old('email') : '' }}" placeholder="nama@email.com" required autocomplete="email" spellcheck="false" />
+                        </div>
                     </div>
 
                     {{-- Password Field --}}
-                    <div class="input-field">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </i>
-                        <input type="password" name="password" id="reg_password" placeholder="Password" required autocomplete="new-password" />
-                        <button type="button" class="btn-field-toggle" data-toggle-password="reg_password" aria-label="Tampilkan kata sandi">
-                            <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                            </svg>
-                        </button>
+                    <div class="form-field-group">
+                        <label for="reg_password" class="field-label">
+                            <span>Kata Sandi</span>
+                        </label>
+                        <div class="input-field">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </i>
+                            <input type="password" name="password" id="reg_password" placeholder="Minimal 8 karakter" required autocomplete="new-password" />
+                            <button type="button" class="btn-field-toggle" data-toggle-password="reg_password" aria-label="Tampilkan kata sandi">
+                                <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     {{-- Password Confirmation Field --}}
-                    <div class="input-field">
-                        <i>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            </svg>
-                        </i>
-                        <input type="password" name="password_confirmation" id="reg_password_confirmation" placeholder="Ulangi Password" required autocomplete="new-password" />
-                        <button type="button" class="btn-field-toggle" data-toggle-password="reg_password_confirmation" aria-label="Tampilkan kata sandi">
-                            <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                            </svg>
-                        </button>
+                    <div class="form-field-group">
+                        <label for="reg_password_confirmation" class="field-label">
+                            <span>Konfirmasi Kata Sandi</span>
+                        </label>
+                        <div class="input-field">
+                            <i>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </i>
+                            <input type="password" name="password_confirmation" id="reg_password_confirmation" placeholder="Ulangi kata sandi" required autocomplete="new-password" />
+                            <button type="button" class="btn-field-toggle" data-toggle-password="reg_password_confirmation" aria-label="Tampilkan kata sandi">
+                                <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <input type="submit" value="Sign up" class="btn" />
@@ -2294,37 +2372,10 @@
                         Sudah punya akun? <a href="javascript:void(0)" data-switch-action="signin">Masuk sekarang</a>
                     </div>
 
-                    <p class="social-text">Or sign up with social platforms</p>
-
-                    {{-- Social Icons --}}
-                    <div class="social-media">
-                        {{-- Google --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Google" aria-label="Google">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-                            </svg>
-                        </a>
-                        {{-- Facebook --}}
-                        <a href="https://www.facebook.com/groups/309658054507585" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" fill="#1877F2">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                            </svg>
-                        </a>
-                        {{-- Twitter (X) --}}
-                        <a href="javascript:void(0)" class="social-icon" title="Twitter" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="#1DA1F2">
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
-                        {{-- LinkedIn --}}
-                        <a href="javascript:void(0)" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="#0A66C2">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
+                    {{-- Helpdesk Notice (Pengganti dead social links) --}}
+                    <div class="auth-help-notice">
+                        <span>Pendaftaran akun khusus tenaga pendidik & staf resmi.</span><br>
+                        <span>Pertanyaan pendaftaran? <a href="https://wa.me/6281270001920?text=Halo%20Admin%20At-Tamam,%20saya%20ingin%20verifikasi%20akun%20staf%20baru" target="_blank" rel="noopener noreferrer">Hubungi Admin PKBM</a></span>
                     </div>
                 </form>
 

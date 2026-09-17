@@ -184,6 +184,51 @@
             font-size: 1.5rem;
         }
     }
+
+    /* Light Theme Engine Overrides (Anti Card Clash) */
+    [data-theme="light"] .news-header-card,
+    [data-theme="light"] .news-content,
+    [data-theme="light"] .related-card {
+        background: oklch(27.1% 0.105 12.094 / 0.94);
+        border-color: oklch(58.6% 0.253 17.585 / 0.35);
+        box-shadow: 0 16px 45px -5px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="light"] .news-badge {
+        background: oklch(58.6% 0.253 17.585 / 0.2);
+        color: oklch(75% 0.18 18);
+        border-color: oklch(58.6% 0.253 17.585 / 0.45);
+    }
+
+    [data-theme="light"] .news-breadcrumb a {
+        color: oklch(75% 0.18 18);
+    }
+
+    [data-theme="light"] .news-breadcrumb span {
+        color: #fecdd3;
+    }
+
+    [data-theme="light"] .news-meta {
+        border-top-color: oklch(58.6% 0.253 17.585 / 0.25);
+        color: #fecdd3;
+    }
+
+    [data-theme="light"] .news-thumbnail {
+        border-color: oklch(58.6% 0.253 17.585 / 0.35);
+    }
+
+    [data-theme="light"] .related-card:hover {
+        border-color: oklch(58.6% 0.253 17.585);
+        background: oklch(33% 0.125 13 / 0.98);
+    }
+
+    [data-theme="light"] .related-card p {
+        color: #fecdd3 !important;
+    }
+
+    [data-theme="light"] .related-card span {
+        color: #fda4af;
+    }
 </style>
 
 <div class="news-detail-wrapper">

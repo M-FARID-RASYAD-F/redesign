@@ -523,6 +523,34 @@
         border-radius: 14px;
     }
 }
+
+/* Feedback Validasi Form PPDB Client-Side */
+.ppdb-form-input.is-invalid,
+.ppdb-form-select.is-invalid,
+.ppdb-form-textarea.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.4) !important;
+    background-color: rgba(239, 68, 68, 0.08) !important;
+}
+.jenjang-selector-grid.has-error {
+    outline: 2px dashed #ef4444;
+    outline-offset: 4px;
+    border-radius: 16px;
+    padding: 4px;
+}
+.ppdb-field-error-msg {
+    color: #f87171;
+    font-size: 0.82rem;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+.ppdb-field-error-msg::before {
+    content: "⚠️";
+    font-size: 0.85rem;
+}
 </style>
 @endpush
 
@@ -1183,8 +1211,143 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     window.handleJenjangChange = handleJenjangChange;
 
-    // Fungsi global untuk navigasi tombol
+    // ── Validasi Form Client-Side per Slide ──
+    function clearFieldErrors(container) {
+        if (!container) return;
+        container.querySelectorAll('.ppdb-field-error-msg').forEach(el => el.remove());
+        container.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        container.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+    }
+
+    function validateStep(step) {
+        const slide = document.getElementById('slide-' + step);
+        if (!slide) return true;
+
+        clearFieldErrors(slide);
+        let isValid = true;
+        let firstInvalid = null;
+
+        function markInvalid(input, message) {
+            isValid = false;
+            input.classList.add('is-invalid');
+            const parent = input.closest('.form-group') || input.parentElement;
+            if (parent && !parent.querySelector('.ppdb-field-error-msg')) {
+                const msgEl = document.createElement('span');
+                msgEl.className = 'ppdb-field-error-msg';
+                msgEl.textContent = message;
+                parent.appendChild(msgEl);
+            }
+            if (!firstInvalid) firstInvalid = input;
+        }
+
+        if (step === 1) {
+            // 1. Jenjang
+            const jenjangChecked = slide.querySelector('input[name="jenjang"]:checked');
+            if (!jenjangChecked) {
+                isValid = false;
+                const grid = slide.querySelector('.jenjang-selector-grid');
+                if (grid) {
+                    grid.classList.add('has-error');
+                    const parent = grid.parentElement;
+                    if (parent && !parent.querySelector('.ppdb-field-error-msg')) {
+                        const msgEl = document.createElement('span');
+                        msgEl.className = 'ppdb-field-error-msg';
+                        msgEl.textContent = 'Silakan pilih salah satu jenjang pendidikan (SD, SMP, atau SMK).';
+                        parent.appendChild(msgEl);
+                    }
+                    if (!firstInvalid) firstInvalid = grid;
+                }
+            }
+            // 2. Full Name
+            const fullName = document.getElementById('full_name');
+            if (fullName && !fullName.value.trim()) {
+                markInvalid(fullName, 'Nama lengkap calon siswa wajib diisi.');
+            }
+            // 3. Gender
+            const gender = document.getElementById('gender');
+            if (gender && !gender.value) {
+                markInvalid(gender, 'Silakan pilih jenis kelamin.');
+            }
+            // 4. Birth Date
+            const birthDate = document.getElementById('birth_date');
+            if (birthDate && !birthDate.value) {
+                markInvalid(birthDate, 'Tanggal lahir calon siswa wajib diisi.');
+            }
+            // 5. Address
+            const address = document.getElementById('address');
+            if (address && !address.value.trim()) {
+                markInvalid(address, 'Alamat domisili lengkap wajib diisi.');
+            }
+        } else if (step === 2) {
+            // 1. Parent Name
+            const parentName = document.getElementById('parent_name');
+            if (parentName && !parentName.value.trim()) {
+                markInvalid(parentName, 'Nama lengkap orang tua / wali wajib diisi.');
+            }
+            // 2. Parent Phone
+            const parentPhone = document.getElementById('parent_phone');
+            if (parentPhone) {
+                const val = parentPhone.value.trim();
+                if (!val) {
+                    markInvalid(parentPhone, 'Nomor WhatsApp / telepon aktif orang tua wajib diisi.');
+                } else if (!/^[0-9+\-\s]{8,18}$/.test(val)) {
+                    markInvalid(parentPhone, 'Format nomor telepon tidak valid (minimal 8 digit angka).');
+                }
+            }
+        } else if (step === 3) {
+            const agreement = document.getElementById('agreement');
+            if (agreement && !agreement.checked) {
+                isValid = false;
+                agreement.classList.add('is-invalid');
+                const parent = agreement.closest('.ppdb-pdp-notice') || agreement.parentElement;
+                if (parent && !parent.querySelector('.ppdb-field-error-msg')) {
+                    const msgEl = document.createElement('span');
+                    msgEl.className = 'ppdb-field-error-msg';
+                    msgEl.textContent = 'Anda wajib menyetujui pernyataan kebenaran data & kebijakan privasi sebelum mengirim.';
+                    parent.appendChild(msgEl);
+                }
+                if (!firstInvalid) firstInvalid = agreement;
+            }
+        }
+
+        if (!isValid && firstInvalid) {
+            if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            updateDeckHeight(step, false);
+        }
+
+        return isValid;
+    }
+
+    // Pembersihan pesan error real-time saat pengguna mengetik/memilih
+    if (form) {
+        form.querySelectorAll('input, select, textarea').forEach(input => {
+            const clearCurrent = function () {
+                this.classList.remove('is-invalid');
+                const parent = this.closest('.form-group') || this.parentElement;
+                if (parent) {
+                    const msg = parent.querySelector('.ppdb-field-error-msg');
+                    if (msg) msg.remove();
+                }
+                const grid = document.querySelector('.jenjang-selector-grid');
+                if (grid && grid.classList.contains('has-error')) {
+                    grid.classList.remove('has-error');
+                    const gridMsg = grid.parentElement.querySelector('.ppdb-field-error-msg');
+                    if (gridMsg) gridMsg.remove();
+                }
+            };
+            input.addEventListener('input', clearCurrent);
+            input.addEventListener('change', clearCurrent);
+        });
+    }
+
+    // Fungsi global untuk navigasi tombol dengan guard validasi
     window.nextSlide = function (targetStep) {
+        if (targetStep > currentStep) {
+            if (!validateStep(currentStep)) {
+                return false;
+            }
+        }
         showSlide(targetStep);
     };
 
@@ -1194,6 +1357,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.jumpToStep = function (targetStep) {
         if (targetStep === currentStep) return;
+        if (targetStep > currentStep) {
+            if (!validateStep(currentStep)) {
+                return false;
+            }
+        }
         showSlide(targetStep);
     };
 
@@ -1208,8 +1376,23 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Submit form
+        // Submit form dengan validasi penuh seluruh langkah
         form.addEventListener('submit', function (e) {
+            if (!validateStep(1)) {
+                e.preventDefault();
+                showSlide(1);
+                return false;
+            }
+            if (!validateStep(2)) {
+                e.preventDefault();
+                showSlide(2);
+                return false;
+            }
+            if (!validateStep(3)) {
+                e.preventDefault();
+                return false;
+            }
+
             const submitBtn = document.getElementById('btnSubmitForm');
             if (submitBtn) {
                 submitBtn.disabled = true;

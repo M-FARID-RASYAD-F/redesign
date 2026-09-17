@@ -19,59 +19,48 @@
         // ══════════════════════════════════════════════════════════
         // KHUSUS TAMPILAN HP (MOBILE <= 768px):
         // Bidirectional Cubic-Bezier Engine untuk Layar HP
+        // Berjalan otomatis saat scroll biasa tanpa perlu me-refresh manual
         // ══════════════════════════════════════════════════════════
         if (isMobile()) {
-            // 1. Prioritas Utama di Mobile: GSAP ScrollTrigger
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
+            let lastY = window.pageYOffset || document.documentElement.scrollTop;
+            let currentDir = 'down';
 
-                elements.forEach((el) => {
-                    ScrollTrigger.create({
-                        trigger: el,
-                        start: 'top 92%',
-                        end: 'bottom top',
-                        // Masuk saat scroll ke bawah — transisi cubic-bezier
-                        onEnter: () => {
-                            el.classList.remove('reveal-reverse');
-                            void el.offsetWidth;
-                            el.classList.add('visible');
-                        },
-                        // Keluar saat benar-benar lewat atas layar
-                        onLeave: () => {
-                            el.classList.remove('visible');
+            function updateElement(el, inView) {
+                if (inView) {
+                    if (!el.classList.contains('visible')) {
+                        if (currentDir === 'up') {
                             el.classList.add('reveal-reverse');
-                        },
-                        // Masuk kembali saat scroll ke atas (REVERSE)
-                        onEnterBack: () => {
-                            el.classList.add('reveal-reverse');
-                            void el.offsetWidth;
-                            el.classList.add('visible');
-                        },
-                        // Keluar saat benar-benar lewat bawah layar
-                        onLeaveBack: () => {
-                            el.classList.remove('visible');
+                        } else {
                             el.classList.remove('reveal-reverse');
-                        },
-                    });
-                });
-
-                ScrollTrigger.refresh();
-                return;
+                        }
+                        void el.offsetWidth;
+                        el.classList.add('visible');
+                    }
+                } else {
+                    if (el.classList.contains('visible')) {
+                        const rect = el.getBoundingClientRect();
+                        el.classList.remove('visible');
+                        if (rect.top < 0) {
+                            el.classList.add('reveal-reverse');
+                        } else {
+                            el.classList.remove('reveal-reverse');
+                        }
+                    }
+                }
             }
 
-            // 2. Fallback di Mobile: IntersectionObserver
+            function updateMobileReveals() {
+                const vh = window.innerHeight || document.documentElement.clientHeight;
+                elements.forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    // InView saat elemen berada di dalam 92% layar atas dan belum terlewati 20px dari atas
+                    const inView = rect.top < (vh * 0.92) && rect.bottom > 20;
+                    updateElement(el, inView);
+                });
+            }
+
+            // 1. Native IntersectionObserver untuk mendeteksi viewport secara efisien
             if ('IntersectionObserver' in window) {
-                let lastY = window.pageYOffset || document.documentElement.scrollTop;
-                let currentDir = 'down';
-
-                window.addEventListener('scroll', () => {
-                    const y = window.pageYOffset || document.documentElement.scrollTop;
-                    if (Math.abs(y - lastY) > 2) {
-                        currentDir = y > lastY ? 'down' : 'up';
-                        lastY = y <= 0 ? 0 : y;
-                    }
-                }, { passive: true });
-
                 const mobileObs = new IntersectionObserver((entries) => {
                     entries.forEach((entry) => {
                         const el = entry.target;
@@ -84,25 +73,56 @@
                             void el.offsetWidth;
                             el.classList.add('visible');
                         } else {
-                            el.classList.remove('visible');
-                            if (entry.boundingClientRect.top < 0) {
-                                el.classList.add('reveal-reverse');
-                            } else {
-                                el.classList.remove('reveal-reverse');
+                            if (el.classList.contains('visible')) {
+                                el.classList.remove('visible');
+                                if (entry.boundingClientRect.top < 0) {
+                                    el.classList.add('reveal-reverse');
+                                } else {
+                                    el.classList.remove('reveal-reverse');
+                                }
                             }
                         }
                     });
                 }, {
-                    threshold: 0.05,
-                    rootMargin: '0px 0px -20px 0px'
+                    threshold: [0, 0.05, 0.1],
+                    rootMargin: '10px 0px 10px 0px'
                 });
 
                 elements.forEach((el) => mobileObs.observe(el));
-                return;
             }
 
-            // 3. Fallback browser lawas: Langsung tampilkan
-            elements.forEach((el) => el.classList.add('visible'));
+            // 2. Real-time scroll & touchmove listener dengan requestAnimationFrame
+            // Menjamin animasi berjalan responsif seketika saat scroll biasa / touch di HP
+            let ticking = false;
+            function onMobileScroll() {
+                const y = window.pageYOffset || document.documentElement.scrollTop;
+                if (Math.abs(y - lastY) > 2) {
+                    currentDir = y > lastY ? 'down' : 'up';
+                    lastY = y <= 0 ? 0 : y;
+                }
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updateMobileReveals();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', onMobileScroll, { passive: true });
+            window.addEventListener('touchmove', onMobileScroll, { passive: true });
+
+            // Pemeriksaan awal otomatis saat load halaman (tanpa perlu manual refresh)
+            updateMobileReveals();
+            setTimeout(updateMobileReveals, 60);
+            setTimeout(updateMobileReveals, 200);
+            setTimeout(updateMobileReveals, 500);
+
+            window.addEventListener('load', updateMobileReveals);
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(updateMobileReveals);
+            }
+
             return;
         }
 

@@ -4439,30 +4439,8 @@ body.nav-mobile-open {
     width: 100%;
   }
 
-  /* Floating Modern Mobile Navigation Dock */
+  /* Hilangkan floating bottom dock bar pada mobile screen */
   .mobile-bottom-dock {
-    display: block !important;
-    position: fixed;
-    bottom: max(10px, env(safe-area-inset-bottom, 10px));
-    left: 12px;
-    right: 12px;
-    max-width: 480px;
-    margin: 0 auto;
-    height: 60px;
-    background: linear-gradient(180deg, rgba(10, 23, 44, 0.94) 0%, rgba(6, 14, 28, 0.98) 100%);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1.5px solid rgba(0, 180, 216, 0.35);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 10, 25, 0.5), 0 0 20px rgba(0, 180, 216, 0.15);
-    z-index: 990;
-    padding: 4px 6px;
-    box-sizing: border-box;
-    pointer-events: auto;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-  }
-
-  body.nav-mobile-open .mobile-bottom-dock {
     display: none !important;
   }
 

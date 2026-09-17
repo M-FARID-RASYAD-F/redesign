@@ -8,23 +8,18 @@ use Tests\TestCase;
 class MobileVisibilityTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
-     * Pastikan komponen Mobile Bottom Dock Navigation dan elemen beranda muncul lengkap pada view.
+     * Pastikan navigasi bottom dock dihilangkan dari DOM sesuai permintaan user.
      */
-    public function test_mobile_bottom_dock_navigation_rendered(): void
+    public function test_mobile_bottom_dock_navigation_removed(): void
     {
         $response = $this->get(route('home'));
         $response->assertStatus(200);
 
-        // Pastikan markup Mobile Bottom Dock ada di DOM
-        $response->assertSee('class="mobile-bottom-dock"', false);
-        $response->assertSee('id="mobileBottomDock"', false);
-        $response->assertSee('data-section="beranda"', false);
-        $response->assertSee('data-section="jenjang"', false);
-        $response->assertSee('data-section="cabang"', false);
-        $response->assertSee('data-section="berita"', false);
-        $response->assertSee('data-section="ppdb"', false);
-        $response->assertSee('mobile-dock-ppdb', false);
+        // Pastikan markup Mobile Bottom Dock benar-benar dihilangkan dari DOM
+        $response->assertDontSee('class="mobile-bottom-dock"', false);
+        $response->assertDontSee('id="mobileBottomDock"', false);
     }
 
     /**
@@ -40,7 +35,7 @@ class MobileVisibilityTest extends TestCase
     }
 
     /**
-     * Pastikan file style.css dan scroll-reveal.js memiliki aturan visibilitas mobile.
+     * Pastikan file style.css dan scroll-reveal.js memiliki aturan visibilitas mobile & PC terpisah.
      */
     public function test_mobile_css_and_reveal_rules_exist(): void
     {
@@ -52,16 +47,13 @@ class MobileVisibilityTest extends TestCase
         $this->assertStringContainsString('.reveal {', $css);
         $this->assertStringContainsString('cubic-bezier(0.16, 1, 0.3, 1)', $css);
 
-        // CSS harus memastikan .mobile-bottom-dock tampil di mobile
-        $this->assertStringContainsString('.mobile-bottom-dock {', $css);
-        $this->assertStringContainsString('display: block !important', $css);
-
-        // JS scroll-reveal harus menjalankan Bidirectional Cubic-Bezier Engine pada mobile
+        // JS scroll-reveal harus menjalankan engine scroll biasa pada mobile tanpa perlu refresh manual
         $this->assertStringContainsString('KHUSUS TAMPILAN HP (MOBILE <= 768px)', $js);
-        $this->assertStringContainsString("start: 'top 92%'", $js);
-        $this->assertStringContainsString("end: 'bottom top'", $js);
+        $this->assertStringContainsString('IntersectionObserver', $js);
+        $this->assertStringContainsString('updateMobileReveals', $js);
+        $this->assertStringContainsString('onMobileScroll', $js);
 
-        // JS scroll-reveal harus mempertahankan Bidirectional Engine asli untuk tampilan PC / Desktop
+        // JS scroll-reveal harus mempertahankan 100% Bidirectional Engine asli untuk tampilan PC / Desktop
         $this->assertStringContainsString("KHUSUS TAMPILAN PC (DESKTOP > 768px)", $js);
         $this->assertStringContainsString("onLeaveBack:", $js);
         $this->assertStringContainsString("start: 'top 88%'", $js);

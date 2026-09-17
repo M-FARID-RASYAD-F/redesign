@@ -191,42 +191,6 @@
     </div>
 </header>
 
-{{-- ── Floating Bottom Dock Navigation (Khusus Tampilan HP / Layar Mobile) ── --}}
-<nav class="mobile-bottom-dock" id="mobileBottomDock" aria-label="Navigasi Cepat Mobile">
-    <div class="mobile-dock-container">
-        <a href="{{ route('home') }}#beranda" class="mobile-dock-btn {{ Request::routeIs('home') && !Request::is('berita*') && !Request::is('ppdb*') ? 'active' : '' }}" data-section="beranda" aria-label="Beranda">
-            <span class="mobile-dock-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </span>
-            <span class="mobile-dock-label">Beranda</span>
-        </a>
-        <a href="{{ route('home') }}#jenjang" class="mobile-dock-btn" data-section="jenjang" aria-label="Jenjang">
-            <span class="mobile-dock-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-.838L12.83 3.18a2 2 0 0 0-1.66 0L2.6 10.084a1 1 0 0 0 0 1.832l8.57 6.908a2 2 0 0 0 1.66 0l8.57-6.908a1 1 0 0 0 .02-.994z"/><path d="M6 12.5v5a6 3 0 0 0 12 0v-5"/></svg>
-            </span>
-            <span class="mobile-dock-label">Jenjang</span>
-        </a>
-        <a href="{{ route('home') }}#cabang" class="mobile-dock-btn" data-section="cabang" aria-label="Cabang">
-            <span class="mobile-dock-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
-            </span>
-            <span class="mobile-dock-label">Cabang</span>
-        </a>
-        <a href="{{ route('berita.index') }}" class="mobile-dock-btn {{ Request::is('berita*') ? 'active' : '' }}" data-section="berita" aria-label="Berita">
-            <span class="mobile-dock-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
-            </span>
-            <span class="mobile-dock-label">Berita</span>
-        </a>
-        <a href="{{ route('ppdb.index') }}" class="mobile-dock-btn mobile-dock-ppdb {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb" aria-label="PPDB Online">
-            <span class="mobile-dock-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-            </span>
-            <span class="mobile-dock-label">PPDB</span>
-        </a>
-    </div>
-</nav>
-
 
 @push('scripts')
 <script>

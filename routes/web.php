@@ -24,6 +24,9 @@ Route::get('/', [SchoolController::class, 'index'])->name('home');
 // 1.1 Route Portal Berita Publik & Detail Artikel
 Route::get('/berita', [SchoolController::class, 'newsIndex'])->name('berita.index');
 Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
+
+// 1.2 Route Quick Search API (Spotlight / Cmd+K)
+Route::get('/api/search', [SchoolController::class, 'globalSearch'])->name('api.search');
 // 2. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');

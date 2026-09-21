@@ -203,6 +203,9 @@
     </div>
 </section>
 
+<!-- Simulasi Biaya & Beasiswa PPDB Online (Kalkulator Interaktif) -->
+<x-tuition-simulator />
+
 <!-- Persyaratan Berkas & Pilihan Program Keahlian -->
 <section class="ppdb-section">
     <div class="ppdb-req-container">
@@ -293,12 +296,20 @@
     </div>
 </section>
 
+<!-- Tanya Jawab Seputar Sekolah & PPDB (Interactive FAQ) -->
+<x-faq-accordion :faqs="$faqs ?? []" />
+
 <!-- Banner Bantuan & Call To Action -->
 <section class="ppdb-section" style="margin-bottom: 5rem;">
     <div class="ppdb-cta-card">
         <div>
             <h3 class="ppdb-cta-title">Butuh Bantuan saat Mengisi Formulir?</h3>
-            <p class="ppdb-cta-desc">Hubungi Tim Helpdesk Panitia PPDB kami via WhatsApp di <strong>0812-3456-7890</strong> (Senin - Sabtu: 08.00 - 15.00 WIB).</p>
+            <p class="ppdb-cta-desc">
+                Hubungi Tim Helpdesk Panitia PPDB kami via WhatsApp resmi di 
+                <a href="{{ config('school.whatsapp_url', 'https://wa.me/6281270001920') }}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 700; text-decoration: underline;">
+                    {{ config('school.whatsapp_formatted', '0812-7000-1920') }}
+                </a> (Senin - Sabtu: 08.00 - 16.00 WIB).
+            </p>
         </div>
         <div>
             <a href="{{ route('ppdb.create') }}" class="btn btn-primary" style="padding: 12px 28px; font-weight: 700; border-radius: 10px;">

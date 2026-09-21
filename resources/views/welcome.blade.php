@@ -220,6 +220,14 @@
             @endforeach
         </div>
     </section>
+
+    <!-- 7. Galeri Fasilitas & Suasana Kampus (Virtual Showcase) -->
+    <section class="section reveal" id="fasilitas-tour">
+        <x-facility-showcase :items="$galeriFasilitas" />
+    </section>
+
+    <!-- 8. Kisah Sukses & Kepercayaan Wali Santri (Testimonials) -->
+    <x-testimonials-slider :testimonials="$testimoni" />
     </x-constellation-grid>{{-- end .content-area-constellation --}}
 
 @endsection

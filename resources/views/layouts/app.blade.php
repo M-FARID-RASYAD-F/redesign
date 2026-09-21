@@ -45,6 +45,7 @@
 </head>
 <body>
 
+
     <!-- Partial Navbar Header (di luar smooth-wrapper — tetap fixed ke viewport) -->
     @include('partials.navbar')
 
@@ -104,6 +105,8 @@
 
     <!-- Bidirectional Cubic-Bezier Scroll Reveal Engine -->
     <script defer src="{{ $jsv('js/scroll-reveal.js') }}"></script>
+    <!-- Global Spotlight Search Modal -->
+    @include('partials.spotlight-search')
     @stack('scripts')
 </body>
 </html>

@@ -46,6 +46,13 @@
 
         {{-- 3. Kapsul Kanan: Theme Switcher, Login / Admin & Menu Mobile --}}
         <div class="navbar-capsule navbar-right">
+            {{-- Tombol Spotlight Quick Search (Ctrl+K) --}}
+            <button class="nav-search-trigger-btn" type="button" onclick="openSpotlight()" aria-label="Buka Pencarian Cepat (Ctrl+K)" title="Cari di website (Ctrl+K)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span class="nav-search-btn-label">Cari</span>
+                <kbd class="nav-search-badge">⌘K</kbd>
+            </button>
+
             {{-- Tombol Toggle Theme (Dark / White) --}}
             <button class="nav-theme-toggle" id="themeToggleBtn" type="button" aria-label="Ganti Tema Tampilan" title="Ganti Tema (Dark / White Mode)">
                 <span class="theme-icon theme-icon-sun" aria-hidden="true">
@@ -103,6 +110,17 @@
                     <span class="nav-mobile-pill-text">PKBM Tahfizh At-Tamam</span>
                 </div>
                 <span class="nav-mobile-status-badge">Edu Portal</span>
+            </div>
+
+            {{-- Quick Search Input Button (Mobile) --}}
+            <div style="padding: 10px 16px 4px;">
+                <button type="button" onclick="openSpotlight(); const p = document.getElementById('navMobilePanel'); if(p) p.classList.remove('active'); const b = document.getElementById('navMobileBackdrop'); if(b) b.classList.remove('active');" style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.35); border-radius: 12px; color: #cbd5e1; cursor: pointer; font-size: 0.86rem; font-family: inherit;">
+                    <span style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>Cari informasi sekolah...</span>
+                    </span>
+                    <kbd style="background: rgba(0, 180, 216, 0.2); border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; color: #38bdf8; font-weight: 700;">Cari</kbd>
+                </button>
             </div>
 
             {{-- 1. Navigasi Halaman Utama --}}

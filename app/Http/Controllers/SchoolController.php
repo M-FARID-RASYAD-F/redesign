@@ -11,6 +11,7 @@ use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class SchoolController extends Controller
 {
@@ -295,8 +296,96 @@ class SchoolController extends Controller
         // Alias untuk kompatibilitas data view lama
         $fasilitas = $cabang;
 
+        // 7. Data Galeri Fasilitas Kampus
+        $galeriFasilitas = [
+            [
+                'id' => 1,
+                'title' => 'Masjid Jami\' & Pusat Halaqah Tahfizh',
+                'category' => 'ibadah',
+                'category_label' => 'Tahfizh & Masjid',
+                'image' => asset('images/sch1.jpeg'),
+                'desc' => 'Pusat kegiatan ibadah, halaqah quran, dan tasmi\' hafalan 30 juz santri.'
+            ],
+            [
+                'id' => 2,
+                'title' => 'Laboratorium Komputer & Software Studio',
+                'category' => 'lab',
+                'category_label' => 'Laboratorium IT',
+                'image' => asset('images/sch2.jpeg'),
+                'desc' => '120 workstation high-end untuk praktikum coding, software web/mobile, dan cloud.'
+            ],
+            [
+                'id' => 3,
+                'title' => 'Perpustakaan & Ruang Baca Digital',
+                'category' => 'akademik',
+                'category_label' => 'Ruang Belajar',
+                'image' => asset('images/sch3.jpeg'),
+                'desc' => 'Koleksi kitab rujukan Islam, literatur sains modern, dan pojok e-library.'
+            ],
+            [
+                'id' => 4,
+                'title' => 'Gedung Kampus Utama & Hall Serbaguna',
+                'category' => 'kampus',
+                'category_label' => 'Kampus Utama',
+                'image' => asset('images/sch5.jpg'),
+                'desc' => 'Ruang kelas interaktif ber-AC dengan pencahayaan alami dan lingkungan sejuk.'
+            ],
+            [
+                'id' => 5,
+                'title' => 'Asrama Santri Modern & Hunian Ber-AC',
+                'category' => 'asrama',
+                'category_label' => 'Asrama & Boarding',
+                'image' => asset('images/hero-campus.jpg'),
+                'desc' => 'Hunian santri kondusif dengan pendampingan musyrif 24 jam dan sanitasi bersih.'
+            ],
+            [
+                'id' => 6,
+                'title' => 'Studio Kreatif Multimedia & Desain DKV',
+                'category' => 'lab',
+                'category_label' => 'Laboratorium IT',
+                'image' => asset('images/sch2.jpeg'),
+                'desc' => 'Perangkat kamera profesional, render station, editing video, dan studio podcast.'
+            ]
+        ];
+
+        // 8. Data Testimoni Wali Santri & Alumni Sukses
+        $testimoni = [
+            [
+                'name' => 'Ustadz H. Hendra Kurniawan, S.Pd.I',
+                'role' => 'Wali Santri SD Tahfizh At-Tamam',
+                'rating' => 5,
+                'quote' => 'Alhamdulillah, dalam 2 tahun anak kami di SD At-Tamam hafalan Juz 30 dan Juz 29 sudah mutqin. Yang paling membahagiakan, akhlak dan adab kesehariannya terhadap orang tua sangat santun.',
+                'avatar_initials' => 'HK',
+                'badge' => 'Wali Santri SD'
+            ],
+            [
+                'name' => 'Muhammad Farhan Al-Fatih',
+                'role' => 'Alumni SMP Tahfizh — Mahasiswa Al-Azhar Kairo',
+                'rating' => 5,
+                'quote' => 'Fondasi bahasa Arab dan hafalan Al-Qur\'an 30 Juz yang saya peroleh selama di At-Tamam menjadi modal berharga saat mengikuti seleksi beasiswa ke Universitas Al-Azhar Mesir.',
+                'avatar_initials' => 'MF',
+                'badge' => 'Alumni Tahfizh 30 Juz'
+            ],
+            [
+                'name' => 'Rizky Pratama',
+                'role' => 'Alumni SMK RPL — Software Engineer di Tech Studio',
+                'rating' => 5,
+                'quote' => 'Kurikulum vokasi di SMK At-Tamam sangat aplikatif. Kami langsung mendalami tech stack modern Laravel dan React. Sebelum wisuda pun saya sudah mulai bekerja di industri digital.',
+                'avatar_initials' => 'RP',
+                'badge' => 'Alumni SMK RPL'
+            ],
+            [
+                'name' => 'dr. Hj. Nurul Hidayah, Sp.A',
+                'role' => 'Wali Santri Boarding School',
+                'rating' => 5,
+                'quote' => 'Sebagai orang tua yang bekerja, kami sangat tenang mempercayakan pendidikan putra kami di Boarding At-Tamam. Fasilitas asrama bersih, makanan bergizi, dan ibadah terpantau ketat.',
+                'avatar_initials' => 'NH',
+                'badge' => 'Wali Santri Boarding'
+            ]
+        ];
+
         // Kirim seluruh data ke view 'welcome'
-        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang'));
+        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang', 'galeriFasilitas', 'testimoni'));
     }
 
     /**
@@ -317,11 +406,50 @@ class SchoolController extends Controller
         $stats = [
             'total' => $totalPendaftar,
             'diterima' => $totalDiterima,
-            'gelombang' => 'Gelombang II (Tahun Ajaran 2026/2027)',
-            'deadline' => '30 Agustus 2026'
+            'gelombang' => 'Gelombang I (Tahun Ajaran 2026/2027)',
+            'deadline' => '30 September 2026'
         ];
 
-        return view('ppdb.index', compact('majors', 'stats'));
+        // Data FAQ Komprehensif PPDB
+        $faqs = [
+            [
+                'q' => 'Apakah ijazah lulusan PKBM Tahfizh At-Tamam resmi dan diakui negara?',
+                'a' => 'Ya, 100% resmi di bawah naungan Kemendikbudristek RI. Ijazah kelulusan berstatus setara formal dan memiliki hak serta legalitas yang sama untuk melanjutkan ke Perguruan Tinggi Negeri (SNBP/SNBT/SPAN-PTKIN), Perguruan Tinggi Kedinasan, maupun universitas internasional serta melamar pekerjaan formal.',
+                'category' => 'Akademik'
+            ],
+            [
+                'q' => 'Berapa target hafalan Al-Qur\'an untuk masing-masing jenjang (SD, SMP, SMK)?',
+                'a' => 'Jenjang SD ditargetkan minimal 3-5 Juz mutqin (Juz 30, 29, 28) beserta kaidah tajwid dasar. Jenjang SMP ditargetkan minimal 5–10 Juz mutqin bersanad. Sedangkan jenjang SMK ditargetkan minimal 3-5 Juz dengan kelas khusus takhasus 30 Juz bagi santri yang berkeinginan menuntaskan hafalan.',
+                'category' => 'Tahfizh'
+            ],
+            [
+                'q' => 'Bagaimana syarat dan ketentuan Beasiswa Tahfizh 30 Juz?',
+                'a' => 'Beasiswa Tahfizh 30 Juz diberikan kepada calon santri yang telah menyelesaikan hafalan 30 Juz dengan baik. Setelah lulus uji tasmi\' panitia seleksi, santri berhak memperoleh Beasiswa Bebas Uang Pangkal 100% dan Bebas SPP Bulanan 100% selama masa belajar dengan komitmen muraja\'ah aktif.',
+                'category' => 'Beasiswa'
+            ],
+            [
+                'q' => 'Apakah santri diwajibkan tinggal di asrama (Boarding) atau boleh Full Day?',
+                'a' => 'Jenjang SD diselenggarakan dalam format Full Day School (07.30 - 15.30 WIB). Untuk jenjang SMP dan SMK, calon santri dan wali santri bebas memilih antara program Full Day School atau Islamic Boarding School (Asrama ber-AC dengan pendampingan musyrif 24 jam).',
+                'category' => 'Fasilitas'
+            ],
+            [
+                'q' => 'Bagaimana tahapan seleksi masuk PPDB dan materi apa saja yang diujikan?',
+                'a' => 'Tahapan seleksi terdiri dari: 1) Verifikasi berkas administrasi digital, 2) Uji observasi bacaan Al-Qur\'an & tes hafalan, 3) Tes potensi dasar dan minat bakat, serta 4) Sesi wawancara komitmen orang tua/wali santri.',
+                'category' => 'Seleksi'
+            ],
+            [
+                'q' => 'Apakah tersedia layanan antar-jemput bagi santri Full Day di wilayah Pekanbaru?',
+                'a' => 'Ya, kami menyediakan armada antar-jemput resmi ber-AC yang melayani rute Tenayan Raya, Sukajadi, Tampan/Panam, Marpoyan Damai, Bukit Raya, dan sekitarnya dengan tarif bulanan terjangkau sesuai zona.',
+                'category' => 'Layanan'
+            ],
+            [
+                'q' => 'Bagaimana cara konfirmasi setelah mengisi formulir pendaftaran online?',
+                'a' => 'Setelah menyelesaikan pendaftaran, sistem akan otomatis menerbitkan Nomor Registrasi resmi (contoh: PPDB-2026-0001). Anda dapat mencetak kartu bukti atau menghubungi Panitia PPDB via WhatsApp resmi untuk jadwal tes wawancara dan observasi.',
+                'category' => 'Alur'
+            ]
+        ];
+
+        return view('ppdb.index', compact('majors', 'stats', 'faqs'));
     }
 
     /**
@@ -486,14 +614,19 @@ class SchoolController extends Controller
         ]);
 
         $query = trim($request->no_pendaftaran);
+        $cleanPhone = preg_replace('/[^0-9]/', '', $query);
+
         $registration = PpdbRegistration::with('documents')
             ->where('no_pendaftaran', $query)
+            ->when(strlen($cleanPhone) >= 8, function ($q) use ($cleanPhone) {
+                $q->orWhere('parent_phone', 'like', "%{$cleanPhone}%");
+            })
             ->first();
 
         if (!$registration) {
             return redirect()->route('ppdb.tracking')
                 ->withInput()
-                ->with('error', "Nomor pendaftaran '{$query}' tidak ditemukan dalam basis data sistem. Pastikan format nomor yang Anda masukkan sudah sesuai.");
+                ->with('error', "Data pendaftaran dengan kata kunci '{$query}' tidak ditemukan. Pastikan Nomor Pendaftaran (misal: PPDB-2026-0001) atau Nomor WhatsApp yang Anda masukkan sudah sesuai.");
         }
 
         // Izinkan sesi pengguna saat ini membuka kartu bukti pendaftaran
@@ -532,19 +665,8 @@ class SchoolController extends Controller
             });
         }
 
-        $headline = null;
-        if ($search === '' && $kategori === '' && (int) $request->get('page', 1) === 1) {
-            $headlineQuery = clone $query;
-            $headline = $headlineQuery->whereNotNull('thumbnail')->where('thumbnail', '!=', '')->latest('created_at')->first();
-            if (!$headline) {
-                $headline = (clone $query)->latest('created_at')->first();
-            }
-            if ($headline) {
-                $query->where('id', '!=', $headline->id);
-            }
-        }
-
         $news = $query->latest('created_at')->paginate(9)->withQueryString();
+        $headline = null;
         $categories = NewsCategory::withCount('news')->get();
 
         $localNewsImages = [
@@ -571,5 +693,178 @@ class SchoolController extends Controller
             ->get();
 
         return view('news.show', compact('news', 'relatedNews'));
+    }
+
+    /**
+     * Endpoint API Global Search (Spotlight / Quick Finder)
+     */
+    public function globalSearch(Request $request)
+    {
+        $q = trim((string) $request->input('q', ''));
+
+        // Daftar index navigasi statis & layanan sekolah
+        $items = [
+            [
+                'title' => 'Pendaftaran PPDB Online',
+                'desc' => 'Pengisian formulir pendaftaran santri baru jenjang SD, SMP, dan SMK secara mandiri',
+                'url' => route('ppdb.create'),
+                'category' => 'Layanan PPDB',
+                'badge' => 'Formulir',
+                'icon' => 'form',
+            ],
+            [
+                'title' => 'Lacak Status Pendaftaran PPDB',
+                'desc' => 'Pantau status verifikasi berkas dan hasil kelulusan seleksi PPDB',
+                'url' => route('ppdb.tracking'),
+                'category' => 'Layanan PPDB',
+                'badge' => 'Tracking',
+                'icon' => 'search',
+            ],
+            [
+                'title' => 'Informasi & Syarat PPDB 2026/2027',
+                'desc' => 'Alur pendaftaran, persyaratan berkas, jadwal gelombang, dan ketentuan beasiswa',
+                'url' => route('ppdb.index'),
+                'category' => 'Layanan PPDB',
+                'badge' => 'Info',
+                'icon' => 'info',
+            ],
+            [
+                'title' => 'Kalkulator Simulasi Biaya & Beasiswa',
+                'desc' => 'Simulasi estimasi biaya masuk dan potongan beasiswa tahfizh 30 Juz & prestasi',
+                'url' => route('ppdb.index') . '#simulasi-biaya',
+                'category' => 'Layanan PPDB',
+                'badge' => 'Kalkulator',
+                'icon' => 'calculator',
+            ],
+            [
+                'title' => 'Tanya Jawab (FAQ) PPDB & Sekolah',
+                'desc' => 'Pertanyaan umum seputar akreditasi, biaya, asrama/boarding, dan kurikulum tahfizh',
+                'url' => route('ppdb.index') . '#faq-section',
+                'category' => 'Bantuan & FAQ',
+                'badge' => 'FAQ',
+                'icon' => 'help',
+            ],
+            [
+                'title' => 'Jenjang Sekolah Dasar (SD)',
+                'desc' => 'Fondasi Qurani, tahfizh cilik, pembentukan adab, dan suasana belajar menyenangkan',
+                'url' => route('home') . '#jenjang',
+                'category' => 'Jenjang Pendidikan',
+                'badge' => 'SD',
+                'icon' => 'school',
+            ],
+            [
+                'title' => 'Jenjang Sekolah Menengah Pertama (SMP)',
+                'desc' => 'Target 5-10 juz mutqin, sains terapan, kepemimpinan santri, dan bahasa Arab/Inggris',
+                'url' => route('home') . '#jenjang',
+                'category' => 'Jenjang Pendidikan',
+                'badge' => 'SMP',
+                'icon' => 'compass',
+            ],
+            [
+                'title' => 'SMK - Rekayasa Perangkat Lunak (RPL)',
+                'desc' => 'Pemrograman web (Laravel/React), aplikasi mobile, cloud computing & kelas industri',
+                'url' => route('home') . '#jenjang',
+                'category' => 'Program Kejuruan',
+                'badge' => 'SMK RPL',
+                'icon' => 'code',
+            ],
+            [
+                'title' => 'SMK - Teknik Komputer & Jaringan (TKJ)',
+                'desc' => 'Arsitektur jaringan, server Linux/Windows, infrastruktur IT & sertifikasi industri',
+                'url' => route('home') . '#jenjang',
+                'category' => 'Program Kejuruan',
+                'badge' => 'SMK TKJ',
+                'icon' => 'network',
+            ],
+            [
+                'title' => 'SMK - Desain Komunikasi Visual (DKV)',
+                'desc' => 'Desain grafis, UI/UX, fotografi, videografi, serta studio animasi digital',
+                'url' => route('home') . '#jenjang',
+                'category' => 'Program Kejuruan',
+                'badge' => 'SMK DKV',
+                'icon' => 'palette',
+            ],
+            [
+                'title' => 'Kampus Pusat (Hangtuah, Tenayan Raya)',
+                'desc' => 'Gedung utama, masjid jami, administrasi pusat & ruang belajar representatif',
+                'url' => route('home') . '#cabang',
+                'category' => 'Cabang Kampus',
+                'badge' => 'Pusat',
+                'icon' => 'map-pin',
+            ],
+            [
+                'title' => 'Cabang Kampus Panam (Pekanbaru Barat)',
+                'desc' => 'Pusat vokasi kejuruan modern, laboratorium komputer, asrama & aula serbaguna',
+                'url' => route('home') . '#cabang',
+                'category' => 'Cabang Kampus',
+                'badge' => 'Panam',
+                'icon' => 'map-pin',
+            ],
+            [
+                'title' => 'Cabang Kampus Marpoyan (Pekanbaru Selatan)',
+                'desc' => 'Pusat tahfizh intensif dengan suasana asri, asrama santri & sarana olahraga',
+                'url' => route('home') . '#cabang',
+                'category' => 'Cabang Kampus',
+                'badge' => 'Marpoyan',
+                'icon' => 'map-pin',
+            ],
+            [
+                'title' => 'Galeri Fasilitas & Kampus Tour',
+                'desc' => 'Dokumentasi foto fasilitas belajar, masjid, laboratorium dan asrama santri',
+                'url' => route('home') . '#galeri-fasilitas',
+                'category' => 'Fasilitas',
+                'badge' => 'Galeri',
+                'icon' => 'image',
+            ],
+            [
+                'title' => 'Kisah Sukses Santri & Wali Santri',
+                'desc' => 'Ulasan langsung wali santri dan kisah alumni penghafal Quran & profesional',
+                'url' => route('home') . '#testimoni',
+                'category' => 'Testimoni',
+                'badge' => 'Alumni',
+                'icon' => 'star',
+            ],
+            [
+                'title' => 'Portal Berita & Warta Sekolah',
+                'desc' => 'Katalog berita, kegiatan santri, prestasi dan pengumuman resmi institusi',
+                'url' => route('berita.index'),
+                'category' => 'Publikasi',
+                'badge' => 'Warta',
+                'icon' => 'newspaper',
+            ],
+            [
+                'title' => 'WhatsApp Helpdesk Panitia',
+                'desc' => 'Layanan bantuan & informasi pendaftaran langsung melalui WhatsApp resmi',
+                'url' => config('school.whatsapp_url', 'https://wa.me/6281270001920'),
+                'category' => 'Bantuan & Kontak',
+                'badge' => 'WhatsApp',
+                'icon' => 'phone',
+            ],
+        ];
+
+        // Tambahkan artikel berita dinamis
+        $newsItems = News::select('title', 'slug', 'content')->latest()->take(8)->get();
+        foreach ($newsItems as $n) {
+            $items[] = [
+                'title' => $n->title,
+                'desc' => Str::limit(strip_tags($n->content), 85),
+                'url' => route('news.show', $n->slug),
+                'category' => 'Berita Terbaru',
+                'badge' => 'Berita',
+                'icon' => 'newspaper',
+            ];
+        }
+
+        if ($q !== '') {
+            $filtered = array_filter($items, function ($item) use ($q) {
+                return mb_stripos($item['title'], $q) !== false 
+                    || mb_stripos($item['desc'], $q) !== false 
+                    || mb_stripos($item['category'], $q) !== false
+                    || mb_stripos($item['badge'], $q) !== false;
+            });
+            return response()->json(array_values($filtered));
+        }
+
+        return response()->json($items);
     }
 }

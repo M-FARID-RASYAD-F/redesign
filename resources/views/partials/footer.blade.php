@@ -179,42 +179,53 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 3. Smooth Kinetic Momentum Scroll to Top
+    // 3. Smooth Kinetic Momentum Scroll to Top (Custom Duration 900ms & Ease-In-Out via requestAnimationFrame)
     function triggerRocketLaunch(btn) {
         if (!btn || btn.classList.contains('is-launching')) return;
+
+        // Ambil posisi scroll saat ini
+        const startPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+        if (startPosition <= 0) return;
 
         btn.classList.add('is-launching');
         createLaunchParticles(btn);
 
-        const startPosition = window.pageYOffset || document.documentElement.scrollTop;
-        const duration = Math.min(900, Math.max(450, startPosition * 0.35));
+        // Durasi scroll dibuat lebih lambat, anggun & sinematik: 1500ms (1.5 detik)
+        const duration = 1500;
         let startTime = null;
 
-        function easeOutQuart(t) {
-            return 1 - (--t) * t * t * t;
+        // Pastikan scroll-behavior bawaan CSS dinonaktifkan agar tidak berkonflik dengan requestAnimationFrame
+        document.documentElement.style.scrollBehavior = 'auto';
+
+        // Easing Ease-In-Out (Cubic):
+        // Memulai dengan akselerasi halus (ease-in), lalu meluncur dan melambat dengan lembut di akhir (ease-out)
+        function easeInOutCubic(t) {
+            return t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
 
         function scrollStep(currentTime) {
             if (!startTime) startTime = currentTime;
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            const ease = easeOutQuart(progress);
+            const ease = easeInOutCubic(progress);
 
-            window.scrollTo(0, startPosition * (1 - ease));
+            // Interpolasi posisi vertikal dari startPosition menuju 0
+            const currentPosition = startPosition * (1 - ease);
+            window.scrollTo(0, currentPosition);
 
             if (progress < 1) {
                 requestAnimationFrame(scrollStep);
             } else {
                 window.scrollTo(0, 0);
+                setTimeout(() => {
+                    btn.classList.remove('is-launching');
+                }, 100);
             }
         }
 
         requestAnimationFrame(scrollStep);
-
-        // Reset button state after launch completion
-        setTimeout(() => {
-            btn.classList.remove('is-launching');
-        }, 1000);
     }
 
     if (floatingBtn) {

@@ -50,11 +50,10 @@
 
         {{-- 3. Kapsul Kanan: Theme Switcher, Login / Admin & Menu Mobile --}}
         <div class="navbar-capsule navbar-right">
-            {{-- Tombol Spotlight Quick Search (Ctrl+K) --}}
-            <button class="nav-search-trigger-btn" type="button" onclick="openSpotlight()" aria-label="Buka Pencarian Cepat (Ctrl+K)" title="Cari di website (Ctrl+K)">
+            {{-- Tombol Spotlight Quick Search --}}
+            <button class="nav-search-trigger-btn" type="button" onclick="openSpotlight()" aria-label="Buka Pencarian Cepat" title="Cari di website">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <span class="nav-search-btn-label">Cari</span>
-                <kbd class="nav-search-badge">⌘K</kbd>
             </button>
 
             {{-- Tombol Toggle Theme (Dark / White) --}}

@@ -97,8 +97,8 @@
 
 [data-theme="light"] .spotlight-dialog {
     background: #ffffff;
-    border-color: #cbd5e1;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    border-color: oklch(58.6% 0.253 17.585 / 0.4);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 24px oklch(58.6% 0.253 17.585 / 0.15);
 }
 
 @keyframes spotlightScaleUp {
@@ -124,7 +124,7 @@
 }
 
 [data-theme="light"] .spotlight-search-icon {
-    color: #0284c7;
+    color: oklch(58.6% 0.253 17.585);
 }
 
 .spotlight-input {
@@ -233,7 +233,7 @@
 }
 
 [data-theme="light"] .spotlight-chip.active {
-    background: #0284c7;
+    background: oklch(58.6% 0.253 17.585);
     color: #ffffff;
 }
 
@@ -267,8 +267,8 @@
 
 [data-theme="light"] .spotlight-item:hover,
 [data-theme="light"] .spotlight-item.selected {
-    background: #f0f9ff;
-    border-color: #bae6fd;
+    background: oklch(58.6% 0.253 17.585 / 0.1);
+    border-color: oklch(58.6% 0.253 17.585 / 0.35);
 }
 
 .spotlight-item-main {
@@ -292,8 +292,8 @@
 }
 
 [data-theme="light"] .spotlight-item-icon {
-    background: #e0f2fe;
-    color: #0284c7;
+    background: oklch(58.6% 0.253 17.585 / 0.12);
+    color: oklch(58.6% 0.253 17.585);
 }
 
 .spotlight-item-info {
@@ -337,8 +337,8 @@
 }
 
 [data-theme="light"] .spotlight-item-badge {
-    background: #f1f5f9;
-    color: #475569;
+    background: oklch(58.6% 0.253 17.585 / 0.12);
+    color: oklch(58.6% 0.253 17.585);
 }
 
 .spotlight-loading,

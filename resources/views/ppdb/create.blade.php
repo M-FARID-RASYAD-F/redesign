@@ -1439,6 +1439,17 @@ document.addEventListener('DOMContentLoaded', function () {
             if (s) ro.observe(s);
         }
     }
+
+    // Auto-scroll input into view on mobile focus (prevent virtual keyboard occlusion)
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.ppdb-form-input, .ppdb-select-custom, textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                setTimeout(() => {
+                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 320);
+            });
+        });
+    }
 });
 </script>
 @endpush

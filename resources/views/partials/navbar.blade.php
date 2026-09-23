@@ -35,22 +35,14 @@
                         <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                         <span class="tab-label">Berita</span>
                     </a>
-                <a href="{{ route('perpus.index') }}" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
-                    <span class="nav-mobile-link-icon">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-                    </span>
-                    <span>Perpustakaan</span>
-                </a>
+                    <a href="{{ route('perpus.index') }}" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
+                        <svg class="tab-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+                        <span class="tab-label">Perpustakaan</span>
+                    </a>
                     <div class="expandable-tab-separator" aria-hidden="true"></div>
                     <a href="{{ route('ppdb.index') }}" class="expandable-tab-btn {{ Request::is('ppdb*') ? 'active' : '' }}" data-section="ppdb" aria-label="PPDB Online">
                         <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                         <span class="tab-label">PPDB Online</span>
-                    </a>
-                    <a href="{{ route('perpus.index') }}" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
-                        <span class="tab-icon">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-                        </span>
-                        <span class="tab-label">Perpustakaan</span>
                     </a>
                 </nav>
             </div>
@@ -126,7 +118,7 @@
 
             {{-- Quick Search Input Button (Mobile) --}}
             <div style="padding: 10px 16px 4px;">
-                <button type="button" onclick="openSpotlight(); const p = document.getElementById('navMobilePanel'); if(p) p.classList.remove('active'); const b = document.getElementById('navMobileBackdrop'); if(b) b.classList.remove('active');" style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.35); border-radius: 12px; color: #cbd5e1; cursor: pointer; font-size: 0.86rem; font-family: inherit;">
+                <button type="button" onclick="closeMobileMenu(); openSpotlight();" style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; min-height: 44px; background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.35); border-radius: 12px; color: #cbd5e1; cursor: pointer; font-size: 0.86rem; font-family: inherit;">
                     <span style="display: flex; align-items: center; gap: 8px;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         <span>Cari informasi sekolah...</span>
@@ -163,6 +155,13 @@
                         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                     </span>
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
+                    <span class="nav-mobile-arrow" aria-hidden="true">›</span>
+                </a>
+                <a href="{{ route('perpus.index') }}" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
+                    <span class="nav-mobile-icon-box">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+                    </span>
+                    <span class="nav-mobile-link-text">Perpustakaan Digital</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
             </div>
@@ -464,6 +463,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (window.location.pathname.startsWith('/berita')) {
             setActiveNav('berita');
+            return;
+        }
+
+        if (window.location.pathname.startsWith('/perpustakaan')) {
+            setActiveNav('perpustakaan');
             return;
         }
 

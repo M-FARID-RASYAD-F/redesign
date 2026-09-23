@@ -60,33 +60,62 @@
                 @endif
 
                 <!-- Application Form -->
-                <form action="{{ route('perpus.pinjam.store', $book->id) }}" method="POST" class="space-y-6">
+                <form action="{{ route('perpus.pinjam.store', $book->id) }}" method="POST" class="space-y-6" id="pinjamForm">
                     @csrf
 
                     <div>
                         <label for="full_name" class="block text-sm font-bold text-slate-200 mb-2">
                             Nama Lengkap Peminjam <span class="text-rose-400">*</span>
                         </label>
-                        <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Rayhan" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base">
-                        <p class="text-xs text-slate-400 mt-1.5">Siswa / Santri / Guru / Wali Siswa / Pengunjung Umum.</p>
+                        <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Rayhan" 
+                            aria-invalid="{{ $errors->has('full_name') ? 'true' : 'false' }}"
+                            @if($errors->has('full_name')) aria-describedby="full_name_error" @endif
+                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('full_name') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        @error('full_name')
+                            <p id="full_name_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
+                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                <span>{{ $message }}</span>
+                            </p>
+                        @else
+                            <p class="text-xs text-slate-400 mt-1.5">Siswa / Santri / Guru / Wali Siswa / Pengunjung Umum.</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="phone" class="block text-sm font-bold text-slate-200 mb-2">
                             Nomor WhatsApp / HP Aktif <span class="text-rose-400">*</span>
                         </label>
-                        <input type="text" id="phone" name="phone" value="{{ old('phone') }}" required placeholder="Contoh: 081234567890" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base">
-                        <p class="text-xs text-emerald-400 mt-1.5 flex items-center gap-1">
-                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Nomor ini menjadi identitas keanggotaan Anda di perpustakaan sekolah.
-                        </p>
+                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required placeholder="Contoh: 081234567890" 
+                            aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}"
+                            @if($errors->has('phone')) aria-describedby="phone_error" @endif
+                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('phone') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        @error('phone')
+                            <p id="phone_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
+                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                <span>{{ $message }}</span>
+                            </p>
+                        @else
+                            <p class="text-xs text-emerald-400 mt-1.5 flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Nomor ini menjadi identitas keanggotaan Anda di perpustakaan sekolah.
+                            </p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="address" class="block text-sm font-bold text-slate-200 mb-2">
                             Alamat Rumah / Kelas / Instansi (Opsional)
                         </label>
-                        <textarea id="address" name="address" rows="3" placeholder="Contoh: Kelas X Tahfizh A / Asrama Putra / Jl. Mawar No. 12" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base">{{ old('address') }}</textarea>
+                        <textarea id="address" name="address" rows="3" placeholder="Contoh: Kelas X Tahfizh A / Asrama Putra / Jl. Mawar No. 12" 
+                            aria-invalid="{{ $errors->has('address') ? 'true' : 'false' }}"
+                            @if($errors->has('address')) aria-describedby="address_error" @endif
+                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('address') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">{{ old('address') }}</textarea>
+                        @error('address')
+                            <p id="address_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
+                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                <span>{{ $message }}</span>
+                            </p>
+                        @enderror
                     </div>
 
                     <!-- Terms agreement note -->
@@ -100,11 +129,11 @@
                     </div>
 
                     <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
-                        <button type="submit" class="perpus-btn-borrow w-full sm:w-auto flex-1 py-4 px-8 text-base">
+                        <button type="submit" class="perpus-btn-borrow w-full sm:w-auto flex-1 py-4 px-8 text-base min-h-[48px] justify-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>Kirim Pengajuan Peminjaman</span>
                         </button>
-                        <a href="{{ route('perpus.show', $book->id) }}" class="perpus-btn-detail w-full sm:w-auto px-6 py-4 text-center text-sm font-semibold">
+                        <a href="{{ route('perpus.show', $book->id) }}" class="perpus-btn-detail w-full sm:w-auto px-6 py-4 text-center text-sm font-semibold min-h-[48px] flex items-center justify-center">
                             Batal
                         </a>
                     </div>

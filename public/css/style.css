@@ -180,10 +180,12 @@ html {
   scroll-behavior: auto;
   overflow-x: hidden;
   width: 100%;
+  scroll-padding-top: 100px;
+  scroll-padding-bottom: 220px;
 }
 
 section[id], div[id] {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 100px;
 }
 
 * {
@@ -886,7 +888,7 @@ a:hover {
   background: rgba(4, 10, 24, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 998;
+  z-index: 10000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -924,7 +926,7 @@ body.nav-mobile-open {
   box-shadow: 0 20px 50px rgba(0, 12, 30, 0.75), 0 0 32px rgba(0, 180, 216, 0.25);
   padding: 16px;
   position: relative;
-  z-index: 1001;
+  z-index: 10001;
   touch-action: pan-y;
   overscroll-behavior: contain;
 }
@@ -4317,33 +4319,36 @@ body.nav-mobile-open {
     flex-shrink: 0;
   }
   .navbar.scrolled .navbar-capsule.navbar-right {
-    height: 44px;
+    height: 48px;
     padding: 0 4px;
   }
   .navbar-right .nav-theme-toggle {
     display: inline-flex !important;
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
     justify-content: center;
     align-items: center;
-    border-radius: 9px;
+    border-radius: 12px;
     background: transparent;
     border: none;
     box-shadow: none;
     cursor: pointer;
   }
   .navbar.scrolled .navbar-right .nav-theme-toggle {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
   .nav-btn-menu,
   .nav-island-toggle {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
     border: none !important;
     background: transparent !important;
@@ -4355,9 +4360,10 @@ body.nav-mobile-open {
     cursor: pointer;
   }
   .navbar.scrolled .nav-btn-menu {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   /* ── Mobile Dropdown Panel ── */
@@ -6052,6 +6058,12 @@ body.nav-mobile-open {
 
 [data-theme="light"] .custom-card.card-with-image .card-title-link:hover {
   color: #fda4af;
+}
+
+[data-theme="light"] .custom-card.card-with-image .card-body,
+[data-theme="light"] .custom-card.card-with-image .news-excerpt {
+  color: #f8fafc !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="light"] .custom-card.card-with-image .card-read-more {
@@ -9386,5 +9398,61 @@ input:-webkit-autofill:active {
   background: oklch(20% 0.08 11 / 0.8) !important;
   border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   UI/UX AUDIT & ACCESSIBILITY ENHANCEMENTS (redesign.md)
+   1. iOS Safari Auto-Zoom Fix (<16px trigger zoom)
+   2. Keyboard Navigation Focus Ring (WCAG 2.4.7 AA)
+   3. Fluid Typography & Overflow Guard
+   4. Minimum Touch Targets (WCAG 2.5.5 / 2.5.8)
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1. iOS Safari Auto-Zoom Prevention */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="url"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* 2. Accessible Focus Rings for Keyboard Navigation */
+:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+}
+
+[data-theme="light"] :focus-visible {
+  outline-color: oklch(58.6% 0.253 17.585) !important;
+}
+
+/* 3. Media & Responsive Overflow Guard */
+img, video, iframe, embed, object {
+  max-width: 100%;
+}
+
+/* 4. Touch Target Standard (44px min-height on mobile) */
+@media screen and (max-width: 640px) {
+  .nav-mobile-link,
+  .nav-mobile-cta,
+  .nav-mobile-sublink,
+  .nav-mobile-auth-btn {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .floating-wa-btn {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
 
 

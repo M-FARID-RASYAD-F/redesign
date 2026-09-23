@@ -57,7 +57,8 @@
                     <li><a href="{{ route('ppdb.index') }}"><span class="footer-link-arrow">›</span> Portal PPDB Online</a></li>
                     <li><a href="{{ route('ppdb.create') }}"><span class="footer-link-arrow">›</span> Formulir Pendaftaran</a></li>
                     <li><a href="{{ route('ppdb.tracking') }}"><span class="footer-link-arrow">›</span> Lacak Status PPDB</a></li>
-                    <li><a href="{{ route('home') }}#berita"><span class="footer-link-arrow">›</span> Kabar & Berita Terbaru</a></li>
+                    <li><a href="{{ route('berita.index') }}"><span class="footer-link-arrow">›</span> Kabar & Berita Terbaru</a></li>
+                    <li><a href="{{ route('perpus.index') }}"><span class="footer-link-arrow">›</span> Perpustakaan Digital</a></li>
                 </ul>
             </div>
 

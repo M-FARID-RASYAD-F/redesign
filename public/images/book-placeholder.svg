@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="spineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="400" height="520" fill="url(#bgGrad)" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Left Spine -->
+  <rect width="18" height="520" fill="url(#spineGrad)"/>
+  <line x1="18" y1="0" x2="18" y2="520" stroke="#047857" stroke-width="1" opacity="0.4"/>
+
+  <!-- Center Circle Graphic -->
+  <circle cx="209" cy="210" r="56" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+  
+  <!-- Book Icon -->
+  <g transform="translate(181, 182)" fill="none" stroke="#059669" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+    <path d="M6 6h10"/>
+    <path d="M6 10h10"/>
+    <path d="M6 14h6"/>
+    <path d="M28 19.5v-15A2.5 2.5 0 0 0 25.5 2H12v20h13.5a2.5 2.5 0 0 0 2.5-2.5Z" stroke="#10b981"/>
+  </g>
+
+  <!-- Label Text -->
+  <text x="209" y="300" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="15" font-weight="700" fill="#334155" letter-spacing="1">PERPUSTAKAAN DIGITAL</text>
+  <text x="209" y="324" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748b" letter-spacing="0.5">PKBM TAHFIZH AT-TAMAM</text>
+  <text x="209" y="350" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="500" fill="#94a3b8">Koleksi Buku &amp; Referensi</text>
+
+  <!-- Decorative Corner lines -->
+  <line x1="40" y1="36" x2="376" y2="36" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="40" y1="484" x2="376" y2="484" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+</svg>

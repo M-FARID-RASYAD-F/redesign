@@ -92,6 +92,12 @@
                                     <span>Editor Akademik</span>
                                 </span>
                                 @break
+                            @case('admin_perpus')
+                                <span class="badge" style="background: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); display: inline-flex; align-items: center; gap: 4px;">
+                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+                                    <span>Petugas Perpustakaan</span>
+                                </span>
+                                @break
                             @default
                                 <span class="badge badge-info">{{ $user->role }}</span>
                         @endswitch

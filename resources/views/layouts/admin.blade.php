@@ -2175,7 +2175,7 @@
         <div class="sidebar-category">Menu Navigasi</div>
         <ul class="sidebar-menu">
             <li>
-                <a href="{{ auth()->user()->dashboard_url }}" class="sidebar-link {{ Route::is('admin.dashboard', 'admin.cms.dashboard', 'admin.ppdb.dashboard', 'admin.akademik.dashboard') ? 'active' : '' }}">
+                <a href="{{ auth()->user()->dashboard_url }}" class="sidebar-link {{ Route::is('admin.dashboard', 'admin.cms.dashboard', 'admin.ppdb.dashboard', 'admin.akademik.dashboard', 'admin.perpus.dashboard') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">
                         <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
                     </span>
@@ -2227,7 +2227,29 @@
             </li>
             @endcan
 
-            @can('viewAny', App\Models\User::class)
+            
+            @can('viewAny', App\Models\Book::class)
+            <li>
+                <a href="{{ route('admin.perpus.books.index') }}" class="sidebar-link {{ Route::is('admin.perpus.books.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+                    </span>
+                    <span>Katalog Buku</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('viewAny', App\Models\BookLoan::class)
+            <li>
+                <a href="{{ route('admin.perpus.loans.index') }}" class="sidebar-link {{ Route::is('admin.perpus.loans.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </span>
+                    <span>Peminjaman Buku</span>
+                </a>
+            </li>
+            @endcan
+@can('viewAny', App\Models\User::class)
             <li>
                 <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">

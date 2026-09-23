@@ -13,6 +13,9 @@ use App\Models\NewsCategory;
 use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\Major;
+use App\Models\Book;
+use App\Models\BookCategory;
+use App\Models\BookLoan;
 use App\Models\ActivityLog;
 use Illuminate\Support\Str;
 use ZipArchive;
@@ -640,5 +643,236 @@ class AdminController extends Controller
         $this->logActivity('jurusan', 'delete', "Menghapus jurusan: '{$name}'");
 
         return redirect()->route('admin.majors.index')->with('success', 'Jurusan berhasil dihapus!');
+    }
+
+    /**
+     * ==========================================
+     * MODUL PERPUSTAKAAN - KATALOG
+     * ==========================================
+     */
+    public function bookIndex(Request $request)
+    {
+        Gate::authorize('viewAny', Book::class);
+
+        $search = $request->query('search');
+        $books = Book::with('category')
+            ->when($search, fn ($q) => $q->where('title', 'like', "%{$search}%")
+                ->orWhere('author', 'like', "%{$search}%"))
+            ->orderBy('title')
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('admin.perpus.books.index', compact('books', 'search'));
+    }
+
+    public function bookCreate()
+    {
+        Gate::authorize('create', Book::class);
+        $categories = BookCategory::orderBy('name')->get();
+        return view('admin.perpus.books.create', compact('categories'));
+    }
+
+    public function bookStore(Request $request)
+    {
+        Gate::authorize('create', Book::class);
+
+        $validated = $request->validate([
+            'category_id'   => 'nullable|exists:book_categories,id',
+            'title'         => 'required|string|max:255',
+            'isbn'          => 'nullable|string|max:50|unique:books,isbn',
+            'author'        => 'required|string|max:150',
+            'publisher'     => 'nullable|string|max:150',
+            'stock'         => 'required|integer|min:1',
+            'synopsis'      => 'nullable|string',
+            'rack_location' => 'nullable|string|max:50',
+        ]);
+
+        $validated['available'] = $validated['stock'];
+        $book = Book::create($validated);
+
+        $this->logActivity('perpus', 'create', "Menambahkan buku baru: '{$book->title}'");
+
+        return redirect()->route('admin.perpus.books.index')
+            ->with('success', 'Buku baru berhasil ditambahkan ke katalog!');
+    }
+
+    public function bookEdit($id)
+    {
+        $book = Book::findOrFail($id);
+        Gate::authorize('update', $book);
+        $categories = BookCategory::orderBy('name')->get();
+        return view('admin.perpus.books.edit', compact('book', 'categories'));
+    }
+
+    public function bookUpdate(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        Gate::authorize('update', $book);
+
+        $validated = $request->validate([
+            'category_id'   => 'nullable|exists:book_categories,id',
+            'title'         => 'required|string|max:255',
+            'isbn'          => 'nullable|string|max:50|unique:books,isbn,' . $book->id,
+            'author'        => 'required|string|max:150',
+            'publisher'     => 'nullable|string|max:150',
+            'stock'         => 'required|integer|min:1',
+            'synopsis'      => 'nullable|string',
+            'rack_location' => 'nullable|string|max:50',
+        ]);
+
+        // Jaga agar 'available' tidak pernah melebihi stok baru
+        $selisih = $validated['stock'] - $book->stock;
+        $validated['available'] = max(0, $book->available + $selisih);
+
+        $book->update($validated);
+        $this->logActivity('perpus', 'update', "Memperbarui data buku: '{$book->title}'");
+
+        return redirect()->route('admin.perpus.books.index')
+            ->with('success', 'Data buku berhasil diperbarui!');
+    }
+
+    public function bookDelete($id)
+    {
+        $book = Book::findOrFail($id);
+        Gate::authorize('delete', $book);
+
+        $title = $book->title;
+        $book->delete();
+        $this->logActivity('perpus', 'delete', "Menghapus buku: '{$title}'");
+
+        return redirect()->route('admin.perpus.books.index')
+            ->with('success', 'Buku berhasil dihapus dari katalog!');
+    }
+
+    public function bookCategoryStore(Request $request)
+    {
+        Gate::authorize('create', Book::class);
+
+        $validated = $request->validate(['name' => 'required|string|max:100']);
+        $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']);
+
+        BookCategory::create($validated);
+
+        return redirect()->back()->with('success', 'Kategori buku baru berhasil ditambahkan!');
+    }
+
+    /**
+     * ==========================================
+     * MODUL PERPUSTAKAAN - PEMINJAMAN
+     * ==========================================
+     */
+    public function loanIndex(Request $request)
+    {
+        Gate::authorize('viewAny', BookLoan::class);
+
+        $status = strtolower($request->query('status', ''));
+        $query = BookLoan::with(['book', 'member']);
+
+        if (in_array($status, ['diajukan', 'dipinjam', 'dikembalikan', 'terlambat'])) {
+            $query->where('status', $status);
+        } else {
+            $status = 'all';
+        }
+
+        $loans = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
+
+        return view('admin.perpus.loans.index', compact('loans', 'status'));
+    }
+
+    public function loanShow($id)
+    {
+        $loan = BookLoan::with(['book', 'member'])->findOrFail($id);
+        Gate::authorize('view', $loan);
+        return view('admin.perpus.loans.show', compact('loan'));
+    }
+
+    public function loanUpdateStatus(Request $request, $id)
+    {
+        $loan = BookLoan::with('book')->findOrFail($id);
+        Gate::authorize('update', $loan);
+
+        $validated = $request->validate([
+            'status' => 'required|in:diajukan,dipinjam,dikembalikan,terlambat',
+            'notes'  => 'nullable|string',
+        ]);
+
+        $oldStatus = $loan->status;
+        $newStatus = $validated['status'];
+
+        // Kelola stok "available" saat status berubah (hanya sekali per transisi)
+        if ($oldStatus !== 'dipinjam' && $newStatus === 'dipinjam') {
+            $loan->book->decrement('available');
+            $validated['borrowed_at'] = now();
+        }
+        if ($oldStatus === 'dipinjam' && $newStatus === 'dikembalikan') {
+            $loan->book->increment('available');
+            $validated['returned_at'] = now();
+        }
+
+        $loan->update($validated);
+        $this->logActivity('perpus', 'verify',
+            "Mengubah status peminjaman {$loan->loan_code} dari {$oldStatus} ke {$newStatus}");
+
+        return redirect()->route('admin.perpus.loans.show', $id)
+            ->with('success', 'Status peminjaman berhasil diperbarui!');
+    }
+
+    public function loanDelete($id)
+    {
+        $loan = BookLoan::findOrFail($id);
+        Gate::authorize('delete', $loan);
+
+        $code = $loan->loan_code;
+        $loan->delete();
+        $this->logActivity('perpus', 'delete', "Menghapus data peminjaman {$code}");
+
+        return redirect()->route('admin.perpus.loans.index')
+            ->with('success', 'Data peminjaman berhasil dihapus!');
+    }
+
+    public function perpusExportCsv(Request $request)
+    {
+        Gate::authorize('viewAny', \App\Models\BookLoan::class);
+
+        $status = strtolower($request->query('status', ''));
+        $query = BookLoan::with(['book', 'member']);
+
+        if (in_array($status, ['diajukan', 'dipinjam', 'dikembalikan', 'terlambat'])) {
+            $query->where('status', $status);
+        } else {
+            $status = 'semua';
+        }
+
+        $loans = $query->orderBy('created_at', 'desc')->get();
+        $filename = 'rekap-peminjaman-' . $status . '-' . date('Y-m-d_His') . '.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+        ];
+
+        $callback = function () use ($loans) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF)); // BOM biar Excel baca UTF-8 benar
+            fputcsv($file, ['Kode Pinjam', 'Anggota', 'No. HP', 'Buku', 'Status', 'Tgl Pinjam', 'Jatuh Tempo']);
+
+            foreach ($loans as $loan) {
+                fputcsv($file, [
+                    $loan->loan_code,
+                    $loan->member->full_name,
+                    $loan->member->phone,
+                    $loan->book->title,
+                    $loan->status_label,
+                    optional($loan->borrowed_at)->format('d-m-Y'),
+                    optional($loan->due_at)->format('d-m-Y'),
+                ]);
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

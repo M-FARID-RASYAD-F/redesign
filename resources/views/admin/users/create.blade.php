@@ -48,6 +48,7 @@
                 <option value="admin_cms" {{ old('role') == 'admin_cms' ? 'selected' : '' }}>Admin CMS (Kelola Berita, Galeri, Agenda & Pengumuman)</option>
                 <option value="admin_ppdb" {{ old('role') == 'admin_ppdb' ? 'selected' : '' }}>Admin PPDB (Verifikasi Pendaftar, Ubah Status, Hapus & Ekspor CSV)</option>
                 <option value="editor_akademik" {{ old('role') == 'editor_akademik' ? 'selected' : '' }}>Editor Akademik (Kelola Dewan Guru, Staf & Program Jurusan)</option>
+                <option value="admin_perpus" {{ old('role') == 'admin_perpus' ? 'selected' : '' }}>Petugas Perpustakaan (Kelola Katalog Buku & Sirkulasi Peminjaman)</option>
             </select>
             @error('role')
                 <div style="color: var(--danger); font-size: 0.8rem; margin-top: 4px;">{{ $message }}</div>

@@ -43,6 +43,19 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
         ->middleware('throttle:20,1');
 });
 
+// Route publik Perpustakaan Digital
+Route::prefix('perpustakaan')->name('perpus.')->group(function () {
+    Route::get('/', [SchoolController::class, 'perpusIndex'])->name('index');
+    Route::get('/buku/{id}', [SchoolController::class, 'perpusShow'])->name('show');
+    Route::get('/pinjam/{bookId}', [SchoolController::class, 'perpusPinjamCreate'])->name('pinjam.create');
+    Route::post('/pinjam/{bookId}', [SchoolController::class, 'perpusPinjamStore'])
+        ->name('pinjam.store')->middleware('throttle:10,1');
+    Route::get('/sukses/{loan_code}', [SchoolController::class, 'perpusPinjamSuccess'])->name('pinjam.success');
+    Route::get('/status', [SchoolController::class, 'perpusTracking'])->name('tracking');
+    Route::post('/status', [SchoolController::class, 'perpusCheckStatus'])
+        ->name('check')->middleware('throttle:20,1');
+});
+
 // 4. Route Login & Registrasi Guru (Custom UI) + proses autentikasi
 Route::get('/login', function () {
     return view('auth.login', ['defaultTab' => 'login']);
@@ -152,4 +165,25 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
     Route::delete('/ppdb/{id}', [AdminController::class, 'ppdbDelete'])
         ->name('ppdb.delete')
         ->middleware('role:super_admin,admin_ppdb');
+
+    // Modul Perpustakaan Digital Admin
+    Route::get('/perpus/dashboard', [\App\Http\Controllers\Admin\PerpusDashboardController::class, 'index'])
+        ->name('perpus.dashboard')
+        ->middleware('role:super_admin,admin_perpus');
+
+    Route::middleware('role:super_admin,admin_perpus')->prefix('perpus')->name('perpus.')->group(function () {
+        Route::get('/books', [AdminController::class, 'bookIndex'])->name('books.index');
+        Route::get('/books/create', [AdminController::class, 'bookCreate'])->name('books.create');
+        Route::post('/books', [AdminController::class, 'bookStore'])->name('books.store');
+        Route::get('/books/{id}/edit', [AdminController::class, 'bookEdit'])->name('books.edit');
+        Route::post('/books/{id}', [AdminController::class, 'bookUpdate'])->name('books.update');
+        Route::delete('/books/{id}', [AdminController::class, 'bookDelete'])->name('books.delete');
+        Route::post('/book-categories', [AdminController::class, 'bookCategoryStore'])->name('book-categories.store');
+
+        Route::get('/loans', [AdminController::class, 'loanIndex'])->name('loans.index');
+        Route::get('/loans-export', [AdminController::class, 'perpusExportCsv'])->name('loans.export');
+        Route::get('/loans/{id}', [AdminController::class, 'loanShow'])->name('loans.show');
+        Route::post('/loans/{id}/status', [AdminController::class, 'loanUpdateStatus'])->name('loans.status');
+        Route::delete('/loans/{id}', [AdminController::class, 'loanDelete'])->name('loans.delete');
+    });
 });

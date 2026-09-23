@@ -39,7 +39,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'role' => ['required', Rule::in(['super_admin', 'admin_cms', 'admin_ppdb', 'editor_akademik'])],
+            'role' => ['required', Rule::in(['super_admin', 'admin_cms', 'admin_ppdb', 'editor_akademik', 'admin_perpus'])],
             'is_active' => 'boolean',
         ]);
 
@@ -70,7 +70,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:6',
-            'role' => ['required', Rule::in(['super_admin', 'admin_cms', 'admin_ppdb', 'editor_akademik'])],
+            'role' => ['required', Rule::in(['super_admin', 'admin_cms', 'admin_ppdb', 'editor_akademik', 'admin_perpus'])],
             'is_active' => 'boolean',
         ]);
 

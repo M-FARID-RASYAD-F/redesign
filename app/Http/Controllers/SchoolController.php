@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Book;
+use App\Models\BookCategory;
+use App\Models\BookLoan;
+use App\Models\LibraryMember;
 use Illuminate\Http\Request;
 use App\Models\Major;
 use App\Models\News;
@@ -866,5 +871,125 @@ class SchoolController extends Controller
         }
 
         return response()->json($items);
+    }
+
+    /**
+     * ==========================================
+     * MODUL PERPUSTAKAAN - PUBLIK
+     * ==========================================
+     */
+    public function perpusIndex(Request $request)
+    {
+        $info = $this->getSchoolData()['info'];
+        $search = $request->query('search');
+        $categoryId = $request->query('category');
+
+        $books = Book::with('category')
+            ->when($search, fn ($q) => $q->where('title', 'like', "%{$search}%")
+                ->orWhere('author', 'like', "%{$search}%"))
+            ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
+            ->orderBy('title')
+            ->paginate(12)
+            ->withQueryString();
+
+        $categories = BookCategory::orderBy('name')->get();
+
+        return view('perpus.index', compact('books', 'categories', 'search', 'categoryId', 'info'));
+    }
+
+    public function perpusShow($id)
+    {
+        $info = $this->getSchoolData()['info'];
+        $book = Book::with('category')->findOrFail($id);
+        $related = Book::where('category_id', $book->category_id)
+            ->where('id', '!=', $book->id)->take(4)->get();
+
+        return view('perpus.show', compact('book', 'related', 'info'));
+    }
+
+    public function perpusPinjamCreate($bookId)
+    {
+        $info = $this->getSchoolData()['info'];
+        $book = Book::findOrFail($bookId);
+        return view('perpus.pinjam-create', compact('book', 'info'));
+    }
+
+    public function perpusPinjamStore(Request $request, $bookId)
+    {
+        $book = Book::findOrFail($bookId);
+
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:150',
+            'phone'     => 'required|string|max:20',
+            'address'   => 'nullable|string',
+        ]);
+
+        if ($book->available < 1) {
+            return back()->withErrors(['stock' => 'Maaf, seluruh eksemplar buku ini sedang dipinjam.']);
+        }
+
+        // Cari anggota lama berdasarkan nomor HP, atau daftarkan sebagai anggota baru
+        $member = LibraryMember::firstOrCreate(
+            ['phone' => $validated['phone']],
+            [
+                'full_name' => $validated['full_name'],
+                'address'   => $validated['address'] ?? null,
+                'joined_at' => now(),
+            ]
+        );
+
+        $loan = BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $book->id,
+            'due_at'    => now()->addDays(7),
+            'status'    => 'diajukan',
+        ]);
+
+        return redirect()->route('perpus.pinjam.success', $loan->loan_code)
+            ->with('success', 'Pengajuan peminjaman berhasil dikirim!');
+    }
+
+    public function perpusPinjamSuccess($loanCode)
+    {
+        $info = $this->getSchoolData()['info'];
+        $loan = BookLoan::with('book')->where('loan_code', $loanCode)->firstOrFail();
+        return view('perpus.pinjam-success', compact('loan', 'info'));
+    }
+
+    public function perpusTracking()
+    {
+        $info = $this->getSchoolData()['info'];
+        return view('perpus.tracking', compact('info'));
+    }
+
+    public function perpusCheckStatus(Request $request)
+    {
+        $validated = $request->validate(['loan_code' => 'required|string']);
+        $loan = BookLoan::with(['book', 'member'])
+            ->where('loan_code', $validated['loan_code'])->first();
+
+        if (!$loan) {
+            return back()->withErrors(['loan_code' => 'Kode peminjaman tidak ditemukan.']);
+        }
+
+        return view('perpus.tracking', ['loan' => $loan, 'info' => $this->getSchoolData()['info']]);
+    }
+
+    /**
+     * Helper data profil sekolah untuk modul perpustakaan & publik
+     */
+    private function getSchoolData(): array
+    {
+        return [
+            'info' => [
+                'nama'          => 'PKBM TAHFIZH ATTAMAM',
+                'slogan'        => 'Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital',
+                'alamat'        => 'Jl. Hangtuah No. 45, Tenayan Raya, Pekanbaru, Riau',
+                'telepon'       => '(0761) 555-0192',
+                'email'         => 'info@pkbmtahfizhattamam.sch.id',
+                'tahun_berdiri' => '2018',
+                'akreditasi'    => 'B (Baik)',
+            ]
+        ];
     }
 }

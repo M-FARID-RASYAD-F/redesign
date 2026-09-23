@@ -1,0 +1,85 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit Buku - ' . $book->title)
+
+@section('content')
+<div class="header" style="margin-bottom: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="{{ route('admin.perpus.books.index') }}" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 4px;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Kembali
+        </a>
+        <h1 class="header-title" style="font-size: 1.4rem; font-weight: 700; color: #1e293b; margin: 0;">Edit Data Buku</h1>
+    </div>
+</div>
+
+@if($errors->any())
+<div style="background-color: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
+    <div style="font-weight: 600; margin-bottom: 4px;">Terjadi kesalahan pengisian form:</div>
+    <ul style="margin: 0; padding-left: 18px;">
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="card" style="max-width: 800px; padding: 24px;">
+    <form action="{{ route('admin.perpus.books.update', $book->id) }}" method="POST">
+        @csrf
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div style="grid-column: span 2;">
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Judul Buku <span style="color: #ef4444;">*</span></label>
+                <input type="text" name="title" value="{{ old('title', $book->title) }}" required class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Kategori Buku</label>
+                <select name="category_id" class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background-color: #fff;">
+                    <option value="">-- Pilih Kategori --</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ old('category_id', $book->category_id) == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Nomor ISBN</label>
+                <input type="text" name="isbn" value="{{ old('isbn', $book->isbn) }}" class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Penulis / Pengarang <span style="color: #ef4444;">*</span></label>
+                <input type="text" name="author" value="{{ old('author', $book->author) }}" required class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Penerbit</label>
+                <input type="text" name="publisher" value="{{ old('publisher', $book->publisher) }}" class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Total Eksemplar Stok <span style="color: #ef4444;">*</span></label>
+                <input type="number" name="stock" value="{{ old('stock', $book->stock) }}" min="1" required class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                <small style="color: #64748b; font-size: 0.775rem;">Saat ini tersedia: <strong>{{ $book->available }}</strong> eksemplar.</small>
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Lokasi Rak Fisik</label>
+                <input type="text" name="rack_location" value="{{ old('rack_location', $book->rack_location) }}" class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <div style="grid-column: span 2;">
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: #334155; margin-bottom: 6px;">Sinopsis / Deskripsi Buku</label>
+                <textarea name="synopsis" rows="4" class="form-control" style="width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-family: inherit;">{{ old('synopsis', $book->synopsis) }}</textarea>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #e2e8f0; padding-top: 18px;">
+            <a href="{{ route('admin.perpus.books.index') }}" class="btn btn-outline" style="padding: 9px 18px;">Batal</a>
+            <button type="submit" class="btn btn-primary" style="padding: 9px 22px;">Perbarui Buku</button>
+        </div>
+    </form>
+</div>
+@endsection

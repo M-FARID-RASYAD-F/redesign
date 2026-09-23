@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\Book::class, \App\Policies\BookPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\BookCategory::class, \App\Policies\BookCategoryPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\BookLoan::class, \App\Policies\BookLoanPolicy::class);
+
         // Super Admin Global Gate Bypass (Kecuali aksi khusus seperti menghapus diri sendiri)
         Gate::before(function ($user, string $ability) {
             if ($user && $user->is_active && $user->role === 'super_admin') {

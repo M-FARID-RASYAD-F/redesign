@@ -352,7 +352,7 @@ class SchoolController extends Controller
         $testimoni = [
             [
                 'name' => 'Ustadz H. Hendra Kurniawan, S.Pd.I',
-                'role' => 'Wali Santri SD Tahfizh At-Tamam',
+                'role' => 'Wali Santri SD Tahfizh, putra mutqin Juz 29 & 30',
                 'rating' => 5,
                 'quote' => 'Alhamdulillah, dalam 2 tahun anak kami di SD At-Tamam hafalan Juz 30 dan Juz 29 sudah mutqin. Yang paling membahagiakan, akhlak dan adab kesehariannya terhadap orang tua sangat santun.',
                 'avatar_initials' => 'HK',
@@ -360,7 +360,7 @@ class SchoolController extends Controller
             ],
             [
                 'name' => 'Muhammad Farhan Al-Fatih',
-                'role' => 'Alumni SMP Tahfizh — Mahasiswa Al-Azhar Kairo',
+                'role' => 'Alumni Tahfizh 30 Juz, kini di Al-Azhar Kairo',
                 'rating' => 5,
                 'quote' => 'Fondasi bahasa Arab dan hafalan Al-Qur\'an 30 Juz yang saya peroleh selama di At-Tamam menjadi modal berharga saat mengikuti seleksi beasiswa ke Universitas Al-Azhar Mesir.',
                 'avatar_initials' => 'MF',
@@ -368,7 +368,7 @@ class SchoolController extends Controller
             ],
             [
                 'name' => 'Rizky Pratama',
-                'role' => 'Alumni SMK RPL — Software Engineer di Tech Studio',
+                'role' => 'Alumni SMK RPL, kini Software Engineer di Tech Studio',
                 'rating' => 5,
                 'quote' => 'Kurikulum vokasi di SMK At-Tamam sangat aplikatif. Kami langsung mendalami tech stack modern Laravel dan React. Sebelum wisuda pun saya sudah mulai bekerja di industri digital.',
                 'avatar_initials' => 'RP',
@@ -376,7 +376,7 @@ class SchoolController extends Controller
             ],
             [
                 'name' => 'dr. Hj. Nurul Hidayah, Sp.A',
-                'role' => 'Wali Santri Boarding School',
+                'role' => 'Wali Santri Boarding School, Dokter Spesialis Anak',
                 'rating' => 5,
                 'quote' => 'Sebagai orang tua yang bekerja, kami sangat tenang mempercayakan pendidikan putra kami di Boarding At-Tamam. Fasilitas asrama bersih, makanan bergizi, dan ibadah terpantau ketat.',
                 'avatar_initials' => 'NH',

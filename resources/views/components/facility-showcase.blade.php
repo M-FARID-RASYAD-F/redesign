@@ -67,6 +67,43 @@
     margin: 50px 0 70px;
 }
 
+[data-theme="light"] .facility-showcase-section {
+    position: relative;
+    background: #2b0b12;
+    background: oklch(27.1% 0.105 12.094 / 0.94);
+    border: 1px solid rgba(225, 29, 72, 0.35);
+    border: 1px solid oklch(58.6% 0.253 17.585 / 0.35);
+    border-radius: 20px;
+    padding: 52px 32px 46px;
+    box-shadow: 0 16px 45px -5px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+}
+
+[data-theme="light"] .facility-showcase-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #be123c 0%, #e11d48 50%, #f43f5e 100%);
+    background: linear-gradient(90deg, oklch(41% 0.159 10.272) 0%, oklch(58.6% 0.253 17.585) 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+[data-theme="light"] .facility-showcase-section .section-title {
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .facility-showcase-section .section-subtitle {
+    color: #ffe4e6 !important;
+}
+
+[data-theme="light"] .facility-showcase-section .section-tag {
+    color: #fda4af !important;
+    color: oklch(75% 0.18 18) !important;
+}
+
 .facility-filter-tabs {
     display: flex;
     justify-content: center;
@@ -101,15 +138,28 @@
 }
 
 [data-theme="light"] .facility-tab-btn {
-    background: #ffffff;
-    border-color: #cbd5e1;
-    color: #475569;
+    background: #190508;
+    background: oklch(20% 0.08 11 / 0.85);
+    border: 1px solid rgba(225, 29, 72, 0.35);
+    border: 1px solid oklch(58.6% 0.253 17.585 / 0.35);
+    color: #ffe4e6;
+}
+
+[data-theme="light"] .facility-tab-btn:hover {
+    background: rgba(225, 29, 72, 0.25);
+    background: oklch(58.6% 0.253 17.585 / 0.25);
+    border-color: #e11d48;
+    border-color: oklch(58.6% 0.253 17.585);
+    color: #ffffff;
 }
 
 [data-theme="light"] .facility-tab-btn.active {
-    background: #0284c7;
-    border-color: #0284c7;
+    background: #e11d48;
+    background: oklch(58.6% 0.253 17.585);
+    border-color: #e11d48;
+    border-color: oklch(58.6% 0.253 17.585);
     color: #ffffff;
+    box-shadow: 0 4px 16px rgba(225, 29, 72, 0.45), 0 0 16px oklch(58.6% 0.253 17.585 / 0.45);
 }
 
 .facility-grid {
@@ -130,9 +180,19 @@
 }
 
 [data-theme="light"] .facility-card {
-    background: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    background: #23060b;
+    background: oklch(22% 0.09 11 / 0.92);
+    border: 1px solid rgba(225, 29, 72, 0.3);
+    border: 1px solid oklch(58.6% 0.253 17.585 / 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .facility-card:hover {
+    background: #300a12;
+    background: oklch(30% 0.12 13 / 0.96);
+    border-color: #e11d48;
+    border-color: oklch(58.6% 0.253 17.585);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(225, 29, 72, 0.35), 0 0 24px oklch(58.6% 0.253 17.585 / 0.35);
 }
 
 .facility-card:hover {
@@ -207,9 +267,11 @@
 }
 
 [data-theme="light"] .facility-badge {
-    background: rgba(255, 255, 255, 0.9);
-    color: #0284c7;
-    border-color: #cbd5e1;
+    background: rgba(20, 4, 7, 0.88);
+    background: oklch(20% 0.08 11 / 0.88);
+    color: #fda4af;
+    border: 1px solid rgba(225, 29, 72, 0.5);
+    border: 1px solid oklch(58.6% 0.253 17.585 / 0.5);
 }
 
 .facility-body {
@@ -228,7 +290,7 @@
 }
 
 [data-theme="light"] .facility-name {
-    color: #0f172a;
+    color: #ffffff;
 }
 
 .facility-desc {
@@ -239,7 +301,7 @@
 }
 
 [data-theme="light"] .facility-desc {
-    color: #64748b;
+    color: #ffe4e6;
 }
 
 /* Lightbox Modal */
@@ -276,8 +338,11 @@
 }
 
 [data-theme="light"] .lightbox-content {
-    background: #ffffff;
-    border-color: #cbd5e1;
+    background: #24070c;
+    background: oklch(24% 0.095 11.5);
+    border-color: rgba(225, 29, 72, 0.5);
+    border-color: oklch(58.6% 0.253 17.585 / 0.5);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(225, 29, 72, 0.35);
 }
 
 @keyframes lightboxPop {
@@ -309,8 +374,10 @@
 }
 
 [data-theme="light"] .lightbox-caption {
-    background: #f8fafc;
-    border-top-color: #e2e8f0;
+    background: rgba(20, 4, 7, 0.95);
+    background: oklch(20% 0.08 11 / 0.95);
+    border-top-color: rgba(225, 29, 72, 0.3);
+    border-top-color: oklch(58.6% 0.253 17.585 / 0.3);
 }
 
 .lightbox-title {
@@ -321,7 +388,7 @@
 }
 
 [data-theme="light"] .lightbox-title {
-    color: #0f172a;
+    color: #ffffff;
 }
 
 .lightbox-desc {
@@ -332,7 +399,7 @@
 }
 
 [data-theme="light"] .lightbox-desc {
-    color: #64748b;
+    color: #ffe4e6;
 }
 
 .lightbox-close-btn {
@@ -385,6 +452,13 @@
 
 .lightbox-nav-btn.next {
     right: 14px;
+}
+
+@media (max-width: 768px) {
+    [data-theme="light"] .facility-showcase-section {
+        padding: 36px 18px 30px;
+        border-radius: 16px;
+    }
 }
 </style>
 

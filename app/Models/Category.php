@@ -26,4 +26,16 @@ class Category extends Model
     {
         return $this->hasMany(Book::class, 'category_id');
     }
+
+    /**
+     * Mengembalikan representasi SVG icon standar yang seragam dengan style website.
+     */
+    public function getIconSvgAttribute(): string
+    {
+        return view('components.category-icon', [
+            'icon' => $this->icon,
+            'category' => $this,
+            'size' => 15,
+        ])->render();
+    }
 }

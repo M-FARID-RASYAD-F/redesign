@@ -79,7 +79,10 @@
                             <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.4;">
                                 {{ $book->rack->name }}
                                 @if($book->rack->location)
-                                    <br><span style="color: #38bdf8;">📍 {{ $book->rack->location }}</span>
+                                    <br><span style="color: #38bdf8; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                                        <span>{{ $book->rack->location }}</span>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -92,8 +95,9 @@
                     {{-- Badges --}}
                     <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
                         @if($book->category)
-                            <a href="{{ route('catalog.index', ['kategori' => $book->category->slug]) }}" style="text-decoration: none; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.5px;">
-                                @if($book->category->icon) {{ $book->category->icon }} @endif {{ $book->category->name }}
+                            <a href="{{ route('catalog.index', ['kategori' => $book->category->slug]) }}" style="text-decoration: none; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;">
+                                <x-category-icon :icon="$book->category->icon" :category="$book->category" size="14" />
+                                <span>{{ $book->category->name }}</span>
                             </a>
                         @endif
                         @if($book->publication_year)

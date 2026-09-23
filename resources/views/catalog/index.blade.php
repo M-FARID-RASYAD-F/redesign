@@ -95,9 +95,7 @@
                             href="{{ route('catalog.index', array_filter(['q' => $search, 'kategori' => $cat->slug, 'rak' => $rackId, 'ketersediaan' => $availability, 'sort' => $sort])) }}" 
                             class="news-category-pill {{ $categorySlug === $cat->slug ? 'active' : '' }}"
                         >
-                            @if($cat->icon)
-                                <span>{{ $cat->icon }}</span>
-                            @endif
+                            <x-category-icon :icon="$cat->icon" :category="$cat" size="15" />
                             <span>{{ $cat->name }}</span>
                             @if($cat->books_count > 0)
                                 <span class="cat-count-badge">{{ $cat->books_count }}</span>
@@ -181,9 +179,10 @@
                                 @endif
 
                                 {{-- Stock Status Badge Over Cover --}}
-                                <span style="position: absolute; top: 12px; right: 12px; background: {{ $book->available_stock > 0 ? 'rgba(16, 185, 129, 0.9)' : 'rgba(239, 68, 68, 0.9)' }}; backdrop-filter: blur(8px); color: #ffffff; font-size: 0.72rem; font-weight: 700; padding: 4px 9px; border-radius: 9999px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                                <span style="position: absolute; top: 12px; right: 12px; background: {{ $book->available_stock > 0 ? 'rgba(16, 185, 129, 0.9)' : 'rgba(239, 68, 68, 0.9)' }}; backdrop-filter: blur(8px); color: #ffffff; font-size: 0.72rem; font-weight: 700; padding: 4px 9px; border-radius: 9999px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: inline-flex; align-items: center; gap: 4px;">
                                     @if($book->available_stock > 0)
-                                        ✓ {{ $book->available_stock }} Eks.
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>{{ $book->available_stock }} Eks.</span>
                                     @else
                                         Dipinjam
                                     @endif

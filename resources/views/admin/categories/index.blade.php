@@ -36,12 +36,8 @@
                 @forelse($categories as $category)
                 <tr>
                     <td style="text-align: center; vertical-align: middle;">
-                        <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(0, 180, 216, 0.15); color: #38bdf8; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;">
-                            @if($category->icon)
-                                {{ $category->icon }}
-                            @else
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                            @endif
+                        <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(0, 180, 216, 0.15); color: #38bdf8; display: inline-flex; align-items: center; justify-content: center;">
+                            <x-category-icon :icon="$category->icon" :category="$category" size="18" />
                         </div>
                     </td>
                     <td>

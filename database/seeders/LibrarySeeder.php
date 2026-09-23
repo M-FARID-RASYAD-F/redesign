@@ -21,37 +21,37 @@ class LibrarySeeder extends Seeder
                 'name' => 'Teknologi Informasi & Komputer',
                 'slug' => 'teknologi-informasi-dan-komputer',
                 'description' => 'Buku-buku tentang pemrograman web, kecerdasan buatan, algoritma, rekayasa perangkat lunak, dan jaringan.',
-                'icon' => '💻'
+                'icon' => 'laptop'
             ],
             [
                 'name' => 'Agama Islam & Tahfizh',
                 'slug' => 'agama-islam-dan-tahfizh',
                 'description' => 'Koleksi tafsir Al-Qur\'an, fiqih ibadah, akhlak Islam, sirah nabawiyah, dan ilmu tajwid.',
-                'icon' => '🕌'
+                'icon' => 'book-open'
             ],
             [
                 'name' => 'Sains & Matematika',
                 'slug' => 'sains-dan-matematika',
                 'description' => 'Buku teks dan referensi fisika, biologi, kimia modern, kalkulus, dan logika matematika.',
-                'icon' => '🔬'
+                'icon' => 'microscope'
             ],
             [
                 'name' => 'Sastra & Fiksi Inspiratif',
                 'slug' => 'sastra-dan-fiksi-inspiratif',
                 'description' => 'Karya novel pembangun jiwa, antologi puisi, cerita anak, dan literasi bahasa Indonesia.',
-                'icon' => '📚'
+                'icon' => 'book'
             ],
             [
                 'name' => 'Sejarah & Sosial Budaya',
                 'slug' => 'sejarah-dan-sosial-budaya',
                 'description' => 'Buku sejarah peradaban dunia, kebudayaan nusantara, dan sosiologi pendidikan.',
-                'icon' => '🏛️'
+                'icon' => 'landmark'
             ],
             [
                 'name' => 'Kewirausahaan & Vokasi',
                 'slug' => 'kewirausahaan-dan-vokasi',
                 'description' => 'Panduan bisnis digital, tata kelola keuangan, dan keahlian kerja kejuruan modern.',
-                'icon' => '📈'
+                'icon' => 'trending-up'
             ],
         ];
 

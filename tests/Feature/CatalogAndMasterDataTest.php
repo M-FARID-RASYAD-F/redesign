@@ -32,14 +32,14 @@ class CatalogAndMasterDataTest extends TestCase
             'name' => 'Teknologi Informasi',
             'slug' => 'teknologi-informasi',
             'description' => 'Buku-buku seputar pemrograman dan komputer',
-            'icon' => '💻'
+            'icon' => 'laptop'
         ]);
 
         $this->categoryAgama = Category::create([
             'name' => 'Agama Islam',
             'slug' => 'agama-islam',
             'description' => 'Buku-buku keislaman',
-            'icon' => '🕌'
+            'icon' => 'book-open'
         ]);
 
         $this->rackA = Rack::create([
@@ -231,7 +231,7 @@ class CatalogAndMasterDataTest extends TestCase
         // 1. Create
         $response = $this->actingAs($this->admin)->post(route('admin.categories.store'), [
             'name' => 'Sains Eksakta',
-            'icon' => '🔬',
+            'icon' => 'microscope',
             'description' => 'Fisika, Biologi, Kimia',
         ]);
         $response->assertRedirect(route('admin.categories.index'));
@@ -242,7 +242,7 @@ class CatalogAndMasterDataTest extends TestCase
         // 2. Update
         $updateResponse = $this->actingAs($this->admin)->put(route('admin.categories.update', $category->id), [
             'name' => 'Sains & Teknologi Maju',
-            'icon' => '🚀',
+            'icon' => 'trending-up',
             'description' => 'Fisika terapan dan bioteknologi',
         ]);
         $updateResponse->assertRedirect(route('admin.categories.index'));

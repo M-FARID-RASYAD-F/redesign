@@ -28,17 +28,23 @@
                     </label>
                     <div class="sim-btn-group" role="radiogroup" aria-label="Jenjang Pendidikan">
                         <button type="button" class="sim-toggle-btn active" data-jenjang="sd">
-                            <span class="btn-icon-sub">🎒</span>
+                            <span class="btn-icon-sub" style="display: inline-flex; align-items: center; justify-content: center;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </span>
                             <span class="btn-text-main">SD Tahfizh</span>
                             <span class="btn-badge-sub">6 Tahun</span>
                         </button>
                         <button type="button" class="sim-toggle-btn" data-jenjang="smp">
-                            <span class="btn-icon-sub">📚</span>
+                            <span class="btn-icon-sub" style="display: inline-flex; align-items: center; justify-content: center;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                            </span>
                             <span class="btn-text-main">SMP Tahfizh</span>
                             <span class="btn-badge-sub">3 Tahun</span>
                         </button>
                         <button type="button" class="sim-toggle-btn" data-jenjang="smk">
-                            <span class="btn-icon-sub">💻</span>
+                            <span class="btn-icon-sub" style="display: inline-flex; align-items: center; justify-content: center;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+                            </span>
                             <span class="btn-text-main">SMK Vokasi</span>
                             <span class="btn-badge-sub">RPL/TKJ/DKV</span>
                         </button>
@@ -78,10 +84,10 @@
                     <div class="sim-select-wrap">
                         <select id="simJalurSelect" class="sim-select-field">
                             <option value="reguler" selected>Jalur Reguler (Standar Mandiri)</option>
-                            <option value="tahfizh_30">⭐ Beasiswa Tahfizh 30 Juz (Bebas Biaya 100% SPP &amp; Pangkal)</option>
-                            <option value="tahfizh_10">🌟 Beasiswa Tahfizh 10–20 Juz (Potongan 50% Uang Pangkal &amp; SPP)</option>
-                            <option value="prestasi">🏆 Beasiswa Prestasi Akademik/Sains/LKS (Potongan 30% Uang Pangkal)</option>
-                            <option value="afirmasi">🤝 Jalur Afirmasi Yatim &amp; Dhuafa (Bantuan Penuh Yayasan)</option>
+                            <option value="tahfizh_30">Beasiswa Tahfizh 30 Juz (Bebas Biaya 100% SPP &amp; Pangkal)</option>
+                            <option value="tahfizh_10">Beasiswa Tahfizh 10–20 Juz (Potongan 50% Uang Pangkal &amp; SPP)</option>
+                            <option value="prestasi">Beasiswa Prestasi Akademik/Sains/LKS (Potongan 30% Uang Pangkal)</option>
+                            <option value="afirmasi">Jalur Afirmasi Yatim &amp; Dhuafa (Bantuan Penuh Yayasan)</option>
                         </select>
                     </div>
                 </div>
@@ -699,7 +705,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (ctaBtn) {
             ctaBtn.href = `{{ route('ppdb.create') }}?jenjang=${selectedJenjang}`;
-            ctaBtn.querySelector('span').textContent = `Daftar Jenjang ${selectedJenjang.toUpperCase()} Sekarang ➔`;
+            ctaBtn.querySelector('span').textContent = `Daftar Jenjang ${selectedJenjang.toUpperCase()} Sekarang \u2192`;
         }
     }
 

@@ -24,9 +24,9 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label" for="icon">Ikon / Simbol Singkat</label>
-            <input type="text" id="icon" name="icon" class="form-control" placeholder="Contoh: 💻, 🔬, 📚, 🕌, 🏛️" value="{{ old('icon', $category->icon) }}">
-            <span style="font-size: 0.75rem; color: var(--text-muted);">Gunakan emoji atau simbol representasi kategori.</span>
+            <label class="form-label" for="icon">Ikon Kategori (SVG Lucide)</label>
+            <input type="text" id="icon" name="icon" class="form-control" placeholder="Pilihan: book-open, laptop, microscope, book, landmark, trending-up" value="{{ old('icon', $category->icon) }}">
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Masukkan nama ikon SVG (misal: <code>book-open</code>, <code>laptop</code>, <code>microscope</code>, <code>book</code>, <code>landmark</code>, <code>trending-up</code>).</span>
             @error('icon')
                 <div style="color: var(--danger); font-size: 0.8rem; margin-top: 4px;">{{ $message }}</div>
             @enderror

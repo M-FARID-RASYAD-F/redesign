@@ -79,7 +79,13 @@
                         </tr>
                         <tr>
                             <td>Nomor WhatsApp</td>
-                            <td>{{ $registration->parent_phone }}</td>
+                            <td>
+                                @if(session('submitted_ppdb_no') === $registration->no_pendaftaran || Auth::check())
+                                    {{ $registration->parent_phone }}
+                                @else
+                                    {{ Str::mask($registration->parent_phone, '*', 4, -3) }}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Alamat</td>

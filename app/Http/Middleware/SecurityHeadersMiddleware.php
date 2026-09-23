@@ -29,6 +29,19 @@ class SecurityHeadersMiddleware
         // Batasi akses sensor/fitur sensitif perangkat yang tidak dibutuhkan
         $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
+        // Content-Security-Policy (CSP) Defense-in-depth against XSS
+        $csp = "default-src 'self'; " .
+               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; " .
+               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; " .
+               "font-src 'self' https://fonts.gstatic.com data:; " .
+               "img-src 'self' data: https: blob:; " .
+               "connect-src 'self' ws: wss:; " .
+               "frame-ancestors 'self'; " .
+               "base-uri 'self'; " .
+               "form-action 'self';";
+
+        $response->headers->set('Content-Security-Policy', $csp);
+
         // HSTS (HTTP Strict Transport Security) jika koneksi menggunakan HTTPS
         if ($request->isSecure()) {
             $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');

@@ -16,6 +16,9 @@ class LibraryMember extends Model
     protected static function booted(): void
     {
         static::creating(function (LibraryMember $member) {
+            if (empty($member->joined_at)) {
+                $member->joined_at = now();
+            }
             if (empty($member->member_code)) {
                 $year = date('Y');
                 $count = static::whereYear('created_at', $year)->count() + 1;

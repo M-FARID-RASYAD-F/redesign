@@ -468,6 +468,22 @@
         }
     }
 
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function sanitizeUrl(url) {
+        if (!url) return '#';
+        const trimmed = String(url).trim();
+        if (trimmed.startsWith('/') || trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+            return encodeURI(trimmed);
+        }
+        return '#';
+    }
+
     function renderItems() {
         const query = (input.value || '').trim().toLowerCase();
         
@@ -496,15 +512,15 @@
 
         emptyState.style.display = 'none';
         itemsWrap.innerHTML = filteredItems.map((item, idx) => `
-            <a href="${item.url}" class="spotlight-item ${idx === selectedIndex ? 'selected' : ''}" data-index="${idx}">
+            <a href="${sanitizeUrl(item.url)}" class="spotlight-item ${idx === selectedIndex ? 'selected' : ''}" data-index="${idx}">
                 <div class="spotlight-item-main">
                     <span class="spotlight-item-icon">${getIconSvg(item.icon)}</span>
                     <div class="spotlight-item-info">
-                        <div class="spotlight-item-title">${item.title}</div>
-                        <div class="spotlight-item-desc">${item.desc}</div>
+                        <div class="spotlight-item-title">${escapeHtml(item.title)}</div>
+                        <div class="spotlight-item-desc">${escapeHtml(item.desc)}</div>
                     </div>
                 </div>
-                <span class="spotlight-item-badge">${item.badge || item.category}</span>
+                <span class="spotlight-item-badge">${escapeHtml(item.badge || item.category || '')}</span>
             </a>
         `).join('');
 

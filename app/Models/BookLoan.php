@@ -42,12 +42,11 @@ class BookLoan extends Model
         static::creating(function (BookLoan $loan) {
             if (empty($loan->loan_code)) {
                 $year = date('Y');
-                $count = static::whereYear('created_at', $year)->count() + 1;
-                $code = 'PINJAM-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
-                while (static::where('loan_code', $code)->exists()) {
-                    $count++;
-                    $code = 'PINJAM-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
-                }
+                do {
+                    $randomPart = str_pad((string) random_int(1000, 9999), 4, '0', STR_PAD_LEFT);
+                    $code = 'PINJAM-' . $year . '-' . $randomPart;
+                } while (static::where('loan_code', $code)->exists());
+
                 $loan->loan_code = $code;
             }
         });

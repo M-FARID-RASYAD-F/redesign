@@ -66,6 +66,16 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $adminPerpus = User::updateOrCreate(
+            ['email' => 'perpus@attamam.sch.id'],
+            [
+                'name' => 'Fathia Azzahra, S.I.Pust. (Admin Perpustakaan)',
+                'password' => bcrypt('password123'),
+                'role' => 'admin_perpus',
+                'is_active' => true,
+            ]
+        );
+
         // 2. Seed Majors (Jurusan)
         $jurusanList = [
             [
@@ -334,5 +344,8 @@ class DatabaseSeeder extends Seeder
             'action' => 'publish',
             'description' => 'Mempublikasikan artikel berita prestasi lomba LKS 2026',
         ]);
+
+        // 11. Seed Modul Perpustakaan & Master Data (Buku, Kategori, Rak)
+        $this->call(LibrarySeeder::class);
     }
 }

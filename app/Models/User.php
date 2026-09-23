@@ -43,7 +43,8 @@ class User extends Authenticatable implements FilamentUser
             'super_admin',
             'admin_cms',
             'admin_ppdb',
-            'editor_akademik'
+            'editor_akademik',
+            'admin_perpus',
         ]);
     }
 
@@ -68,6 +69,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === 'editor_akademik';
     }
 
+    public function isAdminPerpus(): bool
+    {
+        return $this->role === 'admin_perpus';
+    }
+
     public function hasRole(string|array $roles): bool
     {
         if (is_array($roles)) {
@@ -83,6 +89,7 @@ class User extends Authenticatable implements FilamentUser
             'admin_cms' => route('admin.cms.dashboard'),
             'admin_ppdb' => route('admin.ppdb.dashboard'),
             'editor_akademik' => route('admin.akademik.dashboard'),
+            'admin_perpus' => route('admin.dashboard'),
             default => route('admin.dashboard'),
         };
     }
@@ -94,6 +101,7 @@ class User extends Authenticatable implements FilamentUser
             'admin_cms' => 'Admin CMS',
             'admin_ppdb' => 'Admin PPDB',
             'editor_akademik' => 'Editor Akademik',
+            'admin_perpus' => 'Admin Perpustakaan',
             default => 'Pengguna',
         };
     }

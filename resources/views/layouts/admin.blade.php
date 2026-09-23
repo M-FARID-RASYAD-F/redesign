@@ -2227,6 +2227,39 @@
             </li>
             @endcan
 
+            @can('viewAny', App\Models\Book::class)
+            <li>
+                <a href="{{ route('admin.books.index') }}" class="sidebar-link {{ Route::is('admin.books.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </span>
+                    <span>Koleksi Buku</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('viewAny', App\Models\Category::class)
+            <li>
+                <a href="{{ route('admin.categories.index') }}" class="sidebar-link {{ Route::is('admin.categories.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </span>
+                    <span>Kategori Buku</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('viewAny', App\Models\Rack::class)
+            <li>
+                <a href="{{ route('admin.racks.index') }}" class="sidebar-link {{ Route::is('admin.racks.*') ? 'active' : '' }}">
+                    <span class="sidebar-link-icon">
+                        <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+                    </span>
+                    <span>Rak Buku</span>
+                </a>
+            </li>
+            @endcan
+
             @can('viewAny', App\Models\User::class)
             <li>
                 <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
@@ -2500,7 +2533,7 @@
                     let type = 'table';
                     if (method === 'DELETE') {
                         type = 'table';
-                    } else if (action.includes('/news') || action.includes('/teachers') || action.includes('/majors')) {
+                    } else if (action.includes('/news') || action.includes('/teachers') || action.includes('/majors') || action.includes('/books') || action.includes('/categories') || action.includes('/racks')) {
                         type = 'form';
                     } else if (action.includes('/ppdb')) {
                         type = 'detail';

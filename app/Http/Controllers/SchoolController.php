@@ -10,6 +10,7 @@ use App\Models\TeacherStaff;
 use App\Models\PpdbRegistration;
 use App\Models\PpdbDocument;
 use App\Models\ActivityLog;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -840,6 +841,14 @@ class SchoolController extends Controller
                 'badge' => 'WhatsApp',
                 'icon' => 'phone',
             ],
+            [
+                'title' => 'Katalog Perpustakaan & Koleksi Buku Digital',
+                'desc' => 'Cari dan jelajahi koleksi buku keilmuan, sains, teknologi, sastra, dan studi Islam',
+                'url' => route('catalog.index'),
+                'category' => 'Perpustakaan',
+                'badge' => 'Katalog',
+                'icon' => 'book',
+            ],
         ];
 
         // Tambahkan artikel berita dinamis
@@ -852,6 +861,19 @@ class SchoolController extends Controller
                 'category' => 'Berita Terbaru',
                 'badge' => 'Berita',
                 'icon' => 'newspaper',
+            ];
+        }
+
+        // Tambahkan buku perpustakaan dinamis
+        $bookItems = Book::select('title', 'slug', 'author', 'isbn')->latest()->take(10)->get();
+        foreach ($bookItems as $b) {
+            $items[] = [
+                'title' => $b->title,
+                'desc' => 'Penulis: ' . $b->author . ($b->isbn ? " (ISBN: {$b->isbn})" : ''),
+                'url' => route('catalog.show', $b->slug),
+                'category' => 'Koleksi Perpustakaan',
+                'badge' => 'Buku',
+                'icon' => 'book',
             ];
         }
 

@@ -58,6 +58,7 @@
                     <li><a href="{{ route('ppdb.create') }}"><span class="footer-link-arrow">›</span> Formulir Pendaftaran</a></li>
                     <li><a href="{{ route('ppdb.tracking') }}"><span class="footer-link-arrow">›</span> Lacak Status PPDB</a></li>
                     <li><a href="{{ route('home') }}#berita"><span class="footer-link-arrow">›</span> Kabar & Berita Terbaru</a></li>
+                    <li><a href="{{ route('catalog.index') }}"><span class="footer-link-arrow">›</span> Katalog Perpustakaan</a></li>
                 </ul>
             </div>
 

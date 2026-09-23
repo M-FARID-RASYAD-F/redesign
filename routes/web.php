@@ -11,6 +11,10 @@ use App\Http\Controllers\Admin\AkademikDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\RackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,10 @@ Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.
 
 // 1.2 Route Quick Search API (Spotlight / Cmd+K)
 Route::get('/api/search', [SchoolController::class, 'globalSearch'])->name('api.search');
+
+// 1.3 Route Modul Katalog Perpustakaan Publik (Tugas 1: Katalog & Master Data)
+Route::get('/katalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 // 2. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');
@@ -152,4 +160,34 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
     Route::delete('/ppdb/{id}', [AdminController::class, 'ppdbDelete'])
         ->name('ppdb.delete')
         ->middleware('role:super_admin,admin_ppdb');
+
+    // 6.7 Modul Perpustakaan & Katalog Master Data (Tugas 1: Siswa A)
+    Route::middleware('role:super_admin,admin_cms,admin_perpus,editor_akademik')->group(function () {
+        // Books (Buku)
+        Route::get('/books', [BookController::class, 'index'])->name('books.index');
+        Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+        Route::post('/books', [BookController::class, 'store'])->name('books.store');
+        Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
+        Route::match(['PUT', 'PATCH', 'POST'], '/books/{id}', [BookController::class, 'update'])->name('books.update');
+        Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.delete');
+        Route::delete('/books/{id}/destroy', [BookController::class, 'destroy'])->name('books.destroy');
+
+        // Categories (Kategori)
+        Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::match(['PUT', 'PATCH', 'POST'], '/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.delete');
+        Route::delete('/categories/{id}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+        // Racks (Rak)
+        Route::get('/racks', [RackController::class, 'index'])->name('racks.index');
+        Route::get('/racks/create', [RackController::class, 'create'])->name('racks.create');
+        Route::post('/racks', [RackController::class, 'store'])->name('racks.store');
+        Route::get('/racks/{id}/edit', [RackController::class, 'edit'])->name('racks.edit');
+        Route::match(['PUT', 'PATCH', 'POST'], '/racks/{id}', [RackController::class, 'update'])->name('racks.update');
+        Route::delete('/racks/{id}', [RackController::class, 'destroy'])->name('racks.delete');
+        Route::delete('/racks/{id}/destroy', [RackController::class, 'destroy'])->name('racks.destroy');
+    });
 });

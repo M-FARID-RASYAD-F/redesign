@@ -118,12 +118,12 @@
 
             {{-- Quick Search Input Button (Mobile) --}}
             <div style="padding: 10px 16px 4px;">
-                <button type="button" onclick="closeMobileMenu(); openSpotlight();" style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; min-height: 44px; background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.35); border-radius: 12px; color: #cbd5e1; cursor: pointer; font-size: 0.86rem; font-family: inherit;">
-                    <span style="display: flex; align-items: center; gap: 8px;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <button type="button" onclick="closeMobileMenu(); openSpotlight();" class="nav-mobile-search-btn" aria-label="Buka Pencarian Cepat (Ctrl+K)">
+                    <span class="nav-mobile-search-inner">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         <span>Cari informasi sekolah...</span>
                     </span>
-                    <kbd style="background: rgba(0, 180, 216, 0.2); border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; color: #38bdf8; font-weight: 700;">Cari</kbd>
+                    <kbd class="nav-mobile-search-kbd">Cari</kbd>
                 </button>
             </div>
 

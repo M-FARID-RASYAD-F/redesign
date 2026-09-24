@@ -37,7 +37,7 @@
 </div>
 @endif
 
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
+<div class="admin-perpus-main-grid">
     <!-- Left Column: Details -->
     <div style="display: flex; flex-direction: column; gap: 20px;">
         <!-- Card Info Buku -->

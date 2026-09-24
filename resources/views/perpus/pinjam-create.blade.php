@@ -8,7 +8,7 @@
         
         <!-- Navigation -->
         <div class="mb-6">
-            <a href="{{ route('perpus.show', $book->id) }}" class="perpus-hero-track-btn">
+            <a href="{{ route('perpus.show', $book->id) }}" class="perpus-btn-detail inline-flex items-center gap-2 px-4 py-2.5 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 <span>Kembali ke Detail Buku</span>
             </a>
@@ -18,40 +18,59 @@
             <!-- Header Banner -->
             <div class="bg-gradient-to-r from-teal-900 via-emerald-950 to-slate-900 p-6 sm:p-8 text-white border-b border-white/10">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-3 border border-emerald-500/30">
-                    Formulir Layanan Sirkulasi
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Layanan Sirkulasi Mandiri Online</span>
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
                     Ajukan Peminjaman Buku
                 </h1>
                 <p class="text-slate-300 text-sm max-w-2xl leading-relaxed">
-                    Silakan lengkapi data diri Anda dengan benar. Cukup gunakan nomor telepon/WhatsApp aktif tanpa perlu registrasi akun berbelit.
+                    Silakan lengkapi data diri Anda di bawah ini. Anda dapat menggunakan nomor WhatsApp aktif sebagai identitas keanggotaan perpustakaan sekolah tanpa perlu registrasi berbelit.
                 </p>
             </div>
 
             <div class="p-6 sm:p-10">
-                <!-- Book Selected Card -->
-                <div class="perpus-card-subsurface p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <!-- Book Selected Card with Cover Thumbnail -->
+                <div class="perpus-card-subsurface p-4 sm:p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        <!-- Book Cover Thumbnail -->
+                        <div class="w-16 h-22 sm:w-18 sm:h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/20 shrink-0 flex items-center justify-center p-1 shadow-md">
+                            <img src="{{ $book->cover ? asset('storage/' . $book->cover) : asset('images/book-placeholder.png') }}"
+                                 alt="{{ $book->title }}"
+                                 onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                                 class="max-h-full max-w-full object-contain">
                         </div>
+
                         <div>
-                            <div class="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-0.5">Buku yang Dipilih:</div>
-                            <h3 class="font-bold text-white text-base sm:text-lg">{{ $book->title }}</h3>
-                            <div class="text-xs text-slate-300">Karya {{ $book->author }} • Lokasi Rak: {{ $book->rack_location ?: '-' }}</div>
+                            <div class="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                <span>Buku yang Akan Dipinjam:</span>
+                            </div>
+                            <h3 class="font-bold text-white text-base sm:text-lg leading-snug">{{ $book->title }}</h3>
+                            <div class="text-xs text-slate-300 mt-1 flex flex-wrap items-center gap-2">
+                                <span>Penulis: <strong>{{ $book->author }}</strong></span>
+                                @if($book->rack_location)
+                                <span>&bull;</span>
+                                <span class="text-cyan-300 font-mono">Rak: {{ $book->rack_location }}</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    <div class="text-left sm:text-right sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
-                        <div class="text-xs text-slate-400">Masa Pinjam</div>
-                        <div class="text-sm font-bold text-emerald-400">7 Hari Kalender</div>
+
+                    <div class="text-left sm:text-right sm:border-l sm:border-white/10 sm:pl-6 shrink-0 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                        <div class="text-xs text-slate-400">Masa Pinjam Standar</div>
+                        <div class="text-base font-bold text-emerald-400">7 Hari Kalender</div>
                     </div>
                 </div>
 
                 <!-- Error Messages -->
                 @if($errors->any())
-                <div class="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm">
-                    <div class="font-bold mb-1">Pengajuan belum dapat diproses:</div>
-                    <ul class="list-disc list-inside space-y-1">
+                <div class="mb-6 p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-sm">
+                    <div class="font-bold mb-1 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Pengajuan belum dapat diproses:</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -67,17 +86,22 @@
                         <label for="full_name" class="block text-sm font-bold text-slate-200 mb-2">
                             Nama Lengkap Peminjam <span class="text-rose-400">*</span>
                         </label>
-                        <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Rayhan" 
-                            aria-invalid="{{ $errors->has('full_name') ? 'true' : 'false' }}"
-                            @if($errors->has('full_name')) aria-describedby="full_name_error" @endif
-                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('full_name') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            </span>
+                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required placeholder="Contoh: Muhammad Rayhan" 
+                                aria-invalid="{{ $errors->has('full_name') ? 'true' : 'false' }}"
+                                @if($errors->has('full_name')) aria-describedby="full_name_error" @endif
+                                class="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border {{ $errors->has('full_name') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        </div>
                         @error('full_name')
                             <p id="full_name_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
                                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                                 <span>{{ $message }}</span>
                             </p>
                         @else
-                            <p class="text-xs text-slate-400 mt-1.5">Siswa / Santri / Guru / Wali Siswa / Pengunjung Umum.</p>
+                            <p class="text-xs text-slate-400 mt-1.5">Terbuka untuk Santri, Siswa, Guru, Karyawan, Wali Siswa, dan Pengunjung Perpustakaan.</p>
                         @enderror
                     </div>
 
@@ -85,10 +109,15 @@
                         <label for="phone" class="block text-sm font-bold text-slate-200 mb-2">
                             Nomor WhatsApp / HP Aktif <span class="text-rose-400">*</span>
                         </label>
-                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required placeholder="Contoh: 081234567890" 
-                            aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}"
-                            @if($errors->has('phone')) aria-describedby="phone_error" @endif
-                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('phone') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </span>
+                            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required placeholder="Contoh: 081234567890" 
+                                aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}"
+                                @if($errors->has('phone')) aria-describedby="phone_error" @endif
+                                class="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border {{ $errors->has('phone') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">
+                        </div>
                         @error('phone')
                             <p id="phone_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
                                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -97,19 +126,21 @@
                         @else
                             <p class="text-xs text-emerald-400 mt-1.5 flex items-center gap-1">
                                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                Nomor ini menjadi identitas keanggotaan Anda di perpustakaan sekolah.
+                                <span>Nomor ini menjadi identitas peminjaman dan dapat dipakai untuk melacak status peminjaman Anda.</span>
                             </p>
                         @enderror
                     </div>
 
                     <div>
                         <label for="address" class="block text-sm font-bold text-slate-200 mb-2">
-                            Alamat Rumah / Kelas / Instansi (Opsional)
+                            Kelas / Asrama / Alamat Domisili (Opsional)
                         </label>
-                        <textarea id="address" name="address" rows="3" placeholder="Contoh: Kelas X Tahfizh A / Asrama Putra / Jl. Mawar No. 12" 
-                            aria-invalid="{{ $errors->has('address') ? 'true' : 'false' }}"
-                            @if($errors->has('address')) aria-describedby="address_error" @endif
-                            class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('address') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">{{ old('address') }}</textarea>
+                        <div class="relative">
+                            <textarea id="address" name="address" rows="3" placeholder="Contoh: Kelas X Tahfizh A / Asrama Kampus Panam / Jl. Hangtuah No. 45" 
+                                aria-invalid="{{ $errors->has('address') ? 'true' : 'false' }}"
+                                @if($errors->has('address')) aria-describedby="address_error" @endif
+                                class="w-full px-4 py-3 rounded-xl bg-white/5 border {{ $errors->has('address') ? 'border-rose-500 ring-1 ring-rose-500/50' : 'border-white/15' }} focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium text-white placeholder-slate-400 text-sm sm:text-base transition-colors">{{ old('address') }}</textarea>
+                        </div>
                         @error('address')
                             <p id="address_error" class="text-xs text-rose-400 mt-1.5 flex items-center gap-1 font-medium">
                                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -120,16 +151,19 @@
 
                     <!-- Terms agreement note -->
                     <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm leading-relaxed">
-                        <strong class="text-amber-300">Ketentuan Peminjaman:</strong>
-                        <ul class="list-disc list-inside mt-1 space-y-1 text-slate-300">
-                            <li>Batas waktu peminjaman adalah 7 hari sejak tanggal pengambilan buku fisik.</li>
-                            <li>Buku wajib dijaga kebersihan dan keutuhannya tanpa coretan atau kerusakan.</li>
-                            <li>Tunjukkan bukti kode peminjaman kepada petugas perpustakaan untuk mengambil buku.</li>
+                        <strong class="text-amber-300 flex items-center gap-1.5 mb-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>Ketentuan &amp; Tata Tertib Peminjaman:</span>
+                        </strong>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
+                            <li>Batas waktu peminjaman buku adalah <strong>7 hari kalender</strong> sejak buku fisik diambil.</li>
+                            <li>Buku wajib dijaga keutuhannya, bebas dari coretan, sobekan, atau kerusakan.</li>
+                            <li>Tunjukkan bukti kode peminjaman kepada petugas perpustakaan untuk verifikasi pengambilan buku.</li>
                         </ul>
                     </div>
 
                     <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
-                        <button type="submit" class="perpus-btn-borrow w-full sm:w-auto flex-1 py-4 px-8 text-base min-h-[48px] justify-center">
+                        <button type="submit" class="perpus-btn-borrow w-full sm:w-auto flex-1 py-4 px-8 text-base min-h-[48px] justify-center font-bold">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>Kirim Pengajuan Peminjaman</span>
                         </button>

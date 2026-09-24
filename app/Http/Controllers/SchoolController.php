@@ -903,24 +903,36 @@ class SchoolController extends Controller
         $categoryId = $request->query('category');
 
         $books = Book::with('category')
-            ->when($search, fn ($q) => $q->where('title', 'like', "%{$search}%")
-                ->orWhere('author', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where(function ($sub) use ($search) {
+                $sub->where('title', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%")
+                    ->orWhere('isbn', 'like', "%{$search}%");
+            }))
             ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
             ->orderBy('title')
             ->paginate(12)
             ->withQueryString();
 
-        $categories = BookCategory::orderBy('name')->get();
+        $categories = BookCategory::withCount('books')->orderBy('name')->get();
 
-        return view('perpus.index', compact('books', 'categories', 'search', 'categoryId', 'info'));
+        $stats = [
+            'total_books'      => Book::count(),
+            'total_available'  => (int) Book::sum('available'),
+            'total_categories' => $categories->count(),
+        ];
+
+        return view('perpus.index', compact('books', 'categories', 'search', 'categoryId', 'info', 'stats'));
     }
 
     public function perpusShow($id)
     {
         $info = $this->getSchoolData()['info'];
         $book = Book::with('category')->findOrFail($id);
-        $related = Book::where('category_id', $book->category_id)
-            ->where('id', '!=', $book->id)->take(4)->get();
+        $related = Book::with('category')
+            ->where('category_id', $book->category_id)
+            ->where('id', '!=', $book->id)
+            ->take(4)
+            ->get();
 
         return view('perpus.show', compact('book', 'related', 'info'));
     }
@@ -991,15 +1003,33 @@ class SchoolController extends Controller
 
     public function perpusCheckStatus(Request $request)
     {
-        $validated = $request->validate(['loan_code' => 'required|string']);
-        $loan = BookLoan::with(['book', 'member'])
-            ->where('loan_code', $validated['loan_code'])->first();
+        $validated = $request->validate([
+            'loan_code' => 'required|string|min:3|max:50'
+        ], [
+            'loan_code.required' => 'Masukkan Kode Peminjaman atau Nomor WhatsApp Anda.'
+        ]);
 
-        if (!$loan) {
-            return back()->withErrors(['loan_code' => 'Kode peminjaman tidak ditemukan.']);
+        $query = trim($validated['loan_code']);
+        $cleanPhone = preg_replace('/[^0-9]/', '', $query);
+
+        $loan = null;
+        if (preg_match('/^PINJAM-/i', $query)) {
+            $loan = BookLoan::with(['book.category', 'member'])
+                ->where('loan_code', strtoupper($query))->first();
+        } elseif (strlen($cleanPhone) >= 10) {
+            $loan = BookLoan::with(['book.category', 'member'])
+                ->whereHas('member', fn($q) => $q->where('phone', $cleanPhone)->orWhere('phone', $query))
+                ->latest('created_at')->first();
+        } else {
+            $loan = BookLoan::with(['book.category', 'member'])
+                ->where('loan_code', strtoupper($query))->first();
         }
 
-        return view('perpus.tracking', ['loan' => $loan, 'info' => $this->getSchoolData()['info']]);
+        if (!$loan) {
+            return back()->withInput()->withErrors(['loan_code' => "Data peminjaman dengan kode atau nomor '{$query}' tidak ditemukan. Pastikan Kode Peminjaman (misal: PINJAM-2026-0001) atau Nomor WhatsApp sudah benar."]);
+        }
+
+        return view('perpus.tracking', ['loan' => $loan, 'search' => $query, 'info' => $this->getSchoolData()['info']]);
     }
 
     /**

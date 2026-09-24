@@ -615,23 +615,41 @@ class SchoolController extends Controller
         $request->validate([
             'no_pendaftaran' => 'required|string|min:5|max:50',
         ], [
-            'no_pendaftaran.required' => 'Masukkan Nomor Pendaftaran yang ingin dicari!',
+            'no_pendaftaran.required' => 'Masukkan Nomor Pendaftaran atau Nomor WhatsApp yang ingin dicari!',
         ]);
 
         $query = trim($request->no_pendaftaran);
         $cleanPhone = preg_replace('/[^0-9]/', '', $query);
 
-        $registration = PpdbRegistration::with('documents')
-            ->where('no_pendaftaran', $query)
-            ->when(strlen($cleanPhone) >= 8, function ($q) use ($cleanPhone) {
-                $q->orWhere('parent_phone', 'like', "%{$cleanPhone}%");
-            })
-            ->first();
+        // Hanya izinkan pencarian persis: Format Nomor Pendaftaran resmi atau Nomor Telepon lengkap (min 10 digit)
+        $isRegCode = (bool) preg_match('/^PPDB-\d{4}-\d{4}$/i', $query);
+        $isFullPhone = strlen($cleanPhone) >= 10;
+
+        $registration = null;
+
+        if ($isRegCode) {
+            $registration = PpdbRegistration::with('documents')
+                ->where('no_pendaftaran', strtoupper($query))
+                ->first();
+        } elseif ($isFullPhone) {
+            // Pencarian nomor telepon wajib eksak penuh, bukan potongan wildcard %...% (Cegah enumerasi PII)
+            $registration = PpdbRegistration::with('documents')
+                ->where(function ($q) use ($query, $cleanPhone) {
+                    $q->where('parent_phone', $query)
+                      ->orWhere('parent_phone', $cleanPhone);
+                })
+                ->first();
+        } else {
+            // Fallback kecocokan eksak pada nomor pendaftaran
+            $registration = PpdbRegistration::with('documents')
+                ->where('no_pendaftaran', $query)
+                ->first();
+        }
 
         if (!$registration) {
             return redirect()->route('ppdb.tracking')
                 ->withInput()
-                ->with('error', "Data pendaftaran dengan kata kunci '{$query}' tidak ditemukan. Pastikan Nomor Pendaftaran (misal: PPDB-2026-0001) atau Nomor WhatsApp yang Anda masukkan sudah sesuai.");
+                ->with('error', "Data pendaftaran dengan kata kunci '{$query}' tidak ditemukan. Pastikan Nomor Pendaftaran (misal: PPDB-2026-0001) atau Nomor WhatsApp yang Anda masukkan sudah lengkap dan sesuai.");
         }
 
         // Izinkan sesi pengguna saat ini membuka kartu bukti pendaftaran
@@ -945,6 +963,8 @@ class SchoolController extends Controller
             'status'    => 'diajukan',
         ]);
 
+        session(['submitted_loan_code' => $loan->loan_code]);
+
         return redirect()->route('perpus.pinjam.success', $loan->loan_code)
             ->with('success', 'Pengajuan peminjaman berhasil dikirim!');
     }
@@ -953,6 +973,13 @@ class SchoolController extends Controller
     {
         $info = $this->getSchoolData()['info'];
         $loan = BookLoan::with('book')->where('loan_code', $loanCode)->firstOrFail();
+
+        // Otorisasi: hanya peminjam pada sesi aktif atau petugas admin yang dapat membuka kartu bukti langsung
+        if (session('submitted_loan_code') !== $loanCode && !Auth::check()) {
+            return redirect()->route('perpus.tracking')
+                ->with('info', 'Silakan masukkan kode peminjaman Anda di bawah ini untuk memeriksa status.');
+        }
+
         return view('perpus.pinjam-success', compact('loan', 'info'));
     }
 

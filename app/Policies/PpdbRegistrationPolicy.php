@@ -14,7 +14,7 @@ class PpdbRegistrationPolicy
 
     public function view(User $user, PpdbRegistration $registration): bool
     {
-        return $user->is_active;
+        return $user->is_active && in_array($user->role, ['super_admin', 'admin_ppdb', 'admin_cms']);
     }
 
     public function update(User $user, PpdbRegistration $registration): bool

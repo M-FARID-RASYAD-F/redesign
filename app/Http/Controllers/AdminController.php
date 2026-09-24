@@ -34,6 +34,21 @@ class AdminController extends Controller
     }
 
     /**
+     * Sanitasi nilai string sel CSV dari ancaman Formula Injection (DDE attack di Excel/Calc)
+     */
+    protected function sanitizeCsvCell(?string $value): string
+    {
+        if ($value === null || $value === '') {
+            return '-';
+        }
+        $firstChar = substr($value, 0, 1);
+        if (in_array($firstChar, ['=', '+', '-', '@', "\t", "\r"], true)) {
+            return "'" . $value;
+        }
+        return $value;
+    }
+
+    /**
      * ==========================================
      * MODUL BERITA (CMS)
      * ==========================================
@@ -337,15 +352,15 @@ class AdminController extends Controller
                 fputcsv($file, [
                     $reg->no_pendaftaran,
                     $reg->jenjang_label,
-                    $reg->major_choice ?? '-',
-                    $reg->full_name,
+                    $this->sanitizeCsvCell($reg->major_choice),
+                    $this->sanitizeCsvCell($reg->full_name),
                     $reg->gender == 'L' ? 'Laki-laki' : 'Perempuan',
                     $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-',
-                    $reg->address,
-                    $reg->parent_name,
-                    $reg->parent_phone,
+                    $this->sanitizeCsvCell($reg->address),
+                    $this->sanitizeCsvCell($reg->parent_name),
+                    $this->sanitizeCsvCell($reg->parent_phone),
                     ucfirst($reg->status),
-                    $reg->notes ?? '-',
+                    $this->sanitizeCsvCell($reg->notes),
                     $reg->created_at ? $reg->created_at->format('d/m/Y H:i') : '-',
                 ], ';');
             }
@@ -512,7 +527,7 @@ class AdminController extends Controller
     {
         $document = PpdbDocument::findOrFail($id);
 
-        if (!Auth::check() || !in_array(Auth::user()->role, ['super_admin', 'admin_ppdb', 'admin_cms'])) {
+        if (!Auth::check() || !in_array(Auth::user()->role, ['super_admin', 'admin_ppdb'])) {
             abort(403, 'Anda tidak memiliki hak akses untuk membuka berkas persyaratan ini.');
         }
 
@@ -862,9 +877,9 @@ class AdminController extends Controller
             foreach ($loans as $loan) {
                 fputcsv($file, [
                     $loan->loan_code,
-                    $loan->member->full_name,
-                    $loan->member->phone,
-                    $loan->book->title,
+                    $this->sanitizeCsvCell($loan->member ? $loan->member->full_name : '-'),
+                    $this->sanitizeCsvCell($loan->member ? $loan->member->phone : '-'),
+                    $this->sanitizeCsvCell($loan->book ? $loan->book->title : '-'),
                     $loan->status_label,
                     optional($loan->borrowed_at)->format('d-m-Y'),
                     optional($loan->due_at)->format('d-m-Y'),

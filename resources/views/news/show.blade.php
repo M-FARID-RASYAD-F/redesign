@@ -269,7 +269,7 @@
     <!-- Isi Konten Artikel -->
     <article class="news-content">
         @if(strip_tags($news->content) !== $news->content)
-            {!! strip_tags($news->content, '<p><br><b><strong><i><em><u><s><h1><h2><h3><h4><h5><h6><blockquote><ul><ol><li><a><hr><span><div>') !!}
+            @sanitizeHtml($news->content)
         @else
             {!! nl2br(e($news->content)) !!}
         @endif

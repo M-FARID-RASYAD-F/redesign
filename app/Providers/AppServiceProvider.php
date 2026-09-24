@@ -41,5 +41,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\PpdbRegistration::class, \App\Policies\PpdbRegistrationPolicy::class);
         Gate::policy(\App\Models\PpdbDocument::class, \App\Policies\PpdbDocumentPolicy::class);
         Gate::policy(\App\Models\User::class, \App\Policies\UserPolicy::class);
+
+        // Blade directive untuk sanitasi konten HTML (Cegah XSS)
+        \Illuminate\Support\Facades\Blade::directive('sanitizeHtml', function ($expression) {
+            return "<?php echo app(\\App\\Services\\HtmlSanitizerService::class)->clean($expression); ?>";
+        });
     }
 }

@@ -14,11 +14,13 @@ class PerpusSeeder extends Seeder
     public function run(): void
     {
         // 1. Akun Petugas Perpustakaan
+        $defaultPassword = bcrypt(env('SEED_ADMIN_PASSWORD', 'password123'));
+
         User::updateOrCreate(
             ['email' => 'perpus@sekolah.sch.id'],
             [
                 'name'      => 'Ust. Ahmad Fauzan, S.I.Pust. (Pustakawan)',
-                'password'  => bcrypt('password123'),
+                'password'  => $defaultPassword,
                 'role'      => 'admin_perpus',
                 'is_active' => true,
             ]

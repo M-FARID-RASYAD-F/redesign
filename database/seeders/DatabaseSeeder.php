@@ -26,11 +26,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Seed Users untuk Tiap Role (Admin Dummy)
+        $defaultPassword = bcrypt(env('SEED_ADMIN_PASSWORD', 'password123'));
+
         $superAdmin = User::updateOrCreate(
             ['email' => 'superadmin@attamam.sch.id'],
             [
                 'name' => 'Budi Santoso, S.Pd. (Super Admin)',
-                'password' => bcrypt('password123'),
+                'password' => $defaultPassword,
                 'role' => 'super_admin',
                 'is_active' => true,
             ]
@@ -40,7 +42,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'cms@attamam.sch.id'],
             [
                 'name' => 'Siti Rahmah, S.Kom. (Admin CMS)',
-                'password' => bcrypt('password123'),
+                'password' => $defaultPassword,
                 'role' => 'admin_cms',
                 'is_active' => true,
             ]
@@ -50,7 +52,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'ppdb@attamam.sch.id'],
             [
                 'name' => 'Ahmad Fauzan, S.Pd. (Admin PPDB)',
-                'password' => bcrypt('password123'),
+                'password' => $defaultPassword,
                 'role' => 'admin_ppdb',
                 'is_active' => true,
             ]
@@ -60,7 +62,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'akademik@attamam.sch.id'],
             [
                 'name' => 'Dewi Lestari, M.Pd. (Editor Akademik)',
-                'password' => bcrypt('password123'),
+                'password' => $defaultPassword,
                 'role' => 'editor_akademik',
                 'is_active' => true,
             ]

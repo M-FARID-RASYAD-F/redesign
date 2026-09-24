@@ -26,7 +26,10 @@ Route::get('/berita', [SchoolController::class, 'newsIndex'])->name('berita.inde
 Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
 
 // 1.2 Route Quick Search API (Spotlight / Cmd+K)
-Route::get('/api/search', [SchoolController::class, 'globalSearch'])->name('api.search');
+Route::get('/api/search', [SchoolController::class, 'globalSearch'])
+    ->name('api.search')
+    ->middleware('throttle:60,1');
+
 // 2. Route Modul PPDB Online Mandiri (Publik)
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [SchoolController::class, 'ppdbIndex'])->name('index');
@@ -50,7 +53,9 @@ Route::prefix('perpustakaan')->name('perpus.')->group(function () {
     Route::get('/pinjam/{bookId}', [SchoolController::class, 'perpusPinjamCreate'])->name('pinjam.create');
     Route::post('/pinjam/{bookId}', [SchoolController::class, 'perpusPinjamStore'])
         ->name('pinjam.store')->middleware('throttle:10,1');
-    Route::get('/sukses/{loan_code}', [SchoolController::class, 'perpusPinjamSuccess'])->name('pinjam.success');
+    Route::get('/sukses/{loan_code}', [SchoolController::class, 'perpusPinjamSuccess'])
+        ->name('pinjam.success')
+        ->middleware('throttle:30,1');
     Route::get('/status', [SchoolController::class, 'perpusTracking'])->name('tracking');
     Route::post('/status', [SchoolController::class, 'perpusCheckStatus'])
         ->name('check')->middleware('throttle:20,1');
@@ -116,8 +121,8 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
     Route::resource('users', UserController::class)->middleware('role:super_admin');
 
     // 6.3 Modul Berita (CMS)
-    Route::get('/news', [AdminController::class, 'newsIndex'])->name('news.index');
     Route::middleware('role:super_admin,admin_cms')->group(function () {
+        Route::get('/news', [AdminController::class, 'newsIndex'])->name('news.index');
         Route::get('/news/create', [AdminController::class, 'newsCreate'])->name('news.create');
         Route::post('/news', [AdminController::class, 'newsStore'])->name('news.store');
         Route::get('/news/{id}/edit', [AdminController::class, 'newsEdit'])->name('news.edit');
@@ -126,8 +131,8 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
     });
 
     // 6.4 Modul Guru & Staf (Akademik & CMS)
-    Route::get('/teachers', [AdminController::class, 'teacherIndex'])->name('teachers.index');
     Route::middleware('role:super_admin,admin_cms,editor_akademik')->group(function () {
+        Route::get('/teachers', [AdminController::class, 'teacherIndex'])->name('teachers.index');
         Route::get('/teachers/create', [AdminController::class, 'teacherCreate'])->name('teachers.create');
         Route::post('/teachers', [AdminController::class, 'teacherStore'])->name('teachers.store');
         Route::get('/teachers/{id}/edit', [AdminController::class, 'teacherEdit'])->name('teachers.edit');
@@ -136,8 +141,8 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
     });
 
     // 6.5 Modul Program Jurusan (Akademik & CMS)
-    Route::get('/majors', [AdminController::class, 'majorIndex'])->name('majors.index');
     Route::middleware('role:super_admin,admin_cms,editor_akademik')->group(function () {
+        Route::get('/majors', [AdminController::class, 'majorIndex'])->name('majors.index');
         Route::get('/majors/create', [AdminController::class, 'majorCreate'])->name('majors.create');
         Route::post('/majors', [AdminController::class, 'majorStore'])->name('majors.store');
         Route::get('/majors/{id}/edit', [AdminController::class, 'majorEdit'])->name('majors.edit');
@@ -145,7 +150,7 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::delete('/majors/{id}', [AdminController::class, 'majorDelete'])->name('majors.delete');
     });
 
-    // 6.6 Modul PPDB Online
+    // 6.6 Modul PPDB Online (CMS memiliki akses baca rekap pendaftar; Super Admin & Admin PPDB memiliki wewenang penuh)
     Route::middleware('role:super_admin,admin_ppdb,admin_cms')->group(function () {
         Route::get('/ppdb', [AdminController::class, 'ppdbIndex'])->name('ppdb.index');
         Route::get('/ppdb/export', [AdminController::class, 'ppdbExportCsv'])
@@ -154,9 +159,10 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/ppdb/export-zip', [AdminController::class, 'ppdbExportZip'])
             ->name('ppdb.export-zip')
             ->middleware(['role:super_admin,admin_ppdb', 'throttle:5,1']);
-        Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
         Route::get('/ppdb/document/{id}', [AdminController::class, 'ppdbViewDocument'])
-            ->name('ppdb.document');
+            ->name('ppdb.document')
+            ->middleware('role:super_admin,admin_ppdb');
+        Route::get('/ppdb/{id}', [AdminController::class, 'ppdbShow'])->name('ppdb.show');
         Route::post('/ppdb/{id}/status', [AdminController::class, 'ppdbUpdateStatus'])
             ->name('ppdb.status')
             ->middleware('role:super_admin,admin_ppdb');

@@ -3,8 +3,8 @@
 @section('title', 'Lacak Status Peminjaman Buku - Perpustakaan Digital')
 
 @section('konten_utama')
-<div class="perpus-page-wrapper">
-    <div class="perpus-container-narrow">
+<div class="ppdb-page-container">
+    <div style="max-width: 800px; margin: 0 auto;">
 
         <!-- Official Print Receipt Header (Only visible when printing slip) -->
         <div class="print-only text-black mb-6 border-b-2 border-black pb-4 text-center">
@@ -26,310 +26,310 @@
                 <span class="text-slate-400" aria-current="page">Lacak Status</span>
             </nav>
 
-            <a href="{{ route('perpus.index') }}" class="perpus-btn-detail inline-flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <a href="{{ route('perpus.index') }}" class="btn btn-outline" style="font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 <span>Katalog Buku</span>
             </a>
         </div>
 
-        <!-- Header Hero (Screen only) -->
-        <div class="text-center mb-8 no-print">
-            <div class="perpus-hero-badge">
-                Layanan Mandiri Sirkulasi
-            </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight">
-                Lacak Status Peminjaman
-            </h1>
-            <p class="text-slate-300 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                Periksa status pengajuan, masa berlaku peminjaman, serta lokasi rak buku dengan memasukkan Kode Peminjaman atau Nomor WhatsApp Anda.
-            </p>
+        <!-- Header Halaman Tracking -->
+        <div style="text-align: center; margin-bottom: 35px;" class="no-print">
+            <span class="ppdb-section-tag">Tracking Sistem Perpustakaan</span>
+            <h1 class="ppdb-section-title" style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 6px 0 0;">Lacak Status Peminjaman</h1>
+            <p class="ppdb-section-desc" style="margin-top: 6px;">Masukkan Kode Peminjaman atau Nomor WhatsApp resmi untuk memantau status sirkulasi dan batas pengembalian buku.</p>
         </div>
 
-        <!-- Search Card (Screen only) -->
-        <div class="perpus-card-surface p-6 sm:p-8 mb-8 no-print">
-            <form action="{{ route('perpus.check') }}" method="POST" class="space-y-4">
+        <!-- Form Pencarian Kode Peminjaman / No. WA -->
+        <div class="ppdb-tracking-box no-print">
+            <form action="{{ route('perpus.check') }}" method="POST">
                 @csrf
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <label for="loan_code" class="block text-sm font-bold text-slate-200">
-                            Kode Peminjaman atau No. WhatsApp
-                        </label>
-                        <span class="text-xs text-slate-400">Pencarian Otomatis</span>
-                    </div>
-                    <div class="relative">
-                        <svg class="w-5 h-5 absolute left-3.5 top-3.5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        <input type="text" id="loan_code" name="loan_code" value="{{ old('loan_code', isset($loan) ? $loan->loan_code : request('loan_code')) }}" required placeholder="Contoh: PINJAM-2026-0001 atau 081234567890" class="perpus-form-input w-full pl-11 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono font-semibold uppercase text-white placeholder-slate-400 text-sm sm:text-base transition-all">
-                    </div>
-                    <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
-                        <span>Format yang didukung:</span>
-                        <span class="px-2 py-0.5 rounded bg-white/10 text-emerald-300 font-mono font-medium">PINJAM-YYYY-XXXX</span>
-                        <span>atau</span>
-                        <span class="px-2 py-0.5 rounded bg-white/10 text-sky-300 font-medium">08xxxxxxxxxx</span>
-                    </div>
+                <label for="loan_code" class="ppdb-form-label" style="margin-bottom: 8px;">
+                    Kode Peminjaman atau Nomor WhatsApp:
+                </label>
+                <div class="ppdb-tracking-form-row" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <input type="text" id="loan_code" name="loan_code" value="{{ old('loan_code', isset($loan) ? $loan->loan_code : ($search ?? request('loan_code'))) }}" required placeholder="Contoh: PINJAM-2026-0001 atau 081234567890" class="ppdb-form-input" style="flex: 1; min-width: 240px; font-family: monospace; font-weight: 700; text-transform: uppercase;">
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 28px; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Cari Data</span>
+                    </button>
                 </div>
-
-                @if($errors->has('loan_code'))
-                <div class="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex items-center gap-2" role="alert">
-                    <svg class="w-5 h-5 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span>{{ $errors->first('loan_code') }}</span>
+                <div style="margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.8rem; color: #94a3b8;">
+                    <span>Format yang didukung:</span>
+                    <span style="background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; font-family: monospace; color: #34d399; font-weight: 600;">PINJAM-YYYY-XXXX</span>
+                    <span>atau</span>
+                    <span style="background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; font-family: monospace; color: #38bdf8; font-weight: 600;">08xxxxxxxxxx</span>
                 </div>
-                @endif
-
-                <button type="submit" class="perpus-btn-borrow w-full py-3.5 text-base flex items-center justify-center gap-2 font-bold cursor-pointer min-h-[48px]">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-                    <span>Periksa Status Peminjaman</span>
-                </button>
             </form>
         </div>
 
-        <!-- Result Card if $loan is present -->
-        @if(isset($loan))
-        <div class="perpus-card-surface overflow-hidden mb-8 shadow-2xl">
-            <!-- Header Result -->
-            <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 bg-white/5">
-                <div>
-                    <div class="text-xs uppercase tracking-wider text-slate-400 font-medium">Hasil Pencarian Peminjaman</div>
-                    <div class="text-xl sm:text-2xl font-extrabold font-mono text-emerald-400 tracking-wide mt-1">
-                        {{ $loan->loan_code }}
-                    </div>
-                </div>
-                <div>
-                    @php
-                        $badgeClasses = match($loan->status) {
-                            'diajukan'     => 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-                            'dipinjam'     => 'bg-blue-500/20 text-blue-300 border-blue-500/40',
-                            'dikembalikan' => 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-                            'terlambat'    => 'bg-rose-500/20 text-rose-300 border-rose-500/40',
-                            default        => 'bg-slate-500/20 text-slate-300 border-slate-500/40',
-                        };
-
-                        $step = match($loan->status) {
-                            'diajukan'     => 1,
-                            'dipinjam'     => 2,
-                            'dikembalikan' => 3,
-                            'terlambat'    => 2,
-                            default        => 1,
-                        };
-
-                        $progressWidth = match($step) {
-                            1 => '15%',
-                            2 => '55%',
-                            3 => '100%',
-                            default => '15%',
-                        };
-                    @endphp
-                    <span class="inline-block px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border {{ $badgeClasses }}">
-                        {{ $loan->status_label }}
-                    </span>
-                </div>
-            </div>
-
-            <!-- Stepper Progress Bar (Screen only) -->
-            <div class="px-4 sm:px-8 pt-6 pb-2 no-print">
-                <div class="perpus-stepper">
-                    <div class="perpus-step-line">
-                        <div class="perpus-step-line-progress" style="width: {{ $progressWidth }};"></div>
-                    </div>
-                    
-                    <!-- Step 1: Diajukan -->
-                    <div class="perpus-step-item {{ $step >= 1 ? 'step-active' : '' }}">
-                        <div class="perpus-step-circle">
-                            @if($step > 1)
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                            @else
-                                1
-                            @endif
-                        </div>
-                        <div class="perpus-step-label">
-                            <span class="block font-semibold">Diajukan</span>
-                            <span class="block text-[10px] sm:text-[11px] opacity-80 font-normal">{{ $loan->created_at->format('d M Y') }}</span>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Diambil / Fisik -->
-                    <div class="perpus-step-item {{ $loan->status === 'terlambat' ? 'step-warning' : ($step >= 2 ? 'step-active' : '') }}">
-                        <div class="perpus-step-circle">
-                            @if($step > 2)
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                            @elseif($loan->status === 'terlambat')
-                                !
-                            @else
-                                2
-                            @endif
-                        </div>
-                        <div class="perpus-step-label">
-                            <span class="block font-semibold">{{ $loan->status === 'terlambat' ? 'Terlambat' : 'Dipinjam' }}</span>
-                            <span class="block text-[10px] sm:text-[11px] opacity-80 font-normal">
-                                {{ $loan->borrowed_at ? $loan->borrowed_at->format('d M Y') : 'Verifikasi Pustakawan' }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Selesai -->
-                    <div class="perpus-step-item {{ $step >= 3 ? 'step-active' : '' }}">
-                        <div class="perpus-step-circle">
-                            @if($step >= 3)
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                            @else
-                                3
-                            @endif
-                        </div>
-                        <div class="perpus-step-label">
-                            <span class="block font-semibold">Dikembalikan</span>
-                            <span class="block text-[10px] sm:text-[11px] opacity-80 font-normal">
-                                {{ $loan->returned_at ? $loan->returned_at->format('d M Y') : 'Batas: ' . ($loan->due_at ? $loan->due_at->format('d M') : '-') }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Details Body -->
-            <div class="p-6 sm:p-8 space-y-6 pt-2">
-                <!-- Book Info with Cover (Fixed Image Fallback) -->
-                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-2xl perpus-card-subsurface">
-                    <div class="w-24 h-32 rounded-xl overflow-hidden shrink-0 shadow-lg border border-white/10 flex items-center justify-center bg-slate-900/60">
-                        <img src="{{ $loan->book->cover ? asset('storage/' . $loan->book->cover) : asset('images/book-placeholder.png') }}" 
-                             alt="Sampul buku: {{ $loan->book->title }}" 
-                             width="96" 
-                             height="128" 
-                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 text-center sm:text-left">
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                                {{ $loan->book->category->name ?? 'Kategori Umum' }}
-                            </span>
-                            @if($loan->book->rack_location)
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 text-slate-300 border border-white/10">
-                                    Lokasi Rak: {{ $loan->book->rack_location }}
-                                </span>
-                            @endif
-                        </div>
-                        <h2 class="font-bold text-white text-lg sm:text-xl mb-1 leading-snug">
-                            {{ $loan->book->title }}
-                        </h2>
-                        <p class="text-xs sm:text-sm text-slate-300 mb-3">
-                            Penulis: <span class="font-medium text-white">{{ $loan->book->author }}</span>
-                            @if($loan->book->isbn)
-                                • ISBN: <span class="font-mono text-slate-400">{{ $loan->book->isbn }}</span>
-                            @endif
-                        </p>
-                        <a href="{{ route('perpus.show', $loan->book->id) }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors no-print">
-                            <span>Buka Halaman Detail Buku</span>
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Timeline / Key Dates Grid -->
-                <div class="perpus-timeline-grid text-sm">
-                    <div class="p-4 rounded-xl perpus-card-subsurface">
-                        <div class="text-xs text-slate-400 mb-1">Tanggal Diajukan</div>
-                        <div class="font-bold text-white">{{ $loan->created_at->format('d M Y, H:i') }}</div>
-                    </div>
-                    <div class="p-4 rounded-xl perpus-card-subsurface">
-                        <div class="text-xs text-slate-400 mb-1">Tanggal Diambil (Fisik)</div>
-                        <div class="font-bold text-white">{{ $loan->borrowed_at ? $loan->borrowed_at->format('d M Y') : 'Menunggu Pustakawan' }}</div>
-                    </div>
-                    <div class="p-4 rounded-xl perpus-card-subsurface">
-                        <div class="text-xs text-slate-400 mb-1">Batas Waktu / Jatuh Tempo</div>
-                        <div class="font-bold {{ $loan->status === 'terlambat' ? 'text-rose-400' : 'text-emerald-400' }}">
-                            {{ $loan->due_at ? $loan->due_at->format('d M Y') : '-' }}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Borrower Details -->
-                <div class="border-t border-white/10 pt-4 text-sm space-y-2.5">
-                    <div class="flex justify-between items-center text-slate-300">
-                        <span>Peminjam Terdaftar:</span>
-                        <span class="font-semibold text-white">{{ $loan->member->full_name }}</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-300">
-                        <span>Nomor Anggota:</span>
-                        <span class="font-mono font-bold text-emerald-400">{{ $loan->member->member_code }}</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-300">
-                        <span>Nomor WhatsApp:</span>
-                        <span class="font-mono text-slate-300">{{ substr($loan->member->phone, 0, 4) }}****{{ substr($loan->member->phone, -4) }}</span>
-                    </div>
-                    @if($loan->returned_at)
-                    <div class="flex justify-between items-center text-slate-300">
-                        <span>Tanggal Dikembalikan:</span>
-                        <span class="font-bold text-emerald-400">{{ $loan->returned_at->format('d M Y, H:i') }}</span>
-                    </div>
-                    @endif
-                    @if($loan->notes)
-                    <div class="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs">
-                        <span class="font-bold block mb-0.5 text-amber-300">Catatan Petugas Perpustakaan:</span>
-                        {{ $loan->notes }}
-                    </div>
-                    @endif
-                </div>
-
-                <!-- Action Buttons (Screen only) -->
-                <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-3 no-print">
-                    <button type="button" onclick="window.print()" class="flex-1 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm flex items-center justify-center gap-2 border border-white/15 transition-all cursor-pointer min-h-[46px]">
-                        <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                        <span>Cetak Bukti Lacak</span>
-                    </button>
-                    @if($loan->status === 'diajukan')
-                    <a href="https://wa.me/6281270001920?text=Halo%20Admin%20Perpustakaan,%20saya%20sudah%20mengajukan%20peminjaman%20dengan%20kode%20{{ $loan->loan_code }}%20untuk%20buku%20{{ urlencode($loan->book->title) }}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/40 text-emerald-300 font-semibold text-sm flex items-center justify-center gap-2 border border-emerald-500/40 transition-all min-h-[46px]">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                        <span>Konfirmasi via WhatsApp</span>
-                    </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-        @else
-        <!-- Information Guide Card when no loan searched yet -->
-        <div class="perpus-card-surface p-6 sm:p-8 mb-8 no-print">
-            <h3 class="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span>Panduan Pelacakan Peminjaman Buku</span>
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
-                <div class="p-4 rounded-xl perpus-card-subsurface">
-                    <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center mb-2.5">
-                        1
-                    </div>
-                    <div class="font-bold text-white mb-1">Cari Kode / No. WA</div>
-                    <p class="text-slate-300 leading-relaxed text-xs">
-                        Ketik kode bukti peminjaman Anda atau gunakan nomor WhatsApp yang terdaftar pada form peminjaman.
-                    </p>
-                </div>
-                <div class="p-4 rounded-xl perpus-card-subsurface">
-                    <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-300 font-bold flex items-center justify-center mb-2.5">
-                        2
-                    </div>
-                    <div class="font-bold text-white mb-1">Lihat Status &amp; Rak</div>
-                    <p class="text-slate-300 leading-relaxed text-xs">
-                        Sistem menampilkan posisi berkas, lokasi nomor rak perpustakaan, serta tenggat pengembalian buku.
-                    </p>
-                </div>
-                <div class="p-4 rounded-xl perpus-card-subsurface">
-                    <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-300 font-bold flex items-center justify-center mb-2.5">
-                        3
-                    </div>
-                    <div class="font-bold text-white mb-1">Ambil di Sirkulasi</div>
-                    <p class="text-slate-300 leading-relaxed text-xs">
-                        Tunjukkan kode peminjaman Anda kepada pustakawan piket untuk serah terima buku fisik di loket.
-                    </p>
-                </div>
-            </div>
-            <div class="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 flex items-center gap-3">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 shrink-0" aria-hidden="true"></span>
-                <span>Jam Layanan Sirkulasi Fisik: <strong>Senin – Jumat, Pukul 07.30 – 16.00 WIB</strong> di Gedung Perpustakaan Pusat.</span>
+        <!-- Alert Jika Nomor/Kode Tidak Ditemukan -->
+        @if(session('error') || $errors->has('loan_code'))
+        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 20px; color: #fca5a5; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print">
+            <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); color: #f87171; flex-shrink: 0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </span>
+            <div>
+                <strong style="display: block; font-size: 0.95rem; margin-bottom: 2px; color: #ffffff;">Data Tidak Ditemukan!</strong>
+                <span style="font-size: 0.9rem;">{{ session('error') ?? $errors->first('loan_code') }}</span>
             </div>
         </div>
         @endif
 
-        <div class="mt-8 text-center no-print">
-            <a href="{{ route('perpus.index') }}" class="perpus-hero-track-btn">
-                &larr; <span>Kembali ke Katalog Buku Utama</span>
+        @if(session('info'))
+        <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 16px; padding: 20px; color: #bae6fd; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print">
+            <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(56, 189, 248, 0.2); color: #38bdf8; flex-shrink: 0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </span>
+            <div>
+                <strong style="display: block; font-size: 0.95rem; margin-bottom: 2px; color: #ffffff;">Petunjuk</strong>
+                <span style="font-size: 0.9rem;">{{ session('info') }}</span>
+            </div>
+        </div>
+        @endif
+
+        <!-- TAMPILAN HASIL JIKA LOAN DITEMUKAN -->
+        @if(isset($loan))
+        <div class="ppdb-result-card" style="margin-bottom: 30px;">
+            
+            <!-- Header Status Box -->
+            <div class="ppdb-result-header">
+                <div>
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">KODE PEMINJAMAN</span>
+                    <h2 class="ppdb-reg-number" style="font-size: 1.5rem; margin: 2px 0 0; text-align: left; font-family: monospace; color: #34d399;">{{ $loan->loan_code }}</h2>
+                </div>
+
+                <!-- Status Badge -->
+                <div>
+                    @if($loan->status == 'diajukan')
+                        <span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>Status: Menunggu Konfirmasi Pustakawan</span>
+                        </span>
+                    @elseif($loan->status == 'dipinjam')
+                        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            <span>Status: Buku Sedang Dipinjam</span>
+                        </span>
+                    @elseif($loan->status == 'dikembalikan')
+                        <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span>Status: Diterima Kembali (Selesai)</span>
+                        </span>
+                    @elseif($loan->status == 'terlambat')
+                        <span style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                            <span>Status: Terlambat Pengembalian</span>
+                        </span>
+                    @else
+                        <span style="background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <span>Status: {{ $loan->status_label }}</span>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Visual Step Progress Bar (PPDB Timeline bar style) -->
+            <div class="ppdb-timeline-bar no-print">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+                    
+                    <!-- Step 1: Diajukan -->
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                        <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">1. Diajukan</span>
+                        <span style="font-size: 0.75rem; color: #94a3b8;">{{ $loan->created_at->format('d M Y') }}</span>
+                    </div>
+
+                    <!-- Step 2: Verifikasi / Pengambilan -->
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        @if($loan->status == 'diajukan')
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #f59e0b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);">2</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #fbbf24;">2. Verifikasi Fisik</span>
+                            <span style="font-size: 0.75rem; color: #fbbf24;">Ambil buku di loket</span>
+                        @elseif($loan->status == 'terlambat')
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);">!</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #f87171;">2. Terlambat</span>
+                            <span style="font-size: 0.75rem; color: #f87171;">Lewat batas waktu</span>
+                        @else
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">2. Dipinjam</span>
+                            <span style="font-size: 0.75rem; color: #34d399;">{{ $loan->borrowed_at ? $loan->borrowed_at->format('d M Y') : 'Buku diambil' }}</span>
+                        @endif
+                    </div>
+
+                    <!-- Step 3: Pengembalian -->
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        @if($loan->status == 'dikembalikan')
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);">✓</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #34d399;">3. Dikembalikan</span>
+                            <span style="font-size: 0.75rem; color: #34d399;">Selesai ({{ $loan->returned_at ? $loan->returned_at->format('d M Y') : 'Tepat Waktu' }})</span>
+                        @else
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px;">3</div>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">3. Pengembalian</span>
+                            <span style="font-size: 0.75rem; color: #64748b;">Batas: {{ $loan->due_at ? $loan->due_at->format('d M Y') : '7 Hari' }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catatan Petugas Perpustakaan -->
+            @if($loan->notes)
+            <div style="padding: 20px 30px; background: rgba(30, 41, 59, 0.4); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    <span>Catatan dari Petugas Perpustakaan:</span>
+                </h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
+                    {{ $loan->notes }}
+                </p>
+            </div>
+            @endif
+
+            <!-- Detail Body -->
+            <div class="ppdb-result-body" style="padding: 30px;">
+                <!-- Book Showcase inside body -->
+                <div style="display: flex; gap: 18px; align-items: center; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 110px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: #0f172a; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                        <img src="{{ $loan->book->cover ? asset('storage/' . $loan->book->cover) : asset('images/book-placeholder.png') }}"
+                             alt="Sampul {{ $loan->book->title }}"
+                             style="width: 100%; height: 100%; object-fit: cover;"
+                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';">
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 9999px;">
+                                {{ $loan->book->category->name ?? 'Kategori Umum' }}
+                            </span>
+                            @if($loan->book->rack_location)
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 9999px;">
+                                Rak: {{ $loan->book->rack_location }}
+                            </span>
+                            @endif
+                        </div>
+                        <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin: 0 0 4px; line-height: 1.3;">
+                            {{ $loan->book->title }}
+                        </h3>
+                        <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">
+                            Penulis: <span style="color: #cbd5e1; font-weight: 600;">{{ $loan->book->author }}</span>
+                            @if($loan->book->isbn)
+                            <span style="margin: 0 6px;">•</span>
+                            <span>ISBN: <code style="color: #38bdf8; font-family: monospace;">{{ $loan->book->isbn }}</code></span>
+                            @endif
+                        </div>
+                        <a href="{{ route('perpus.show', $loan->book->id) }}" class="no-print" style="font-size: 0.8rem; font-weight: 700; color: #34d399; display: inline-flex; align-items: center; gap: 4px; text-decoration: none;">
+                            <span>Lihat Halaman Detail Buku &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Ringkasan Data Peminjaman -->
+                <h4 style="font-size: 1rem; font-weight: 800; color: #ffffff; margin-bottom: 16px;">Ringkasan Data Peminjaman</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; font-size: 0.9rem;">
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Nama Peminjam:</span>
+                        <strong style="color: #ffffff;">{{ $loan->member->full_name }}</strong>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Nomor Anggota:</span>
+                        <strong style="color: #34d399; font-family: monospace;">{{ $loan->member->member_code }}</strong>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Nomor WhatsApp:</span>
+                        <strong style="color: #ffffff; font-family: monospace;">{{ substr($loan->member->phone, 0, 4) }}****{{ substr($loan->member->phone, -4) }}</strong>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Waktu Pengajuan:</span>
+                        <strong style="color: #ffffff;">{{ $loan->created_at ? $loan->created_at->translatedFormat('d F Y - H:i') : '-' }} WIB</strong>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Tanggal Pengambilan Fisik:</span>
+                        <strong style="color: #ffffff;">{{ $loan->borrowed_at ? $loan->borrowed_at->translatedFormat('d F Y') : 'Menunggu Pengambilan di Loket' }}</strong>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Batas Waktu Pengembalian:</span>
+                        <strong style="color: {{ $loan->status === 'terlambat' ? '#f87171' : '#34d399' }};">
+                            {{ $loan->due_at ? $loan->due_at->translatedFormat('d F Y') : '7 Hari Kalender' }}
+                        </strong>
+                    </div>
+                    @if($loan->returned_at)
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.8rem; display: block;">Tanggal Selesai Dikembalikan:</span>
+                        <strong style="color: #34d399;">{{ $loan->returned_at->translatedFormat('d F Y - H:i') }} WIB</strong>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Footer Card Action -->
+            <div class="no-print" style="background: rgba(30, 41, 59, 0.4); padding: 18px 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" onclick="window.print()" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                        <span>Cetak Bukti Lacak</span>
+                    </button>
+                    @if($loan->status === 'diajukan')
+                    <a href="https://wa.me/6281270001920?text=Halo%20Admin%20Perpustakaan,%20saya%20sudah%20mengajukan%20peminjaman%20dengan%20kode%20{{ $loan->loan_code }}%20untuk%20buku%20{{ urlencode($loan->book->title) }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; background: #059669; border-color: #059669;">
+                        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        <span>Konfirmasi via WhatsApp</span>
+                    </a>
+                    @endif
+                </div>
+                <span style="font-size: 0.8rem; color: #94a3b8;">
+                    Pembaruan status terakhir: {{ $loan->updated_at ? $loan->updated_at->diffForHumans() : '-' }}
+                </span>
+            </div>
+        </div>
+        @else
+        <!-- Panduan Pelacakan Peminjaman (PPDB result card style) -->
+        <div class="ppdb-result-card no-print" style="margin-bottom: 30px;">
+            <div class="ppdb-result-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #34d399; display: flex; align-items: center; justify-content: center;">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 0;">Panduan Pelacakan Peminjaman Buku</h3>
+                </div>
+                <span style="font-size: 0.8rem; color: #94a3b8;">Layanan Mandiri</span>
+            </div>
+
+            <div class="ppdb-result-body" style="padding: 24px 30px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px;">
+                        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">1</div>
+                        <h5 style="font-size: 0.9rem; font-weight: 700; color: #ffffff; margin: 0 0 6px;">Cari Kode / No. WA</h5>
+                        <p style="font-size: 0.8rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                            Ketik kode bukti peminjaman Anda atau gunakan nomor WhatsApp yang terdaftar pada form peminjaman.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px;">
+                        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">2</div>
+                        <h5 style="font-size: 0.9rem; font-weight: 700; color: #ffffff; margin: 0 0 6px;">Lihat Status &amp; Rak</h5>
+                        <p style="font-size: 0.8rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                            Sistem menampilkan posisi berkas, lokasi nomor rak perpustakaan, serta tenggat pengembalian buku.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px;">
+                        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(192, 132, 252, 0.2); color: #c084fc; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">3</div>
+                        <h5 style="font-size: 0.9rem; font-weight: 700; color: #ffffff; margin: 0 0 6px;">Ambil di Loket Sirkulasi</h5>
+                        <p style="font-size: 0.8rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                            Tunjukkan kode peminjaman Anda kepada pustakawan piket untuk serah terima buku fisik di loket.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; display: inline-block;"></span>
+                    <span>Jam Layanan Sirkulasi Fisik: <strong style="color: #ffffff;">Senin – Jumat, Pukul 07.30 – 16.00 WIB</strong> di Loket Perpustakaan Pusat.</span>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <div style="text-align: center; margin-top: 30px;" class="no-print">
+            <a href="{{ route('perpus.index') }}" class="btn btn-outline" style="font-size: 0.9rem; padding: 10px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span>Kembali ke Katalog Buku Utama</span>
             </a>
         </div>
 

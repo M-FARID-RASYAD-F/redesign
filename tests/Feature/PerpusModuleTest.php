@@ -97,6 +97,12 @@ class PerpusModuleTest extends TestCase
         $searchResponse->assertSee('Laskar Pelangi');
         $searchResponse->assertDontSee('Clean Code');
 
+        // Pencarian berdasarkan ISBN
+        $isbnResponse = $this->get(route('perpus.index', ['search' => '978-979-3062-79-2']));
+        $isbnResponse->assertOk();
+        $isbnResponse->assertSee('Laskar Pelangi');
+        $isbnResponse->assertDontSee('Clean Code');
+
         // Filter berdasarkan kategori
         $filterResponse = $this->get(route('perpus.index', ['category' => $this->scienceCategory->id]));
         $filterResponse->assertOk();
@@ -198,7 +204,7 @@ class PerpusModuleTest extends TestCase
             'due_at'    => now()->addDays(7),
         ]);
 
-        // Cek halaman tracking
+        // Cek halaman tracking dengan Kode Pinjam
         $trackingResponse = $this->post(route('perpus.check'), [
             'loan_code' => $loan->loan_code,
         ]);
@@ -207,6 +213,15 @@ class PerpusModuleTest extends TestCase
         $trackingResponse->assertSee($loan->loan_code);
         $trackingResponse->assertSee('Siti Nurhaliza');
         $trackingResponse->assertSee('Sedang Dipinjam');
+
+        // Cek halaman tracking dengan Nomor WhatsApp
+        $phoneTrackingResponse = $this->post(route('perpus.check'), [
+            'loan_code' => '081333444555',
+        ]);
+
+        $phoneTrackingResponse->assertOk();
+        $phoneTrackingResponse->assertSee($loan->loan_code);
+        $phoneTrackingResponse->assertSee('Siti Nurhaliza');
     }
 
     /**

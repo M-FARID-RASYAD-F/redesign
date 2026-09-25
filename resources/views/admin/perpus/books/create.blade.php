@@ -28,7 +28,7 @@
     <form action="{{ route('admin.perpus.books.store') }}" method="POST">
         @csrf
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div class="admin-form-grid-2">
             <div style="grid-column: span 2;">
                 <label style="display: block; font-weight: 600; font-size: 0.875rem; color: var(--adm-text-sub, #f1f5f9); margin-bottom: 6px;">Judul Buku <span style="color: #ef4444;">*</span></label>
                 <input type="text" name="title" value="{{ old('title') }}" required placeholder="Masukkan judul lengkap buku" class="form-control">

@@ -83,7 +83,7 @@
 </div>
 
 <!-- Main Content Grid -->
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
+<div class="admin-perpus-main-grid">
     <!-- Recent Loans Table -->
     <div class="card" style="padding: 22px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--adm-table-border, rgba(255, 255, 255, 0.12)); padding-bottom: 12px;">

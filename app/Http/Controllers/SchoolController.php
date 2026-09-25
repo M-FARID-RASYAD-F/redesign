@@ -958,9 +958,12 @@ class SchoolController extends Controller
             return back()->withErrors(['stock' => 'Maaf, seluruh eksemplar buku ini sedang dipinjam.']);
         }
 
+        $cleanPhone = preg_replace('/[^0-9]/', '', $validated['phone']);
+        $phoneToSave = !empty($cleanPhone) ? $cleanPhone : $validated['phone'];
+
         // Cari anggota lama berdasarkan nomor HP, atau daftarkan sebagai anggota baru
         $member = LibraryMember::firstOrCreate(
-            ['phone' => $validated['phone']],
+            ['phone' => $phoneToSave],
             [
                 'full_name' => $validated['full_name'],
                 'address'   => $validated['address'] ?? null,

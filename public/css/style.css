@@ -8888,9 +8888,15 @@ input:-webkit-autofill:active {
   gap: 12px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 640px) {
+  .perpus-hero-stats-panel {
+    padding: 1rem !important;
+    gap: 0.85rem !important;
+    border-radius: 16px !important;
+  }
   .perpus-hero-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
   }
 }
 
@@ -8903,6 +8909,14 @@ input:-webkit-autofill:active {
   align-items: center;
   gap: 12px;
   transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .perpus-stat-chip {
+    padding: 8px 10px !important;
+    gap: 8px !important;
+    border-radius: 10px !important;
+  }
 }
 
 .perpus-stat-chip:hover {
@@ -8918,6 +8932,18 @@ input:-webkit-autofill:active {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .perpus-stat-icon-wrap {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 8px !important;
+  }
+  .perpus-stat-icon-wrap svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
 }
 
 .perpus-stat-icon-wrap.stat-blue {
@@ -8952,11 +8978,24 @@ input:-webkit-autofill:active {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+@media (max-width: 640px) {
+  .perpus-stat-number {
+    font-size: 1.1rem !important;
+  }
+}
+
 .perpus-stat-label {
   font-size: 0.775rem;
-  color: #94a3b8;
+  color: #cbd5e1;
   margin-top: 3px;
   font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .perpus-stat-label {
+    font-size: 0.675rem !important;
+    margin-top: 2px !important;
+  }
 }
 
 .perpus-hero-track-btn {
@@ -9133,14 +9172,15 @@ input:-webkit-autofill:active {
 @media (max-width: 768px) {
   .perpus-books-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    gap: 12px !important;
+    margin-bottom: 2rem !important;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 480px) {
   .perpus-books-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
   }
 }
 
@@ -9376,6 +9416,62 @@ input:-webkit-autofill:active {
   min-height: 42px;
 }
 
+/* Mobile Book Card Adjustments (2-Column Grid on Mobile) */
+@media (max-width: 640px) {
+  .perpus-book-cover-wrap {
+    height: 180px !important;
+    padding: 10px !important;
+  }
+  .perpus-book-cover-img {
+    max-height: 155px !important;
+  }
+  .perpus-book-badge-cat,
+  .perpus-book-badge-stock {
+    font-size: 0.65rem !important;
+    padding: 3px 6px !important;
+    top: 8px !important;
+  }
+  .perpus-book-badge-cat {
+    left: 8px !important;
+  }
+  .perpus-book-badge-stock {
+    right: 8px !important;
+  }
+  .perpus-book-body {
+    padding: 0.75rem !important;
+  }
+  .perpus-book-title {
+    font-size: 0.85rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.25rem !important;
+    min-height: 2.4em !important;
+  }
+  .perpus-book-meta {
+    font-size: 0.725rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  .perpus-book-rack {
+    font-size: 0.7rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  .perpus-book-synopsis {
+    display: none !important;
+  }
+  .perpus-card-actions {
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding-top: 0.5rem !important;
+  }
+  .perpus-card-actions .perpus-btn-borrow,
+  .perpus-card-actions .perpus-btn-detail,
+  .perpus-card-actions .perpus-btn-disabled {
+    width: 100% !important;
+    font-size: 0.75rem !important;
+    padding: 6px 8px !important;
+    min-height: 34px !important;
+  }
+}
+
 .perpus-empty-card {
   padding: 4.5rem 2rem;
   text-align: center;
@@ -9399,7 +9495,7 @@ input:-webkit-autofill:active {
 }
 
 .perpus-pagination-card p {
-  color: #94a3b8 !important;
+  color: #cbd5e1 !important;
 }
 
 /* Detail, Form, Tracking Dual-Mode Cards */
@@ -9432,6 +9528,13 @@ input:-webkit-autofill:active {
   .perpus-detail-grid {
     grid-template-columns: 1fr !important;
   }
+  .detail-visual-col {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 1.5rem 1.25rem !important;
+  }
 }
 
 .perpus-detail-cover-box {
@@ -9448,6 +9551,15 @@ input:-webkit-autofill:active {
   box-sizing: border-box;
   border: 1.5px solid rgba(0, 180, 216, 0.3);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 640px) {
+  .perpus-detail-cover-box {
+    max-width: 200px !important;
+    height: 260px !important;
+    margin-bottom: 1rem !important;
+    padding: 12px !important;
+  }
 }
 
 .perpus-detail-cover-box img {
@@ -9468,13 +9580,15 @@ input:-webkit-autofill:active {
 
 @media (max-width: 1024px) {
   .perpus-related-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 640px) {
   .perpus-related-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
   }
 }
 
@@ -9488,7 +9602,7 @@ input:-webkit-autofill:active {
 @media (max-width: 640px) {
   .perpus-timeline-grid {
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    gap: 10px !important;
   }
 }
 
@@ -9502,6 +9616,13 @@ input:-webkit-autofill:active {
   margin: 1.5rem 0 2rem;
   padding: 0 0.5rem;
   box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .perpus-stepper {
+    margin: 1rem 0 1.25rem !important;
+    padding: 0 !important;
+  }
 }
 
 .perpus-step-item {
@@ -9524,8 +9645,16 @@ input:-webkit-autofill:active {
   font-size: 0.95rem;
   background: rgba(15, 23, 42, 0.9);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  color: #94a3b8;
+  color: #cbd5e1;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .perpus-step-circle {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.8rem !important;
+  }
 }
 
 .perpus-step-item.step-active .perpus-step-circle {
@@ -9545,9 +9674,17 @@ input:-webkit-autofill:active {
 .perpus-step-label {
   font-size: 0.775rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: #cbd5e1;
   margin-top: 8px;
   text-align: center;
+}
+
+@media (max-width: 640px) {
+  .perpus-step-label {
+    font-size: 0.675rem !important;
+    line-height: 1.2 !important;
+    margin-top: 5px !important;
+  }
 }
 
 .perpus-step-item.step-active .perpus-step-label {
@@ -9844,8 +9981,91 @@ input:-webkit-autofill:active {
   background: oklch(58.6% 0.253 17.585 / 0.25) !important;
 }
 
-[data-theme="light"] .perpus-step-line-progress {
-  background: oklch(58.6% 0.253 17.585) !important;
+[data-theme="light"] .perpus-form-hero {
+  background: linear-gradient(135deg, oklch(33% 0.125 13) 0%, oklch(27.1% 0.105 12.094) 50%, oklch(22% 0.09 11) 100%) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.45) !important;
+}
+
+[data-theme="light"] .perpus-form-input {
+  background: oklch(20% 0.08 11 / 0.85) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-form-input:focus {
+  border-color: oklch(58.6% 0.253 17.585) !important;
+  box-shadow: 0 0 0 3px oklch(58.6% 0.253 17.585 / 0.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT STYLESHEET (Bukti Peminjaman & Tracking Slip)
+   ═══════════════════════════════════════════════════════════ */
+.print-only {
+  display: none;
+}
+
+@media print {
+  #mainNavbar,
+  .navbar,
+  .floating-wa-wrapper,
+  .floating-wa-btn,
+  .floating-back-to-top,
+  .footer,
+  .perpus-hero-banner,
+  .perpus-pills-row,
+  .perpus-search-form,
+  .no-print,
+  .no-print *,
+  button,
+  .perpus-btn-borrow,
+  .perpus-btn-detail {
+    display: none !important;
+  }
+
+  body, html, #smooth-wrapper, #smooth-content, .main-content, .perpus-page-wrapper {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+  }
+
+  .perpus-container,
+  .perpus-container-compact,
+  .perpus-container-narrow,
+  .perpus-container-medium {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .perpus-card-surface,
+  .perpus-card-subsurface {
+    background: #ffffff !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  h1, h2, h3, h4, p, span, div, strong, label {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  .print-receipt-border {
+    border: 2px dashed #000000 !important;
+    background: #fafafa !important;
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    border-radius: 6px !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════

@@ -19,4 +19,9 @@ class Book extends Model
     {
         return $this->hasMany(BookLoan::class, 'book_id');
     }
+
+    public function getCoverUrlAttribute(): string
+    {
+        return $this->cover ? asset('storage/' . $this->cover) : asset('images/book-placeholder.png');
+    }
 }

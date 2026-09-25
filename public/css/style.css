@@ -8575,7 +8575,7 @@ input:-webkit-autofill:active {
 
 .perpus-container-medium {
   width: 100% !important;
-  max-width: 1020px !important;
+  max-width: 1140px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: clamp(1rem, 2.5vw, 2rem) !important;
@@ -9303,18 +9303,249 @@ input:-webkit-autofill:active {
   box-sizing: border-box !important;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   PERPUSTAKAAN PAGINATION NAVIGATOR (DARK & LIGHT MODE)
+   ═══════════════════════════════════════════════════════════ */
 .perpus-pagination-card {
-  background: rgba(0, 33, 71, 0.65);
-  border: 1px solid rgba(0, 180, 216, 0.25);
-  padding: 1rem 1.5rem;
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
+  background: rgba(0, 33, 71, 0.65) !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.25) !important;
+  padding: 1.15rem 1.6rem !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  margin-top: 2rem !important;
+  margin-bottom: 3.5rem !important;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.45) !important;
+}
+
+.perpus-pagination-wrapper {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
+  flex-wrap: wrap !important;
+}
+
+.perpus-pagination-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  flex-wrap: wrap !important;
+}
+
+.perpus-pagination-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.875rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.4 !important;
+}
+
+.perpus-pagination-badge .perpus-page-highlight {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.perpus-pagination-pages-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  background: rgba(0, 180, 216, 0.12) !important;
+  border: 1px solid rgba(0, 180, 216, 0.25) !important;
+  color: #38bdf8 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.3 !important;
+}
+
+.perpus-pagination-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+.perpus-page-nav-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 14px !important;
+  border-radius: 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  min-height: 40px !important;
+  line-height: 1 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-sizing: border-box !important;
+}
+
+.perpus-page-nav-link {
+  background: rgba(0, 33, 71, 0.6) !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.25) !important;
+  color: #cbd5e1 !important;
+  cursor: pointer !important;
+}
+
+.perpus-page-nav-link:hover {
+  background: rgba(0, 180, 216, 0.2) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.25) !important;
+}
+
+.perpus-page-nav-disabled {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #475569 !important;
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+.perpus-page-numbers {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.perpus-page-item {
+  display: inline-flex !important;
+  text-decoration: none !important;
+}
+
+.perpus-page-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  padding: 0 10px !important;
+  border-radius: 12px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  line-height: 1 !important;
+}
+
+.perpus-page-link .perpus-page-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(0, 180, 216, 0.2) !important;
+  color: #cbd5e1 !important;
+}
+
+.perpus-page-link:hover .perpus-page-btn {
+  background: rgba(0, 180, 216, 0.18) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.3) !important;
+}
+
+.perpus-page-active .perpus-page-btn {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  border: 1.5px solid #10b981 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.45) !important;
+  cursor: default !important;
+}
+
+.perpus-page-dots {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 40px !important;
+  color: #64748b !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  user-select: none !important;
+}
+
+/* Fallback overrides if stock Laravel pagination is rendered inside perpus-pagination-card */
+.perpus-pagination-card nav [aria-current="page"] span,
+.perpus-pagination-card nav span.bg-gray-200,
+.perpus-pagination-card nav span[aria-current="page"] > span {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+}
+
+.perpus-pagination-card nav a.bg-white,
+.perpus-pagination-card nav span.bg-white {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(0, 180, 216, 0.25) !important;
+  border-radius: 8px !important;
+}
+
+.perpus-pagination-card nav a.bg-white:hover {
+  background: rgba(0, 180, 216, 0.2) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
 }
 
 .perpus-pagination-card p {
   color: #94a3b8 !important;
+}
+
+.perpus-pagination-card p span.font-medium {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 840px) {
+  .perpus-pagination-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+  .perpus-pagination-info {
+    justify-content: center !important;
+  }
+  .perpus-pagination-controls {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .perpus-pagination-card {
+    padding: 1rem 0.85rem !important;
+    border-radius: 16px !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+  .perpus-page-nav-text {
+    display: none !important;
+  }
+  .perpus-page-nav-btn {
+    padding: 8px 12px !important;
+  }
+  .perpus-page-btn {
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: 0.825rem !important;
+    border-radius: 10px !important;
+  }
+  .perpus-pagination-badge {
+    font-size: 0.815rem !important;
+  }
+  .perpus-pagination-pages-badge {
+    font-size: 0.7rem !important;
+    padding: 2px 8px !important;
+  }
 }
 
 /* Detail, Form, Tracking Dual-Mode Cards */
@@ -9324,9 +9555,17 @@ input:-webkit-autofill:active {
   border-radius: 24px;
   box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #ffffff;
   width: 100% !important;
   box-sizing: border-box !important;
+}
+
+/* Dedicated Spacious Book Detail Outer Card */
+.perpus-card-surface.perpus-detail-card {
+  padding: clamp(1.75rem, 3.5vw, 2.85rem) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5) !important;
 }
 
 .perpus-card-subsurface {
@@ -9338,31 +9577,54 @@ input:-webkit-autofill:active {
 /* Responsive Grids for Detail & Related */
 .perpus-detail-grid {
   display: grid !important;
-  grid-template-columns: 340px 1fr !important;
-  gap: 0 !important;
+  grid-template-columns: 360px 1fr !important;
+  gap: clamp(2.5rem, 4.5vw, 4.25rem) !important;
   width: 100% !important;
+  align-items: stretch !important;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 960px) {
   .perpus-detail-grid {
     grid-template-columns: 1fr !important;
+    gap: 2.75rem !important;
   }
 }
 
+/* Left Column Cover Panel */
+.perpus-detail-cover-panel {
+  padding: clamp(1.75rem, 3vw, 2.5rem) !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 2.25rem !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.perpus-cover-panel-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 2rem !important;
+  flex-wrap: wrap !important;
+}
+
 .perpus-detail-cover-box {
-  width: 100%;
-  max-width: 250px;
-  height: 340px;
-  margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(6, 20, 38, 0.95) 0%, rgba(2, 10, 20, 0.98) 100%);
-  border-radius: 16px;
-  padding: 16px;
-  box-sizing: border-box;
-  border: 1.5px solid rgba(0, 180, 216, 0.3);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  width: 100% !important;
+  max-width: 270px !important;
+  height: 360px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(180deg, rgba(6, 20, 38, 0.95) 0%, rgba(2, 10, 20, 0.98) 100%) !important;
+  border-radius: 18px !important;
+  padding: 22px !important;
+  box-sizing: border-box !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.3) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6) !important;
 }
 
 .perpus-detail-cover-box img {
@@ -9374,23 +9636,439 @@ input:-webkit-autofill:active {
   filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.65));
 }
 
+.perpus-stock-widget {
+  background: rgba(0, 15, 32, 0.65) !important;
+  border: 1px solid rgba(0, 180, 216, 0.22) !important;
+  border-radius: 16px !important;
+  padding: 16px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.perpus-stock-widget-label {
+  font-size: 0.75rem !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.perpus-stock-widget-status {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.perpus-stock-widget-total {
+  font-size: 0.8rem !important;
+  color: #64748b !important;
+  padding-top: 6px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOK DETAIL TEXT & SPECIFICATIONS ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════ */
+.perpus-detail-content-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 100% !important;
+  padding: 0 !important;
+}
+
+.perpus-detail-tag-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 1.65rem !important;
+}
+
+.perpus-detail-cat-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  background: rgba(5, 150, 105, 0.2) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(52, 211, 153, 0.35) !important;
+  line-height: 1.2 !important;
+}
+
+.perpus-detail-rack-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  background: rgba(0, 180, 216, 0.12) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(0, 180, 216, 0.25) !important;
+  line-height: 1.2 !important;
+}
+
+.perpus-detail-stock-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  line-height: 1.2 !important;
+}
+
+.perpus-detail-stock-badge.badge-in-stock {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #6ee7b7 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.perpus-detail-stock-badge.badge-out-stock {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+.perpus-detail-stock-badge .badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.perpus-detail-title {
+  font-size: clamp(1.65rem, 2.8vw, 2.35rem) !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 0 1.65rem 0 !important;
+  text-wrap: balance !important;
+}
+
+.perpus-detail-byline {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 14px 22px !important;
+  font-size: 0.925rem !important;
+  color: #94a3b8 !important;
+  margin-bottom: 2.75rem !important;
+  line-height: 1.6 !important;
+}
+
+.perpus-detail-byline .perpus-byline-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.perpus-detail-byline .perpus-byline-separator {
+  color: #475569 !important;
+  font-weight: bold !important;
+}
+
+.perpus-specs-matrix {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  padding: 2.25rem 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  margin-bottom: 3.25rem !important;
+}
+
+.perpus-spec-card {
+  background: rgba(0, 33, 71, 0.45) !important;
+  border: 1px solid rgba(0, 180, 216, 0.2) !important;
+  border-radius: 16px !important;
+  padding: 16px 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  transition: all 0.2s ease !important;
+  min-width: 0 !important;
+}
+
+.perpus-spec-card:hover {
+  background: rgba(0, 33, 71, 0.75) !important;
+  border-color: rgba(0, 180, 216, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.perpus-spec-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.perpus-spec-icon.stat-blue {
+  background: rgba(14, 165, 233, 0.15) !important;
+  color: #38bdf8 !important;
+}
+
+.perpus-spec-icon.stat-purple {
+  background: rgba(168, 85, 247, 0.15) !important;
+  color: #c084fc !important;
+}
+
+.perpus-spec-icon.stat-cyan {
+  background: rgba(6, 182, 212, 0.15) !important;
+  color: #22d3ee !important;
+}
+
+.perpus-spec-icon.stat-green {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+}
+
+.perpus-spec-content {
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+.perpus-spec-label {
+  display: block !important;
+  font-size: 0.74rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+.perpus-spec-val {
+  display: block !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.perpus-synopsis-section {
+  margin-bottom: 3.25rem !important;
+}
+
+.perpus-synopsis-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 1.5rem !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+}
+
+.perpus-synopsis-title {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+
+.perpus-synopsis-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.725rem !important;
+  color: #6ee7b7 !important;
+  background: rgba(5, 150, 105, 0.12) !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(5, 150, 105, 0.25) !important;
+  font-weight: 600 !important;
+}
+
+.perpus-synopsis-card {
+  background: rgba(0, 20, 42, 0.55) !important;
+  border: 1px solid rgba(0, 180, 216, 0.2) !important;
+  border-left: 4px solid #059669 !important;
+  border-radius: 20px !important;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) !important;
+  backdrop-filter: blur(10px) !important;
+  position: relative !important;
+}
+
+.perpus-synopsis-prose {
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem) !important;
+  line-height: 2.0 !important;
+  color: #cbd5e1 !important;
+  letter-spacing: 0.015em !important;
+  text-align: justify !important;
+  hyphens: auto !important;
+}
+
+.perpus-synopsis-prose p {
+  margin-bottom: 1.25rem !important;
+}
+
+.perpus-synopsis-prose p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.perpus-policy-callout {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+  padding: 20px 26px !important;
+  background: rgba(0, 33, 71, 0.35) !important;
+  border: 1px dashed rgba(0, 180, 216, 0.25) !important;
+  border-radius: 16px !important;
+  font-size: 0.875rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.7 !important;
+  margin-bottom: 3.25rem !important;
+}
+
+.perpus-policy-icon {
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+.perpus-policy-text strong {
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+}
+
+.perpus-detail-cta-bar {
+  margin-top: 1.5rem !important;
+  padding-top: 2.5rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 22px !important;
+}
+
+.perpus-detail-cta-bar .perpus-btn-borrow,
+.perpus-detail-cta-bar .perpus-btn-disabled,
+.perpus-detail-cta-bar .perpus-btn-detail {
+  padding: 16px 36px !important;
+  font-size: 1rem !important;
+  border-radius: 16px !important;
+  min-height: 54px !important;
+}
+
+@media (max-width: 640px) {
+  .perpus-specs-matrix {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .perpus-synopsis-card {
+    padding: 1.25rem 1.35rem !important;
+  }
+  .perpus-synopsis-prose {
+    font-size: 0.925rem !important;
+    line-height: 1.85 !important;
+    text-align: left !important;
+  }
+  .perpus-detail-cta-bar {
+    flex-direction: column !important;
+  }
+  .perpus-detail-cta-bar a,
+  .perpus-detail-cta-bar div {
+    width: 100% !important;
+  }
+}
+
 .perpus-related-grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 20px !important;
+  gap: 24px !important;
   width: 100% !important;
 }
 
 @media (max-width: 1024px) {
   .perpus-related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
   }
 }
 
 @media (max-width: 540px) {
   .perpus-related-grid {
     grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
+}
+
+/* Dedicated Spacious Buttons for Top Track & See All */
+.perpus-btn-top-track {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px 28px !important;
+  border-radius: 14px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: #34d399 !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.32) !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.perpus-btn-top-track:hover {
+  background: rgba(16, 185, 129, 0.24) !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3) !important;
+}
+
+.perpus-btn-see-all {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 12px 28px !important;
+  border-radius: 14px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: #34d399 !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.32) !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  min-height: 46px !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.perpus-btn-see-all:hover {
+  background: rgba(16, 185, 129, 0.24) !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3) !important;
 }
 
 .perpus-timeline-grid {
@@ -9716,10 +10394,70 @@ input:-webkit-autofill:active {
 [data-theme="light"] .perpus-pagination-card {
   background: oklch(27.1% 0.105 12.094 / 0.94) !important;
   border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="light"] .perpus-pagination-badge {
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-pagination-badge .perpus-page-highlight {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-pagination-pages-badge {
+  background: oklch(58.6% 0.253 17.585 / 0.2) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.4) !important;
+  color: #fda4af !important;
+}
+
+[data-theme="light"] .perpus-page-nav-link {
+  background: oklch(20% 0.08 11 / 0.7) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-page-nav-link:hover {
+  background: oklch(58.6% 0.253 17.585 / 0.25) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.6) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-page-nav-disabled {
+  background: oklch(20% 0.08 11 / 0.3) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.15) !important;
+  color: oklch(58.6% 0.253 17.585 / 0.4) !important;
+}
+
+[data-theme="light"] .perpus-page-link .perpus-page-btn {
+  background: oklch(20% 0.08 11 / 0.7) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-page-link:hover .perpus-page-btn {
+  background: oklch(58.6% 0.253 17.585 / 0.25) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.6) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-page-active .perpus-page-btn {
+  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(45% 0.22 17)) !important;
+  border-color: #fda4af !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px oklch(58.6% 0.253 17.585 / 0.5) !important;
+}
+
+[data-theme="light"] .perpus-page-dots {
+  color: #fda4af !important;
 }
 
 [data-theme="light"] .perpus-pagination-card p {
   color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-pagination-card p span.font-medium {
+  color: #ffffff !important;
 }
 
 [data-theme="light"] .perpus-card-surface {
@@ -9736,6 +10474,115 @@ input:-webkit-autofill:active {
 [data-theme="light"] .perpus-detail-cover-box {
   background: oklch(20% 0.08 11 / 0.95) !important;
   border-color: oklch(58.6% 0.253 17.585 / 0.4) !important;
+}
+
+[data-theme="light"] .perpus-stock-widget {
+  background: oklch(20% 0.08 11 / 0.75) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+}
+
+[data-theme="light"] .perpus-stock-widget-label {
+  color: #fda4af !important;
+}
+
+[data-theme="light"] .perpus-stock-widget-total {
+  color: #fecdd3 !important;
+  border-top-color: oklch(58.6% 0.253 17.585 / 0.2) !important;
+}
+
+[data-theme="light"] .perpus-detail-cat-badge {
+  background: oklch(58.6% 0.253 17.585 / 0.25) !important;
+  color: #ffffff !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.5) !important;
+}
+
+[data-theme="light"] .perpus-detail-rack-badge {
+  background: oklch(20% 0.08 11 / 0.8) !important;
+  color: #fda4af !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+}
+
+[data-theme="light"] .perpus-detail-title {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-detail-byline {
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-detail-byline strong {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-specs-matrix {
+  border-color: oklch(58.6% 0.253 17.585 / 0.25) !important;
+}
+
+[data-theme="light"] .perpus-spec-card {
+  background: oklch(20% 0.08 11 / 0.75) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+}
+
+[data-theme="light"] .perpus-spec-card:hover {
+  background: oklch(20% 0.08 11 / 0.95) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.5) !important;
+}
+
+[data-theme="light"] .perpus-spec-label {
+  color: #fda4af !important;
+}
+
+[data-theme="light"] .perpus-spec-val {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-synopsis-title {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-synopsis-tag {
+  color: #fda4af !important;
+  background: oklch(58.6% 0.253 17.585 / 0.2) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
+}
+
+[data-theme="light"] .perpus-synopsis-card {
+  background: oklch(20% 0.08 11 / 0.85) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+  border-left-color: oklch(58.6% 0.253 17.585) !important;
+}
+
+[data-theme="light"] .perpus-synopsis-prose {
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-policy-callout {
+  background: oklch(20% 0.08 11 / 0.5) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.3) !important;
+  color: #fecdd3 !important;
+}
+
+[data-theme="light"] .perpus-policy-callout strong {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-detail-cta-bar {
+  border-color: oklch(58.6% 0.253 17.585 / 0.25) !important;
+}
+
+[data-theme="light"] .perpus-btn-top-track,
+[data-theme="light"] .perpus-btn-see-all {
+  background: oklch(58.6% 0.253 17.585 / 0.15) !important;
+  color: #fecdd3 !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
+}
+
+[data-theme="light"] .perpus-btn-top-track:hover,
+[data-theme="light"] .perpus-btn-see-all:hover {
+  background: oklch(58.6% 0.253 17.585 / 0.3) !important;
+  color: #ffffff !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.7) !important;
+  box-shadow: 0 6px 18px oklch(58.6% 0.253 17.585 / 0.35) !important;
 }
 
 [data-theme="light"] .perpus-step-circle {

@@ -230,7 +230,7 @@
         <!-- Pagination -->
         @if($books->hasPages())
         <div class="perpus-pagination-card mb-12">
-            {{ $books->links() }}
+            {{ $books->links('perpus.partials.pagination') }}
         </div>
         @endif
 

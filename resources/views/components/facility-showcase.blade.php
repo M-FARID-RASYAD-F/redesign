@@ -174,7 +174,7 @@
     border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease;
     display: flex;
     flex-direction: column;
 }
@@ -196,7 +196,7 @@
 }
 
 .facility-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     border-color: #00B4D8;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
@@ -212,11 +212,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.45s ease;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .facility-card:hover .facility-img {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .facility-overlay {
@@ -458,6 +458,35 @@
     [data-theme="light"] .facility-showcase-section {
         padding: 36px 18px 30px;
         border-radius: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .facility-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .facility-filter-tabs {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .facility-tab-btn {
+        padding: 7px 14px;
+        font-size: 0.78rem;
+    }
+    .facility-card {
+        border-radius: 14px;
+    }
+    .facility-img-wrap {
+        height: 180px;
+    }
+    .facility-name {
+        font-size: 1.05rem;
+        word-break: break-word;
+    }
+    .facility-desc {
+        font-size: 0.82rem;
+        word-break: break-word;
     }
 }
 </style>

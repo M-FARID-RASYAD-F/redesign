@@ -76,6 +76,8 @@ class WebsiteUpgradeSuiteTest extends TestCase
             ->assertDontSee('topAnnouncementBar')
             ->assertSee('spotlightModal')
             ->assertSee('galeri-fasilitas')
+            ->assertSee('perpustakaan')
+            ->assertSee('Pusat Referensi &amp; Perpustakaan Digital', false)
             ->assertSee('testimoni')
             ->assertSee('nav-search-trigger-btn');
     }

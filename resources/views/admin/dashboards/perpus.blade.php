@@ -3,82 +3,75 @@
 @section('title', 'Dashboard Perpustakaan - At-Tamam Edu')
 
 @section('content')
-<!-- Hero Section -->
-<div class="dashboard-hero" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; padding: 28px 32px; border-radius: 14px; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.3);">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-        <div>
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.2); padding: 4px 12px; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-bottom: 10px; backdrop-filter: blur(4px);">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
-                Portal Petugas Perpustakaan
-            </div>
-            <h1 style="font-size: 1.75rem; font-weight: 800; margin: 0 0 6px 0; color: #ffffff;">
-                Pusat Sirkulasi & Koleksi Buku Digital
-            </h1>
-            <p style="margin: 0; color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">
-                Pantau sirkulasi peminjaman, buku aktif, pengembalian terlambat, dan ketersediaan koleksi.
-            </p>
+<!-- HERO BANNER (ADMIN PERPUS) -->
+<div class="dashboard-hero">
+    <div class="hero-content">
+        <div class="hero-badge-pill">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+            <span>Portal Petugas Perpustakaan</span>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="{{ route('admin.perpus.books.index') }}" class="btn" style="background: #ffffff; color: #002147; font-weight: 700; padding: 9px 18px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
-                Katalog Buku
-            </a>
-            <a href="{{ route('admin.perpus.loans.export') }}" class="btn" style="background: rgba(255, 255, 255, 0.15); color: white; border: 1px solid rgba(255, 255, 255, 0.4); font-weight: 600; padding: 9px 18px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; backdrop-filter: blur(4px);">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Ekspor Laporan
-            </a>
-        </div>
+        <h1 class="hero-title">Pusat Sirkulasi & Koleksi Buku Digital</h1>
+    </div>
+    <div class="hero-actions">
+        <a href="{{ route('admin.perpus.books.index') }}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            <span>Katalog Buku</span>
+        </a>
+        <a href="{{ route('admin.perpus.loans.export') }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Ekspor Laporan CSV</span>
+        </a>
     </div>
 </div>
 
-<!-- Stats Grid -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 28px;">
+<!-- KARTU STATISTIK PERPUSTAKAAN -->
+<div class="stats-grid">
     <!-- Stat 1: Total Judul -->
-    <a href="{{ route('admin.perpus.books.index') }}" class="card" style="padding: 20px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; border-left: 4px solid var(--adm-primary, #00B4D8);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Total Judul Buku</span>
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(0, 180, 216, 0.18); color: var(--adm-primary, #00B4D8); border: 1px solid rgba(0, 180, 216, 0.35); display: flex; align-items: center; justify-content: center;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+    <a href="{{ route('admin.perpus.books.index') }}" class="card stat-card-item" style="text-decoration: none;">
+        <div class="stat-card-header">
+            <span class="stat-card-label">TOTAL JUDUL BUKU</span>
+            <div class="stat-card-icon icon-cyan">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
             </div>
         </div>
-        <div style="font-size: 1.85rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">{{ $stats['total_books'] }}</div>
-        <div style="font-size: 0.775rem; color: var(--adm-text-muted, #cbd5e1); margin-top: 4px;">Koleksi judul aktif</div>
+        <div class="stat-card-val">{{ $stats['total_books'] }}</div>
+        <div class="stat-card-sub">Koleksi judul aktif</div>
     </a>
 
     <!-- Stat 2: Total Tersedia -->
-    <div class="card" style="padding: 20px; border-left: 4px solid #10b981;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Eksemplar Tersedia</span>
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); display: flex; align-items: center; justify-content: center;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="card stat-card-item">
+        <div class="stat-card-header">
+            <span class="stat-card-label">EKSEMPLAR TERSEDIA</span>
+            <div class="stat-card-icon icon-emerald">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
         </div>
-        <div style="font-size: 1.85rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">{{ $stats['total_available'] }}</div>
-        <div style="font-size: 0.775rem; color: var(--adm-text-muted, #cbd5e1); margin-top: 4px;">Siap dipinjam siswa & umum</div>
+        <div class="stat-card-val" style="color: #34d399;">{{ $stats['total_available'] }}</div>
+        <div class="stat-card-sub">Siap dipinjam santri & umum</div>
     </div>
 
     <!-- Stat 3: Sedang Dipinjam -->
-    <a href="{{ route('admin.perpus.loans.index', ['status' => 'dipinjam']) }}" class="card" style="padding: 20px; text-decoration: none; border-left: 4px solid #3b82f6;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Sedang Dipinjam</span>
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    <a href="{{ route('admin.perpus.loans.index', ['status' => 'dipinjam']) }}" class="card stat-card-item" style="text-decoration: none;">
+        <div class="stat-card-header">
+            <span class="stat-card-label">SEDANG DIPINJAM</span>
+            <div class="stat-card-icon icon-sky">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             </div>
         </div>
-        <div style="font-size: 1.85rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">{{ $stats['total_dipinjam'] }}</div>
-        <div style="font-size: 0.775rem; color: var(--adm-text-muted, #cbd5e1); margin-top: 4px;">Sirkulasi buku aktif</div>
+        <div class="stat-card-val" style="color: #38bdf8;">{{ $stats['total_dipinjam'] }}</div>
+        <div class="stat-card-sub">Sirkulasi buku aktif</div>
     </a>
 
     <!-- Stat 4: Terlambat -->
-    <a href="{{ route('admin.perpus.loans.index', ['status' => 'terlambat']) }}" class="card" style="padding: 20px; text-decoration: none; border-left: 4px solid #ef4444;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Terlambat Kembali</span>
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); display: flex; align-items: center; justify-content: center;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <a href="{{ route('admin.perpus.loans.index', ['status' => 'terlambat']) }}" class="card stat-card-item" style="text-decoration: none;">
+        <div class="stat-card-header">
+            <span class="stat-card-label">TERLAMBAT KEMBALI</span>
+            <div class="stat-card-icon icon-rose">
+                <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
         </div>
-        <div style="font-size: 1.85rem; font-weight: 800; color: #f87171;">{{ $stats['total_terlambat'] }}</div>
-        <div style="font-size: 0.775rem; color: #fca5a5; margin-top: 4px;">Perlu ditindaklanjuti</div>
+        <div class="stat-card-val" style="color: #f87171;">{{ $stats['total_terlambat'] }}</div>
+        <div class="stat-card-sub">Perlu tindak lanjut petugas</div>
     </a>
 </div>
 

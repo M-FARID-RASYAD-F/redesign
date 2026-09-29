@@ -31,12 +31,6 @@
     </div>
 </div>
 
-@if(session('success'))
-<div style="background-color: rgba(16, 185, 129, 0.15); border-left: 4px solid #10b981; color: #6ee7b7; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
-    {{ session('success') }}
-</div>
-@endif
-
 <div class="admin-perpus-main-grid">
     <!-- Left Column: Details -->
     <div style="display: flex; flex-direction: column; gap: 20px;">

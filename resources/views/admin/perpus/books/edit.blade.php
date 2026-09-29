@@ -3,26 +3,16 @@
 @section('title', 'Edit Buku - ' . $book->title)
 
 @section('content')
-<div class="header" style="margin-bottom: 24px;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-        <a href="{{ route('admin.perpus.books.index') }}" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 4px;">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Kembali
-        </a>
-        <h1 class="header-title" style="font-size: 1.4rem; font-weight: 700; color: var(--adm-text-title, #ffffff); margin: 0;">Edit Data Buku</h1>
+<div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+    <div>
+        <h1 class="header-title">Edit Data Buku</h1>
+        <p style="color: var(--adm-text-muted); font-size: 0.9rem; margin-top: 4px;">Perbarui metadata atau informasi inventaris buku perpustakaan.</p>
     </div>
+    <a href="{{ route('admin.perpus.books.index') }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 6px;">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Kembali ke Daftar Buku</span>
+    </a>
 </div>
-
-@if($errors->any())
-<div style="background-color: rgba(239, 68, 68, 0.15); border-left: 4px solid #ef4444; color: #fca5a5; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
-    <div style="font-weight: 600; margin-bottom: 4px;">Terjadi kesalahan pengisian form:</div>
-    <ul style="margin: 0; padding-left: 18px;">
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
 <div class="card" style="max-width: 800px; padding: 24px;">
     <form action="{{ route('admin.perpus.books.update', $book->id) }}" method="POST">

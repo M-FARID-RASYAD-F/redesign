@@ -40,8 +40,11 @@
                         </div>
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 2px;">{{ $major->name }}</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $major->slug }}</div>
+                        <div style="font-weight: 600; color: var(--adm-text-title, #ffffff); margin-bottom: 4px; font-size: 0.95rem;">{{ $major->name }}</div>
+                        <div style="font-size: 0.8rem; color: var(--adm-text-muted); display: inline-flex; align-items: center; gap: 4px;">
+                            <span>Slug:</span>
+                            <code style="background: rgba(255, 255, 255, 0.06); padding: 1px 6px; border-radius: 4px; color: var(--adm-primary, var(--primary)); font-size: 0.78rem;">{{ $major->slug }}</code>
+                        </div>
                     </td>
                     <td style="line-height: 1.4; color: var(--text-muted); font-size: 0.85rem;">
                         {{ Str::limit($major->description, 100) }}

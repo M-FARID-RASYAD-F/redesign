@@ -41,10 +41,10 @@
                                     {{ strtoupper(substr($teacher->name, 0, 1)) }}
                                 @endif
                             </div>
-                            <div style="font-weight: 600; color: #ffffff;">{{ $teacher->name }}</div>
+                            <div style="font-weight: 600; color: var(--adm-text-title, #ffffff);">{{ $teacher->name }}</div>
                         </div>
                     </td>
-                    <td style="font-family: monospace; font-size: 0.85rem;">
+                    <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--adm-text-sub);">
                         {{ $teacher->nip ?? 'Belum Diisi' }}
                     </td>
                     <td>

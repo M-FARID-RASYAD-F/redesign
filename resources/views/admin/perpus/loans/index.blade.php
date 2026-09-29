@@ -16,12 +16,6 @@
     </div>
 </div>
 
-@if(session('success'))
-<div style="background-color: rgba(16, 185, 129, 0.15); border-left: 4px solid #10b981; color: #6ee7b7; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
-    {{ session('success') }}
-</div>
-@endif
-
 <!-- Status Filter Tabs -->
 <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid var(--adm-table-border, rgba(255, 255, 255, 0.12)); padding-bottom: 12px;">
     @php

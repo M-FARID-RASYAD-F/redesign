@@ -18,9 +18,9 @@
       if (card.dataset.tiltActive === 'true') return;
       card.dataset.tiltActive = 'true';
 
-      const maxTilt = parseFloat(card.dataset.maxTilt) || 12; // Maximum tilt angle in degrees
-      const maxTranslateZ = parseFloat(card.dataset.translateZ) || 16; // Lift in px
-      const lerpSpeed = 0.095; // Damping interpolation speed (0.08–0.1 = ultra silky smooth)
+      const maxTilt = parseFloat(card.dataset.maxTilt) || 5; // Relaxed tilt angle in degrees for calm motion
+      const maxTranslateZ = parseFloat(card.dataset.translateZ) || 8; // Gentle lift in px
+      const lerpSpeed = 0.045; // Silky calm damping interpolation (prevents jittery/fast tilts)
 
       let isHovered = false;
       let targetX = 0;
@@ -50,7 +50,7 @@
         currentZ = lerp(currentZ, targetZ, lerpSpeed);
         currentGlareX = lerp(currentGlareX, targetGlareX, lerpSpeed * 1.2);
         currentGlareY = lerp(currentGlareY, targetGlareY, lerpSpeed * 1.2);
-        currentGlareOpacity = lerp(currentGlareOpacity, targetGlareOpacity, 0.12);
+        currentGlareOpacity = lerp(currentGlareOpacity, targetGlareOpacity, 0.06);
 
         // Apply hardware-accelerated 3D transform directly
         card.style.transform = `perspective(1200px) rotateX(${currentX.toFixed(3)}deg) rotateY(${currentY.toFixed(3)}deg) translateZ(${currentZ.toFixed(2)}px)`;

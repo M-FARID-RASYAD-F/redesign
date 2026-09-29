@@ -16,20 +16,6 @@
     </a>
 </div>
 
-@if(session('success'))
-    <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; padding: 14px 18px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>{{ session('success') }}</span>
-    </div>
-@endif
-
-@if(session('error'))
-    <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 14px 18px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>{{ session('error') }}</span>
-    </div>
-@endif
-
 <div class="card">
     <div class="table-responsive">
         <table>
@@ -52,7 +38,7 @@
                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                             </div>
                             <div>
-                                <div style="font-weight: 700; color: #ffffff;">
+                                <div style="font-weight: 700; color: var(--adm-text-title, #ffffff);">
                                     {{ $user->name }}
                                     @if($user->id === auth()->id())
                                         <span style="font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; margin-left: 4px;">Anda</span>

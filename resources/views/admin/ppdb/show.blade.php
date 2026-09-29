@@ -109,7 +109,7 @@
     .ppdb-hero-info h1 {
         font-size: 1.38rem;
         font-weight: 800;
-        color: #ffffff;
+        color: var(--adm-text-title, #ffffff);
         margin: 0 0 6px 0;
         line-height: 1.25;
         word-break: break-word;

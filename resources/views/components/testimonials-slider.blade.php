@@ -276,10 +276,10 @@
     flex-direction: column;
     justify-content: space-between;
     box-shadow: var(--testi-card-shadow);
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.22s ease, 
-                box-shadow 0.22s ease, 
-                background-color 0.3s ease;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.4s ease;
     position: relative;
     box-sizing: border-box;
 }
@@ -295,7 +295,7 @@
 .testimonial-card:hover {
     border-color: var(--testi-card-border-hover);
     box-shadow: var(--testi-card-shadow-hover);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 /* Light Mode Overrides for Cards */
@@ -315,7 +315,7 @@
 
 [data-theme="light"] .testimonial-card:hover {
     border-color: oklch(58.6% 0.253 17.585);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 [data-theme="light"] .testimonial-card.accent-teal:hover {
@@ -652,6 +652,23 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+    .testimonials-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    .btn-testimonial-primary {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+        text-align: center;
+    }
+    .btn-testimonial-secondary {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+        text-align: center;
     }
 }
 </style>

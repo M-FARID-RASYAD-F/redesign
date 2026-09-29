@@ -337,6 +337,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Mempublikasikan artikel berita prestasi lomba LKS 2026',
         ]);
     
-        $this->call(PerpusSeeder::class);
+        // Jalankan terpisah: php artisan db:seed --class=PerpusSeeder
+        // $this->call(PerpusSeeder::class);
     }
 }

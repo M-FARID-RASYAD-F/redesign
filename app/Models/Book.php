@@ -6,8 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     protected $fillable = [
-        'category_id', 'title', 'isbn', 'author', 'publisher',
+        'category_id', 'title', 'isbn', 'author', 'publisher', 'year',
         'stock', 'available', 'cover', 'synopsis', 'rack_location',
+    ];
+
+    protected $casts = [
+        'year'      => 'integer',
+        'stock'     => 'integer',
+        'available' => 'integer',
     ];
 
     public function category()

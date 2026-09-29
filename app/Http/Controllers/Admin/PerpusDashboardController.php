@@ -13,7 +13,8 @@ class PerpusDashboardController extends Controller
         $stats = [
             'total_books'     => Book::count(),
             'total_available' => (int) Book::sum('available'),
-            'total_dipinjam'  => BookLoan::where('status', 'dipinjam')->count(),
+            'total_dipinjam'  => BookLoan::whereIn('status', ['dipinjam', 'disetujui'])->count(),
+            'total_pending'   => BookLoan::where('status', 'diajukan')->count(),
             'total_terlambat' => BookLoan::where('status', 'terlambat')->count(),
         ];
 

@@ -9,7 +9,7 @@
         <p style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.9rem; margin: 0;">Verifikasi pengajuan peminjaman baru, kelola masa pinjam, dan konfirmasi pengembalian buku.</p>
     </div>
     <div>
-        <a href="{{ route('admin.perpus.loans.export', ['status' => request('status')]) }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 6px;">
+        <a href="{{ route('admin.perpus.loans.export', array_filter(['status' => request('status'), 'start_date' => request('start_date'), 'end_date' => request('end_date')])) }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 6px;">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Ekspor Laporan CSV
         </a>
@@ -23,24 +23,49 @@
 @endif
 
 <!-- Status Filter Tabs -->
-<div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid var(--adm-table-border, rgba(255, 255, 255, 0.12)); padding-bottom: 12px;">
+<div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--adm-table-border, rgba(255, 255, 255, 0.12)); padding-bottom: 12px;">
     @php
         $currStatus = request('status', 'all');
         $tabs = [
             'all'          => 'Semua Peminjaman',
             'diajukan'     => 'Menunggu Verifikasi',
+            'disetujui'    => 'Disetujui',
             'dipinjam'     => 'Sedang Dipinjam',
             'dikembalikan' => 'Sudah Dikembalikan',
             'terlambat'    => 'Terlambat',
+            'ditolak'      => 'Ditolak',
         ];
     @endphp
     @foreach($tabs as $key => $label)
-    <a href="{{ route('admin.perpus.loans.index', $key === 'all' ? [] : ['status' => $key]) }}"
+    <a href="{{ route('admin.perpus.loans.index', array_filter(array_merge(request()->only(['start_date', 'end_date']), ['status' => $key === 'all' ? null : $key]))) }}"
        style="padding: 7px 14px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; {{ $currStatus === $key ? 'background: var(--adm-primary, #00B4D8); color: #ffffff; box-shadow: 0 0 12px rgba(0, 180, 216, 0.35);' : 'background: rgba(255, 255, 255, 0.06); color: var(--adm-text-sub, #f1f5f9); border: 1px solid var(--adm-border, rgba(0, 180, 216, 0.25));' }}">
         {{ $label }}
     </a>
     @endforeach
 </div>
+
+<!-- Date Range Filter Form -->
+<form method="GET" action="{{ route('admin.perpus.loans.index') }}" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; background: rgba(255, 255, 255, 0.04); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--adm-border, rgba(0, 180, 216, 0.2));">
+    <input type="hidden" name="status" value="{{ request('status', 'all') }}">
+    <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--adm-text-sub, #f1f5f9);">
+        <label for="start_date" style="font-weight: 600;">Dari Tanggal:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ request('start_date') }}" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--adm-border, rgba(0, 180, 216, 0.3)); color: #ffffff; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem;">
+    </div>
+    <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--adm-text-sub, #f1f5f9);">
+        <label for="end_date" style="font-weight: 600;">Sampai Tanggal:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ request('end_date') }}" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--adm-border, rgba(0, 180, 216, 0.3)); color: #ffffff; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem;">
+    </div>
+    <div style="display: inline-flex; gap: 8px;">
+        <button type="submit" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem; font-weight: 600;">
+            Filter
+        </button>
+        @if(request('start_date') || request('end_date'))
+        <a href="{{ route('admin.perpus.loans.index', ['status' => request('status', 'all')]) }}" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.85rem;">
+            Reset Filter
+        </a>
+        @endif
+    </div>
+</form>
 
 <!-- Table Card -->
 <div class="card">
@@ -89,9 +114,11 @@
                         @php
                             $badgeStyles = match($loan->status) {
                                 'diajukan'     => 'background-color: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);',
-                                'dipinjam'     => 'background-color: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);',
+                                'disetujui'    => 'background-color: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4);',
+                                'dipinjam'     => 'background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4);',
                                 'dikembalikan' => 'background-color: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);',
                                 'terlambat'    => 'background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);',
+                                'ditolak'      => 'background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.4);',
                                 default        => 'background-color: rgba(255, 255, 255, 0.1); color: #cbd5e1;',
                             };
                         @endphp
@@ -100,10 +127,36 @@
                         </span>
                     </td>
                     <td style="padding: 14px 16px; text-align: center;">
-                        <div style="display: inline-flex; gap: 6px; align-items: center;">
+                        <div style="display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                            {{-- Quick Action Buttons --}}
+                            @if($loan->status === 'diajukan')
+                            <form action="{{ route('admin.perpus.loans.status', $loan->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="status" value="dipinjam">
+                                <button type="submit" class="btn btn-sm" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 5px 9px; font-size: 0.8rem; font-weight: 600;" title="Setujui dan serahkan buku fisik">
+                                    Setujui
+                                </button>
+                            </form>
+                            <form action="{{ route('admin.perpus.loans.status', $loan->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="status" value="ditolak">
+                                <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); padding: 5px 9px; font-size: 0.8rem; font-weight: 600;" title="Tolak pengajuan peminjaman">
+                                    Tolak
+                                </button>
+                            </form>
+                            @elseif(in_array($loan->status, ['dipinjam', 'disetujui', 'terlambat']))
+                            <form action="{{ route('admin.perpus.loans.status', $loan->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="status" value="dikembalikan">
+                                <button type="submit" class="btn btn-sm" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); padding: 5px 9px; font-size: 0.8rem; font-weight: 600;" title="Tandai buku telah dikembalikan">
+                                    Kembalikan
+                                </button>
+                            </form>
+                            @endif
+
                             <a href="{{ route('admin.perpus.loans.show', $loan->id) }}" class="btn btn-outline btn-sm" style="color: var(--primary, #00B4D8); border-color: var(--adm-border, rgba(0, 180, 216, 0.35)); display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; font-size: 0.8rem;">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                                Detail / Ubah
+                                Detail
                             </a>
                             <form action="{{ route('admin.perpus.loans.delete', $loan->id) }}" method="POST" class="form-delete-confirm" data-delete-message="Apakah Anda yakin ingin menghapus data peminjaman <strong>{{ $loan->loan_code }}</strong>?">
                                 @csrf

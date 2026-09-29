@@ -186,7 +186,7 @@
 
                         <div class="perpus-book-meta">
                             <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                            <span class="truncate">{{ $book->author }}</span>
+                            <span class="truncate">{{ $book->author }}{{ $book->year ? " ({$book->year})" : '' }}</span>
                         </div>
 
                         @if($book->rack_location)

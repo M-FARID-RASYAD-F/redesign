@@ -56,7 +56,12 @@
 
             <div>
                 <label style="display: block; font-weight: 600; font-size: 0.875rem; color: var(--adm-text-sub, #f1f5f9); margin-bottom: 6px;">Penerbit</label>
-                <input type="text" name="publisher" value="{{ old('publisher') }}" placeholder="Nama penerbit / tahun terbit" class="form-control">
+                <input type="text" name="publisher" value="{{ old('publisher') }}" placeholder="Nama penerbit buku" class="form-control">
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: var(--adm-text-sub, #f1f5f9); margin-bottom: 6px;">Tahun Terbit</label>
+                <input type="number" name="year" value="{{ old('year') }}" placeholder="Contoh: 2024" min="1900" max="{{ date('Y') + 1 }}" class="form-control">
             </div>
 
             <div>

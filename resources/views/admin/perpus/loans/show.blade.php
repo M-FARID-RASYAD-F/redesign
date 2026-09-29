@@ -168,6 +168,9 @@
                         <option value="diajukan" {{ old('status', $loan->status) == 'diajukan' ? 'selected' : '' }} style="background: var(--adm-card-solid, #002147); color: #ffffff;">
                             Menunggu Verifikasi (Diajukan)
                         </option>
+                        <option value="disetujui" {{ old('status', $loan->status) == 'disetujui' ? 'selected' : '' }} style="background: var(--adm-card-solid, #002147); color: #ffffff;">
+                            Disetujui (Siap Diambil di Perpustakaan)
+                        </option>
                         <option value="dipinjam" {{ old('status', $loan->status) == 'dipinjam' ? 'selected' : '' }} style="background: var(--adm-card-solid, #002147); color: #ffffff;">
                             Sedang Dipinjam (Buku Fisik Diserahkan)
                         </option>
@@ -176,6 +179,9 @@
                         </option>
                         <option value="terlambat" {{ old('status', $loan->status) == 'terlambat' ? 'selected' : '' }} style="background: var(--adm-card-solid, #002147); color: #ffffff;">
                             Terlambat (Melewati Batas Waktu)
+                        </option>
+                        <option value="ditolak" {{ old('status', $loan->status) == 'ditolak' ? 'selected' : '' }} style="background: var(--adm-card-solid, #002147); color: #ffffff;">
+                            Ditolak (Pengajuan Dibatalkan / Ditolak)
                         </option>
                     </select>
                 </div>

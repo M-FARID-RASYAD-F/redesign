@@ -30,9 +30,11 @@ class BookLoan extends Model
     {
         return match ($this->status) {
             'diajukan'     => 'Menunggu Verifikasi',
+            'disetujui'    => 'Disetujui (Siap Diambil)',
             'dipinjam'     => 'Sedang Dipinjam',
             'dikembalikan' => 'Sudah Dikembalikan',
             'terlambat'    => 'Terlambat',
+            'ditolak'      => 'Pengajuan Ditolak',
             default        => ucfirst($this->status),
         };
     }

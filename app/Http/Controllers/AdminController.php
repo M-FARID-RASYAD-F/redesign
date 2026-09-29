@@ -697,6 +697,7 @@ class AdminController extends Controller
             'isbn'          => 'nullable|string|max:50|unique:books,isbn',
             'author'        => 'required|string|max:150',
             'publisher'     => 'nullable|string|max:150',
+            'year'          => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
             'stock'         => 'required|integer|min:1',
             'synopsis'      => 'nullable|string',
             'rack_location' => 'nullable|string|max:50',
@@ -730,6 +731,7 @@ class AdminController extends Controller
             'isbn'          => 'nullable|string|max:50|unique:books,isbn,' . $book->id,
             'author'        => 'required|string|max:150',
             'publisher'     => 'nullable|string|max:150',
+            'year'          => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
             'stock'         => 'required|integer|min:1',
             'synopsis'      => 'nullable|string',
             'rack_location' => 'nullable|string|max:50',
@@ -780,18 +782,28 @@ class AdminController extends Controller
     {
         Gate::authorize('viewAny', BookLoan::class);
 
-        $status = strtolower($request->query('status', ''));
+        $status    = strtolower($request->query('status', ''));
+        $startDate = $request->query('start_date');
+        $endDate   = $request->query('end_date');
+
         $query = BookLoan::with(['book', 'member']);
 
-        if (in_array($status, ['diajukan', 'dipinjam', 'dikembalikan', 'terlambat'])) {
+        if (in_array($status, ['diajukan', 'disetujui', 'dipinjam', 'dikembalikan', 'ditolak', 'terlambat'])) {
             $query->where('status', $status);
         } else {
             $status = 'all';
         }
 
+        if (!empty($startDate)) {
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+        if (!empty($endDate)) {
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+
         $loans = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
 
-        return view('admin.perpus.loans.index', compact('loans', 'status'));
+        return view('admin.perpus.loans.index', compact('loans', 'status', 'startDate', 'endDate'));
     }
 
     public function loanShow($id)
@@ -807,29 +819,38 @@ class AdminController extends Controller
         Gate::authorize('update', $loan);
 
         $validated = $request->validate([
-            'status' => 'required|in:diajukan,dipinjam,dikembalikan,terlambat',
+            'status' => 'required|in:diajukan,disetujui,dipinjam,dikembalikan,ditolak,terlambat',
             'notes'  => 'nullable|string',
         ]);
 
         $oldStatus = $loan->status;
         $newStatus = $validated['status'];
 
-        // Kelola stok "available" saat status berubah (hanya sekali per transisi)
-        if ($oldStatus !== 'dipinjam' && $newStatus === 'dipinjam') {
+        $heldStock = in_array($oldStatus, ['disetujui', 'dipinjam']);
+        $willHoldStock = in_array($newStatus, ['disetujui', 'dipinjam']);
+
+        // Kelola stok "available" secara idempotent
+        if (!$heldStock && $willHoldStock) {
             $loan->book->decrement('available');
-            $validated['borrowed_at'] = now();
-        }
-        if ($oldStatus === 'dipinjam' && $newStatus === 'dikembalikan') {
+            if ($newStatus === 'dipinjam' && !$loan->borrowed_at) {
+                $validated['borrowed_at'] = now();
+            }
+        } elseif ($heldStock && !$willHoldStock) {
             $loan->book->increment('available');
-            $validated['returned_at'] = now();
+            if ($newStatus === 'dikembalikan') {
+                $validated['returned_at'] = now();
+            }
+        } elseif ($oldStatus === 'disetujui' && $newStatus === 'dipinjam') {
+            if (!$loan->borrowed_at) {
+                $validated['borrowed_at'] = now();
+            }
         }
 
         $loan->update($validated);
         $this->logActivity('perpus', 'verify',
             "Mengubah status peminjaman {$loan->loan_code} dari {$oldStatus} ke {$newStatus}");
 
-        return redirect()->route('admin.perpus.loans.show', $id)
-            ->with('success', 'Status peminjaman berhasil diperbarui!');
+        return redirect()->back()->with('success', "Status peminjaman {$loan->loan_code} berhasil diperbarui menjadi {$loan->status_label}!");
     }
 
     public function loanDelete($id)
@@ -849,13 +870,23 @@ class AdminController extends Controller
     {
         Gate::authorize('viewAny', \App\Models\BookLoan::class);
 
-        $status = strtolower($request->query('status', ''));
+        $status    = strtolower($request->query('status', ''));
+        $startDate = $request->query('start_date');
+        $endDate   = $request->query('end_date');
+
         $query = BookLoan::with(['book', 'member']);
 
-        if (in_array($status, ['diajukan', 'dipinjam', 'dikembalikan', 'terlambat'])) {
+        if (in_array($status, ['diajukan', 'disetujui', 'dipinjam', 'dikembalikan', 'ditolak', 'terlambat'])) {
             $query->where('status', $status);
         } else {
             $status = 'semua';
+        }
+
+        if (!empty($startDate)) {
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+        if (!empty($endDate)) {
+            $query->whereDate('created_at', '<=', $endDate);
         }
 
         $loans = $query->orderBy('created_at', 'desc')->get();

@@ -105,6 +105,11 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <span>Status: Menunggu Konfirmasi Pustakawan</span>
                         </span>
+                    @elseif($loan->status == 'disetujui')
+                        <span style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span>Status: Disetujui (Siap Diambil di Loket)</span>
+                        </span>
                     @elseif($loan->status == 'dipinjam')
                         <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
@@ -114,6 +119,11 @@
                         <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                             <span>Status: Diterima Kembali (Selesai)</span>
+                        </span>
+                    @elseif($loan->status == 'ditolak')
+                        <span style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                            <span>Status: Pengajuan Ditolak</span>
                         </span>
                     @elseif($loan->status == 'terlambat')
                         <span style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); font-weight: 800; font-size: 0.9rem; padding: 8px 18px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
@@ -144,7 +154,15 @@
                         @if($loan->status == 'diajukan')
                             <div style="width: 36px; height: 36px; border-radius: 50%; background: #f59e0b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);">2</div>
                             <span style="font-size: 0.85rem; font-weight: 700; color: #fbbf24;">2. Verifikasi Fisik</span>
-                            <span style="font-size: 0.75rem; color: #fbbf24;">Ambil buku di loket</span>
+                            <span style="font-size: 0.75rem; color: #fbbf24;">Menunggu verifikasi</span>
+                        @elseif($loan->status == 'disetujui')
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #0284c7; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);">✓</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #38bdf8;">2. Disetujui</span>
+                            <span style="font-size: 0.75rem; color: #38bdf8;">Siap diambil di loket</span>
+                        @elseif($loan->status == 'ditolak')
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);">✕</div>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #f87171;">2. Ditolak</span>
+                            <span style="font-size: 0.75rem; color: #f87171;">Pengajuan tidak disetujui</span>
                         @elseif($loan->status == 'terlambat')
                             <div style="width: 36px; height: 36px; border-radius: 50%; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);">!</div>
                             <span style="font-size: 0.85rem; font-weight: 700; color: #f87171;">2. Terlambat</span>

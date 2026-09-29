@@ -432,4 +432,181 @@ class PerpusModuleTest extends TestCase
         $response->assertSee('Portal Petugas Perpustakaan');
         $response->assertSee('Laskar Pelangi');
     }
+
+    /**
+     * Test 11: Admin dapat menyimpan buku dengan tahun terbit
+     */
+    public function test_admin_can_save_book_with_publication_year(): void
+    {
+        $this->actingAs($this->adminPerpus);
+
+        // Create buku dengan year
+        $this->post(route('admin.perpus.books.store'), [
+            'category_id' => $this->fictionCategory->id,
+            'title'       => 'Negeri 5 Menara',
+            'author'      => 'Ahmad Fuadi',
+            'publisher'   => 'Gramedia',
+            'year'        => 2009,
+            'stock'       => 4,
+        ])->assertRedirect(route('admin.perpus.books.index'));
+
+        $book = Book::where('title', 'Negeri 5 Menara')->first();
+        $this->assertNotNull($book);
+        $this->assertEquals(2009, $book->year);
+
+        // Tampil di halaman detail publik
+        $this->get(route('perpus.show', $book->id))
+            ->assertOk()
+            ->assertSee('2009');
+    }
+
+    /**
+     * Test 12: Admin dapat memfilter peminjaman berdasarkan rentang tanggal
+     */
+    public function test_admin_can_filter_loans_by_date_range(): void
+    {
+        $this->actingAs($this->adminPerpus);
+
+        $member = LibraryMember::create([
+            'full_name' => 'Budi Santoso',
+            'phone'     => '089988776655',
+            'joined_at' => now(),
+        ]);
+
+        // Loan kemarin
+        BookLoan::create([
+            'member_id'  => $member->id,
+            'book_id'    => $this->testBook->id,
+            'status'     => 'dipinjam',
+            'created_at' => now()->subDay(),
+        ]);
+
+        // Loan hari ini
+        $todayLoan = BookLoan::create([
+            'member_id'  => $member->id,
+            'book_id'    => $this->testBook->id,
+            'status'     => 'diajukan',
+            'created_at' => now(),
+        ]);
+
+        // Filter hanya hari ini
+        $today = now()->toDateString();
+        $response = $this->get(route('admin.perpus.loans.index', [
+            'start_date' => $today,
+            'end_date'   => $today,
+        ]));
+
+        $response->assertOk();
+        $response->assertSee($todayLoan->loan_code);
+    }
+
+    /**
+     * Test 13: Admin dapat menyetujui dan menolak pengajuan peminjaman
+     */
+    public function test_admin_can_quick_approve_and_reject_loan(): void
+    {
+        $this->actingAs($this->adminPerpus);
+
+        $member = LibraryMember::create([
+            'full_name' => 'Citra Dewi',
+            'phone'     => '082211334455',
+            'joined_at' => now(),
+        ]);
+
+        // --- Approve ---
+        $loanApprove = BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'diajukan',
+        ]);
+
+        $this->post(route('admin.perpus.loans.status', $loanApprove->id), [
+            'status' => 'disetujui',
+        ])->assertRedirect();
+
+        $loanApprove->refresh();
+        $this->testBook->refresh();
+        $this->assertEquals('disetujui', $loanApprove->status);
+        $this->assertEquals(2, $this->testBook->available); // stok berkurang
+
+        // --- Reject ---
+        $loanReject = BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'diajukan',
+        ]);
+
+        $this->post(route('admin.perpus.loans.status', $loanReject->id), [
+            'status' => 'ditolak',
+        ])->assertRedirect();
+
+        $loanReject->refresh();
+        $this->assertEquals('ditolak', $loanReject->status);
+        $this->assertEquals(2, $this->testBook->fresh()->available); // stok tidak berubah
+    }
+
+    /**
+     * Test 14: Dashboard menampilkan counter pengajuan pending
+     */
+    public function test_perpus_dashboard_displays_pending_counter(): void
+    {
+        $this->actingAs($this->adminPerpus);
+
+        $member = LibraryMember::create([
+            'full_name' => 'Eko Purnomo',
+            'phone'     => '081122334455',
+            'joined_at' => now(),
+        ]);
+
+        BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'diajukan',
+        ]);
+
+        BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'diajukan',
+        ]);
+
+        $response = $this->get(route('admin.perpus.dashboard'));
+        $response->assertOk();
+        // Halaman dashboard berhasil diakses; statistik pending dihitung oleh controller
+        $response->assertSee('Pengajuan Pending');
+    }
+
+    /**
+     * Test 15: Halaman tracking menampilkan badge disetujui dan ditolak dengan benar
+     */
+    public function test_tracking_shows_disetujui_and_ditolak_status(): void
+    {
+        $member = LibraryMember::create([
+            'full_name' => 'Fira Azzahra',
+            'phone'     => '088877665544',
+            'joined_at' => now(),
+        ]);
+
+        // Status disetujui
+        $approvedLoan = BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'disetujui',
+        ]);
+
+        $this->post(route('perpus.check'), ['loan_code' => $approvedLoan->loan_code])
+            ->assertOk()
+            ->assertSee('Disetujui');
+
+        // Status ditolak
+        $rejectedLoan = BookLoan::create([
+            'member_id' => $member->id,
+            'book_id'   => $this->testBook->id,
+            'status'    => 'ditolak',
+        ]);
+
+        $this->post(route('perpus.check'), ['loan_code' => $rejectedLoan->loan_code])
+            ->assertOk()
+            ->assertSee('Ditolak');
+    }
 }

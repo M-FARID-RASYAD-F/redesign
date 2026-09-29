@@ -69,7 +69,19 @@
         <div style="font-size: 0.775rem; color: var(--adm-text-muted, #cbd5e1); margin-top: 4px;">Sirkulasi buku aktif</div>
     </a>
 
-    <!-- Stat 4: Terlambat -->
+    <!-- Stat 4: Pengajuan Pending (Menunggu Verifikasi) -->
+    <a href="{{ route('admin.perpus.loans.index', ['status' => 'diajukan']) }}" class="card" style="padding: 20px; text-decoration: none; border-left: 4px solid #f59e0b;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Pengajuan Pending</span>
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+        </div>
+        <div style="font-size: 1.85rem; font-weight: 800; color: #fbbf24;">{{ $stats['total_pending'] ?? 0 }}</div>
+        <div style="font-size: 0.775rem; color: #fde68a; margin-top: 4px;">Menunggu verifikasi admin</div>
+    </a>
+
+    <!-- Stat 5: Terlambat -->
     <a href="{{ route('admin.perpus.loans.index', ['status' => 'terlambat']) }}" class="card" style="padding: 20px; text-decoration: none; border-left: 4px solid #ef4444;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <span style="font-size: 0.85rem; font-weight: 600; color: var(--adm-text-sub, #f1f5f9);">Terlambat Kembali</span>

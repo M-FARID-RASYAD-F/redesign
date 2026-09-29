@@ -60,6 +60,11 @@
             </div>
 
             <div>
+                <label style="display: block; font-weight: 600; font-size: 0.875rem; color: var(--adm-text-sub, #f1f5f9); margin-bottom: 6px;">Tahun Terbit</label>
+                <input type="number" name="year" value="{{ old('year', $book->year) }}" placeholder="Contoh: 2024" min="1900" max="{{ date('Y') + 1 }}" class="form-control">
+            </div>
+
+            <div>
                 <label style="display: block; font-weight: 600; font-size: 0.875rem; color: var(--adm-text-sub, #f1f5f9); margin-bottom: 6px;">Total Eksemplar Stok <span style="color: #ef4444;">*</span></label>
                 <input type="number" name="stock" value="{{ old('stock', $book->stock) }}" min="1" required class="form-control">
                 <small style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.775rem; display: block; margin-top: 4px;">Saat ini tersedia: <strong>{{ $book->available }}</strong> eksemplar.</small>

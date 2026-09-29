@@ -128,7 +128,15 @@
                                 <svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
-                                <span>Penerbit: <strong class="text-slate-200">{{ $book->publisher }}</strong></span>
+                                <span>Penerbit: <strong class="text-slate-200">{{ $book->publisher }}{{ $book->year ? " ({$book->year})" : '' }}</strong></span>
+                            </div>
+                            @elseif($book->year)
+                            <span class="perpus-byline-separator">&bull;</span>
+                            <div class="perpus-byline-item">
+                                <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span>Tahun: <strong class="text-slate-200">{{ $book->year }}</strong></span>
                             </div>
                             @endif
                         </div>
@@ -160,6 +168,21 @@
                                     <span class="perpus-spec-val" title="{{ $book->publisher ?: '-' }}">{{ $book->publisher ?: 'Umum / Tidak Dicantumkan' }}</span>
                                 </div>
                             </div>
+
+                            <!-- Card: Tahun Terbit -->
+                            @if($book->year)
+                            <div class="perpus-spec-card">
+                                <div class="perpus-spec-icon stat-amber">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="perpus-spec-content">
+                                    <span class="perpus-spec-label">Tahun Terbit</span>
+                                    <span class="perpus-spec-val text-amber-300 font-bold">{{ $book->year }}</span>
+                                </div>
+                            </div>
+                            @endif
 
                             <!-- Card 3: ISBN -->
                             <div class="perpus-spec-card">

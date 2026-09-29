@@ -2,8 +2,91 @@
 
 @section('title', 'Lacak Status Peminjaman Buku - Perpustakaan Digital')
 
+@push('styles')
+<style>
+.perpus-tracking-container {
+    padding-top: clamp(110px, 14vh, 150px) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CUBIC-BEZIER MOTION ALA HALAMAN UTAMA WEB
+   - Fluid deceleration timing: cubic-bezier(0.16, 1, 0.3, 1)
+   - Spring hover physics: cubic-bezier(0.34, 1.56, 0.64, 1)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Header Entrance Stagger Animation */
+.perpus-tracking-header .ppdb-section-tag {
+    display: inline-block;
+    animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+.perpus-tracking-header .ppdb-section-title {
+    animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+.perpus-tracking-header .ppdb-section-desc {
+    animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+/* Card & Box Fluid Hover Micro-interactions */
+.ppdb-tracking-box {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ppdb-tracking-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    border-color: rgba(56, 189, 248, 0.35);
+}
+
+.ppdb-tracking-box input:focus {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+.ppdb-tracking-box button[type="submit"] {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.25s ease;
+}
+.ppdb-tracking-box button[type="submit"]:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+}
+
+.ppdb-result-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ppdb-result-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border-color: rgba(56, 189, 248, 0.25);
+}
+
+.btn-outline {
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-outline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+@media print {
+    .perpus-tracking-container {
+        padding-top: 0 !important;
+    }
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+</style>
+@endpush
+
 @section('konten_utama')
-<div class="ppdb-page-container">
+<div class="ppdb-page-container perpus-tracking-container">
     <div style="max-width: 800px; margin: 0 auto;">
 
         <!-- Official Print Receipt Header (Only visible when printing slip) -->
@@ -16,31 +99,16 @@
             </div>
         </div>
         
-        <!-- Breadcrumb / Header Navigation -->
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print">
-            <nav class="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium" aria-label="Breadcrumb">
-                <a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a>
-                <span class="text-slate-500">/</span>
-                <a href="{{ route('perpus.index') }}" class="hover:text-white transition-colors">Perpustakaan</a>
-                <span class="text-slate-500">/</span>
-                <span class="text-slate-400" aria-current="page">Lacak Status</span>
-            </nav>
-
-            <a href="{{ route('perpus.index') }}" class="btn btn-outline" style="font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
-                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                <span>Katalog Buku</span>
-            </a>
-        </div>
 
         <!-- Header Halaman Tracking -->
-        <div style="text-align: center; margin-bottom: 35px;" class="no-print">
+        <div style="text-align: center; margin-bottom: 35px;" class="perpus-tracking-header no-print reveal">
             <span class="ppdb-section-tag">Tracking Sistem Perpustakaan</span>
             <h1 class="ppdb-section-title" style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 6px 0 0;">Lacak Status Peminjaman</h1>
             <p class="ppdb-section-desc" style="margin-top: 6px;">Masukkan Kode Peminjaman atau Nomor WhatsApp resmi untuk memantau status sirkulasi dan batas pengembalian buku.</p>
         </div>
 
         <!-- Form Pencarian Kode Peminjaman / No. WA -->
-        <div class="ppdb-tracking-box no-print">
+        <div class="ppdb-tracking-box no-print reveal">
             <form action="{{ route('perpus.check') }}" method="POST">
                 @csrf
                 <label for="loan_code" class="ppdb-form-label" style="margin-bottom: 8px;">
@@ -64,7 +132,7 @@
 
         <!-- Alert Jika Nomor/Kode Tidak Ditemukan -->
         @if(session('error') || $errors->has('loan_code'))
-        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 20px; color: #fca5a5; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print">
+        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 20px; color: #fca5a5; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print reveal">
             <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); color: #f87171; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
             </span>
@@ -76,7 +144,7 @@
         @endif
 
         @if(session('info'))
-        <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 16px; padding: 20px; color: #bae6fd; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print">
+        <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 16px; padding: 20px; color: #bae6fd; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 12px;" class="no-print reveal">
             <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(56, 189, 248, 0.2); color: #38bdf8; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             </span>
@@ -89,7 +157,7 @@
 
         <!-- TAMPILAN HASIL JIKA LOAN DITEMUKAN -->
         @if(isset($loan))
-        <div class="ppdb-result-card" style="margin-bottom: 30px;">
+        <div class="ppdb-result-card reveal" style="margin-bottom: 30px;">
             
             <!-- Header Status Box -->
             <div class="ppdb-result-header">
@@ -280,7 +348,7 @@
         </div>
         @else
         <!-- Panduan Pelacakan Peminjaman (PPDB result card style) -->
-        <div class="ppdb-result-card no-print" style="margin-bottom: 30px;">
+        <div class="ppdb-result-card no-print reveal" style="margin-bottom: 30px;">
             <div class="ppdb-result-header">
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #34d399; display: flex; align-items: center; justify-content: center;">
@@ -326,7 +394,7 @@
         </div>
         @endif
 
-        <div style="text-align: center; margin-top: 30px;" class="no-print">
+        <div style="text-align: center; margin-top: 30px;" class="no-print reveal">
             <a href="{{ route('perpus.index') }}" class="btn btn-outline" style="font-size: 0.9rem; padding: 10px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 <span>Kembali ke Katalog Buku Utama</span>
@@ -336,3 +404,14 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.refreshScrollReveal === 'function') {
+        window.refreshScrollReveal();
+    }
+});
+</script>
+@endpush
+

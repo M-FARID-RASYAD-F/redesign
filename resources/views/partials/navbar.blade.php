@@ -35,7 +35,7 @@
                         <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                         <span class="tab-label">Berita</span>
                     </a>
-                    <a href="{{ route('home') }}#perpustakaan" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
+                    <a href="{{ route('perpus.index') }}" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
                         <svg class="tab-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
                         <span class="tab-label">Perpustakaan</span>
                     </a>
@@ -156,7 +156,7 @@
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
-                <a href="{{ route('home') }}#perpustakaan" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
+                <a href="{{ route('perpus.index') }}" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
                     <span class="nav-mobile-icon-box">
                         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
                     </span>

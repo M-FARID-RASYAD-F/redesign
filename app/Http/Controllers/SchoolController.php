@@ -464,12 +464,13 @@ class SchoolController extends Controller
             'total_available' => Book::sum('available'),
             'total_categories' => BookCategory::count(),
         ];
+        $perpusCategories = BookCategory::withCount('books')->orderBy('name')->take(8)->get();
 
         // Kirim seluruh data ke view 'welcome'
         return view('welcome', compact(
             'sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan',
             'berita', 'fasilitas', 'cabang', 'galeriFasilitas', 'testimoni',
-            'bukuPerpusList', 'perpusStats'
+            'bukuPerpusList', 'perpusStats', 'perpusCategories'
         ));
     }
 

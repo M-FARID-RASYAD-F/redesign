@@ -55,7 +55,7 @@
                 </div>
                 <div>
                     <div style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.8rem; margin-bottom: 2px;">Kategori</div>
-                    <span style="background-color: rgba(0, 180, 216, 0.18); color: var(--adm-primary, #00B4D8); border: 1px solid rgba(0, 180, 216, 0.35); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">
+                    <span style="display: inline-block; background-color: rgba(0, 180, 216, 0.18); color: var(--adm-primary, #00B4D8); border: 1px solid rgba(0, 180, 216, 0.35); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; line-height: 1.45; max-width: 100%; word-break: normal; vertical-align: middle;">
                         {{ $loan->book->category ? $loan->book->category->name : 'Umum' }}
                     </span>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div>
                     <div style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.8rem; margin-bottom: 2px;">Nomor Anggota</div>
-                    <span style="font-family: monospace; font-weight: 700; color: var(--adm-primary, #00B4D8); background: rgba(0, 180, 216, 0.18); border: 1px solid rgba(0, 180, 216, 0.35); padding: 2px 6px; border-radius: 4px;">
+                    <span style="display: inline-block; font-family: monospace; font-weight: 700; color: var(--adm-primary, #00B4D8); background: rgba(0, 180, 216, 0.18); border: 1px solid rgba(0, 180, 216, 0.35); padding: 3px 8px; border-radius: 6px; line-height: 1.45; vertical-align: middle;">
                         {{ $loan->member->member_code }}
                     </span>
                 </div>

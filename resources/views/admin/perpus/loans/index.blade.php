@@ -79,10 +79,10 @@
                 @forelse($loans as $loan)
                 <tr style="border-bottom: 1px solid var(--adm-table-border, rgba(255, 255, 255, 0.08));">
                     <td style="padding: 14px 16px;">
-                        <span style="font-family: monospace; font-weight: 700; color: var(--adm-primary, #00B4D8); background: rgba(0, 180, 216, 0.16); padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; border: 1px solid rgba(0, 180, 216, 0.3);">
+                        <span style="display: inline-block; font-family: monospace; font-weight: 700; color: var(--adm-primary, #00B4D8); background: rgba(0, 180, 216, 0.16); padding: 4px 8px; border-radius: 6px; font-size: 0.85rem; border: 1px solid rgba(0, 180, 216, 0.3); line-height: 1.45; max-width: 100%; word-break: normal; vertical-align: middle; margin-bottom: 6px;">
                             {{ $loan->loan_code }}
                         </span>
-                        <div style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.775rem; margin-top: 3px;">
+                        <div style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.775rem; line-height: 1.4;">
                             {{ $loan->created_at->format('d M Y, H:i') }}
                         </div>
                     </td>

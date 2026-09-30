@@ -180,10 +180,16 @@
 @endpush
 
 @section('content')
-<div class="header">
+<div class="header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
     <div>
-        <h1 class="header-title">Edit Berita</h1>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Kembali ke <a href="{{ route('admin.news.index') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Daftar Berita</a></p>
+        <h1 class="header-title" style="font-size: 1.5rem; font-weight: 700; color: var(--adm-text-title, #ffffff); margin: 0 0 6px 0;">Edit Berita</h1>
+        <p style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.9rem; margin: 0;">Perbarui isi artikel, thumbnail, dan status publikasi warta sekolah.</p>
+    </div>
+    <div>
+        <a href="{{ route('admin.news.index') }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Kembali ke Daftar Berita</span>
+        </a>
     </div>
 </div>
 
@@ -202,7 +208,7 @@
         <div class="form-group">
             <label class="form-label" for="category_id">Kategori Berita *</label>
             <select id="category_id" name="category_id" class="form-control" required>
-                <option value="">-- Pilih Kategori --</option>
+                <option value="">-- Pilih Kategori Berita --</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ old('category_id', $news->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
@@ -221,7 +227,7 @@
             <div class="thumb-switch-bar">
                 <button type="button" class="thumb-switch-btn active" id="btnModeUpload">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    Unggah dari PC / HP
+                    Unggah dari Komputer / HP
                 </button>
                 <button type="button" class="thumb-switch-btn" id="btnModeUrl">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -246,7 +252,7 @@
             <!-- Mode 2: Manual URL Input -->
             <div id="urlPane" style="display: none;">
                 <input type="text" id="thumbnail" name="thumbnail" class="form-control" placeholder="Contoh: https://images.unsplash.com/... atau https://picsum.photos/800/400" value="{{ old('thumbnail', $news->thumbnail) }}">
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">Tempel link gambar dari web publik. Pratinjau akan langsung ditampilkan.</span>
+                <span style="font-size: 0.8rem; color: var(--adm-text-muted, #94a3b8); display: block; margin-top: 5px;">Tempel tautan gambar dari web publik. Pratinjau akan langsung ditampilkan.</span>
             </div>
 
             <!-- Live Preview Card Instan -->
@@ -277,9 +283,9 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label" for="published_at">Tanggal Publikasi</label>
+            <label class="form-label" for="published_at">Tanggal & Waktu Publikasi</label>
             <input type="datetime-local" id="published_at" name="published_at" class="form-control" value="{{ old('published_at', $news->published_at ? $news->published_at->format('Y-m-d\TH:i') : '') }}">
-            <span style="font-size: 0.75rem; color: var(--text-muted);">Biarkan kosong untuk menjadikannya draft, atau isi tanggal agar otomatis terbit.</span>
+            <span style="font-size: 0.8rem; color: var(--adm-text-muted, #94a3b8); display: block; margin-top: 5px;">Kosongkan jika ingin menjadikannya draft, atau isi tanggal & waktu agar otomatis terbit.</span>
             @error('published_at')
                 <div style="color: var(--danger); font-size: 0.8rem; margin-top: 4px;">{{ $message }}</div>
             @enderror
@@ -290,14 +296,17 @@
             <label class="form-label" for="content">Isi Konten Berita *</label>
             <div id="quillEditor"></div>
             <textarea id="content" name="content" style="display: none;" required>{{ old('content', $news->content) }}</textarea>
-            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 6px;">Gunakan tombol pemformatan di atas untuk mengatur heading, daftar poin, kutipan, dan tautan.</span>
+            <span style="font-size: 0.8rem; color: var(--adm-text-muted, #94a3b8); display: block; margin-top: 6px;">Gunakan baris toolbar di atas untuk mengatur heading, format teks tebal/miring, daftar poin, kutipan, dan tautan.</span>
             @error('content')
                 <div style="color: var(--danger); font-size: 0.8rem; margin-top: 4px;">{{ $message }}</div>
             @enderror
         </div>
 
         <div style="display: flex; gap: 12px; margin-top: 28px;">
-            <button type="submit" class="btn btn-primary" id="btnSubmitNews">Simpan Perubahan</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmitNews" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span>Simpan Perubahan</span>
+            </button>
             <a href="{{ route('admin.news.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
@@ -309,6 +318,15 @@
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const editorContainer = document.getElementById('quillEditor');
+    if (!editorContainer || editorContainer.__quillInitialized) return;
+    editorContainer.__quillInitialized = true;
+
+    // Bersihkan toolbar yatim jika ada
+    const parent = editorContainer.parentNode;
+    const existingToolbars = parent.querySelectorAll('.ql-toolbar');
+    existingToolbars.forEach(tb => tb.remove());
+
     // 1. Inisialisasi Quill Rich-Text Editor
     const quill = new Quill('#quillEditor', {
         theme: 'snow',

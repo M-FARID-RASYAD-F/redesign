@@ -3,10 +3,16 @@
 @section('title', 'Tambah Jurusan Baru - At-Tamam Edu')
 
 @section('content')
-<div class="header">
+<div class="header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
     <div>
-        <h1 class="header-title">Tambah Jurusan Baru</h1>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Kembali ke <a href="{{ route('admin.majors.index') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Daftar Jurusan</a></p>
+        <h1 class="header-title" style="font-size: 1.5rem; font-weight: 700; color: var(--adm-text-title, #ffffff); margin: 0 0 6px 0;">Tambah Jurusan Baru</h1>
+        <p style="color: var(--adm-text-muted, #cbd5e1); font-size: 0.9rem; margin: 0;">Tambahkan data program keahlian dan kejuruan baru di sekolah.</p>
+    </div>
+    <div>
+        <a href="{{ route('admin.majors.index') }}" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Kembali ke Daftar Jurusan</span>
+        </a>
     </div>
 </div>
 

@@ -35,7 +35,7 @@
                         <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                         <span class="tab-label">Berita</span>
                     </a>
-                    <a href="{{ route('perpus.index') }}" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
+                    <a href="{{ route('home') }}#perpustakaan" class="expandable-tab-btn {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan" aria-label="Perpustakaan">
                         <svg class="tab-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
                         <span class="tab-label">Perpustakaan</span>
                     </a>
@@ -54,7 +54,6 @@
             <button class="nav-search-trigger-btn" type="button" onclick="openSpotlight()" aria-label="Buka Pencarian Cepat (Ctrl+K)" title="Cari di website (Ctrl+K)">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <span class="nav-search-btn-label">Cari</span>
-                <kbd class="nav-search-badge">⌘K</kbd>
             </button>
 
             {{-- Tombol Toggle Theme (Dark / White) --}}
@@ -157,7 +156,7 @@
                     <span class="nav-mobile-link-text">Berita & Informasi</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
-                <a href="{{ route('perpus.index') }}" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
+                <a href="{{ route('home') }}#perpustakaan" class="nav-mobile-link {{ Request::is('perpustakaan*') ? 'active' : '' }}" data-section="perpustakaan">
                     <span class="nav-mobile-icon-box">
                         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
                     </span>
@@ -379,7 +378,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Scroll mulus tersinkronisasi (ScrollSmoother di desktop atau native smooth scroll di mobile)
         if (window.smoother && typeof window.smoother.scrollTo === 'function') {
-            window.smoother.scrollTo(targetId === 'beranda' ? 0 : targetEl, true, targetId === 'beranda' ? 'top' : 'top ' + navHeight + 'px');
+            try {
+                window.smoother.scrollTo(targetId === 'beranda' ? 0 : targetEl, true, targetId === 'beranda' ? 'top' : 'top ' + navHeight + 'px');
+            } catch (err) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         } else {
             window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
@@ -474,11 +477,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const jenjangEl   = document.getElementById('jenjang') || document.getElementById('jurusan');
         const cabangEl    = document.getElementById('cabang') || document.getElementById('fasilitas');
         const beritaEl    = document.getElementById('berita');
+        const perpusEl    = document.getElementById('perpustakaan');
 
         const navHeight = 90;
         const jenjangTop   = jenjangEl ? (jenjangEl.getBoundingClientRect().top + scrollY - navHeight) : 1200;
         const cabangTop    = cabangEl  ? (cabangEl.getBoundingClientRect().top + scrollY - navHeight)  : 2200;
         const beritaTop    = beritaEl  ? (beritaEl.getBoundingClientRect().top + scrollY - navHeight)  : 3200;
+        const perpusTop    = perpusEl  ? (perpusEl.getBoundingClientRect().top + scrollY - navHeight)  : 4200;
 
         if (scrollY < jenjangTop - 80) {
             setActiveNav('beranda');
@@ -486,8 +491,10 @@ document.addEventListener('DOMContentLoaded', function () {
             setActiveNav('jenjang');
         } else if (scrollY >= cabangTop - 80 && scrollY < beritaTop - 80) {
             setActiveNav('cabang');
-        } else {
+        } else if (scrollY >= beritaTop - 80 && scrollY < perpusTop - 80) {
             setActiveNav('berita');
+        } else {
+            setActiveNav('perpustakaan');
         }
     }
 

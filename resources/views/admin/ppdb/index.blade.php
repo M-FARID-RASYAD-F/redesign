@@ -272,7 +272,7 @@
                         @endif
                     </td>
                     <td>
-                        <div style="font-weight: 700; color: #ffffff; margin-bottom: 3px; font-size: 0.92rem;">{{ $reg->full_name }}</div>
+                        <div style="font-weight: 700; color: var(--adm-text-title, #ffffff); margin-bottom: 3px; font-size: 0.92rem;">{{ $reg->full_name }}</div>
                         <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                             <span>{{ $reg->gender == 'L' ? 'Ikhwan (L)' : 'Akhwat (P)' }}</span>
                             <span>•</span>
@@ -280,7 +280,7 @@
                         </div>
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 3px; font-size: 0.88rem;">{{ $reg->parent_name }}</div>
+                        <div style="font-weight: 600; color: var(--adm-text-title, #ffffff); margin-bottom: 3px; font-size: 0.88rem;">{{ $reg->parent_name }}</div>
                         @if($reg->parent_phone)
                             @php
                                 $rawPhone = $reg->parent_phone;

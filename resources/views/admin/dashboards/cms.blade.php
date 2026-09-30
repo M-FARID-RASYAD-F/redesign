@@ -80,7 +80,7 @@
     <!-- Kolom 1: Berita Terbaru -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">Berita & Publikasi Terbaru</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">Berita & Publikasi Terbaru</h3>
             <a href="{{ route('admin.news.index') }}" class="btn btn-outline btn-sm">Lihat Semua Berita →</a>
         </div>
 
@@ -107,7 +107,7 @@
                                 </div>
                                 @endif
                                 <div style="min-width: 0;">
-                                    <div style="font-weight: 700; color: #ffffff; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $n->title }}</div>
+                                    <div style="font-weight: 700; color: var(--adm-text-title, #ffffff); max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $n->title }}</div>
                                     <div style="font-size: 0.78rem; color: var(--adm-text-muted);">{{ $n->created_at->format('d M Y') }}</div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
 
     <!-- Kolom 2: Agenda & Pengumuman Aktif -->
     <div class="card">
-        <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--adm-text-title, #ffffff); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>Agenda Mendatang</span>
         </h3>
@@ -153,7 +153,7 @@
                     <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
                     <span>{{ \Carbon\Carbon::parse($ag->date)->translatedFormat('l, d F Y') }}</span>
                 </div>
-                <div style="font-size: 0.9rem; font-weight: 700; color: #ffffff; margin-top: 4px;">{{ $ag->title }}</div>
+                <div style="font-size: 0.9rem; font-weight: 700; color: var(--adm-text-title, #ffffff); margin-top: 4px;">{{ $ag->title }}</div>
                 @if($ag->location)
                 <div style="font-size: 0.78rem; color: var(--adm-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 5px;">
                     <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -166,14 +166,14 @@
             @endforelse
         </div>
 
-        <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--adm-text-title, #ffffff); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
             <span>Pengumuman Aktif</span>
         </h3>
         <div style="display: flex; flex-direction: column; gap: 10px;">
             @forelse($recentAnnouncements as $ann)
             <div style="padding: 10px 12px; background: rgba(0, 0, 0, 0.25); border-left: 3px solid #fbbf24; border-radius: 0 8px 8px 0;">
-                <div style="font-size: 0.88rem; font-weight: 700; color: #ffffff;">{{ $ann->title }}</div>
+                <div style="font-size: 0.88rem; font-weight: 700; color: var(--adm-text-title, #ffffff);">{{ $ann->title }}</div>
                 <div style="font-size: 0.76rem; color: var(--adm-text-muted); margin-top: 2px;">
                     Mulai: {{ \Carbon\Carbon::parse($ann->start_date)->format('d/m/Y') }} · {{ $ann->is_archived ? 'Arsip' : 'Aktif' }}
                 </div>

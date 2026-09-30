@@ -33,13 +33,16 @@
                 @forelse($newsList as $news)
                 <tr>
                     <td>
-                        <div style="font-weight: 600; color: #ffffff; margin-bottom: 4px;">{{ $news->title }}</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Slug: {{ $news->slug }}</div>
+                        <div style="font-weight: 600; color: var(--adm-text-title, #ffffff); margin-bottom: 4px; font-size: 0.95rem;">{{ $news->title }}</div>
+                        <div style="font-size: 0.8rem; color: var(--adm-text-muted); display: inline-flex; align-items: center; gap: 4px;">
+                            <span>Slug:</span>
+                            <code style="background: rgba(255, 255, 255, 0.06); padding: 1px 6px; border-radius: 4px; color: var(--adm-primary, var(--primary)); font-size: 0.78rem;">{{ $news->slug }}</code>
+                        </div>
                     </td>
                     <td>
                         <span class="badge badge-info">{{ $news->category->name ?? 'Umum' }}</span>
                     </td>
-                    <td>
+                    <td style="color: var(--adm-text-main);">
                         {{ $news->author->name ?? 'Admin' }}
                     </td>
                     <td style="font-size: 0.85rem; color: var(--text-muted);">

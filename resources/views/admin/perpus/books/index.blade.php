@@ -21,22 +21,6 @@
     </div>
 </div>
 
-@if(session('success'))
-<div style="background-color: rgba(16, 185, 129, 0.15); border-left: 4px solid #10b981; color: #6ee7b7; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
-    {{ session('success') }}
-</div>
-@endif
-
-@if($errors->any())
-<div style="background-color: rgba(239, 68, 68, 0.15); border-left: 4px solid #ef4444; color: #fca5a5; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
-    <ul style="margin: 0; padding-left: 18px;">
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <!-- Search & Filter Card -->
 <div class="card" style="padding: 18px; margin-bottom: 20px;">
     <form action="{{ route('admin.perpus.books.index') }}" method="GET" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">

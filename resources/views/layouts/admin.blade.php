@@ -1631,36 +1631,22 @@
             .table-detail,
             .table-detail tbody,
             .table-detail tr,
-            .table-detail td,
-            .card table[style*="width: 100%"],
-            .card table[style*="width: 100%"] tbody,
-            .card table[style*="width: 100%"] tr,
-            .card table[style*="width: 100%"] td,
-            .card table[style*="width:100%"],
-            .card table[style*="width:100%"] tbody,
-            .card table[style*="width:100%"] tr,
-            .card table[style*="width:100%"] td {
+            .table-detail td {
                 display: block !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
             }
 
-            .table-detail tr,
-            .card table[style*="width: 100%"] tr,
-            .card table[style*="width:100%"] tr {
+            .table-detail tr {
                 padding: 10px 0 !important;
                 border-bottom: 1px solid var(--adm-table-border) !important;
             }
 
-            .table-detail tr:last-child,
-            .card table[style*="width: 100%"] tr:last-child,
-            .card table[style*="width:100%"] tr:last-child {
+            .table-detail tr:last-child {
                 border-bottom: none !important;
             }
 
-            .table-detail td:first-child,
-            .card table[style*="width: 100%"] td:first-child,
-            .card table[style*="width:100%"] td:first-child {
+            .table-detail td:first-child {
                 font-size: 0.76rem !important;
                 color: var(--adm-text-muted) !important;
                 text-transform: uppercase !important;
@@ -1671,9 +1657,7 @@
                 width: 100% !important;
             }
 
-            .table-detail td:last-child,
-            .card table[style*="width: 100%"] td:last-child,
-            .card table[style*="width:100%"] td:last-child {
+            .table-detail td:last-child {
                 font-size: 0.95rem !important;
                 color: #ffffff !important;
                 font-weight: 600 !important;
@@ -2249,7 +2233,8 @@
                 </a>
             </li>
             @endcan
-@can('viewAny', App\Models\User::class)
+
+            @can('viewAny', App\Models\User::class)
             <li>
                 <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
                     <span class="sidebar-link-icon">
@@ -2281,7 +2266,7 @@
             </a>
             <a href="{{ route('logout') }}" class="btn-sidebar-action btn-sidebar-logout">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                <span>Logout Sesi</span>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
@@ -2337,6 +2322,20 @@
             <div class="alert-danger">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <span>{{ session('error') }}</span>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert-danger" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Terjadi kesalahan pengisian formulir:</span>
+                </div>
+                <ul style="margin: 4px 0 0 26px; padding: 0; font-size: 0.88rem; list-style-type: disc;">
+                    @foreach($errors->all() as $err)
+                        <li>{{ $err }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
@@ -2547,8 +2546,6 @@
             if (content) content.classList.remove('is-loading');
         });
     </script>
-
-    @stack('scripts')
 
     {{-- ═══════════════════════════════════════════════════════════
          GLOBAL DELETE CONFIRMATION ENGINE — SweetAlert2 Bounce-in

@@ -140,7 +140,7 @@
 
 <!-- VISUAL BAR STATUS PROGRESS CHART -->
 <div class="card" style="margin-bottom: 26px;">
-    <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+    <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--adm-text-title, #ffffff); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         <span>Komposisi Kelulusan Seleksi Calon Siswa</span>
     </h3>
@@ -178,7 +178,7 @@
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <div>
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 2px; display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--adm-text-title, #ffffff); margin-bottom: 2px; display: flex; align-items: center; gap: 8px;">
                 <svg width="18" height="18" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                 <span>Antrean Pendaftar Baru (Perlu Tindakan Verifikasi Segera)</span>
             </h3>
@@ -227,13 +227,13 @@
                         @endif
                     </td>
                     <td>
-                        <div style="font-weight: 700; color: #ffffff;">{{ $reg->full_name }}</div>
+                        <div style="font-weight: 700; color: var(--adm-text-title, #ffffff);">{{ $reg->full_name }}</div>
                         <div style="font-size: 0.78rem; color: var(--adm-text-muted);">
                             {{ $reg->gender == 'L' ? 'Ikhwan (L)' : 'Akhwat (P)' }} · {{ $reg->birth_date ? $reg->birth_date->format('d/m/Y') : '-' }}
                         </div>
                     </td>
                     <td>
-                        <div style="color: #ffffff;">{{ $reg->parent_name }}</div>
+                        <div style="color: var(--adm-text-title, #ffffff); font-weight: 600;">{{ $reg->parent_name }}</div>
                         <div style="font-size: 0.78rem; color: var(--adm-text-muted); font-family: monospace;">{{ $reg->parent_phone }}</div>
                     </td>
                     <td>

@@ -80,7 +80,7 @@
     <!-- Kolom 1: Data Guru & Staf Terbaru -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">Dewan Guru & Staf Terbaru</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">Dewan Guru & Staf Terbaru</h3>
             <a href="{{ route('admin.teachers.index') }}" class="btn btn-outline btn-sm">Kelola Semua Guru →</a>
         </div>
 
@@ -108,7 +108,7 @@
                                     </div>
                                 @endif
                                 <div style="min-width: 0;">
-                                    <div style="font-weight: 700; color: #ffffff; white-space: nowrap;">{{ $teacher->name }}</div>
+                                    <div style="font-weight: 700; color: var(--adm-text-title, #ffffff); white-space: nowrap;">{{ $teacher->name }}</div>
                                     <div style="font-size: 0.78rem; color: var(--adm-text-muted);">{{ $teacher->subject ?? 'Staf Umum' }}</div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
     <!-- Kolom 2: Program Jurusan & Kurikulum -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--adm-text-title, #ffffff); display: flex; align-items: center; gap: 8px;">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 <span>Program Jurusan</span>
             </h3>
@@ -165,7 +165,7 @@
                         @endif
                     </div>
                     <div>
-                        <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem;">{{ $m->name }}</div>
+                        <div style="font-weight: 700; color: var(--adm-text-title, #ffffff); font-size: 0.95rem;">{{ $m->name }}</div>
                         <div style="font-size: 0.76rem; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">/{{ $m->slug }}</div>
                         @if($m->description)
                             <div style="font-size: 0.8rem; color: var(--adm-text-muted); margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">

@@ -122,7 +122,7 @@
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
-                <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 2px;">Jejak Audit Aktivitas (Activity Logs)</h3>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--adm-text-title, #ffffff); margin-bottom: 2px;">Jejak Audit Aktivitas (Activity Logs)</h3>
                 <span style="font-size: 0.8rem; color: var(--adm-text-muted);">Merekam riwayat seluruh aksi admin pada data krusial</span>
             </div>
             <span class="badge badge-info">{{ count($recentLogs) }} Terakhir</span>
@@ -172,7 +172,7 @@
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
-                <h3 style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">Pengelola Sistem</h3>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--adm-text-title, #ffffff);">Pengelola Sistem</h3>
                 <span style="font-size: 0.78rem; color: var(--adm-text-muted);">Akun administrator aktif</span>
             </div>
             <a href="{{ route('admin.users.index') }}" style="font-size: 0.8rem; color: var(--adm-primary); font-weight: 700; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(0, 180, 216, 0.1);">Semua →</a>
@@ -186,7 +186,7 @@
                 </div>
                 <div style="flex: 1; min-width: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px;">
-                        <div style="font-size: 0.88rem; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $u->name }}">
+                        <div style="font-size: 0.88rem; font-weight: 700; color: var(--adm-text-title, #ffffff); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $u->name }}">
                             {{ $u->name }}
                         </div>
                         <span class="badge {{ $u->role === 'super_admin' ? 'badge-danger' : ($u->role === 'admin_cms' ? 'badge-info' : ($u->role === 'admin_ppdb' ? 'badge-warning' : 'badge-success')) }}" style="font-size: 0.68rem; padding: 2px 7px; flex-shrink: 0; white-space: nowrap;">

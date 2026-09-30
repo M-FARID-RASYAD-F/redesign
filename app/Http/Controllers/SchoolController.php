@@ -389,8 +389,88 @@ class SchoolController extends Controller
             ]
         ];
 
+        // 9. Data Buku & Statistik Perpustakaan Digital untuk Landing Page
+        $bukuPerpus = Book::with('category')->latest()->take(4)->get();
+        $bukuPerpusList = $bukuPerpus->map(function ($b) {
+            return [
+                'id' => $b->id,
+                'title' => $b->title,
+                'author' => $b->author,
+                'publisher' => $b->publisher,
+                'category_name' => $b->category ? $b->category->name : 'Umum',
+                'cover' => $b->cover ? asset('storage/' . $b->cover) : null,
+                'available' => (int) $b->available,
+                'stock' => (int) $b->stock,
+                'rack_location' => $b->rack_location,
+                'synopsis' => Str::limit($b->synopsis, 110),
+            ];
+        })->toArray();
+
+        if (empty($bukuPerpusList)) {
+            $bukuPerpusList = [
+                [
+                    'id' => 1,
+                    'title' => 'Tafsir Al-Azhar (Jilid Lengkap)',
+                    'author' => 'Prof. Dr. Buya Hamka',
+                    'publisher' => 'Gema Insani Press',
+                    'category_name' => 'Al-Qur\'an & Tafsir',
+                    'cover' => null,
+                    'available' => 4,
+                    'stock' => 6,
+                    'rack_location' => 'Rak A-01',
+                    'synopsis' => 'Karya monumental tafsir Al-Qur\'an bercorak sastra dan sosial kemasyarakatan nusantara.',
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Ringkasan Shahih Bukhari & Muslim',
+                    'author' => 'Imam Az-Zabidi & Al-Mundziri',
+                    'publisher' => 'Pustaka As-Sunnah',
+                    'category_name' => 'Hadits & Fiqih',
+                    'cover' => null,
+                    'available' => 5,
+                    'stock' => 5,
+                    'rack_location' => 'Rak A-02',
+                    'synopsis' => 'Kompilasi hadits-hadits shahih pilihan muttafaq \'alaih sebagai rujukan pokok fiqih dan ibadah santri.',
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Clean Code: A Handbook of Agile Software Craftsmanship',
+                    'author' => 'Robert C. Martin (Uncle Bob)',
+                    'publisher' => 'Prentice Hall',
+                    'category_name' => 'Sains & Teknologi',
+                    'cover' => null,
+                    'available' => 3,
+                    'stock' => 4,
+                    'rack_location' => 'Rak B-01',
+                    'synopsis' => 'Panduan esensial bagi santri kejuruan IT dalam menyusun arsitektur kode bersih, terstruktur, dan teruji.',
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'Api Sejarah: Mahakarya Perjuangan Ulama',
+                    'author' => 'Prof. Ahmad Mansur Suryanegara',
+                    'publisher' => 'Salamadani',
+                    'category_name' => 'Sejarah Islam & Peradaban',
+                    'cover' => null,
+                    'available' => 2,
+                    'stock' => 3,
+                    'rack_location' => 'Rak C-01',
+                    'synopsis' => 'Eksplorasi peran vital santri dan ulama dalam membidani kemerdekaan dan kebangkitan Indonesia.',
+                ],
+            ];
+        }
+
+        $perpusStats = [
+            'total_books' => Book::count(),
+            'total_available' => Book::sum('available'),
+            'total_categories' => BookCategory::count(),
+        ];
+
         // Kirim seluruh data ke view 'welcome'
-        return view('welcome', compact('sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan', 'berita', 'fasilitas', 'cabang', 'galeriFasilitas', 'testimoni'));
+        return view('welcome', compact(
+            'sekolah', 'sambutan', 'stats', 'jenjang', 'jurusan',
+            'berita', 'fasilitas', 'cabang', 'galeriFasilitas', 'testimoni',
+            'bukuPerpusList', 'perpusStats'
+        ));
     }
 
     /**

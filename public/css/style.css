@@ -10848,6 +10848,18 @@ input:-webkit-autofill:active {
   background: oklch(58.6% 0.253 17.585 / 0.25) !important;
 }
 
+/* Base Book Loan Form Input Styles */
+.perpus-form-input {
+  font-size: 16px !important; /* Anti iOS Safari auto-zoom */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+  line-height: 1.5 !important;
+}
+
+.perpus-form-input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
 [data-theme="light"] .perpus-form-hero {
   background: linear-gradient(135deg, oklch(33% 0.125 13) 0%, oklch(27.1% 0.105 12.094) 50%, oklch(22% 0.09 11) 100%) !important;
   border-color: oklch(58.6% 0.253 17.585 / 0.45) !important;
@@ -10857,6 +10869,11 @@ input:-webkit-autofill:active {
   background: oklch(20% 0.08 11 / 0.85) !important;
   border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
   color: #ffffff !important;
+}
+
+[data-theme="light"] .perpus-form-input::placeholder {
+  color: #fca5a5 !important;
+  opacity: 1 !important;
 }
 
 [data-theme="light"] .perpus-form-input:focus {

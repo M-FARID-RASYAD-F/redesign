@@ -8692,7 +8692,7 @@ input:-webkit-autofill:active {
 
 .perpus-container-narrow {
   width: 100% !important;
-  max-width: 780px !important;
+  max-width: 880px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: clamp(1rem, 2.5vw, 2rem) !important;
@@ -10851,8 +10851,9 @@ input:-webkit-autofill:active {
 /* Base Book Loan Form Input Styles */
 .perpus-form-input {
   font-size: 16px !important; /* Anti iOS Safari auto-zoom */
+  min-height: 52px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
 }
 
 .perpus-form-input::placeholder {

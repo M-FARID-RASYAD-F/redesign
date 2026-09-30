@@ -302,4 +302,39 @@ class RbacTest extends TestCase
             'status' => 'diverifikasi',
         ]);
     }
+
+    public function test_admin_root_redirects_to_user_dashboard_url(): void
+    {
+        $this->actingAs($this->superAdmin)
+            ->get('/admin')
+            ->assertRedirect(route('admin.dashboard'));
+
+        $this->actingAs($this->adminPpdb)
+            ->get('/admin')
+            ->assertRedirect(route('admin.ppdb.dashboard'));
+
+        $this->actingAs($this->adminCms)
+            ->get('/admin')
+            ->assertRedirect(route('admin.cms.dashboard'));
+
+        $this->actingAs($this->editorAkademik)
+            ->get('/admin')
+            ->assertRedirect(route('admin.akademik.dashboard'));
+    }
+
+    public function test_navbar_admin_button_links_to_appropriate_role_dashboard(): void
+    {
+        // Admin PPDB viewing home sees their own dashboard link in navbar
+        $this->actingAs($this->adminPpdb)
+            ->get(route('home'))
+            ->assertOk()
+            ->assertSee(route('admin.ppdb.dashboard'))
+            ->assertDontSee('href="' . route('admin.dashboard') . '"', false);
+
+        // Super Admin viewing home sees admin.dashboard link in navbar
+        $this->actingAs($this->superAdmin)
+            ->get(route('home'))
+            ->assertOk()
+            ->assertSee('href="' . route('admin.dashboard') . '"', false);
+    }
 }

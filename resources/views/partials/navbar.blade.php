@@ -68,7 +68,7 @@
 
             <div class="nav-auth-desktop">
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="nav-admin-link">
+                    <a href="{{ auth()->user()->dashboard_url }}" class="nav-admin-link">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         <span class="nav-link-text">Admin</span>
                     </a>
@@ -198,7 +198,7 @@
                 </button>
 
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="nav-mobile-auth-btn nav-mobile-auth-admin">
+                    <a href="{{ auth()->user()->dashboard_url }}" class="nav-mobile-auth-btn nav-mobile-auth-admin">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         <span>Admin</span>
                     </a>

@@ -103,6 +103,11 @@ Route::post('/logout', function (\Illuminate\Http\Request $request) {
 
 // 6. Route Group Admin (Proteksi Otentikasi & Akun Aktif)
 Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(function () {
+    // 6.0 Route Shortcut /admin (Otomatis redirect ke dashboard sesuai role)
+    Route::get('/', function (\Illuminate\Http\Request $request) {
+        return redirect($request->user()->dashboard_url);
+    })->name('index');
+
     // 6.1 Role Dashboards
     Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])
         ->name('dashboard')

@@ -307,15 +307,7 @@
             </a>
 
             @auth
-                @if(Auth::user()->role === 'super_admin')
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Dashboard Admin</a>
-                @elseif(Auth::user()->role === 'admin_cms')
-                    <a href="{{ route('admin.cms.dashboard') }}" class="btn btn-secondary">Dashboard CMS</a>
-                @elseif(Auth::user()->role === 'admin_ppdb')
-                    <a href="{{ route('admin.ppdb.dashboard') }}" class="btn btn-secondary">Dashboard PPDB</a>
-                @elseif(Auth::user()->role === 'editor_akademik')
-                    <a href="{{ route('admin.akademik.dashboard') }}" class="btn btn-secondary">Dashboard Akademik</a>
-                @endif
+                <a href="{{ Auth::user()->dashboard_url }}" class="btn btn-secondary">Dashboard {{ Auth::user()->role_label }}</a>
 
                 <form method="POST" action="{{ route('logout') }}" style="display: inline-block;">
                     @csrf

@@ -32,7 +32,7 @@
                         <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <span>Lihat Jenjang & Jurusan</span>
                     </a>
-                    <a href="#perpustakaan" class="btn btn-outline">
+                    <a href="{{ route('perpus.index') }}" class="btn btn-outline">
                         <svg class="btn-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
                         <span>Perpustakaan Digital</span>
                     </a>

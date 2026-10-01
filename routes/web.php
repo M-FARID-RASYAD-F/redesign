@@ -23,7 +23,7 @@ Route::get('/', [SchoolController::class, 'index'])->name('home');
 
 // 1.1 Route Portal Berita Publik & Detail Artikel
 Route::get('/berita', [SchoolController::class, 'newsIndex'])->name('berita.index');
-Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');
+Route::get('/berita/{news:slug}', [SchoolController::class, 'newsShow'])->name('news.show');
 
 // 1.2 Route Quick Search API (Spotlight / Cmd+K)
 Route::get('/api/search', [SchoolController::class, 'globalSearch'])
@@ -130,9 +130,9 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/news', [AdminController::class, 'newsIndex'])->name('news.index');
         Route::get('/news/create', [AdminController::class, 'newsCreate'])->name('news.create');
         Route::post('/news', [AdminController::class, 'newsStore'])->name('news.store');
-        Route::get('/news/{id}/edit', [AdminController::class, 'newsEdit'])->name('news.edit');
-        Route::post('/news/{id}', [AdminController::class, 'newsUpdate'])->name('news.update');
-        Route::delete('/news/{id}', [AdminController::class, 'newsDelete'])->name('news.delete');
+        Route::get('/news/{news:id}/edit', [AdminController::class, 'newsEdit'])->name('news.edit');
+        Route::post('/news/{news:id}', [AdminController::class, 'newsUpdate'])->name('news.update');
+        Route::delete('/news/{news:id}', [AdminController::class, 'newsDelete'])->name('news.delete');
     });
 
     // 6.4 Modul Guru & Staf (Akademik & CMS)
@@ -140,9 +140,9 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/teachers', [AdminController::class, 'teacherIndex'])->name('teachers.index');
         Route::get('/teachers/create', [AdminController::class, 'teacherCreate'])->name('teachers.create');
         Route::post('/teachers', [AdminController::class, 'teacherStore'])->name('teachers.store');
-        Route::get('/teachers/{id}/edit', [AdminController::class, 'teacherEdit'])->name('teachers.edit');
-        Route::post('/teachers/{id}', [AdminController::class, 'teacherUpdate'])->name('teachers.update');
-        Route::delete('/teachers/{id}', [AdminController::class, 'teacherDelete'])->name('teachers.delete');
+        Route::get('/teachers/{teacher}/edit', [AdminController::class, 'teacherEdit'])->name('teachers.edit');
+        Route::post('/teachers/{teacher}', [AdminController::class, 'teacherUpdate'])->name('teachers.update');
+        Route::delete('/teachers/{teacher}', [AdminController::class, 'teacherDelete'])->name('teachers.delete');
     });
 
     // 6.5 Modul Program Jurusan (Akademik & CMS)
@@ -150,9 +150,9 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/majors', [AdminController::class, 'majorIndex'])->name('majors.index');
         Route::get('/majors/create', [AdminController::class, 'majorCreate'])->name('majors.create');
         Route::post('/majors', [AdminController::class, 'majorStore'])->name('majors.store');
-        Route::get('/majors/{id}/edit', [AdminController::class, 'majorEdit'])->name('majors.edit');
-        Route::post('/majors/{id}', [AdminController::class, 'majorUpdate'])->name('majors.update');
-        Route::delete('/majors/{id}', [AdminController::class, 'majorDelete'])->name('majors.delete');
+        Route::get('/majors/{major}/edit', [AdminController::class, 'majorEdit'])->name('majors.edit');
+        Route::post('/majors/{major}', [AdminController::class, 'majorUpdate'])->name('majors.update');
+        Route::delete('/majors/{major}', [AdminController::class, 'majorDelete'])->name('majors.delete');
     });
 
     // 6.6 Modul PPDB Online (CMS memiliki akses baca rekap pendaftar; Super Admin & Admin PPDB memiliki wewenang penuh)

@@ -8,6 +8,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -83,28 +84,32 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === 'admin_perpus';
     }
 
-    public function getDashboardUrlAttribute(): string
+    protected function dashboardUrl(): Attribute
     {
-        return match ($this->role) {
-            'super_admin' => route('admin.dashboard'),
-            'admin_cms' => route('admin.cms.dashboard'),
-            'admin_ppdb' => route('admin.ppdb.dashboard'),
-            'editor_akademik' => route('admin.akademik.dashboard'),
-            'admin_perpus' => route('admin.perpus.dashboard'),
-            default => route('admin.dashboard'),
-        };
+        return Attribute::make(
+            get: fn () => match ($this->role) {
+                'super_admin'     => route('admin.dashboard'),
+                'admin_cms'       => route('admin.cms.dashboard'),
+                'admin_ppdb'      => route('admin.ppdb.dashboard'),
+                'editor_akademik' => route('admin.akademik.dashboard'),
+                'admin_perpus'    => route('admin.perpus.dashboard'),
+                default           => route('admin.dashboard'),
+            }
+        );
     }
 
-    public function getRoleLabelAttribute(): string
+    protected function roleLabel(): Attribute
     {
-        return match ($this->role) {
-            'super_admin' => 'Super Admin',
-            'admin_cms' => 'Admin CMS',
-            'admin_ppdb' => 'Admin PPDB',
-            'editor_akademik' => 'Editor Akademik',
-            'admin_perpus' => 'Petugas Perpustakaan',
-            default => 'Pengguna',
-        };
+        return Attribute::make(
+            get: fn () => match ($this->role) {
+                'super_admin'     => 'Super Admin',
+                'admin_cms'       => 'Admin CMS',
+                'admin_ppdb'      => 'Admin PPDB',
+                'editor_akademik' => 'Editor Akademik',
+                'admin_perpus'    => 'Petugas Perpustakaan',
+                default           => 'Pengguna',
+            }
+        );
     }
 
     // Relationships

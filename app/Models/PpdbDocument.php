@@ -21,4 +21,14 @@ class PpdbDocument extends Model
     {
         return $this->belongsTo(PpdbRegistration::class, 'registration_id');
     }
+
+    public function scopeVerified($query)
+    {
+        return $query->where('verification_status', 'valid');
+    }
+
+    public function scopeUnverified($query)
+    {
+        return $query->where('verification_status', 'belum_diverifikasi');
+    }
 }

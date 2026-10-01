@@ -786,11 +786,12 @@ class SchoolController extends Controller
     /**
      * Menampilkan Halaman Detail Berita / Pengumuman Publik
      */
-    public function newsShow($slug)
+    public function newsShow(News $news)
     {
-        $news = News::with(['category', 'author'])->where('slug', $slug)->firstOrFail();
+        $news->load(['category', 'author']);
         
-        $relatedNews = News::where('id', '!=', $news->id)
+        $relatedNews = News::with('category')
+            ->where('id', '!=', $news->id)
             ->where('category_id', $news->category_id)
             ->orderBy('created_at', 'desc')
             ->limit(3)

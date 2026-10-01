@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \App\Models\PpdbRegistration::observe(\App\Observers\PpdbRegistrationObserver::class);
+        \App\Models\BookLoan::observe(\App\Observers\BookLoanObserver::class);
+
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Book::class, \App\Policies\BookPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookCategory::class, \App\Policies\BookCategoryPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookLoan::class, \App\Policies\BookLoanPolicy::class);

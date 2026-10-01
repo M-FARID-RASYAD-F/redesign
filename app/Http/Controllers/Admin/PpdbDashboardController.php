@@ -18,19 +18,19 @@ class PpdbDashboardController extends Controller
     {
         $stats = [
             'total' => PpdbRegistration::count(),
-            'pending' => PpdbRegistration::where('status', 'pending')->count(),
-            'diverifikasi' => PpdbRegistration::where('status', 'diverifikasi')->count(),
-            'diterima' => PpdbRegistration::where('status', 'diterima')->count(),
-            'ditolak' => PpdbRegistration::where('status', 'ditolak')->count(),
-            'docs_unverified' => PpdbDocument::where('verification_status', 'belum_diverifikasi')->count(),
-            'docs_valid' => PpdbDocument::where('verification_status', 'valid')->count(),
-            'sd_total' => PpdbRegistration::where('jenjang', 'sd')->count(),
-            'smp_total' => PpdbRegistration::where('jenjang', 'smp')->count(),
-            'smk_total' => PpdbRegistration::where('jenjang', 'smk')->count(),
+            'pending' => PpdbRegistration::pending()->count(),
+            'diverifikasi' => PpdbRegistration::status('diverifikasi')->count(),
+            'diterima' => PpdbRegistration::status('diterima')->count(),
+            'ditolak' => PpdbRegistration::status('ditolak')->count(),
+            'docs_unverified' => PpdbDocument::unverified()->count(),
+            'docs_valid' => PpdbDocument::verified()->count(),
+            'sd_total' => PpdbRegistration::jenjang('sd')->count(),
+            'smp_total' => PpdbRegistration::jenjang('smp')->count(),
+            'smk_total' => PpdbRegistration::jenjang('smk')->count(),
         ];
 
         $pendingRegistrations = PpdbRegistration::with('documents')
-            ->where('status', 'pending')
+            ->pending()
             ->orderBy('created_at', 'asc')
             ->limit(8)
             ->get();

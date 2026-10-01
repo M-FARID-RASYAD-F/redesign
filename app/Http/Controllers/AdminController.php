@@ -17,6 +17,9 @@ use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\BookLoan;
 use App\Models\ActivityLog;
+use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\UpdateNewsRequest;
+use App\Http\Requests\StoreTeacherRequest;
 use Illuminate\Support\Str;
 use ZipArchive;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -70,16 +73,9 @@ class AdminController extends Controller
         return view('admin.news.create', compact('categories'));
     }
 
-    public function newsStore(Request $request)
+    public function newsStore(StoreNewsRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
-            'content' => 'required|string',
-            'thumbnail' => 'nullable|string|max:1000',
-            'thumbnail_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
-            'published_at' => 'nullable|date',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('thumbnail_file')) {
             $path = $request->file('thumbnail_file')->store('news', 'public');
@@ -97,26 +93,15 @@ class AdminController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diterbitkan!');
     }
 
-    public function newsEdit($id)
+    public function newsEdit(News $news)
     {
-        $news = News::findOrFail($id);
         $categories = NewsCategory::all();
         return view('admin.news.edit', compact('news', 'categories'));
     }
 
-    public function newsUpdate(Request $request, $id)
+    public function newsUpdate(UpdateNewsRequest $request, News $news)
     {
-        $news = News::findOrFail($id);
-
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
-            'content' => 'required|string',
-            'thumbnail' => 'nullable|string|max:1000',
-            'thumbnail_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
-            'remove_thumbnail' => 'nullable|boolean',
-            'published_at' => 'nullable|date',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('thumbnail_file')) {
             if (!empty($news->thumbnail) && Str::startsWith($news->thumbnail, 'storage/news/')) {
@@ -147,9 +132,8 @@ class AdminController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diperbarui!');
     }
 
-    public function newsDelete($id)
+    public function newsDelete(News $news)
     {
-        $news = News::findOrFail($id);
         $title = $news->title;
         if (!empty($news->thumbnail) && Str::startsWith($news->thumbnail, 'storage/news/')) {
             $oldFile = Str::after($news->thumbnail, 'storage/');
@@ -178,16 +162,9 @@ class AdminController extends Controller
         return view('admin.teachers.create');
     }
 
-    public function teacherStore(Request $request)
+    public function teacherStore(StoreTeacherRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'subject' => 'nullable|string|max:255',
-            'photo' => 'nullable|string',
-            'nip' => 'nullable|string|max:255',
-            'status' => 'required|in:aktif,nonaktif',
-        ]);
+        $validated = $request->validated();
 
         $teacher = TeacherStaff::create($validated);
 
@@ -196,16 +173,13 @@ class AdminController extends Controller
         return redirect()->route('admin.teachers.index')->with('success', 'Data guru/staf berhasil ditambahkan!');
     }
 
-    public function teacherEdit($id)
+    public function teacherEdit(TeacherStaff $teacher)
     {
-        $teacher = TeacherStaff::findOrFail($id);
         return view('admin.teachers.edit', compact('teacher'));
     }
 
-    public function teacherUpdate(Request $request, $id)
+    public function teacherUpdate(Request $request, TeacherStaff $teacher)
     {
-        $teacher = TeacherStaff::findOrFail($id);
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
@@ -222,9 +196,8 @@ class AdminController extends Controller
         return redirect()->route('admin.teachers.index')->with('success', 'Data guru/staf berhasil diperbarui!');
     }
 
-    public function teacherDelete($id)
+    public function teacherDelete(TeacherStaff $teacher)
     {
-        $teacher = TeacherStaff::findOrFail($id);
         $name = $teacher->name;
         $teacher->delete();
 
@@ -622,16 +595,13 @@ class AdminController extends Controller
         return redirect()->route('admin.majors.index')->with('success', 'Jurusan baru berhasil ditambahkan!');
     }
 
-    public function majorEdit($id)
+    public function majorEdit(Major $major)
     {
-        $major = Major::findOrFail($id);
         return view('admin.majors.edit', compact('major'));
     }
 
-    public function majorUpdate(Request $request, $id)
+    public function majorUpdate(Request $request, Major $major)
     {
-        $major = Major::findOrFail($id);
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -649,9 +619,8 @@ class AdminController extends Controller
         return redirect()->route('admin.majors.index')->with('success', 'Data jurusan berhasil diperbarui!');
     }
 
-    public function majorDelete($id)
+    public function majorDelete(Major $major)
     {
-        $major = Major::findOrFail($id);
         $name = $major->name;
         $major->delete();
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,51 +26,54 @@ class PpdbRegistration extends Model
         'notes',
     ];
 
-    public function getJenjangLabelAttribute(): string
+    protected function jenjangLabel(): Attribute
     {
-        return match (strtolower($this->jenjang ?? '')) {
-            'sd' => 'Sekolah Dasar (SD)',
-            'smp' => 'Sekolah Menengah Pertama (SMP)',
-            'smk' => 'Sekolah Menengah Kejuruan (SMK)',
-            default => strtoupper($this->jenjang ?? '-'),
-        };
+        return Attribute::make(
+            get: fn () => match (strtolower($this->jenjang ?? '')) {
+                'sd' => 'Sekolah Dasar (SD)',
+                'smp' => 'Sekolah Menengah Pertama (SMP)',
+                'smk' => 'Sekolah Menengah Kejuruan (SMK)',
+                default => strtoupper($this->jenjang ?? '-'),
+            }
+        );
     }
 
-    public function getJenjangCodeAttribute(): string
+    protected function jenjangCode(): Attribute
     {
-        return strtoupper($this->jenjang ?? '-');
+        return Attribute::make(
+            get: fn () => strtoupper($this->jenjang ?? '-')
+        );
     }
 
-    public function getJenjangIconAttribute(): string
+    protected function jenjangIcon(): Attribute
     {
-        return match (strtolower($this->jenjang ?? '')) {
-            'sd' => '🎒',
-            'smp' => '📚',
-            'smk' => '💻',
-            default => '🏫',
-        };
+        return Attribute::make(
+            get: fn () => match (strtolower($this->jenjang ?? '')) {
+                'sd' => '🎒',
+                'smp' => '📚',
+                'smk' => '💻',
+                default => '🏫',
+            }
+        );
     }
 
     protected $casts = [
         'birth_date' => 'date',
     ];
 
-    protected static function booted(): void
+    public function scopeStatus($query, string $status)
     {
-        static::creating(function (PpdbRegistration $registration) {
-            if (empty($registration->no_pendaftaran)) {
-                $year = date('Y');
-                $count = static::whereYear('created_at', $year)->count() + 1;
-                $noPendaftaran = 'PPDB-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
+        return $query->where('status', $status);
+    }
 
-                while (static::where('no_pendaftaran', $noPendaftaran)->exists()) {
-                    $count++;
-                    $noPendaftaran = 'PPDB-' . $year . '-' . str_pad((string) $count, 4, '0', STR_PAD_LEFT);
-                }
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
 
-                $registration->no_pendaftaran = $noPendaftaran;
-            }
-        });
+    public function scopeJenjang($query, string $jenjang)
+    {
+        return $query->where('jenjang', $jenjang);
     }
 
     public function documents(): HasMany

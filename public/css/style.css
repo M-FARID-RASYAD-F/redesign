@@ -1668,7 +1668,19 @@ body.nav-mobile-open {
   box-shadow: 0 24px 50px -6px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 180, 216, 0.3);
 }
 
-.content-area-constellation .card-title {
+.content-area-constellation .card-title,
+.content-area-constellation .perpus-landing-book-title,
+.content-area-constellation .perpus-landing-book-title a,
+.content-area-constellation .perpus-landing-book-author,
+.content-area-constellation .perpus-landing-book-synopsis,
+.content-area-constellation .perpus-landing-stat-lbl,
+.content-area-constellation .perpus-landing-cta-info p,
+.content-area-constellation .perpus-landing-section .section-subtitle,
+.content-area-constellation .btn-perpus-landing-outline {
+  color: #ffffff;
+}
+
+.content-area-constellation .perpus-landing-book-title a:hover {
   color: #ffffff;
 }
 
@@ -11069,13 +11081,13 @@ img, video, iframe, embed, object {
   font-size: 1.45rem;
   font-weight: 800;
   line-height: 1.1;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
 .perpus-landing-stat-lbl {
   font-size: 0.78rem;
-  color: var(--text-muted);
+  color: #ffffff;
   margin-top: 3px;
   font-weight: 600;
 }
@@ -11274,7 +11286,7 @@ img, video, iframe, embed, object {
 .perpus-landing-book-title {
   font-size: 0.96rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: #ffffff;
   line-height: 1.35;
   margin: 0 0 6px;
   display: -webkit-box;
@@ -11285,18 +11297,18 @@ img, video, iframe, embed, object {
 }
 
 .perpus-landing-book-title a {
-  color: inherit;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: none;
 }
 
 .perpus-landing-book-title a:hover {
-  color: var(--primary);
+  color: #ffffff;
 }
 
 .perpus-landing-book-author {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -11323,7 +11335,7 @@ img, video, iframe, embed, object {
 
 .perpus-landing-book-synopsis {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #ffffff;
   line-height: 1.45;
   margin: 0 0 14px;
   display: -webkit-box;
@@ -11421,13 +11433,13 @@ img, video, iframe, embed, object {
 .perpus-landing-cta-info h4 {
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #ffffff;
   margin: 0 0 6px;
 }
 
 .perpus-landing-cta-info p {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: #ffffff;
   margin: 0;
 }
 
@@ -11444,9 +11456,9 @@ img, video, iframe, embed, object {
   gap: 8px;
   padding: 10px 18px;
   border-radius: 10px;
-  border: 1.5px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.88rem;
   text-decoration: none;
@@ -11456,7 +11468,7 @@ img, video, iframe, embed, object {
 .btn-perpus-landing-outline:hover {
   border-color: var(--primary);
   color: #ffffff;
-  background: rgba(0, 180, 216, 0.12);
+  background: rgba(0, 180, 216, 0.16);
 }
 
 .btn-perpus-landing-primary {
@@ -11520,8 +11532,10 @@ img, video, iframe, embed, object {
   border-color: oklch(58.6% 0.253 17.585 / 0.45);
 }
 
+[data-theme="light"] .perpus-landing-book-title,
+[data-theme="light"] .perpus-landing-book-title a,
 [data-theme="light"] .perpus-landing-book-title a:hover {
-  color: oklch(75% 0.18 18);
+  color: #ffffff;
 }
 
 [data-theme="light"] .perpus-landing-book-rack {
@@ -11561,6 +11575,11 @@ img, video, iframe, embed, object {
 [data-theme="light"] .perpus-landing-bottom-actions {
   background: oklch(27.1% 0.105 12.094 / 0.86);
   border-color: oklch(58.6% 0.253 17.585 / 0.42);
+}
+
+[data-theme="light"] .btn-perpus-landing-outline {
+  color: #ffffff;
+  border-color: oklch(58.6% 0.253 17.585 / 0.45);
 }
 
 [data-theme="light"] .btn-perpus-landing-outline:hover {

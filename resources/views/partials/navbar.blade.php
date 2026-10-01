@@ -9,7 +9,7 @@
                     <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="brand-logo-img">
                 </div>
                 <div class="brand-text">
-                    <span class="brand-text-main">PKBM Tahfizh At-Tamam</span>
+                    <span class="brand-text-main"><span class="brand-prefix-desktop">PKBM </span>Tahfizh At-Tamam</span>
                     <span class="brand-text-sub">Sekolah Unggulan Berkarakter</span>
                 </div>
             </a>
@@ -110,7 +110,7 @@
             <div class="nav-mobile-header">
                 <div class="nav-mobile-brand-pill">
                     <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Resmi PKBM Tahfizh At-Tamam" class="nav-mobile-pill-logo">
-                    <span class="nav-mobile-pill-text">PKBM Tahfizh At-Tamam</span>
+                    <span class="nav-mobile-pill-text">TAHFIZH AT-TAMAM</span>
                 </div>
                 <span class="nav-mobile-status-badge">Edu Portal</span>
             </div>

@@ -404,6 +404,10 @@ a:hover {
   text-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
 }
 
+.brand-prefix-desktop {
+  display: inline;
+}
+
 .brand-text-sub {
   font-family: var(--font-family);
   font-size: 0.64rem;
@@ -1668,7 +1672,19 @@ body.nav-mobile-open {
   box-shadow: 0 24px 50px -6px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 180, 216, 0.3);
 }
 
-.content-area-constellation .card-title {
+.content-area-constellation .card-title,
+.content-area-constellation .perpus-landing-book-title,
+.content-area-constellation .perpus-landing-book-title a,
+.content-area-constellation .perpus-landing-book-author,
+.content-area-constellation .perpus-landing-book-synopsis,
+.content-area-constellation .perpus-landing-stat-lbl,
+.content-area-constellation .perpus-landing-cta-info p,
+.content-area-constellation .perpus-landing-section .section-subtitle,
+.content-area-constellation .btn-perpus-landing-outline {
+  color: #ffffff;
+}
+
+.content-area-constellation .perpus-landing-book-title a:hover {
   color: #ffffff;
 }
 
@@ -4143,8 +4159,41 @@ body.nav-mobile-open {
   .navbar-right .nav-theme-toggle {
     display: none !important;
   }
-  .navbar-left {
+  .navbar-capsule.navbar-left {
+    height: 52px;
+    padding: 0 14px 0 10px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     flex-shrink: 0;
+  }
+  .brand-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .brand-text-main {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .brand-text-sub {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .navbar-capsule.navbar-right {
     width: 48px;
@@ -4239,13 +4288,14 @@ body.nav-mobile-open {
     flex: 1;
     min-width: 0;
     height: 48px;
-    padding: 0 10px 0 6px;
+    padding: 0 10px 0 8px;
     border-radius: 12px;
     box-sizing: border-box;
+    overflow: hidden;
   }
   .navbar.scrolled .navbar-capsule.navbar-left {
     height: 44px;
-    padding: 0 8px 0 5px;
+    padding: 0 8px 0 6px;
   }
   .navbar-brand {
     display: flex;
@@ -4254,25 +4304,32 @@ body.nav-mobile-open {
     min-width: 0;
     flex: 1;
     width: 100%;
+    overflow: hidden;
     text-decoration: none;
   }
   .brand-icon {
-    width: 36px;
-    height: 36px;
-    padding: 1px;
-    border-radius: 9px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 2px;
+    border-radius: 8px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 180, 216, 0.35);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
   .navbar.scrolled .brand-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
   }
   .brand-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 7px;
+    border-radius: 6px;
   }
   .brand-text {
     display: flex !important;
@@ -4281,28 +4338,31 @@ body.nav-mobile-open {
     text-align: left;
     min-width: 0;
     flex: 1;
-    overflow: visible;
+    overflow: hidden;
   }
   .brand-text-main {
     display: block !important;
-    font-size: clamp(0.72rem, 3.6vw, 0.85rem);
+    font-size: clamp(0.70rem, 3.2vw, 0.82rem);
     font-weight: 700;
     line-height: 1.2;
     color: #ffffff;
     white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-    max-width: none !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .brand-text-sub {
     display: block !important;
-    font-size: clamp(0.50rem, 2.2vw, 0.60rem);
+    font-size: clamp(0.48rem, 2vw, 0.58rem);
     color: #94a3b8;
     line-height: 1.15;
     white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-    max-width: none !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .brand-prefix-desktop {
+    display: none !important;
   }
   .navbar-center,
   .nav-auth-desktop {
@@ -5425,28 +5485,46 @@ body.nav-mobile-open {
   .navbar-container {
     gap: 6px;
   }
+  .navbar-capsule.navbar-left {
+    height: 44px;
+    padding: 0 8px 0 6px;
+    overflow: hidden;
+  }
   .brand-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
   }
   .brand-text-main {
-    font-size: 0.70rem;
+    font-size: 0.68rem;
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .brand-text-sub {
-    font-size: 0.50rem;
+    font-size: 0.48rem;
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .navbar-capsule.navbar-right {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: auto;
+    height: 44px;
+    min-width: 0;
+    padding: 0 3px;
+    gap: 2px;
   }
   .nav-btn-menu {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+  .navbar-right .nav-theme-toggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
   }
   .tab-nav-bar {
     width: 100% !important;
@@ -11069,13 +11147,13 @@ img, video, iframe, embed, object {
   font-size: 1.45rem;
   font-weight: 800;
   line-height: 1.1;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
 .perpus-landing-stat-lbl {
   font-size: 0.78rem;
-  color: var(--text-muted);
+  color: #ffffff;
   margin-top: 3px;
   font-weight: 600;
 }
@@ -11274,7 +11352,7 @@ img, video, iframe, embed, object {
 .perpus-landing-book-title {
   font-size: 0.96rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: #ffffff;
   line-height: 1.35;
   margin: 0 0 6px;
   display: -webkit-box;
@@ -11285,18 +11363,18 @@ img, video, iframe, embed, object {
 }
 
 .perpus-landing-book-title a {
-  color: inherit;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: none;
 }
 
 .perpus-landing-book-title a:hover {
-  color: var(--primary);
+  color: #ffffff;
 }
 
 .perpus-landing-book-author {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -11323,7 +11401,7 @@ img, video, iframe, embed, object {
 
 .perpus-landing-book-synopsis {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #ffffff;
   line-height: 1.45;
   margin: 0 0 14px;
   display: -webkit-box;
@@ -11421,13 +11499,13 @@ img, video, iframe, embed, object {
 .perpus-landing-cta-info h4 {
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #ffffff;
   margin: 0 0 6px;
 }
 
 .perpus-landing-cta-info p {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: #ffffff;
   margin: 0;
 }
 
@@ -11444,9 +11522,9 @@ img, video, iframe, embed, object {
   gap: 8px;
   padding: 10px 18px;
   border-radius: 10px;
-  border: 1.5px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.88rem;
   text-decoration: none;
@@ -11456,7 +11534,7 @@ img, video, iframe, embed, object {
 .btn-perpus-landing-outline:hover {
   border-color: var(--primary);
   color: #ffffff;
-  background: rgba(0, 180, 216, 0.12);
+  background: rgba(0, 180, 216, 0.16);
 }
 
 .btn-perpus-landing-primary {
@@ -11520,8 +11598,10 @@ img, video, iframe, embed, object {
   border-color: oklch(58.6% 0.253 17.585 / 0.45);
 }
 
+[data-theme="light"] .perpus-landing-book-title,
+[data-theme="light"] .perpus-landing-book-title a,
 [data-theme="light"] .perpus-landing-book-title a:hover {
-  color: oklch(75% 0.18 18);
+  color: #ffffff;
 }
 
 [data-theme="light"] .perpus-landing-book-rack {
@@ -11561,6 +11641,11 @@ img, video, iframe, embed, object {
 [data-theme="light"] .perpus-landing-bottom-actions {
   background: oklch(27.1% 0.105 12.094 / 0.86);
   border-color: oklch(58.6% 0.253 17.585 / 0.42);
+}
+
+[data-theme="light"] .btn-perpus-landing-outline {
+  color: #ffffff;
+  border-color: oklch(58.6% 0.253 17.585 / 0.45);
 }
 
 [data-theme="light"] .btn-perpus-landing-outline:hover {

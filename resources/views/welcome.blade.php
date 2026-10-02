@@ -161,10 +161,7 @@
 
     <!-- 5. Info Cabang-Cabang Sekolah At-Tamam -->
     <section class="section reveal" id="cabang">
-        {{-- Hidden anchor fallback untuk kompatibilitas tautan lama --}}
-        <span id="fasilitas" style="position: relative; top: -90px; display: block; visibility: hidden;"></span>
-
-        <div class="cabang-section fasilitas-section">
+        <div class="cabang-section">
             <x-section-header 
                 tag="JARINGAN KAMPUS & PUSAT BELAJAR" 
                 title="Cabang & Lokasi Belajar PKBM Tahfizh At-Tamam" 
@@ -174,6 +171,11 @@
             {{-- Interactive Animated Tabs Component (Menampilkan detail cabang aktif) --}}
             <x-animated-tabs :tabs="$cabang" />
         </div>
+    </section>
+
+    <!-- 6. Fasilitas & Sarana Prasarana Sekolah -->
+    <section class="section reveal" id="fasilitas">
+        <x-facility-showcase :items="$galeriFasilitas" />
     </section>
 
     <!-- 6. Berita & Pengumuman Terbaru -->
@@ -332,38 +334,6 @@
             </div>
         </div>
 
-        <!-- Filter / Shortcut Kategori Buku Langsung ke Katalog -->
-        @if(!empty($perpusCategories) && count($perpusCategories) > 0)
-        <div style="margin-top: 2rem; width: 100%;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 8px;">
-                <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 6px;">
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
-                    Jelajahi Koleksi Berdasarkan Kategori:
-                </span>
-                <a href="{{ route('perpus.index') }}" style="font-size: 0.825rem; font-weight: 600; color: var(--primary, #00B4D8); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-                    <span>Lihat Semua Koleksi di Katalog</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="perpus-pills-row" role="navigation" aria-label="Kategori Buku Perpustakaan">
-                <a href="{{ route('perpus.index') }}" class="perpus-pill-item perpus-pill-active">
-                    <span>Semua Kategori</span>
-                    <span class="perpus-pill-count">{{ ($perpusStats['total_books'] ?? 0) > 0 ? $perpusStats['total_books'] : 18 }}</span>
-                </a>
-                @foreach($perpusCategories as $cat)
-                <a href="{{ route('perpus.index', ['category' => $cat->id]) }}" class="perpus-pill-item perpus-pill-inactive">
-                    <span>{{ $cat->name }}</span>
-                    <span class="perpus-pill-count">{{ $cat->books_count ?? 0 }}</span>
-                </a>
-                @endforeach
-            </div>
-        </div>
-        @endif
-    </section>
-
-    <!-- 8. Galeri Fasilitas & Suasana Kampus (Virtual Showcase) -->
-    <section class="section reveal" id="fasilitas-tour">
-        <x-facility-showcase :items="$galeriFasilitas" />
     </section>
 
     <!-- 8. Kisah Sukses & Kepercayaan Wali Santri (Testimonials) -->

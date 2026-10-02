@@ -161,20 +161,21 @@
                          onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
                          class="perpus-book-cover-img">
                     
-                    <!-- Kategori Badge -->
-                    <span class="perpus-book-badge-cat">
-                        {{ $book->category ? $book->category->name : 'Umum' }}
-                    </span>
+                    <!-- Top Floating Badges (Flex container preventing overlap) -->
+                    <div class="perpus-book-cover-badges">
+                        <span class="perpus-book-badge-cat" title="{{ $book->category ? $book->category->name : 'Umum' }}">
+                            {{ $book->category ? $book->category->name : 'Umum' }}
+                        </span>
 
-                    <!-- Stok Tersedia Badge -->
-                    <span class="perpus-book-badge-stock {{ $book->available > 0 ? 'stock-available' : 'stock-empty' }}"
-                          aria-label="Status ketersediaan: {{ $book->available > 0 ? $book->available . ' eksemplar tersedia' : 'stok habis' }}">
-                        @if($book->available > 0)
-                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-1" aria-hidden="true"></span>{{ $book->available }} Tersedia
-                        @else
-                            Habis
-                        @endif
-                    </span>
+                        <span class="perpus-book-badge-stock {{ $book->available > 0 ? 'stock-available' : 'stock-empty' }}"
+                              aria-label="Status ketersediaan: {{ $book->available > 0 ? $book->available . ' eksemplar tersedia' : 'stok habis' }}">
+                            @if($book->available > 0)
+                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-1" aria-hidden="true"></span>{{ $book->available }} Tersedia
+                            @else
+                                Habis
+                            @endif
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Book Details Body -->

@@ -75,6 +75,7 @@
                     <li><a href="{{ route('home') }}#jenjang"><span class="footer-link-arrow">›</span> SMK (Kejuruan Vokasi)</a></li>
                     <li><a href="{{ route('home') }}#sambutan"><span class="footer-link-arrow">›</span> Program Tahfizh Intensif</a></li>
                     <li><a href="{{ route('home') }}#cabang"><span class="footer-link-arrow">›</span> Cabang Sekolah</a></li>
+                    <li><a href="{{ route('home') }}#fasilitas"><span class="footer-link-arrow">›</span> Fasilitas Sekolah</a></li>
                 </ul>
             </div>
         </div>

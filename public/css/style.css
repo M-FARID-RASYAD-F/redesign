@@ -8760,11 +8760,11 @@ input:-webkit-autofill:active {
 
 .perpus-container-medium {
   width: 100% !important;
-  max-width: 1140px !important;
+  max-width: 980px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: clamp(1rem, 2.5vw, 2rem) !important;
-  padding-right: clamp(1rem, 2.5vw, 2rem) !important;
+  padding-left: clamp(1rem, 2vw, 1.75rem) !important;
+  padding-right: clamp(1rem, 2vw, 1.75rem) !important;
   box-sizing: border-box !important;
 }
 
@@ -9854,9 +9854,9 @@ input:-webkit-autofill:active {
 
 /* Dedicated Spacious Book Detail Outer Card */
 .perpus-card-surface.perpus-detail-card {
-  padding: clamp(1.75rem, 3.5vw, 2.85rem) !important;
-  border-radius: 28px !important;
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5) !important;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.45) !important;
 }
 
 .perpus-card-subsurface {
@@ -9901,32 +9901,32 @@ input:-webkit-autofill:active {
 /* Form-specific balanced 2-column grid */
 .perpus-form-grid {
   display: grid !important;
-  grid-template-columns: 315px 1fr !important;
-  gap: clamp(1.75rem, 3vw, 2.75rem) !important;
+  grid-template-columns: 295px 1fr !important;
+  gap: clamp(1.5rem, 2.5vw, 2.25rem) !important;
   width: 100% !important;
-  align-items: stretch !important;
+  align-items: start !important;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .perpus-form-grid {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
   }
 }
 
 /* Responsive Grids for Detail & Related */
 .perpus-detail-grid {
   display: grid !important;
-  grid-template-columns: 360px 1fr !important;
-  gap: clamp(2.5rem, 4.5vw, 4.25rem) !important;
+  grid-template-columns: 310px 1fr !important;
+  gap: clamp(1.75rem, 3vw, 2.75rem) !important;
   width: 100% !important;
   align-items: stretch !important;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
   .perpus-detail-grid {
     grid-template-columns: 1fr !important;
-    gap: 2.75rem !important;
+    gap: 2rem !important;
   }
   .detail-visual-col {
     border-right: none !important;
@@ -9939,12 +9939,12 @@ input:-webkit-autofill:active {
 
 /* Left Column Cover Panel */
 .perpus-detail-cover-panel {
-  padding: clamp(1.75rem, 3vw, 2.5rem) !important;
+  padding: clamp(1.25rem, 2.25vw, 1.75rem) !important;
   border-radius: 20px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  gap: 2.25rem !important;
+  gap: 1.75rem !important;
   height: 100% !important;
   box-sizing: border-box !important;
 }
@@ -9953,8 +9953,8 @@ input:-webkit-autofill:active {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 12px !important;
-  margin-bottom: 2rem !important;
+  gap: 10px !important;
+  margin-bottom: 1.5rem !important;
   flex-wrap: wrap !important;
 }
 
@@ -9964,15 +9964,15 @@ input:-webkit-autofill:active {
 
 .perpus-detail-cover-box {
   width: 100% !important;
-  max-width: 270px !important;
-  height: 360px !important;
+  max-width: 235px !important;
+  height: 315px !important;
   margin: 0 auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   background: linear-gradient(180deg, rgba(6, 20, 38, 0.95) 0%, rgba(2, 10, 20, 0.98) 100%) !important;
   border-radius: 18px !important;
-  padding: 22px !important;
+  padding: 16px !important;
   box-sizing: border-box !important;
   border: 1.5px solid rgba(0, 180, 216, 0.3) !important;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6) !important;
@@ -10116,12 +10116,12 @@ input:-webkit-autofill:active {
 }
 
 .perpus-detail-title {
-  font-size: clamp(1.65rem, 2.8vw, 2.35rem) !important;
+  font-size: clamp(1.5rem, 2.4vw, 2.05rem) !important;
   font-weight: 800 !important;
   color: #ffffff !important;
   line-height: 1.35 !important;
   letter-spacing: -0.02em !important;
-  margin: 0 0 1.65rem 0 !important;
+  margin: 0 0 1.25rem 0 !important;
   text-wrap: balance !important;
 }
 
@@ -10129,10 +10129,10 @@ input:-webkit-autofill:active {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
-  gap: 14px 22px !important;
-  font-size: 0.925rem !important;
+  gap: 12px 18px !important;
+  font-size: 0.9rem !important;
   color: #94a3b8 !important;
-  margin-bottom: 2.75rem !important;
+  margin-bottom: 2rem !important;
   line-height: 1.6 !important;
 }
 
@@ -10150,11 +10150,11 @@ input:-webkit-autofill:active {
 .perpus-specs-matrix {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  gap: 20px !important;
-  padding: 2.25rem 0 !important;
+  gap: 14px !important;
+  padding: 1.5rem 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-  margin-bottom: 3.25rem !important;
+  margin-bottom: 2rem !important;
 }
 
 .perpus-spec-card {
@@ -10300,15 +10300,15 @@ input:-webkit-autofill:active {
 .perpus-policy-callout {
   display: flex !important;
   align-items: flex-start !important;
-  gap: 16px !important;
-  padding: 20px 26px !important;
+  gap: 14px !important;
+  padding: 16px 20px !important;
   background: rgba(0, 33, 71, 0.35) !important;
   border: 1px dashed rgba(0, 180, 216, 0.25) !important;
   border-radius: 16px !important;
-  font-size: 0.875rem !important;
+  font-size: 0.85rem !important;
   color: #94a3b8 !important;
-  line-height: 1.7 !important;
-  margin-bottom: 3.25rem !important;
+  line-height: 1.65 !important;
+  margin-bottom: 2rem !important;
 }
 
 .perpus-policy-icon {
@@ -10322,22 +10322,22 @@ input:-webkit-autofill:active {
 }
 
 .perpus-detail-cta-bar {
-  margin-top: 1.5rem !important;
-  padding-top: 2.5rem !important;
+  margin-top: 1rem !important;
+  padding-top: 1.75rem !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
-  gap: 22px !important;
+  gap: 16px !important;
 }
 
 .perpus-detail-cta-bar .perpus-btn-borrow,
 .perpus-detail-cta-bar .perpus-btn-disabled,
 .perpus-detail-cta-bar .perpus-btn-detail {
-  padding: 16px 36px !important;
-  font-size: 1rem !important;
-  border-radius: 16px !important;
-  min-height: 54px !important;
+  padding: 14px 28px !important;
+  font-size: 0.95rem !important;
+  border-radius: 14px !important;
+  min-height: 48px !important;
 }
 
 @media (max-width: 640px) {

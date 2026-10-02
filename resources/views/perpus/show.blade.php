@@ -34,7 +34,7 @@
         </div>
 
         <!-- Book Detail Card (Responsive 2-col on desktop, stacked on mobile) -->
-        <div class="perpus-card-surface perpus-detail-card mb-20 sm:mb-28">
+        <div class="perpus-card-surface perpus-detail-card mb-16 sm:mb-20">
             <div class="perpus-detail-grid">
                 <!-- Visual / Illustration Panel (Left Column) -->
                 <div class="perpus-detail-cover-panel perpus-card-subsurface">

@@ -161,10 +161,7 @@
 
     <!-- 5. Info Cabang-Cabang Sekolah At-Tamam -->
     <section class="section reveal" id="cabang">
-        {{-- Hidden anchor fallback untuk kompatibilitas tautan lama --}}
-        <span id="fasilitas" style="position: relative; top: -90px; display: block; visibility: hidden;"></span>
-
-        <div class="cabang-section fasilitas-section">
+        <div class="cabang-section">
             <x-section-header 
                 tag="JARINGAN KAMPUS & PUSAT BELAJAR" 
                 title="Cabang & Lokasi Belajar PKBM Tahfizh At-Tamam" 
@@ -174,6 +171,11 @@
             {{-- Interactive Animated Tabs Component (Menampilkan detail cabang aktif) --}}
             <x-animated-tabs :tabs="$cabang" />
         </div>
+    </section>
+
+    <!-- 6. Fasilitas & Sarana Prasarana Sekolah -->
+    <section class="section reveal" id="fasilitas">
+        <x-facility-showcase :items="$galeriFasilitas" />
     </section>
 
     <!-- 6. Berita & Pengumuman Terbaru -->
@@ -354,29 +356,6 @@
             @endforeach
         </div>
 
-        {{-- Bottom Action Box --}}
-        <div class="perpus-landing-bottom-actions">
-            <div class="perpus-landing-cta-info">
-                <h4>Ingin membaca atau mencari judul buku lainnya?</h4>
-                <p>Katalog kami memiliki koleksi pustaka lengkap yang diperbarui secara berkala oleh pustakawan sekolah.</p>
-            </div>
-            <div class="perpus-landing-cta-buttons">
-                <a href="{{ route('perpus.tracking') }}" class="btn-perpus-landing-outline">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <span>Cek Status Pinjam</span>
-                </a>
-                <a href="{{ route('perpus.index') }}" class="btn-perpus-landing-primary">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-                    <span>Buka Katalog Lengkap</span>
-                    <span class="cta-arrow">&rarr;</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Galeri Fasilitas & Suasana Kampus (Virtual Showcase) -->
-    <section class="section reveal" id="fasilitas-tour">
-        <x-facility-showcase :items="$galeriFasilitas" />
     </section>
 
     <!-- 8. Kisah Sukses & Kepercayaan Wali Santri (Testimonials) -->

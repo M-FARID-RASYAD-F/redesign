@@ -7,7 +7,7 @@
     <div class="perpus-container-medium">
         
         <!-- Breadcrumbs & Navigation Bar -->
-        <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
             <nav class="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium" aria-label="Breadcrumb">
                 <a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a>
                 <span class="text-slate-500">/</span>
@@ -22,50 +22,35 @@
                 <span class="text-slate-400 truncate max-w-[180px] sm:max-w-[280px]" aria-current="page">{{ $book->title }}</span>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <a href="{{ route('perpus.index') }}" class="perpus-btn-detail inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm rounded-xl">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    <span>Kembali ke Katalog</span>
+            <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                <a href="{{ route('perpus.index') }}" class="perpus-btn-detail inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-[13px] rounded-xl">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span>Katalog Buku</span>
                 </a>
-                <a href="{{ route('perpus.tracking') }}" class="perpus-btn-top-track text-xs sm:text-sm">
-                    <span>Lacak Status Pinjaman &rarr;</span>
+                <a href="{{ route('perpus.tracking') }}" class="perpus-btn-top-track inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-[13px] rounded-xl">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Lacak Status Pinjaman</span>
+                    <span aria-hidden="true">&rarr;</span>
                 </a>
             </div>
         </div>
 
         <!-- Book Detail Card (Responsive 2-col on desktop, stacked on mobile) -->
-        <div class="perpus-card-surface perpus-detail-card mb-20 sm:mb-28">
+        <div class="perpus-card-surface perpus-detail-card mb-12 sm:mb-16">
             <div class="perpus-detail-grid">
                 <!-- Visual / Illustration Panel (Left Column) -->
                 <div class="perpus-detail-cover-panel perpus-card-subsurface">
-                    <div>
-                        <div class="perpus-cover-panel-header">
-                            <span class="perpus-detail-cat-badge">
-                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                </svg>
-                                <span>{{ $book->category ? $book->category->name : 'Umum' }}</span>
-                            </span>
-                            @if($book->rack_location)
-                            <span class="perpus-detail-rack-badge">
-                                <svg class="w-3.5 h-3.5 shrink-0 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <span>Rak: {{ $book->rack_location }}</span>
-                            </span>
-                            @endif
-                        </div>
-
-                        <!-- Book Cover Showcase with Drop Shadow -->
-                        <div class="perpus-detail-cover-box">
-                            <img src="{{ $book->cover ? asset('storage/' . $book->cover) : asset('images/book-placeholder.png') }}"
-                                 alt="Sampul buku: {{ $book->title }}"
-                                 width="200"
-                                 height="280"
-                                 onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
-                                 class="perpus-book-cover-img">
-                        </div>
+                    <!-- Book Cover Showcase with Drop Shadow -->
+                    <div class="perpus-detail-cover-box">
+                        <img src="{{ $book->cover ? asset('storage/' . $book->cover) : asset('images/book-placeholder.png') }}"
+                             alt="Sampul buku: {{ $book->title }}"
+                             width="200"
+                             height="280"
+                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                             class="perpus-book-cover-img">
                     </div>
 
                     <!-- Live Stock Status Widget -->
@@ -77,7 +62,12 @@
                                 {{ $book->available > 0 ? $book->available . ' Eksemplar Tersedia' : 'Seluruh Buku Sedang Dipinjam' }}
                             </span>
                         </div>
-                        <div class="perpus-stock-widget-total">Total Koleksi Perpustakaan: <strong>{{ $book->stock }} eksemplar</strong></div>
+                        <div class="perpus-stock-widget-total flex flex-col gap-1 text-xs sm:text-sm">
+                            <div>Total Koleksi: <strong>{{ $book->stock }} eksemplar</strong></div>
+                            @if($book->rack_location)
+                            <div class="text-cyan-300 font-mono font-semibold">Rak: {{ $book->rack_location }}</div>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -169,21 +159,6 @@
                                 </div>
                             </div>
 
-                            <!-- Card: Tahun Terbit -->
-                            @if($book->year)
-                            <div class="perpus-spec-card">
-                                <div class="perpus-spec-icon stat-amber">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="perpus-spec-content">
-                                    <span class="perpus-spec-label">Tahun Terbit</span>
-                                    <span class="perpus-spec-val text-amber-300 font-bold">{{ $book->year }}</span>
-                                </div>
-                            </div>
-                            @endif
-
                             <!-- Card 3: ISBN -->
                             <div class="perpus-spec-card">
                                 <div class="perpus-spec-icon stat-cyan">
@@ -256,21 +231,21 @@
                     <!-- Call To Action -->
                     <div class="perpus-detail-cta-bar">
                         @if($book->available > 0)
-                        <a href="{{ route('perpus.pinjam.create', $book->id) }}" class="perpus-btn-borrow w-full sm:w-auto flex-1 text-center py-4 px-8 text-base font-bold min-h-[48px] inline-flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2.5 inline-block shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('perpus.pinjam.create', $book->id) }}" class="perpus-btn-borrow flex-1 text-center font-bold inline-flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2 inline-block shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                             <span>Ajukan Peminjaman Buku Ini</span>
                         </a>
                         @else
-                        <div class="w-full sm:w-auto flex-1 py-4 px-8 perpus-btn-disabled text-center font-bold min-h-[48px] inline-flex items-center justify-center">
-                            <svg class="w-4 h-4 mr-2.5 inline-block shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex-1 perpus-btn-disabled text-center font-bold inline-flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2 inline-block shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <span>Seluruh Eksemplar Sedang Dipinjam</span>
                         </div>
                         @endif
-                        <a href="{{ route('perpus.index') }}" class="perpus-btn-detail w-full sm:w-auto px-8 py-4 text-center text-sm font-semibold min-h-[48px] inline-flex items-center justify-center">
+                        <a href="{{ route('perpus.index') }}" class="perpus-btn-detail px-6 text-center text-sm font-semibold inline-flex items-center justify-center">
                             Cari Buku Lain
                         </a>
                     </div>
@@ -280,11 +255,11 @@
 
         <!-- Related Books Section -->
         @if($related->count() > 0)
-        <div class="perpus-related-section pt-8 sm:pt-12">
-            <div class="flex flex-wrap items-center justify-between gap-6 mb-12">
-                <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-3.5">
-                    <svg class="w-6 h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                    <span>Buku Terkait dalam Kategori yang Sama</span>
+        <div class="perpus-related-section pt-4 sm:pt-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2.5">
+                    <svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    <span>Koleksi Buku Terkait dalam Kategori yang Sama</span>
                 </h3>
                 <a href="{{ route('perpus.index', ['category' => $book->category_id]) }}" class="perpus-btn-see-all">
                     <span>Lihat Semua</span>
@@ -306,9 +281,11 @@
                              class="perpus-book-cover-img"
                              style="max-height: 155px;">
                         
-                        <span class="perpus-book-badge-stock {{ $rel->available > 0 ? 'stock-available' : 'stock-empty' }}" style="font-size: 0.65rem; padding: 2px 7px;">
-                            {{ $rel->available > 0 ? $rel->available . ' Tersedia' : 'Habis' }}
-                        </span>
+                        <div class="perpus-book-cover-badges">
+                            <span class="perpus-book-badge-stock {{ $rel->available > 0 ? 'stock-available' : 'stock-empty' }}">
+                                {{ $rel->available > 0 ? $rel->available . ' Tersedia' : 'Habis' }}
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Details Body -->

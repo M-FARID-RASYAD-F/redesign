@@ -329,9 +329,9 @@ class SchoolController extends Controller
             ],
             [
                 'id' => 4,
-                'title' => 'Gedung Kampus Utama & Hall Serbaguna',
-                'category' => 'kampus',
-                'category_label' => 'Kampus Utama',
+                'title' => 'Gedung Kampus Utama & Ruang Kelas Modern',
+                'category' => 'akademik',
+                'category_label' => 'Ruang Belajar & Gedung',
                 'image' => asset('images/sch5.jpg'),
                 'desc' => 'Ruang kelas interaktif ber-AC dengan pencahayaan alami dan lingkungan sejuk.'
             ],
@@ -1021,7 +1021,7 @@ class SchoolController extends Controller
     public function perpusPinjamCreate($bookId)
     {
         $info = $this->getSchoolData()['info'];
-        $book = Book::findOrFail($bookId);
+        $book = Book::with('category')->findOrFail($bookId);
         return view('perpus.pinjam-create', compact('book', 'info'));
     }
 

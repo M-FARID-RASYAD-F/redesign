@@ -964,6 +964,9 @@ body.nav-mobile-open {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  max-width: calc(100% - 90px);
+  overflow: hidden;
 }
 
 .nav-mobile-pill-logo {
@@ -971,13 +974,17 @@ body.nav-mobile-open {
   height: 22px;
   border-radius: 6px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .nav-mobile-pill-text {
   font-size: 0.78rem;
   font-weight: 700;
   color: #e2e8f0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-mobile-status-badge {
@@ -2366,6 +2373,57 @@ body.nav-mobile-open {
   padding: 0 1.6rem 1.1rem;
   margin-top: -0.25rem;
   border-top: none;
+}
+
+/* Tombol Lihat Berita Lainnya di Bawah Kartu Berita */
+.news-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.75rem;
+  width: 100%;
+}
+
+.news-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 180, 216, 0.35);
+}
+
+.news-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 180, 216, 0.5);
+}
+
+.news-more-btn .news-more-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.news-more-btn:hover .news-more-arrow {
+  transform: translateX(5px);
+}
+
+@media (max-width: 640px) {
+  .news-more-wrap {
+    margin-top: 2rem;
+  }
+  .news-more-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    justify-content: center;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -4242,6 +4300,7 @@ body.nav-mobile-open {
     padding: 0 10px 0 6px;
     border-radius: 12px;
     box-sizing: border-box;
+    overflow: hidden;
   }
   .navbar.scrolled .navbar-capsule.navbar-left {
     height: 44px;
@@ -4255,6 +4314,7 @@ body.nav-mobile-open {
     flex: 1;
     width: 100%;
     text-decoration: none;
+    overflow: hidden;
   }
   .brand-icon {
     width: 36px;
@@ -4281,28 +4341,30 @@ body.nav-mobile-open {
     text-align: left;
     min-width: 0;
     flex: 1;
-    overflow: visible;
+    overflow: hidden;
   }
   .brand-text-main {
     display: block !important;
-    font-size: clamp(0.72rem, 3.6vw, 0.85rem);
+    font-size: clamp(0.66rem, 2.9vw, 0.80rem);
     font-weight: 700;
     line-height: 1.2;
     color: #ffffff;
     white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-    max-width: none !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    letter-spacing: 0.01em;
   }
   .brand-text-sub {
     display: block !important;
-    font-size: clamp(0.50rem, 2.2vw, 0.60rem);
+    font-size: clamp(0.48rem, 2vw, 0.58rem);
     color: #94a3b8;
     line-height: 1.15;
     white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-    max-width: none !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    letter-spacing: 0.01em;
   }
   .navbar-center,
   .nav-auth-desktop {
@@ -5430,14 +5492,18 @@ body.nav-mobile-open {
     height: 30px;
   }
   .brand-text-main {
-    font-size: 0.70rem;
+    font-size: 0.65rem;
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .brand-text-sub {
-    font-size: 0.50rem;
+    font-size: 0.46rem;
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
   .navbar-capsule.navbar-right {
     width: 42px;

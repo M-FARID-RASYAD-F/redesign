@@ -64,7 +64,7 @@
 
 <style>
 .facility-showcase-section {
-    margin: 50px 0 70px;
+    margin: 0;
 }
 
 [data-theme="light"] .facility-showcase-section {
@@ -524,6 +524,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.style.display = 'none';
                 }
             });
+
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
         });
     });
 

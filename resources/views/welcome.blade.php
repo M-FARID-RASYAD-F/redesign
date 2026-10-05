@@ -225,6 +225,15 @@
                 </x-card>
             @endforeach
         </div>
+
+        {{-- Tombol Baru: Akses ke Halaman Portal Berita Selengkapnya --}}
+        <div class="news-more-wrap">
+            <a href="{{ route('berita.index') }}" class="btn btn-primary news-more-btn" aria-label="Buka Portal Berita Sekolah Selengkapnya">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                <span>Lihat Berita &amp; Artikel Lainnya</span>
+                <span class="news-more-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
     </section>
 
     <!-- 7. Perpustakaan Digital & Pojok Literasi Sekolah -->

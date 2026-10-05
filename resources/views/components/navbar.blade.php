@@ -49,7 +49,7 @@
                     </a>
 
                     {{-- Berita --}}
-                    <a href="{{ route('berita.index') }}" class="expandable-tab-btn {{ Request::is('berita*') ? 'active' : '' }}" data-section="berita" aria-label="Berita">
+                    <a href="{{ route('home') }}#berita" class="expandable-tab-btn" data-section="berita" aria-label="Berita">
                         <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                         <span class="tab-label">Berita</span>
                     </a>
@@ -140,16 +140,6 @@
                 <span class="nav-mobile-status-badge">Edu Portal</span>
             </div>
 
-            <div style="padding: 10px 16px 4px;">
-                <button type="button" onclick="closeMobileMenu(); openSpotlight();" class="nav-mobile-search-btn" aria-label="Buka Pencarian Cepat (Ctrl+K)">
-                    <span class="nav-mobile-search-inner">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <span>Cari informasi sekolah...</span>
-                    </span>
-                    <kbd class="nav-mobile-search-kbd">Cari</kbd>
-                </button>
-            </div>
-
             <div class="nav-mobile-nav-list">
                 <a href="{{ route('home') }}#beranda" class="nav-mobile-link {{ Request::routeIs('home') ? 'active' : '' }}" data-section="beranda">
                     <span class="nav-mobile-icon-box">
@@ -179,7 +169,7 @@
                     <span class="nav-mobile-link-text">Galeri Fasilitas</span>
                     <span class="nav-mobile-arrow" aria-hidden="true">›</span>
                 </a>
-                <a href="{{ route('berita.index') }}" class="nav-mobile-link {{ Request::is('berita*') ? 'active' : '' }}" data-section="berita">
+                <a href="{{ route('home') }}#berita" class="nav-mobile-link" data-section="berita">
                     <span class="nav-mobile-icon-box">
                         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
                     </span>

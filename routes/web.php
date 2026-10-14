@@ -21,20 +21,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 // 1. Route Halaman Utama Landing Page Sekolah
 Route::get('/', [SchoolController::class, 'index'])->name('home');
 
-Route::get('/debug-db', function () {
-    return response()->json([
-        'connection' => config('database.default'),
-        'db_config' => config('database.connections.sqlite.database'),
-        'database_path_sqlite' => database_path('database.sqlite'),
-        'src_db_exists' => file_exists(database_path('database.sqlite')),
-        'src_db_size' => @filesize(database_path('database.sqlite')),
-        'tmp_db_exists' => file_exists('/tmp/database.sqlite'),
-        'tmp_db_size' => @filesize('/tmp/database.sqlite'),
-        'books_count' => \App\Models\Book::count(),
-        'categories_count' => \App\Models\BookCategory::count(),
-    ]);
-});
-
 // 1.1 Route Portal Berita Publik & Detail Artikel
 Route::get('/berita', [SchoolController::class, 'newsIndex'])->name('berita.index');
 Route::get('/berita/{slug}', [SchoolController::class, 'newsShow'])->name('news.show');

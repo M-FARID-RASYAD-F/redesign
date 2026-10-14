@@ -293,10 +293,10 @@
             @foreach($bukuPerpusList as $buku)
             <div class="perpus-landing-card">
                 <div class="perpus-landing-cover-box">
-                    <img src="{{ !empty($buku['cover']) ? $buku['cover'] : asset('images/book-placeholder.png') }}" 
+                    <img src="{{ !empty($buku['cover']) ? $buku['cover'] : asset('images/book-placeholder.svg') }}" 
                          alt="{{ $buku['title'] }}" 
                          loading="lazy" 
-                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';"
                          class="perpus-landing-cover-img">
                     
                     <span class="perpus-landing-cat-badge">

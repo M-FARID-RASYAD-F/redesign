@@ -68,7 +68,7 @@
                         <!-- Book Cover Showcase (C.1: 2:3 aspect ratio, meaningful fallback) -->
                         <div class="perpus-cover-wrapper">
                             @if($book->cover)
-                                <img src="{{ asset('storage/' . $book->cover) }}"
+                                <img src="{{ $book->cover_url }}"
                                      alt="Sampul buku {{ $book->title }}"
                                      class="perpus-cover-image"
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -348,7 +348,7 @@
                                     <svg id="submitIcon" class="perpus-btn-icon w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span class="perpus-btn-spinner" aria-hidden="true"></span>
+                                    <span id="submitSpinner" class="perpus-btn-spinner" aria-hidden="true"></span>
                                     <span id="submitText">Ajukan Peminjaman</span>
                                 </button>
                                 @else

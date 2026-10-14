@@ -59,11 +59,11 @@
 
                         <!-- Book Cover Showcase with Drop Shadow -->
                         <div class="perpus-detail-cover-box">
-                            <img src="{{ $book->cover ? asset('storage/' . $book->cover) : asset('images/book-placeholder.png') }}"
+                            <img src="{{ $book->cover_url }}"
                                  alt="Sampul buku: {{ $book->title }}"
                                  width="200"
                                  height="280"
-                                 onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                                 onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';"
                                  class="perpus-book-cover-img">
                         </div>
                     </div>
@@ -297,12 +297,12 @@
                 <div class="perpus-book-card">
                     <!-- Thumbnail Cover Image -->
                     <div class="perpus-book-cover-wrap" style="height: 180px; padding: 10px;">
-                        <img src="{{ $rel->cover ? asset('storage/' . $rel->cover) : asset('images/book-placeholder.png') }}"
+                        <img src="{{ $rel->cover_url }}"
                              alt="Sampul buku {{ $rel->title }}"
                              width="140"
                              height="180"
                              loading="lazy"
-                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';"
                              class="perpus-book-cover-img"
                              style="max-height: 155px;">
                         

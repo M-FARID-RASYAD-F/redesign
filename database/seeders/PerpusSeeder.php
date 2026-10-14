@@ -252,7 +252,7 @@ class PerpusSeeder extends Seeder
         $bookModels = [];
         foreach ($booksData as $b) {
             $cat = $categoryModels[$b['category_slug']] ?? null;
-            $bookModels[$b['title']] = Book::updateOrCreate(
+            $book = Book::updateOrCreate(
                 ['title' => $b['title']],
                 [
                     'category_id'   => $cat?->id,
@@ -265,6 +265,11 @@ class PerpusSeeder extends Seeder
                     'synopsis'      => $b['synopsis'],
                 ]
             );
+            if (!$book->cover) {
+                $book->cover = 'images/books/book-' . $book->id . '.svg';
+                $book->save();
+            }
+            $bookModels[$b['title']] = $book;
         }
 
         // 4. Data Anggota Perpustakaan Realistis

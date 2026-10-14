@@ -398,7 +398,7 @@ class SchoolController extends Controller
                 'author' => $b->author,
                 'publisher' => $b->publisher,
                 'category_name' => $b->category ? $b->category->name : 'Umum',
-                'cover' => $b->cover ? asset('storage/' . $b->cover) : null,
+                'cover' => $b->cover_url,
                 'available' => (int) $b->available,
                 'stock' => (int) $b->stock,
                 'rack_location' => $b->rack_location,

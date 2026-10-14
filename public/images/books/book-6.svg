@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 460" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Spine 3D Crease Shadow & Highlight -->
+    <linearGradient id="spineCrease6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.45"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#000000" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Metallic Gold/Accent Foil for Badges -->
+    <linearGradient id="foilGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow -->
+    <filter id="softShadow6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Base Cover Card -->
+  <rect width="320" height="460" rx="8" fill="url(#bgGrad6)"/>
+
+  <!-- Subtle Geometric Pattern Overlay -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1">
+    <circle cx="160" cy="205" r="140" fill="none"/>
+    <circle cx="160" cy="205" r="110" fill="none" stroke-dasharray="4 4"/>
+    <circle cx="160" cy="205" r="80" fill="none"/>
+    <line x1="20" y1="205" x2="300" y2="205"/>
+    <line x1="160" y1="65" x2="160" y2="345"/>
+  </g>
+
+  <!-- Top Header Banner (Library Branding) -->
+  <g transform="translate(160, 28)" text-anchor="middle">
+    <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="700" fill="#fde047" letter-spacing="2">PKBM TAHFIZH AT-TAMAM</text>
+    <text y="14" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="7.5" font-weight="600" fill="#cbd5e1" letter-spacing="1">PERPUSTAKAAN DIGITAL</text>
+  </g>
+
+  <!-- Category & Bestseller Badge Pill -->
+  <g transform="translate(160, 68)">
+    <rect x="-85" y="-12" width="170" height="24" rx="12" fill="#000000" fill-opacity="0.35" stroke="url(#foilGrad6)" stroke-width="1.2"/>
+    <text text-anchor="middle" y="4.5" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="800" fill="#fde047" letter-spacing="1">SUMBER SUNNAH SHAHIH</text>
+  </g>
+
+  <!-- Central Themed Artwork Box -->
+  <g filter="url(#softShadow6)">
+                <g transform="translate(160, 205)">
+                <!-- Classical Medallion Ornament -->
+                <circle cx="0" cy="0" r="54" fill="none" stroke="#fde047" stroke-width="2" opacity="0.5"/>
+                <circle cx="0" cy="0" r="48" fill="#1e3a5f" stroke="#fde047" stroke-width="1.5"/>
+                <!-- Antique Scroll with Ribbon -->
+                <path d="M-30,-28 C-10,-32 10,-24 30,-28 L28,24 C8,20 -12,28 -32,24 Z" fill="#fef3c7" stroke="#fde047" stroke-width="2"/>
+                <!-- Lines on parchment -->
+                <line x1="-20" y1="-14" x2="18" y2="-14" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+                <line x1="-20" y1="-2" x2="20" y2="-2" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+                <line x1="-20" y1="10" x2="10" y2="10" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+                <!-- Inkpot & Golden Quill -->
+                <path d="M12,-35 L38,-60 L32,-30 Z" fill="#fde047"/>
+            </g>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="50" y1="295" x2="270" y2="295" stroke="url(#foilGrad6)" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+
+  <!-- Title Section -->
+  <g filter="url(#softShadow6)">
+    <text x="160" y="335" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.3">Ringkasan Shahih Al-Bukhari</text>
+
+  </g>
+
+  <!-- Subtitle -->
+  <text x="160" y="372" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="500" fill="#e2e8f0" opacity="0.9">Ikhtisar Komprehensif Hadits Nabawi</text>
+
+  <!-- Author Tag with Icon Accent -->
+  <g transform="translate(160, 400)">
+    <rect x="-95" y="-11" width="190" height="22" rx="6" fill="#000000" fill-opacity="0.3"/>
+    <text text-anchor="middle" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#fde047">Karya: Imam Az-Zabidi</text>
+  </g>
+
+  <!-- Footer: Publisher & Archive Seal -->
+  <g transform="translate(160, 436)" text-anchor="middle">
+    <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="0.5">Pustaka As-Sunnah • KOLEKSI RESMI</text>
+  </g>
+
+  <!-- Left 3D Spine Fold / Crease (Gives depth and book feel) -->
+  <rect x="0" y="0" width="16" height="460" rx="8" fill="url(#spineCrease6)"/>
+  <line x1="16" y1="0" x2="16" y2="460" stroke="#000000" stroke-width="1" opacity="0.35"/>
+  <line x1="17" y1="0" x2="17" y2="460" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
+
+  <!-- Decorative Outer Border -->
+  <rect x="1" y="1" width="318" height="458" rx="7" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+</svg>

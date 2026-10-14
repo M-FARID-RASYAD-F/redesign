@@ -275,10 +275,10 @@
                 <!-- Book Showcase inside body -->
                 <div style="display: flex; gap: 18px; align-items: center; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px; margin-bottom: 24px;">
                     <div style="width: 80px; height: 110px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: #0f172a; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
-                        <img src="{{ $loan->book->cover ? asset('storage/' . $loan->book->cover) : asset('images/book-placeholder.png') }}"
+                        <img src="{{ $loan->book->cover_url }}"
                              alt="Sampul {{ $loan->book->title }}"
                              style="width: 100%; height: 100%; object-fit: cover;"
-                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';">
+                             onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';">
                     </div>
                     <div style="flex: 1; min-width: 0;">
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">

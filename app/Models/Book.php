@@ -28,6 +28,18 @@ class Book extends Model
 
     public function getCoverUrlAttribute(): string
     {
-        return $this->cover ? asset('storage/' . $this->cover) : asset('images/book-placeholder.png');
+        if (empty($this->cover)) {
+            return asset('images/book-placeholder.svg');
+        }
+
+        if (str_starts_with($this->cover, 'http://') || str_starts_with($this->cover, 'https://')) {
+            return $this->cover;
+        }
+
+        if (str_starts_with($this->cover, 'images/')) {
+            return asset($this->cover);
+        }
+
+        return asset('storage/' . $this->cover);
     }
 }

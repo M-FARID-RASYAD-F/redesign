@@ -153,12 +153,12 @@
             <div class="perpus-book-card">
                 <!-- Cover Buku dengan 3D Shadow dan Fallback Placeholder -->
                 <div class="perpus-book-cover-wrap">
-                    <img src="{{ $book->cover ? asset('storage/' . $book->cover) : asset('images/book-placeholder.png') }}"
+                    <img src="{{ $book->cover_url }}"
                          alt="Sampul buku {{ $book->title }}"
                          width="160"
                          height="220"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
+                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';"
                          class="perpus-book-cover-img">
                     
                     <!-- Kategori Badge -->

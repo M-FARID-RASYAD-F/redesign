@@ -1,0 +1,13 @@
+.git
+.github
+.env
+.env.*
+node_modules
+/vendor
+/storage/*.key
+/storage/pail
+graphify-out
+.agents
+ponytail
+*.mp4
+Screenshot*.png

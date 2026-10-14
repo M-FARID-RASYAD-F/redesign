@@ -16,8 +16,12 @@ foreach ($dirs as $dir) {
 }
 
 // Copy seeded sqlite database to writable /tmp if using sqlite
-if (!file_exists('/tmp/database.sqlite') && file_exists(__DIR__ . '/../database/database.sqlite')) {
-    copy(__DIR__ . '/../database/database.sqlite', '/tmp/database.sqlite');
+$srcDb = __DIR__ . '/../database/database.sqlite';
+$dstDb = '/tmp/database.sqlite';
+if (file_exists($srcDb)) {
+    if (!file_exists($dstDb) || filesize($dstDb) < filesize($srcDb)) {
+        @copy($srcDb, $dstDb);
+    }
 }
 
 // Forward Vercel requests to Laravel's public entry point

@@ -55,6 +55,8 @@
     "APP_NAME": "Attamam Edu",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
+    "APP_URL": "https://attamamedu.vercel.app",
+    "ASSET_URL": "https://attamamedu.vercel.app",
     "APP_KEY": "base64:BckF5soIxIpTYgELpEwx2nXqjW9TYhwObOBwZGgSl/w=",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",

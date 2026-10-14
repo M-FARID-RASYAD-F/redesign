@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('production') || isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Book::class, \App\Policies\BookPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookCategory::class, \App\Policies\BookCategoryPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookLoan::class, \App\Policies\BookLoanPolicy::class);

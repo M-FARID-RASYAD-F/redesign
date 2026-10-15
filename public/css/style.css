@@ -4715,7 +4715,7 @@ body.nav-mobile-open {
   /* ── Hero Section ── */
   .hero {
     min-height: auto;
-    padding: 5.75rem 1.25rem 3.5rem;
+    padding: 5.75rem 1.25rem 2.75rem;
     justify-content: flex-start;
     box-sizing: border-box;
     width: 100%;
@@ -4765,40 +4765,17 @@ body.nav-mobile-open {
   .hero-desc {
     font-size: 0.82rem;
     line-height: 1.6;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
     word-break: break-word;
   }
   .hero-actions {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    box-sizing: border-box;
-  }
-  .hero-actions .btn {
-    width: 100%;
-    min-height: 48px;
-    padding: 12px 18px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    justify-content: center;
-    text-align: center;
-    border-radius: 12px;
-    box-sizing: border-box;
-  }
-  .hero-actions .btn-outline {
-    background: rgba(0, 25, 55, 0.90);
-    border: 1.5px solid rgba(0, 180, 216, 0.65);
-    box-shadow: 0 4px 16px rgba(0, 15, 35, 0.6), 0 0 12px rgba(0, 180, 216, 0.2);
-    color: #ffffff;
+    display: none !important;
   }
 
   /* ── Statistics Section ── */
   .stats-section {
     background: #002147;
-    padding: 1.75rem 1.25rem;
+    padding: 1.6rem 1.25rem;
     margin: 0;
     width: 100%;
     box-sizing: border-box;
@@ -4848,7 +4825,7 @@ body.nav-mobile-open {
 
   /* ── Sambutan Kepala Sekolah ── */
   .principal-section {
-    padding: 3rem 1.25rem 3.5rem;
+    padding: 2.75rem 1.25rem 2.75rem;
     box-sizing: border-box;
     width: 100%;
   }
@@ -4914,26 +4891,29 @@ body.nav-mobile-open {
   .content-area-white,
   .content-area-constellation {
     border-radius: 20px 20px 0 0;
-    padding-top: 2rem;
+    padding-top: 40px;
     padding-bottom: 1.5rem;
     width: 100%;
     box-sizing: border-box;
     overflow: hidden;
   }
-  .content-area-constellation .section:last-child {
-    margin-bottom: 1.5rem;
+  .content-area-constellation .section:last-child,
+  .content-area-constellation > :last-child {
+    margin-bottom: 0.75rem !important;
   }
   #constellation-canvas {
     display: none !important;
   }
   .section {
     padding: 0 1.25rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.85rem;
     width: 100%;
     box-sizing: border-box;
   }
-  .section-header {
-    margin-bottom: 1.75rem;
+  .section-header,
+  .cabang-section .section-header,
+  .fasilitas-section .section-header {
+    margin-bottom: 30px;
     text-align: center;
     padding: 0 4px;
     width: 100%;
@@ -5045,7 +5025,7 @@ body.nav-mobile-open {
   /* ── Fasilitas & Cabang (Animated Tabs) ── */
   .cabang-section,
   .fasilitas-section {
-    padding: 1.5rem 1rem;
+    padding: 1.65rem 1.15rem 1.5rem;
     border-radius: 16px;
     box-sizing: border-box;
     width: 100%;
@@ -5342,7 +5322,7 @@ body.nav-mobile-open {
     text-align: center !important;
   }
   .ppdb-stats-wrapper {
-    margin: -1.5rem auto 2.5rem !important;
+    margin: -1.35rem auto 2.35rem !important;
     padding: 0 1.25rem !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -5359,7 +5339,7 @@ body.nav-mobile-open {
   }
   .ppdb-section {
     padding: 0 1.25rem !important;
-    margin-bottom: 2.5rem !important;
+    margin-bottom: 2.35rem !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -5476,10 +5456,20 @@ body.nav-mobile-open {
 @media (max-width: 480px) {
   .section {
     padding: 0 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.35rem;
+  }
+  .section-header,
+  .cabang-section .section-header,
+  .fasilitas-section .section-header {
+    margin-bottom: 30px;
+  }
+  .content-area-white,
+  .content-area-constellation {
+    padding-top: 40px;
+    padding-bottom: 1.25rem;
   }
   .stats-section {
-    padding: 1.5rem 1rem;
+    padding: 1.35rem 1rem;
   }
   .stats-grid {
     gap: 8px;
@@ -5500,13 +5490,13 @@ body.nav-mobile-open {
     font-size: 0.68rem;
   }
   .hero {
-    padding: 5.25rem 1rem 3rem;
+    padding: 5.25rem 1rem 2.25rem;
   }
   .hero-title {
     font-size: clamp(1.4rem, 6vw, 1.75rem);
   }
   .principal-section {
-    padding: 2.5rem 1rem 3rem;
+    padding: 2.25rem 1rem 2.25rem;
   }
   .principal-photo-col {
     max-width: 140px;
@@ -5516,7 +5506,7 @@ body.nav-mobile-open {
   }
   .fasilitas-section,
   .cabang-section {
-    padding: 1.25rem 0.75rem;
+    padding: 1.35rem 0.85rem 1.25rem;
   }
   /* Footer Small Mobile (<= 480px): Tinggikan padding bawah agar tidak tertutupi tombol WA floating */
   .footer {
@@ -12199,7 +12189,7 @@ img, video, iframe, embed, object {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     width: 100%;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
     box-sizing: border-box;
   }
 
@@ -12237,7 +12227,7 @@ img, video, iframe, embed, object {
   .perpus-landing-search-wrap {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
     box-sizing: border-box;
   }
 

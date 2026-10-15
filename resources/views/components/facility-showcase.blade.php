@@ -456,8 +456,15 @@
 
 @media (max-width: 768px) {
     [data-theme="light"] .facility-showcase-section {
-        padding: 36px 18px 30px;
+        padding: 28px 18px 24px;
         border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-theme="light"] .facility-showcase-section {
+        padding: 24px 14px 20px;
+        border-radius: 14px;
     }
 }
 
@@ -468,7 +475,7 @@
     }
     .facility-filter-tabs {
         gap: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
     .facility-tab-btn {
         padding: 7px 14px;

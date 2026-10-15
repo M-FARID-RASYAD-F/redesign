@@ -634,8 +634,17 @@
 @media (max-width: 768px) {
     .testimonials-section {
         width: calc(100% - 2rem);
-        padding: 40px 18px 36px;
-        margin-bottom: 3.5rem;
+        padding: 34px 18px 30px;
+        margin: 0 auto 2.75rem;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials-section {
+        width: calc(100% - 1.5rem);
+        padding: 26px 14px 22px;
+        margin: 0 auto 2.25rem;
         border-radius: 14px;
     }
 }

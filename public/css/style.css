@@ -4573,7 +4573,7 @@ body.nav-mobile-open {
   /* ── Hero Section ── */
   .hero {
     min-height: auto;
-    padding: 5.75rem 1.25rem 3.5rem;
+    padding: 5.75rem 1.25rem calc(3.5rem + 164px);
     justify-content: flex-start;
     box-sizing: border-box;
     width: 100%;
@@ -4626,14 +4626,9 @@ body.nav-mobile-open {
     margin-bottom: 1.25rem;
     word-break: break-word;
   }
+  /* 3 tombol di bawah deskripsi disembunyikan pada mode HP tanpa mengubah posisi garis/batas bawah hero */
   .hero-actions {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    box-sizing: border-box;
+    display: none !important;
   }
   .hero-actions .btn {
     width: 100%;
@@ -5358,7 +5353,7 @@ body.nav-mobile-open {
     font-size: 0.68rem;
   }
   .hero {
-    padding: 5.25rem 1rem 3rem;
+    padding: 5.25rem 1rem calc(3rem + 164px);
   }
   .hero-title {
     font-size: clamp(1.4rem, 6vw, 1.75rem);

@@ -29,7 +29,7 @@
 
             <div class="perpus-top-actions">
                 <a href="{{ route('perpus.show', $book->id) }}" class="perpus-btn-nav-outline">
-                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                     <span>Detail Buku</span>
                 </a>
                 <a href="{{ route('perpus.tracking') }}" class="perpus-btn-top-track text-xs !py-1.5 !px-3 !rounded-lg !min-h-[38px]">
@@ -49,14 +49,14 @@
                         <!-- Top Header: Category & Single Rack Badge (B.2: Single rack badge) -->
                         <div class="perpus-cover-panel-header is-centered">
                             <span class="perpus-detail-cat-badge">
-                                <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg width="12" height="12" class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                 </svg>
                                 <span>{{ $book->category ? $book->category->name : 'Umum' }}</span>
                             </span>
                             @if($book->rack_location)
                             <span class="perpus-detail-rack-badge">
-                                <svg class="w-3 h-3 shrink-0 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg width="12" height="12" class="w-3 h-3 shrink-0 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
@@ -125,7 +125,7 @@
                         <!-- Mini Guidelines: TATA TERTIB PINJAM (A.1 & A.2: Dedicated card, >=16px gap, left aligned) -->
                         <div class="perpus-rules-card">
                             <div class="perpus-rules-header">
-                                <svg class="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg width="16" height="16" class="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <span class="perpus-rules-title">TATA TERTIB PINJAM</span>
@@ -194,7 +194,7 @@
                         @if($book->available < 1)
                         <div class="mb-5 p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200" role="alert">
                             <div class="flex items-center gap-2 font-bold text-sm mb-1 text-rose-300">
-                                <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <svg width="16" height="16" class="w-4 h-4 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 <span>Seluruh Eksemplar Sedang Dipinjam</span>
                             </div>
                             <p class="text-xs text-slate-300 mb-3 leading-relaxed">
@@ -202,7 +202,7 @@
                             </p>
                             <div class="flex flex-wrap items-center gap-2">
                                 <a href="{{ route('perpus.index') }}" class="perpus-btn-detail px-3 py-1.5 text-xs font-semibold rounded-lg inline-flex items-center gap-1.5">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                                    <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                                     <span>Katalog Buku</span>
                                 </a>
                                 <a href="{{ route('perpus.tracking') }}" class="perpus-btn-top-track !text-xs !py-1.5 !px-3 !rounded-lg">
@@ -216,7 +216,7 @@
                         @if($errors->any())
                         <div class="mb-5 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs sm:text-sm" role="alert" aria-live="assertive">
                             <div class="font-bold mb-1 flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <svg width="16" height="16" class="w-4 h-4 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 <span>Periksa kembali data pengajuan:</span>
                             </div>
                             <ul class="list-disc list-inside space-y-0.5 pl-1 text-xs">
@@ -239,7 +239,7 @@
                                     </label>
                                     <div class="relative">
                                         <span class="absolute left-3.5 top-3.5 text-slate-400 pointer-events-none" aria-hidden="true">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                            <svg width="16" height="16" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                         </span>
                                         <input type="text"
                                                id="full_name"
@@ -255,7 +255,7 @@
                                     </div>
                                     @error('full_name')
                                         <p id="full_name_error" class="perpus-form-help has-error text-xs text-rose-400 mt-2 font-medium flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                            <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                                             <span>{{ $message }}</span>
                                         </p>
                                     @else
@@ -272,7 +272,7 @@
                                     </label>
                                     <div class="relative">
                                         <span class="absolute left-3.5 top-3.5 text-slate-400 pointer-events-none" aria-hidden="true">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                            <svg width="16" height="16" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                         </span>
                                         <input type="tel"
                                                id="phone"
@@ -288,13 +288,13 @@
                                     </div>
                                     @error('phone')
                                         <p id="phone_error" class="perpus-form-help has-error text-xs text-rose-400 mt-2 font-medium flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                            <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                                             <span>{{ $message }}</span>
                                         </p>
                                     @else
                                         <!-- C.8 Shortened copywriting -->
                                         <p id="phone_help" class="perpus-form-help text-xs text-emerald-400 mt-2 flex items-center gap-1.5 leading-relaxed font-medium">
-                                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                            <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>Nomor ini dipakai untuk melacak pinjaman Anda.</span>
                                         </p>
                                     @enderror
@@ -306,15 +306,15 @@
                                         Kelas / Asrama / Alamat Domisili <span class="text-xs font-normal text-slate-400">(Opsional)</span>
                                     </label>
                                     <textarea id="address"
-                                              name="address"
-                                              rows="2"
-                                              placeholder="Tuliskan kelas, asrama, atau alamat domisili"
-                                              aria-describedby="{{ $errors->has('address') ? 'address_error' : 'address_help' }}"
-                                              class="perpus-form-input perpus-textarea !py-3 !px-3.5 !text-sm {{ $errors->has('address') ? 'has-error' : '' }}"
-                                              {{ $book->available < 1 ? 'disabled' : '' }}>{{ old('address') }}</textarea>
+                                               name="address"
+                                               rows="2"
+                                               placeholder="Tuliskan kelas, asrama, atau alamat domisili"
+                                               aria-describedby="{{ $errors->has('address') ? 'address_error' : 'address_help' }}"
+                                               class="perpus-form-input perpus-textarea !py-3 !px-3.5 !text-sm {{ $errors->has('address') ? 'has-error' : '' }}"
+                                               {{ $book->available < 1 ? 'disabled' : '' }}>{{ old('address') }}</textarea>
                                     @error('address')
                                         <p id="address_error" class="perpus-form-help has-error text-xs text-rose-400 mt-2 font-medium flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                            <svg width="14" height="14" class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                                             <span>{{ $message }}</span>
                                         </p>
                                     @else
@@ -345,7 +345,7 @@
                             <div class="perpus-form-actions">
                                 @if($book->available > 0)
                                 <button type="submit" id="submitBtn" class="perpus-btn-submit">
-                                    <svg id="submitIcon" class="perpus-btn-icon w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <svg width="16" height="16" id="submitIcon" class="perpus-btn-icon w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                                     </svg>
                                     <span id="submitSpinner" class="perpus-btn-spinner" aria-hidden="true"></span>
@@ -353,7 +353,7 @@
                                 </button>
                                 @else
                                 <button type="button" disabled class="perpus-btn-submit is-disabled" disabled>
-                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <svg width="16" height="16" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     <span>Seluruh Eksemplar Sedang Dipinjam</span>

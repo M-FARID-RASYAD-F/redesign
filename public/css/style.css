@@ -8747,6 +8747,178 @@ input:-webkit-autofill:active {
   align-items: center !important;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   SVG ICON NORMALIZER & SIZING FOR PERPUSTAKAAN MODULE
+   Menghindari icon melar/raksasa pada seluruh halaman perpus
+   ═══════════════════════════════════════════════════════════ */
+.perpus-page-wrapper svg,
+.perpus-tracking-container svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+/* Utility fallbacks for SVGs in Perpus module */
+.perpus-page-wrapper svg.w-3,
+.perpus-page-wrapper svg[class*="w-3 "],
+.perpus-tracking-container svg.w-3,
+.perpus-tracking-container svg[class*="w-3 "] { width: 12px !important; height: 12px !important; }
+
+.perpus-page-wrapper svg.w-3\.5,
+.perpus-page-wrapper svg[class*="w-3.5"],
+.perpus-tracking-container svg.w-3\.5,
+.perpus-tracking-container svg[class*="w-3.5"] { width: 14px !important; height: 14px !important; }
+
+.perpus-page-wrapper svg.w-4,
+.perpus-page-wrapper svg[class*="w-4"],
+.perpus-tracking-container svg.w-4,
+.perpus-tracking-container svg[class*="w-4"] { width: 16px !important; height: 16px !important; }
+
+.perpus-page-wrapper svg.w-5,
+.perpus-page-wrapper svg[class*="w-5"],
+.perpus-tracking-container svg.w-5,
+.perpus-tracking-container svg[class*="w-5"] { width: 20px !important; height: 20px !important; }
+
+.perpus-page-wrapper svg.w-6,
+.perpus-page-wrapper svg[class*="w-6"],
+.perpus-tracking-container svg.w-6,
+.perpus-tracking-container svg[class*="w-6"] { width: 24px !important; height: 24px !important; }
+
+.perpus-page-wrapper svg.w-8,
+.perpus-page-wrapper svg[class*="w-8"],
+.perpus-tracking-container svg.w-8,
+.perpus-tracking-container svg[class*="w-8"] { width: 32px !important; height: 32px !important; }
+
+.perpus-page-wrapper svg.w-10,
+.perpus-page-wrapper svg[class*="w-10"],
+.perpus-tracking-container svg.w-10,
+.perpus-tracking-container svg[class*="w-10"] { width: 40px !important; height: 40px !important; }
+
+/* Component Specific Icon Rules */
+.perpus-hero-badge svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-search-input-wrap > svg,
+.perpus-search-input-wrap .perpus-search-input-icon {
+  position: absolute !important;
+  left: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: #94a3b8 !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+.perpus-search-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.perpus-stat-icon-wrap svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.perpus-hero-track-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-filter-indicator svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-book-meta svg,
+.perpus-book-rack svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.perpus-top-nav-bar svg,
+.perpus-top-actions svg,
+.perpus-btn-nav-outline svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.perpus-detail-cat-badge svg,
+.perpus-detail-rack-badge svg {
+  width: 13px !important;
+  height: 13px !important;
+}
+
+.perpus-spec-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.perpus-detail-byline svg,
+.perpus-byline-item svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-synopsis-header svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-card-actions svg,
+.perpus-btn-borrow svg,
+.perpus-btn-detail svg,
+.perpus-btn-top-track svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-field-icon svg,
+.perpus-input-icon-wrap svg,
+.perpus-input-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.perpus-guideline-card svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Positioning & Layout Utility Fallbacks for Input Icons */
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+.left-3\.5 { left: 0.875rem !important; }
+.left-4 { left: 1rem !important; }
+.top-3\.5 { top: 0.875rem !important; }
+.top-1\/2 { top: 50% !important; }
+.-translate-y-1\/2 { transform: translateY(-50%) !important; }
+.pointer-events-none { pointer-events: none !important; }
+.shrink-0 { flex-shrink: 0 !important; }
+
+.perpus-form-group .relative {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+.perpus-form-group .relative > span {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
 /* Containers Utama: 100% terpusat (centered) di semua resolusi desktop & mobile */
 .perpus-container {
   width: 100% !important;
@@ -8890,6 +9062,20 @@ input:-webkit-autofill:active {
   display: flex !important;
   align-items: center !important;
   width: 100% !important;
+}
+
+.perpus-search-input-wrap > svg,
+.perpus-search-input-wrap .perpus-search-input-icon {
+  position: absolute !important;
+  left: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: #94a3b8 !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+  flex-shrink: 0 !important;
 }
 
 .perpus-search-input {

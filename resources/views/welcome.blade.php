@@ -254,94 +254,55 @@
 
     <!-- 7. Perpustakaan Digital & Pojok Literasi Sekolah -->
     <section class="section perpus-landing-section" id="perpustakaan">
-        <!-- Header / Hero Banner Perpustakaan (2-Column Balanced Container seperti Halaman Perpustakaan) -->
-        <div class="perpus-hero-banner">
-            <div class="perpus-hero-grid relative z-10">
-                <!-- Left Column: Branding, Title, Intro & Search -->
-                <div class="perpus-hero-content">
-                    <div class="perpus-hero-badge">
-                        <svg width="16" height="16" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                        <span>Literasi &amp; Perpustakaan Digital</span>
-                    </div>
+        <x-section-header 
+            tag="LITERASI & PERPUSTAKAAN DIGITAL" 
+            title="Pusat Referensi & Perpustakaan Digital" 
+            subtitle="Jelajahi ribuan koleksi literatur keislaman, sains, teknologi, dan kejuruan modern. Ajukan peminjaman buku mandiri secara online dan pantau statusnya dengan mudah."
+        />
 
-                    <h2 class="perpus-hero-title">
-                        Pusat Referensi &amp; Perpustakaan Digital
-                    </h2>
-
-                    <p class="perpus-hero-desc">
-                        Jelajahi ribuan koleksi literatur keislaman, sains, teknologi, dan kejuruan modern. Ajukan peminjaman buku mandiri secara online dan pantau statusnya dengan mudah.
-                    </p>
-
-                    <!-- Search Bar Form -->
-                    <form action="{{ route('perpus.index') }}" method="GET" class="perpus-search-form" role="search">
-                        <div class="perpus-search-input-wrap">
-                            <svg width="20" height="20" class="perpus-search-input-icon w-5 h-5 absolute left-4 text-slate-400 pointer-events-none shrink-0" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; z-index: 5;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                            <input type="text"
-                                   name="search"
-                                   placeholder="Cari judul buku, nama penulis, atau ISBN..."
-                                   class="perpus-search-input"
-                                   autocomplete="off">
-                        </div>
-                        <button type="submit" class="perpus-search-btn">
-                            <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                            <span>Cari Buku</span>
-                        </button>
-                    </form>
+        <!-- 4 Container Statistik Perpustakaan -->
+        <div class="perpus-landing-stats-bar">
+            <!-- 1. Judul Buku -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-blue">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                 </div>
+                <div>
+                    <div class="perpus-stat-number">{{ ($perpusStats['total_books'] ?? 0) > 0 ? $perpusStats['total_books'] : 18 }}+</div>
+                    <div class="perpus-stat-label">Judul Buku</div>
+                </div>
+            </div>
 
-                <!-- Right Column: Glassmorphism Stats Showcase & Fast Tracking CTA -->
-                <div class="perpus-hero-stats-panel">
-                    <div class="perpus-hero-stats-grid">
-                        <!-- Stat 1: Total Judul -->
-                        <div class="perpus-stat-chip">
-                            <div class="perpus-stat-icon-wrap stat-blue">
-                                <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                            </div>
-                            <div>
-                                <div class="perpus-stat-number">{{ ($perpusStats['total_books'] ?? 0) > 0 ? $perpusStats['total_books'] : 18 }}+</div>
-                                <div class="perpus-stat-label">Judul Buku</div>
-                            </div>
-                        </div>
+            <!-- 2. Kategori Ilmu -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-purple">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                </div>
+                <div>
+                    <div class="perpus-stat-number">{{ ($perpusStats['total_categories'] ?? 0) > 0 ? $perpusStats['total_categories'] : 8 }}</div>
+                    <div class="perpus-stat-label">Kategori Ilmu</div>
+                </div>
+            </div>
 
-                        <!-- Stat 2: Eksemplar Tersedia -->
-                        <div class="perpus-stat-chip">
-                            <div class="perpus-stat-icon-wrap stat-green">
-                                <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div>
-                                <div class="perpus-stat-number text-emerald-400">{{ ($perpusStats['total_available'] ?? 0) > 0 ? $perpusStats['total_available'] : 65 }}+</div>
-                                <div class="perpus-stat-label">Siap Dipinjam</div>
-                            </div>
-                        </div>
+            <!-- 3. Siap Dipinjam -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-green">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <div class="perpus-stat-number text-emerald-400">{{ ($perpusStats['total_available'] ?? 0) > 0 ? $perpusStats['total_available'] : 65 }}+</div>
+                    <div class="perpus-stat-label">Siap Dipinjam</div>
+                </div>
+            </div>
 
-                        <!-- Stat 3: Kategori Koleksi -->
-                        <div class="perpus-stat-chip">
-                            <div class="perpus-stat-icon-wrap stat-purple">
-                                <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
-                            </div>
-                            <div>
-                                <div class="perpus-stat-number">{{ ($perpusStats['total_categories'] ?? 0) > 0 ? $perpusStats['total_categories'] : 8 }}</div>
-                                <div class="perpus-stat-label">Kategori Ilmu</div>
-                            </div>
-                        </div>
-
-                        <!-- Stat 4: Durasi Pinjam -->
-                        <div class="perpus-stat-chip">
-                            <div class="perpus-stat-icon-wrap stat-amber">
-                                <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div>
-                                <div class="perpus-stat-number text-amber-400">7 Hari</div>
-                                <div class="perpus-stat-label">Masa Pinjam</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Fast Tracking Action Button -->
-                    <a href="{{ route('perpus.tracking') }}" class="perpus-hero-track-btn">
-                        <svg width="16" height="16" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                        <span>Lacak Status Peminjaman Saya &rarr;</span>
-                    </a>
+            <!-- 4. Masa Pinjam -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-amber">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <div class="perpus-stat-number text-amber-400">7 Hari</div>
+                    <div class="perpus-stat-label">Masa Pinjam</div>
                 </div>
             </div>
         </div>

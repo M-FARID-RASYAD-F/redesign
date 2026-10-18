@@ -11313,30 +11313,43 @@ img, video, iframe, embed, object {
   z-index: 5;
 }
 
-.perpus-landing-section .perpus-hero-banner {
-  margin-bottom: 2rem !important;
-}
-
 .perpus-landing-section .perpus-books-grid {
   margin-bottom: 2rem !important;
 }
 
+.perpus-landing-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.perpus-landing-section .perpus-stat-chip {
+  background: rgba(0, 28, 58, 0.85);
+  border: 1.5px solid rgba(0, 180, 216, 0.22);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .perpus-landing-section .perpus-stat-chip {
+  background: oklch(27.1% 0.105 12.094 / 0.94) !important;
+  border-color: oklch(58.6% 0.253 17.585 / 0.35) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
 @media (max-width: 768px) {
-  .perpus-landing-section .perpus-hero-banner {
-    margin-bottom: 1.5rem !important;
+  .perpus-landing-stats-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
   }
 
   .perpus-landing-section .perpus-books-grid {
     margin-bottom: 1.5rem !important;
   }
-}
-
-.perpus-landing-stats-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 2.25rem;
 }
 
 .perpus-landing-stat-item {
@@ -12068,7 +12081,7 @@ img, video, iframe, embed, object {
 
 @media (max-width: 440px) {
   .perpus-landing-stats-bar {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
 

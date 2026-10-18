@@ -11281,6 +11281,24 @@ img, video, iframe, embed, object {
   z-index: 5;
 }
 
+.perpus-landing-section .perpus-hero-banner {
+  margin-bottom: 2rem !important;
+}
+
+.perpus-landing-section .perpus-books-grid {
+  margin-bottom: 2rem !important;
+}
+
+@media (max-width: 768px) {
+  .perpus-landing-section .perpus-hero-banner {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .perpus-landing-section .perpus-books-grid {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
 .perpus-landing-stats-bar {
   display: flex;
   flex-wrap: wrap;
@@ -11681,18 +11699,18 @@ img, video, iframe, embed, object {
   border-color: var(--primary);
 }
 
-/* Bottom Actions Banner */
+/* Bottom Actions Banner (Container sama dengan halaman perpustakaan) */
 .perpus-landing-bottom-actions {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  background: rgba(0, 28, 58, 0.85);
+  border: 1.5px solid rgba(0, 180, 216, 0.25);
+  border-radius: 20px;
   padding: 24px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -11706,7 +11724,7 @@ img, video, iframe, embed, object {
 
 .perpus-landing-cta-info p {
   font-size: 0.88rem;
-  color: #ffffff;
+  color: #cbd5e1;
   margin: 0;
 }
 
@@ -11721,21 +11739,21 @@ img, video, iframe, embed, object {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 180, 216, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  font-weight: 600;
   font-size: 0.88rem;
   text-decoration: none;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-perpus-landing-outline:hover {
-  border-color: var(--primary);
+  border-color: #38bdf8;
   color: #ffffff;
-  background: rgba(0, 180, 216, 0.16);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .btn-perpus-landing-primary {
@@ -11743,20 +11761,21 @@ img, video, iframe, embed, object {
   align-items: center;
   gap: 8px;
   padding: 11px 22px;
-  border-radius: 10px;
-  background: var(--primary);
+  border-radius: 12px;
+  background: #059669;
   color: #ffffff;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 0.88rem;
   text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 180, 216, 0.35);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);
 }
 
 .btn-perpus-landing-primary:hover {
-  background: var(--primary-hover);
+  background: #047857;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 180, 216, 0.5);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.5);
+  color: #ffffff;
 }
 
 .btn-perpus-landing-primary .cta-arrow {

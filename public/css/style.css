@@ -2773,7 +2773,7 @@ body.nav-mobile-open {
 @media (max-width: 768px) {
   .pc-12-jurusan-stage,
   .pc-12-jenjang-stage {
-    gap: 22px;
+    gap: 32px;
   }
 }
 
@@ -4815,7 +4815,7 @@ body.nav-mobile-open {
   .pc-12-jurusan-stage {
     width: 100%;
     padding: 0;
-    gap: 20px;
+    gap: 32px;
     box-sizing: border-box;
   }
   .pc-12__card {
@@ -4825,6 +4825,10 @@ body.nav-mobile-open {
     box-sizing: border-box;
     border-radius: 22px;
     margin: 0 auto;
+    box-shadow: 8px 8px 16px var(--neu-dark-shadow), -7px -7px 15px var(--neu-light-shadow);
+  }
+  .pc-12__card:hover {
+    box-shadow: 10px 10px 20px var(--neu-dark-shadow), -9px -9px 18px var(--neu-light-shadow);
   }
   .pc-12__pfp {
     width: 80px;

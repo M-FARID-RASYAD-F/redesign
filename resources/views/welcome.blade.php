@@ -89,9 +89,13 @@
             {{-- Foto Kepsek (kiri) --}}
             <div class="principal-photo-col">
                 <div class="principal-photo-frame">
-                    <div class="principal-photo-initials">
-                        {{ $sambutan['foto_initials'] }}
-                    </div>
+                    @if(!empty($sambutan['foto']))
+                        <img src="{{ $sambutan['foto'] }}" alt="{{ $sambutan['nama'] }}" class="principal-photo-img" loading="lazy">
+                    @else
+                        <div class="principal-photo-initials">
+                            {{ $sambutan['foto_initials'] }}
+                        </div>
+                    @endif
                 </div>
             </div>
 

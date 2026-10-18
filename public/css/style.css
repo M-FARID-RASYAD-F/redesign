@@ -2881,12 +2881,20 @@ body.nav-mobile-open {
   letter-spacing: -0.02em;
 }
 
+.principal-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Aksen line cyan di kiri frame */
 .principal-photo-frame::before {
   content: '';
   position: absolute;
   top: 0; left: 0; bottom: 0;
   width: 4px;
+  z-index: 2;
   background: linear-gradient(to bottom, #00B4D8, #5BC8E6);
 }
 

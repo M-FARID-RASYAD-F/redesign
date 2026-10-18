@@ -40,10 +40,11 @@ class SchoolController extends Controller
         // 2. Data Sambutan Kepala Sekolah
         $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
         $sambutan = [
-            'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
+            'nama' => ($kepsek && $kepsek->name !== 'Dr. H. Ahmad Fauzi, M.Pd.') ? $kepsek->name : 'Muhammad Fathoni, S.Pd.',
             'jabatan' => 'Kepala PKBM Tahfizh At-Tamam',
             'pesan' => 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan berlandaskan nilai-nilai Al-Qur\'an serta kejuruan modern.',
-            'foto_initials' => 'AF'
+            'foto' => asset('images/guru-siluet.jpg'),
+            'foto_initials' => 'MF'
         ];
 
         // 3. Data Statistik Sekolah

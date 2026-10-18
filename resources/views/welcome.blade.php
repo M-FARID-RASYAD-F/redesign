@@ -10,50 +10,63 @@
 
 @section('konten_utama')
 
-    <!-- 1. Hero Banner Section — Full Width Academic Style -->
+    <!-- 1. Hero Banner & Statistics Section -->
     <section class="hero" id="beranda">
         <div class="hero-container">
-            <div class="hero-content">
-                <span class="hero-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:inline-block; vertical-align: -1px; margin-right: 4px; color: #fbbf24;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
-                </span>
+            <div class="hero-main-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">
+                        Akreditasi {{ $sekolah['akreditasi'] }}, berdiri sejak {{ $sekolah['tahun_berdiri'] }}
+                    </span>
 
-                <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
-                <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
-                <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
+                    <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
+                    <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
+                    <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
+                </div>
+
+                <div class="hero-visual">
+                    <figure class="hero-photo-card">
+                        <img
+                            src="{{ asset('images/sch5.jpg') }}"
+                            alt="Gedung {{ $sekolah['nama'] }}"
+                            class="hero-photo-img"
+                            fetchpriority="high"
+                            decoding="async"
+                        >
+                        <figcaption class="hero-photo-caption">
+                            Gedung {{ $sekolah['nama'] }}
+                        </figcaption>
+                    </figure>
+                </div>
 
                 <div class="hero-actions">
-                    <a href="{{ route('ppdb.index') }}" class="btn btn-primary">
-                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        <span>Daftar PPDB Online</span>
+                    <a href="{{ route('ppdb.index') }}" class="btn btn-primary hero-btn-primary" aria-label="Daftar PPDB online">
+                        <span>Daftar PPDB online</span>
                     </a>
-                    <a href="#jenjang" class="btn btn-outline">
-                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <span>Lihat Jenjang & Jurusan</span>
+                    <a href="#jenjang" class="btn btn-outline hero-btn-secondary" aria-label="Lihat jenjang dan jurusan">
+                        <span>Lihat jenjang dan jurusan</span>
                     </a>
-                    <a href="{{ route('perpus.index') }}" class="btn btn-outline">
-                        <svg class="btn-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-                        <span>Perpustakaan Digital</span>
+                    <a href="{{ route('perpus.index') }}" class="hero-btn-tertiary" aria-label="Buka perpustakaan digital">
+                        <span>Perpustakaan digital</span>
                     </a>
+                </div>
+            </div>
+
+            <!-- 2. Statistics Counter Bar -->
+            <div class="stats-section" aria-label="Statistik sekolah">
+                <div class="stats-grid">
+                    @foreach($stats as $st)
+                        <x-stat-card 
+                            :label="$st['label']" 
+                            :value="$st['value']" 
+                            :icon="$st['icon']" 
+                            :color="$st['color']" 
+                        />
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- 2. Statistics Counter Bar -->
-    <div class="stats-section reveal">
-        <div class="stats-grid">
-            @foreach($stats as $st)
-                <x-stat-card 
-                    :label="$st['label']" 
-                    :value="$st['value']" 
-                    :icon="$st['icon']" 
-                    :color="$st['color']" 
-                />
-            @endforeach
-        </div>
-    </div>
 
     <!-- 3. Sambutan Kepala Sekolah — Navy Oxford Section -->
     <section class="principal-section reveal" id="sambutan">

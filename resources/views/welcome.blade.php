@@ -25,18 +25,32 @@
                 </div>
 
                 <div class="hero-visual">
-                    <figure class="hero-photo-card">
-                        <img
-                            src="{{ asset('images/sch5.jpg') }}"
-                            alt="Gedung {{ $sekolah['nama'] }}"
-                            class="hero-photo-img"
-                            fetchpriority="high"
-                            decoding="async"
-                        >
-                        <figcaption class="hero-photo-caption">
-                            Gedung {{ $sekolah['nama'] }}
-                        </figcaption>
-                    </figure>
+                    <div class="hero-photo-card" aria-label="Galeri foto {{ $sekolah['nama'] }}">
+                        @php
+                            $heroSlides = [
+                                ['src' => 'images/sch5.jpg', 'caption' => 'Gedung ' . $sekolah['nama']],
+                                ['src' => 'images/sch1.jpeg', 'caption' => 'Kampus Pusat & Asrama Santri'],
+                                ['src' => 'images/sch2.jpeg', 'caption' => 'Sentra Teknologi & Laboratorium'],
+                                ['src' => 'images/sch3.jpeg', 'caption' => 'Lingkungan Belajar Qurani & Asri'],
+                            ];
+                        @endphp
+                        <div class="hero-carousel-track">
+                            @foreach(array_merge($heroSlides, $heroSlides) as $idx => $slide)
+                                <figure class="hero-carousel-slide" @if($idx >= count($heroSlides)) aria-hidden="true" @endif>
+                                    <img
+                                        src="{{ asset($slide['src']) }}"
+                                        alt="{{ $idx >= count($heroSlides) ? '' : $slide['caption'] }}"
+                                        class="hero-photo-img"
+                                        @if($idx === 0) fetchpriority="high" @else loading="lazy" @endif
+                                        decoding="async"
+                                    >
+                                    <figcaption class="hero-photo-caption">
+                                        {{ $slide['caption'] }}
+                                    </figcaption>
+                                </figure>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
                 <div class="hero-actions">

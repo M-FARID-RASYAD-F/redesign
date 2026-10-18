@@ -1353,10 +1353,35 @@ body.nav-mobile-open {
   box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.45);
 }
 
-.hero-photo-card::after {
+.hero-carousel-track {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  width: 680%;
+  height: calc(100% - 16px);
+  animation: heroCarouselScroll 20s linear infinite;
+  will-change: transform;
+}
+
+.hero-photo-card:hover .hero-carousel-track {
+  animation-play-state: paused;
+}
+
+.hero-carousel-slide {
+  position: relative;
+  flex: 0 0 12.5%;
+  width: 12.5%;
+  height: 100%;
+  margin: 0;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.hero-carousel-slide::after {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: 0 12px 0 0;
+  border-radius: 14px;
   background: linear-gradient(
     to top,
     rgba(0, 12, 28, 0.78) 0%,
@@ -1367,17 +1392,24 @@ body.nav-mobile-open {
   z-index: 1;
 }
 
+@keyframes heroCarouselScroll {
+  0%   { transform: translate3d(0%, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
 .hero-photo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+  border-radius: 14px;
 }
 
 .hero-photo-caption {
   position: absolute;
   left: 16px;
+  right: 24px;
   bottom: 12px;
   z-index: 2;
   font-size: 0.8125rem;

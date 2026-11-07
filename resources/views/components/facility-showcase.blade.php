@@ -52,7 +52,7 @@
             </button>
             
             <div class="lightbox-img-box">
-                <img src="" alt="" id="lightboxImg" class="lightbox-img">
+                <img alt="" id="lightboxImg" class="lightbox-img">
             </div>
             <div class="lightbox-caption">
                 <h4 id="lightboxTitle" class="lightbox-title"></h4>

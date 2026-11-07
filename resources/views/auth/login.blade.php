@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Portal Masuk & Registrasi — PKBM Tahfizh At-Tamam</title>
+    <meta name="description" content="Portal pendidik dan staf PKBM Tahfizh At-Tamam. Masuk atau daftar akun untuk mengelola pembelajaran, perpustakaan, dan administrasi sekolah.">
     
     <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpeg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2115,37 +2116,6 @@
         })();
     </script>
 
-    {{-- Onload Brand Intro Preloader (Glassmorphism Dual-Ring Orbit Spinner) --}}
-    <div id="loginPageLoader" class="login-page-loader" aria-live="polite" title="Klik untuk langsung masuk">
-        <div class="loader-content">
-            <div class="loader-emblem-wrap">
-                <div class="loader-glow-orb"></div>
-                <div class="loader-orbit-ring ring-outer"></div>
-                <div class="loader-orbit-ring ring-inner"></div>
-                <div class="loader-logo-card">
-                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo PKBM Tahfizh At-Tamam" class="loader-logo-img">
-                </div>
-            </div>
-            
-            <div class="loader-text-group">
-                <h1 class="loader-title">PKBM TAHFIZH AT-TAMAM</h1>
-                <p class="loader-subtitle">Portal Pendidik &amp; Staf</p>
-            </div>
-
-            <div class="loader-progress-wrap">
-                <div class="loader-progress-bar"></div>
-            </div>
-
-            <button type="button" class="loader-skip-btn" id="loaderSkipBtn" aria-label="Lewati transisi pembuka">
-                <span>Lewati</span>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="13 17 18 12 13 7"></polyline>
-                    <polyline points="6 17 11 12 6 7"></polyline>
-                </svg>
-            </button>
-        </div>
-    </div>
-
     {{-- Background Ambient Decorative Glow Lights --}}
     <div class="bg-ambient-light light-top-left" aria-hidden="true"></div>
     <div class="bg-ambient-light light-bottom-right" aria-hidden="true"></div>
@@ -2182,7 +2152,7 @@
                         <span>Portal Pendidik & Staf</span>
                     </div>
 
-                    <h2 class="title">Sign in</h2>
+                    <h1 class="title">Sign in</h1>
                     <p class="subtitle-text">Selamat datang kembali! Masuk untuk melanjutkan.</p>
 
                     @if (session('status'))
@@ -2456,44 +2426,6 @@
          ═══════════════════════════════════════════════════════════ --}}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 0. Onload Brand Intro Preloader Dismissal & Smooth Transition
-            const pageLoader = document.getElementById('loginPageLoader');
-            const skipBtn = document.getElementById('loaderSkipBtn');
-
-            if (pageLoader) {
-                let isDismissed = false;
-                const dismissLoader = (instant = false) => {
-                    if (isDismissed) return;
-                    isDismissed = true;
-                    pageLoader.classList.add('loader-dismissed');
-                    if (instant) {
-                        document.body.classList.add('skip-intro');
-                    }
-                    setTimeout(() => {
-                        pageLoader.style.display = 'none';
-                    }, 550);
-                };
-
-                // Biarkan transisi pembuka tampil selama 1.5 detik agar terlihat jelas & dinikmati pengguna
-                const introDuration = 1500;
-                setTimeout(() => {
-                    dismissLoader(false);
-                }, introDuration);
-
-                // Tombol "Lewati" untuk pengguna yang ingin langsung masuk
-                if (skipBtn) {
-                    skipBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        dismissLoader(true);
-                    });
-                }
-
-                // Klik pada overlay preloader juga mempercepat masuk
-                pageLoader.addEventListener('click', () => {
-                    dismissLoader(true);
-                });
-            }
-
             // Hentikan animasi onload setelah 2.6 detik agar tidak mengganggu interaksi form switch
             setTimeout(() => {
                 document.body.classList.add('onload-done');

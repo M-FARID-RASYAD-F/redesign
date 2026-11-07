@@ -410,7 +410,7 @@ a:hover {
 
 .brand-text-sub {
   font-family: var(--font-family);
-  font-size: 0.64rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: rgba(255,255,255,0.7);
   letter-spacing: 0.06em;
@@ -557,8 +557,8 @@ a:hover {
 .expandable-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  padding: 8px 11px;
+  gap: 4px;
+  padding: 8px 10px;
   border-radius: 9999px;
   font-size: 0.8125rem;
   font-weight: 700;
@@ -579,8 +579,8 @@ a:hover {
 .expandable-tab-btn:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.12);
-  gap: 6px;
-  padding: 8px 14px;
+  gap: 4px;
+  padding: 8px 10px;
   text-decoration: none;
 }
 
@@ -599,12 +599,12 @@ a:hover {
 
 .expandable-tab-btn .tab-label {
   display: inline-block;
-  max-width: 0;
-  opacity: 0;
+  max-width: 140px;
+  opacity: 1;
   overflow: hidden;
   white-space: nowrap;
   transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), margin-left 0.25s ease;
-  margin-left: 0;
+  margin-left: 2px;
   vertical-align: middle;
 }
 
@@ -625,7 +625,7 @@ a:hover {
 .expandable-tab-btn:hover .tab-label {
   max-width: 140px;
   opacity: 1;
-  margin-left: 3px;
+  margin-left: 2px;
 }
 
 .expandable-tab-separator {
@@ -634,6 +634,42 @@ a:hover {
   background: rgba(255, 255, 255, 0.22);
   margin: 0 4px;
   flex-shrink: 0;
+}
+
+/* Layar desktop sempit: rapatkan nav kembali menjadi ikon + label saat hover */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .expandable-tab-btn {
+    gap: 0;
+    padding: 8px 10px;
+  }
+
+  .expandable-tab-btn .tab-label {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+  }
+
+  .expandable-tab-btn.active .tab-label,
+  .expandable-tab-btn:hover .tab-label {
+    max-width: 140px;
+    opacity: 1;
+    margin-left: 2px;
+  }
+}
+
+/* Desktop menengah: sembunyikan teks Admin/Logout secara visual, tetap terbaca screen reader */
+@media (min-width: 1025px) and (max-width: 1399px) {
+  .nav-auth-desktop .nav-link-text {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
 }
 
 /* Light Theme Adaptations */
@@ -803,7 +839,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   flex-shrink: 0;
 }
 
@@ -842,6 +878,20 @@ a:hover {
   border-radius: 6px;
 }
 .nav-logout-link:hover { color: #fca5a5; background: rgba(248,113,113,0.08); }
+
+/* Form logout tetap mengikuti layout flex navbar */
+.nav-logout-form,
+.nav-mobile-auth-form {
+  display: contents;
+}
+
+button.nav-logout-link {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.2;
+}
 
 .btn-nav-login {
   display: inline-flex;
@@ -985,7 +1035,7 @@ body.nav-mobile-open {
 }
 
 .nav-mobile-status-badge {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #38bdf8;
   background: rgba(0, 180, 216, 0.14);
@@ -1164,7 +1214,7 @@ body.nav-mobile-open {
 }
 
 .nav-sublink-badge {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #10b981;
   background: rgba(16, 185, 129, 0.15);
@@ -1881,6 +1931,19 @@ body.nav-mobile-open {
   display: block;
 }
 
+/* Hanya untuk pembaca layar (heading struktural yang tidak tampil visual) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .section-title {
   font-family: var(--font-display);
   font-size: 1.75rem;
@@ -2067,7 +2130,7 @@ body.nav-mobile-open {
   color: var(--primary);
   padding: 4px 10px;
   border-radius: 50px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   white-space: nowrap;
   transform: translateZ(34px);
@@ -2296,7 +2359,7 @@ body.nav-mobile-open {
   border: 1px solid rgba(56, 189, 248, 0.50);
   padding: 5px 14px;
   border-radius: 50px;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 180, 216, 0.25);
@@ -2905,7 +2968,7 @@ body.nav-mobile-open {
 
 .principal-eyebrow {
   font-family: var(--font-family);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -3195,7 +3258,7 @@ body.nav-mobile-open {
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -3340,7 +3403,7 @@ body.nav-mobile-open {
 .btn-tab-action {
   text-decoration: none;
   font-family: inherit;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -3541,7 +3604,7 @@ body.nav-mobile-open {
   align-items: center;
   padding: 0.35rem 0.65rem;
   border-radius: 8px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
   transition: transform 0.2s ease, filter 0.2s ease;
@@ -3711,7 +3774,7 @@ body.nav-mobile-open {
 }
 
 .footer-brand-tagline {
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: #38bdf8;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -3735,7 +3798,7 @@ body.nav-mobile-open {
 .footer-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 3px 9px;
   border-radius: 9999px;
@@ -4767,7 +4830,7 @@ body.nav-mobile-open {
   }
   .principal-eyebrow {
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     margin-bottom: 0.75rem;
   }
   .principal-eyebrow::before {
@@ -4832,7 +4895,7 @@ body.nav-mobile-open {
     box-sizing: border-box;
   }
   .section-tag {
-    font-size: 0.70rem;
+    font-size: 0.75rem;
     letter-spacing: 0.8px;
     word-break: break-word;
     display: inline-block;
@@ -4911,7 +4974,7 @@ body.nav-mobile-open {
     white-space: normal;
   }
   .pc-12__stat span {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     margin-top: 2px;
   }
   .pc-12__prospek {
@@ -5108,7 +5171,7 @@ body.nav-mobile-open {
   .badge {
     flex-shrink: 0;
     align-self: flex-start;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     padding: 3px 9px;
   }
   .card-body {
@@ -5194,7 +5257,7 @@ body.nav-mobile-open {
     gap: 0.5rem;
   }
   .footer-copyright {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     line-height: 1.45;
     word-break: break-word;
   }
@@ -5421,7 +5484,7 @@ body.nav-mobile-open {
     margin: 0 !important;
   }
   .pc-12__stat span {
-    font-size: 0.72rem !important;
+    font-size: 0.75rem !important;
     margin: 0 !important;
   }
 }
@@ -5447,14 +5510,14 @@ body.nav-mobile-open {
     min-width: 28px;
   }
   .brand-text-main {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
   }
   .brand-text-sub {
-    font-size: 0.48rem;
+    font-size: 0.75rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5563,7 +5626,7 @@ body.nav-mobile-open {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   padding: 1px 5px;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: #38bdf8;
   font-family: inherit;
   font-weight: 700;
@@ -5654,7 +5717,7 @@ body.nav-mobile-open {
   background: rgba(0, 180, 216, 0.2);
   border-radius: 4px;
   padding: 2px 6px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: #38bdf8;
   font-weight: 700;
   font-family: inherit;
@@ -7313,7 +7376,7 @@ body.nav-mobile-open {
 }
 
 .ppdb-step-label {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -8003,7 +8066,7 @@ input:-webkit-autofill:active {
 }
 
 .floating-wa-sub {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #dcfce7;
   opacity: 0.95;
@@ -8455,7 +8518,7 @@ input:-webkit-autofill:active {
 }
 
 .news-category-pill .cat-count-badge {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   padding: 1px 7px;
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.25);
@@ -9266,7 +9329,7 @@ input:-webkit-autofill:active {
 
 @media (max-width: 640px) {
   .perpus-stat-label {
-    font-size: 0.675rem !important;
+    font-size: 0.75rem !important;
     margin-top: 2px !important;
   }
 }
@@ -9342,7 +9405,7 @@ input:-webkit-autofill:active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.725rem;
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 9999px;
@@ -9517,7 +9580,7 @@ input:-webkit-autofill:active {
   z-index: 10;
   padding: 4px 10px;
   border-radius: 8px;
-  font-size: 0.725rem;
+  font-size: 0.75rem;
   font-weight: 700;
   background: rgba(10, 25, 47, 0.9);
   color: #38bdf8;
@@ -9533,13 +9596,13 @@ input:-webkit-autofill:active {
   z-index: 10;
   padding: 4px 10px;
   border-radius: 8px;
-  font-size: 0.725rem;
+  font-size: 0.75rem;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .perpus-book-badge-stock.stock-available {
-  background: #059669;
+  background: #047857;
   color: #ffffff;
 }
 
@@ -9621,7 +9684,7 @@ input:-webkit-autofill:active {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background-color: #059669 !important;
+  background-color: #047857 !important;
   color: #ffffff !important;
   font-weight: 700 !important;
   font-size: 0.825rem !important;
@@ -9643,7 +9706,7 @@ input:-webkit-autofill:active {
 }
 
 .perpus-btn-borrow:hover {
-  background-color: #047857 !important;
+  background-color: #065f46 !important;
   color: #ffffff !important;
   box-shadow: 0 4px 14px rgba(5, 150, 105, 0.5) !important;
   transform: translateY(-1px) !important;
@@ -9700,7 +9763,7 @@ input:-webkit-autofill:active {
   }
   .perpus-book-badge-cat,
   .perpus-book-badge-stock {
-    font-size: 0.65rem !important;
+    font-size: 0.75rem !important;
     padding: 3px 6px !important;
     top: 8px !important;
   }
@@ -9720,11 +9783,11 @@ input:-webkit-autofill:active {
     min-height: 2.4em !important;
   }
   .perpus-book-meta {
-    font-size: 0.725rem !important;
+    font-size: 0.75rem !important;
     margin-bottom: 0.25rem !important;
   }
   .perpus-book-rack {
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
     margin-bottom: 0.25rem !important;
   }
   .perpus-book-synopsis {
@@ -9997,7 +10060,7 @@ input:-webkit-autofill:active {
     font-size: 0.815rem !important;
   }
   .perpus-pagination-pages-badge {
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
     padding: 2px 8px !important;
   }
 }
@@ -10376,7 +10439,7 @@ input:-webkit-autofill:active {
 
 .perpus-spec-label {
   display: block !important;
-  font-size: 0.74rem !important;
+  font-size: 0.75rem !important;
   text-transform: uppercase !important;
   letter-spacing: 0.06em !important;
   color: #94a3b8 !important;
@@ -10424,7 +10487,7 @@ input:-webkit-autofill:active {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  font-size: 0.725rem !important;
+  font-size: 0.75rem !important;
   color: #6ee7b7 !important;
   background: rgba(5, 150, 105, 0.12) !important;
   padding: 4px 10px !important;
@@ -10691,7 +10754,7 @@ input:-webkit-autofill:active {
 
 @media (max-width: 640px) {
   .perpus-step-label {
-    font-size: 0.675rem !important;
+    font-size: 0.75rem !important;
     line-height: 1.2 !important;
     margin-top: 5px !important;
   }
@@ -10913,12 +10976,12 @@ input:-webkit-autofill:active {
 }
 
 [data-theme="light"] .perpus-btn-borrow {
-  background: linear-gradient(135deg, oklch(58.6% 0.253 17.585), oklch(45% 0.22 17)) !important;
-  box-shadow: 0 4px 14px oklch(58.6% 0.253 17.585 / 0.4) !important;
+  background: linear-gradient(135deg, oklch(45% 0.19 17), oklch(38% 0.16 17)) !important;
+  box-shadow: 0 4px 14px oklch(45% 0.19 17 / 0.4) !important;
 }
 
 [data-theme="light"] .perpus-btn-borrow:hover {
-  background: linear-gradient(135deg, oklch(65% 0.26 18), oklch(50% 0.23 17)) !important;
+  background: linear-gradient(135deg, oklch(40% 0.18 18), oklch(33% 0.15 17)) !important;
 }
 
 [data-theme="light"] .perpus-btn-detail {
@@ -11564,7 +11627,7 @@ img, video, iframe, embed, object {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #38bdf8;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 6px;
@@ -11577,7 +11640,7 @@ img, video, iframe, embed, object {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 9999px;
@@ -11657,7 +11720,7 @@ img, video, iframe, embed, object {
 }
 
 .perpus-landing-book-rack {
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-family: 'JetBrains Mono', monospace;
   color: #38bdf8;
   display: inline-flex;
@@ -11983,7 +12046,7 @@ img, video, iframe, embed, object {
   }
 
   .perpus-landing-stat-lbl {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     line-height: 1.25;
     word-break: break-word;
   }

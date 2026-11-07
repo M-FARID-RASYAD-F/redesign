@@ -578,7 +578,7 @@
 }
 
 .perpus-cover-tag {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -625,7 +625,7 @@
 
 .perpus-side-label {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--perpus-accent-green);
@@ -675,7 +675,7 @@
 }
 
 .perpus-stock-lbl {
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--perpus-text-muted);
@@ -713,7 +713,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--perpus-text-secondary);
 }
 
@@ -754,7 +754,7 @@
 }
 
 .perpus-rules-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -871,7 +871,7 @@
 }
 
 .perpus-spec-k {
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--perpus-text-muted);

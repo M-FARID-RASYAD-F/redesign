@@ -38,6 +38,7 @@
                                    value="{{ $search }}"
                                    placeholder="Cari judul buku, nama penulis, atau ISBN..."
                                    class="perpus-search-input"
+                                   aria-label="Cari judul buku, nama penulis, atau ISBN"
                                    autocomplete="off">
                             <a href="{{ route('perpus.index', array_filter(['category' => $categoryId])) }}" 
                                id="perpusSearchClear" 

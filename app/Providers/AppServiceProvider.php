@@ -20,6 +20,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('production') || isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+
+            $src = database_path('database.sqlite');
+            $dst = '/tmp/database.sqlite';
+            if (file_exists($src)) {
+                if (!file_exists($dst) || filesize($dst) !== filesize($src)) {
+                    @copy($src, $dst);
+                }
+            }
+        }
+
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Book::class, \App\Policies\BookPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookCategory::class, \App\Policies\BookCategoryPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\BookLoan::class, \App\Policies\BookLoanPolicy::class);

@@ -255,7 +255,7 @@
 
             <!-- Live Preview Card Instan -->
             <div class="thumbnail-preview-container" id="previewContainer">
-                <img src="" alt="Pratinjau Thumbnail" id="previewImg" class="preview-img">
+                <img alt="Pratinjau Thumbnail" id="previewImg" class="preview-img">
                 <div class="preview-meta">
                     <div class="preview-filename" id="previewFilename">nama-file.jpg</div>
                     <div class="preview-size" id="previewSize">0 KB</div>

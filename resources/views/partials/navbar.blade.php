@@ -72,14 +72,17 @@
 
             <div class="nav-auth-desktop">
                 @auth
-                    <a href="{{ auth()->user()->dashboard_url }}" class="nav-admin-link">
+                    <a href="{{ auth()->user()->dashboard_url }}" class="nav-admin-link" title="Admin Panel">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         <span class="nav-link-text">Admin</span>
                     </a>
-                    <a href="{{ route('logout') }}" class="nav-logout-link">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                        <span class="nav-link-text">Logout</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="nav-logout-form">
+                        @csrf
+                        <button type="submit" class="nav-logout-link" title="Logout">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            <span class="nav-link-text">Logout</span>
+                        </button>
+                    </form>
                 @endauth
                 @guest
                     <a href="{{ route('login') }}" class="nav-btn-search">
@@ -213,10 +216,13 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         <span>Admin</span>
                     </a>
-                    <a href="{{ route('logout') }}" class="nav-mobile-auth-btn nav-mobile-auth-logout">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                        <span>Keluar</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="nav-mobile-auth-form">
+                        @csrf
+                        <button type="submit" class="nav-mobile-auth-btn nav-mobile-auth-logout">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            <span>Keluar</span>
+                        </button>
+                    </form>
                 @endauth
 
                 @guest

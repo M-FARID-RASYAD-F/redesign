@@ -10,50 +10,77 @@
 
 @section('konten_utama')
 
-    <!-- 1. Hero Banner Section — Full Width Academic Style -->
+    <!-- 1. Hero Banner & Statistics Section -->
     <section class="hero" id="beranda">
         <div class="hero-container">
-            <div class="hero-content">
-                <span class="hero-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:inline-block; vertical-align: -1px; margin-right: 4px; color: #fbbf24;" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    Akreditasi {{ $sekolah['akreditasi'] }} &bull; Est. {{ $sekolah['tahun_berdiri'] }}
-                </span>
+            <div class="hero-main-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">
+                        Akreditasi {{ $sekolah['akreditasi'] }}, berdiri sejak {{ $sekolah['tahun_berdiri'] }}
+                    </span>
 
-                <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
-                <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
-                <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
+                    <h1 class="hero-title">{{ $sekolah['nama'] }}</h1>
+                    <p class="hero-subtitle">{{ $sekolah['slogan'] }}</p>
+                    <p class="hero-desc">{{ $sekolah['deskripsi'] }}</p>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-photo-card" aria-label="Galeri foto {{ $sekolah['nama'] }}">
+                        @php
+                            $heroSlides = [
+                                ['src' => 'images/sch5.jpg', 'caption' => 'Gedung ' . $sekolah['nama']],
+                                ['src' => 'images/sch1.jpeg', 'caption' => 'Kampus Pusat & Asrama Santri'],
+                                ['src' => 'images/sch2.jpeg', 'caption' => 'Sentra Teknologi & Laboratorium'],
+                                ['src' => 'images/sch3.jpeg', 'caption' => 'Lingkungan Belajar Qurani & Asri'],
+                            ];
+                        @endphp
+                        <div class="hero-carousel-track">
+                            @foreach(array_merge($heroSlides, $heroSlides) as $idx => $slide)
+                                <figure class="hero-carousel-slide" @if($idx >= count($heroSlides)) aria-hidden="true" @endif>
+                                    <img
+                                        src="{{ asset($slide['src']) }}"
+                                        alt="{{ $idx >= count($heroSlides) ? '' : $slide['caption'] }}"
+                                        class="hero-photo-img"
+                                        @if($idx === 0) fetchpriority="high" @else loading="lazy" @endif
+                                        decoding="async"
+                                    >
+                                    <figcaption class="hero-photo-caption">
+                                        {{ $slide['caption'] }}
+                                    </figcaption>
+                                </figure>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
 
                 <div class="hero-actions">
-                    <a href="{{ route('ppdb.index') }}" class="btn btn-primary">
-                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        <span>Daftar PPDB Online</span>
+                    <a href="{{ route('ppdb.index') }}" class="btn btn-primary hero-btn-primary" aria-label="Daftar PPDB online">
+                        <span>Daftar PPDB online</span>
                     </a>
-                    <a href="#jenjang" class="btn btn-outline">
-                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <span>Lihat Jenjang & Jurusan</span>
+                    <a href="#jenjang" class="btn btn-outline hero-btn-secondary" aria-label="Lihat jenjang dan jurusan">
+                        <span>Lihat jenjang dan jurusan</span>
                     </a>
-                    <a href="{{ route('perpus.index') }}" class="btn btn-outline">
-                        <svg class="btn-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-                        <span>Perpustakaan Digital</span>
+                    <a href="{{ route('perpus.index') }}" class="hero-btn-tertiary" aria-label="Buka perpustakaan digital">
+                        <span>Perpustakaan digital</span>
                     </a>
+                </div>
+            </div>
+
+            <!-- 2. Statistics Counter Bar -->
+            <div class="stats-section" aria-label="Statistik sekolah">
+                <div class="stats-grid">
+                    @foreach($stats as $st)
+                        <x-stat-card 
+                            :label="$st['label']" 
+                            :value="$st['value']" 
+                            :icon="$st['icon']" 
+                            :color="$st['color']" 
+                        />
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- 2. Statistics Counter Bar -->
-    <div class="stats-section reveal">
-        <div class="stats-grid">
-            @foreach($stats as $st)
-                <x-stat-card 
-                    :label="$st['label']" 
-                    :value="$st['value']" 
-                    :icon="$st['icon']" 
-                    :color="$st['color']" 
-                />
-            @endforeach
-        </div>
-    </div>
 
     <!-- 3. Sambutan Kepala Sekolah — Navy Oxford Section -->
     <section class="principal-section reveal" id="sambutan">
@@ -62,9 +89,13 @@
             {{-- Foto Kepsek (kiri) --}}
             <div class="principal-photo-col">
                 <div class="principal-photo-frame">
-                    <div class="principal-photo-initials">
-                        {{ $sambutan['foto_initials'] }}
-                    </div>
+                    @if(!empty($sambutan['foto']))
+                        <img src="{{ $sambutan['foto'] }}" alt="{{ $sambutan['nama'] }}" class="principal-photo-img" loading="lazy">
+                    @else
+                        <div class="principal-photo-initials">
+                            {{ $sambutan['foto_initials'] }}
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -235,121 +266,115 @@
             subtitle="Jelajahi ribuan koleksi literatur keislaman, sains, teknologi, dan kejuruan modern. Ajukan peminjaman buku mandiri secara online dan pantau statusnya dengan mudah."
         />
 
-        {{-- Highlight Stats Bar --}}
+        <!-- 4 Container Statistik Perpustakaan -->
         <div class="perpus-landing-stats-bar">
-            <div class="perpus-landing-stat-item">
-                <div class="perpus-landing-stat-icon stat-blue">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+            <!-- 1. Judul Buku -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-blue">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                 </div>
                 <div>
-                    <div class="perpus-landing-stat-val">{{ ($perpusStats['total_books'] ?? 0) > 0 ? $perpusStats['total_books'] : 18 }}+</div>
-                    <div class="perpus-landing-stat-lbl">Judul Buku Pilihan</div>
+                    <div class="perpus-stat-number">{{ ($perpusStats['total_books'] ?? 0) > 0 ? $perpusStats['total_books'] : 18 }}+</div>
+                    <div class="perpus-stat-label">Judul Buku</div>
                 </div>
             </div>
 
-            <div class="perpus-landing-stat-item">
-                <div class="perpus-landing-stat-icon stat-green">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <!-- 2. Kategori Ilmu -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-purple">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
                 </div>
                 <div>
-                    <div class="perpus-landing-stat-val text-emerald-400">{{ ($perpusStats['total_available'] ?? 0) > 0 ? $perpusStats['total_available'] : 65 }}+</div>
-                    <div class="perpus-landing-stat-lbl">Eksemplar Siap Pinjam</div>
+                    <div class="perpus-stat-number">{{ ($perpusStats['total_categories'] ?? 0) > 0 ? $perpusStats['total_categories'] : 8 }}</div>
+                    <div class="perpus-stat-label">Kategori Ilmu</div>
                 </div>
             </div>
 
-            <div class="perpus-landing-stat-item">
-                <div class="perpus-landing-stat-icon stat-purple">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+            <!-- 3. Siap Dipinjam -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-green">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <div class="perpus-landing-stat-val">{{ ($perpusStats['total_categories'] ?? 0) > 0 ? $perpusStats['total_categories'] : 8 }}</div>
-                    <div class="perpus-landing-stat-lbl">Kategori Disiplin Ilmu</div>
+                    <div class="perpus-stat-number text-emerald-400">{{ ($perpusStats['total_available'] ?? 0) > 0 ? $perpusStats['total_available'] : 65 }}+</div>
+                    <div class="perpus-stat-label">Siap Dipinjam</div>
                 </div>
             </div>
 
-            <div class="perpus-landing-stat-item">
-                <div class="perpus-landing-stat-icon stat-amber">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <!-- 4. Masa Pinjam -->
+            <div class="perpus-stat-chip">
+                <div class="perpus-stat-icon-wrap stat-amber">
+                    <svg width="20" height="20" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <div class="perpus-landing-stat-val text-amber-400">7 Hari</div>
-                    <div class="perpus-landing-stat-lbl">Masa Peminjaman Mandiri</div>
+                    <div class="perpus-stat-number text-amber-400">7 Hari</div>
+                    <div class="perpus-stat-label">Masa Pinjam</div>
                 </div>
             </div>
         </div>
 
-        {{-- Quick Search Form (Redirects to Full Catalog) --}}
-        <div class="perpus-landing-search-wrap">
-            <form action="{{ route('perpus.index') }}" method="GET" class="perpus-landing-search-form" role="search">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="color: var(--text-muted); flex-shrink: 0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" name="search" placeholder="Cari judul buku, pengarang, atau topik ilmu..." class="perpus-landing-search-input" autocomplete="off">
-                <button type="submit" class="perpus-landing-search-btn">
-                    <span>Cari Katalog</span>
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
-            </form>
-        </div>
-
-        {{-- Featured Books Grid --}}
-        <div class="perpus-landing-books-grid">
+        {{-- Featured Books Grid (Menggunakan konsep container .perpus-book-card dari halaman perpustakaan) --}}
+        <div class="perpus-books-grid">
             @foreach($bukuPerpusList as $buku)
-            <div class="perpus-landing-card">
-                <div class="perpus-landing-cover-box">
-                    <img src="{{ !empty($buku['cover']) ? $buku['cover'] : asset('images/book-placeholder.png') }}" 
-                         alt="{{ $buku['title'] }}" 
+            <div class="perpus-book-card">
+                <div class="perpus-book-cover-wrap">
+                    <img src="{{ !empty($buku['cover']) ? $buku['cover'] : asset('images/book-placeholder.svg') }}" 
+                         alt="Sampul buku {{ $buku['title'] }}" 
+                         width="160"
+                         height="220"
                          loading="lazy" 
-                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.png') }}';"
-                         class="perpus-landing-cover-img">
+                         onerror="this.onerror=null; this.src='{{ asset('images/book-placeholder.svg') }}';"
+                         class="perpus-book-cover-img">
                     
-                    <span class="perpus-landing-cat-badge">
+                    <span class="perpus-book-badge-cat">
                         {{ $buku['category_name'] }}
                     </span>
 
-                    <span class="perpus-landing-stock-badge {{ ($buku['available'] ?? 0) > 0 ? 'is-available' : 'is-empty' }}">
+                    <span class="perpus-book-badge-stock {{ ($buku['available'] ?? 0) > 0 ? 'stock-available' : 'stock-empty' }}">
                         @if(($buku['available'] ?? 0) > 0)
-                            <span class="pulse-dot"></span> {{ $buku['available'] }} Tersedia
+                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-1" aria-hidden="true"></span>{{ $buku['available'] }} Tersedia
                         @else
                             Habis
                         @endif
                     </span>
                 </div>
 
-                <div class="perpus-landing-card-body">
-                    <h3 class="perpus-landing-book-title" title="{{ $buku['title'] }}">
-                        <a href="{{ route('perpus.show', $buku['id']) }}">{{ $buku['title'] }}</a>
-                    </h3>
+                <div class="perpus-book-body">
+                    <div>
+                        <h3 class="perpus-book-title" title="{{ $buku['title'] }}">
+                            <a href="{{ route('perpus.show', $buku['id']) }}">{{ $buku['title'] }}</a>
+                        </h3>
 
-                    <div class="perpus-landing-book-author">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                        <span>{{ $buku['author'] }}</span>
-                    </div>
+                        <div class="perpus-book-meta">
+                            <svg width="14" height="14" class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            <span class="truncate">{{ $buku['author'] }}</span>
+                        </div>
 
-                    @if(!empty($buku['rack_location']))
-                    <div class="perpus-landing-book-rack">
-                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        <span>{{ $buku['rack_location'] }}</span>
-                    </div>
-                    @endif
-
-                    <p class="perpus-landing-book-synopsis">
-                        {{ $buku['synopsis'] }}
-                    </p>
-
-                    <div class="perpus-landing-card-footer">
-                        @if(($buku['available'] ?? 0) > 0)
-                        <a href="{{ route('perpus.pinjam.create', $buku['id']) }}" class="btn-perpus-pinjam">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                            <span>Pinjam</span>
-                        </a>
-                        @else
-                        <button type="button" disabled class="btn-perpus-disabled">
-                            <span>Habis</span>
-                        </button>
+                        @if(!empty($buku['rack_location']))
+                        <div class="perpus-book-rack">
+                            <svg width="12" height="12" class="w-3 h-3 text-cyan-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span>Rak: {{ $buku['rack_location'] }}</span>
+                        </div>
                         @endif
 
-                        <a href="{{ route('perpus.show', $buku['id']) }}" class="btn-perpus-detail" title="Lihat Detail Buku">
-                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7Z"/></svg>
+                        <p class="perpus-book-synopsis">
+                            {{ $buku['synopsis'] ?: 'Buku ini tersedia di perpustakaan sekolah untuk dipinjam dan dibaca.' }}
+                        </p>
+                    </div>
+
+                    <div class="perpus-card-actions">
+                        <a href="{{ route('perpus.show', $buku['id']) }}" class="perpus-btn-detail flex-1">
+                            Detail Buku
                         </a>
+                        @if(($buku['available'] ?? 0) > 0)
+                        <a href="{{ route('perpus.pinjam.create', $buku['id']) }}" class="perpus-btn-borrow flex-1">
+                            Pinjam Buku
+                        </a>
+                        @else
+                        <button type="button" disabled class="perpus-btn-disabled flex-1" aria-disabled="true">
+                            Stok Habis
+                        </button>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -8,6 +8,9 @@
     <div class="news-portal-container">
 
 
+        {{-- 1. Heading Utama Halaman (h1 untuk struktur & SEO) --}}
+        <h1 class="sr-only">Warta &amp; Berita PKBM Tahfizh At-Tamam</h1>
+
         {{-- 2. Section Header --}}
         <x-section-header 
             tag="KABAR & WARTA RESMI" 

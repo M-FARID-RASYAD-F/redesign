@@ -11,7 +11,7 @@
             {{-- FAQ Live Search Bar --}}
             <div class="faq-search-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-search-icon" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="faqSearchInput" placeholder="Cari pertanyaan... (contoh: beasiswa, ijazah, tes, antar-jemput)" class="faq-search-input" autocomplete="off">
+                <input type="text" id="faqSearchInput" placeholder="Cari pertanyaan... (contoh: beasiswa, ijazah, tes, antar-jemput)" class="faq-search-input" aria-label="Cari pertanyaan" autocomplete="off">
             </div>
         </div>
 
@@ -185,10 +185,10 @@
 }
 
 .faq-chip.active {
-    background: #00B4D8;
-    border-color: #00B4D8;
+    background: #0369a1;
+    border-color: #0369a1;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+    box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
 }
 
 [data-theme="light"] .faq-chip {
@@ -198,8 +198,8 @@
 }
 
 [data-theme="light"] .faq-chip.active {
-    background: #0284c7;
-    border-color: #0284c7;
+    background: #0369a1;
+    border-color: #0369a1;
     color: #ffffff;
 }
 

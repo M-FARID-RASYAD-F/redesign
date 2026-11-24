@@ -219,10 +219,10 @@ class DatabaseSeeder extends Seeder
         // 8. Seed Teachers & Staff
         $teachers = [
             [
-                'name' => 'Dr. H. Ahmad Fauzi, M.Pd.',
+                'name' => 'Muhammad Fathoni, S.Pd.',
                 'position' => 'Kepala Sekolah',
                 'subject' => 'Manajemen Sekolah',
-                'photo' => 'https://i.pravatar.cc/150?img=60',
+                'photo' => '/images/guru-siluet.jpg',
                 'nip' => '197508122000031002',
                 'status' => 'aktif',
             ],

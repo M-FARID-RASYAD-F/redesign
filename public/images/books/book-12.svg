@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 460" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142b2b"/>
+      <stop offset="55%" stop-color="#134e4a"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+
+    <!-- Spine 3D Crease Shadow & Highlight -->
+    <linearGradient id="spineCrease12" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.45"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#000000" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Metallic Gold/Accent Foil for Badges -->
+    <linearGradient id="foilGrad12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#5eead4"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow -->
+    <filter id="softShadow12" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Base Cover Card -->
+  <rect width="320" height="460" rx="8" fill="url(#bgGrad12)"/>
+
+  <!-- Subtle Geometric Pattern Overlay -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1">
+    <circle cx="160" cy="205" r="140" fill="none"/>
+    <circle cx="160" cy="205" r="110" fill="none" stroke-dasharray="4 4"/>
+    <circle cx="160" cy="205" r="80" fill="none"/>
+    <line x1="20" y1="205" x2="300" y2="205"/>
+    <line x1="160" y1="65" x2="160" y2="345"/>
+  </g>
+
+  <!-- Top Header Banner (Library Branding) -->
+  <g transform="translate(160, 28)" text-anchor="middle">
+    <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="700" fill="#facc15" letter-spacing="2">PKBM TAHFIZH AT-TAMAM</text>
+    <text y="14" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="7.5" font-weight="600" fill="#cbd5e1" letter-spacing="1">PERPUSTAKAAN DIGITAL</text>
+  </g>
+
+  <!-- Category & Bestseller Badge Pill -->
+  <g transform="translate(160, 68)">
+    <rect x="-85" y="-12" width="170" height="24" rx="12" fill="#000000" fill-opacity="0.35" stroke="url(#foilGrad12)" stroke-width="1.2"/>
+    <text text-anchor="middle" y="4.5" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="800" fill="#facc15" letter-spacing="1">ERA NABAWI HINGGA MODERN</text>
+  </g>
+
+  <!-- Central Themed Artwork Box -->
+  <g filter="url(#softShadow12)">
+                <g transform="translate(160, 205)">
+                <!-- Dome of Islamic Civilization -->
+                <path d="M0,-60 C-5,-45 -48,-15 -48,25 L48,25 C48,-15 5,-45 0,-60 Z" fill="none" stroke="#facc15" stroke-width="3"/>
+                <path d="M-35,25 L-35,42 L35,42 L35,25 Z" fill="#047857" stroke="#facc15" stroke-width="2"/>
+                <!-- Minaret Silhouettes -->
+                <rect x="-65" y="-30" width="10" height="72" fill="#facc15" opacity="0.85"/>
+                <polygon points="-65,-30 -60,-48 -55,-30" fill="#facc15"/>
+                <rect x="55" y="-30" width="10" height="72" fill="#facc15" opacity="0.85"/>
+                <polygon points="55,-30 60,-48 65,-30" fill="#facc15"/>
+                <!-- Crescent spire -->
+                <circle cx="0" cy="-68" r="4" fill="#facc15"/>
+            </g>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="50" y1="295" x2="270" y2="295" stroke="url(#foilGrad12)" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+
+  <!-- Title Section -->
+  <g filter="url(#softShadow12)">
+    <text x="160" y="335" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.3">Sejarah Peradaban Islam</text>
+
+  </g>
+
+  <!-- Subtitle -->
+  <text x="160" y="372" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="500" fill="#e2e8f0" opacity="0.9">Kejayaan, Dinamika &amp; Kebangkitan</text>
+
+  <!-- Author Tag with Icon Accent -->
+  <g transform="translate(160, 400)">
+    <rect x="-95" y="-11" width="190" height="22" rx="6" fill="#000000" fill-opacity="0.3"/>
+    <text text-anchor="middle" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#facc15">Karya: Dr. Badri Yatim, M.A.</text>
+  </g>
+
+  <!-- Footer: Publisher & Archive Seal -->
+  <g transform="translate(160, 436)" text-anchor="middle">
+    <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="0.5">Rajawali Pers • KOLEKSI RESMI</text>
+  </g>
+
+  <!-- Left 3D Spine Fold / Crease (Gives depth and book feel) -->
+  <rect x="0" y="0" width="16" height="460" rx="8" fill="url(#spineCrease12)"/>
+  <line x1="16" y1="0" x2="16" y2="460" stroke="#000000" stroke-width="1" opacity="0.35"/>
+  <line x1="17" y1="0" x2="17" y2="460" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
+
+  <!-- Decorative Outer Border -->
+  <rect x="1" y="1" width="318" height="458" rx="7" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+</svg>

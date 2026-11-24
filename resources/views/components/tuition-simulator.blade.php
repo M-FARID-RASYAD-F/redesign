@@ -71,7 +71,7 @@
 
                 {{-- 3. Jalur Beasiswa & Prestasi --}}
                 <div class="sim-control-group">
-                    <label class="sim-control-label">
+                    <label class="sim-control-label" for="simJalurSelect">
                         <span class="step-num">3</span>
                         <span>Jalur Pendaftaran &amp; Beasiswa:</span>
                     </label>

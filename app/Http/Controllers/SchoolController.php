@@ -27,9 +27,9 @@ class SchoolController extends Controller
     {
         // 1. Data Informasi Sekolah (Default fallback jika DB kosong)
         $sekolah = [
-            'nama' => 'PKBM TAHFIZH ATTAMAM',
-            'slogan' => 'Mencetak Generasi Qurani, Berkarakter & Siap Kerja di Era Digital',
-            'deskripsi' => 'Lembaga pendidikan Islam & kejuruan terkemuka yang memadukan kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
+            'nama' => 'PKBM Tahfizh Attamam',
+            'slogan' => 'Mencetak generasi Qurani, berkarakter, dan siap kerja di era digital.',
+            'deskripsi' => 'Lembaga pendidikan Islam dan kejuruan yang memadukan hafalan Al-Qur\'an, kurikulum industri modern, pembentukan karakter mulia, dan fasilitas pembelajaran digital.',
             'tahun_berdiri' => '2018',
             'akreditasi' => 'B (Baik)',
             'alamat' => 'Jl. Hangtuah No. 45, Tenayan Raya, Pekanbaru, Riau',
@@ -40,10 +40,11 @@ class SchoolController extends Controller
         // 2. Data Sambutan Kepala Sekolah
         $kepsek = TeacherStaff::where('position', 'Kepala Sekolah')->first();
         $sambutan = [
-            'nama' => $kepsek ? $kepsek->name : 'Dr. H. Ahmad Fauzi, M.Pd.',
+            'nama' => ($kepsek && $kepsek->name !== 'Dr. H. Ahmad Fauzi, M.Pd.') ? $kepsek->name : 'Muhammad Fathoni, S.Pd.',
             'jabatan' => 'Kepala PKBM Tahfizh At-Tamam',
             'pesan' => 'Selamat datang di portal resmi PKBM Tahfizh At-Tamam. Kami berdedikasi menciptakan lingkungan belajar yang inspiratif, inovatif, dan berlandaskan nilai-nilai Al-Qur\'an serta kejuruan modern.',
-            'foto_initials' => 'AF'
+            'foto' => asset('images/guru-siluet.jpg'),
+            'foto_initials' => 'MF'
         ];
 
         // 3. Data Statistik Sekolah
@@ -52,10 +53,10 @@ class SchoolController extends Controller
         $jumlahJurusan = Major::count();
 
         $stats = [
-            ['label' => 'Siswa Terdaftar', 'value' => number_format($jumlahSiswa) . '+', 'icon' => 'users', 'color' => '#00B4D8'],
-            ['label' => 'Guru & Staf', 'value' => ($jumlahGuru > 0 ? $jumlahGuru : 85) . ' Pengajar', 'icon' => 'teachers', 'color' => '#10b981'],
-            ['label' => 'Jenjang Pendidikan', 'value' => '3 Jenjang (SD, SMP, SMK)', 'icon' => 'school', 'color' => '#f59e0b'],
-            ['label' => 'Serapan Kerja & Prestasi', 'value' => '96% Sukses', 'icon' => 'trending-up', 'color' => '#a855f7'],
+            ['label' => 'Siswa terdaftar', 'value' => number_format($jumlahSiswa, 0, ',', '.') . '+', 'icon' => 'users', 'color' => '#00B4D8'],
+            ['label' => 'Jenjang: SD, SMP, SMA', 'value' => '3', 'icon' => 'school', 'color' => '#f59e0b'],
+            ['label' => 'Guru dan staf pengajar', 'value' => (string) ($jumlahGuru > 0 ? $jumlahGuru : 3), 'icon' => 'teachers', 'color' => '#10b981'],
+            ['label' => 'Lulusan bekerja atau berprestasi', 'value' => '96%', 'icon' => 'trending-up', 'color' => '#a855f7'],
         ];
 
         // 4. Data Jenjang Pendidikan (SD, SMP, SMK) - Dummy Data Lengkap
@@ -398,7 +399,7 @@ class SchoolController extends Controller
                 'author' => $b->author,
                 'publisher' => $b->publisher,
                 'category_name' => $b->category ? $b->category->name : 'Umum',
-                'cover' => $b->cover ? asset('storage/' . $b->cover) : null,
+                'cover' => $b->cover_url,
                 'available' => (int) $b->available,
                 'stock' => (int) $b->stock,
                 'rack_location' => $b->rack_location,

@@ -27,3 +27,6 @@ Thumbs.db
 /.gemini
 ponytail/
 *.mp4
+
+.vercel
+.env*

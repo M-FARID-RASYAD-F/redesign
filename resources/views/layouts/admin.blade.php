@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>@yield('title', 'Admin Panel - At-Tamam Edu')</title>
+    <meta name="description" content="Panel administrasi At-Tamam Edu untuk mengelola data santri, PPDB, berita, dan perpustakaan.">
+    <meta name="robots" content="noindex, nofollow">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
